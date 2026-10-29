@@ -1,0 +1,15 @@
+.order-live{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 16px;color:#65786e;font-size:13px}
+.order-live label,.receipt-check{display:flex;gap:9px;align-items:center}
+input[type=checkbox]{width:17px;height:17px;flex:0 0 17px;accent-color:#087d51}
+.order-actions{display:grid;gap:6px;align-items:center;min-width:106px;min-height:40px}
+.order-actions button{white-space:nowrap}
+#settlement{max-width:560px}
+#settlement-form{display:grid;gap:12px}
+.settlement-details{display:grid;grid-template-columns:80px minmax(0,1fr);gap:12px;margin:12px 0;padding:18px 0;border-block:1px solid #dce4df}
+.settlement-details dt{color:#65786e}
+.settlement-details dd{margin:0;overflow-wrap:anywhere}
+#settlement-form>input{width:100%;min-width:0}
+.receipt-check{font-size:13px;line-height:1.7;align-items:flex-start;margin-top:6px}
+#settlement-error{color:#a75240;margin:0;line-height:1.6;overflow-wrap:anywhere}
+#settlement-close{background:transparent;color:#435f50;border:0;width:38px;height:38px;padding:0;font-size:24px}
+#settlement-submit{width:100%}

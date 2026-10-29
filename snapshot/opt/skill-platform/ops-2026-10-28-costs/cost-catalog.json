@@ -1,0 +1,17 @@
+{
+  "aisplice": {
+    "currency": "USD",
+    "rates": [{"label": "生图", "amount": "0.0065", "unit": "image"}],
+    "basis": "负责人确认的生图成本",
+    "notes": "每张生图的成本记录；不改变客户套餐、计费或资源调用配置。"
+  },
+  "grok-imagine-1.5-video": {
+    "currency": "USD",
+    "rates": [
+      {"label": "480p", "amount": "0.0112", "unit": "second"},
+      {"label": "720p", "amount": "0.021", "unit": "second"}
+    ],
+    "basis": "现有 Grok Imagine 1.5 视频服务费率配置",
+    "notes": "按生成视频的输出时长计费，当前支持6–15秒；不是每条视频固定价格。KEY沿用独立视频服务配置。"
+  }
+}

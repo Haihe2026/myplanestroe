@@ -1,0 +1,2 @@
+@media(min-width:801px){.model-brands{gap:12px;min-width:0}.model-brands span{white-space:nowrap;flex-shrink:0}.model-brands img{object-fit:contain;flex-shrink:0}}
+@media(min-width:801px) and (max-width:1100px){.model-brands{gap:8px;font-size:11px}.model-brands img{width:18px;height:18px}}

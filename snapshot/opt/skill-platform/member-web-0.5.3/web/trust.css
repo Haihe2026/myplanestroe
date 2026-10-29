@@ -1,0 +1,36 @@
+/* The linked reports cover the published Gemini skill, not the whole service. */
+body[data-product=gemini] .header-line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-rows:48px 40px;height:88px;gap:0 22px}
+body[data-product=gemini] .compact-brand{grid-column:1;grid-row:1}
+.trust-badges{grid-column:2/4;grid-row:1;display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0}
+.trust-badge{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid #99e7bd54;background:#ffffff0c;border-radius:999px;padding:7px 12px;color:#f1fff6;font-size:11px;line-height:18px;white-space:nowrap;min-width:0}
+.trust-badge:hover{background:#ffffff1c;border-color:#94eab6}
+.trust-icon{display:inline-flex;align-items:center;justify-content:center;color:#5be3a0;font-size:14px;font-weight:700;flex-shrink:0}
+.trust-copy{display:flex;gap:4px;align-items:center;min-width:0}
+.trust-result::before{content:'·';margin-right:4px;color:#a7dec0}
+body[data-product=gemini] .model-brands{grid-column:1;grid-row:2;justify-content:flex-start}
+body[data-product=gemini] .compact-payments{grid-column:2;grid-row:2}
+body[data-product=gemini] #account-tools{grid-column:3;grid-row:2}
+@media(max-width:800px){
+  body[data-product=gemini] .header-line{grid-template-rows:50px 36px;height:86px;gap:0 12px}
+  .trust-badges{grid-column:1/-1;grid-row:2;justify-content:center}
+  body[data-product=gemini] .compact-payments{grid-column:2;grid-row:1}
+  body[data-product=gemini] #account-tools{grid-column:3;grid-row:1}
+}
+@media(max-width:480px){
+  body[data-product=gemini] .header-line{grid-template-rows:46px 42px;height:88px;gap:0 10px}
+  .trust-badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;width:100%}
+  .trust-badge{padding:4px 3px;gap:4px;font-size:10px;line-height:13px;height:36px}
+  .trust-copy{flex-direction:column;gap:0}
+  .trust-result::before{content:none}
+  .trust-icon{font-size:12px}
+  body[data-product=gemini] .current-skill{display:none}
+}
+@media(max-height:700px){
+  body[data-product=gemini] .header-line{grid-template-rows:42px 32px;height:74px}
+  body[data-product=gemini] .current-skill{display:none}
+}
+@media(max-height:700px) and (max-width:480px){
+  body[data-product=gemini] .header-line{grid-template-rows:38px 40px;height:78px}
+  body[data-product=gemini] .recharge-heading{padding-top:3px;margin-bottom:4px}
+  body[data-product=gemini] .reputation{padding-top:8px;padding-bottom:8px}
+}

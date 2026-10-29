@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><script async src="/membership/journey/page.js?v=0.10.16"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Gemini生图器 · 开通账户</title>
+  <link rel="icon" href="/membership/gemini/icon.png">
+  <link rel="stylesheet" href="register.css?v=0.10.31">
+  <script src="register.js?v=0.10.31" defer></script>
+</head>
+<body>
+  <header><a href="/membership/gemini/"><img src="/membership/gemini/icon.png" width="32" height="32" alt="">MyPlaneStore</a></header>
+  <main>
+    <p class="product">Gemini生图器</p>
+    <h1 id="title">开通创作账户</h1>
+    <p class="lead" id="lead">图片需求已保留。关联当前 Skill，选套餐扫码后继续创作。</p>
+    <section id="remembered" hidden aria-labelledby="title">
+      <p class="remembered-account" id="remembered-account" role="status" aria-live="polite"></p>
+      <label class="consent"><input id="link-consent" type="checkbox"><span>同意把这个新对话关联到上面的原账户；确认制作后，图片需求和授权照片将发送至生图服务及算力供应商。</span></label>
+      <button id="link" type="button" disabled>关联原账户</button>
+      <p id="link-feedback" role="status" aria-live="polite">关联后不会重复开户，也不会下单或扣费。</p>
+      <p class="safety">只在你自己刚从对话里打开的链接上点关联。不是你的账户？</p>
+      <button id="use-new" class="secondary" type="button">不是我，按新账户继续</button>
+      <button id="forget" class="secondary" type="button">退出这个浏览器的登录</button>
+    </section>
+    <form id="registration">
+      <label class="consent"><input id="consent" type="checkbox"><span>同意创建创作账户；确认制作后，图片需求和授权照片将发送至生图服务及算力供应商。</span></label>
+      <button id="confirm" type="submit" disabled>注册并选套餐 <span aria-hidden="true">→</span></button>
+      <p id="feedback" role="status" aria-live="polite">与当前 Skill 自动关联，无需手机号或 API Key。</p>
+    </form>
+    <p class="continuation" id="continuation">扫码核款到账后，回到原对话即可继续这张图。</p>
+  </main>
+</body>
+</html>

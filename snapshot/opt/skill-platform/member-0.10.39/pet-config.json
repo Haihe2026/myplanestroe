@@ -1,0 +1,50 @@
+{
+  "product": "pet",
+  "quota_policy": "独立额度，不与通用次数通兑",
+  "unlimited_sentinel": -1,
+  "plans": {
+    "pet_monthly": {
+      "name": "给毛孩子买个安心",
+      "price_fen": 1900,
+      "duration_days": 30,
+      "photo_analyses": 5,
+      "pet_profiles": 1,
+      "inquiries": -1,
+      "reminders": false,
+      "medical_report_pdf": false
+    },
+    "pet_quarterly": {
+      "name": "毛孩子季度问安包",
+      "price_fen": 4900,
+      "duration_days": 90,
+      "photo_analyses": 25,
+      "pet_profiles": 3,
+      "inquiries": -1,
+      "reminders": true,
+      "medical_report_pdf": false
+    },
+    "pet_annual": {
+      "name": "毛孩子年度安康会员",
+      "price_fen": 19800,
+      "duration_days": 365,
+      "photo_analyses": 120,
+      "pet_profiles": -1,
+      "inquiries": -1,
+      "reminders": true,
+      "medical_report_pdf": true
+    }
+  },
+  "trial": {
+    "inquiries_best_effort": 3,
+    "photo_analyses": 1,
+    "pet_profiles": 0,
+    "reminders": false,
+    "medical_report_pdf": false
+  },
+  "inquiry_enforcement": "best_effort_only_host_can_answer_without_api",
+  "renewal_proposal": {
+    "status": "requires_owner_confirmation",
+    "same_tier": "extend_expiry_add_photo_allowance",
+    "mixed_tier": "independent_terms_confirmed"
+  }
+}

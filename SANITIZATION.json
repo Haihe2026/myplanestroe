@@ -1,0 +1,359 @@
+{
+  "code_files": 1323,
+  "excluded_count": 373,
+  "redactions": [
+    {
+      "file": "snapshot/opt/skill-platform/0.3.0/service/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/assistant-1.3.0/cleanup_test_account.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/ops-0.3.3/test_live.cjs",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/ops-0.3.3/service/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/ops-0.3.4/test_live.cjs",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/ops-0.3.4/test_ui.cjs",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/ops-0.3.4/service/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/ops-0.3.4/service/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.4.0/build.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.4.0/web/auth/index.html",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.4.0/web/gemini/index.html",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.5.0/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.5.0/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.5.0/web/auth/index.html",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.5.0/web/gemini/index.html",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.5.1/web/gemini/index.html",
+      "replacements": 3
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-name-0.5.2/web/auth/index.html",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-name-0.5.2/web/gemini/index.html",
+      "replacements": 3
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.5.3/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.7.0/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.7.0/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.7.0/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.8.0/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.8.0/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.8.1/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.8.2/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.8.3/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-web-0.9.3/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.0/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.0/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.0/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.1/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.1/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.3/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.3/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/title-0.10.8/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.9/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.9/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.9/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.10/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.10/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.10/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/plus-copy-0.10.11/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/qr-logo-0.10.12/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.13/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.13/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.13/web/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.13/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.13/web/temu/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.13/web/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.14/ops/test_monitor.py",
+      "replacements": 1
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.14/ops/test_settlement.py",
+      "replacements": 2
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.14/web/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.14/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.14/web/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/readability-0.10.15/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/readability-0.10.15/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/readability-0.10.15/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/readability-0.10.15-r2/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/readability-0.10.15-r2/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/readability-0.10.15-r2/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.16/web/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.16/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.16/web/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.18/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.18/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.18/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.18/temu/index.html",
+      "replacements": 5
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.19/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.19/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.19/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-proof-0.10.19/temu/index.html",
+      "replacements": 5
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.20/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.20/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.20/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.20/temu/index.html",
+      "replacements": 5
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.21/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.21/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.21/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/checkout-viewport-0.10.21/temu/index.html",
+      "replacements": 5
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.56/web/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.56/web/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.56/web/temu/index.html",
+      "replacements": 5
+    },
+    {
+      "file": "snapshot/opt/skill-platform/member-0.10.56/web/xhs/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/var/www/image-assistant/membership/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/var/www/image-assistant/membership/temu/index.html",
+      "replacements": 5
+    },
+    {
+      "file": "snapshot/var/www/image-assistant/membership/gemini/index.html",
+      "replacements": 10
+    },
+    {
+      "file": "snapshot/var/www/image-assistant/membership/xhs/index.html",
+      "replacements": 10
+    }
+  ],
+  "excluded": "Runtime key/config files, databases, datasets, logs, credentials, photos, binary images, virtualenvs, backups and evidence are not read/exported."
+}

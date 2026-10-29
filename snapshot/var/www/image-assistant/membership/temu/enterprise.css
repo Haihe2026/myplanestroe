@@ -1,0 +1,20 @@
+.compact-main #plans{grid-template-columns:repeat(3,minmax(0,1fr))}.enterprise-trial{font-size:14px;color:#c8f3de;text-align:center;margin:8px 0}.enterprise-history{font-size:13px;text-align:left;overflow-wrap:anywhere}.enterprise-history ul{padding-left:20px}.enterprise-history summary{cursor:pointer}.compact-main #plans .enterprise-tag{background:#ffe45c;color:#b71c1c;padding:3px 7px;font-size:11px;border-radius:4px}.plan .enterprise-tag{position:absolute;top:-12px;left:12px}.compact-main #plans .plan[aria-checked=true]{background:#fff}@media(max-width:480px){.plans{gap:8px}.plans .plan{padding:24px 6px 14px}.plans .price{font-size:32px}.plans .count{font-size:12px}}
+
+/* Temu checkout aligns with the complete three-plan row. */
+body[data-product="temu"] #checkout-panel{max-width:920px;display:block;box-sizing:border-box}
+body[data-product="temu"] #checkout-panel .checkout-action{width:100%;max-width:none;box-sizing:border-box}
+body[data-product="temu"] #checkout-panel .checkout-action{display:flex;margin-left:0;margin-right:0}
+body[data-product="temu"] #checkout-panel #total{display:none!important}
+body[data-product="temu"] #checkout-panel #buy{display:block;flex:1 1 auto;width:100%;max-width:none;margin:0;box-sizing:border-box}
+
+/* Clear heading hierarchy; balance remains available through existing account tools. */
+body[data-product="temu"] .compact-main .recharge-heading{display:flex;flex-direction:column;gap:10px;padding-top:30px;margin-bottom:22px;text-align:center}
+body[data-product="temu"] .compact-main .recharge-heading .current-skill{font-size:14px;line-height:1.5;margin:0}
+body[data-product="temu"] .compact-main .recharge-heading h1{font-size:48px;line-height:1.25;margin:0;overflow-wrap:anywhere}
+body[data-product="temu"] .compact-main .recharge-heading .recharge-caption{font-size:26px;line-height:1.5;margin:0}
+@media(max-width:600px){
+body[data-product="temu"] .compact-main .recharge-heading{gap:9px;padding-top:24px;margin-bottom:18px}
+body[data-product="temu"] .compact-main .recharge-heading .current-skill{font-size:12px}
+body[data-product="temu"] .compact-main .recharge-heading h1{font-size:32px}
+body[data-product="temu"] .compact-main .recharge-heading .recharge-caption{font-size:19px}
+}

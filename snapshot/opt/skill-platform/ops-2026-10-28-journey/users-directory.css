@@ -1,0 +1,10 @@
+#users-directory{background:#fff;border:1px solid #dfe8e3;border-radius:10px;margin:16px 0;padding:20px;min-width:0}
+#users-directory h2{margin:0 0 12px;font-size:20px}#users-directory .ud-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+#users-directory input{min-width:0;max-width:100%;padding:9px;border:1px solid #cbdcd3;border-radius:5px}
+#users-directory button{border:1px solid #bdd6c9;border-radius:5px;background:#edf7f1;color:#08794b;padding:8px 12px;cursor:pointer}
+#users-directory button[disabled]{opacity:.5;cursor:default}#users-directory .ud-scroll{overflow-x:auto;max-width:100%;border:1px solid #e1e9e4;border-radius:6px}
+#users-directory table{width:100%;min-width:1080px;border-collapse:collapse}#users-directory td,#users-directory th{padding:12px;text-align:left;border-bottom:1px solid #e3ebe6;vertical-align:top;white-space:normal;font-size:13px}
+#users-directory th{background:#f4f8f6;white-space:nowrap}#users-directory small{display:block;color:#698375;line-height:1.6}#users-directory .ud-id{overflow-wrap:anywhere;max-width:200px;text-align:left}#users-directory .ud-note{color:#698375;font-size:12px;line-height:1.7}#users-directory .ud-status{min-height:22px;color:#08794b}#users-directory .ud-pager{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+@media(max-width:700px){#users-directory{padding:12px}#users-directory input{width:100%}}
+
+#users-directory .ud-journey{white-space:nowrap;background:#087f5b;color:#fff;border-color:#087f5b}#users-directory .ud-id{border:0;background:transparent;color:#087f5b;font-weight:600;padding:0}#users-directory thead th{font-weight:600}#users-directory .ud-controls input{flex:1;max-width:480px}#users-directory td{padding-top:16px;padding-bottom:16px}

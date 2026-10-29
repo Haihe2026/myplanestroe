@@ -1,0 +1,9 @@
+header{height:auto;min-height:122px;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:18px 32px;padding-top:20px;padding-bottom:15px}
+header .payment-brands{grid-column:2;grid-row:1}
+header .tag{grid-column:3;grid-row:1}
+.ai-brands{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:12px 26px;border-top:1px solid #2b4037;padding-top:13px}
+.ai-caption{font-size:11px;color:#9fb6ab}
+.ai-brand{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:12px;color:#edf9f3}
+.ai-brand img{display:block;width:24px;height:24px;object-fit:contain;flex-shrink:0}
+@media(max-width:760px){header{grid-template-columns:minmax(0,1fr) auto;gap:15px 10px;padding:16px 20px}header .tag{grid-column:2}header .payment-brands{grid-column:1/-1;grid-row:2}.ai-brands{grid-row:3;gap:12px 18px}.ai-caption{flex-basis:100%}.ai-brand{font-size:12px;gap:5px}.ai-brand img{width:22px;height:22px}}
+@media(max-width:360px){.ai-brands{gap:12px 14px}.ai-brand{font-size:11px}}

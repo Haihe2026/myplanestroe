@@ -1,0 +1,19 @@
+{
+  "files": 1337,
+  "parts": [
+    "manifests/source-00.json",
+    "manifests/source-01.json",
+    "manifests/source-02.json",
+    "manifests/source-03.json",
+    "manifests/source-04.json",
+    "manifests/source-05.json",
+    "manifests/source-06.json",
+    "manifests/source-07.json",
+    "manifests/source-08.json",
+    "manifests/source-09.json",
+    "manifests/source-10.json",
+    "manifests/source-11.json",
+    "manifests/source-12.json",
+    "manifests/source-13.json"
+  ]
+}

@@ -1,0 +1,502 @@
+[
+  {
+    "path": "snapshot/opt/skill-platform/ops-test-marks-0.10.2/test_mark.py",
+    "bytes": 6287,
+    "sha256": "89212aa11a2f16f5d30761b45b891349537a3fb54ee4aedf2a358c66a2a54c72"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-test-marks-0.10.2/web/app.js",
+    "bytes": 30725,
+    "sha256": "e2d3c5ae55bc1b1a2b5aef3de79d728c742df17a8e4b9d1d5f49fe235de56cd6"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-test-marks-0.10.2/web/index.html",
+    "bytes": 7412,
+    "sha256": "0d52c8665038810b6e01eb0eaaa195b580f16e321015c9731c3481f27a18ef9b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-test-marks-0.10.2/web/style.css",
+    "bytes": 9006,
+    "sha256": "606e71b71d9493b0c45b48e569a27605fe5102bd7d2474319f2cb6c090c61bed"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.0/deploy.py",
+    "bytes": 1498,
+    "sha256": "b6d859d4a57fbc91b282fcb805c642780a2889a5f35abb4ce9793404f30fcfc4"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.0/web/app.js",
+    "bytes": 20243,
+    "sha256": "db1cadea7b1958d00d2ce30eb1b412325de3f03455b289c26f103fbc77ff41a5"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.0/web/index.html",
+    "bytes": 7410,
+    "sha256": "2d97893d42829cd22b38e5531db62445e4ead8204815a3d6f33727fe78aebb5b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.0/web/style.css",
+    "bytes": 8087,
+    "sha256": "ea997820b3b86139b043ac4af6cf578e0f09c1526dc97a900215a733d92d814f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.2/deploy.py",
+    "bytes": 1505,
+    "sha256": "6d999557ea2ff23d7eb7e0e14485a67ad36d24d5523d6c493af7881e9f7645ef"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.2/web/app.js",
+    "bytes": 25502,
+    "sha256": "164b96607e0b26509fd5f5459fe08e74d471759787ef4d7a45e94587e070844a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.2/web/index.html",
+    "bytes": 7410,
+    "sha256": "82deafce4256e39a6c7d5cb0a2388cddaad978d523a08677a8092cf425c816b4"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/ops-web-0.9.2/web/style.css",
+    "bytes": 8087,
+    "sha256": "ea997820b3b86139b043ac4af6cf578e0f09c1526dc97a900215a733d92d814f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/deploy.py",
+    "bytes": 4728,
+    "sha256": "7caded6f7dca03f226af2126d2aeba4dcce764ce500f9ebe4a245f3fc2ed6d31"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/email_settlement.py",
+    "bytes": 5815,
+    "sha256": "ab28e14ff7a9d72c9cf4f7deaba39e4c6d4e4e747967633253e9025ba0f54aee"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/mail_auth.py",
+    "bytes": 3671,
+    "sha256": "e17761b4926048484fca7d5a4e95f94fd26286fe129d69393311f5e896ac6e79"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/mail_worker.py",
+    "bytes": 15783,
+    "sha256": "1358b88d2f2793aa24199ec1f60bcab576830e3fd73bdff79d85e6364af521de"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/ops-web/app.js",
+    "bytes": 13673,
+    "sha256": "bf019b6509c7045ae79f8b35714e49334e46ab01144c0c1b8863d5f121b0ff6d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/ops-web/index.html",
+    "bytes": 7402,
+    "sha256": "06a70e842bdab2f6db01674cba782ee9f1d7a8c6848c32ad86ec7b9a919fc761"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/requirements.txt",
+    "bytes": 31,
+    "sha256": "eddc936b98ce82bc415f3ed76d0b81e5af3477738053e32f405119e0a00c30c0"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/status.py",
+    "bytes": 974,
+    "sha256": "9ee7b8237ff127397a04342d0f944d052523bdea0528661c9c0edd23f38c8b54"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.0/test_email.py",
+    "bytes": 16505,
+    "sha256": "64eb0abddd2c0f5d5695e6abcb10ed676e9866167327447bc0c81418417bdf62"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.1/deploy.py",
+    "bytes": 3423,
+    "sha256": "7c8b7b1c6edb5fe8c72b9ec81616e2d52e4e270dc5f848d1f52a77937314d54b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.1/email_settlement.py",
+    "bytes": 5815,
+    "sha256": "ab28e14ff7a9d72c9cf4f7deaba39e4c6d4e4e747967633253e9025ba0f54aee"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.1/mail_auth.py",
+    "bytes": 6632,
+    "sha256": "af952f798b0458c448358990d000865ed155cced38d3e5aa15961ef238a4df8e"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.1/mail_worker.py",
+    "bytes": 16002,
+    "sha256": "d1c16918f05d4e067a75c233f14d4ff2fd157712d811cb1a01739cfac1419c11"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.1/test_email.py",
+    "bytes": 21209,
+    "sha256": "cda289ccc9900e23e341efaa553f2ed1b44665a07128bfe35f9551b8e5d431a9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.2/deploy.py",
+    "bytes": 2679,
+    "sha256": "6674f6d489364b8d70cee3ae7f3ea4f864fc81e3d639c2b7ba68537ce40ae5f0"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.2/email_settlement.py",
+    "bytes": 5815,
+    "sha256": "ab28e14ff7a9d72c9cf4f7deaba39e4c6d4e4e747967633253e9025ba0f54aee"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.2/event_runner.py",
+    "bytes": 6274,
+    "sha256": "6ceb52f0fe2d21aeb5af31a7fb815f987795f818980d470bcc146809b4b9052e"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.2/mail_auth.py",
+    "bytes": 6632,
+    "sha256": "af952f798b0458c448358990d000865ed155cced38d3e5aa15961ef238a4df8e"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.2/mail_worker.py",
+    "bytes": 16002,
+    "sha256": "d1c16918f05d4e067a75c233f14d4ff2fd157712d811cb1a01739cfac1419c11"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.2/test_email.py",
+    "bytes": 21209,
+    "sha256": "cda289ccc9900e23e341efaa553f2ed1b44665a07128bfe35f9551b8e5d431a9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/order-mail-0.6.2/test_events.py",
+    "bytes": 3986,
+    "sha256": "33b4a8735a718949da823340a59d613e6d58a0953502552b8dca216440a3acaf"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/plus-copy-0.10.11/compact.js",
+    "bytes": 4254,
+    "sha256": "a0f59fbb349c817a91ce88bb2c71ce5063bd2bf14e3724570dd10a69ac427c2b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/plus-copy-0.10.11/gemini/index.html",
+    "bytes": 11300,
+    "sha256": "0a81d2315205d00c8d7248456f0955807b79352529284b78a3081e8821cebcfa"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/plus-copy-0.10.11/temu/index.html",
+    "bytes": 7759,
+    "sha256": "07fa5ffe20aeb927b655c9b3f52a96380808d8126ec3463814f057a94cb603f9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/plus-copy-0.10.11/xhs/index.html",
+    "bytes": 7574,
+    "sha256": "a57b5bae880d0374e30250026ace4946149c38bc89349a2b1c00c2913683206d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/qr-logo-0.10.12/gemini/index.html",
+    "bytes": 11298,
+    "sha256": "b900506dac62a0367e18c9d6ed109ee4cddb825238b0281ac5f84bc3cf3a8032"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/qr-logo-0.10.12/gemini/manual-payment.js",
+    "bytes": 6140,
+    "sha256": "0bc1685bb2db3fead36d3bc52843328c4bc3faabdf1133320770e86db45f0ccf"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/qr-logo-0.10.12/temu/index.html",
+    "bytes": 7779,
+    "sha256": "994530289553b8b3f7d99173e7587343306cca0586faacdf4eeb5812867f9e2f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/qr-logo-0.10.12/temu/manual-payment.js",
+    "bytes": 5847,
+    "sha256": "cff2d4c67639adf5db49dd1390a7b858877e7822ac74071a49d0bdb5785b5059"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/qr-logo-0.10.12/xhs/index.html",
+    "bytes": 7595,
+    "sha256": "1772db2ad4ff1d35a70994f78710019541dd7d1562965c750914b97efe90587f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/qr-logo-0.10.12/xhs/manual-payment.js",
+    "bytes": 5973,
+    "sha256": "cb1d04d5be4fe5e8e37a9f18088d1c706f8918fbe13ad05419e35e4e6e3d593b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15/gemini/index.html",
+    "bytes": 11871,
+    "sha256": "9a6b922b45792fd35952da630f7143165a36301c1dc6f973223a6df0129131ee"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15/index.html",
+    "bytes": 11864,
+    "sha256": "2016743b49c025b5bc98ec1c67a491864e66817a6ffa2097fafcd9972c98dddd"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15/readability.css",
+    "bytes": 2078,
+    "sha256": "b948b3d16ed6dafcc1e25459b37b40d2b97dbef489fdde14cf01949dcf7dee7d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15/xhs/index.html",
+    "bytes": 11862,
+    "sha256": "41d426f5c0375836f87f35467a89e4c848def636190c4974958c7a9da7ca034d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15-r2/gemini/index.html",
+    "bytes": 11871,
+    "sha256": "9a6b922b45792fd35952da630f7143165a36301c1dc6f973223a6df0129131ee"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15-r2/index.html",
+    "bytes": 11864,
+    "sha256": "2016743b49c025b5bc98ec1c67a491864e66817a6ffa2097fafcd9972c98dddd"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15-r2/readability.css",
+    "bytes": 2078,
+    "sha256": "b948b3d16ed6dafcc1e25459b37b40d2b97dbef489fdde14cf01949dcf7dee7d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/readability-0.10.15-r2/xhs/index.html",
+    "bytes": 11862,
+    "sha256": "41d426f5c0375836f87f35467a89e4c848def636190c4974958c7a9da7ca034d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/temu-copy-0.10.4/enterprise.js",
+    "bytes": 3900,
+    "sha256": "d671a5a7dca73f692af4fb40c4f811381bf8d2e40141380941958fb5ab29b7a3"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/temu-copy-0.10.4/index.html",
+    "bytes": 7721,
+    "sha256": "bfc634eeab8e8cdae9efd25efc3a1acb76e1c827bce471f4a6d8ce1443f32db9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/temu-copy-0.10.5/enterprise.css",
+    "bytes": 678,
+    "sha256": "ac298675f69fe9ceefc4d3fac3fc07fe97cbf89521e1bb8919190caa5c320323"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/temu-copy-0.10.5/index.html",
+    "bytes": 7721,
+    "sha256": "e22d6cc1dc8405bf234bb8bd8bfd2a66f4cf3f3479666155e05ac9e13fb41c46"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/title-0.10.8/gemini/index.html",
+    "bytes": 11300,
+    "sha256": "fa04ac29de6f0ffcbb7585f1a6c5570608608e35049003e5eaffd38ba0a85c75"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/title-0.10.8/temu/enterprise.js",
+    "bytes": 3904,
+    "sha256": "3a4a00e45e595cf7c8b545ff54e13705524723d835731eab1c3ef80b37c3d955"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/title-0.10.8/temu/index.html",
+    "bytes": 7751,
+    "sha256": "01847a95b9f8eda8f91a9a81b8414b15b4f7fe0aaefe09ec71bd25f5dfc19b49"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/title-0.10.8/xhs/index.html",
+    "bytes": 7570,
+    "sha256": "07b2955d79af3643413a6e5a7bde83c2635654ed000ad3d5a530f7a37d142d55"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.1.0/service/pilot.py",
+    "bytes": 19380,
+    "sha256": "7bee00981c6024204adddfcad5444a5fc6195bcf74f07919c8d3cad3ccd2983a"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.1.0/service/server.py",
+    "bytes": 10135,
+    "sha256": "9f300cc90c117464952b763c8b007265cee8c02a00cbeaac014e26c196903c14"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.1.0/skill/scripts/client.py",
+    "bytes": 8751,
+    "sha256": "a1a29fe5888aa6657e025dbcff496d8d8b06d9176531507f6dace3e1fecf27aa"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.1.0/skill/scripts/transport.py",
+    "bytes": 5361,
+    "sha256": "d07d531c13101650945a8eb7a9057ecb5dbc8ba5dfaef7ddd1550507111fdc58"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.1.0/test_temu.py",
+    "bytes": 10716,
+    "sha256": "c933b2a32e9c05c0d62179db77c58d4380d5b8d70bb6e3888a6004b795c01cad"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/api_access.py",
+    "bytes": 4762,
+    "sha256": "c51231dc50baf60defdcf35c900816e759a3b3a8c97567d05394a07bf2140b2a"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/manual_payments.py",
+    "bytes": 7246,
+    "sha256": "08230f9ec0a6c3568708ef26265800b3179e18502b1e75d514c9463e1e03a267"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/manual_settle.py",
+    "bytes": 1110,
+    "sha256": "1bb31ecb1a83c1fa9df6743c0d209b0c5d34d4d72edde8022cb2f1f585770373"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/membership.py",
+    "bytes": 7730,
+    "sha256": "d15718dbb0cd18a36e4e5e15385eb79533be517b8d96264d9c98a383d6631099"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/pilot.py",
+    "bytes": 27229,
+    "sha256": "ade397f37f61d738216f3583a800255be6696babc7f6cc7b7e47fc9be98083ac"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/platform_catalog.py",
+    "bytes": 2800,
+    "sha256": "f1efa6c73fd61ce78ea2f68cb1497d11d74b68938398bc53ba4509910d21e460"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/server.py",
+    "bytes": 10348,
+    "sha256": "b6cdbe53f5f0cfef71627354f7c610a0236cb0ac95b0b7b917d53227b0aca895"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/service/test_server.py",
+    "bytes": 10402,
+    "sha256": "47c11aa483e24e22dc6d98f620bc1f31e34c6e3fe4bec877c624f1b1ad5369d8"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/ai-platforms.css",
+    "bytes": 996,
+    "sha256": "f1b7d1966056058f6617754c90280eb795ec04c9e0a84ec9fab71bca6a3bdf81"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/alipay.svg",
+    "bytes": 889,
+    "sha256": "36b34fb1500a992aafca2012c3b16f7f6788db97f0f3a42aa7d6e521890a7b35"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/api-guide.css",
+    "bytes": 219,
+    "sha256": "87c9a97a7d100e58366b7d56910a9fce82a125cc0ffce55c1618f861d2374c4a"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/api-guide.html",
+    "bytes": 2603,
+    "sha256": "a65f7f8d3cf01d1d1f965828220d3a34929deac5c7e15c7b77e15c7afc1cb331"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/api-keys.css",
+    "bytes": 1232,
+    "sha256": "ed182b335737a85e1e66414ccae47bb8195f6c6af9cff069d1d395d6f3d83c63"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/api-keys.js",
+    "bytes": 3337,
+    "sha256": "cd763a7db4c31d234c74e1d0901922fd46f32139779fa8cb834ef274a1f93047"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/app.js",
+    "bytes": 6461,
+    "sha256": "bae36f80f191e5f1bdbcb04d0e81853c50d51b4f61bc991bc188cd8cf5bedd0f"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/deepseek.svg",
+    "bytes": 2165,
+    "sha256": "0a47d55e6449ef97fb2185020f8118d75ad1ffe5cd711bef6862699f50d5217b"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/doubao.svg",
+    "bytes": 1154,
+    "sha256": "4c8ef236fcf9173552ccad5c028b4b71f3ae0d61678e2b9996a9d70b315c00bf"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/heading.css",
+    "bytes": 110,
+    "sha256": "8cf61bc279e4979185bcc5f688bc541191fc579a3832feb6e3a03deb0a82b102"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/index.html",
+    "bytes": 8220,
+    "sha256": "54f9df502bc7e58b687f88dbbf01344111884341c67b3cc52f1197d5324dfd4d"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/kimi.svg",
+    "bytes": 774,
+    "sha256": "8149f95f8513573da9bcffb79a1b800c856e054d97633c8c43b6cd9ebe7b7859"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/manual-payment.css",
+    "bytes": 2923,
+    "sha256": "a8f374ad940afaf25df978b550edf5d34af66f870a8c1ec07f60568e1aebd5f1"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/manual-payment.js",
+    "bytes": 4374,
+    "sha256": "7122341136aea99407db4acaaccb5231b188b903d4caf547ee158d1a1614b1f0"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/payments.css",
+    "bytes": 952,
+    "sha256": "354ba8954163e3417db08b8c49158a53f64019151e575d63322d1c9de84a3cf3"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/platform-mark.svg",
+    "bytes": 376,
+    "sha256": "2d1ffeabbb0e6bd11352b35ec7b8dc69a07fe3f5867160046b27caae10600739"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/platform.css",
+    "bytes": 4789,
+    "sha256": "a3ff69afacfdd5498ac7f609af44309374d0c8d6cf60a512e67636f2de9444c6"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/platform.js",
+    "bytes": 3837,
+    "sha256": "ffd3e99860f1bc4733e833d165f2768cafe93e3a0deaae1679265aa2bd9b618b"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/qwen.svg",
+    "bytes": 2045,
+    "sha256": "8a0ffcf5e176d5424636617c360012f05e972ed5bfeb5dcfa8126439aa6a550f"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/renewal.css",
+    "bytes": 303,
+    "sha256": "dd609f39e404558b76326fe321cba034f5199c7887168cd473972fd3294a838a"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/style.css",
+    "bytes": 4291,
+    "sha256": "ef29c8e618c6d74ca4360df7a69ec0479507d056cac6d0e244b4acfd6fa14ec7"
+  },
+  {
+    "path": "snapshot/opt/temu-image-assistant/0.2.2/web/wechat-pay.svg",
+    "bytes": 1172,
+    "sha256": "e50c3680d87afba22c7cc7968f9baea2217126f4b8a685128da6c1deb028b1e6"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/auth/app.js",
+    "bytes": 3308,
+    "sha256": "337247a65ac16383cd675ea4b32361ee0d44f150018a41388bc760b044efb62d"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/auth/index.html",
+    "bytes": 309,
+    "sha256": "fdc89d4d0914b9512edd43a069c13ea1bd43bd0dc69b2940e3a21c14d6e24f49"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/auth/style.css",
+    "bytes": 1824,
+    "sha256": "1a31bb57f9df2c886e4fb908783f918104c84e18efe4497e50df6bc9ab67e068"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/auth/wechat/index.html",
+    "bytes": 1348,
+    "sha256": "371dd70269ce5d8bfb9bc3329a289d97f7847e3fd6806ea9613059b6b98f6b2c"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/auth/wechat/redirect.js",
+    "bytes": 363,
+    "sha256": "6b42ec080affad1ebb641a8b6c1ced3c1e12883fcd85a9310e8f0bb94f8a6f84"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/auth/wechat/wechat.css",
+    "bytes": 754,
+    "sha256": "f59619a7ab5256aadece14f40cfcf7e044ed40fdd27569172ae1072aeb8a149d"
+  }
+]

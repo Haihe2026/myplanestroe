@@ -1,0 +1,98 @@
+/* Public evidence is scoped to the named skill/version, not the checkout site. */
+body .compact-main > .reputation.trust-proof {
+  --proof-green: #07634e;
+  --proof-light: #11a877;
+  --proof-gold: #d58a16;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 30px 24px 34px;
+  background: #fff;
+  color: #163e34;
+  letter-spacing: 0;
+  display: block;
+  margin: 0;
+  min-height: 0;
+}
+.trust-proof *, .trust-proof *::before, .trust-proof *::after { box-sizing: border-box; }
+.trust-proof .proof-eyebrow {
+  margin: 0 0 16px;
+  text-align: center;
+  color: var(--proof-green);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.proof-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr);
+  border: 1px solid #d8e9e2;
+  border-radius: 8px;
+  padding: 24px 26px;
+  background: #fbfdfc;
+  box-shadow: 0 10px 26px #153f340a;
+  gap: 28px;
+}
+.proof-overview {
+  min-width: 0;
+  border-right: 1px dashed #d8e9e2;
+  padding-right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.proof-emblem {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  border-radius: 8px;
+  background: #07563f;
+  padding: 12px;
+  box-shadow: 0 6px 14px #07563f20;
+}
+.proof-summary { min-width: 0; }
+.proof-score { display: flex; align-items: baseline; gap: 6px; line-height: 1.05; }
+.proof-score strong { font-size: 52px; font-weight: 800; color: #07563f; }
+.proof-score small { color: #6b847a; font-size: 16px; font-weight: 600; }
+.proof-stars { position: relative; display: inline-block; font-size: 22px; line-height: 1.5; color: #dee6e0; }
+.proof-stars-fill { position: absolute; left: 0; top: 0; overflow: hidden; white-space: nowrap; width: 92%; color: var(--proof-gold); }
+.trust-proof .proof-label { margin: 2px 0 5px; color: #6b847a; font-size: 13px; line-height: 1.5; }
+.trust-proof .proof-version { margin: 0; color: #345c4c; font-size: 13px; font-weight: 600; line-height: 1.6; overflow-wrap: anywhere; }
+.proof-detail { min-width: 0; }
+.proof-metrics { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.proof-metric { display: grid; grid-template-columns: 64px minmax(0, 1fr) 28px; align-items: center; gap: 12px; font-size: 14px; line-height: 1.3; }
+.proof-metric-label { color: #345c4c; white-space: nowrap; }
+.proof-bar { width: 100%; height: 8px; border-radius: 4px; background: #e7f0eb; overflow: hidden; }
+.proof-bar-fill { display: block; height: 100%; border-radius: inherit; background: var(--proof-light); }
+.proof-metric-score { color: #07563f; text-align: right; font-size: 14px; }
+.proof-bottom { margin-top: 15px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.trust-proof .proof-security { margin: 0; display: flex; align-items: flex-start; gap: 7px; color: #07634e; font-size: 13px; line-height: 1.6; font-weight: 600; }
+.proof-security img { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 2px; }
+.proof-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 14px; }
+.trust-proof .proof-links a { color: #07634e; font-size: 13px; line-height: 1.6; font-weight: 600; text-decoration: none; text-underline-offset: 3px; white-space: nowrap; }
+.trust-proof .proof-links a:hover { text-decoration: underline; }
+.trust-proof .proof-links a:focus-visible { outline: 2px solid #087b59; outline-offset: 3px; }
+@media (max-width: 1000px) {
+  .proof-inner { grid-template-columns: 250px minmax(0, 1fr); gap: 22px; padding: 22px; }
+  .proof-overview { gap: 12px; padding-right: 18px; }
+  .proof-bottom { flex-direction: column; gap: 8px; }
+  .proof-links { justify-content: flex-start; }
+}
+@media (max-width: 700px) {
+  body .compact-main > .reputation.trust-proof { padding: 25px 16px 30px; }
+  .proof-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 22px 18px; }
+  .proof-overview { border-right: 0; border-bottom: 1px dashed #d8e9e2; padding: 0 0 20px; justify-content: center; gap: 18px; }
+  .proof-score strong { font-size: 48px; }
+  .proof-metric { gap: 9px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .proof-links a { transition: color .15s ease; }
+}
+
+/* External score widths: inline styles are forbidden by site CSP. */
+.proof-bar-fill[data-dimension="adaptability"] { width: 88.0%; }
+.proof-bar-fill[data-dimension="convention"] { width: 89.00%; }
+.proof-bar-fill[data-dimension="effectiveness"] { width: 94.500%; }
+.proof-bar-fill[data-dimension="reliability"] { width: 92.0%; }
+.proof-bar-fill[data-dimension="trust"] { width: 98.0%; }

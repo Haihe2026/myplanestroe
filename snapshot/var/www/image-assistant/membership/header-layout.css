@@ -1,0 +1,22 @@
+header.site-header{display:block;height:auto;min-height:0;padding-top:0;padding-bottom:0;letter-spacing:0}
+.site-header .header-top{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;min-height:86px;padding:16px 0}
+.site-header .brand{white-space:nowrap}
+.site-header .ai-brands{grid-column:auto;grid-row:auto;border:0;padding:0;justify-content:center;gap:18px}
+.site-header .header-account{display:flex;align-items:center;gap:28px}
+.site-header .payment-brands{gap:20px}
+.site-header .tag{white-space:nowrap}
+.site-header .header-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid #2b4037;min-height:64px;padding:8px 0}
+.site-header .skill-nav{grid-column:auto;grid-row:auto;border:0;padding:0;gap:24px}
+.site-header .registration-entry{display:flex;align-items:center;justify-content:flex-end;gap:10px;color:#ffdc38;background:transparent;border:0;border-radius:0;padding:10px 0;font:600 16px/1.6 inherit;font-family:inherit;font-size:16px;line-height:1.6;text-align:right;cursor:pointer;letter-spacing:0}
+.registration-entry small{font-size:11px;white-space:nowrap;color:#e0c670;border:1px solid #665c2c;border-radius:4px;padding:1px 5px}
+.site-header .registration-entry:hover{color:#ffeb8a;background:transparent}
+.site-header a:focus-visible,.registration-entry:focus-visible{outline:2px solid #ffdc38;outline-offset:5px}
+#registration-dialog{width:min(460px,calc(100% - 32px));max-width:calc(100% - 32px);padding:28px;border:1px solid #d7e5de;border-radius:8px;color:#20372d;background:#fff;box-sizing:border-box}
+#registration-dialog::backdrop{background:rgb(0 0 0 / 48%)}
+#registration-dialog h2{font-size:20px;margin:0 0 14px;line-height:1.5}
+#registration-dialog p{font-size:14px;line-height:1.8;margin:0 0 22px}
+#registration-dialog form{display:flex;justify-content:flex-end}
+#registration-dialog button{font:inherit;background:#008650;color:#fff;border:0;border-radius:4px;padding:10px 22px;cursor:pointer}
+@media(max-width:1100px){.site-header .header-top{gap:16px}.site-header .ai-brands{gap:12px}.site-header .header-account{gap:16px}.site-header .payment-brands{gap:12px}.site-header .registration-entry{font-size:14px}.site-header .skill-nav{gap:18px}}
+@media(max-width:900px){.site-header .header-top{grid-template-columns:1fr auto;gap:16px}.site-header .ai-brands{grid-column:1/-1;grid-row:2;justify-content:flex-start;gap:24px}.site-header .header-account{grid-column:2;grid-row:1}.site-header .header-bottom{flex-wrap:wrap;gap:0}.site-header .registration-entry{justify-content:flex-start;text-align:left}}
+@media(max-width:540px){header.site-header{padding-left:20px;padding-right:20px}.site-header .header-top{grid-template-columns:minmax(0,1fr);gap:18px}.site-header .header-account{grid-column:1;grid-row:2;justify-content:space-between}.site-header .ai-brands{grid-row:3;gap:12px 20px}.site-header .skill-nav{width:100%;justify-content:space-between;gap:8px}.site-header .skill-nav a{font-size:12px}.site-header .registration-entry{font-size:14px;gap:8px}.site-header .registration-entry span{overflow-wrap:anywhere}.site-header .header-bottom{padding-bottom:12px}}

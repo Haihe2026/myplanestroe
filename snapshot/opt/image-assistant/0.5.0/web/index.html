@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Gemini生图助手 · 会员中心</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="renewal.css">
+  <link rel="stylesheet" href="payments.css">
+  <link rel="stylesheet" href="api-keys.css">
+  <script src="app.js" defer></script>
+  <script src="api-keys.js" defer></script>
+</head>
+<body>
+<header><a href="/membership/" class="brand"><img src="icon.png" alt="" width="34" height="34">Gemini生图助手</a><div class="payment-brands" aria-label="支付渠道，接入中"><span class="payment-caption">支付渠道</span><span class="payment-brand"><img src="alipay.svg" alt="" width="26" height="26">支付宝</span><span class="payment-brand"><img src="wechat-pay.svg" alt="" width="26" height="26">微信支付</span><span class="payment-pending">接入中</span></div><span class="tag">会员中心</span></header>
+<main>
+  <div class="intro"><div><p class="eyebrow">做牛马最好用的生图工具</p><h1>把工作需要的图，继续做完。</h1><p>选岗位，说需求。办公配图、活动海报、内容封面，回 WorkBuddy 继续生成。</p></div><div class="balance"><span id="account">尚未关联生图账户</span><strong id="balance">— <small>积分</small></strong><button id="refresh" type="button" aria-label="刷新余额" title="刷新余额">↻</button></div></div>
+  <div class="notice" id="notice" role="status">正在检查账户连接…</div>
+  <section aria-labelledby="plans-title"><div class="section-title"><h2 id="plans-title">选择你的会员套餐</h2><span>月度会员 / 终身会员</span></div><div id="plans" class="plans" role="radiogroup" aria-label="生图会员套餐"></div><label class="renewal"><input id="renewal" type="checkbox">自动续费方案 · 九折 <span>代扣签约接入中，选择不会产生扣款</span></label></section>
+  <section class="checkout" aria-labelledby="summary"><div><h2 id="summary">Ultra 次数包</h2><p id="detail">54 次标准生图 · 54,000 积分</p><p class="subtle">这是本生图服务的积分，不是 WorkBuddy 官方会员。</p></div><div class="action"><strong id="total">¥49</strong><button id="buy" type="button" disabled>收款接入中</button><span>计划支持微信支付 / 支付宝</span></div></section>
+  <section class="api-section" aria-labelledby="api-title"><div class="section-title"><h2 id="api-title">我的生图 API</h2><span>与 WorkBuddy 共用额度</span></div><p id="api-notice" role="status">从 Skill 打开会员中心，查看你的 API 权限。</p><div class="api-toolbar"><button id="issue-key" type="button" disabled>＋ 领取 API Key</button><a href="api-guide.html">接口文档 ↗</a></div><div id="new-key" hidden><label for="key-value">新 Key · 仅本次展示，请妥善保管</label><div class="key-actions"><input id="key-value" type="password" readonly autocomplete="off" aria-label="新 API Key"><button id="reveal-key" type="button">显示</button><button id="copy-key" type="button">复制</button><button id="hide-key" type="button">关闭</button></div></div><div id="key-list"></div></section>
+  <section class="after"><h2>买完，回到熟悉的工作流</h2><ol><li><span>01</span><div><strong>同一个生图账户</strong><p>从 Skill 打开会员中心，无需重复注册。</p></div></li><li><span>02</span><div><strong>购买会员</strong><p>支付开放后，经服务端核验再增加积分。</p></div></li><li><span>03</span><div><strong>回 WorkBuddy 继续生图</strong><p>说“刷新我的生图积分”，接着说图片需求。</p></div></li></ol></section>
+  <footer>首次使用赠送 5,000 积分，以实际试用名额为准。月度额度到期与结转规则待确认；终身档一次2000次、长期有效。<br>自动续费需另行明确签约，默认不勾选；当前仅预览，暂不收款、不代扣。请保留安装设备上的账户凭证；换设备暂不自动同步。</footer>
+</main>
+</body></html>

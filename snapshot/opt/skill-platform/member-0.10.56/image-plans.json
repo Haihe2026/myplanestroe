@@ -1,0 +1,46 @@
+{
+  "unit_price_fen": 20,
+  "supplier_cost_usd_per_image": "0.0065",
+  "shared": [
+    {
+      "id": "shared_image20_29",
+      "name": "Plus",
+      "price_fen": 2900
+    },
+    {
+      "id": "shared_image20_39",
+      "name": "Pro",
+      "price_fen": 3900
+    },
+    {
+      "id": "shared_image20_49",
+      "name": "Ultra",
+      "price_fen": 4900
+    },
+    {
+      "id": "shared_image20_999",
+      "name": "终身会员",
+      "price_fen": 99900
+    }
+  ],
+  "temu": [
+    {
+      "id": "temu_image20_89",
+      "name": "企业入门",
+      "price_fen": 8900,
+      "images": 500
+    },
+    {
+      "id": "temu_image20_198",
+      "name": "企业成长",
+      "price_fen": 19800,
+      "images": 1000
+    },
+    {
+      "id": "temu_image20_365",
+      "name": "企业批量",
+      "price_fen": 36500,
+      "images": 2000
+    }
+  ]
+}

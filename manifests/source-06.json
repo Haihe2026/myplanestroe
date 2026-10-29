@@ -1,0 +1,502 @@
+[
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.43/run_shared.py",
+    "bytes": 951,
+    "sha256": "18152a049e7fe7d4b556d1043ddf4da5bdb54c938620d0f64d066e41123ff4e0"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.44/checkout_resume.py",
+    "bytes": 3483,
+    "sha256": "f5a6eb115bf9ad9c022a2069bfcaedd83c2100f3d25cec0af28852f058079517"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.44/run_shared.py",
+    "bytes": 662,
+    "sha256": "a0aa475e076cde318e15de8cc171d538822347f73260a405127479524bc0dc51"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.45/product-directory.js",
+    "bytes": 4471,
+    "sha256": "e650a9b06094fb6ffa437c77461699dec15dbe87635ba0a5f0e9fe3ba206cb00"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.45/product_ops.py",
+    "bytes": 4156,
+    "sha256": "ed92d8b9feaf8fa0d12a65af2bbc5e081be03a67811d28bedf11a15ca93c69f0"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.45/run_ops.py",
+    "bytes": 429,
+    "sha256": "0eafe58133cfd304e03debcae4c65e58985e947229ab9a146e364db0ad9753ba"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.46/arrival_ops.py",
+    "bytes": 3007,
+    "sha256": "f6da8177a6b435ee9866a8c35f15cd5a785af5d32d868a8c6823e0d4d10d66d0"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.46/first-use.js",
+    "bytes": 3349,
+    "sha256": "ef8997d24195a94c4b115c354347365c4a53fd648f33f503a68a2f24e7e16ec5"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.46/run_ops.py",
+    "bytes": 429,
+    "sha256": "45266dbca687e5178ed1acc9fd524b59ee6d8f74722082d0d2be093a243cb02b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.47/product-directory.js",
+    "bytes": 6451,
+    "sha256": "68cc8d7af7305c3ae553b5d4923c9fb047df617bbfc4f466438a81e286ddc7ee"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.47/product_ops.py",
+    "bytes": 4156,
+    "sha256": "3d1abe1ae24b2518ea034c0085cc80039de133681cadd9f16f1bf1bb816f8654"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.47/run_ops.py",
+    "bytes": 295,
+    "sha256": "ea89cc0e4027e9bf30e10670326cf545e530ec723d30930ce13aebc5809e390d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.48/run_shared.py",
+    "bytes": 455,
+    "sha256": "834cd133b9476961aae2114df3cdf89ad3abd1d5f348dcaf2808fb35c1e72502"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.48/trade_config.py",
+    "bytes": 2908,
+    "sha256": "a282c3cba6d1a8c1ee784792be66a042684420912fe40eabe6c0218c23c44d86"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.48/trade_gateway.py",
+    "bytes": 9869,
+    "sha256": "e3dc543dfba7ff639f4b37d34233f0b2c57ea49c6bb3df6ccb9f68f087e2fff3"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.48/web/trade.css",
+    "bytes": 8240,
+    "sha256": "cb29c0902b9fb407c8343a9aae451d5f775a6ac7c97bd35223b743cdf46edf5f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.48/web/trade.html",
+    "bytes": 4567,
+    "sha256": "4f6ba92e51eee3395d7e464be3cced9c300171a85a59e304d20981754d7ffb85"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.48/web/trade.js",
+    "bytes": 4296,
+    "sha256": "fc613bb4cf1a518c51c3f1b7f1841ed4df955dacb5389359079f0d09f4f5f972"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.49/run_shared.py",
+    "bytes": 407,
+    "sha256": "c5b91a9cc7eb7781518729e88ccf4e1695a8ace59afb29e61505f7a0dfaa8b2d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.49/trade_config.py",
+    "bytes": 2908,
+    "sha256": "e79d7d8a815000ba63d531bb4b6ce5f0153d3ead976fcf9be813c7c5d4753bc1"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.50/channel_refresh.py",
+    "bytes": 4166,
+    "sha256": "7097ccbbec8bc3ce80846e4cf2891fb207ff6fce55e0f7841ba58d035d8bea0d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.50/product-directory.js",
+    "bytes": 8175,
+    "sha256": "3359b1c33c7a9f78b6185b89a1fe3a72800751abc90950aedb517232c809a4ab"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.50/product_ops.py",
+    "bytes": 5151,
+    "sha256": "ffb163810cf77664ae029a80f805b90beb9d88830c1e28119e69dadbf4f23b65"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.50/run_ops.py",
+    "bytes": 211,
+    "sha256": "8280a8374756a728c2b56e8f72fd1af59dd105038a9c60135bf90dbf43e1444a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.51/layout_ops.py",
+    "bytes": 771,
+    "sha256": "d30db800c9352dd7b964907589f835456fbb073615d8e4a23e93b55c1f11bf6e"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.51/run_ops.py",
+    "bytes": 427,
+    "sha256": "3a481146234ec0019744026246da717a2f6757be82d5a9ac9234128ba7dc9a81"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.51/users-first.js",
+    "bytes": 980,
+    "sha256": "f5857e1d7cf073e3dcfffcc606162831909c1690d7a861a27d1972f210bc975c"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.52/asset_ops.py",
+    "bytes": 3209,
+    "sha256": "76d07f8a7d4a693858a2fbc7da2b0e73cc8664c60e6f5211bf06214e7ac4a32a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.52/asset_registry.py",
+    "bytes": 7476,
+    "sha256": "28fd277ca7d3f90351cbcff47d8bc149f1d76a18175363d4ac6e864881915982"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.52/run_ops.py",
+    "bytes": 425,
+    "sha256": "148c059ec1d22ff823c65eee3a17f4f5ec914516ca39d656373335e3c318a667"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.52/upstream-assets.css",
+    "bytes": 2077,
+    "sha256": "0f76fcb0a9bcadb11621ab95bc9dbfd2e8f560a3e90d5158e423857e7ec1a186"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.52/upstream-assets.js",
+    "bytes": 10856,
+    "sha256": "4eff1b6598333e9248857ca4fc8c854ace31713aee9bcdba90395ac5138b744f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.53/resource_ops.py",
+    "bytes": 784,
+    "sha256": "bf95b3a3d14c705bf8b521db35d02264b08e86f0bfa9097e14fe5d7e67a2d9f1"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.53/run_ops.py",
+    "bytes": 389,
+    "sha256": "46e211152b506957801cd5c8db52f90985df3906f25e77124fa4d75748c3f382"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/run_ops.py",
+    "bytes": 267,
+    "sha256": "8132d74c990d36961d3d5edb7cf88ec250374e2a34ee5e638d9d504a24de4bf9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/run_shared.py",
+    "bytes": 260,
+    "sha256": "d0747321726f2658dd5afddb7f353a9c08c28d2857d70359b097352994c4b375"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/trade_config.py",
+    "bytes": 3455,
+    "sha256": "bfecf4cb48c4ccdd82b28eeda846b96b100f2a7f52f9a0324f50c3e766f1c32b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/trade_ops.py",
+    "bytes": 5548,
+    "sha256": "8c95dccbfc86a7f664c156a7d6b521e77ca73d5a07596b287b203c030cf7ceb9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/trade_store.py",
+    "bytes": 18900,
+    "sha256": "f90a08b9055e215ba48b08e3e847010a542a32464e7babb40192538f0f998c40"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/web/trade.css",
+    "bytes": 8629,
+    "sha256": "3e0bcf265f650fea69b4a9d7b868c86df07909fcf8ccd1d99c6363765f639061"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/web/trade.html",
+    "bytes": 4699,
+    "sha256": "64b14c71b045f7410737dd0ee9155310d9e1c369ec8be9026377ac422fc0a950"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.54/web/trade.js",
+    "bytes": 5010,
+    "sha256": "3830b43aa2c34788bb61d3c13f6a2fb00ef1d6a451080cc0ac057f1a5993981f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.55/asset_ops.py",
+    "bytes": 3209,
+    "sha256": "76d07f8a7d4a693858a2fbc7da2b0e73cc8664c60e6f5211bf06214e7ac4a32a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.55/resource_ops.py",
+    "bytes": 784,
+    "sha256": "53dd69bb9b6afb59cce4fce345eda59f2daa0e1afd4c59d230fb32d6119280e5"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.55/run_ops.py",
+    "bytes": 255,
+    "sha256": "d916f1c08a0d882f222be5816dbcb5f6d3c07646f8882ac73b2c2a97ad8dfa7e"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.55/upstream-assets.css",
+    "bytes": 2482,
+    "sha256": "330250c8a617c78d8557d01e9cfc8a0cd7bc010706da0aba8e58b3db7e4512cc"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.55/upstream-assets.js",
+    "bytes": 13777,
+    "sha256": "b858643be351e02fa2a308aac579cc4dbacbe35b506a00c7d4a8def04ccf29aa"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/image-plans.json",
+    "bytes": 845,
+    "sha256": "2e5a0af777a09a79a99fe1a0c861009cfc4c0714007d41a36766a6275f628d1a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/install_mail_pricing.py",
+    "bytes": 337,
+    "sha256": "c568572783e43fc73739bcd78deb2208029b1352af2073cba1d59b94f123d024"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/install_pricing.py",
+    "bytes": 213,
+    "sha256": "380851938b6b0ba746dbc4ef353e35ee32d9f6cced60d75ac1f9243cb6b9c9f5"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/permanent_plans.py",
+    "bytes": 1124,
+    "sha256": "af8fc7609f8b6935235a13114bd87d4131699cab244a2d107716b30d56718204"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/run_mail.py",
+    "bytes": 467,
+    "sha256": "63182eacd5aee6d06668064ff008720b0ab16a7d1253913315f22bc276ba53fa"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/run_ops.py",
+    "bytes": 295,
+    "sha256": "9eb73a9b5cf22312c61cf0f77d2a6c93a9dc9b48ba35032e2e54d19fcf888870"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/run_shared.py",
+    "bytes": 298,
+    "sha256": "268efd0684cabdb4cbfb6e68767c42f0fc1857fd63f351daa1ddd12ab9cb647a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/compact.js",
+    "bytes": 4759,
+    "sha256": "f731f76604e19a16ed2b28f88982eec4a0bb25b90593b8930664ea68c9121ec4"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/gemini/app.js",
+    "bytes": 6679,
+    "sha256": "15537a26dd6f386d639723767952f45afe39b2c7fe6379589437b3c23ce0a7dc"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/gemini/index.html",
+    "bytes": 16058,
+    "sha256": "bbff0b8869bfd4bd9cadc6a27e6bd18bc0934eab158368ee946e527cbea13ba9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/index.html",
+    "bytes": 16051,
+    "sha256": "00f69bc8caadc5cccf90e8b3f646282d6e28c61bb8f9d53fa85203d110744cad"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/shared-app.js",
+    "bytes": 6802,
+    "sha256": "37dd09627c6476b6583158bfb6793efa42295b4772a73eb268f4eb75f40b1432"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/temu/app.js",
+    "bytes": 6506,
+    "sha256": "6420bb4d9e08f7fd1e37eb41ce6243e1e28db77ac764075390f6568b0dfe4355"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/temu/compact.js",
+    "bytes": 4254,
+    "sha256": "7b6b6ca94db2dfd130d79c7bbff0a8af919acf9cf8541faf7edff5b226b7473a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/temu/enterprise.js",
+    "bytes": 3628,
+    "sha256": "51e23b4fced6f0f9dd928b3dfc49b668aa78002f0c5d2666fca91bc28fb936dd"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/temu/index.html",
+    "bytes": 12919,
+    "sha256": "c00a137afe49b21775f40f6b07243f334b08196bc3a634928dec7c2d58148390"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.56/web/xhs/index.html",
+    "bytes": 16162,
+    "sha256": "e836277a75de2af62649a9a685faddef5e8eb2c7681381cbca25f63a9e139286"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.57/expert_service.py",
+    "bytes": 4139,
+    "sha256": "67ec58885e2b934c84e28d95c299c03069ebb8ea9ef1757910f6e9bd59a7e79b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py",
+    "bytes": 9399,
+    "sha256": "66cdc5932c3c80f3945977e26e1cfac3217912f00078fa3fa628d0ac28ff1bec"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.57/run_shared.py",
+    "bytes": 754,
+    "sha256": "d007236f23e53635b1e29367fe485d70553be66f59e6d2eac1758decb956a1e4"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.57/safe_http.py",
+    "bytes": 2378,
+    "sha256": "3e2733bc189ae76a880b3ec6e145f18842d04cbe3d0ce89b613b61e2f56767e0"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.57/temu_delivery.py",
+    "bytes": 18132,
+    "sha256": "a0584549bf61a85ac450f8366dc7defe0ce7e2d339632e6ef8a2781f44220038"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py",
+    "bytes": 3245,
+    "sha256": "7b07d6c625cf404b5d6daf51dc791e73b4545cd0fcfbe4472bcd8526d7ac85b6"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/dialogue_ops.py",
+    "bytes": 2189,
+    "sha256": "89dbf55439d51e271b0314f6c94c25f3c81fcf5decc7c695d8e9e6a86fd45e05"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py",
+    "bytes": 7413,
+    "sha256": "cf853d6d82a1d55c735c015d1dd2bbb2785df994c591e9a305426d005d3f5801"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/first-dialogues.js",
+    "bytes": 2886,
+    "sha256": "b886c6e0bcd7c7969932dbc2de2d859f5bc0ee38645f61e2e66b7eeb2050ba11"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/panel.js",
+    "bytes": 23847,
+    "sha256": "98470de7c083599f3b49fb0c5707d7f4a8180f376857bec4a6977c918c76554c"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/run_ops.py",
+    "bytes": 686,
+    "sha256": "4d3fa36cbadca49d12baf8d83b8b2a57cc8da02561cc70ca2882b04f6befa1a9"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/run_shared.py",
+    "bytes": 620,
+    "sha256": "9add4e0f263e46e1b8a2c32ba212247534bc4d3ebf1199d04b13f101425bf4a8"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/users-directory.css",
+    "bytes": 1425,
+    "sha256": "c59bc856d70802078fe871cf9259b83267d8d5931a4d821c090e72aebd613273"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/users-directory.js",
+    "bytes": 7645,
+    "sha256": "b9d928a16e95bd4774477d91f3ce829ab35afab099af74af163ecc6f67ec6965"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.58/users_ops.py",
+    "bytes": 6209,
+    "sha256": "eba78d04b2b33e711736e563ca650c19cb9b4c79778a19611a5fa36aa854167e"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/child_resource.py",
+    "bytes": 6659,
+    "sha256": "1eaa1e6b7f5470978ce45ca3408fba0fce33810a804d26e89db3aa439dedceca"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/child_service.py",
+    "bytes": 8795,
+    "sha256": "da719119e35344b17be8fc700477002a9083df2363062f93217d10c95e661628"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/rollback_entry.py",
+    "bytes": 2260,
+    "sha256": "f06a5cea129cf19a4dafe5a465478b908dd6d31476c5b6e22ceef6fc9b64a602"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/run_shared.py",
+    "bytes": 1277,
+    "sha256": "856fdc9b95c9ae2c9861678d836b77e129bf7b9b9bd72675b650ccf6980ee0bb"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/guard_entry.py",
+    "bytes": 4912,
+    "sha256": "81301b2e505543aa0b8bb183236e120f509c464f136d1d24b63f98794d645752"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+    "bytes": 10638,
+    "sha256": "6ccc4649db1751d568177c05603152bce779a1fd087295b70d07f3fc51e80482"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/run_legacy.py",
+    "bytes": 1652,
+    "sha256": "8984869d329524b5b4558be147bb1d9d04cdbc08dd061879724fb41de3e165a5"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/run_shared.py",
+    "bytes": 2515,
+    "sha256": "0702f8c4e2ce8ca15960fe5703be516b224134cc9ddecb480eeff954613560c8"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/run_shared.py",
+    "bytes": 781,
+    "sha256": "a4d20450bbb73764cd6d0726be303153a574423dfcd16f02eabb16604136f44f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/web/binding.js",
+    "bytes": 1062,
+    "sha256": "23b026a94123940a490358f72bf3a73b0bffbd902d7291df6ca153ccf63aff53"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/web/index.html",
+    "bytes": 1371,
+    "sha256": "a8e3544716b75900d4ba748e6e9ab436229a13460876be6eb9c4d74e9bd48a93"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/web/redirect.html",
+    "bytes": 309,
+    "sha256": "fdc89d4d0914b9512edd43a069c13ea1bd43bd0dc69b2940e3a21c14d6e24f49"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/web/redirect.js",
+    "bytes": 363,
+    "sha256": "6b42ec080affad1ebb641a8b6c1ced3c1e12883fcd85a9310e8f0bb94f8a6f84"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/web/wechat.css",
+    "bytes": 754,
+    "sha256": "f59619a7ab5256aadece14f40cfcf7e044ed40fdd27569172ae1072aeb8a149d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/web/wechat.js",
+    "bytes": 3246,
+    "sha256": "60a35ad84caa64ebaac87a57f67c09442cfa55af25c2c547efa4664937697c8a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+    "bytes": 16469,
+    "sha256": "c7c03be06d664d78a52dd65e8e6d99dafd00cc06ae64728f836b5d5d9a233763"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.9/core/api_access.py",
+    "bytes": 4814,
+    "sha256": "7b5adcf52ffcbe0757fa99cf7bf4d603ef1fbe7609cd68470657278f6c26935a"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.9/core/image_inputs.py",
+    "bytes": 3478,
+    "sha256": "6359236f2e5415f30c84fa2f07a46e59f99b141fdc370959b2b9a9ba233a2b43"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.9/core/manual_payments.py",
+    "bytes": 7418,
+    "sha256": "360d5ab5d06c9e5dd34e1ad0976bd1a9d4d0dfdb7f51d204b1a5f5f9874be25e"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.9/core/manual_settle.py",
+    "bytes": 1112,
+    "sha256": "ba1e880b300711eefc56f97ebc2d7ec21672672c0c23169d37831a160caea969"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.9/core/membership.py",
+    "bytes": 7761,
+    "sha256": "1e75c8f22264620ecba1e7a45c33a0f8bb88ee4d2a4391b833701b2dc88bf512"
+  }
+]

@@ -1,0 +1,29 @@
+/* Common checkout only. Temu retains its separate enterprise styling. */
+body.shared-checkout .header-line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-rows:48px 40px;height:88px;gap:0 22px}
+body.shared-checkout .compact-brand{grid-column:1;grid-row:1}
+body.shared-checkout .trust-badges{grid-column:2/4;grid-row:1}
+body.shared-checkout .model-brands{grid-column:1;grid-row:2;justify-content:flex-start}
+body.shared-checkout .compact-payments{grid-column:2;grid-row:2}
+body.shared-checkout #account-tools{grid-column:3;grid-row:2;font-size:14px;font-weight:600}
+body.shared-checkout .trust-badge{font-size:14px;line-height:20px;font-weight:600}
+body.shared-checkout .current-skill{display:flex;font-size:14px;line-height:22px;font-weight:600}
+body.shared-checkout .recharge-delivery-note{font-size:16px;line-height:1.6}
+body.shared-checkout .plan-period{font-size:14px;line-height:22px;white-space:normal;overflow-wrap:anywhere;max-width:100%;min-height:22px}
+body.shared-checkout #plan-guidance{font-size:16px;line-height:1.6}
+@media(max-width:1100px){
+  body.shared-checkout .header-line{grid-template-rows:50px 42px;height:92px;gap:0 12px}
+  body.shared-checkout .model-brands{display:none}
+  body.shared-checkout .trust-badges{grid-column:1/-1;grid-row:2;justify-content:center}
+  body.shared-checkout .compact-payments{grid-column:2;grid-row:1}
+  body.shared-checkout #account-tools{grid-column:3;grid-row:1}
+}
+@media(max-width:600px){
+  body.shared-checkout .header-line{grid-template-rows:46px 52px;height:98px;gap:0 8px}
+  body.shared-checkout .trust-badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;width:100%}
+  body.shared-checkout .trust-badge{height:48px;padding:4px 1px;gap:3px}
+  body.shared-checkout .trust-copy{flex-direction:column;gap:0}
+  body.shared-checkout .trust-result::before{content:none}
+  body.shared-checkout .trust-icon{font-size:12px}
+  body.shared-checkout .plan-period{min-height:44px;display:flex;align-items:center;justify-content:center}
+  body.shared-checkout .plan{min-height:180px}
+}

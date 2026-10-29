@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><script async src="/membership/journey/page.js?v=0.10.16"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Temu商家生图skill · 免费体验</title>
+  <link rel="icon" href="/membership/platform-mark.svg?v=site-logo-20261022">
+  <link rel="stylesheet" href="trial-register.css?v=0.10.30">
+  <script src="trial-register.js?v=0.10.30" defer></script>
+</head>
+<body>
+  <header><a href="/membership/temu/"><img src="/membership/platform-mark.svg?v=site-logo-20261022" width="32" height="32" alt="">MyPlaneStore</a></header>
+  <main>
+    <p class="product">Temu商家生图skill</p>
+    <h1 id="title">先免费做1张商品图</h1>
+    <p class="lead" id="lead">关联当前技能后，符合资格的新用户可领取1次免费体验，无需先购买套餐。原图片需求已保留。</p>
+    <form id="registration">
+      <label class="consent"><input id="consent" type="checkbox"><span>同意关联原账户或创建创作账户；确认制作后，本次需求和授权照片由MyPlaneStore及其受托图片处理服务处理。</span></label>
+      <button id="confirm" type="submit" disabled>关联账户，领取免费体验</button>
+      <p id="feedback" role="status" aria-live="polite">与当前 Skill 自动关联，无需手机号或 API Key。</p>
+    </form>
+    <section id="result" hidden aria-labelledby="title">
+      <p id="trial-count" class="trial-count" role="status" aria-live="polite"></p>
+      <p id="result-status" class="result-status" role="status" aria-live="polite"></p>
+      <button id="copy-continue" type="button" hidden>复制“继续”，回到WorkBuddy</button>
+      <button id="retry" class="secondary" type="button" hidden>重新查询账户状态</button>
+      <button id="view-plans" class="secondary" type="button" hidden>需要更多图片？查看企业套餐</button>
+    </section>
+    <p class="continuation" id="continuation">关联账户只用于确认体验资格，不会下单或扣费。先体验，满意后需要更多图片时再购买。</p>
+  </main>
+</body>
+</html>

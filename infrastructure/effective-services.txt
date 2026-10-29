@@ -1,0 +1,17 @@
+skill-platform
+{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/grok-video-0.1.3/run_paid.py --db /var/lib/skill-platform/shared.db --gemini-db /var/lib/image-assistant/pilot.db --temu-db /var/lib/temu-image-assistant/trial.db --temu-source /opt/temu-image-assistant/0.2.2/service ; ignore_errors=no ; start_time=[Thu 2026-10-29 13:52:00 CST] ; stop_time=[n/a] ; pid=966504 ; code=(null) ; status=0/0 }
+
+skill-monitor
+{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/ops-2026-10-28-costs/run_ops.py --config /etc/skill-monitor/config.json --shared-db /var/lib/skill-platform/shared.db --temu-source /opt/temu-image-assistant/0.2.2/service ; ignore_errors=no ; start_time=[Thu 2026-10-29 16:16:19 CST] ; stop_time=[n/a] ; pid=998458 ; code=(null) ; status=0/0 }
+
+skill-order-mail
+{ path=/opt/skill-platform/order-mail-0.6.0/venv/bin/python ; argv[]=/opt/skill-platform/order-mail-0.6.0/venv/bin/python /opt/skill-platform/member-0.10.56/run_mail.py ; ignore_errors=no ; start_time=[Thu 2026-10-29 13:52:00 CST] ; stop_time=[n/a] ; pid=966503 ; code=(null) ; status=0/0 }
+
+image-assistant
+{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/member-0.10.60-new-resource-only/run_legacy.py --source /opt/skill-platform/assistant-1.3.0/service --product gemini --db /var/lib/image-assistant/pilot.db --port 8787 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+
+temu-image-assistant
+{ path=/opt/temu-image-assistant/venv/bin/python ; argv[]=/opt/temu-image-assistant/venv/bin/python /opt/skill-platform/member-0.10.60-new-resource-only/run_legacy.py --source /opt/temu-image-assistant/0.2.2/service --product temu --db /var/lib/temu-image-assistant/trial.db --port 8788 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+
+image-pack
+{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/member-0.10.60-new-resource-only/run_legacy.py --source /opt/skill-platform/1.2.0/service --db /var/lib/image-assistant/pack-test.db --port 18790 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }

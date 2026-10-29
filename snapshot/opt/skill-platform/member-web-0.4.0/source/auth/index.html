@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gemini生图助手 · 手机号授权</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
+<body><header><a href="/membership/gemini/">MyPlaneStore</a><span>Gemini生图助手</span></header><main>
+<p class="eyebrow">账户授权</p><h1>验证手机号，继续创作</h1><p class="intro">完成一次验证，关联你的生图账户。原来的图片需求会保留在 WorkBuddy，验证后可以接着制作。</p>
+<form id="form"><label for="phone">手机号</label><input id="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="14" placeholder="中国大陆手机号" required disabled>
+<label for="code">短信验证码</label><div class="code-row"><input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="6位验证码" required disabled><button id="send" type="button" disabled>获取验证码</button></div>
+<label class="consent"><input id="accepted" type="checkbox" disabled><span>同意使用手机号验证并关联生图账户。图片仅在确认后发送至生图服务；手机号仅向腾讯云短信服务发送以投递验证码。</span></label>
+<button id="verify" type="submit" disabled>验证并关联账户</button><p id="message" role="status" aria-live="polite">正在检查授权状态…</p></form>
+<section id="success" hidden><h2>验证完成</h2><p>回到 WorkBuddy 说“已验证，继续”，即可接着制作刚才的图片。</p><button id="copy" type="button">复制继续指令</button></section>
+<p class="note">更新或登录使用原账户余额。重复验证不会重复赠送积分。</p></main><footer>MyPlaneStore · 生图服务</footer></body></html>

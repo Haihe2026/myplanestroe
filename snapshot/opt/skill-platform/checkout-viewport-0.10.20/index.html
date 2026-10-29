@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><script async src="/membership/journey/page.js?v=0.10.16"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>MyPlaneStore · Skill通用充值中心</title><link rel="icon" href="/membership/platform-mark.svg" type="image/svg+xml"><link rel="stylesheet" href="/membership/compact.css?v=0.5.0"><script src="/membership/shared-app.js?v=0.10.13" defer></script><link rel="stylesheet" href="/membership/recharge.css?v=0.5.1"><script src="/membership/gemini/api-keys.js?v=0.10.13" defer></script><script src="/membership/gemini/platform.js?v=0.10.13" defer></script><script src="/membership/shared-payment.js?v=0.10.13" defer></script><script src="/membership/compact.js?v=0.10.13" defer></script><link rel="stylesheet" href="/membership/trust.css?v=0.5.3"><link rel="stylesheet" href="/membership/payment-return.css?v=0.7.0"><link rel="stylesheet" href="/membership/account-center.css?v=0.8.3"><script src="/membership/account-center.js?v=0.10.13" defer></script><link rel="stylesheet" href="/membership/brandbar.css?v=0.9.3"><link rel="stylesheet" href="/membership/skill-key.css?v=0.10.0"><script src="/membership/skill-key.js?v=0.10.13" defer></script><link rel="stylesheet" href="/membership/shared-portal.css?v=0.10.13"><link rel="stylesheet" href="/membership/readability.css?v=0.10.15"><link rel="stylesheet" href="/membership/evaluation.css?v=0.10.19"><link rel="stylesheet" href="/membership/viewport.css?v=0.10.20"></head><body data-product="gemini" class="shared-checkout"><header class="compact-header"><div class="header-line"><a class="compact-brand" href="/membership/"><img src="/membership/platform-mark.svg" alt="" width="28" height="28"><b>MyPlaneStore</b></a><div class="trust-badges" role="group" aria-label="Gemini生图器 v1.0.5 安全评测"><a href="https://skillhub.cn/skills/user_9dc847d2/jyai-gemini-image-assistant" target="_blank" rel="noopener noreferrer" title="Gemini生图器 v1.0.5 · SkillHub · 安全评测" class="trust-badge" aria-label="Gemini生图器 v1.0.5 · SkillHub · 安全评测"><span class="trust-icon" aria-hidden="true">✓</span><span class="trust-copy"><span class="trust-label">Gemini</span><span class="trust-result">安全评测</span></span></a><a href="https://tix.qq.com/search/skill?keyword=REDACTED_FOR_HANDOFF" target="_blank" rel="noopener noreferrer" title="Gemini生图器 v1.0.5 · 科恩实验室 · 安全无风险" class="trust-badge" aria-label="Gemini生图器 v1.0.5 · 科恩实验室 · 安全无风险"><span class="trust-icon" aria-hidden="true">✓</span><span class="trust-copy"><span class="trust-label">科恩实验室</span><span class="trust-result">评测记录</span></span></a><a href="https://static.cloudsec.tencent.com/html-report-v2/2026/10/15/2151859_8587ae2301f8506cce87e1bbf44793b1.html?q-sign-algorithm=sha1&amp;q-ak=REDACTED_FOR_HANDOFF&amp;q-sign-time=1792054577%3B1823590577&amp;q-key-time=1792054577%3B1823590577&amp;q-header-list=host&amp;q-url-param-list=&amp;q-signature=REDACTED_FOR_HANDOFF" target="_blank" rel="noopener noreferrer" title="Gemini生图器 v1.0.5 · 云鼎实验室 · 安全无风险" class="trust-badge" aria-label="Gemini生图器 v1.0.5 · 云鼎实验室 · 安全无风险"><span class="trust-icon" aria-hidden="true">✓</span><span class="trust-copy"><span class="trust-label">云鼎实验室</span><span class="trust-result">评测记录</span></span></a></div><div class="model-brands" aria-label="AI模型与技能平台"><span><img src="/membership/qwen.svg" alt="" width="20" height="20">千问</span><span><img src="/membership/doubao.svg" alt="" width="20" height="20">豆包</span><span><img src="/membership/deepseek.svg" alt="" width="20" height="20">DeepSeek</span><span><img src="/membership/kimi.svg" alt="" width="20" height="20">Kimi</span><span class="skill-platform-brand"><img src="/membership/workbuddy.svg" alt="" width="20" height="20">WorkBuddy</span><span class="skill-platform-brand"><img src="/membership/skillhub.png" alt="" width="20" height="20">SkillHub</span></div><div class="compact-payments"><span><img src="/membership/alipay.svg" alt="" width="20" height="20"><span>支付宝</span></span><span><img src="/membership/wechat-pay.svg" alt="" width="20" height="20"><span>微信支付</span></span></div><button id="account-tools" type="button">我的账户</button></div><nav aria-label="充值与账户"><a href="/membership/" aria-current="page">通用充值中心</a><button type="button" id="nav-account">账户与订单</button><a href="/membership/temu/">Temu企业服务</a></nav></header><main class="compact-main">
+
+<div class="compact-heading recharge-heading"><p class="current-skill"><img src="/membership/platform-mark.svg" alt="" width="22" height="22"><span>统一账户 · 多技能共享次数</span></p><h1>Skill通用充值中心</h1><p class="recharge-caption">让想法更快落地，让成果更出彩</p></div><div class="account-line"><span id="account">正在关联账户…</span><div><strong id="balance">— 次</strong><button id="refresh" type="button" aria-label="刷新次数" title="刷新次数">↻</button></div></div>
+
+<p id="notice" role="status" class="compact-notice">正在检查账户连接…</p><div hidden><div id="products"></div></div><p id="product-status" hidden role="status"></p>
+
+<section id="plans-panel" aria-label="选择套餐"><p class="recharge-delivery-note">一次充值，多款技能共享。次数永久有效，随用随享。</p><div id="plans" class="plans" role="radiogroup" aria-label="共享次数套餐"></div><input id="renewal" type="checkbox" hidden disabled></section>
+
+<section id="checkout-panel" class="compact-checkout"><h2 id="summary" class="sr-only">Ultra 永久次数包</h2><p id="plan-guidance">一次备足，集中制作更从容。</p><div class="checkout-action"><strong id="total">¥49</strong><button id="buy" type="button" disabled>关联账户并充值</button></div><p id="detail" class="sr-only"></p><p class="payment-terms">扫码核款到账 · 已接入技能共享 · 次数永久有效</p></section>
+
+<section class="reputation trust-proof" aria-label="Gemini生图器 v1.0.12公开评测">
+      <h2 class="proof-eyebrow">TRUSTED · 值得信赖</h2>
+      <div class="proof-inner">
+        <div class="proof-overview">
+          <img class="proof-emblem" src="/membership/evaluation-shield-white.svg?v=0.10.18" alt="" width="54" height="54">
+          <div class="proof-summary">
+            <div class="proof-score" aria-label="综合评分 4.6，满分5分"><strong>4.6</strong><small>/5.0</small></div>
+            <div class="proof-stars" aria-hidden="true">★★★★★<span class="proof-stars-fill">★★★★★</span></div>
+            <p class="proof-label">SkillHub 技能质量评分</p>
+            <p class="proof-version">评测对象：<br>Gemini生图器 v1.0.12</p>
+          </div>
+        </div>
+        <div class="proof-detail">
+          <ul class="proof-metrics"><li class="proof-metric">
+      <span class="proof-metric-label">能力边界</span>
+      <span class="proof-bar" role="meter" aria-label="能力边界评分" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.4">
+        <span class="proof-bar-fill" data-dimension="adaptability"></span>
+      </span><strong class="proof-metric-score">4.4</strong></li><li class="proof-metric">
+      <span class="proof-metric-label">规范性</span>
+      <span class="proof-bar" role="meter" aria-label="规范性评分" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.5">
+        <span class="proof-bar-fill" data-dimension="convention"></span>
+      </span><strong class="proof-metric-score">4.5</strong></li><li class="proof-metric">
+      <span class="proof-metric-label">有效性</span>
+      <span class="proof-bar" role="meter" aria-label="有效性评分" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.7">
+        <span class="proof-bar-fill" data-dimension="effectiveness"></span>
+      </span><strong class="proof-metric-score">4.7</strong></li><li class="proof-metric">
+      <span class="proof-metric-label">可靠性</span>
+      <span class="proof-bar" role="meter" aria-label="可靠性评分" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.6">
+        <span class="proof-bar-fill" data-dimension="reliability"></span>
+      </span><strong class="proof-metric-score">4.6</strong></li><li class="proof-metric">
+      <span class="proof-metric-label">可信度</span>
+      <span class="proof-bar" role="meter" aria-label="可信度评分" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4.9">
+        <span class="proof-bar-fill" data-dimension="trust"></span>
+      </span><strong class="proof-metric-score">4.9</strong></li></ul>
+          <div class="proof-bottom">
+            <p class="proof-security"><img src="/membership/evaluation-shield.svg?v=0.10.18" alt="" width="16" height="16"><span>双实验室交叉验证，无 P0/P1 级安全风险</span></p>
+            <nav class="proof-links" aria-label="该版本公开评测报告"><a href="https://tix.qq.com/search/skill?keyword=REDACTED_FOR_HANDOFF" target="_blank" rel="noopener noreferrer">科恩报告</a><a href="https://static.cloudsec.tencent.com/html-report-v2/2026/10/20/2211924_ec7ab6bcc94587dbcf3c23d1f78bc3ac.html?q-sign-algorithm=sha1&amp;q-ak=REDACTED_FOR_HANDOFF&amp;q-sign-time=1792466796%3B1824002796&amp;q-key-time=1792466796%3B1824002796&amp;q-header-list=host&amp;q-url-param-list=&amp;q-signature=REDACTED_FOR_HANDOFF" target="_blank" rel="noopener noreferrer">云鼎报告</a><a href="https://skillhub.cn/skills/user_9dc847d2/jyai-gemini-image-assistant" target="_blank" rel="noopener noreferrer">查看技能评测 ↗</a></nav>
+          </div>
+        </div>
+      </div>
+    </section></main><dialog id="tools-dialog"><div class="payment-head"><h2>我的账户</h2><button type="button" id="tools-close" aria-label="关闭">×</button></div><section id="payment-order-section" hidden><h2>我的订单</h2><div id="payment-orders"></div></section><section id="api-panel" class="api-section" aria-labelledby="api-title"><div class="section-title"><div><p class="panel-kicker">DEVELOPER ACCESS</p><h2 id="api-title">共享生图服务 · 我的API</h2></div><span>与此技能共用额度</span></div><p id="api-notice" role="status">从 Skill 打开会员中心，查看你的 API 权限。</p><div class="api-toolbar"><button id="issue-key" type="button" disabled>＋ 领取 API Key</button><a href="/membership/gemini/api-guide.html">接口文档 ↗</a></div><div id="new-key" hidden><label for="key-value">新 Key · 仅本次展示，请妥善保管</label><div class="key-actions"><input id="key-value" type="password" readonly autocomplete="off" aria-label="新 API Key"><button id="reveal-key" type="button">显示</button><button id="copy-key" type="button">复制</button><button id="hide-key" type="button">关闭</button></div></div><div id="key-list"></div></section><section class="promotion" aria-labelledby="promotion-title"><img src="/membership/gemini/gift-360.png" alt="360防骗技能图标" width="72" height="72"><div><p class="promotion-label">会员开通礼 / 免费版赠品</p><h2 id="promotion-title">开通会员，送你一份 360° 防骗助手。</h2><p>购买会员并经客服核款后，附赠「360防骗」免费版安装包。转账前核验可疑话术，事后整理止损与留证步骤。</p><span>围绕可疑信息核验与留证，提供分步处理清单。</span></div><div class="gift-action"><button id="gift-claim" type="button" disabled>核款到账后领取</button><a id="gift-download" hidden>下载免费版</a><span id="gift-state" role="status">赠品随已确认的会员订单发放</span></div></section><section class="legacy-source-links"><h2>旧版专用记录</h2><a href="/membership/gemini/">Gemini旧版次数</a><a href="/membership/temu/">Temu体验与旧版次数</a></section></dialog><dialog id="account-dialog" aria-labelledby="account-title" aria-describedby="account-help">
+
+<div class="payment-head"><h2 id="account-title">关联你的Skill账户</h2><button id="account-close" type="button" aria-label="关闭账户关联弹窗">×</button></div>
+
+<p id="account-plan"></p><p id="account-help">在你正在使用的 Skill 对话中发送下面这句话，打开返回的账户链接，即可查看余额和充值。</p>
+
+<input id="account-prompt" aria-label="发送给 Skill 客户端的内容" readonly value="打开我的账户，查看剩余次数和充值入口">
+
+<div class="payment-actions"><button id="account-copy" type="button">复制这句话</button><button id="account-recheck" type="button">我已关联，刷新</button></div>
+
+<p id="account-feedback" role="status"></p><p class="payment-note">关联后再扫码，确保次数发到你的账户。如需帮助，联系客服微信：GMC2B2022。</p>
+
+</dialog><dialog id="payment-dialog" aria-labelledby="payment-title" aria-describedby="payment-status">
+
+<div class="payment-head"><h2 id="payment-title">扫码充值共享次数</h2><button id="payment-close" type="button" aria-label="关闭收款弹窗" title="关闭">×</button></div>
+
+<p id="payment-plan"></p><strong id="payment-amount"></strong><p id="payment-term"></p>
+
+<img id="payment-qr" src="/membership/gemini/payment-qr.png?v=0.10.12" alt="商户提供的微信收款二维码" width="298" height="297">
+
+<a id="payment-save" href="/membership/gemini/payment-qr.png?v=0.10.12" download="MyPlaneStore-payment.png">保存收款码</a>
+
+<div class="payment-field"><label for="payment-order-id">订单号</label><input id="payment-order-id" readonly><button id="copy-payment-order" type="button" aria-label="复制订单号">复制</button></div>
+
+<div class="payment-field"><label for="payment-support">客服微信</label><input id="payment-support" value="GMC2B2022" readonly><button id="copy-payment-support" type="button" aria-label="复制客服微信">复制</button></div>
+
+<p id="payment-status" role="status"></p><p id="payment-expiry"></p><p class="payment-note">扫码后点击“我已付款”，即可进入我的账户，查看核款进度与剩余次数。核款确认后发放次数。如需核对付款凭证，客服微信：GMC2B2022。</p>
+
+<div class="payment-actions"><button id="payment-report" type="button">我已付款</button><button id="payment-refresh" type="button">刷新到账状态</button></div>
+
+</dialog></body></html>

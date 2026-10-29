@@ -1,0 +1,187 @@
+[
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/compact.js",
+    "bytes": 4254,
+    "sha256": "7b6b6ca94db2dfd130d79c7bbff0a8af919acf9cf8541faf7edff5b226b7473a"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/deepseek.svg",
+    "bytes": 2165,
+    "sha256": "0a47d55e6449ef97fb2185020f8118d75ad1ffe5cd711bef6862699f50d5217b"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/direct-checkout.css",
+    "bytes": 31,
+    "sha256": "3bb8949670e050f171c9b593a3247c1df472f1a9701acd55c8551135408bf412"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/doubao.svg",
+    "bytes": 1154,
+    "sha256": "4c8ef236fcf9173552ccad5c028b4b71f3ae0d61678e2b9996a9d70b315c00bf"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/enterprise-account-center.js",
+    "bytes": 11709,
+    "sha256": "72773e54536481b8ca79b9ca8ad5504b5752bf41e11c81e6a79c33a2f460d9d0"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/enterprise.css",
+    "bytes": 2243,
+    "sha256": "fed0845d4128870a544812587bd063071e0c80bcfa4b1f2b2980c383a1a8a17b"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/enterprise.js",
+    "bytes": 3747,
+    "sha256": "54110190649a79dddaf826286e4ab8c09d3599c2c4568b20ac020c5ba4e5eb82"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/heading.css",
+    "bytes": 110,
+    "sha256": "8cf61bc279e4979185bcc5f688bc541191fc579a3832feb6e3a03deb0a82b102"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/index.html",
+    "bytes": 12161,
+    "sha256": "30ef392095b36c518e487f0fd93bb4a4e1ba236c310fc48893b17b9d64c44289"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/kimi.svg",
+    "bytes": 774,
+    "sha256": "8149f95f8513573da9bcffb79a1b800c856e054d97633c8c43b6cd9ebe7b7859"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/manual-payment.css",
+    "bytes": 2923,
+    "sha256": "a8f374ad940afaf25df978b550edf5d34af66f870a8c1ec07f60568e1aebd5f1"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/manual-payment.js",
+    "bytes": 6129,
+    "sha256": "47346cebe0daae429ded66774a5408dd5e2f1838c1c5a88fa4c99cc8f7182143"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/payments.css",
+    "bytes": 952,
+    "sha256": "354ba8954163e3417db08b8c49158a53f64019151e575d63322d1c9de84a3cf3"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/platform-mark.svg",
+    "bytes": 376,
+    "sha256": "2d1ffeabbb0e6bd11352b35ec7b8dc69a07fe3f5867160046b27caae10600739"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/platform.css",
+    "bytes": 4789,
+    "sha256": "a3ff69afacfdd5498ac7f609af44309374d0c8d6cf60a512e67636f2de9444c6"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/platform.js",
+    "bytes": 3849,
+    "sha256": "a75e8cd8f1e0ab5c5f093591dcd8d14f8307bde9a432102cb455fd071e96c969"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/qwen.svg",
+    "bytes": 2045,
+    "sha256": "8a0ffcf5e176d5424636617c360012f05e972ed5bfeb5dcfa8126439aa6a550f"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/register/index.html",
+    "bytes": 309,
+    "sha256": "fdc89d4d0914b9512edd43a069c13ea1bd43bd0dc69b2940e3a21c14d6e24f49"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/register/register.css",
+    "bytes": 1665,
+    "sha256": "8029730188c6451cfc354eff7fff833baad950c337191cf9feb130b51209060a"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/register/register.js",
+    "bytes": 1389,
+    "sha256": "6aef9a953602a25c90303fd92b30ddcca4660add62f3181cabb1916d987c78a7"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/register/trial-register.css",
+    "bytes": 2388,
+    "sha256": "01a2d8fffcf548f73bf5be880b0643ad0e2075b49a504eb5ca3f10bbecdf7c04"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/register/trial-register.js",
+    "bytes": 8681,
+    "sha256": "2e4d0ed1496512eb1d94a5c462cb59d23947f08fb10220dbcc3a9f5e5b9bd28d"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/renewal.css",
+    "bytes": 303,
+    "sha256": "dd609f39e404558b76326fe321cba034f5199c7887168cd473972fd3294a838a"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/style.css",
+    "bytes": 4291,
+    "sha256": "ef29c8e618c6d74ca4360df7a69ec0479507d056cac6d0e244b4acfd6fa14ec7"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/temu/wechat-pay.svg",
+    "bytes": 1172,
+    "sha256": "e50c3680d87afba22c7cc7968f9baea2217126f4b8a685128da6c1deb028b1e6"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/trade-leads/trade.css",
+    "bytes": 8629,
+    "sha256": "3e0bcf265f650fea69b4a9d7b868c86df07909fcf8ccd1d99c6363765f639061"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/trade-leads/trade.html",
+    "bytes": 4699,
+    "sha256": "64b14c71b045f7410737dd0ee9155310d9e1c369ec8be9026377ac422fc0a950"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/trade-leads/trade.js",
+    "bytes": 5010,
+    "sha256": "3830b43aa2c34788bb61d3c13f6a2fb00ef1d6a451080cc0ac057f1a5993981f"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/trust.css",
+    "bytes": 2472,
+    "sha256": "78ce753b4cbb8fc3e7e12c38ddad38566286d8abcc346f873fc370f2f62d2114"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/viewport.css",
+    "bytes": 7610,
+    "sha256": "6647e462834ac6bc409266caf72435e785fb19aa755bc923339ed9b4cb3ee3de"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/wechat-pay.svg",
+    "bytes": 1172,
+    "sha256": "e50c3680d87afba22c7cc7968f9baea2217126f4b8a685128da6c1deb028b1e6"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/workbuddy.svg",
+    "bytes": 4142,
+    "sha256": "10ccbc099e7bc3d5ff12c315c4edd7b21386aa7166c1ec19997b3d55010d5c7d"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/xhs/app.js",
+    "bytes": 6678,
+    "sha256": "8f599d9e2a8200bab3b3535eb51c2871df4aa1c93c3ede493554a0ab2d87b902"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/xhs/index.html",
+    "bytes": 15962,
+    "sha256": "311767ee7993a2bce48c5b8ab7a417115b239c8914296add4afe3bfa9a9c37a7"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/xhs/manual-payment.js",
+    "bytes": 5973,
+    "sha256": "bbdc1cb5ac107fd5e6eb75d820481bc0d00ef3f38f73ce1b864f97efa4a78717"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/xhs/page.js",
+    "bytes": 515,
+    "sha256": "b57fdc94c8f3fa72e634a2f5ce19964fc41137afe5173ac1ea0105ead7902b64"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/xhs/platform.js",
+    "bytes": 3827,
+    "sha256": "9ff9ea5da15814f21d679ae899ec04262e8fc7f811212a10a11fccdb08dfc49b"
+  }
+]

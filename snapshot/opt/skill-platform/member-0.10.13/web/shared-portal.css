@@ -1,0 +1,9 @@
+.compact-header nav button{border:0;background:transparent;color:#d4e9de;font:inherit;font-size:13px;padding:0;cursor:pointer}
+.compact-header nav button:hover{color:#a2f8c3}
+.legacy-source-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.legacy-source-links h2{flex-basis:100%;font-size:16px;margin:0}
+.legacy-source-links a{color:#087a4a;font-size:13px}
+.enterprise-history{font-size:13px;text-align:left;overflow-wrap:anywhere;margin-top:16px}
+.enterprise-history ul{padding-left:20px}.enterprise-history summary{cursor:pointer}
+.enterprise-trial{font-size:13px;color:#46715a;margin:8px 0}
+@media(max-width:480px){.compact-header nav button{font-size:11px}.recharge-heading h1{font-size:28px}}

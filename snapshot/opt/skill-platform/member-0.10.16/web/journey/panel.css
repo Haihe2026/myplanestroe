@@ -1,0 +1,61 @@
+#journey-v2 {border-top:2px solid #17775d;margin-top:24px;padding:20px 0;color:#182421;font-size:14px;letter-spacing:0}
+#journey-v2 h2 {font-size:20px;margin:0 0 12px}
+#journey-v2 h3 {font-size:16px;margin:18px 0 10px}
+#journey-v2 .j-controls {display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}
+#journey-v2 label {display:inline-flex;align-items:center;gap:6px;margin:0;font-size:13px}
+#journey-v2 input[type=checkbox] {width:16px;height:16px;flex:none;margin:0}
+#journey-v2 input[type=search] {max-width:100%;width:300px}
+#journey-v2 button {border-radius:4px;font-size:13px;min-height:34px;background:#f3f6f4;color:#1c5444;border:1px solid #c5d7cf;padding:6px 10px}
+#journey-v2 .j-icon {width:36px;height:36px;flex:none;padding:0;font-size:19px}
+#journey-v2 p {font-size:13px;line-height:1.6;margin:8px 0;color:#53625a}
+#journey-v2 .j-status {color:#8c3d24;min-height:22px}
+#journey-v2 table {font-size:13px;border-collapse:collapse;width:100%;min-width:900px}
+#journey-v2 th,#journey-v2 td {padding:9px 10px;text-align:left;border-bottom:1px solid #dde4e0;white-space:nowrap}
+#journey-v2 .j-scroll {overflow-x:auto;max-width:100%}
+#journey-v2 .j-id {font-family:monospace;overflow-wrap:anywhere;white-space:normal;min-width:160px;width:250px;max-width:300px}
+#journey-v2 dl {display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 16px;margin:12px 0}
+#journey-v2 dt {color:#59675f} #journey-v2 dd {margin:0;overflow-wrap:anywhere}
+#journey-v2 .j-detail {border-top:1px solid #cbd9d1;padding-top:14px;margin-top:18px}
+#journey-v2 .j-selected {background:#ebf4ef}
+@media(max-width:600px){#journey-v2 dl{grid-template-columns:100px minmax(0,1fr)}#journey-v2{padding-top:16px}#journey-v2 .j-controls{gap:9px}}
+
+
+/* A compact manager workspace with a collapsible menu. */
+.workspace-sidebar{position:fixed;inset:0 auto 0 0;width:232px;background:#112b25;color:#c4d8d0;z-index:20;padding:22px 14px;overflow-y:auto;transition:width .18s}
+.workspace-brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;min-height:36px;white-space:nowrap;padding:0 4px}
+.workspace-brand strong{font-size:17px}.workspace-brand img{flex:none}
+.workspace-toggle{display:flex;align-items:center;gap:14px;width:100%;margin:24px 0 20px;padding:10px 14px;background:#1c3b31;border:1px solid #365146;color:#d7e7df;text-align:left}
+.workspace-sidebar nav{display:grid;gap:8px}
+.workspace-sidebar nav button{display:flex;align-items:center;gap:14px;width:100%;min-height:46px;padding:12px 14px;border:0;background:transparent;color:#a8c3b7;text-align:left;white-space:nowrap;border-radius:8px}
+.workspace-sidebar nav button:hover{background:#1c3e31;color:#fff}
+.workspace-sidebar nav button[aria-current]{background:#148661;color:#fff}
+.nav-icon{display:inline-block;width:20px;text-align:center;font-size:20px;line-height:1;flex:none}
+body.workspace-active{background:#f4f7f9;color:#20352f}
+.workspace-active>header{margin-left:232px;height:64px;background:#fff;border-bottom:1px solid #e1e8e6;color:#233f34;padding:0 30px}
+.workspace-active>header .brand span{color:#6d8278;border-color:#d6e2dc}
+.workspace-active>main{margin-left:232px;max-width:none;padding:24px 30px 40px}
+.workspace-active #console>.heading{margin:0 0 10px;gap:12px}
+.workspace-active #console>.heading h1{font-size:26px;margin:0}.workspace-active #console>.heading .eyebrow{display:none}
+.workspace-active .statusline{margin:10px 0 22px}
+.workspace-active #ops-overview>section:not(.metrics),.workspace-active #journey-v2,.workspace-active #ops-channels{background:#fff;border:1px solid #dfe8e3;border-radius:12px;padding:22px;margin-bottom:20px;min-width:0}
+.workspace-active .metrics{border:0;background:transparent;gap:18px;margin-bottom:22px}
+.workspace-active .metrics>div{border:1px solid #dfe8e3;border-radius:12px;background:#fff;padding:24px;box-shadow:0 3px 14px #14392a03}
+.workspace-active .metrics strong{font-size:32px}.workspace-active .metrics span{font-size:12px}
+.workspace-active .table-wrap{border:1px solid #e1e9e4;border-radius:8px}
+.workspace-active th{background:#f5f8f7}.workspace-active td{font-size:13px}
+.workspace-active #journey-v2{border-top:1px solid #dfe8e3;margin-top:0}
+.workspace-active #journey-v2 h2{font-size:20px}
+.workspace-active #journey-v2 .j-account-head{display:flex;align-items:center;gap:18px;border-bottom:1px solid #e3ebe6;padding-bottom:16px;margin-bottom:20px}
+.workspace-active #journey-v2 .j-account-head h2{margin:0}
+.workspace-active #journey-v2 .j-detail{border:0;margin:0;padding:0}
+.workspace-active #journey-v2 .j-detail>h3:first-child{overflow-wrap:anywhere;font-size:17px;margin:0 0 20px}
+.workspace-active #journey-v2 .j-quota-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:20px 0}
+.workspace-active #journey-v2 .j-quota-cards article{border:1px solid #dce8e1;border-radius:10px;padding:20px;background:#f8fbf9}
+.workspace-active #journey-v2 .j-quota-cards span{display:block;font-size:12px;color:#6b8175}
+.workspace-active #journey-v2 .j-quota-cards strong{display:block;font-size:28px;margin-top:10px;color:#097d53;overflow-wrap:anywhere}
+.workspace-active #journey-v2 .j-detail>h3:not(:first-child){margin-top:28px}
+.workspace-collapsed .workspace-sidebar{width:76px}.workspace-collapsed .workspace-sidebar .nav-label{display:none}
+.workspace-collapsed .workspace-sidebar nav button,.workspace-collapsed .workspace-toggle{justify-content:center;padding-inline:8px}
+.workspace-active.workspace-collapsed>header,.workspace-active.workspace-collapsed>main{margin-left:76px}
+@media(max-width:1050px){.workspace-active .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.workspace-active #journey-v2 .j-quota-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.workspace-active>main{padding:16px 12px}.workspace-active>header{padding:12px;min-height:64px;height:auto}.workspace-active>header .brand strong{font-size:15px}.workspace-active>header .brand span{display:none}.workspace-active #console>.heading h1{font-size:22px}.workspace-active #ops-overview>section:not(.metrics),.workspace-active #journey-v2,.workspace-active #ops-channels{padding:14px}.workspace-active .metrics{gap:10px}.workspace-active .metrics>div{padding:16px 12px}.workspace-active .metrics strong{font-size:26px}.workspace-sidebar{box-shadow:4px 0 20px #0f2c211a}.workspace-active:not(.workspace-collapsed)>main,.workspace-active:not(.workspace-collapsed)>header{margin-left:76px}.workspace-active #journey-v2 .j-quota-cards article{padding:14px}.workspace-active #journey-v2 .j-quota-cards strong{font-size:24px}.workspace-active #journey-v2 .j-account-head{flex-wrap:wrap}}

@@ -1,0 +1,87 @@
+{
+  "product": "pet",
+  "quota_policy": "独立额度，不与通用次数通兑",
+  "unlimited_sentinel": -1,
+  "plans": {
+    "pet_monthly": {
+      "name": "给毛孩子买个安心",
+      "price_fen": 1900,
+      "duration_days": 30,
+      "photo_analyses": 5,
+      "pet_profiles": 1,
+      "inquiries": -1,
+      "reminders": true,
+      "medical_report_pdf": false,
+      "display": {
+        "suitable": "适合：家里一只猫或一只狗，先试一个月",
+        "features": [
+          "不用每次重新描述：建好它的专属档案（1只），直接问，回答按它的品种、年龄、体重来",
+          "每月养护计划：每天喂多少克、什么时候称重、什么时候驱虫打疫苗，帮你排好",
+          "胖了瘦了马上知道：每次称重自动对比上一次",
+          "该做的事帮你记着：疫苗、驱虫、复查，问一句就列出来"
+        ],
+        "photo": "照片问诊 5 次：伤口、皮肤、眼睛、便便有变化，拍一张就能看",
+        "benefit": "🎁 第一次照片问诊免费，先试试再决定"
+      }
+    },
+    "pet_quarterly": {
+      "name": "毛孩子季度问安包",
+      "price_fen": 4500,
+      "duration_days": 90,
+      "photo_analyses": 25,
+      "pet_profiles": 3,
+      "inquiries": -1,
+      "reminders": true,
+      "medical_report_pdf": false,
+      "display": {
+        "suitable": "适合：多宠家庭，或想看到一个季度的养护效果",
+        "features": [
+          "3只宠物各有专属档案，猫狗分开记，问哪只答哪只",
+          "每只一份每月养护计划",
+          "一整个季度的体重变化，换粮、减肥效果看得见",
+          "几只宠物的疫苗驱虫日子统一帮你记着"
+        ],
+        "photo": "照片问诊 25 次：有变化随时拍，前后对比更放心",
+        "benefit": "每天约 5 毛，比月付省 12 元"
+      }
+    },
+    "pet_annual": {
+      "name": "毛孩子年度安康会员",
+      "price_fen": 12800,
+      "duration_days": 365,
+      "photo_analyses": 120,
+      "pet_profiles": -1,
+      "inquiries": -1,
+      "reminders": true,
+      "medical_report_pdf": true,
+      "display": {
+        "suitable": "适合：把一整年的养护和健康安排交给我们",
+        "features": [
+          "📋 就医报告 PDF（年付专属）：一键把档案整理成医生看得懂的报告，到医院直接给医生看，不用现场回忆",
+          "🐾 不限宠物数量，家里几只都能建档",
+          "📊 全年体重与健康记录，换粮、减肥效果一年看得清清楚楚",
+          "📅 全年养护计划，按季节调整：夏天防暑、冬天保暖、换毛季护理",
+          "💊 全年疫苗驱虫日子一个不落"
+        ],
+        "photo": "📸 照片问诊 120 次，平均每月 10 次",
+        "benefit": "每天约 3 毛 5，比月付一年省 100 元"
+      }
+    }
+  },
+  "trial": {
+    "inquiries_best_effort": 3,
+    "photo_analyses": 1,
+    "pet_profiles": 0,
+    "reminders": false,
+    "medical_report_pdf": false
+  },
+  "inquiry_enforcement": "best_effort_only_host_can_answer_without_api",
+  "renewal_proposal": {
+    "status": "requires_owner_confirmation",
+    "same_tier": "extend_expiry_add_photo_allowance",
+    "mixed_tier": "independent_terms_confirmed"
+  },
+  "display": {
+    "price_anchor": "年度会员活动期间-仅需1袋猫粮的费用，给毛孩子一个365天安全呵护的档案和专属顾问。"
+  }
+}

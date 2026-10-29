@@ -1,0 +1,8 @@
+#skill-key-status{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #dfebe5}
+#skill-key-status[hidden]{display:none!important}
+#skill-key-status strong{font-size:13px;color:#176c45}
+#skill-key-message{font-size:11px;line-height:1.5;color:#66806f;margin:4px 0 0;overflow-wrap:anywhere}
+#skill-key-status>div:last-child{display:flex;flex-shrink:0;gap:8px}
+#skill-key-status button{min-height:30px;padding:4px 8px;font-size:11px;border-radius:4px;border:1px solid #cadfd2;background:#fff;color:#286546}
+@media(max-width:480px){#skill-key-status{padding:6px 0;gap:8px}#skill-key-status strong{font-size:12px}#skill-key-message{font-size:10px}#skill-key-status>div:last-child{flex-direction:column;gap:4px}#skill-key-status button{min-height:25px}}
+@media(max-height:700px){#member-account{padding-top:12px;padding-bottom:8px}.member-kicker{display:none}.member-heading{padding-bottom:8px}.member-heading h1{font-size:21px}.member-overview{padding:10px 0}#member-uses{font-size:28px}#member-order-state{font-size:18px}#member-update{min-height:30px;margin:6px 0;font-size:10px}.member-section-title{margin:7px 0 4px}.member-order{min-height:48px;padding:7px 2px}.member-actions{margin-top:8px}.member-continue{margin-top:6px;font-size:10px}}

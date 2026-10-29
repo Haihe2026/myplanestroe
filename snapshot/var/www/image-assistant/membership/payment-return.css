@@ -1,0 +1,11 @@
+.payment-return{min-height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 0;gap:12px}
+.payment-return h2{font-size:28px;line-height:1.4;margin:0;color:#fff}
+.payment-return p{font-size:15px;line-height:1.7;margin:0;color:#def5e9}
+.return-mark{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border:1px solid #68dca1;border-radius:50%;font-size:32px;background:#65e59c12;color:#71f2b1;margin-bottom:6px}
+.return-actions{display:flex;gap:12px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.return-actions button{min-height:42px;padding:8px 22px;border:1px solid #61d397;border-radius:5px;background:#16a461;color:#fff;font-size:14px}
+.return-actions button+button{background:transparent;color:#d5f5e3}
+.payment-return small{font-size:11px;color:#b5d7c4;line-height:1.6;max-width:350px}
+.payment-returning .compact-main>:not(#payment-return):not(.reputation){display:none!important}
+@media(max-width:480px){.payment-return{min-height:320px;padding:28px 0;gap:10px}.payment-return h2{font-size:23px}.payment-return p{font-size:13px}.return-actions button{font-size:13px;padding:8px 16px}}
+@media(max-height:700px){.payment-return{min-height:290px;padding:18px 0}.payment-return h2{font-size:23px}}

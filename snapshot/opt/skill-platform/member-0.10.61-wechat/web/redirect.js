@@ -1,0 +1,1 @@
+(()=>{const p=location.pathname.includes('/pet/')?'pet':location.pathname.includes('/temu/')?'temu':'gemini';const q=new URLSearchParams(location.hash.slice(1));if(!q.has('product'))q.set('product',p);const c=new URLSearchParams(location.search).get('code');if(c){q.set('product','trade-leads');q.set('code',c)}location.replace('/auth/wechat/#'+q.toString())})();
