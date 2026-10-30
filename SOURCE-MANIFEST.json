@@ -1,5 +1,5 @@
 {
-  "files": 1340,
+  "files": 1343,
   "parts": [
     "manifests/source-00.json",
     "manifests/source-01.json",
@@ -17,6 +17,7 @@
     "manifests/source-13.json",
     "manifests/source-heading-bold.json",
     "manifests/source-unified-users.json",
-    "manifests/source-temu-bg.json"
+    "manifests/source-temu-bg.json",
+    "manifests/source-pet-svg.json"
   ]
 }

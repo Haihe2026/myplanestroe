@@ -1,0 +1,17 @@
+[
+  {
+    "path": "snapshot/var/www/image-assistant/membership/pet/pet-watermark.svg",
+    "bytes": 1539,
+    "sha256": "54bf83a4fad86e1686ee2f96c7490a065e93d2255a809220e7bba23c4a1dd9f5"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/pet/pet-cat-portrait.svg",
+    "bytes": 1086,
+    "sha256": "fc99c8356ad2678797278808469c6735a7abf033a892b493a2068fbead1520f2"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/pet/pet-dog-portrait.svg",
+    "bytes": 1127,
+    "sha256": "87da008659008a86ba59bbbbd1ae7eb5ccdd3030a3e214f183d488f8f129cb0d"
+  }
+]
