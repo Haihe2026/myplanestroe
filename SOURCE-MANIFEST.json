@@ -1,5 +1,5 @@
 {
-  "files": 1337,
+  "files": 1339,
   "parts": [
     "manifests/source-00.json",
     "manifests/source-01.json",
@@ -14,6 +14,8 @@
     "manifests/source-10.json",
     "manifests/source-11.json",
     "manifests/source-12.json",
-    "manifests/source-13.json"
+    "manifests/source-13.json",
+    "manifests/source-heading-bold.json",
+    "manifests/source-unified-users.json"
   ]
 }

@@ -1,12 +1,2 @@
-"use strict";
-document.addEventListener('DOMContentLoaded',()=>{
- const root=document.getElementById('console'),section=document.getElementById('users-directory');if(!root||!section)return;
- const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);return n;};
- const details=el('details'),title=el('summary','尚未关联账户的首次回话'),status=el('p'),wrap=el('div'),table=el('table'),head=el('tr'),body=el('tbody'),pager=el('div'),prev=el('button','上一页'),next=el('button','下一页');details.id='anonymous-first-dialogues';wrap.style.overflowX='auto';table.style.cssText='width:100%;min-width:650px';prev.type=next.type='button';pager.style.cssText='display:flex;gap:12px;margin:12px 0';
- ['Skill / 渠道','首次回话 · 服务端接收','客户端自报时间','版本','操作'].forEach(label=>head.append(el('th',label)));table.append(head,body);wrap.append(table);pager.append(prev,next);status.setAttribute('role','status');details.append(title,el('p','尚未注册也会记录。这里是Skill上报的首次回话事件，不含原话，不能当作已注册用户或独立人数。近30天，排除显式测试事件。'),status,wrap,pager);section.append(details);
- let page=1,busy=false;const when=x=>x==null?'未提供':new Date(x*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}),channels={workbuddy_skill:'WorkBuddy技能',workbuddy_expert:'WorkBuddy专家',skillhub:'SkillHub'};
- async function load(){if(section.hidden||root.hidden||busy)return;busy=true;try{const response=await fetch('/ops/api/first-dialogues?days=30&state=anonymous&page='+page,{credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('首次回话暂未读取成功，请刷新重试。');const data=await response.json();if(section.hidden||root.hidden)return;body.replaceChildren();for(const item of data.items){const row=el('tr');[item.skill_name+' / '+channels[item.channel],when(item.received_at),when(item.client_occurred_at),item.skill_version||'未提供'].forEach(value=>row.append(el('td',value)));const td=el('td'),journey=el('button','旅程');journey.type='button';journey.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('ops:open-user-journey',{detail:{eventId:item.event_id}})));td.append(journey);row.append(td);body.append(row);}title.textContent='尚未关联账户的首次回话 · '+data.total+' 条';status.textContent=data.total?'更新于 '+when(data.generated_at)+'；第 '+page+' 页':'暂无首轮上报，Skill升级接入后开始记录。';prev.disabled=page<=1;next.disabled=page*data.page_size>=data.total;if(data.total)details.open=true;}catch(error){status.textContent=error.message;}finally{busy=false;}}
- prev.onclick=()=>{page--;load();};next.onclick=()=>{page++;load();};section.querySelector('.ud-controls button[type="button"]')?.addEventListener('click',load);
- new MutationObserver(()=>{if(!section.hidden)load();}).observe(section,{attributes:true,attributeFilter:['hidden']});
- details.addEventListener('toggle',()=>{if(details.open)load();});
-});
+'use strict';
+// First interactions are now rendered in the unified users-directory list.

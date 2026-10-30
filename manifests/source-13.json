@@ -166,8 +166,8 @@
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/xhs/index.html",
-    "bytes": 15962,
-    "sha256": "311767ee7993a2bce48c5b8ab7a417115b239c8914296add4afe3bfa9a9c37a7"
+    "bytes": 16446,
+    "sha256": "11435b503daab505077ca0f819f991bf5bffe0c3d5c7aadac2e49eb208f06a6c"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/xhs/manual-payment.js",

@@ -21,13 +21,13 @@
   },
   {
     "path": "docs/当前进度.md",
-    "bytes": 1791,
-    "sha256": "7c601a13c58e0c9b4edd11359822e3bc55d62e487eadac53e5f8b4d278a4504a"
+    "bytes": 2985,
+    "sha256": "d3e5e6da6d1eb5a86a0be3dc15381785e7d4001ad196588dbb44a5798bb3e206"
   },
   {
     "path": "docs/当前阶段与修改入口.md",
-    "bytes": 3397,
-    "sha256": "1e64cdb88e9e4ad11f6c40df0712a6aa6a56bc92e72ad07cdb4d012edfa69370"
+    "bytes": 3690,
+    "sha256": "3a9e3f9dae72aac708b7ab2ef814f1f466a82d40614e05cb1010074a048ffb28"
   },
   {
     "path": "docs/新品Skill接入说明.md",
@@ -56,8 +56,8 @@
   },
   {
     "path": "PUBLICATION-STATUS.json",
-    "bytes": 288,
-    "sha256": "0eede621a3c015bb5e1fb839d7bea5b808294a3b83b3665f897c9ee6da317f39"
+    "bytes": 347,
+    "sha256": "7f202483b4ea4f90721a833e3dd084eff2ed5fd78da39d89fa16e245cd6e78f4"
   },
   {
     "path": "README.md",

@@ -7,7 +7,9 @@ if type(UNIT_PRICE_FEN)is not int or UNIT_PRICE_FEN<=0:raise ValueError('Invalid
 def catalog(items,per_image):
  result={}
  for item in items:
-  amount=item['price_fen'];images=amount//UNIT_PRICE_FEN if per_image else item['images']
+  bonus=item.get('bonus_images',0)
+  if type(bonus)is not int or bonus<0:raise ValueError('Invalid image bonus')
+  amount=item['price_fen'];images=amount//UNIT_PRICE_FEN+bonus if per_image else item['images']
   if type(amount)is not int or amount<=0 or type(images)is not int or images<=0 or (per_image and amount%UNIT_PRICE_FEN):raise ValueError('Invalid image plan')
   result[item['id']]=dict(name=item['name'],price_fen=amount,images=images,pricing_basis='per_image' if per_image else 'promotional_bundle')
  return result

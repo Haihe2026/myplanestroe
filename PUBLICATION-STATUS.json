@@ -1,10 +1,6 @@
 {
-  "repository": "Haihe2026/myplanestroe",
-  "snapshot_date": "2026-10-29",
-  "sync_mode": "manual_reviewed_snapshot",
-  "production_access": false,
-  "runtime_secrets": false,
-  "customer_datasets": false,
-  "extra_uuid_scrub_files": 2,
-  "full_local_runtime_verified": false
+  "updated": "2026-10-30",
+  "mode": "manual_reviewed_snapshot",
+  "last_change": "unified_users_and_pending_payment_fixes",
+  "production_access_included": false
 }

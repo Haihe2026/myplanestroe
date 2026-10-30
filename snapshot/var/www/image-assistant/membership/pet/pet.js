@@ -20,7 +20,8 @@ for(const [id,p] of Object.entries(cfg.plans)){
  button.onclick=()=>openCheckout(id,p);
  a.append(name,price,duration,suitable,features);if(benefit.textContent)a.append(benefit);a.append(button);$('plans').append(a);
 }
-try{await account();}catch(e){$('status').textContent='请先在宠物养护中关联账户，关联后回到此页即可选择养护套餐。';}}
+try{await account();}catch(e){$('status').textContent=[401,403,404].includes(e.status)?'':'账户信息暂未读取，请稍后刷新。';}
+try{const pending=JSON.parse(localStorage.getItem('mps-pet-checkout')||'null');if(pending&&Date.now()-pending.at>=0&&Date.now()-pending.at<15*60*1000&&Object.hasOwn(cfg.plans,pending.plan)&&cfg.payment_ready)await openCheckout(pending.plan,cfg.plans[pending.plan]);}catch(e){} }
 
 let selectedPlan=null,selectedConfig=null,paymentTimer=null,paymentBusy=false,checking=false,checkoutGeneration=0;
 function feedback(text){$('payment-feedback').textContent=text;}
@@ -29,6 +30,7 @@ function poll(){stopPolling();paymentTimer=setInterval(()=>{if(document.visibili
 async function openCheckout(id,p){
  if(paymentBusy)return;
  checkoutGeneration++;selectedPlan=id;selectedConfig=p;order=null;stopPolling();
+ try{localStorage.setItem('mps-pet-checkout',JSON.stringify({plan:id,at:Date.now()}));}catch(e){}
  $('selected-plan').textContent=p.name+' · '+p.duration_days+'天 · ¥'+(p.price_fen/100).toFixed(2);
  $('qr').hidden=false;$('payment-content').hidden=true;$('payment-identity').hidden=true;$('reported').disabled=false;
  if(!$('payment').open)$('payment').showModal();
@@ -36,21 +38,24 @@ async function openCheckout(id,p){
 }
 async function preparePayment(){
  if(paymentBusy||!selectedPlan||!$('payment').open)return;
- paymentBusy=true;$('payment-retry').disabled=true;$('payment-retry').textContent='正在检查账户…';const generation=checkoutGeneration;feedback('正在检查当前浏览器的账户登录状态…');
+ paymentBusy=true;$('payment-retry').disabled=true;$('payment-retry').hidden=true;$('payment-identity').hidden=true;const generation=checkoutGeneration;feedback('正在准备付款…');
  try{
-  try{await account();}catch(e){if(e.status!==401)throw e;await api('resume',{});await account();}
-  if(!$('payment').open)return;
+  try{await account();}catch(e){if(![401,403].includes(e.status))throw e;if(generation!==checkoutGeneration||!$('payment').open)return;await api('activate',{accepted:true});if(generation!==checkoutGeneration||!$('payment').open)return;await account();}
+  if(generation!==checkoutGeneration||!$('payment').open)return;
   const created=await api('orders',{plan:selectedPlan});if(generation!==checkoutGeneration||!$('payment').open)return;order=created;
   $('order-info').textContent='订单 '+order.id+' · 应付 ¥'+(order.amount_fen/100).toFixed(2);
-  $('payment-identity').hidden=true;$('payment-content').hidden=false;
+  $('payment-identity').hidden=true;$('payment-content').hidden=false;$('payment-retry').hidden=true;
+  try{localStorage.removeItem('mps-pet-checkout');}catch(e){}
   $('reported').disabled=order.status==='reported'||order.status==='paid';
   if(order.status==='paid'){await completePayment();return;}
   feedback(order.status==='reported'?'付款信息已登记，正在等待核款确认。':'请用微信或支付宝扫码，按订单金额付款。');poll();
  }catch(e){
-  if(e.status===401||e.status===403){accountLinked=false;$('payment-identity').hidden=false;$('payment-content').hidden=true;feedback(e.status===403?'已识别到账户，但还没有确认宠物账户。请回到宠物养护对话回复“会员”，完成确认后再试。':'这次检查还没有识别到账户登录。请先点击“登录已有账户”；首次使用请复制下方指令，发到宠物养护对话完成确认。');}
-  else{feedback(e.name==='AbortError'?'本次账户检查超时，请检查网络后重新点击。':'暂时无法打开付款，请稍后重试。');$('payment-identity').hidden=false;}
-  $('payment-retry').hidden=false;
- }finally{paymentBusy=false;$('payment-retry').disabled=false;$('payment-retry').textContent='重新检查并显示收款码';}
+  if(generation!==checkoutGeneration||!$('payment').open)return;
+  $('payment-content').hidden=true;
+  if(e.status===401){accountLinked=false;$('payment-identity').hidden=false;$('payment-retry').hidden=true;feedback('微信扫码登录后，即可在这里付款。');}
+  else{feedback(e.name==='AbortError'?'付款准备超时，请点击付款重试。':'暂时未能准备付款，请点击付款重试。');$('payment-identity').hidden=true;$('payment-retry').hidden=false;}
+ }finally{paymentBusy=false;$('payment-retry').disabled=false;$('payment-retry').textContent='付款';}
+
 }
 async function completePayment(){
  stopPolling();$('reported').disabled=true;$('qr').hidden=true;$('payment-content').hidden=true;
@@ -74,9 +79,10 @@ $('reported').onclick=async()=>{
 $('check-order').onclick=checkPayment;
 $('payment-retry').onclick=preparePayment;
 $('payment-close').onclick=()=>{$('payment').close();stopPolling();};
-$('payment').addEventListener('close',()=>{checkoutGeneration++;stopPolling();});
+$('payment').addEventListener('close',()=>{checkoutGeneration++;stopPolling();try{localStorage.removeItem('mps-pet-checkout');}catch(e){}});
 $('payment').addEventListener('click',e=>{if(e.target!==$('payment'))return;const r=$('payment').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('payment').close();});
 main().catch(e=>$('status').textContent='请稍后刷新页面，或联系客服协助完成当前操作。');
 
-$('payment-copy').onclick=async()=>{try{await navigator.clipboard.writeText('会员，请帮我确认宠物账户并打开付款链接');feedback('已复制。请粘贴到宠物养护对话，按返回的链接完成账户确认，再回到这里继续付款。');}catch(e){feedback('请在宠物养护对话中发送：会员，请帮我确认宠物账户并打开付款链接。');}};
 globalThis.addEventListener?.('focus',()=>{if($('payment').open&&!order&&!paymentBusy)preparePayment();});
+
+window.addEventListener('storage',e=>{if(e.key==='mps-pet-checkout'&&e.newValue===null&&$('payment').open&&!order){$('payment').close();}});

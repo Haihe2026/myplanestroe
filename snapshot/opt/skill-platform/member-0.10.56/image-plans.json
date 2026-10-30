@@ -5,22 +5,26 @@
     {
       "id": "shared_image20_29",
       "name": "Plus",
-      "price_fen": 2900
+      "price_fen": 2900,
+      "bonus_images": 5
     },
     {
       "id": "shared_image20_39",
       "name": "Pro",
-      "price_fen": 3900
+      "price_fen": 3900,
+      "bonus_images": 5
     },
     {
       "id": "shared_image20_49",
       "name": "Ultra",
-      "price_fen": 4900
+      "price_fen": 4900,
+      "bonus_images": 5
     },
     {
       "id": "shared_image20_999",
       "name": "终身会员",
-      "price_fen": 99900
+      "price_fen": 99900,
+      "bonus_images": 5
     }
   ],
   "temu": [

@@ -3,10 +3,12 @@ import json,time,os,ipaddress
 from http.cookies import SimpleCookie
 from urllib.parse import urlsplit,parse_qs
 PATH='/platform-api/pet/membership-api/resume'
+ACTIVATE='/platform-api/pet/membership-api/activate'
 def wrap(parent,store,server):
     class Handler(parent):
         def run_request(self):
-            if urlsplit(self.path).path!=PATH:return super().run_request()
+            route=urlsplit(self.path).path
+            if route not in (PATH,ACTIVATE):return super().run_request()
             self.close_connection=True;self.connection.settimeout(15)
             ip=self.client_address[0]
             if ip in ('127.0.0.1','::1'):
@@ -18,15 +20,34 @@ def wrap(parent,store,server):
                     r=c.execute('SELECT count FROM pet_rate_limits WHERE key=? AND window>?',(key,now-window)).fetchone()
                     if r and r[0]>=int(os.environ.get('PET_FAILURE_LIMIT','600')):raise server.Problem(429,'操作较频繁，请稍后再试')
                 if self.command!='POST':raise server.Problem(405,'请从付款页面继续')
-                if self.headers.get('Origin')!='https://myplanestore.com' or self.headers.get('X-Membership-Request')!='1':raise server.Problem(403,'请从本站操作')
+                origins=('https://myplanestore.com','https://aistore.zhaopintong.com') if route==ACTIVATE else ('https://myplanestore.com',)
+                if self.headers.get('Origin') not in origins or self.headers.get('X-Membership-Request')!='1':raise server.Problem(403,'请从本站操作')
                 size=int(self.headers.get('Content-Length','0'))
                 if not 0<size<=4096 or self.headers.get('Content-Type','').split(';')[0]!='application/json':raise server.Problem(400,'请求格式无效')
-                if not isinstance(json.loads(self.rfile.read(size)),dict):raise server.Problem(400,'请求格式无效')
+                body=json.loads(self.rfile.read(size))
+                if not isinstance(body,dict):raise server.Problem(400,'请求格式无效')
+                if route==ACTIVATE and body.get('accepted') is not True:raise server.Problem(400,'请确认开通宠物账户')
                 cookies=SimpleCookie(self.headers.get('Cookie',''));device=cookies.get('mps_device')
-                uid=store.device_links.lookup(device.value if device else None)
-                if not uid:raise server.Problem(401,'当前浏览器还没有登录，请先确认账户')
-                # Never register/enroll a new pet user, link a new device, or issue trials.
-                with store.connect() as c:store.pet_billing.require(c,uid)
+                uid=None
+                if route==ACTIVATE:
+                    member=cookies.get('platform_member')
+                    if member:
+                        try:uid=store.membership.web_user(member.value)
+                        except server.Problem as e:
+                            if e.status!=401:raise
+                if not uid:uid=store.device_links.lookup(device.value if device else None)
+                if not uid:raise server.Problem(401,'请先微信扫码登录')
+                if route==ACTIVATE:
+                    # Explicit checkout action only. A read/resume never creates eligibility.
+                    # Identity comes solely from verified server sessions, never a body uid.
+                    with store.connect() as c:
+                        c.execute('BEGIN IMMEDIATE')
+                        if not c.execute('SELECT 1 FROM users WHERE id=?',(uid,)).fetchone():raise server.Problem(401,'账户登录已失效')
+                        store.pet_billing.enroll(c,uid,False)
+                        store.pet_billing.audit(c,'pet_checkout_account_confirmed',uid)
+                else:
+                    # Resume preserves the historical read-only eligibility boundary.
+                    with store.connect() as c:store.pet_billing.require(c,uid)
                 link=store.membership.handoff(uid)
                 ticket=parse_qs(urlsplit(link['url']).fragment)['ticket'][0]
                 session=store.membership.redeem(ticket)

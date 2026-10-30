@@ -4,6 +4,7 @@ from urllib.parse import urlsplit,parse_qs
 from contextlib import closing
 import os,sqlite3,uuid
 from overview_data import overview
+from unified_users import Directory
 ROOT=Path(__file__).resolve().parent
 def read_connection(path):
     c=sqlite3.connect(Path(path).resolve().as_uri()+'?mode=ro',uri=True,timeout=4)
@@ -35,6 +36,8 @@ def anonymous(path,event_id):
 def extend(factory,shared_path):
     def build(*args,**kwargs):
         parent=factory(*args,**kwargs)
+        report=args[0] if args else kwargs.get('report')
+        directory=Directory(shared_path,getattr(report,'products',{}) or {})
         class Handler(parent):
             def send(self,status,result,mime='application/json; charset=utf-8',cookie=None):
                 if status==200 and mime.startswith('text/html') and isinstance(result,bytes):
@@ -49,6 +52,13 @@ def extend(factory,shared_path):
                 if u.path in ('/ops/user-journey.js','/ops/user-journey.css'):
                     p=ROOT/u.path.rsplit('/',1)[-1];mime='application/javascript' if p.suffix=='.js' else 'text/css'
                     return self.send(200,p.read_bytes(),mime+'; charset=utf-8')
+                if u.path=='/ops/api/users-activity':
+                    if not self.authenticated():return self.send(401,dict(error='ops_login_required'))
+                    try:
+                        q=parse_qs(u.query)
+                        return self.send(200,directory.listing(int(q.get('page',['1'])[0]),q.get('q',[''])[0]))
+                    except (ValueError,TypeError):return self.send(400,dict(error='invalid_query'))
+                    except (sqlite3.Error,OSError):return self.send(503,dict(error='users_activity_unavailable'))
                 if u.path=='/ops/api/workspace-overview':
                     if not self.authenticated():return self.send(401,dict(error='ops_login_required'))
                     try:return self.send(200,overview(shared_path,int(parse_qs(u.query).get('days',['14'])[0])))

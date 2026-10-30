@@ -96,8 +96,8 @@
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/compact.js",
-    "bytes": 4739,
-    "sha256": "cb4c62ec1d78e524db194728bb9d9fc6c576de209654b253b39e30c519a246c3"
+    "bytes": 4844,
+    "sha256": "dcf0d613633ae4f0edf452ae252f8393219f61564d07e32ff15df448c9c8e28a"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/deepseek.svg",
@@ -196,8 +196,8 @@
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/gemini/index.html",
-    "bytes": 15858,
-    "sha256": "5bf55da8eeb995360e99f4059b8104fa16c6ead8ce7bb4d44d4d55c7eff16277"
+    "bytes": 16460,
+    "sha256": "c4ed5c2a124fb1ec597d5eb2b0953c0d21745e5ba18cd6b535addb532b28c23f"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/gemini/kimi.svg",
@@ -286,8 +286,8 @@
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/index.html",
-    "bytes": 15851,
-    "sha256": "fd43569d4c9798e9fb73771e692ff5b39711f78663b203683a88589fc84da0e7"
+    "bytes": 16453,
+    "sha256": "898743f91dc9b882c0ceb83b433e6afd2c5b7a56f00162b560872943651f97c2"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/journey/page.js",
@@ -331,18 +331,18 @@
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/pet/index.html",
-    "bytes": 5131,
-    "sha256": "12ff128bca6d5cfc03151848e5b39fbb7e3e829e2ba975d2462c798029b39301"
+    "bytes": 4706,
+    "sha256": "18c75c6160ae5277f27c95e65345f0eb56b1d2dd70b4f90434b3a8081e2ce692"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/pet/pet.css",
-    "bytes": 13593,
-    "sha256": "3f79b6680787e6c840f2705c0cec04a502f5a8ef0acc32c1d9794d028dc73b54"
+    "bytes": 13711,
+    "sha256": "1042d659f3b11719c26811c39d2ec59d731e203d9ea13b3fb23aca91903c2694"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/pet/pet.js",
-    "bytes": 8658,
-    "sha256": "91d918852b253f457a7729be6ec141176ca7ff1ecf6faf4f0cc066ffaa0d506d"
+    "bytes": 8982,
+    "sha256": "170cf53987f1cf15a3da9a7cc7add100215e16a8f3dca9e09f05ab944667df27"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/pet/register/index.html",

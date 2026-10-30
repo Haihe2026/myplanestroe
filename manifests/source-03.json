@@ -431,8 +431,8 @@
   },
   {
     "path": "snapshot/opt/skill-platform/member-0.10.14/core/permanent_plans.py",
-    "bytes": 2358,
-    "sha256": "7892cb9b5cf80fa315eac76573934015d78fc893c96e183215f42d2bf9e9f17b"
+    "bytes": 2500,
+    "sha256": "b705fbd1524256b91d46f47b26ccf0522bb20220fd6d8ac05812b641f1664e00"
   },
   {
     "path": "snapshot/opt/skill-platform/member-0.10.14/core/platform_catalog.py",

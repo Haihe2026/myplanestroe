@@ -411,13 +411,13 @@
   },
   {
     "path": "snapshot/opt/skill-platform/ops-2026-10-28-journey/first-dialogues.js",
-    "bytes": 3135,
-    "sha256": "68a8272ec7cce255c2430e4823f1ec26f447b8d2fa0490888d4f561135dfac77"
+    "bytes": 92,
+    "sha256": "77c60b3d2cd8fc0a07b8976af18f007f4b4bc52e770f348b02bbd5dbdf7db185"
   },
   {
     "path": "snapshot/opt/skill-platform/ops-2026-10-28-journey/manual_admin.py",
-    "bytes": 4826,
-    "sha256": "58b3f8d4e4df715d3cbc2e63577dcdb7f029a4536aa8d63e5bb66f7667e42d86"
+    "bytes": 5624,
+    "sha256": "519514e87bcd9ba5df395aeca0f599e69c850c05c1f83982ca3a02e08bc12e38"
   },
   {
     "path": "snapshot/opt/skill-platform/ops-2026-10-28-journey/overview_data.py",
@@ -456,8 +456,8 @@
   },
   {
     "path": "snapshot/opt/skill-platform/ops-2026-10-28-journey/users-directory.js",
-    "bytes": 8063,
-    "sha256": "351ac932706cbef10cfb4e54db02073f46763ca1a391f353bb7ae7e7b0487d5f"
+    "bytes": 8836,
+    "sha256": "ec10f0e08c895ca5f6a82de850228347ad9b61d432789eec14d4058dd4a5229b"
   },
   {
     "path": "snapshot/opt/skill-platform/ops-refresh-0.10.6/app.js",
