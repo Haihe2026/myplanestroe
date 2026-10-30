@@ -14,7 +14,7 @@
   function update(){
     for(const button of byId('plans').children){
       if(!button.querySelector('.enterprise-tag')){const tag=document.createElement('small');tag.className='enterprise-tag';tag.textContent=/_(198)$/.test(button.dataset.id)?'成长优选':/_(365)$/.test(button.dataset.id)?'批量备图':'上新起步';button.append(tag);}
-      if(button.getAttribute('aria-checked')==='true'){const plan=typeof catalog!=='undefined'?catalog.find(p=>p.id===button.dataset.id):null;byId('plan-guidance').textContent=(plan?plan.images.toLocaleString('zh-CN')+'张，':'')+(guidance[button.dataset.id]||'商品图按需制作，次数永久有效。');}
+      if(button.getAttribute('aria-checked')==='true'){const plan=typeof catalog!=='undefined'?catalog.find(p=>p.id===button.dataset.id):null;byId('plan-guidance').textContent='<0.20元/张，'+(plan?plan.images.toLocaleString('zh-CN')+'张，':'')+(guidance[button.dataset.id]||'商品图按需制作，次数永久有效。');}
     }
   }
   new MutationObserver(update).observe(byId('plans'),{childList:true,subtree:true,attributes:true,attributeFilter:['aria-checked']});update();
