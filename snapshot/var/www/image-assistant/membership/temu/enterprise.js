@@ -3,7 +3,7 @@
   const byId=id=>document.getElementById(id);
   document.title='Temu商家生图skill · 为商家上新助力 | MyPlaneStore';
   document.querySelector('.compact-heading h1').textContent='Temu商家生图skill';
-  document.querySelector('.recharge-caption').textContent='为Temu商家助力，让好产品更出彩';
+  document.querySelector('.recharge-caption').textContent='做一个Temu团队懂得转化的智能美工助手';
   document.querySelector('.current-skill span').textContent='WorkBuddy官方认证技能 · 企业生图服务';
   document.querySelector('.recharge-delivery-note').textContent='一套商品实拍，主图、SKU图、场景图接着做。新用户先体验1次，再为企业持续备图。';
   const trial=document.createElement('p');trial.hidden=true;trial.className='enterprise-trial';trial.setAttribute('role','status');byId('notice').after(trial);

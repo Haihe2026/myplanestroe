@@ -31,8 +31,8 @@
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/temu/enterprise.js",
-    "bytes": 3747,
-    "sha256": "54110190649a79dddaf826286e4ab8c09d3599c2c4568b20ac020c5ba4e5eb82"
+    "bytes": 3792,
+    "sha256": "582a0785977465cc3098366fd95848c2ac76fbec77dc9e1f63a56a78a07fa95c"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/temu/heading.css",
@@ -41,8 +41,8 @@
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/temu/index.html",
-    "bytes": 12161,
-    "sha256": "30ef392095b36c518e487f0fd93bb4a4e1ba236c310fc48893b17b9d64c44289"
+    "bytes": 12339,
+    "sha256": "477ab423996746f356cc3fe3ca90fb56749b07244c0737f6b11091e5ac27f13f"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/temu/kimi.svg",
