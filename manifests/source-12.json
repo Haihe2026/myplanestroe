@@ -332,12 +332,12 @@
   {
     "path": "snapshot/var/www/image-assistant/membership/pet/index.html",
     "bytes": 4706,
-    "sha256": "18c75c6160ae5277f27c95e65345f0eb56b1d2dd70b4f90434b3a8081e2ce692"
+    "sha256": "143bd3871eaace44de59f105c5fe5ae204f1d94016da73540e7e56890916632b"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/pet/pet.css",
-    "bytes": 13711,
-    "sha256": "1042d659f3b11719c26811c39d2ec59d731e203d9ea13b3fb23aca91903c2694"
+    "bytes": 16811,
+    "sha256": "09a21a35c167a908006a81a411d9dbcfeab4185922d308ec292bcdfd26dd0186"
   },
   {
     "path": "snapshot/var/www/image-assistant/membership/pet/pet.js",
