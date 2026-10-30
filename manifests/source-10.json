@@ -426,8 +426,8 @@
   },
   {
     "path": "snapshot/opt/skill-platform/ops-2026-10-28-journey/panel.js",
-    "bytes": 23847,
-    "sha256": "98470de7c083599f3b49fb0c5707d7f4a8180f376857bec4a6977c918c76554c"
+    "bytes": 24419,
+    "sha256": "c308c03d344761c612a9a81bb5282b4dec10795d0b2488a17ccabceea31ac098"
   },
   {
     "path": "snapshot/opt/skill-platform/ops-2026-10-28-journey/product-directory.js",

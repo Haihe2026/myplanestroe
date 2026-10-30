@@ -182,7 +182,7 @@
 
         const s = g.stages;
 
-        const row = cells(stages, [sourceName(g.source), g.channel, g.gateway_product, s.invitation_created || 0, s.registration_page_entered || 0, s.recharge_page_entered || 0, s.account_linked || 0, s.payment_reported || 0, s.image_succeeded || 0, s.return_visit || 0, g.orders_created, g.orders_paid]);
+        const row = cells(stages, [sourceName(g.source), g.channel, (g.gateway_product === 'gemini' ? '通用生图' : g.gateway_product), s.invitation_created || 0, s.registration_page_entered || 0, s.recharge_page_entered || 0, s.account_linked || 0, s.payment_reported || 0, s.image_succeeded || 0, s.return_visit || 0, g.orders_created, g.orders_paid]);
 
         row.firstChild.title = g.source;
 
