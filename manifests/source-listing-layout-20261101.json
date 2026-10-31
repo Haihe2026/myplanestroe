@@ -1,0 +1,82 @@
+[
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/index.html",
+    "bytes": 5572,
+    "sha256": "b410f5d3d4c4bfae8bc346c1bd202a8927d84a8b272e39da8a698ede2d2b130b"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/listing.css",
+    "bytes": 7063,
+    "sha256": "83d8a6a4152d1645438713d05ffdcc8279f0e7883abde2ae88006e81d6d00329"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/listing.js",
+    "bytes": 9951,
+    "sha256": "636e7d61a0c24bd6cb3260d64603c3c3fe9a6112909e9ed6a227b5288a70ef88"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/amazon.svg",
+    "bytes": 2129,
+    "sha256": "f7ef379d2ea0da19e63e74e394ec6a1423e335ef785a456729da66a840858dbf"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/ebay.svg",
+    "bytes": 1268,
+    "sha256": "846e8d8ac6cea49766e7c62e095e739d115ed355f9b63bf46067f14c9343c745"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/etsy.svg",
+    "bytes": 710,
+    "sha256": "4780de1a0c4949e614557a1fe1d3deb5f57fc0f1f901d19cafcf77091b7d5202"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/independent-site.svg",
+    "bytes": 224,
+    "sha256": "dfa9086d96a8d6c150469246e706cf2356ef367fc3adba22b19f46a50a39f4a0"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/shopee.svg",
+    "bytes": 1207,
+    "sha256": "b51a59e1463937286acca1b03bf9dd11df629fcde3f6fa91822f55d7bcb976bd"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/shopify.svg",
+    "bytes": 1234,
+    "sha256": "a5ea31f53511bb0b3663cb73ff96eaa8d0451fe9cad586625adfc02b729e4d4d"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/temu.ico",
+    "bytes": 16958,
+    "sha256": "9e50f7118d02f2fc45af374163bf05bb6467869ff0333751d2e0d9a0401e8b5e"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/platforms/tiktok.svg",
+    "bytes": 707,
+    "sha256": "6f54ac8d325faacea8935bdc44cbed60206a6b408641799e5fea1cba7c1a0af7"
+  },
+  {
+    "path": "docs/third-party/listing-platform-icons/LICENSE.md",
+    "bytes": 6569,
+    "sha256": "9046848b63a5c92bff14e4accca80bd987e0623b74adf9226ce5198d312b79d5"
+  },
+  {
+    "path": "docs/third-party/listing-platform-icons/DISCLAIMER.md",
+    "bytes": 4736,
+    "sha256": "09dddc05bc94ecb61e293cf7d39c2585b4ecc900be707a3589d05b29563c4f3d"
+  },
+  {
+    "path": "docs/third-party/listing-platform-icons/README.md",
+    "bytes": 761,
+    "sha256": "22bc6aea5e82d54b9cc153427ab2c7dcfeb79d23dca8a610a652d842e5b10dd9"
+  },
+  {
+    "path": "docs/Listing-页面优化-2026-11-01.md",
+    "bytes": 2056,
+    "sha256": "f355fbdf85f08e16a592eed3c96f9a2ed2209ce87849bc28f6b9714d17307f18"
+  },
+  {
+    "path": "docs/当前进度.md",
+    "bytes": 9116,
+    "sha256": "22ad90ad982220675163d759671c046199e05196b9efd23ef0dc24391cea6b32"
+  }
+]
