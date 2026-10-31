@@ -1,0 +1,1 @@
+body.listing-admin-view #ops-overview > :not(#listing-admin){display:none!important}

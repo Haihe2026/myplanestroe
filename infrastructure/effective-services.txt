@@ -1,8 +1,9 @@
+2026-10-31 更新：前两项入口已核对，其余条目为原快照，时间/PID不代表实时状态。
 skill-platform
-{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/grok-video-0.1.3/run_paid.py --db /var/lib/skill-platform/shared.db --gemini-db /var/lib/image-assistant/pilot.db --temu-db /var/lib/temu-image-assistant/trial.db --temu-source /opt/temu-image-assistant/0.2.2/service ; ignore_errors=no ; start_time=[Thu 2026-10-29 13:52:00 CST] ; stop_time=[n/a] ; pid=966504 ; code=(null) ; status=0/0 }
+{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/listing-cny-0.3.0/run_shared.py --db /var/lib/skill-platform/shared.db --gemini-db /var/lib/image-assistant/pilot.db --temu-db /var/lib/temu-image-assistant/trial.db --temu-source /opt/temu-image-assistant/0.2.2/service ; ignore_errors=no ; start_time=[Sat 2026-10-31 23:29:43 CST] ; stop_time=[n/a] ; pid=1739326 ; code=(null) ; status=0/0 }
 
 skill-monitor
-{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/ops-2026-10-28-costs/run_ops.py --config /etc/skill-monitor/config.json --shared-db /var/lib/skill-platform/shared.db --temu-source /opt/temu-image-assistant/0.2.2/service ; ignore_errors=no ; start_time=[Thu 2026-10-29 16:16:19 CST] ; stop_time=[n/a] ; pid=998458 ; code=(null) ; status=0/0 }
+{ path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/listing-cny-0.3.0/run_ops.py --config /etc/skill-monitor/config.json --shared-db /var/lib/skill-platform/shared.db --temu-source /opt/temu-image-assistant/0.2.2/service ; ignore_errors=no ; start_time=[Sat 2026-10-31 23:29:44 CST] ; stop_time=[n/a] ; pid=1739349 ; code=(null) ; status=0/0 }
 
 skill-order-mail
 { path=/opt/skill-platform/order-mail-0.6.0/venv/bin/python ; argv[]=/opt/skill-platform/order-mail-0.6.0/venv/bin/python /opt/skill-platform/member-0.10.56/run_mail.py ; ignore_errors=no ; start_time=[Thu 2026-10-29 13:52:00 CST] ; stop_time=[n/a] ; pid=966503 ; code=(null) ; status=0/0 }

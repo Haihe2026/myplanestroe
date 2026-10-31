@@ -1,0 +1,109 @@
+{
+  "product_id": "listing-optimizer",
+  "display_name": "跨境多平台listing优化师",
+  "currency": "CNY",
+  "wallet_scope": "listing-optimizer",
+  "price_version": "listing-cny-v2-bundle",
+  "unit_price_fen": 30,
+  "trial_policy": {
+    "total_successes": 1,
+    "reset": "never",
+    "coverage": "same_as_paid_bundle",
+    "included_revisions": -1,
+    "completion": "until_original_service_completed"
+  },
+  "tiers": [
+    {
+      "id": "listing_cny_39_v1",
+      "pay_fen": 3900,
+      "credit_fen": 3900
+    },
+    {
+      "id": "listing_cny_99_v1",
+      "pay_fen": 9900,
+      "credit_fen": 9900
+    },
+    {
+      "id": "listing_cny_190_v1",
+      "pay_fen": 19000,
+      "credit_fen": 19000
+    }
+  ],
+  "charging_enabled": true,
+  "terms": {
+    "confirmed": true,
+    "unit_scope": "同一商品全部已开放平台的一次完整服务合计0.30元，同一任务内不限修改直至完成。",
+    "trial_scope": "一次免费体验包含全部已开放平台的完整服务",
+    "included_revisions": -1,
+    "balance_validity": "no_expiry",
+    "refund_policy": "no_discretionary_refund_statutory_rights_preserved",
+    "refund_requested_by_owner": "nonrefundable_in_all_circumstances",
+    "public_summary": [
+      "首次免费体验同一商品全部已开放平台的完整服务。",
+      "同一次服务内不限修改，直到完成。",
+      "余额长期有效，未用余额可与后续充值合并使用。",
+      "充值余额原则上不支持退款；法律法规规定应当退款的情形除外。"
+    ]
+  },
+  "delivery_adapter_confirmed": true,
+  "spec_version": "1.1",
+  "platforms": [
+    {
+      "id": "amazon",
+      "status": "available",
+      "publicly_available": true
+    },
+    {
+      "id": "temu",
+      "status": "available",
+      "publicly_available": true
+    },
+    {
+      "id": "tiktok-shop",
+      "status": "available",
+      "publicly_available": true
+    },
+    {
+      "id": "shopify",
+      "status": "available",
+      "publicly_available": true
+    },
+    {
+      "id": "shopee",
+      "status": "available",
+      "publicly_available": true
+    },
+    {
+      "id": "etsy",
+      "status": "available",
+      "publicly_available": true
+    },
+    {
+      "id": "ebay",
+      "status": "available",
+      "publicly_available": true
+    },
+    {
+      "id": "independent-site",
+      "status": "available",
+      "publicly_available": true
+    }
+  ],
+  "identity_mapping": {
+    "backend_product_id": "listing-optimizer",
+    "skill_name_candidate": "cross-border-listing-optimizer",
+    "published_identity_verified": false,
+    "release_channels": [
+      "workbuddy_skill",
+      "workbuddy_expert"
+    ],
+    "skillhub_delivery": "deferred"
+  },
+  "certification": {
+    "status": "user_confirmed",
+    "independently_verified": false,
+    "evidence_archived": false,
+    "skill_welcome_text": "本产品为work buddy认证的跨境多平台listing优化师"
+  },
+  "client_skill_integration_verified": false
+}

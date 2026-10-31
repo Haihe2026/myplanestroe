@@ -1,0 +1,132 @@
+[
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/listing_store.py",
+    "bytes": 17745,
+    "sha256": "0079c0663e49d6b76da417d73c4df992eb6ea8d5adbdf2a4c0b951dcd8d72fca"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/listing_scope.py",
+    "bytes": 2072,
+    "sha256": "903941265cc367489849231071f6510a4b1604501a0c9bc2daffad8067955d2d"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/hosted_delivery.py",
+    "bytes": 2461,
+    "sha256": "b64d45a92b893039423f4689d83ba99d64f6ad8c9af1629cc48fc761fccac949"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/listing_gateway.py",
+    "bytes": 11059,
+    "sha256": "3d3ad9ecddd6b6c27e3574f14e714392b72ce55f0de46c92a2babc54b95245d3"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/listing_ops.py",
+    "bytes": 3223,
+    "sha256": "1d4e7641f72736aff4980944215ca703b543de70cad5302754cd066e194107b5"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/listing_receipts.py",
+    "bytes": 1831,
+    "sha256": "ff2f7de6efb61fe504edc4467f67da83706c72a9fac590937f7ccb0de14f62d7"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/run_shared.py",
+    "bytes": 806,
+    "sha256": "da3a1cd732eb65ba2caa9272547c0d15d2183fc42c9e223391b2b014ed4bed53"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/run_ops.py",
+    "bytes": 904,
+    "sha256": "b9eb3b4773bdb87ebde9c925fcbbeef2c44251b8df384426dd29ef4342fe2d23"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/listing-config.json",
+    "bytes": 3098,
+    "sha256": "f7ca10c5be8cc70cca5445428dd3df250e18ec6d1f8a9faabeee6533e7e0fb1b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/listing-admin.js",
+    "bytes": 4207,
+    "sha256": "fd6325986d7c2401670146c9291ceb3243b170602ee84ffafb79a66eaa841e5f"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/test_listing.py",
+    "bytes": 12871,
+    "sha256": "bb39d7a8a6a24ae8aa7b0915a5040ce1327aa57fb6d990ec46920411b8d75b6b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/test_http.py",
+    "bytes": 6959,
+    "sha256": "0f3eda48aa35d554d333cf41dd14c9676f414ad5a890de0c979d381ac55a77de"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/test_ops.py",
+    "bytes": 2146,
+    "sha256": "0b491bac14a3c1a3147953857c9f0a02200d1f0f63ab1dddb1d0fcacf8bf7f54"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/test_wechat.py",
+    "bytes": 5785,
+    "sha256": "f74e8a526093f698650a34cf3b9a9525e08a88198af35024eea5cd5ef4f7d31b"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/test_receipts.py",
+    "bytes": 3344,
+    "sha256": "19ced7da1104dd7cee09230f6bbed445b9c1768c8a863a1d6387dfeb3f5438da"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/tests-fixtures/wechat_binding.py",
+    "bytes": 16671,
+    "sha256": "3d7c26d492567a1cd389a08e66e18068855824a44ffda68438334f41c1f001b7"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/tests-fixtures/account_link.py",
+    "bytes": 14075,
+    "sha256": "9120107f9b4c179a5e72129baca1b6bfc3066879c7b1546e475a36d6b3632761"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/listing-cny-0.3.0/tests-fixtures/manual_payments.py",
+    "bytes": 7418,
+    "sha256": "360d5ab5d06c9e5dd34e1ad0976bd1a9d4d0dfdb7f51d204b1a5f5f9874be25e"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/admin.css",
+    "bytes": 86,
+    "sha256": "8d89bd4bfaa82120c580347cde91604534184474de6a1b7f09a3abe5b3500a5a"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/index.html",
+    "bytes": 2780,
+    "sha256": "5ece2e2fd366ac8d80f5fb37e138fb94d09e3c8aab7a67ca7d81e7f4b35c8a95"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/listing.css",
+    "bytes": 2875,
+    "sha256": "b02a74832f541a05ff2e5e4decc46770b206562c127422e0508e407fc198156e"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/listing.js",
+    "bytes": 7040,
+    "sha256": "4b105dd389281d7337e1d3b147826cde90225ca527429d0ad5110787780a4d95"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/wechat-listing.js",
+    "bytes": 3531,
+    "sha256": "4007182d0e208fc1ad741e147cc7237f52bb415c927727c236f10bbc5b1252ce"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/disclaimer/index.html",
+    "bytes": 1439,
+    "sha256": "ddfbb9495c0579371b5a16c60fb8daa7eaff180b341c279c6ea9ef00fbe6bac4"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/membership/listing/terms/index.html",
+    "bytes": 1461,
+    "sha256": "51791d3c86d8c2cde787b6a7e1b596e37ee83a0f77b18032de7bd286b97b748d"
+  },
+  {
+    "path": "snapshot/var/www/image-assistant/auth/wechat/listing.html",
+    "bytes": 1354,
+    "sha256": "0b4fef8b34f03e01ace01ec2bb3ad7d9caffd25389756922ea84f8bc313cf437"
+  }
+]
