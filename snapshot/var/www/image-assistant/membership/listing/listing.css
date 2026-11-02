@@ -11,3 +11,36 @@ main{padding-top:18px}.intro{padding:15px 0 18px}.intro h1{margin:8px 0 12px;fon
 @media(max-width:600px){.header-inner{padding:16px 16px 0}.header-top{flex-wrap:wrap;gap:12px}.site-header .brand{font-size:23px}.trust-labels{justify-content:flex-start;gap:5px}.trust-labels span{font-size:10px}.platform-logos{justify-content:flex-start;gap:12px 16px;margin-top:12px;padding:13px 0}.platform-logos li{font-size:11px;gap:5px}.platform-logos img{width:22px;height:22px}.intro{padding:14px 0 20px}.intro h1{font-size:27px}.account{padding:15px 14px!important}.recharge{padding:18px 16px!important}.recharge>p{margin:5px 0}.tiers{gap:12px}.tier{padding:17px}.tier strong{font-size:30px}#auth-dialog{padding:21px 18px}#auth-qr{height:390px}.auth-heading h2{font-size:21px}}
 
 .header-inner{width:100%}
+
+/* Compact purchase view, 2026-11-02: controls remain in normal flow. */
+#login{width:100%;min-height:49px;margin:8px 0 0;display:block}
+.header-inner{padding-top:12px}.platform-logos{margin-top:10px;padding:10px 0}
+main{padding-top:12px}.intro{padding:8px 0 14px}.intro h1{font-size:30px;margin:6px 0 8px}
+.account{padding:12px 24px!important;margin-bottom:12px!important}
+.recharge{padding:16px 24px!important}.recharge h2{margin-bottom:5px}
+.tiers{margin-top:12px;gap:14px}.tier{position:relative;padding:12px 12px 10px;gap:3px;align-items:center}
+.tier strong{font-size:31px;line-height:1.25}.tier span{font-size:13px;line-height:1.5}
+.tier .tier-badge{font-size:11px;padding:2px 12px;border-radius:20px;background:#e7bc65;color:#173f2b;font-weight:700;margin-bottom:5px}
+.tier .tier-validity{color:#bde5cd;font-size:12px}.tier[aria-pressed=true] .tier-validity{color:#386a50}
+#estimate{min-height:0;margin:7px 0;font-size:12px}#estimate:empty{display:none}
+#pay{margin-top:10px}#consent{margin-top:6px}#orders-panel{margin-top:0}
+@media(min-width:601px) and (max-height:800px){.header-inner{padding-top:8px}.platform-logos{padding:7px 0;margin-top:7px}.intro{padding:4px 0 10px}.intro h1{font-size:27px}.intro .eyebrow{font-size:10px}.recharge{padding:12px 24px!important}.tier{padding:8px}.tier strong{font-size:29px}main{padding-top:8px}}
+@media(max-width:600px){
+ .header-inner{padding:10px 12px 0}.header-top{gap:5px}.site-header .brand{font-size:21px}.brand img{width:23px;height:23px}.trust-labels{gap:4px}.trust-labels span{font-size:9px;padding:1px 6px}.platform-logos{gap:6px 12px;margin-top:7px;padding:7px 0}.platform-logos img{width:18px;height:18px}.platform-logos li{font-size:10px}
+ main{padding:8px 12px}.intro{padding:5px 0 10px}.intro .eyebrow{display:none}.intro h1{font-size:22px;line-height:1.35;margin:3px 0 6px}.intro>p:last-child{font-size:12px;line-height:1.5}
+ .account{padding:10px 12px!important;margin-bottom:10px!important}.account h2{font-size:15px;margin-bottom:3px}#account{font-size:12px;line-height:1.5}#consent{font-size:10px;line-height:1.6;margin-top:5px}#login{min-height:44px;margin-top:6px;padding:7px 8px;font-size:13px}
+ .recharge{padding:12px!important}.recharge h2{font-size:17px;margin:0 0 4px}#price{font-size:12px;line-height:1.5}#trial{font-size:11px;line-height:1.4}
+ .tiers{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:9px}.tier{padding:9px 3px;gap:3px}.tier strong{font-size:23px;line-height:1.2}.tier span{font-size:10px;line-height:1.5}.tier .tier-badge{font-size:10px;padding:1px 7px;margin-bottom:3px}.tier .tier-validity{font-size:10px}
+ #estimate{font-size:10px;line-height:1.4;margin:5px 0}#pay{min-height:44px;font-size:14px;margin-top:7px}.benefits{grid-template-columns:1fr}
+}
+
+@media(min-width:601px) and (max-height:800px){.intro>p:last-child{display:none}}
+@media(max-width:600px) and (max-height:740px){
+ .trust-labels{display:none}.platform-logos{gap:6px 12px}.platform-logos li span{display:none}
+ .intro>p:last-child{display:none}.intro h1{font-size:20px}.intro{padding:3px 0 8px}
+ .account h2{display:none}.account{padding:8px 12px!important}#consent{margin-top:4px}
+ .recharge{padding:10px 12px!important}.recharge h2{font-size:16px}.tier strong{font-size:20px}.tier{padding:7px 2px}
+ #trial{font-size:10px}#estimate{margin:4px 0}#pay{margin-top:5px}
+}
+
+@media(max-width:340px) and (max-height:650px){.header-inner{padding-top:6px}.intro{padding:0 0 4px}.intro h1{font-size:18px;margin:0 0 3px}.account{margin-bottom:6px!important}.recharge h2{font-size:14px}.recharge{padding-top:8px!important}.tier{padding-top:5px;padding-bottom:5px}}
