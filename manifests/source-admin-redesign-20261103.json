@@ -1,0 +1,37 @@
+[
+  {
+    "path": "snapshot/opt/skill-platform/admin-redesign-20261103/run_ops.py",
+    "bytes": 780,
+    "sha256": "442b6085f12333177710fe81d43bc9f396e96a71aec907ec85b968426aa5a8c6"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/admin-redesign-20261103/redesign_ops.py",
+    "bytes": 1194,
+    "sha256": "140c4597d44f06a328821cc3572f8a3edcca7221898c8a5046b063311f06fa31"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/admin-redesign-20261103/admin-redesign.js",
+    "bytes": 6623,
+    "sha256": "53a7d511327c6c458fd04b09eea6501b41e3ab5cfae9167b1ece7d6f14e547ad"
+  },
+  {
+    "path": "snapshot/opt/skill-platform/admin-redesign-20261103/admin-redesign.css",
+    "bytes": 6986,
+    "sha256": "4e75a6cfd3681bc64cc68534f74e42cf4a70a048144799d83643f3373c3da7ce"
+  },
+  {
+    "path": "docs/管理后台改版-2026-11-03.md",
+    "bytes": 4452,
+    "sha256": "aa68ba849ab1c03fa82b49124bd5148271399df2971fcb89e1f7bb78a034b391"
+  },
+  {
+    "path": "docs/当前进度.md",
+    "bytes": 13360,
+    "sha256": "34d621f408f9a759548e11d2259a3f9ba615243ddf4f8c11de5bb1d25ac8b2af"
+  },
+  {
+    "path": "infrastructure/effective-services.txt",
+    "bytes": 2950,
+    "sha256": "6f1220e90501ee705d6a2fcf2664fe597d34221e4f08ba9e262f5d4bd471cccf"
+  }
+]

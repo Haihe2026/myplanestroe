@@ -16,3 +16,9 @@ temu-image-assistant
 
 image-pack
 { path=/opt/skill-platform/1.2.0/venv/bin/python ; argv[]=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/member-0.10.60-new-resource-only/run_legacy.py --source /opt/skill-platform/1.2.0/service --db /var/lib/image-assistant/pack-test.db --port 18790 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+
+
+
+# Verified 2026-11-03: skill-monitor presentation-only head
+skill-monitor ExecStart=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/admin-redesign-20261103/run_ops.py --config /etc/skill-monitor/config.json --shared-db /var/lib/skill-platform/shared.db --temu-source /opt/temu-image-assistant/0.2.2/service
+# Wraps listing-cny-0.4.0/run_ops.py. All public domains remain closed, including alternate aistore domain.
