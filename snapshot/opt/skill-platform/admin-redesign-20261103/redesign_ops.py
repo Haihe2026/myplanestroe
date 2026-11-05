@@ -24,5 +24,7 @@ def extend(factory,path):
         import sys
         sys.path.insert(0,'/opt/skill-platform/provider-costs-20261105')
         import provider_ops
-        return provider_ops.wrap(Handler)
+        sys.path.insert(0,'/opt/skill-platform/metered-page-20261105')
+        import metered_ops
+        return metered_ops.wrap(provider_ops.wrap(Handler))
     return build

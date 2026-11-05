@@ -50,3 +50,5 @@ main{padding-top:12px}.intro{padding:8px 0 14px}.intro h1{font-size:30px;margin:
 #auth-close::before, #auth-close::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2px;border-radius:1px;background:currentColor;pointer-events:none}
 #auth-close::before{transform:translate(-50%,-50%) rotate(45deg)}
 #auth-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
+
+#claim-trial{display:block;width:100%;max-width:520px;margin:10px auto;padding:12px 18px;font-size:16px}#claim-trial:disabled{opacity:.65}

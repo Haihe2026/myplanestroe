@@ -1,0 +1,12 @@
+{
+  "example-service": {
+    "name": "请替换为实际技能名称",
+    "description": "请填写当前技能的价值说明",
+    "unit_scope": "请明确一次完整服务包含什么",
+    "unit_price_fen": 30,
+    "enabled": true,
+    "result_fields": [
+      "result"
+    ]
+  }
+}

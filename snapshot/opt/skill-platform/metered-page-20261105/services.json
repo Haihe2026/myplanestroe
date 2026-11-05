@@ -1,0 +1,12 @@
+{
+  "version": "metered-page-20261105",
+  "unit_price_fen": 30,
+  "trial_successes_per_wechat_account_per_skill": 1,
+  "services": {
+    "listing-optimizer": {
+      "bridge": "listing",
+      "name": "跨境多平台Listing优化师",
+      "description": "把商品资料整理成适合目标站点的标题、卖点与关键词。"
+    }
+  }
+}
