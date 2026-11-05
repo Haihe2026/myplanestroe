@@ -31,6 +31,11 @@ s=s.replace("if(account){closeAuth();$('status').textContent=", "if(account){his
 # Extract only a validated short-lived ticket; OAuth still starts on this page's origin.
 s=s.replace("if(target.origin!==location.origin||target.pathname!=='/auth/wechat/listing.html')throw Error('账户入口暂不可用，请刷新后重试。');const q=new URLSearchParams(target.hash.slice(1));", "const trusted=['https://myplanestore.com','https://aistore.zhaopintong.com'];const entryPath=target.pathname==='/auth/wechat/listing.html'||(generic&&target.pathname==='/membership/listing/'&&target.searchParams.get('skill')===serviceId);const q=new URLSearchParams(target.hash.slice(1));if(!trusted.includes(target.origin)||!entryPath||q.get('product')!=='listing-optimizer'||!/^[A-Za-z0-9_-]{43}$/.test(q.get('entry')||''))throw Error('账户入口暂不可用，请刷新后重试。');")
 html=html.replace('20261105-metered','20261105-metered-fix1')
+# Owner-requested common one-line introduction, with no per-Skill ad override.
+html=re.sub(r'<section class="intro">.*?</section>','<section class="intro"><h1>立志于为中小跨境商家助力</h1></section>',html,count=1)
+for fragment in ["document.querySelector('.intro h1').textContent=cfg.display_name+' · 按次服务';", "document.querySelector('.intro>p:last-child').textContent=cfg.description||'';", "document.querySelector('.eyebrow').textContent='按次服务';", "document.querySelector('.intro>p:last-child').textContent='请从对应技能打开已配置的服务入口。';"]:
+ s=s.replace(fragment,'')
+html=html.replace('20261105-metered-fix1','20261105-metered-copy1')
 css=(R/'before'/web/'listing.css').read_text(encoding='utf-8')+'\n#claim-trial{display:block;width:100%;max-width:520px;margin:10px auto;padding:12px 18px;font-size:16px}#claim-trial:disabled{opacity:.65}\n'
 for n,t in [('index.html',html),('listing.js',s),('listing.css',css)]:
  p=R/'after'/web/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(t,encoding='utf-8')
