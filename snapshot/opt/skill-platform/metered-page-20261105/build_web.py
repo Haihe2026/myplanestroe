@@ -27,6 +27,10 @@ s=s.replace("}catch(e){$('status').textContent=e.message;$('pay').disabled=true;
 s=s.replace("'listing-pending-order'", "('metered-pending-order:'+serviceId)")
 s=s.replace("const entry=await call('/entry',{accepted:true},entryKey);", "const incoming=new URLSearchParams(location.hash.slice(1));const existing=incoming.get('entry');const entry=existing&&/^[A-Za-z0-9_-]{43}$/.test(existing)?{url:location.origin+'/auth/wechat/listing.html#product=listing-optimizer&entry='+existing}:await call('/entry',{accepted:true},entryKey);")
 s=s.replace("if(account){closeAuth();$('status').textContent=", "if(account){history.replaceState(null,'',location.pathname+location.search);closeAuth();$('status').textContent=",1)
+# Existing production wrappers canonicalize entry links to the primary domain.
+# Extract only a validated short-lived ticket; OAuth still starts on this page's origin.
+s=s.replace("if(target.origin!==location.origin||target.pathname!=='/auth/wechat/listing.html')throw Error('账户入口暂不可用，请刷新后重试。');const q=new URLSearchParams(target.hash.slice(1));", "const trusted=['https://myplanestore.com','https://aistore.zhaopintong.com'];const entryPath=target.pathname==='/auth/wechat/listing.html'||(generic&&target.pathname==='/membership/listing/'&&target.searchParams.get('skill')===serviceId);const q=new URLSearchParams(target.hash.slice(1));if(!trusted.includes(target.origin)||!entryPath||q.get('product')!=='listing-optimizer'||!/^[A-Za-z0-9_-]{43}$/.test(q.get('entry')||''))throw Error('账户入口暂不可用，请刷新后重试。');")
+html=html.replace('20261105-metered','20261105-metered-fix1')
 css=(R/'before'/web/'listing.css').read_text(encoding='utf-8')+'\n#claim-trial{display:block;width:100%;max-width:520px;margin:10px auto;padding:12px 18px;font-size:16px}#claim-trial:disabled{opacity:.65}\n'
 for n,t in [('index.html',html),('listing.js',s),('listing.css',css)]:
  p=R/'after'/web/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(t,encoding='utf-8')
