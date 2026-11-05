@@ -143,12 +143,21 @@ class Report:
         pattern = '%' + query.replace('\\', '\\\\').replace('%', '\\%').replace('_', '\\_') + '%'
         with database(self.shared, True) as c:
             total = c.execute("SELECT count(*) FROM users WHERE id LIKE ? ESCAPE '\\'", (pattern,)).fetchone()[0]
-            ids = [r[0] for r in c.execute("SELECT id FROM users WHERE id LIKE ? ESCAPE '\\' ORDER BY id LIMIT 30 OFFSET ?", (pattern, (page - 1) * 30))]
+            c.execute('ATTACH DATABASE ? AS activity', (Path(self.journey.path).resolve().as_uri()+'?mode=ro',))
+            records = c.execute("""WITH registrations AS (
+                SELECT user_id,min(created) registered_at FROM ledger WHERE kind='account_created' GROUP BY user_id
+              ) SELECT u.id,coalesce(r.registered_at,a.first_seen) registered_at,
+                max(coalesce(r.registered_at,0),coalesce(a.last_seen,0),coalesce(a.first_seen,0)) latest_recorded_at
+              FROM users u LEFT JOIN registrations r ON r.user_id=u.id
+              LEFT JOIN activity.journey_accounts a ON a.user_id=u.id
+              WHERE u.id LIKE ? ESCAPE '\\'
+              ORDER BY (coalesce(r.registered_at,a.first_seen,a.last_seen) IS NULL),latest_recorded_at DESC,u.id
+              LIMIT 30 OFFSET ?""",(pattern,(page-1)*30)).fetchall()
         rows = []
-        for uid in ids:
-            detail = self.user(uid)
-            rows.append({k: detail[k] for k in ('id', 'first_observed_source', 'source_evidence', 'last_active', 'quota', 'key', 'test_account')})
-        return dict(users=rows, page=page, total=total, page_size=30)
+        for record in records:
+            detail = self.user(record['id'])
+            rows.append(dict({k: detail[k] for k in ('id', 'first_observed_source', 'source_evidence', 'last_active', 'quota', 'key', 'test_account')},registered_at=record['registered_at'],latest_recorded_at=record['latest_recorded_at']))
+        return dict(users=rows, page=page, total=total, page_size=30,generated_at=int(time.time()),ordering='recent_registration_or_authentication_desc')
 
     def summary(self, days=7, exclude_unknown=False, exclude_test_accounts=True, exclude_test_orders=True):
         if days not in (1, 2, 7, 30, 90):

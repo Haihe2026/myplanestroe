@@ -14,7 +14,7 @@ function message(text=''){$('message').textContent=text;}
 async function api(path,body){const response=await fetch('/ops/api/'+path,{credentials:'same-origin',cache:'no-store',method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(20000)});const result=await response.json();if(!response.ok){if(response.status===401){$('login').hidden=false;$('console').hidden=true;$('logout').hidden=true;if($('journey').open)$('journey').close();if($('settlement').open)$('settlement').close();message('登录已过期，请重新登录后使用原交易单号核查或重试');}const error=Error(result.error||'暂时无法加载数据');error.status=response.status;throw error;}return result;}
 function show(){ $('login').hidden=true;$('console').hidden=false;$('logout').hidden=false; }
 async function summary(){const seq=++summarySeq;const d=await api('summary?days='+$('days').value);if(seq!==summarySeq)return;document.dispatchEvent(new CustomEvent('channel-data-ready',{detail:d.channels}));show();['products','requests','sources'].forEach(id=>$(id).replaceChildren());let u=0,s=0,p=0,paid=0;for(const item of d.products){if(item.product==='xhs')continue;if(!item.connected){tr('products',[names[item.product],'数据源不可用','—','—','—','—','—','—']);continue;}const j=item.jobs;u+=item.users;s+=j.succeeded||0;p+=j.pending||0;paid+=item.paid.amount_fen;tr('products',[names[item.product],num(item.users),num(item.new_users),num(item.active),num(j.succeeded),num(j.pending),num(j.failed),money(item.paid.amount_fen)]);const acts=item.events.filter(e=>e.event.startsWith('activation_'));const count=acts.reduce((n,e)=>n+e.count,0),failed=acts.filter(e=>e.status>=400).reduce((n,e)=>n+e.count,0);const sum=name=>item.events.filter(e=>e.event===name).reduce((n,e)=>n+e.count,0);tr('requests',[names[item.product],num(count),num(sum('activation_created'))+' / '+num(sum('activation_restored')),num(failed),count?(100*failed/count).toFixed(1)+'%':'—',num(sum('purchase_offer_fetch')),num(sum('native_order_attempt'))]);const groups={};for(const e of acts){const key=e.device+'|'+e.channel;groups[key]??={device:e.device,channel:e.channel,n:0,bad:0};groups[key].n+=e.count;if(e.status>=400)groups[key].bad+=e.count;}for(const g of Object.values(groups)){tr('sources',[names[item.product],({desktop:'桌面',mobile:'手机',cloud:'云端',unknown:'未知'})[g.device]||'未知',({workbuddy_skill:'WorkBuddy技能',workbuddy_expert:'WorkBuddy专家',skillhub:'SkillHub',unknown:'未知'})[g.channel]||'未知',num(g.n),num(g.bad)]);}}
-$('users-total').textContent=num(u);$('images-total').textContent=num(s);$('pending-total').textContent=num(p);$('paid-total').textContent=money(paid);$('updated').textContent='更新于 '+date(d.generated_at);$('started').textContent='请求采集始于 '+date(d.collection_started);if(!$('sources').children.length)tr('sources',['尚无激活请求记录','—','—','—','—']);}
+$('users-total').textContent=num(u);$('images-total').textContent=num(s);$('pending-total').textContent=num(p);$('paid-total').textContent=money(paid);$('updated').textContent=document.body.dataset.workspaceView==='users'&&$('updated').dataset.accountReadAt?'账户读取于 '+date(Number($('updated').dataset.accountReadAt)):'后台读取于 '+date(d.generated_at);$('started').textContent='请求采集始于 '+date(d.collection_started);if(!$('sources').children.length)tr('sources',['尚无激活请求记录','—','—','—','—']);}
 async function accounts(){const seq=++accountSeq;const product=$('product').value;const data=await api('users?'+new URLSearchParams({product,q:$('search').value,page:String(page)}));if(seq!==accountSeq)return;total=data.total;$('accounts').replaceChildren();for(const u of data.users){const row=tr('accounts',[u.id.slice(0,12),date(u.activated),date(u.last_job),num(u.images),num(u.balance_points/1000)]);const idButton=document.createElement('button');idButton.className='link';idButton.textContent=u.id.slice(0,12);idButton.title=u.id;idButton.addEventListener('click',()=>journey(product,u.id).catch(e=>message(e.message)));row.firstChild.replaceChildren(idButton);const button=document.createElement('button');button.className='link';button.textContent='查看旅程';button.addEventListener('click',()=>journey(product,u.id).catch(e=>message(e.message)));cell(row,'').append(button);}if(!data.users.length)tr('accounts',['暂无账户','—','—','—','—','—']);$('page').textContent='第 '+page+' 页 · '+num(total)+' 个账户';$('prev').disabled=page<=1;$('next').disabled=page*50>=total;}
 async function journey(product,uid){if(product==='shared'){document.dispatchEvent(new CustomEvent('ops:show-user',{detail:{uid}}));return;}const d=await api('journey?'+new URLSearchParams({product,uid}));$('journey-id').textContent=names[product]+' / '+d.id;$('journey-balance').textContent=num(d.balance_points/1000)+(product==='shared'?' 共享次':' 次')+(d.legacy_accounts||[]).map(x=>' · 原'+names[x.product]+' '+num(x.remaining_uses)+'次').join('');$('timeline').replaceChildren();const rows=[];for(const x of d.ledger)rows.push({at:x.created,title:ledgerNames[x.kind]||x.kind,note:'业务流水 · '+(x.amount>0?'+':'')+num(x.amount)+'次'});for(const x of d.jobs)rows.push({at:x.created,title:'生成任务 · '+({succeeded:'成功',pending:'待核查',failed:'失败'})[x.status],note:'任务创建时间 · '+x.id.slice(0,12)});for(const x of d.orders){rows.push({at:x.created,title:'创建订单 · '+money(x.amount_fen),note:'当前状态：'+({paid:'已确认到账',reported:'用户报告已付款，待核实',pending:'待付款'})[x.status]});if(x.paid_at)rows.push({at:x.paid_at,title:'收款确认 · '+money(x.amount_fen),note:x.provider==='manual_qr'?'收款确认':x.provider==='manual_email'?'邮件确认核款':'渠道：'+x.provider});}for(const x of d.events)rows.push({at:x.created,title:eventNames[x.event]||x.event,note:'请求事件 · HTTP '+x.status+' · '+x.duration_ms+'ms · 渠道 '+x.channel});rows.sort((a,b)=>b.at-a.at);for(const x of rows){const li=document.createElement('li'),title=document.createElement('strong'),time=document.createElement('time'),note=document.createElement('p');title.textContent=x.title;time.textContent=date(x.at);note.textContent=x.note;li.append(title,time,note);$('timeline').append(li);}if(!rows.length){const li=document.createElement('li');li.textContent='暂无旅程记录';$('timeline').append(li);}if(!$('journey').open)$('journey').showModal();}
 const orderStates={test_fulfilled:'已发放（测试标记）',reported:'已报付款 · 待核款',pending:'待付款',paid:'已核款到账'};
@@ -112,7 +112,7 @@ function restoreReloadFilters(){
 }
 restoreReloadFilters();
 let refreshFlight=null;
-function refreshSnapshot(){return ['users-total','images-total','pending-total','paid-total','products','requests','sources','orders','accounts'].map(id=>$(id).textContent).join('\n');}
+function refreshSnapshot(){return ['users-total','images-total','pending-total','paid-total','products','requests','sources','orders','accounts'].map(id=>$(id).textContent).join('\n')+'\n'+[...document.querySelectorAll('#journey-v2 tbody,#users-directory tbody')].map(x=>x.textContent).join('\n');}
 function refresh({manual=false}={}){
  if(refreshFlight)return manual?refreshFlight:refreshFlight.then(()=>refresh());
  const button=$('refresh'),status=$('refresh-status'),before=refreshSnapshot();
@@ -120,7 +120,7 @@ function refresh({manual=false}={}){
  status.textContent='正在查询统计、订单和账户…';status.dataset.state='loading';message();
  refreshFlight=(async()=>{
   const failures=[],completed=[];
-  for(const [label,load] of [['统计',summary],['订单',orders],['账户',accounts]]){
+  for(const [label,load] of [['统计',summary],['订单',orders],['账户',accounts],['当前页',async()=>{const hook=window.mpsOpsRefreshHooks?.[document.body.dataset.workspaceView];if(hook)await hook();}]]){
    try{await load();completed.push(label);}
    catch(error){
     const detail=['TimeoutError','AbortError'].includes(error.name)?'查询超时，请重试':error.name==='TypeError'?'网络连接未完成，请重试':error.message;
@@ -133,7 +133,7 @@ function refresh({manual=false}={}){
    message('未成功的项目保留上次数据，请重试。');
   }else{
    const unchanged=manual&&before===refreshSnapshot();
-   status.textContent=(navigationRefresh?'整页刷新完成，统计、订单和账户已重新读取':unchanged?'已刷新，当前显示数据无变化':'后台加载完成，统计、订单和账户已同步')+' · '+new Date().toLocaleTimeString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false});
+   status.textContent=(navigationRefresh?'整页刷新完成，统计、订单和账户已重新读取':unchanged?'已重新读取，当前记录无变化':'后台读取完成，当前页面数据已刷新')+' · '+new Date().toLocaleTimeString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false});
    navigationRefresh=false;
    status.dataset.state='success';
   }
@@ -202,7 +202,14 @@ $('days').addEventListener('change',()=>refresh({manual:true}));$('product').add
     if(!from.value||!to.value||from.value>to.value||to.value>today){caption.textContent='请选择有效日期：开始日期不能晚于结束日期，结束日期不能晚于今天。';return;}
     showPeriod(from.value,to.value,'所选日期');
   });
-  choose(panel.querySelector('[data-range="30"]'));
+  function syncBusinessPeriod(){
+    const count=Number(document.getElementById('days').value);
+    if(!Number.isFinite(count)||count<1)return;
+    const button=panel.querySelector('[data-range="'+(count===1?'today':count)+'"]');
+    if(button)choose(button);else{ranges.forEach(b=>b.setAttribute('aria-pressed','false'));showPeriod(shift(today,1-count),today,'所选日期');}
+  }
+  document.getElementById('days').addEventListener('change',syncBusinessPeriod);
+  syncBusinessPeriod();
 })();
 
 
@@ -211,21 +218,34 @@ $('days').addEventListener('change',()=>refresh({manual:true}));$('product').add
  const n=value=>Number.isSafeInteger(value)&&value>=0?value.toLocaleString('zh-CN'):'—';
  const dateNow=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
  const previousDate=(day,offset)=>{const d=new Date(day+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+offset);return d.toISOString().slice(0,10);};
- const delta=(history,day)=>{const a=history[day],b=history[previousDate(day,-1)];if(!a||!b||JSON.stringify(a.skills.map(x=>x.slug).sort())!==JSON.stringify(b.skills.map(x=>x.slug).sort()))return null;const value=a.downloads-b.downloads;return value>=0?value:null;};
+ const delta=(history,day)=>{const a=history[day],b=history[previousDate(day,-1)];if(!a||!b||JSON.stringify(a.skills.map(x=>x.slug).sort())!==JSON.stringify(b.skills.map(x=>x.slug).sort()))return null;const prior=new Map(b.skills.map(x=>[x.slug,x.downloads]));const changes=a.skills.map(x=>Number.isSafeInteger(x.downloads)&&Number.isSafeInteger(prior.get(x.slug))?x.downloads-prior.get(x.slug):-1);return changes.every(v=>v>=0)?changes.reduce((x,y)=>x+y,0):null;};
  let latest=null;const hiddenSkills=new Set(),skillNames=new Map();
  function draw(){
   const data=latest,snapshot=data?.skillhub;if(!snapshot)return;
   const panel=document.getElementById('ops-channels'),cards=panel.querySelectorAll('.channel-cards article');
   const history=data.history||{},today=dateNow();
-  cards[0].querySelector('strong').textContent=n(delta(history,previousDate(today,-1)));
-  cards[0].querySelector('small').textContent='SkillHub · 需连续两日同范围记录';
-  cards[1].querySelector('strong').textContent=n(delta(history,today));
-  cards[1].querySelector('small').textContent='SkillHub · 需昨日同范围快照';
-  cards[2].querySelector('span').textContent='SkillHub 已匹配技能下载小计';
-  cards[2].querySelector('strong').textContent=n(snapshot.downloads);
-  cards[2].querySelector('small').textContent=snapshot.skill_count+' 个技能 · '+snapshot.date+' · 清单待核全';
+  const selectedStart=document.getElementById('channel-from').value,selectedEnd=document.getElementById('channel-to').value;
+  if(!selectedStart||!selectedEnd||selectedStart>selectedEnd||selectedEnd>today)return;
+  const selectedDays=[];for(let day=selectedStart;day<=selectedEnd&&selectedDays.length<366;day=previousDate(day,1))selectedDays.push(day);
+  const recordedDays=Object.keys(history).filter(d=>d>=selectedStart&&d<=selectedEnd).sort();
+  const comparable=selectedDays.map(d=>delta(history,d)).filter(v=>v!==null);
+  cards[0].querySelector('span').textContent='所选期间新增下载';
+  cards[0].querySelector('strong').textContent=n(comparable.length?comparable.reduce((a,b)=>a+b,0):null);
+  cards[0].querySelector('small').textContent='SkillHub · '+comparable.length+'/'+selectedDays.length+' 天可比较；缺失及计数回退不计入';
+  cards[1].querySelector('span').textContent='所选期间已采集天数';
+  cards[1].querySelector('strong').textContent=recordedDays.length+' / '+selectedDays.length;
+  cards[1].querySelector('small').textContent=selectedStart+' 至 '+selectedEnd+' · 缺失日期留空';
+  const endpoint=recordedDays.length?history[recordedDays.at(-1)]:null;
+  cards[2].querySelector('span').textContent='期间最后快照 · 下载小计';
+  cards[2].querySelector('strong').textContent=n(endpoint?.downloads);
+  cards[2].querySelector('small').textContent=endpoint?recordedDays.at(-1)+' · '+(endpoint.skill_count??endpoint.skills?.length??0)+' 个技能 · 清单待核全':'所选日期没有快照';
+  const allWb={...(data.workbuddy_history||{})};if(data.workbuddy)allWb[data.workbuddy.date]=data.workbuddy;
+  const wbDays=Object.keys(allWb).filter(d=>d>=selectedStart&&d<=selectedEnd).sort();
+  const selectedWb=wbDays.length?allWb[wbDays.at(-1)]:null;
   const wb=data.workbuddy;
-  if(wb){cards[3].querySelector('span').textContent=wb.period==='last_30_days'?'WorkBuddy 近30天安装量':'WorkBuddy 已记录安装量';cards[3].querySelector('strong').textContent=n(wb.installs);cards[3].querySelector('small').textContent=(wb.period_label||'统计范围见接入说明')+' · 采集日 '+wb.date;panel.querySelector('.channel-legend span+span').textContent='● WorkBuddy '+(wb.period_label||'已记录')+'安装量快照';}
+  cards[3].querySelector('span').textContent='期间最后快照 · WorkBuddy安装量';
+  cards[3].querySelector('strong').textContent=n(selectedWb?.installs);
+  cards[3].querySelector('small').textContent=selectedWb?(selectedWb.period_label||'已记录范围')+' · 采集日 '+wbDays.at(-1)+'；非期间新增':'所选日期没有安装量快照';
   panel.querySelector('.channel-connection').textContent=wb?'已接入 · 技能清单待核全':'SkillHub 已读取 · WorkBuddy 待登录';
   const body=panel.querySelector('#channel-setup tbody');body.rows[0].cells[1].textContent='已读取（部分清单）';body.rows[0].cells[2].textContent=snapshot.scope;
   body.rows[1].cells[1].textContent=wb?'已读取':'等待首次登录';
@@ -295,7 +315,7 @@ $('days').addEventListener('change',()=>refresh({manual:true}));$('product').add
   wbPanel.replaceChildren(el('h3','WorkBuddy · '+(wb?.period_label||'已记录范围')+'安装量快照'));
   const wbHistory={...(data.workbuddy_history||{})};if(wb)wbHistory[wb.date]=wb;
   wbPanel.append(el('p',wb?'最近采集日 '+wb.date+'；已保存 '+Object.keys(wbHistory).length+' 天。这是各采集日看到的滚动周期安装量，不是单日新增，不作差分。':'尚未取得安装统计。'));
-  if(wb?.assets){const list=el('ul');for(const asset of wb.assets)list.append(el('li',asset.name+'：'+asset.installs+' 次'));wbPanel.append(list);}
+  if(selectedWb?.assets){const list=el('ul');for(const asset of selectedWb.assets)list.append(el('li',asset.name+'：'+asset.installs+' 次'));wbPanel.append(list);}
   const wbNames=[...new Set(Object.values(wbHistory).flatMap(row=>(row.assets||[]).map(a=>a.name)))].sort();
   if(wbNames.length){
    const chart=document.createElementNS(ns,'svg');chart.setAttribute('viewBox','0 0 1040 330');chart.setAttribute('width','100%');chart.setAttribute('role','img');chart.setAttribute('aria-label','WorkBuddy 各资产近30天安装量快照趋势');chart.classList.add('channel-skill-chart');
@@ -319,6 +339,7 @@ $('days').addEventListener('change',()=>refresh({manual:true}));$('product').add
  document.addEventListener('channel-data-ready',event=>{latest=event.detail;draw();});
  document.querySelectorAll('#ops-channels [data-range]').forEach(button=>button.addEventListener('click',draw));
  document.getElementById('channel-custom').addEventListener('submit',draw);
+ document.getElementById('days').addEventListener('change',draw);
 })();
 
 

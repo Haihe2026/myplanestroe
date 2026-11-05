@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded',()=>{
  const show=x=>x==null?'未采集':Number(x).toLocaleString('zh-CN');
  let seq=0;const sorts=new Map();let pendingRefresh=null;
  function refreshChannels(){
-  if(pendingRefresh||document.getElementById('console')?.hidden)return;
-  let note=document.getElementById('channel-refresh-status');if(!note){note=el('p');note.id='channel-refresh-status';note.setAttribute('role','status');const line=document.querySelector('#console .statusline');if(line)line.before(note);else document.getElementById('console').prepend(note);}
+  if(pendingRefresh||document.getElementById('console')?.hidden||document.body.dataset.workspaceView!=='channels')return;
+  let note=document.getElementById('channel-refresh-status');if(!note){note=el('p');note.id='channel-refresh-status';note.setAttribute('role','status');document.getElementById('ops-channels')?.prepend(note);}
   note.textContent='正在重新采集 SkillHub 最新下载量…';
   pendingRefresh=(async()=>{try{const response=await fetch('/ops/api/channel-refresh',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json','X-Membership-Request':'1'},body:'{}',signal:AbortSignal.timeout(30000)});const result=await response.json();if(!response.ok)throw Error(result.error||'采集暂未成功，保留上次数据');const sh=result.channels.skillhub,wb=result.channels.workbuddy;note.textContent='SkillHub 已更新：'+String(sh.captured_at).replace('T',' ').slice(0,19)+'。WorkBuddy '+(wb?.captured_at?String(wb.captured_at).replace('T',' ').slice(0,19):'未采集')+'（上次已核验记录；尚未接通按钮同步）。';document.dispatchEvent(new CustomEvent('channel-data-ready',{detail:result.channels}));}catch(e){note.textContent=e.message+'；当前保留上次成功数据。';}finally{pendingRefresh=null;}})();
  }

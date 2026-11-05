@@ -1,43 +1,85 @@
 'use strict';
+
 document.addEventListener('DOMContentLoaded',()=>{
+
  const consolePanel=document.getElementById('console'),overview=document.getElementById('ops-overview'),nav=document.querySelector('.workspace-sidebar nav');
+
  if(!consolePanel||!overview||!nav)return;
+
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;};
+
  const menu=el('button');menu.type='button';menu.title='用户与额度';menu.setAttribute('aria-label','用户与额度');const icon=el('span','♙','nav-icon');icon.setAttribute('aria-hidden','true');menu.append(icon,el('span','用户与额度','nav-label'));
+
  const oldUsers=nav.querySelector('button[aria-label="用户管理"]');nav.insertBefore(menu,oldUsers||null);
+
  const section=el('section');section.id='users-directory';section.hidden=true;
+
  const controls=el('form',undefined,'ud-controls'),input=el('input');input.type='search';input.maxLength=64;input.placeholder='搜索账户编号';input.setAttribute('aria-label','搜索账户编号');const find=el('button','查询用户');find.type='submit';const refresh=el('button','刷新额度');refresh.type='button';controls.append(input,find);section.append(controls);
+
  const counts=el('p','','ud-counts');section.append(counts);
+
  const status=el('p','','ud-status');status.setAttribute('role','status');section.append(status);
+
  const scroll=el('div',undefined,'ud-scroll'),table=el('table'),head=el('thead'),tr=el('tr'),body=el('tbody');
+
  ['用户账户 / 详情','接收 / 首次登记','首次回话 / Skill','通用生图可用','Temu 可用 / 体验','宠物独立额度','外贸获客余额','操作'].forEach(x=>tr.append(el('th',x)));head.append(tr);table.append(head,body);scroll.append(table);section.append(scroll);
+
  const pager=el('div',undefined,'ud-pager'),prev=el('button','上一页'),next=el('button','下一页'),label=el('span');prev.type=next.type='button';pager.append(prev,label,next);section.append(pager);overview.insertBefore(section,overview.querySelector('footer'));
+
  let active=false,detailFromHere=false,page=1,revision=0,total=0;
+
  const when=x=>x==null?'未知 / 未记录':new Date(x*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false});
+
  const money=n=>'¥'+(n/100).toFixed(2),basis={account_created:'账户创建',credential_registered:'首次凭证登记',trade_account_linked:'首次外贸账户关联',pet_enrolled:'宠物开通记录',unknown:'历史注册时间未记录'};
+
  function activate(loadData=true){if(consolePanel.hidden)return;oldUsers?.click();active=true;detailFromHere=false;document.getElementById('journey-v2')?.setAttribute('hidden','');document.querySelector('.workspace-legacy-users')?.setAttribute('hidden','');nav.querySelectorAll('[aria-current]').forEach(x=>x.removeAttribute('aria-current'));menu.setAttribute('aria-current','page');section.hidden=false;document.body.dataset.workspaceView='all-users';const heading=consolePanel.querySelector('.heading h1');if(heading)heading.textContent='用户与额度';if(loadData)load();}
+
  menu.addEventListener('click',()=>activate());
+
  nav.addEventListener('click',e=>{if(e.target.closest('button')!==menu&&e.target.closest('button')){active=false;detailFromHere=false;section.hidden=true;menu.removeAttribute('aria-current');revision++;}});
- async function load(){if(!active||consolePanel.hidden)return;const rev=++revision;refresh.disabled=true;status.textContent='正在读取用户及额度…';try{const r=await fetch('/ops/api/users-activity?'+new URLSearchParams({page:String(page),q:input.value}),{credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(15000)});if(r.status===401){body.replaceChildren();consolePanel.hidden=true;const login=document.getElementById('login');if(login)login.hidden=false;const logout=document.getElementById('logout');if(logout)logout.hidden=true;throw Error('登录已失效，请重新登录');}if(!r.ok)throw Error('用户额度暂未读取成功，请刷新重试');const data=await r.json();if(rev!==revision||consolePanel.hidden||!active)return;body.replaceChildren();total=data.total;counts.textContent=data.counts?'统一账户 '+data.counts.accounts+' · 历史独立账户 '+data.counts.legacy_accounts+' · 待关联互动 '+data.counts.interactions:'';
+
+ async function load(options={}){if(!active||consolePanel.hidden)return;const rev=++revision;refresh.disabled=true;status.textContent='正在读取用户及额度…';try{const r=await fetch('/ops/api/users-activity?'+new URLSearchParams({page:String(page),q:input.value}),{credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(15000)});if(r.status===401){body.replaceChildren();consolePanel.hidden=true;const login=document.getElementById('login');if(login)login.hidden=false;const logout=document.getElementById('logout');if(logout)logout.hidden=true;throw Error('登录已失效，请重新登录');}if(!r.ok)throw Error('用户额度暂未读取成功，请刷新重试');const data=await r.json();if(rev!==revision||consolePanel.hidden||!active)return;body.replaceChildren();total=data.total;counts.textContent=data.counts?'统一账户 '+data.counts.accounts+' · 历史独立账户 '+data.counts.legacy_accounts+' · 待关联互动 '+data.counts.interactions:'';
+
  for(const u of data.users){if(u.record_type==='legacy_account'){const row=el('tr'),id=el('td'),name=u.legacy_product==='temu'?'Temu':'通用生图',open=()=>document.dispatchEvent(new CustomEvent('ops:open-user-journey',{detail:{uid:u.id,legacyProduct:u.legacy_product,account:u}})),button=el('button',u.id,'ud-id');button.type='button';button.onclick=open;id.append(button,el('small',name+' · 历史独立账户'));const date=el('td',when(u.observed_at));date.append(el('small','历史首次记录'),el('small','历史成功 '+(u.job_counts?.succeeded||0)+' 次'));row.append(id,date,el('td','未上报'));for(const p of ['gemini','temu']){const own=p===u.legacy_product,cell=el('td',own?(u.image.available[p]+' 次'):'未关联');if(own)cell.append(el('small','历史独立额度'));row.append(cell);}row.append(el('td','未关联'),el('td','未关联'));const actions=el('td'),journey=el('button','旅程','ud-journey');journey.type='button';journey.onclick=open;actions.append(journey);row.append(actions);body.append(row);continue;}if(u.record_type==='interaction'){const row=el('tr'),first=u.first_dialogue,identity=el('td',first.skill_name);identity.append(el('small','尚未关联账户'));row.append(identity,el('td',when(u.observed_at)));const detail=el('td',when(first.received_at));detail.append(el('small',first.skill_name+' / '+({workbuddy_skill:'WorkBuddy技能',workbuddy_expert:'WorkBuddy专家',skillhub:'SkillHub'})[first.channel]));row.append(detail);for(let n=0;n<4;n++)row.append(el('td',n<2?'未关联账户':'—'));const actions=el('td'),button=el('button','旅程','ud-journey');button.type='button';button.onclick=()=>document.dispatchEvent(new CustomEvent('ops:open-user-journey',{detail:{eventId:u.event_id}}));actions.append(button);row.append(actions);body.append(row);continue;}const row=el('tr'),id=el('td'),choose=el('button',u.id,'ud-id');choose.type='button';choose.title='查看该用户的全部详情';choose.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('ops:open-user-journey',{detail:{uid:u.id,account:u}})));id.append(choose);row.append(id);
+
  const date=el('td',when(u.observed_at??u.registered_at));date.append(el('small',u.first_dialogue?'首次互动接收':basis[u.registration_basis]||'首次登记记录'));row.append(date);
+
  const first=u.first_dialogue,dialogue=el('td',u.first_dialogue_unavailable?'暂时无法读取':first?when(first.received_at):'未上报');if(first)dialogue.append(el('small',first.skill_name+' / '+({workbuddy_skill:'WorkBuddy技能',workbuddy_expert:'WorkBuddy专家',skillhub:'SkillHub'})[first.channel]));row.append(dialogue);
+
  const image=el('td',u.image?.available?.gemini!=null?u.image.available.gemini+' 次':'暂未读取');if(u.image)image.append(el('small','共享 '+u.image.shared+' 次；旧专用 '+(u.image.legacy.gemini??'未读取')+' 次'));row.append(image);
+
  const temu=el('td',u.image?(u.image.available.temu??'未读取')+' 次':'暂未读取');if(u.image)temu.append(el('small','其中体验 '+u.image.temu_trial+' 次；旧专用 '+(u.image.legacy.temu??'未读取')+' 次'));row.append(temu);
+
  const pet=el('td',u.pet?'订阅照片 '+u.pet.photo_remaining+' 次':u.missing.includes('pet_quota_unavailable')?'暂未读取':'未开通');if(u.pet){pet.append(el('small','体验照片 '+u.pet.trial_photo_remaining+' 次；档案 '+u.pet.profiles_used+' / '+(u.pet.profiles_limit===-1?'不限':u.pet.profiles_limit)),el('small','订阅到期：'+(u.pet.expires_at?when(u.pet.expires_at):'无有效订阅')),el('small','照片分析是否开放以宠物服务状态为准'));}row.append(pet);
+
  const trade=el('td',u.trade?money(u.trade.available_fen):'未开通');if(u.trade)trade.append(el('small','预占 '+money(u.trade.reserved_fen)));row.append(trade);const actions=el('td'),journey=el('button','旅程','ud-journey');journey.type='button';journey.setAttribute('aria-label','查看用户 '+u.id+' 的操作旅程');journey.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('ops:open-user-journey',{detail:{uid:u.id,account:u}})));actions.append(journey);row.append(actions);body.append(row);}
+
  if(!data.users.length){const td=el('td','当前查询没有匹配用户');td.colSpan=8;const row=el('tr');row.append(td);body.append(row);}label.textContent='第 '+page+' / '+Math.max(1,Math.ceil(total/data.page_size))+' 页 · 共 '+total+' 条记录';prev.disabled=page<=1;next.disabled=page*data.page_size>=total;status.textContent='读取于 '+when(data.generated_at);
+
  const feedback=data.telemetry_summary;
+
  let info=section.querySelector('.ud-feedback-status');
+
  if(!info){info=el('details',undefined,'ud-feedback-status');status.after(info);}
+
  info.replaceChildren();
+
  const heading=el('summary',feedback&&!feedback.unavailable?'Skill主动上报 · 最近收到：'+(feedback.latest_received_at?when(feedback.latest_received_at):'尚无记录'):'Skill上报状态暂时无法读取');info.append(heading);
+
  info.append(el('p','此列表来自Skill首次互动元数据，不来自平台下载统计。首次事件按安装、技能、渠道去重；后续聊天不重复计数。未收到不代表没有互动，也不保存对话正文。'));
+
  for(const g of feedback?.groups||[])info.append(el('p',g.skill_name+' / '+g.channel+' · '+g.events+' 条 · 最近 '+when(g.latest_received_at)));
 
- }catch(e){if(rev===revision){body.replaceChildren();label.textContent='';status.textContent=e.message;prev.disabled=next.disabled=true;}}finally{if(rev===revision)refresh.disabled=false;}}
- document.getElementById('refresh')?.addEventListener('click',()=>{if(active)load();});
+
+
+ }catch(e){if(rev===revision){body.replaceChildren();label.textContent='';status.textContent=e.message;prev.disabled=next.disabled=true;}if(options?.throwErrors)throw e;}finally{if(rev===revision)refresh.disabled=false;}}
+
+ window.mpsOpsRefreshHooks=window.mpsOpsRefreshHooks||{};window.mpsOpsRefreshHooks['all-users']=()=>load({throwErrors:true});
+
  controls.addEventListener('submit',e=>{e.preventDefault();page=1;load();});refresh.addEventListener('click',load);prev.addEventListener('click',()=>{if(page>1){page--;load();}});next.addEventListener('click',()=>{page++;load();});
+
  document.addEventListener('ops:account-close',()=>{if(detailFromHere)activate(false);});
+
  new MutationObserver(()=>{if(consolePanel.hidden){revision++;active=false;detailFromHere=false;body.replaceChildren();section.hidden=true;menu.removeAttribute('aria-current');}else if(active&&!detailFromHere){activate(false);load();}}).observe(consolePanel,{attributes:true,attributeFilter:['hidden']});
+
 });

@@ -85,7 +85,7 @@
 
   const submit = node('button', '查询账户'); submit.type = 'submit'; searchForm.append(search, submit); section.append(searchForm);
 
-  const accounts = table(['匿名 ID', '首次记录来源', '可用次数 / 共享 / 专用', '最近认证请求', 'Key 状态', '测试账户']);
+  const accounts = table(['匿名 ID', '首次登记', '首次记录来源', '可用次数 / 共享 / 专用', '最近认证请求', 'Key 状态', '测试账户']);
 
   const pager = node('div', undefined, 'j-controls'), prev = node('button', '←', 'j-icon'), next = node('button', '→', 'j-icon'), pageLabel = node('span');
 
@@ -141,7 +141,7 @@
 
     if (res.status === 401) {
 
-      clear(); const error = Error('请登录后台后查看旅程'); error.unauthorized = true; throw error;
+      clear(); const error = Error('请登录后台后查看旅程'); error.unauthorized = true; error.status=401; throw error;
 
     }
 
@@ -157,7 +157,7 @@
 
   function cells(body, values) { const row = node('tr'); values.forEach(value => row.append(node('td', value ?? '未知'))); body.append(row); return row; }
 
-  async function load() {
+  async function load(options={}) {
 
     if (consolePanel.hidden) return;
 
@@ -193,9 +193,9 @@
 
         const quota = u.quota;
 
-        const row = cells(accounts, ['', sourceName(u.first_observed_source), 'Gemini ' + (quota.available.gemini ?? '缺失') + ' / Temu ' + (quota.available.temu ?? '缺失') + '；共享 ' + quota.shared + '；旧 Gemini ' + (quota.legacy.gemini ?? '缺失') + ' / Temu ' + (quota.legacy.temu ?? '缺失') + '；Temu体验 ' + quota.temu_trial, when(u.last_active), keyName(u.key), u.test_account ? '明确标记' : '未标记']);
+        const row = cells(accounts, ['', when(u.registered_at), sourceName(u.first_observed_source), 'Gemini ' + (quota.available.gemini ?? '缺失') + ' / Temu ' + (quota.available.temu ?? '缺失') + '；共享 ' + quota.shared + '；旧 Gemini ' + (quota.legacy.gemini ?? '缺失') + ' / Temu ' + (quota.legacy.temu ?? '缺失') + '；Temu体验 ' + quota.temu_trial, when(u.last_active), keyName(u.key), u.test_account ? '明确标记' : '未标记']);
 
-        row.children[1].title = u.first_observed_source;
+        row.children[2].title = u.first_observed_source;
 
         const choose = node('button', u.id); choose.type = 'button'; choose.className = 'j-id'; choose.addEventListener('click', () => showUser(u.id)); row.firstChild.append(choose);
 
@@ -207,12 +207,14 @@
 
       coverage.textContent = '采集起点：' + when(Number(summary.collection.collection_started)) + '。各阶段可能缺失；历史任务无成功时刻。剔除：未知事件 ' + summary.exclusions.unknown_events + '、测试账户事件 ' + summary.exclusions.test_account_events + '、测试订单 ' + summary.exclusions.test_orders + '。' + (summary.truncated ? '已截断，最多 ' + summary.limit + ' 条，非完整统计。' : '');
 
+      const stamp=document.getElementById('updated');if(stamp){stamp.dataset.accountReadAt=users.generated_at||'';if(document.body.dataset.workspaceView==='users')stamp.textContent='账户读取于 '+when(users.generated_at);}
       status.textContent = summary.groups.length ? '更新于 ' + when(summary.generated_at) : '当前范围暂无可验证记录';
 
     } catch (error) {
 
       if (rev === revision && !consolePanel.hidden) { stages.replaceChildren(); accounts.replaceChildren(); clearDetail(); status.hidden=false; status.textContent = error.message; }
 
+      if(options?.throwErrors)throw error;
     } finally { if (rev === revision) refresh.disabled = false; }
 
   }
@@ -322,7 +324,8 @@
   document.addEventListener('ops:show-user', event => { if (!consolePanel.hidden && typeof event.detail?.uid === 'string') showUser(event.detail.uid); });
 
   refresh.addEventListener('click', load);
-  document.getElementById('refresh-form')?.addEventListener('submit', () => { clearDetail(); load(); });
+  window.mpsOpsRefreshHooks=window.mpsOpsRefreshHooks||{};
+  for(const view of ['users','traffic'])window.mpsOpsRefreshHooks[view]=()=>{clearDetail();return load({throwErrors:true});};
 
   document.getElementById('days')?.addEventListener('change', () => { clearDetail(); load(); });
 
