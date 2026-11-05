@@ -13,12 +13,12 @@ def extend(factory,path):
                     try:result={**result,'telemetry_summary':summary()}
                     except Exception:result={**result,'telemetry_summary':{'unavailable':True}}
                 if status==200 and mime.startswith('text/html') and isinstance(result,bytes):
-                    result=result.replace(b'</head>',b'<link rel="stylesheet" href="/ops/admin-redesign.css?v=20261103"><script defer src="/ops/admin-redesign-userlist-20261105.js?v=20261105-userlist"></script></head>',1)
+                    result=result.replace(b'</head>',b'<link rel="stylesheet" href="/ops/admin-redesign.css?v=20261103"><script defer src="/ops/admin-redesign-clean-20261105.js?v=20261105-clean"></script></head>',1)
                 return super().send(status,result,mime,cookie=cookie)
             def do_GET(self):
                 name=urlsplit(self.path).path
-                if name in ('/ops/admin-redesign.js','/ops/admin-redesign-userlist-20261105.js','/ops/admin-redesign.css'):
-                    p=ROOT/('admin-redesign.js' if name=='/ops/admin-redesign-userlist-20261105.js' else name.rsplit('/',1)[-1])
+                if name in ('/ops/admin-redesign.js','/ops/admin-redesign-userlist-20261105.js','/ops/admin-redesign-clean-20261105.js','/ops/admin-redesign.css'):
+                    p=ROOT/('admin-redesign.js' if name in ('/ops/admin-redesign-userlist-20261105.js','/ops/admin-redesign-clean-20261105.js') else name.rsplit('/',1)[-1])
                     return self.send(200,p.read_bytes(),('text/css' if p.suffix=='.css' else 'application/javascript')+'; charset=utf-8')
                 return super().do_GET()
         import sys

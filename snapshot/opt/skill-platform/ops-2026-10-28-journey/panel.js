@@ -42,7 +42,6 @@
 
   section.append(node('h2', '来源与真实旅程'));
 
-  section.append(node('p', '按周期展示阶段量，非同批次转化漏斗。来源为客户端声明或本次邀请会话关联，不代表认证。unknown 不反推；邀请创建不代表用户看见引导。充值页统计已关联账户的可验证进入，匿名访问未采集。'));
 
   const controls = node('div', undefined, 'j-controls');
 
@@ -62,11 +61,11 @@
 
   const refresh = node('button', '↻', 'j-icon'); refresh.type = 'button'; refresh.title = '刷新旅程数据';
 
-  refresh.setAttribute('aria-label', '刷新旅程数据'); controls.append(refresh); section.append(controls);
+  refresh.setAttribute('aria-label', '刷新旅程数据'); controls.append(refresh);
 
-  const status = node('p', '', 'j-status'); status.setAttribute('role', 'status'); section.append(status);
+  const status = node('p', '', 'j-status'); status.setAttribute('role', 'status'); status.hidden=true; section.append(status);
 
-  const coverage = node('p'); section.append(coverage);
+  const coverage = node('p');
 
   function table(headers) {
 
@@ -162,7 +161,7 @@
 
     if (consolePanel.hidden) return;
 
-    const rev = ++revision; refresh.disabled = true; status.textContent = '正在读取…';
+    const rev = ++revision; refresh.disabled = true; status.hidden=true; status.textContent = '正在读取…';
 
     const days = document.getElementById('days')?.value || '7';
 
@@ -212,7 +211,7 @@
 
     } catch (error) {
 
-      if (rev === revision && !consolePanel.hidden) { stages.replaceChildren(); accounts.replaceChildren(); clearDetail(); status.textContent = error.message; }
+      if (rev === revision && !consolePanel.hidden) { stages.replaceChildren(); accounts.replaceChildren(); clearDetail(); status.hidden=false; status.textContent = error.message; }
 
     } finally { if (rev === revision) refresh.disabled = false; }
 
@@ -282,7 +281,7 @@
 
           await showUser(uid); await load();
 
-        } catch (error) { if (rev === detailRevision && !consolePanel.hidden) { status.textContent = error.message; mark.disabled = !markCheck.checked; } }
+        } catch (error) { if (rev === detailRevision && !consolePanel.hidden) { status.hidden=false; status.textContent = error.message; mark.disabled = !markCheck.checked; } }
 
       });
 
@@ -323,6 +322,7 @@
   document.addEventListener('ops:show-user', event => { if (!consolePanel.hidden && typeof event.detail?.uid === 'string') showUser(event.detail.uid); });
 
   refresh.addEventListener('click', load);
+  document.getElementById('refresh-form')?.addEventListener('submit', () => { clearDetail(); load(); });
 
   document.getElementById('days')?.addEventListener('change', () => { clearDetail(); load(); });
 
@@ -517,4 +517,3 @@
 
 
 })();
-
