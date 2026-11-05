@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded',()=>{
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;};
  const menu=el('button');menu.type='button';menu.title='用户与额度';menu.setAttribute('aria-label','用户与额度');const icon=el('span','♙','nav-icon');icon.setAttribute('aria-hidden','true');menu.append(icon,el('span','用户与额度','nav-label'));
  const oldUsers=nav.querySelector('button[aria-label="用户管理"]');nav.insertBefore(menu,oldUsers||null);
- const section=el('section');section.id='users-directory';section.hidden=true;section.append(el('h2','用户管理与使用旅程'));
- section.append(el('p','首次互动按服务器接收时间倒序排列；尚无互动上报的账户按首次登记时间排列，未知时间排在最后。未关联账户的互动一并展示，关联后归入对应账户。不保存对话原文；记录条数不等于独立人数，未上报不代表没有互动。','ud-note'));
- const controls=el('form',undefined,'ud-controls'),input=el('input');input.type='search';input.maxLength=64;input.placeholder='搜索账户编号';input.setAttribute('aria-label','搜索账户编号');const find=el('button','查询用户');find.type='submit';const refresh=el('button','刷新额度');refresh.type='button';controls.append(input,find,refresh);section.append(controls);
+ const section=el('section');section.id='users-directory';section.hidden=true;
+ const controls=el('form',undefined,'ud-controls'),input=el('input');input.type='search';input.maxLength=64;input.placeholder='搜索账户编号';input.setAttribute('aria-label','搜索账户编号');const find=el('button','查询用户');find.type='submit';const refresh=el('button','刷新额度');refresh.type='button';controls.append(input,find);section.append(controls);
  const status=el('p','','ud-status');status.setAttribute('role','status');section.append(status);
  const scroll=el('div',undefined,'ud-scroll'),table=el('table'),head=el('thead'),tr=el('tr'),body=el('tbody');
  ['用户账户 / 详情','接收 / 首次登记','首次回话 / Skill','共享生图次数','Temu 可用 / 体验','宠物独立额度','外贸获客余额','操作'].forEach(x=>tr.append(el('th',x)));head.append(tr);table.append(head,body);scroll.append(table);section.append(scroll);
@@ -26,7 +25,15 @@ document.addEventListener('DOMContentLoaded',()=>{
  const temu=el('td',u.image?(u.image.available.temu??'未读取')+' 次':'暂未读取');if(u.image)temu.append(el('small','其中体验 '+u.image.temu_trial+' 次；旧专用 '+(u.image.legacy.temu??'未读取')+' 次'));row.append(temu);
  const pet=el('td',u.pet?'订阅照片 '+u.pet.photo_remaining+' 次':u.missing.includes('pet_quota_unavailable')?'暂未读取':'未开通');if(u.pet){pet.append(el('small','体验照片 '+u.pet.trial_photo_remaining+' 次；档案 '+u.pet.profiles_used+' / '+(u.pet.profiles_limit===-1?'不限':u.pet.profiles_limit)),el('small','订阅到期：'+(u.pet.expires_at?when(u.pet.expires_at):'无有效订阅')),el('small','照片分析是否开放以宠物服务状态为准'));}row.append(pet);
  const trade=el('td',u.trade?money(u.trade.available_fen):'未开通');if(u.trade)trade.append(el('small','预占 '+money(u.trade.reserved_fen)));row.append(trade);const actions=el('td'),journey=el('button','旅程','ud-journey');journey.type='button';journey.setAttribute('aria-label','查看用户 '+u.id+' 的操作旅程');journey.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('ops:open-user-journey',{detail:{uid:u.id,account:u}})));actions.append(journey);row.append(actions);body.append(row);}
- if(!data.users.length){const td=el('td','当前查询没有匹配用户');td.colSpan=8;const row=el('tr');row.append(td);body.append(row);}label.textContent='第 '+page+' / '+Math.max(1,Math.ceil(total/data.page_size))+' 页 · 共 '+total+' 条记录';prev.disabled=page<=1;next.disabled=page*data.page_size>=total;status.textContent='更新于 '+when(data.generated_at);
+ if(!data.users.length){const td=el('td','当前查询没有匹配用户');td.colSpan=8;const row=el('tr');row.append(td);body.append(row);}label.textContent='第 '+page+' / '+Math.max(1,Math.ceil(total/data.page_size))+' 页 · 共 '+total+' 条记录';prev.disabled=page<=1;next.disabled=page*data.page_size>=total;status.textContent='读取于 '+when(data.generated_at);
+ const feedback=data.telemetry_summary;
+ let info=section.querySelector('.ud-feedback-status');
+ if(!info){info=el('details',undefined,'ud-feedback-status');status.after(info);}
+ info.replaceChildren();
+ const heading=el('summary',feedback&&!feedback.unavailable?'Skill主动上报 · 最近收到：'+(feedback.latest_received_at?when(feedback.latest_received_at):'尚无记录'):'Skill上报状态暂时无法读取');info.append(heading);
+ info.append(el('p','此列表来自Skill首次互动元数据，不来自平台下载统计。首次事件按安装、技能、渠道去重；后续聊天不重复计数。未收到不代表没有互动，也不保存对话正文。'));
+ for(const g of feedback?.groups||[])info.append(el('p',g.skill_name+' / '+g.channel+' · '+g.events+' 条 · 最近 '+when(g.latest_received_at)));
+
  }catch(e){if(rev===revision){body.replaceChildren();label.textContent='';status.textContent=e.message;prev.disabled=next.disabled=true;}}finally{if(rev===revision)refresh.disabled=false;}}
  document.getElementById('refresh')?.addEventListener('click',()=>{if(active)load();});
  controls.addEventListener('submit',e=>{e.preventDefault();page=1;load();});refresh.addEventListener('click',load);prev.addEventListener('click',()=>{if(page>1){page--;load();}});next.addEventListener('click',()=>{page++;load();});
