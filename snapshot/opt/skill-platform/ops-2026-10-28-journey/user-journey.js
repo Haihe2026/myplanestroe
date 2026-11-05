@@ -3,7 +3,7 @@ const opsJourneyLabels={invitation_created:'创建账户入口',registration_pag
 function opsJourneyEvents(data,account={}){
  const result=[],seen=new Set(),channel=x=>({workbuddy_skill:'WorkBuddy技能',workbuddy_expert:'WorkBuddy专家',skillhub:'SkillHub'})[x]||x||'渠道未记录';
  function add(at,title,detail,key){if(typeof at!=='number'||!Number.isFinite(at)||at<0)return;if(key&&seen.has(key))return;if(key)seen.add(key);result.push({at,title,detail:String(detail||'')});}
- if(account.registered_at!=null)add(account.registered_at,'账户创建 / 首次登记',account.registration_basis||'按原登记记录','registration');
+ if(account.registered_at!=null)add(account.registered_at,account.record_type==='legacy_account'?'历史首次记录':'账户创建 / 首次登记',account.registration_basis||'按原登记记录','registration');
  for(const e of data.first_dialogues||[])add(e.received_at,'首次互动上报',e.skill_name+' · '+channel(e.channel)+' · '+(e.skill_version||'版本未提供')+(e.client_occurred_at?'；客户端自报时间另有记录':''),'first:'+e.event_id);
  for(const e of data.events||[])add(e.created,opsJourneyLabels[e.event]||'服务端事件：'+e.event,[e.source&&e.source!=='unknown'?e.source:'来源未记录',channel(e.channel),e.object_id||''].join(' · '),e.event+':'+(e.object_id||e.id||e.created));
  for(const o of data.orders||[]){add(o.created,'创建订单','订单 '+o.id+' · ¥'+(o.amount_fen/100).toFixed(2)+' · '+(o.gateway_product||'通用'),'order_created:'+o.id);add(o.reported_at,'登记付款（尚未核款）','订单 '+o.id,'payment_reported:'+o.id);if(o.paid_authoritative===true)add(o.paid_at,'核款到账','订单 '+o.id+' · ¥'+(o.amount_fen/100).toFixed(2),'paid:'+o.id);}
@@ -39,8 +39,8 @@ if(typeof document!=='undefined')document.addEventListener('DOMContentLoaded',()
  function toolbar(){const bar=node('div',undefined,'uj-toolbar'),refresh=node('button','刷新旅程');refresh.type='button';refresh.addEventListener('click',load);bar.append(node('span','北京时间 · 按服务端已记录数据','uj-meta'),refresh);body.append(bar);}
  function render(data,account){
   body.replaceChildren();toolbar();const summary=node('section',undefined,'uj-summary'),first=(data.first_dialogues||[]).slice().sort((a,b)=>a.received_at-b.received_at)[0];
-  summary.append(node('span','统一账户','uj-meta'),node('h3',first?.skill_name||'账户 '+data.id.slice(0,8)),node('p',data.id,'uj-meta'));
-  const grid=node('div',undefined,'uj-grid');fact(grid,'账户创建 / 首次登记',when(account.registered_at));fact(grid,'首次互动上报 · 服务端接收',data.first_dialogues_unavailable?'暂时无法读取':first?when(first.received_at):'未上报');fact(grid,'共享生图次数',data.quota?.shared==null?'暂未读取':data.quota.shared+' 次');fact(grid,'Temu 可用次数',data.quota?.available?.temu==null?'暂未读取':data.quota.available.temu+' 次');
+  summary.append(node('span',data.account_kind==='legacy'?(data.product==='temu'?'Temu':'通用生图')+' · 历史独立账户':'统一账户','uj-meta'),node('h3',first?.skill_name||'账户 '+data.id.slice(0,8)),node('p',data.id,'uj-meta'));
+  const grid=node('div',undefined,'uj-grid');fact(grid,data.account_kind==='legacy'?'历史首次记录':'账户创建 / 首次登记',when(account.registered_at));fact(grid,'首次互动上报 · 服务端接收',data.first_dialogues_unavailable?'暂时无法读取':first?when(first.received_at):'未上报');if(data.account_kind==='legacy'){fact(grid,'历史可用次数',data.quota.available[data.product]+' 次');fact(grid,'历史成功任务',data.historical_succeeded_jobs+' 次');}else{fact(grid,'共享生图次数',data.quota?.shared==null?'暂未读取':data.quota.shared+' 次');fact(grid,'Temu 可用次数',data.quota?.available?.temu==null?'暂未读取':data.quota.available.temu+' 次');}
   if(account.pet)fact(grid,'宠物照片额度','订阅 '+account.pet.photo_remaining+' 次 · 体验 '+account.pet.trial_photo_remaining+' 次');
   if(account.trade)fact(grid,'外贸获客可用余额','¥'+(account.trade.available_fen/100).toFixed(2));
   summary.append(grid);body.append(summary,node('h3','操作记录'));
@@ -56,6 +56,7 @@ if(typeof document!=='undefined')document.addEventListener('DOMContentLoaded',()
  }
  async function load(){if(!selected||!modal.open)return;const rev=++revision;controller?.abort();controller=new AbortController();body.replaceChildren(node('p','正在读取最新操作记录…','uj-meta'));try{
   let snapshot=selected;
+  if(snapshot.legacyProduct){const d=await read('/ops/api/user-journey/legacy?'+new URLSearchParams({product:snapshot.legacyProduct,uid:snapshot.uid}));if(rev!==revision||!modal.open)return;render(d,snapshot.account||{});return;}
   if(snapshot.eventId){const d=await read('/ops/api/user-journey/anonymous?event_id='+encodeURIComponent(snapshot.eventId));if(rev!==revision)return;if(!d.item.user_id){renderAnonymous(d.item);return;}snapshot={uid:d.item.user_id,account:{}};selected=snapshot;}
   const d=await read('/ops/api/journey-v2/user?uid='+encodeURIComponent(snapshot.uid));if(rev!==revision||!modal.open)return;render(d,snapshot.account||{});
  }catch(e){if(rev!==revision||!modal.open)return;body.replaceChildren();toolbar();body.append(node('p',e.message,'uj-error'));}}

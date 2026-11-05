@@ -37,7 +37,7 @@ def extend(factory,shared_path):
     def build(*args,**kwargs):
         parent=factory(*args,**kwargs)
         report=args[0] if args else kwargs.get('report')
-        directory=Directory(shared_path,getattr(report,'products',{}) or {})
+        directory=Directory(shared_path,getattr(report,'products',{}) or None)
         class Handler(parent):
             def send(self,status,result,mime='application/json; charset=utf-8',cookie=None):
                 if status==200 and mime.startswith('text/html') and isinstance(result,bytes):
@@ -59,6 +59,14 @@ def extend(factory,shared_path):
                         return self.send(200,directory.listing(int(q.get('page',['1'])[0]),q.get('q',[''])[0]))
                     except (ValueError,TypeError):return self.send(400,dict(error='invalid_query'))
                     except (sqlite3.Error,OSError):return self.send(503,dict(error='users_activity_unavailable'))
+                if u.path=='/ops/api/user-journey/legacy':
+                    if not self.authenticated():return self.send(401,dict(error='ops_login_required'))
+                    try:
+                        q=parse_qs(u.query)
+                        return self.send(200,directory.legacy_detail(q.get('product',[''])[0],q.get('uid',[''])[0]))
+                    except (ValueError,TypeError):return self.send(400,dict(error='invalid_legacy_query'))
+                    except LookupError:return self.send(404,dict(error='legacy_account_not_found'))
+                    except (sqlite3.Error,OSError):return self.send(503,dict(error='legacy_data_unavailable'))
                 if u.path=='/ops/api/workspace-overview':
                     if not self.authenticated():return self.send(401,dict(error='ops_login_required'))
                     try:return self.send(200,overview(shared_path,int(parse_qs(u.query).get('days',['14'])[0])))

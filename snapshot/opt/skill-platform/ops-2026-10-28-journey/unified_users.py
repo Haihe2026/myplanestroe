@@ -11,7 +11,7 @@ def connect(path):
 def exists(c,name):return c.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",(name,)).fetchone() is not None
 
 class Directory:
-    def __init__(self,path,legacy=None):self.path,self.legacy=path,legacy or {}
+    def __init__(self,path,legacy=None):self.path,self.legacy=path,legacy if legacy is not None else {'gemini':'/var/lib/image-assistant/pilot.db','temu':'/var/lib/temu-image-assistant/trial.db'}
     def listing(self,page=1,query=''):
         if type(page)is not int or not 1<=page<=100000 or not isinstance(query,str) or len(query)>64:raise ValueError('invalid query')
         from journey.report import Report
@@ -20,6 +20,15 @@ class Directory:
         pattern='%'+query.replace('\\','\\\\').replace('%','\\%').replace('_','\\_')+'%'
         with closing(connect(self.path)) as c:
             c.execute('ATTACH DATABASE ? AS dialogue', (Path(os.environ.get('FIRST_DIALOGUES_DB','/var/lib/skill-monitor/first-dialogues.sqlite3')).resolve().as_uri()+'?mode=ro',))
+            legacy_sources=[];unavailable=[]
+            for product,path in self.legacy.items():
+                if product not in ('gemini','temu'):continue
+                try:
+                    alias='old_'+product
+                    c.execute('ATTACH DATABASE ? AS '+alias,(Path(path).resolve().as_uri()+'?mode=ro',))
+                    if not c.execute('SELECT 1 FROM '+alias+".sqlite_master WHERE type='table' AND name='users'").fetchone():raise sqlite3.OperationalError('missing users')
+                    legacy_sources.append((product,alias))
+                except (sqlite3.Error,OSError,TypeError):unavailable.append(product)
             c.execute('BEGIN')
             sources=[]
             if exists(c,'ledger'):sources.append("SELECT user_id,min(created) stamp,'account_created' basis,1 priority FROM ledger WHERE kind='account_created' GROUP BY user_id")
@@ -36,24 +45,38 @@ class Directory:
               SELECT *,row_number() OVER(PARTITION BY user_id ORDER BY received_at,event_id) pos
               FROM dialogue.first_dialogues WHERE is_test=0 AND user_id IS NOT NULL
             ), entries AS (
-              SELECT u.id,r.stamp,r.basis,f.event_id,coalesce(f.received_at,r.stamp) observed_at,0 anonymous
+              SELECT u.id,r.stamp,r.basis,f.event_id,coalesce(f.received_at,r.stamp) observed_at,0 anonymous,NULL legacy_product
               FROM users u LEFT JOIN ranked r ON r.user_id=u.id AND r.rn=1
               LEFT JOIN firsts f ON f.user_id=u.id AND f.pos=1
               WHERE u.id LIKE ? ESCAPE '\\'
               UNION ALL
-              SELECT f.event_id,NULL,'first_interaction',f.event_id,f.received_at,1
+              SELECT f.event_id,NULL,'first_interaction',f.event_id,f.received_at,1,NULL
               FROM dialogue.first_dialogues f WHERE f.is_test=0
               AND NOT EXISTS(SELECT 1 FROM users u WHERE u.id=f.user_id)
               AND (f.event_id LIKE ? ESCAPE '\\' OR f.skill_name LIKE ? ESCAPE '\\')
             ) """
-            params=(pattern,pattern,pattern)
+            params=[pattern,pattern,pattern]
+            extras=[]
+            for product,alias in legacy_sources:
+                has_ledger=c.execute('SELECT 1 FROM '+alias+".sqlite_master WHERE name='ledger'").fetchone()
+                stamp='(SELECT min(created) FROM '+alias+'.ledger WHERE user_id=o.id)' if has_ledger else 'NULL'
+                exclude=" AND NOT EXISTS(SELECT 1 FROM legacy_links l JOIN users u ON u.id=l.user_id WHERE l.product='"+product+"' AND l.legacy_uid=o.id)" if exists(c,'legacy_links') else ''
+                extras.append("SELECT o.id,"+stamp+",'legacy_first_observed',NULL,"+stamp+",2,'"+product+"' FROM "+alias+".users o WHERE o.id LIKE ? ESCAPE '\\'"+exclude)
+                params.append(pattern)
+            if extras:
+                marker=cte.rfind(')')
+                cte=cte[:marker]+' UNION ALL '+' UNION ALL '.join(extras)+cte[marker:]
+            params=tuple(params)
             total=c.execute(cte+'SELECT count(*) FROM entries',params).fetchone()[0]
-            records=c.execute(cte+'SELECT * FROM entries ORDER BY (observed_at IS NULL),observed_at DESC,anonymous,id LIMIT ? OFFSET ?',params+(size,(page-1)*size)).fetchall()
+            counts=dict(c.execute(cte+'SELECT coalesce(sum(anonymous=0),0) accounts,coalesce(sum(anonymous=1),0) interactions,coalesce(sum(anonymous=2),0) legacy_accounts FROM entries',params).fetchone())
+            records=c.execute(cte+'SELECT * FROM entries ORDER BY (observed_at IS NULL),observed_at DESC,anonymous,legacy_product,id LIMIT ? OFFSET ?',params+(size,(page-1)*size)).fetchall()
             for r in records:
                 uid=r['id'];first=None
                 if r['event_id']:
                     f=c.execute('SELECT event_id,skill_id,skill_name,skill_version,channel,received_at,client_occurred_at FROM dialogue.first_dialogues WHERE event_id=?',(r['event_id'],)).fetchone()
                     first=dict(f) if f else None
+                if r['anonymous']==2:
+                    rows.append(self.legacy_account(r['legacy_product'],uid,r['stamp']));continue
                 if r['anonymous']:
                     rows.append(dict(id=uid,record_type='interaction',event_id=r['event_id'],observed_at=r['observed_at'],first_dialogue=first));continue
                 item=dict(id=uid,record_type='account',observed_at=r['observed_at'],first_dialogue=first,registered_at=r['stamp'],registration_basis=r['basis'] or 'unknown',image=None,pet=None,trade=None,missing=[])
@@ -73,4 +96,24 @@ class Directory:
                     wallet=c.execute('SELECT balance_fen,reserved_fen FROM trade_wallets WHERE account_id=?',(uid,)).fetchone()
                     if wallet:item['trade']=dict(balance_fen=wallet[0],reserved_fen=wallet[1],available_fen=wallet[0]-wallet[1])
                 rows.append(item)
-        return dict(users=rows,total=total,page=page,page_size=size,generated_at=now,scope='accounts_and_first_interactions_not_unique_people',ordering='first_received_or_registration_desc_unknown_last')
+        return dict(users=rows,total=total,page=page,page_size=size,generated_at=now,scope='accounts_and_first_interactions_not_unique_people',ordering='first_received_or_registration_desc_unknown_last',unavailable_sources=unavailable,counts=counts)
+
+    def legacy_account(self,product,uid,stamp=None):
+        if product not in ('gemini','temu') or not isinstance(uid,str) or not 1<=len(uid)<=100:raise ValueError('invalid legacy identity')
+        path=self.legacy.get(product)
+        if not path:raise ValueError('legacy source not configured')
+        with closing(connect(path)) as c:
+            row=c.execute('SELECT balance FROM users WHERE id=?',(uid,)).fetchone()
+            if row is None:raise LookupError('unknown legacy account')
+            if stamp is None and exists(c,'ledger'):stamp=c.execute('SELECT min(created) FROM ledger WHERE user_id=?',(uid,)).fetchone()[0]
+            expired=c.execute('SELECT coalesce(sum(remaining),0) FROM member_grants WHERE user_id=? AND expires IS NOT NULL AND expires<=?',(uid,int(time.time()))).fetchone()[0] if exists(c,'member_grants') else 0
+            balance=max(0,row[0]-expired)
+            jobs=dict(c.execute('SELECT status,count(*) FROM jobs WHERE user_id=? GROUP BY status',(uid,))) if exists(c,'jobs') else {}
+        return dict(id=uid,record_type='legacy_account',legacy_product=product,registered_at=stamp,observed_at=stamp,registration_basis='legacy_first_observed',first_dialogue=None,image=dict(shared=None,legacy={product:balance},available={product:balance},temu_trial=None),pet=None,trade=None,missing=[],job_counts=jobs)
+
+    def legacy_detail(self,product,uid):
+        a=self.legacy_account(product,uid)
+        with closing(connect(self.legacy[product])) as c:
+            jobs=[dict(r,product=product) for r in c.execute('SELECT id,created,status FROM jobs WHERE user_id=? ORDER BY created DESC,id DESC LIMIT 101',(uid,))] if exists(c,'jobs') else []
+            ledger=[dict(r,database='legacy_'+product) for r in c.execute('SELECT id,job_id,created,kind,amount FROM ledger WHERE user_id=? ORDER BY created DESC,id DESC LIMIT 101',(uid,))] if exists(c,'ledger') else []
+        return dict(id=uid,account_kind='legacy',product=product,quota=a['image'],registered_at=a['registered_at'],first_dialogues=[],events=[],orders=[],jobs=[],ledger=[],historical_succeeded_jobs=a['job_counts'].get('succeeded',0),legacy={product:dict(jobs=jobs[:100],ledger=ledger[:100])},truncated=dict(jobs=len(jobs)>100,ledger=len(ledger)>100))
