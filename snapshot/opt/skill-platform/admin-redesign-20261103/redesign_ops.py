@@ -8,6 +8,10 @@ def extend(factory,path):
         parent=factory(*args,**kwargs)
         class Handler(parent):
             def send(self,status,result,mime='application/json; charset=utf-8',cookie=None):
+                if status==200 and isinstance(result,dict) and urlsplit(self.path).path=='/ops/api/users-activity':
+                    from feedback_status import summary
+                    try:result={**result,'telemetry_summary':summary()}
+                    except Exception:result={**result,'telemetry_summary':{'unavailable':True}}
                 if status==200 and mime.startswith('text/html') and isinstance(result,bytes):
                     result=result.replace(b'</head>',b'<link rel="stylesheet" href="/ops/admin-redesign.css?v=20261103"><script defer src="/ops/admin-redesign.js?v=20261103"></script></head>',1)
                 return super().send(status,result,mime,cookie=cookie)
@@ -17,5 +21,8 @@ def extend(factory,path):
                     p=ROOT/name.rsplit('/',1)[-1]
                     return self.send(200,p.read_bytes(),('text/css' if p.suffix=='.css' else 'application/javascript')+'; charset=utf-8')
                 return super().do_GET()
-        return Handler
+        import sys
+        sys.path.insert(0,'/opt/skill-platform/provider-costs-20261105')
+        import provider_ops
+        return provider_ops.wrap(Handler)
     return build
