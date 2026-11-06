@@ -1,0 +1,8 @@
+{
+  "role": "claude",
+  "protocol_version": 1,
+  "consumer_ready": true,
+  "checked_at": "2026-11-06T13:40:00+08:00",
+  "evidence_ref": "b281ab9:pipeline/relay/receipts/claude/evt-053a0a51c6164e4f78cb1bbd8fd82265d62411e77233afdb304921ba08d2fcc6.json",
+  "note": "Claude receiver runs as a cloud scheduled task (hourly at :37 Beijing minute offset), not on the local machine. It automatically claimed and acknowledged the transport test via git commits. Product notifications may wait up to one hour before pickup."
+}
