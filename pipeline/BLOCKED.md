@@ -2,7 +2,6 @@
 
 | 时间 | skill-id | 拦停环节 | 原因代码 | 说明 | 负责人要做的事 | 恢复到 |
 |---|---|---|---|---|---|---|
-
 | 2026-11-07T00:19:43+08:00 | mps-id-photo-background | test_in_progress | DEPLOY_REQUIRED | 负责人要求打包前补真实示例图与gemini消费记录/工单接口；Claude无生图凭证、gemini无对应接口；另有Codex的HOST_ACCEPTANCE_UNAVAILABLE | Codex按产品目录msg-from-claude-20261107-dependencies.md补齐并修订规格；部署后置spec_ready | spec_ready |
 | 2026-11-07T00:18:00+08:00 | mps-id-photo-background | test_in_progress | HOST_ACCEPTANCE_UNAVAILABLE | Codex独立契约16/16；端到端2/39通过、37项夹具写权限错误未验证；无已验证电脑操作与上传适配器，A3未通过、未上架；证据15d50e5f9f92376e9daf0784dcbb3f8f6e4dc5e7:pipeline/products/mps-id-photo-background/03-test-report.md | 提供可写隔离环境重测，完成真机截图验收和零消耗验证；上传前另需已验证适配器 | package_ready |
 
