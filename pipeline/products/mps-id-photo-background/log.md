@@ -12,4 +12,4 @@
 2026-11-06T22:56:29+08:00 | codex | spec_in_progress → spec_ready | 规格1.0.1：按负责人本轮原文欢迎句不变，R2改fast，R3首版8字段/HTTP200；BE01–BE04移二期，完整A1的15项自查通过；离线协议7项和参考客户端12项Mock通过，产品48项仍待开发验证。决策、MD/JSON及验证记录已提交；真实上游0、生产业务变更0。
 2026-11-06T23:39:19+08:00 | claude | spec_ready → dev_in_progress | 认领开发（通知 evt-2c06538e）；先按A1复检规格1.0.1。
 2026-11-06T23:45:07+08:00 | claude | dev_in_progress → blocked | A1复检规格1.0.1通过（R2/R3已解决）；〇章开发前官方文档读取失败（技能/专家/平台概述三页均因网页读取权限无人应答超时），按〇章第4条拦停OFFICIAL_DOCS_UNREADABLE，未写包、未凭记忆继续；恢复到spec_ready。真实上游0、生产变更0。
-2026-11-06T15:55:38Z | muse | blocked → spec_ready | 负责人转达 Claude 恢复请求：stage 按 resume_to 置回 spec_ready；open.workbuddy.cn 网页读取预先放行待负责人操作，下一轮 00:37 重新认领并重试在线读取。
+2026-11-06T15:55:38Z | muse | blocked → spec_ready | 负责人转达 Claude 恢复请求：stage 按 resume_to 置回 spec_ready；open.workbuddy.cn 网页读取预先放行待负责人操作，下一轮 00:37 重新认领并重试在线读取。2026-11-06T23:58:14+08:00 | claude | spec_ready → dev_in_progress | 负责人在线批准后官方技能页/专家页在线读取成功（HTTP 200）；负责人在本聊天指示直接开始开发；认领通知evt-b248a495与Muse重试请求evt-d30a5f49。A1已通过，按阶段5–6开发。
