@@ -1,0 +1,178 @@
+{
+  "skill_id": "mps-id-photo-background",
+  "document_version": "1.0.1",
+  "checked_at": "2026-11-06T22:54:14+08:00",
+  "source_snapshot": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
+  "a1_self_check": [
+    {
+      "item": "立项字段与词表/name查重",
+      "result": "pass",
+      "evidence": "§2、§3、§8；本次固定仓库产品目录索引"
+    },
+    {
+      "item": "官方文档读取记录",
+      "result": "pass",
+      "evidence": "§1；read_record含在线正文哈希"
+    },
+    {
+      "item": "场景路由表",
+      "result": "pass",
+      "evidence": "§3；scenes=10"
+    },
+    {
+      "item": "提示词与基线",
+      "result": "pass",
+      "evidence": "§3；prompt_baselines"
+    },
+    {
+      "item": "首轮8–12偶数示例与方式",
+      "result": "pass",
+      "evidence": "§4；demos=10，synthetic_mock待Claude制作"
+    },
+    {
+      "item": "计费通道/每张消耗/无试用",
+      "result": "pass",
+      "evidence": "§5、§5.1；billing"
+    },
+    {
+      "item": "模型/单张估算成本/毛利",
+      "result": "pass",
+      "evidence": "§5、§5.2；margin≈76.47%≥60%"
+    },
+    {
+      "item": "fast车道且无后端部署依赖",
+      "result": "pass",
+      "evidence": "§1、§7.3；lane=fast，deploy补丁项不适用"
+    },
+    {
+      "item": "源码存在的接口与字段",
+      "result": "pass",
+      "evidence": "§5.1、§5.2、§6、§7；source_snapshot固定提交"
+    },
+    {
+      "item": "漏斗对应表与不可得项",
+      "result": "pass",
+      "evidence": "§8；L0等缺口不造数"
+    },
+    {
+      "item": "相邻技能与分界",
+      "result": "pass",
+      "evidence": "§8；sibling_skills"
+    },
+    {
+      "item": "不承接清单",
+      "result": "pass",
+      "evidence": "§2、§8；non_goals"
+    },
+    {
+      "item": "逐项验收计划与分工",
+      "result": "pass",
+      "evidence": "§9；48项，T35–T39按8字段改写"
+    },
+    {
+      "item": "决策记录",
+      "result": "pass",
+      "evidence": "§11；负责人原文及R1–R4处理"
+    },
+    {
+      "item": "MD/JSON一致",
+      "result": "pass",
+      "evidence": "本次逐项比对48个验收描述、场景/示例及契约"
+    }
+  ],
+  "a1_passed": true,
+  "checks_passed": 69,
+  "check_names": [
+    "fast lane without release backend changes",
+    "8-field active contract and 200 receipt",
+    "phase2 deferred not release dependency",
+    "welcome format unchanged",
+    "full A1 no per-product exception",
+    "10 scenes, 10 demos, matching keys",
+    "48 unchanged test identities",
+    "MD/JSON agreement T01",
+    "MD/JSON agreement T02",
+    "MD/JSON agreement T03",
+    "MD/JSON agreement T04",
+    "MD/JSON agreement T05",
+    "MD/JSON agreement T06",
+    "MD/JSON agreement T07",
+    "MD/JSON agreement T08",
+    "MD/JSON agreement T09",
+    "MD/JSON agreement T10",
+    "MD/JSON agreement T11",
+    "MD/JSON agreement T12",
+    "MD/JSON agreement T13",
+    "MD/JSON agreement T14",
+    "MD/JSON agreement T15",
+    "MD/JSON agreement T16",
+    "MD/JSON agreement T17",
+    "MD/JSON agreement T18",
+    "MD/JSON agreement T19",
+    "MD/JSON agreement T20",
+    "MD/JSON agreement T21",
+    "MD/JSON agreement T22",
+    "MD/JSON agreement T23",
+    "MD/JSON agreement T24",
+    "MD/JSON agreement T25",
+    "MD/JSON agreement T26",
+    "MD/JSON agreement T27",
+    "MD/JSON agreement T28",
+    "MD/JSON agreement T29",
+    "MD/JSON agreement T30",
+    "MD/JSON agreement T31",
+    "MD/JSON agreement T32",
+    "MD/JSON agreement T33",
+    "MD/JSON agreement T34",
+    "MD/JSON agreement T35",
+    "MD/JSON agreement T36",
+    "MD/JSON agreement T37",
+    "MD/JSON agreement T38",
+    "MD/JSON agreement T39",
+    "MD/JSON agreement T40",
+    "MD/JSON agreement T41",
+    "MD/JSON agreement T42",
+    "MD/JSON agreement T43",
+    "MD/JSON agreement T44",
+    "MD/JSON agreement T45",
+    "MD/JSON agreement T46",
+    "MD/JSON agreement T47",
+    "MD/JSON agreement T48",
+    "L0 unavailable",
+    "human decisions recorded",
+    "payment and upstream integration retained",
+    "no key/secret assignment literals",
+    "stable name references only own product directory",
+    "spec field set equals actual source whitelist",
+    "actual gateway accepts 8 fields with HTTP200 and receipt",
+    "server returns original canonical event and receipt on installation dedup",
+    "actual gateway rejects 9th machine_id field",
+    "link requires existing account authentication",
+    "3-field existing-account link succeeds with HTTP200",
+    "same-account link idempotent",
+    "different-account link rejected",
+    "existing reference client Mock tests pass"
+  ],
+  "actual_gateway_http_checks": 7,
+  "reference_client_mock_tests_passed": 12,
+  "name_check": {
+    "scope": "fixed-commit repository product directory/path index; existing references are this same product, not a new duplicate listing",
+    "product_directories": [
+      "mps-id-photo-background",
+      "mps-relay-probe"
+    ],
+    "existing_product_preserved": true
+  },
+  "real_upstream_calls": 0,
+  "production_business_changes": 0,
+  "production_database_used": false,
+  "network_scope": "loopback mock HTTP only during contract tests; official pages and GitHub fetched separately read-only",
+  "not_verified": [
+    "actual Skill implementation",
+    "all 48 product acceptance cases",
+    "real WorkBuddy host",
+    "real payment/settlement",
+    "real model output quality",
+    "phase2 backend implementation/deployment"
+  ]
+}

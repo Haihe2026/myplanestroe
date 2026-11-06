@@ -6,28 +6,34 @@
   "document_status": "ready",
   "ready_for_development": true,
   "a1_passed": true,
-  "lane": "deploy",
-  "lane_note": "文档已交付；客户端可按明确目标契约进行Mock开发。目标机器漏斗后端实施与部署是后续依赖，不冒称已上线。",
+  "lane": "fast",
+  "lane_note": "首版仅使用现有接口，不新增或部署后端；8字段/HTTP200首次对话契约；BE01–BE04移入二期待办，不是首版依赖。",
   "channels": [
     "workbuddy-skill"
   ],
-  "source_snapshot": "44a6ed60ea015f260a89b75975f9b21fe39e9e3e",
+  "source_snapshot": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
   "authorization": {
-    "source": "human_reply_in_current_chat",
-    "text": "按照自动化SOP执行，接入当前有效上游资产和通用生图支付页；本轮Codex只完成开发文档，认证由后续Claude Code处理。",
-    "scope": "开发规格与交接；不包含客户端开发、后端部署、财务操作或公开发布。"
+    "source": "direct_human_instruction_in_document_owner_chat",
+    "record_path": "pipeline/products/mps-id-photo-background/01-dev-spec.md#11-决策记录",
+    "text": "欢迎句保持认证格式不变，R2 选改 fast，R3 按 8 字段改，决定写进决策记录，修订后重交 spec_ready。",
+    "scope": "修订开发文档、按完整A1自查并重交spec_ready；不增加真实上游调用、生产部署或财务权限。"
   },
   "read_record": {
     "date": "2026-11-06",
-    "canonical_sop_path": "C:\\Users\\Administrator\\Desktop\\Skill项目\\Claude-Code\\SOP\\sop-image-gen-skill.md",
-    "canonical_sop_sha256": "e820386dd4e0feba2ac502c748bd5e7bc2d0bf28ed17da6a58693051fde2b84f",
+    "checked_at": "2026-11-06T22:52:59+08:00",
     "auto_sop": "docs/sop/sop-image-gen-skill-auto.md",
-    "auto_sop_sha256": "92d10cd6f3afcb4f06caeb34b1aa0592d77e4a7773bfeba85ee03efc556dc85a",
+    "auto_sop_ref": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
+    "auto_sop_sha256": "d7a538d8c03950af8eba268ef6bdee3e23c51578baeb9cc5dffc165b2b15adf1",
     "official_pages": [
-      "https://open.workbuddy.cn/docs/expert",
-      "https://open.workbuddy.cn/docs/skill"
+      "https://open.workbuddy.cn/docs/skill",
+      "https://open.workbuddy.cn/docs/expert"
     ],
-    "applied_flow": "本次人工确认采用自动关口；保留实际后端契约及HARD_STOP；只做WorkBuddy技能版",
+    "official_read_result": "本轮重新在线下载两页并读取正文，成功；技能字段与目录按当前官网核对。",
+    "official_page_sha256": {
+      "skill": "da1cd76badca427d321b055a4b2e20c191ea6f2d0fe623813f21dc477a0a5a19",
+      "expert": "52bdc01012ec0718393cdb29366edd0e61843636823eec189f877157c7c0d1f5"
+    },
+    "applied_flow": "自动SOP完整A1；当前只做WorkBuddy技能包；A.5首版8字段兼容优先于未实施的二期机器漏斗目标。",
     "unresolved_conflicts": []
   },
   "billing": {
@@ -43,7 +49,16 @@
     "cost_source": "resources/shared-image-temporary/plans.public.json and live /membership-api/plans",
     "prices_in_client_copy": false,
     "account_authorization_link": "server_issued_only",
-    "sibling_reuse": false
+    "sibling_reuse": false,
+    "integration_sources": [
+      "resources/shared-image-temporary/README.md",
+      "resources/shared-image-temporary/client.py:36",
+      "snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py:311",
+      "snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py:68",
+      "snapshot/opt/skill-platform/member-0.10.14/core/permanent_plans.py:3"
+    ],
+    "integration_source_ref": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
+    "settlement": "沿现有manual_qr核款链；report-payment只登记，客户端不接收/伪造支付回调或执行核款；以服务端paid状态及remaining_uses核对到账。"
   },
   "model": {
     "name": "gpt-image-2.5-ext",
@@ -55,7 +70,11 @@
     "n": 1,
     "legacy_fallback": false,
     "public_health_only": true,
-    "real_model_probe_performed": false
+    "real_model_probe_performed": false,
+    "integration_source_ref": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
+    "adapter_source": "snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py",
+    "policy_source": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new-only-policy.json",
+    "asset_resolution": "Registry().resolve_for_service('aisplice')，只在服务端执行"
   },
   "margin": {
     "unit_cost": 0.0455,
@@ -440,28 +459,14 @@
       "dpi",
       "target_pixels",
       "machine_id"
-    ]
+    ],
+    "source_ref": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad"
   },
   "telemetry": {
     "current_contract": {
       "fields": [
-        "channel",
-        "client_occurred_at",
         "event_id",
         "installation_id",
-        "is_test",
-        "skill_id",
-        "skill_name",
-        "skill_version"
-      ],
-      "success_status": 200,
-      "source": "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9"
-    },
-    "target_contract": {
-      "fields": [
-        "event_id",
-        "installation_id",
-        "machine_id",
         "skill_id",
         "skill_name",
         "skill_version",
@@ -469,43 +474,80 @@
         "client_occurred_at",
         "is_test"
       ],
-      "success_status": 204,
-      "installation_id": "按技能/安装独立规范小写随机UUIDv4",
-      "machine_id": "自家技能之间共享的规范小写随机UUIDv4，不读取硬件指纹",
-      "success_persistence": "HTTP204确认后本地记已上报，每安装一次；2秒预算、不自动重试，失败不阻塞业务",
-      "account_link": "在已有合法账户关联时接入安装与机器标识，保持既有身份与鉴权",
-      "disclosure": "匿名随机安装/机器标识仅用于首次互动与安装关联；提供关闭开关，不传消息正文、照片、路径或凭证"
+      "success_status": 200,
+      "source": "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9",
+      "source_ref": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad"
     },
-    "implementation_required": true,
-    "deployed": false,
+    "target_contract": {
+      "fields": [
+        "event_id",
+        "installation_id",
+        "skill_id",
+        "skill_name",
+        "skill_version",
+        "channel",
+        "client_occurred_at",
+        "is_test"
+      ],
+      "success_status": 200,
+      "installation_id": "本技能本渠道每次安装持久化的独立小写随机UUIDv4，不复用install_secret",
+      "event_id": "独立随机UUIDv4，先持久化；重复执行沿原ID",
+      "success_persistence": "仅HTTP200且返回合法event_id、receipt后原子保存回执与成功标记；采用服务端返回ID，不能使用首次请求ID覆盖去重回执",
+      "account_link": {
+        "fields": [
+          "event_id",
+          "receipt",
+          "product"
+        ],
+        "product": "gemini",
+        "success_status": 200,
+        "auth": "existing_account_bearer_header_only",
+        "response": "linked=true；409不覆盖其他账户"
+      },
+      "disclosure": "匿名随机安装标识和技能元数据用于首次对话统计及安装绑定；提供关闭开关，不传消息正文、照片、路径、账户凭证或machine_id"
+    },
+    "request_timeout_s": 2,
+    "automatic_retries": 0,
+    "max_request_bytes": 4096,
+    "skill_id": "mps-id-photo-background",
+    "channel": "workbuddy_skill",
     "is_test_during_development": true,
-    "rule": "不静默退回8字段来宣称完整机器漏斗已满足。目标服务端未就绪时如实标记后端依赖，不阻塞离线首轮。"
+    "backend_change_required": false,
+    "implementation_required": false,
+    "client_implementation_required": true,
+    "cross_skill_new_device_funnel": "不可得",
+    "rule": "首版严格只发8字段，以HTTP200及有效回执判成功；不发送或依赖machine_id，不按204判成功；失败不阻塞业务且不自动重试。"
   },
   "funnel_steps": [
     {
       "step": "L0",
-      "definition": "窗口内machine_id历史首现的新设备",
-      "source": "目标首次互动事件和机器首见索引"
+      "definition": "跨技能新设备首次开口",
+      "availability": "不可得",
+      "source": "现有8字段无machine_id；不得以安装数替代"
     },
     {
       "step": "L1",
-      "definition": "授权页匿名PV与按ip_day_hash去重的访客",
-      "source": "目标页面到达事件；按日哈希不能被解释成永久唯一人数"
+      "definition": "授权页新访客PV/UV",
+      "availability": "不可得",
+      "source": "首版没有本品ip_day_hash历史首见投影，不新增采集"
     },
     {
       "step": "L2",
       "definition": "窗口内新建并首次完成关联的账户",
-      "source": "既有账户创建记录与目标关联表"
+      "availability": "部分可得；完整漏斗不可得",
+      "source": "现有first_dialogues与账户创建/关联只读资料；不能仅凭linked=true认定新账户"
     },
     {
       "step": "L3",
-      "definition": "窗口内新账户到达充值页，按账户去重",
-      "source": "现有合法账户/页面事件"
+      "definition": "新账户首次到达充值页",
+      "availability": "不可得",
+      "source": "本品未核实同口径页面到达关联；签发链接不等于页面到达"
     },
     {
       "step": "L4",
-      "definition": "新账户首次实际入账，订单与未挂订单充值逐条去重",
-      "source": "原订单/账本只读投影，不以自述付款认定到账"
+      "definition": "新账户首次实际入账",
+      "availability": "部分可得；完整漏斗不可得",
+      "source": "既有订单/账本只读记录；须按账户首充和交易去重，不以自述或reported认定到账"
     }
   ],
   "sibling_skills": [
@@ -805,7 +847,7 @@
       "id": "T35",
       "group": "telemetry",
       "by": "claude",
-      "desc": "目标契约9字段严格白名单，machine_id为独立随机UUIDv4；目标后端204确认成功，原8字段200协议的兼容性由服务端验收。",
+      "desc": "首版仅8字段：event_id、installation_id、skill_id、skill_name、skill_version、channel、client_occurred_at、is_test；skill_id=mps-id-photo-background、channel=workbuddy_skill、测试is_test=true；HTTP200且有效回执才成功，不发送machine_id、不以204判成功。",
       "status": "not_run_product_not_implemented",
       "independent_retest_by": "codex"
     },
@@ -813,7 +855,7 @@
       "id": "T36",
       "group": "telemetry",
       "by": "claude",
-      "desc": "标识持久化失败跳过，不临时造身份；去重和开关生效",
+      "desc": "installation_id及event_id先持久化；只读/损坏/写失败不临时造身份；安装×技能×渠道去重与关闭开关生效。",
       "status": "not_run_product_not_implemented",
       "independent_retest_by": "codex"
     },
@@ -821,7 +863,7 @@
       "id": "T37",
       "group": "telemetry",
       "by": "claude",
-      "desc": "2秒预算、不自动重试、不阻塞主流程；成功持久化一次性标记，标识写不进去则跳过，不临时造身份。",
+      "desc": "总预算2秒、不自动重试、不阻塞首轮；200合法回执原子保存返回event_id/receipt及一次性标记；失败、204或缺回执不标成功；重复执行沿原ID，成功后不再上报。",
       "status": "not_run_product_not_implemented",
       "independent_retest_by": "codex"
     },
@@ -829,7 +871,7 @@
       "id": "T38",
       "group": "telemetry",
       "by": "claude",
-      "desc": "账户后续link幂等，409不覆盖其他账户；凭证只在头部",
+      "desc": "原账户后续link只传event_id/receipt/product=gemini，账户Bearer仅头部；200且linked=true完成；无回执/无合法账户跳过，409不覆盖其他账户。",
       "status": "not_run_product_not_implemented",
       "independent_retest_by": "codex"
     },
@@ -837,7 +879,7 @@
       "id": "T39",
       "group": "telemetry",
       "by": "claude",
-      "desc": "按machine_id历史首见计算新设备，老设备安装新技能只进入独立启用指标；不得把安装数或下载数冒充人数。",
+      "desc": "首版跨技能新设备漏斗标不可得；只验证既有安装去重与合法账户关联，不要求或伪造machine_id、204、IP日哈希、新表及新设备报表；不把安装/下载当独立人数。",
       "status": "not_run_product_not_implemented",
       "independent_retest_by": "codex"
     },
@@ -1059,18 +1101,48 @@
       "basis": "未核实的机构要求不能默认通用；美国签证FAQ禁止改变外貌的数字修改"
     },
     {
+      "item": "欢迎句（R1）",
+      "chosen": "欢迎使用WorkBuddy官方认证技能 证件照换底助手。",
+      "basis": "用户本轮直接明确保持认证格式不变；现行SOP固定规则1、A.5；Claude已撤回R1。"
+    },
+    {
+      "item": "R2车道",
+      "chosen": "fast；不新增后端；BE01–BE04移入二期待办，不作为首版依赖",
+      "basis": "用户本轮明确选择R2方案a；自动SOP A.5遥测行及阶段4快车道。"
+    },
+    {
+      "item": "R3首次对话契约",
+      "chosen": "只发8字段；HTTP200及合法event_id/receipt后标成功；不发machine_id",
+      "basis": "用户本轮明确按8字段改；A.5与固定规则12；dialogue_store.py:9和dialogue_gateway.py:50。"
+    },
+    {
+      "item": "二期机器漏斗",
+      "chosen": "9字段/204、机器标识、新表与报表均延期；首版跨技能新设备漏斗标不可得",
+      "basis": "A.5首版兼容默认；不得把目录或Mock当后端已部署。"
+    },
+    {
+      "item": "A1范围（R4）",
+      "chosen": "执行A.7完整A1清单，不再使用documentation_only特例",
+      "basis": "本轮指令已归档于本节；fast无后端改动，因此deploy补丁/部署项不适用，并非豁免A1。"
+    },
+    {
       "item": "职责边界",
-      "chosen": "本轮只完成文档，后续由Claude Code按文档开发与衔接实施",
-      "basis": "用户在当前聊天直接限定范围；不再由Codex前置认证核验或后端代码实施"
+      "chosen": "本聊天Codex修订MD/JSON和状态；Claude Code按首版8字段契约开发客户端并自测",
+      "basis": "用户接手指示和本轮原文；后端二期由Codex未来另单写补丁及测试，部署按原关口。"
+    },
+    {
+      "item": "旧首次互动说明的重试建议",
+      "chosen": "以自动SOP的2秒、无自动重试为准；保留8字段、200和回执关联协议",
+      "basis": "resources/shared-image-temporary/首次互动接入.md含旧重试建议；自动SOP固定规则12优先。"
     }
   ],
   "document_review_passed": true,
   "a1_scope": {
-    "type": "documentation_only",
-    "source": "current_chat_direct_human_instruction",
-    "at": "2026-11-06T22:23:26+08:00",
-    "instruction": "认证交由后续Claude Code处理，不由Codex核验或标注是否获得；Codex只完成开发文档并交接。",
-    "exception": "本轮A1检查文档完备性；不要求Codex先实施后端补丁。依赖及验收仍须在后续阶段实际完成。"
+    "type": "full_auto_sop_A1",
+    "source": "docs/sop/sop-image-gen-skill-auto.md A.7",
+    "exception": null,
+    "lane": "fast",
+    "backend_patch_and_deploy_gate": "not_applicable_no_backend_change"
   },
   "copy": {
     "welcome_template": "欢迎使用WorkBuddy官方认证技能 证件照换底助手。",
@@ -1078,10 +1150,35 @@
     "rule": "按SOP固定话术实现；本轮文档不作认证状态判断。"
   },
   "backend_requirements": {
-    "owner": "后续闭环实施环节",
-    "implementation_done": false,
-    "deployment_done": false,
+    "required_for_this_release": false,
+    "owner": null,
+    "tasks": [],
     "production_mutations_authorized": false,
+    "preservation_rules": [
+      "现有通用生图、共享钱包、微信恢复和新资源适配器原样接入",
+      "不改客户余额、订单、套餐、鉴权和幂等；无旧上游回退；真实上游调用0"
+    ],
+    "deferred_to": "phase2_backlog"
+  },
+  "independent_metrics": [
+    "技能首次对话上报数：按installation×skill×channel去重的服务端受理记录；不是独立设备/人数；新老设备拆分不可得",
+    "已关联首次对话数：沿现有event_id/receipt合法账户关联；完整新老账户激活口径未核实则标不可得",
+    "充值笔数：只读已有实际入账记录并去重；本品归因未核实则不可得，不新增统计或把充值当利润"
+  ],
+  "implementation_status": {
+    "client_package_written": false,
+    "backend_implemented": false,
+    "backend_deployed": false,
+    "documentation_only": true,
+    "real_upstream_calls": 0,
+    "backend_change_required": false,
+    "phase2_implemented": false,
+    "phase2_deployed": false
+  },
+  "document_version": "1.0.1",
+  "phase2_backlog": {
+    "not_a_release_dependency": true,
+    "backend_owner": "Codex（文档/后端补丁）；未来另单立项",
     "tasks": [
       {
         "id": "BE01",
@@ -1102,24 +1199,27 @@
         "id": "BE04",
         "task": "实现L0-L4及三项独立指标的同口径只读报表与管理台明细",
         "acceptance": "管理台沿原管理员鉴权；离线脚本与在线数字一致；新设备/新账户/老账户区分；订单与未挂订单入账去重；不混用预充值、扣量和利润"
-      },
-      {
-        "id": "BE05",
-        "task": "保持现有通用生图、共享钱包、微信恢复及新资源适配器",
-        "acceptance": "不改客户余额/订单/套餐；无旧上游回退；真实上游0；未部署不得宣称线上已支持目标契约"
       }
-    ]
-  },
-  "independent_metrics": [
-    "技能启用数：按installation_id首见，区分新/老设备",
-    "技能激活数：技能与账户新绑定，区分新/老账户",
-    "充值笔数：窗口内真实入账去重后按渠道拆分；不等同收入或利润"
-  ],
-  "implementation_status": {
-    "client_package_written": false,
-    "backend_implemented": false,
-    "backend_deployed": false,
-    "documentation_only": true,
-    "real_upstream_calls": 0
+    ],
+    "future_telemetry_contract": {
+      "fields": [
+        "event_id",
+        "installation_id",
+        "machine_id",
+        "skill_id",
+        "skill_name",
+        "skill_version",
+        "channel",
+        "client_occurred_at",
+        "is_test"
+      ],
+      "success_status": 204,
+      "installation_id": "按技能/安装独立规范小写随机UUIDv4",
+      "machine_id": "自家技能之间共享的规范小写随机UUIDv4，不读取硬件指纹",
+      "success_persistence": "HTTP204确认后本地记已上报，每安装一次；2秒预算、不自动重试，失败不阻塞业务",
+      "account_link": "在已有合法账户关联时接入安装与机器标识，保持既有身份与鉴权",
+      "disclosure": "匿名随机安装/机器标识仅用于首次互动与安装关联；提供关闭开关，不传消息正文、照片、路径或凭证"
+    },
+    "activation_gate": "未来服务端另行实现、隔离测试并按部署关口上线，取得兼容证据后由新版客户端启用；首版不得发送或验收9字段/204。"
   }
 }
