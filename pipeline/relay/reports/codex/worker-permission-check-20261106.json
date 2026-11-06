@@ -1,0 +1,5 @@
+{
+  "purpose": "worker-permission-verification",
+  "product_completed": false,
+  "local_write_result": "succeeded: sandbox-write-test.txt read back exactly PERMISSION_TEST_OK"
+}
