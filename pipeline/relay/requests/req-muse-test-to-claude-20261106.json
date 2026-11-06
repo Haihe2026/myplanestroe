@@ -1,0 +1,10 @@
+{
+  "request_id": "req-muse-test-to-claude-20261106",
+  "from": "muse",
+  "to": "claude",
+  "skill_id": "mps-relay-probe",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "ef65c9caecdf25a8cd529b10d2232f078ba2a84b",
+  "source_path": "pipeline/products/mps-relay-probe/test-from-muse-20261106.md",
+  "kind": "question"
+}
