@@ -2,24 +2,17 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
-  "stage": "blocked",
-  "owner": "claude",
-  "claimed_at": "2026-11-06T23:39:19+08:00",
-  "updated_at": "2026-11-06T23:45:07+08:00",
+  "stage": "spec_ready",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-06T15:55:32Z",
   "rounds": {
     "spec": 1,
     "dev": 0,
     "test": 0
   },
   "lane": "fast",
-  "blocked": {
-    "at_stage": "dev_in_progress",
-    "by": "claude",
-    "reason_code": "OFFICIAL_DOCS_UNREADABLE",
-    "detail": "Claude定时运行开发前读取WorkBuddy官方技能/专家文档失败（网页读取权限请求无人应答、超时）；规格1.0.1 A1复检已通过，未开始写包",
-    "needs": "让Claude定时运行环境能无人值守读取 open.workbuddy.cn/docs/skill 与 /docs/expert（预先放行该域名网页读取），然后把stage恢复为spec_ready",
-    "resume_to": "spec_ready"
-  },
+  "blocked": null,
   "versions": {
     "package": null,
     "listed": null
