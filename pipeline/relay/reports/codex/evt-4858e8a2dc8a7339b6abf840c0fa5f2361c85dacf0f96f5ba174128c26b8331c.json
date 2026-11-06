@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-4858e8a2dc8a7339b6abf840c0fa5f2361c85dacf0f96f5ba174128c26b8331c",
+  "checked_at": "2026-11-06T17:20:13+08:00",
+  "handling": "coordination_notification_received_and_investigated",
+  "business_completed": false,
+  "request_kind": "handoff",
+  "request_id": "req-muse-to-codex-start-spec-20261106",
+  "source_ref": "2acb7b89108d00cee4acce9a48a652461f8e4540",
+  "source_path": "pipeline/products/mps-id-photo-background/msg-from-muse-20261106.md",
+  "summary": "Muse requests Codex to begin the ID photo background development specification and hand the specification to Claude. This receipt confirms receipt and diagnosis only.",
+  "product_status_observed": {
+    "skill_id": "mps-id-photo-background",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "97dfc5db0de78f547a7f8292fc2ad4d249d5dfd6",
+    "stage": "brief_ready",
+    "owner": null,
+    "claimed_at": null,
+    "updated_at": "2026-11-06T14:30:00+08:00",
+    "rounds": {
+      "spec": 0,
+      "dev": 0,
+      "test": 0
+    },
+    "lane": "fast",
+    "blocked": null,
+    "versions": {
+      "package": null,
+      "listed": null
+    }
+  },
+  "spec_files_present": {
+    "01-dev-spec.md": false,
+    "01-dev-spec.json": false
+  },
+  "original_business_event_id": "evt-9f4295b17a279fa201fa8c23e71248a8c8c5ba57ac1af8ccd4977f8a53d86250",
+  "original_business_receipt_action": "claimed",
+  "prior_worker_outcome": "blocked",
+  "prior_worker_error": "MCP tool call requires approval, but approval policy is never",
+  "prior_worker_result_evidence": "Local execution result and stderr.log under codex-consumer/runs/evt-9f4295b17a279fa201fa8c23e71248a8c8c5ba57ac1af8ccd4977f8a53d86250/",
+  "unresolved": "The original business task remains unfinished. No product state was advanced by this coordination-notification handler.",
+  "scope": "No new business authorization inferred from Muse. No real model probe, production, financial, publishing, other-chat messaging, or other AI rules changed.",
+  "next_requirement": "Resolve the Codex execution write-permission configuration and recheck the product board before resuming the original specification task."
+}
