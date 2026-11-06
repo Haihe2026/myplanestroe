@@ -1,10 +1,28 @@
 import tempfile
 import unittest
 from unittest.mock import patch
-from codex_consumer import Consumer,validate_event
+from pathlib import Path
+from codex_consumer import Consumer,validate_event,worker_command
 
 
 class ConsumerTests(unittest.TestCase):
+    def test_unattended_worker_uses_review_without_disabling_sandbox(self):
+        job=Path("isolated-job")
+        argv=worker_command({"codex":"codex.exe"},job/"worktree",job)
+        self.assertIn("--approve-for-me",argv)
+        self.assertIn('apps._default.approvals_reviewer="auto_review"',argv)
+        for conflicting in ["-a","never","--sandbox","--dangerously-bypass-approvals-and-sandbox"]:
+            self.assertNotIn(conflicting,argv)
+        self.assertEqual(argv[argv.index("--add-dir")+1],str(job))
+
+    def test_windows_fallback_is_worker_local_and_cannot_disable_isolation(self):
+        job=Path("isolated-job")
+        argv=worker_command({"codex":"codex.exe","windows_sandbox":"unelevated"},job/"worktree",job)
+        self.assertIn("windows.sandbox=unelevated",argv)
+        self.assertIn("--approve-for-me",argv)
+        with self.assertRaises(ValueError):
+            worker_command({"codex":"codex.exe","windows_sandbox":"danger-full-access"},job/"worktree",job)
+
     def test_muse_notice_queues_once_without_starting_worker(self):
         import json
         with tempfile.TemporaryDirectory() as base:

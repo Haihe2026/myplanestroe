@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-11-06T19:50:56+08:00",
+  "scope": "codex_worker_permissions_only",
+  "approval": "on-request with automatic reviewer",
+  "sandbox": "workspace-write",
+  "windows_sandbox": "unelevated",
+  "global_codex_configuration_changed": false,
+  "helper_directory_acl_restored": true,
+  "unit_tests_passed": 28,
+  "independent_worker_result": {
+    "outcome": "completed",
+    "evidence_ref": "947aee386f1b6cc795f06b0a639c0b220329ce0f:pipeline/relay/reports/codex/worker-permission-check-20261106.json",
+    "reason": "Local write and exact read-back succeeded. GitHub update_file succeeded on main; fresh read-back matched the JSON and returned blob SHA."
+  },
+  "sandbox_direct_tests": {
+    "workspace_write": "passed",
+    "outside_workspace_write": "denied",
+    "outside_file_created": false
+  },
+  "business_completed": false,
+  "original_business_event": "evt-9f4295b17a279fa201fa8c23e71248a8c8c5ba57ac1af8ccd4977f8a53d86250",
+  "original_business_task_retried": false,
+  "other_ai_rules_changed": false,
+  "periodic_ai_monitoring_enabled": false,
+  "limitations": [
+    "Unelevated fallback has weaker network isolation than the elevated sandbox.",
+    "Original unfinished product work requires reconciliation before retry."
+  ]
+}

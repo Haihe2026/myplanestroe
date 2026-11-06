@@ -19,6 +19,22 @@ REF_RE = re.compile(r"[a-f0-9]{40}\Z")
 EVIDENCE_RE = re.compile(r"([a-f0-9]{40}):(.+)\Z")
 
 
+def worker_command(settings, worktree, job):
+    # Automatic review can approve authorized writes without an unattended prompt.
+    # Keep workspace isolation; never replace this with unrestricted/yolo mode.
+    argv = [settings["codex"], "--search", "exec", "--approve-for-me",
+            "-c", 'apps._default.approvals_reviewer="auto_review"',
+            "-C", str(worktree), "--add-dir", str(job),
+            "--output-schema", str(job/"result.schema.json"),
+            "-o", str(job/"result.json"), "-"]
+    implementation = settings.get("windows_sandbox")
+    if implementation is not None:
+        if implementation not in {"elevated", "unelevated", "mxc"}:
+            raise ValueError("unsupported Windows sandbox implementation")
+        argv[1:1] = ["-c", "windows.sandbox="+implementation]
+    return argv
+
+
 def validate_event(event, filename, repo):
     if not EVENT_RE.fullmatch(event.get("event_id", "")) or filename != event["event_id"] + ".json":
         raise ValueError("event identity mismatch")
@@ -135,9 +151,7 @@ class Consumer:
             "只有真实提交结果后才能outcome=completed，并给完整commit:path证据；缺权限或能力则blocked，保留证据，不能猜测完成。"
             "不要变更全局模型、认证、共享层或其他AI环境。\n输入通知：\n"+json.dumps(event,ensure_ascii=False))
         (job/"prompt.txt").write_text(prompt, encoding="utf-8")
-        argv = [settings["codex"], "--search", "-a", "never", "exec", "-C", str(worktree),
-                "--sandbox", "workspace-write", "--output-schema", str(job/"result.schema.json"),
-                "-o", str(result_file), "-"]
+        argv = worker_command(settings, worktree, job)
         with open(job/"stdout.log","wb") as stdout, open(job/"stderr.log","wb") as stderr:
             process = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=stdout, stderr=stderr,
                                        env=child_env(self.cfg), cwd=worktree,
