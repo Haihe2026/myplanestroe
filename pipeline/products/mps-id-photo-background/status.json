@@ -1,0 +1,13 @@
+{
+  "skill_id": "mps-id-photo-background",
+  "sop": "sop-image-gen-skill-auto",
+  "sop_version": "97dfc5db0de78f547a7f8292fc2ad4d249d5dfd6",
+  "stage": "brief_ready",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-06T14:30:00+08:00",
+  "rounds": { "spec": 0, "dev": 0, "test": 0 },
+  "lane": "fast",
+  "blocked": null,
+  "versions": { "package": null, "listed": null }
+}
