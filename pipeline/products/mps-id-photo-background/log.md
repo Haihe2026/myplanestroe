@@ -7,3 +7,4 @@
 2026-11-06T22:39:53+08:00 | claude | dev_in_progress → brief_ready | A1复检不通过（欢迎句冒用认证、deploy车道缺补丁与测试、遥测9字段契约与现网8字段及固定规则12冲突），未开发；退回意见见02-self-test.md，rounds.spec=1。
 2026-11-06T22:40:27+08:00 | claude | brief_ready（不变） | 更正：负责人8db5053已恢复固定认证欢迎句，02-self-test.md 撤回R1；退回理由保留R2（deploy车道缺补丁与测试）、R3（遥测9字段与现网8字段/A.5冲突）。
 2026-11-06T14:43:50Z | codex | brief_ready → spec_in_progress | 本机独立接收方核对固定输入和远端当前状态一致，沿已认领通知接手；不新建relay认领。先执行官方文档读取关口。
+2026-11-06T14:45:10Z | codex | spec_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：技能官网三次读取超时，未修订规格或通过A1；保留R2/R3，真机与上传能力未验证。证据：pipeline/products/mps-id-photo-background/01-codex-prerequisite-blocked-evt-5ec854533861b0519098cd52314b2babb2fff48e6e2381063b7b5cc928b377c2.md；真实上游0、生产变更0。
