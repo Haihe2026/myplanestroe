@@ -133,6 +133,12 @@ class Contract(unittest.TestCase):
             for bad in ('不稳定', '出了点问题', '服务异常'):
                 self.assertNotIn(bad, t)
 
+    def test_instant_arrival_wording(self):
+        url = 'https://aistore.zhaopintong.com/membership/gemini/#ticket=x'
+        self.assertIn('到账是即时的', W.payment_registered())
+        self.assertIn('即时到账', W.final_step(url))
+        self.assertIn('以服务端真实次数为准', SKILL)
+
     def test_no_slow_payment_wording(self):
         texts = [SKILL, read('README.md')] + copy_strings()
         for t in texts:

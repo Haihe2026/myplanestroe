@@ -1,5 +1,12 @@
 # 自测报告：mps-id-photo-background 1.0.0
 
+> **2026-11-07T00:19:43+08:00 更新：负责人要求下面两项完成后才能打包放进仓库，ZIP 已撤出 `02-package/dist/`（git 历史提交 aab2a9f 仍可取回）。**
+> 1. 10 张示例图改用仓库登记的生图资源真实生成：Claude 没有生图凭证，做不了，已请 Codex 在服务端生成并提交（`msg-from-claude-20261107-dependencies.md`）。
+> 2. 消费记录、提交工单、查工单接现有接口：`gemini` 产品没有这三个客户端接口（`/enterprise-history`、`/feedback` 只对 Temu 开放，没有查工单接口），已请 Codex 按 deploy 车道补上。
+> 3. 到账口径：已按负责人指示改为「即时到账」（`payment_registered`、`final_step`），契约测试新增 `test_instant_arrival_wording` 锁定。改后契约 17/17、端到端 39/39 通过（本机）。
+> 另按 Codex 03-test-report 的环境问题修了测试夹具：`idphoto.STATE_HOME` 隔离状态目录、`os.geteuid` 在 Windows 上跳过、`MPS_E2E_TMP` 可指定可写临时目录。
+> 以下为 1.0.0 首次自测原文；ZIP 哈希等信息对应已撤出的那一版。
+
 - 角色：Claude Code；时间：2026-11-07（北京时间）
 - 已读 WorkBuddy 官方文档：2026-11-07 00:00 前后（北京时间）在线读取 https://open.workbuddy.cn/docs/skill （HTTP 200）、https://open.workbuddy.cn/docs/expert （HTTP 200）。技能页规定：目录为 `{skill-name}/SKILL.md`（必须）+ `references/`、`scripts/`、`templates/`（可选）；frontmatter 必填 name、display_name、display_name_en、description、description_zh、description_en、version、author，可选 allowed-tools、examples_zh、examples_en。技能页没写字段长度、ZIP 规则、图标要求和审核规则。
 - 依据开发文档：规格 1.0.1，`01-dev-spec.md` / `01-dev-spec.json`（提交 bf7d282a3dc834818d9347650dbbf9150f38536e）；SOP 提交 3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad。
@@ -80,7 +87,6 @@ python3 dev/e2e_check.py --package <干净解压后的 mps-id-photo-background �
 | 消费记录、工单 | 只提供查剩余次数；反馈如实说暂时不能提交 | 规格第 6 节未列消费记录/工单接口，不杜撰；SOP 第 6 节要求已追加 sop-proposals |
 | 大图分段下载、内联补取 | 不实现；下载失败保留原任务，用户说「继续」再取 | 规格第 6 节：不杜撰 inline_delivery；服务端只返回图片二进制 |
 | 低余额提醒 | 不实现 | 服务端未返回低余额标记，不自行设阈值 |
-| 「即时到账」 | 不说即时，改为「到账以系统核实后的次数为准」 | 当前收款为 manual_qr（规格 5.1），SOP 只在有实时监控时允许说即时；取保守写法 |
 | 计费前拒绝等待重试 | 0 次（429 直接保留任务，用户说继续再用原键提交） | 规格 timeouts `rate_limit_wait_s=0` |
 | 本次扣费 | 只报服务端返回的剩余次数，本次扣费写「以服务记录为准」 | 服务端成功返回不含本次扣费字段，禁止自行计算 |
 | 老用户余额用完 | 本机交付过一次后，quick-entry 返回 checkout 时先问再给链接 | SOP「任务中途余额不足先问」；首次开通仍按「最后一步」直接给链接 |

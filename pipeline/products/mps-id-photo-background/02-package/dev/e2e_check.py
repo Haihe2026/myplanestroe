@@ -39,11 +39,12 @@ def jpeg_bytes(w=600, h=800):
 
 class Base(unittest.TestCase):
     def setUp(self):
-        self.tmp = tempfile.mkdtemp()
+        self.tmp = tempfile.mkdtemp(dir=os.environ.get('MPS_E2E_TMP'))  # 可指定可写目录
         self.home = os.path.join(self.tmp, 'home')
         os.makedirs(self.home)
         self.env = dict(os.environ)
         os.environ['HOME'] = self.home
+        idphoto.STATE_HOME = self.home  # 不依赖 HOME/USERPROFILE，Windows 同样隔离
         os.environ['MPS_ID_PHOTO_TEST'] = '1'
         os.environ.pop('MPS_ID_PHOTO_JOURNEY', None)
         self.mock = mock_backend.Mock()
@@ -61,6 +62,7 @@ class Base(unittest.TestCase):
 
     def tearDown(self):
         idphoto.time.sleep = self._sleep
+        idphoto.STATE_HOME = None
         os.environ.clear()
         os.environ.update(self.env)
         shutil.rmtree(self.tmp)
@@ -447,7 +449,7 @@ class Telemetry(Base):
         self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
         self.assertEqual(len(self.mock.telemetry_calls), 1)
         os.remove(os.path.join(d, 'first-dialogue.json'))
-        if os.geteuid() != 0:
+        if hasattr(os, 'geteuid') and os.geteuid() != 0:
             os.chmod(d, 0o500)
             try:
                 code, s, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '你好')

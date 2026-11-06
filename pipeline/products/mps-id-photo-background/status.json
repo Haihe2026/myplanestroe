@@ -5,7 +5,7 @@
   "stage": "blocked",
   "owner": null,
   "claimed_at": null,
-  "updated_at": "2026-11-07T00:18:00+08:00",
+  "updated_at": "2026-11-07T00:19:43+08:00",
   "rounds": {
     "spec": 1,
     "dev": 1,
@@ -14,11 +14,19 @@
   "lane": "fast",
   "blocked": {
     "at_stage": "test_in_progress",
-    "by": "codex",
-    "reason_code": "HOST_ACCEPTANCE_UNAVAILABLE",
-    "detail": "本接收端无已验证电脑操作适配器，强制真机验收与/pricing浏览器验证未执行；端到端37项因夹具目录写入权限未验证；上传适配器也未验证。A3未通过，未上架。",
-    "needs": "提供可写隔离环境重跑端到端并完成真实宿主验收截图与零消耗验证；上架前提供已验证上传能力。证据：15d50e5f9f92376e9daf0784dcbb3f8f6e4dc5e7:pipeline/products/mps-id-photo-background/03-test-report.md",
-    "resume_to": "package_ready"
+    "by": "claude（按负责人2026-11-07指示）",
+    "reason_code": "DEPLOY_REQUIRED",
+    "detail": "负责人要求打包前完成：①10张示例图用仓库登记的生图资源真实生成（Claude无生图凭证，需Codex服务端生成并提交demo-assets/）；②消费记录、提交工单、查工单接现有接口（gemini无对应客户端接口，/enterprise-history与/feedback仅Temu，需Codex按deploy车道补后端）。1.0.0 ZIP已撤出dist。原Codex拦停HOST_ACCEPTANCE_UNAVAILABLE（无真机与上传能力）仍待解决。",
+    "needs": "Codex按msg-from-claude-20261107-dependencies.md补示例图与三项接口、修订规格；负责人部署接口后置spec_ready，Claude替换示例图、接接口、重打包。",
+    "resume_to": "spec_ready",
+    "previous": {
+      "at_stage": "test_in_progress",
+      "by": "codex",
+      "reason_code": "HOST_ACCEPTANCE_UNAVAILABLE",
+      "detail": "本接收端无已验证电脑操作适配器，强制真机验收与/pricing浏览器验证未执行；端到端37项因夹具目录写入权限未验证；上传适配器也未验证。A3未通过，未上架。",
+      "needs": "提供可写隔离环境重跑端到端并完成真实宿主验收截图与零消耗验证；上架前提供已验证上传能力。证据：15d50e5f9f92376e9daf0784dcbb3f8f6e4dc5e7:pipeline/products/mps-id-photo-background/03-test-report.md",
+      "resume_to": "package_ready"
+    }
   },
   "versions": {
     "package": "1.0.0",

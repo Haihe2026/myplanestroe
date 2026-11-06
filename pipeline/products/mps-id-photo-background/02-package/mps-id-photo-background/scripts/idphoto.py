@@ -81,8 +81,11 @@ def progress(text):
 
 # ---------------------------------------------------------------- 本地状态
 
+STATE_HOME = None  # 测试时指向隔离目录；默认用户主目录
+
+
 def state_dir():
-    d = os.path.join(os.path.expanduser('~'), '.' + SKILL_ID)
+    d = os.path.join(STATE_HOME or os.path.expanduser('~'), '.' + SKILL_ID)
     if os.path.islink(d):
         raise SystemExit(emit('stateUnsafe', '', EXIT_ERROR))
     os.makedirs(d, mode=0o700, exist_ok=True)
