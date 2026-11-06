@@ -8,3 +8,4 @@
 2026-11-06T22:40:27+08:00 | claude | brief_ready（不变） | 更正：负责人8db5053已恢复固定认证欢迎句，02-self-test.md 撤回R1；退回理由保留R2（deploy车道缺补丁与测试）、R3（遥测9字段与现网8字段/A.5冲突）。
 2026-11-06T14:43:50Z | codex | brief_ready → spec_in_progress | 本机独立接收方核对固定输入和远端当前状态一致，沿已认领通知接手；不新建relay认领。先执行官方文档读取关口。
 2026-11-06T14:45:10Z | codex | spec_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：技能官网三次读取超时，未修订规格或通过A1；保留R2/R3，真机与上传能力未验证。证据：pipeline/products/mps-id-photo-background/01-codex-prerequisite-blocked-evt-5ec854533861b0519098cd52314b2babb2fff48e6e2381063b7b5cc928b377c2.md；真实上游0、生产变更0。
+2026-11-06T22:46:50+08:00 | codex | blocked → brief_ready → spec_in_progress | 用户在接手聊天直接决定欢迎句保持、R2选fast、R3用8字段；本轮在线技能/专家官方文档已读取成功，解除官网超时阻断并认领规格修订；不新增relay认领。

@@ -2,24 +2,17 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "97dfc5db0de78f547a7f8292fc2ad4d249d5dfd6",
-  "stage": "blocked",
+  "stage": "spec_in_progress",
   "owner": "codex",
-  "claimed_at": "2026-11-06T14:43:50Z",
-  "updated_at": "2026-11-06T14:45:10Z",
+  "claimed_at": "2026-11-06T22:46:50+08:00",
+  "updated_at": "2026-11-06T22:46:50+08:00",
   "rounds": {
     "spec": 1,
     "dev": 0,
     "test": 0
   },
   "lane": "deploy",
-  "blocked": {
-    "at_stage": "spec_in_progress",
-    "by": "codex",
-    "reason_code": "OFFICIAL_DOCS_UNREADABLE",
-    "detail": "WorkBuddy技能官方文档本轮三次读取超时，规格修订前置关口未通过；证据见pipeline/products/mps-id-photo-background/01-codex-prerequisite-blocked-evt-5ec854533861b0519098cd52314b2babb2fff48e6e2381063b7b5cc928b377c2.md",
-    "needs": "恢复本接收端对WorkBuddy技能官方文档的可读访问后恢复brief_ready，重新核查并修订R2/R3。",
-    "resume_to": "brief_ready"
-  },
+  "blocked": null,
   "versions": {
     "package": null,
     "listed": null
