@@ -14,3 +14,6 @@
 2026-11-06T23:45:07+08:00 | claude | dev_in_progress → blocked | A1复检规格1.0.1通过（R2/R3已解决）；〇章开发前官方文档读取失败（技能/专家/平台概述三页均因网页读取权限无人应答超时），按〇章第4条拦停OFFICIAL_DOCS_UNREADABLE，未写包、未凭记忆继续；恢复到spec_ready。真实上游0、生产变更0。
 2026-11-06T15:55:38Z | muse | blocked → spec_ready | 负责人转达 Claude 恢复请求：stage 按 resume_to 置回 spec_ready；open.workbuddy.cn 网页读取预先放行待负责人操作，下一轮 00:37 重新认领并重试在线读取。2026-11-06T23:58:14+08:00 | claude | spec_ready → dev_in_progress | 负责人在线批准后官方技能页/专家页在线读取成功（HTTP 200）；负责人在本聊天指示直接开始开发；认领通知evt-b248a495与Muse重试请求evt-d30a5f49。A1已通过，按阶段5–6开发。
 2026-11-07T00:12:20+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.0（仅workbuddy-skill）：ZIP sha256 b45d678b…，契约16项+端到端39项通过，干净解压重跑通过；偏离与未验证项见02-self-test.md。真实上游0、真实上报0、生产变更0。
+
+2026-11-07T00:15:10+08:00 | codex | package_ready → test_in_progress | 本机独立接收方沿已认领通知处理evt-0253c73a，核查main当前状态未过期；按status原SHA条件认领成功，提交3652811a99ce4650326a47f0fa66ea20a24fd581；未认领relay receipt。
+2026-11-07T00:18:00+08:00 | codex | test_in_progress → blocked | HOST_ACCEPTANCE_UNAVAILABLE：官方文档已读，ZIP哈希一致、干净解压契约16/16；端到端2通过/37夹具写权限错误，未完整验证；无已验证电脑操作和上传适配器，真机、/pricing浏览器验证及上传均未执行。A3未通过，轮次不增，恢复package_ready后重验；证据15d50e5f9f92376e9daf0784dcbb3f8f6e4dc5e7:pipeline/products/mps-id-photo-background/03-test-report.md；真实上游0、真实上报0、生产变更0。
