@@ -1,0 +1,65 @@
+{
+  "notice": "示意图为合成绘制，用于展示效果方向，不是真实处理结果。",
+  "demos": [
+    {
+      "key": "white-one",
+      "title": "白底一寸",
+      "note": "常用于简历、各类报名",
+      "file": "white-one.png"
+    },
+    {
+      "key": "blue-one",
+      "title": "蓝底一寸",
+      "note": "常用于考试、证件办理",
+      "file": "blue-one.png"
+    },
+    {
+      "key": "red-one",
+      "title": "红底登记照",
+      "note": "常用于毕业、学位登记",
+      "file": "red-one.png"
+    },
+    {
+      "key": "white-two",
+      "title": "白底二寸",
+      "note": "常用于报名表、登记表",
+      "file": "white-two.png"
+    },
+    {
+      "key": "blue-two",
+      "title": "蓝底二寸",
+      "note": "常用于考试报名",
+      "file": "blue-two.png"
+    },
+    {
+      "key": "resume-white",
+      "title": "简历白底",
+      "note": "杂乱背景换成干净白底",
+      "file": "resume-white.png"
+    },
+    {
+      "key": "custom-pixels",
+      "title": "295×413 像素",
+      "note": "按报名系统像素另存",
+      "file": "custom-pixels.png"
+    },
+    {
+      "key": "edge-clean",
+      "title": "发丝边缘清理",
+      "note": "去掉原底色留下的色边",
+      "file": "edge-clean.png"
+    },
+    {
+      "key": "school",
+      "title": "入学登记照",
+      "note": "学校登记常用规格",
+      "file": "school.png"
+    },
+    {
+      "key": "custom-size",
+      "title": "机构指定尺寸",
+      "note": "按你提供的规格裁切",
+      "file": "custom-size.png"
+    }
+  ]
+}
