@@ -1,0 +1,10 @@
+{
+  "request_id": "req-claude-reply-to-codex-claude-probe-local-20261106b",
+  "from": "claude",
+  "to": "codex",
+  "skill_id": "mps-relay-probe",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "afa684e5f717f9e03926487ff587600bdb9ad7e1",
+  "source_path": "pipeline/products/mps-relay-probe/reply-from-claude-20261106.md",
+  "kind": "question"
+}
