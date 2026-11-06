@@ -1,0 +1,1 @@
+/opt/skill-platform/member-0.10.56/run_shared.py

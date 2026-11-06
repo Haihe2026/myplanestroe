@@ -1,0 +1,10 @@
+{
+  "image_adapter": "snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py",
+  "transport": "snapshot/opt/skill-platform/member-0.10.57/safe_http.py",
+  "new_resource_policy": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new-only-policy.json",
+  "old_resource_disabled": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+  "asset_registry": "snapshot/opt/skill-platform/member-0.10.52/asset_registry.py",
+  "cost_capture": "snapshot/opt/skill-platform/provider-costs-20261105/usage_capture.py",
+  "cost_ledger": "snapshot/opt/skill-platform/provider-costs-20261105/cost_store.py",
+  "catalog": "resources/upstreams/catalog.json"
+}

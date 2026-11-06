@@ -1,0 +1,33 @@
+{
+  "verified_on": "2026-11-06",
+  "client_unit_tests": {
+    "passed": 12,
+    "provider": "MockHTTP"
+  },
+  "synthetic_chain": {
+    "synthetic_service_chain": ".60 -> .59 -> .58 -> older layers",
+    "sdk_binding": true,
+    "single_charge": true,
+    "same_idempotency_task": true,
+    "query_and_png_download": true,
+    "mock_provider_posts": 1,
+    "real_provider_calls": 0,
+    "production_customer_credentials_used": false,
+    "wechat_oauth_not_exercised": true
+  },
+  "public_http": {
+    "health": 200,
+    "plans": 200,
+    "anonymous_balance": 401,
+    "anonymous_jobs": 401,
+    "sdk_readonly_health": "passed"
+  },
+  "not_verified": [
+    "live_wechat_oauth",
+    "real_payment_confirmation",
+    "live_model_output",
+    "all_skill_hosts",
+    "standalone_full_current_chain_deployment"
+  ],
+  "production_mutations": 0
+}

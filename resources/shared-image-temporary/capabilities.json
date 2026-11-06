@@ -1,0 +1,33 @@
+{
+  "verified_on": "2026-11-06",
+  "origin": "https://aistore.zhaopintong.com",
+  "api_prefix": "/platform-api/gemini",
+  "observed_health": {
+    "status": "ok",
+    "version": "0.10.14",
+    "shared_wallet": true,
+    "automatic_skill_keys": true,
+    "new_user_uses": 0,
+    "provider_configured": true,
+    "reference_editing": true,
+    "sms_required": false,
+    "image_engines": {
+      "photo-retouch-sunburst": {
+        "configured": true,
+        "reference_editing": true,
+        "text_to_image": false
+      },
+      "gemini-personal-sunburst": {
+        "configured": true,
+        "reference_editing": true,
+        "text_to_image": true
+      }
+    },
+    "image_resource_contract": "all-new-resource-v1"
+  },
+  "actual_image_model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "scope": "public_response_snapshot_not_live_status"
+}

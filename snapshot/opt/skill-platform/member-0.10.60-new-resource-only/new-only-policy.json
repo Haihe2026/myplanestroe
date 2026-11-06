@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "resource": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false
+}

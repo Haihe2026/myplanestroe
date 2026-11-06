@@ -1,0 +1,38 @@
+{
+  "version": "2026-10-08",
+  "source": "用户提供的行业岗位表；视觉规则为推荐预设，不是行业强制规范",
+  "industries": {
+    "internet": "互联网/软件", "advertising": "广告传媒", "manufacturing": "制造业",
+    "textile": "纺织行业", "printing": "印刷行业", "retail": "零售/电商",
+    "education": "教育培训", "finance": "金融行业", "construction": "建筑工程",
+    "medical": "医疗（非临床）", "logistics": "物流供应链"
+  },
+  "roles": {
+    "media": {"name": "新媒体运营", "industry": "internet", "reviewer": "市场经理", "scenes": ["公众号封面", "短视频封面", "PPT配图", "活动海报"], "guidance": "现代清晰的信息层级，按发布渠道构图；风格依主题和品牌决定，不默认固定配色。"},
+    "hr": {"name": "HR专员", "industry": "internet", "reviewer": "HR经理", "scenes": ["招聘海报", "入职PPT配图", "团建配图", "制度插图"], "guidance": "柔和商务，人物自然亲和，信息清楚；薪酬、日期、地点只用已确认资料。"},
+    "admin": {"name": "行政前台", "industry": "internet", "reviewer": "行政主管", "scenes": ["访客指引", "会议室配图", "办公环境宣传", "年会物料"], "guidance": "简洁易读、空间清楚、自然光，优先通知和指引信息；不编造真实办公环境。"},
+    "sales": {"name": "销售专员", "industry": "internet", "reviewer": "销售主管", "scenes": ["客户拜访配图", "业绩PPT配图", "销售方案配图"], "guidance": "专业商务、客户问题与方案清楚，不编造业绩、客户背书和合作关系。"},
+    "product": {"name": "产品策划", "industry": "internet", "reviewer": "产品经理", "scenes": ["产品概念配图", "方案PPT配图", "用户场景示意"], "guidance": "简洁理性、结构与留白清楚；概念图标为示意，不冒充真实UI或已实现功能。"},
+    "developer": {"name": "程序员/开发", "industry": "internet", "reviewer": "技术主管", "scenes": ["技术汇报配图", "架构示意", "团队工作配图"], "guidance": "克制科技风、清晰结构；架构连接与技术数据需确定性绘制，不由生图模型猜测。"},
+    "designer": {"name": "平面设计师", "industry": "advertising", "reviewer": "创意总监", "scenes": ["品牌KV", "海报", "包装概念", "宣传物料"], "guidance": "按品牌和创意简报确定色彩、构图与视觉层次；可探索大胆方案，包装图只能标概念，字体版权单独核验。"},
+    "copywriter": {"name": "文案策划", "industry": "advertising", "reviewer": "项目总监", "scenes": ["提案PPT配图", "短视频脚本配图", "活动视觉方案"], "guidance": "画面支持文案主题和故事，不为氛围牺牲信息；精确文字需确定性排版。"},
+    "production_clerk": {"name": "生产文员", "industry": "manufacturing", "reviewer": "生产主管", "scenes": ["生产日报配图", "车间培训配图", "安全宣传", "流程示意"], "guidance": "工业清晰写实，仅制作标为示意的培训素材；生产数据和安全步骤来自确认资料，不伪造车间记录。"},
+    "qc": {"name": "品质QC", "industry": "manufacturing", "reviewer": "品质经理", "scenes": ["质检培训配图", "质量看板", "检验示意"], "guidance": "严谨客观，问题点可辨认；不能生成照片冒充质检记录或检验结果，真实证据需原始素材。"},
+    "process_engineer": {"name": "工艺工程师", "industry": "manufacturing", "reviewer": "生产经理", "scenes": ["工艺示意", "产线改造概念", "设备演示配图"], "guidance": "工程结构清楚，机械材质合理；流程、尺寸和设备原理不靠模型猜测，概念须标示。"},
+    "fabric_merchandiser": {"name": "面料跟单", "industry": "textile", "reviewer": "业务主管", "scenes": ["面料样品配图", "产品画册", "展会宣传"], "guidance": "柔和自然光、突出布料纹理；样品颜色和材质须参考实物，不把生成纹理作为真实样品证明。"},
+    "pattern_designer": {"name": "花型设计师", "industry": "textile", "reviewer": "设计主管", "scenes": ["面料花稿概念", "印花图案", "服装效果图"], "guidance": "纺织审美、细腻纹理、配色服从简报；循环接版和可生产尺寸需专用工具验证，不保证生图直接生产。"},
+    "print_layout": {"name": "印前排版专员", "industry": "printing", "reviewer": "印刷车间主管", "scenes": ["画册排版示意", "包装打样概念", "印刷工艺展示"], "guidance": "纸张与工艺表现清楚，版面层级明确；CMYK、出血、刀线和字体须确定性输出核验，不宣称提示词等于印刷标准。"},
+    "ecommerce": {"name": "电商运营", "industry": "retail", "reviewer": "运营主管", "scenes": ["商品场景图", "详情配图", "店铺横幅", "活动海报"], "guidance": "按平台和图片位置匹配构图，保留真实商品信息；不默认低价感或固定红黄橙金配色，不虚构配件、价格和销量。"},
+    "customer_service": {"name": "客服专员", "industry": "retail", "reviewer": "客服主管", "scenes": ["客服培训配图", "服务流程插图", "售后宣传"], "guidance": "亲和清楚、信息易理解；服务承诺和流程来自用户确认，不自行增加赔付保证。"},
+    "course_consultant": {"name": "课程顾问", "industry": "education", "reviewer": "销售主管", "scenes": ["课程海报", "招生配图", "课件插图"], "guidance": "明亮教育风，课程主题与对象明确；不捏造名师背书、考试通过率或升学保证。"},
+    "teaching_admin": {"name": "教务老师", "industry": "education", "reviewer": "教务主任", "scenes": ["排课配图", "学员活动示意", "培训课件插图"], "guidance": "干净稳重、时间信息清楚；不编造真实学员照片或活动记录，未成年人素材需授权。"},
+    "financial_adviser": {"name": "理财专员", "industry": "finance", "reviewer": "理财经理", "scenes": ["客户宣讲配图", "金融科普插图", "理财PPT配图"], "guidance": "稳重克制，金融信息可信；不编造收益曲线、收益保证和专业建议，图表只用确认数据。"},
+    "risk_control": {"name": "风控专员", "industry": "finance", "reviewer": "风控主管", "scenes": ["风险报告配图", "风险培训示意", "制度配图"], "guidance": "严谨理性、风险层级清楚；不据虚构数据作判断，不用装饰图替代风险模型和分析图表。"},
+    "construction_docs": {"name": "资料员", "industry": "construction", "reviewer": "项目经理", "scenes": ["工程资料配图", "施工流程示意", "项目汇报配图"], "guidance": "工程信息清楚，概念与真实记录区分；禁止伪造施工现场照片、签章或验收证据。"},
+    "cost_estimator": {"name": "造价员", "industry": "construction", "reviewer": "造价主管", "scenes": ["造价汇报配图", "工程概念示意"], "guidance": "工程线稿和实景意象克制；不编造工程量、价格、尺寸或计算结果，图表需确认数据。"},
+    "medical_admin": {"name": "行政医务专员", "industry": "medical", "reviewer": "医务科主任", "scenes": ["院内通知配图", "培训PPT配图", "行政宣传插图"], "guidance": "干净明亮、非临床行政用途；不生成虚假医疗证明、患者记录或未经核验的诊疗图解。"},
+    "warehouse_clerk": {"name": "仓储文员", "industry": "logistics", "reviewer": "仓库主管", "scenes": ["仓储流程示意", "盘点PPT配图", "仓储培训配图"], "guidance": "货架和托盘结构清楚；不伪造仓储现场或库存记录，作业安全步骤需确认。"}
+  },
+  "platforms": {"amazon": "亚马逊", "temu": "Temu", "jd": "京东", "taobao": "淘宝/天猫", "pdd": "拼多多", "general": "其他/通用"},
+  "compatibility_roles": {"operations": "生产/供应链（旧版大类，建议重新选择具体岗位）", "general": "其他办公"}
+}

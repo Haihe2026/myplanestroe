@@ -1,0 +1,30 @@
+{
+  "exported": [
+    "selected_source_code",
+    "public_static_text",
+    "policy_configuration",
+    "entry_script_paths",
+    "whitelisted_asset_metadata",
+    "dated_public_price_catalog",
+    "reference_client",
+    "synthetic_test_code"
+  ],
+  "excluded": [
+    "provider_keys",
+    "credential_values_or_tails",
+    "encrypted_secret_blobs",
+    "encryption_master_keys",
+    "production_databases",
+    "customer_or_task_records",
+    "cookies",
+    "authorization_headers",
+    "real_images",
+    "payment_qr_images",
+    "logs",
+    "environment_files",
+    "raw_capture_transport_bundle",
+    "temporary_signed_third_party_report_urls"
+  ],
+  "html_redaction": "Signed report links replaced by inert fragments in exported copies only. Production unchanged.",
+  "note": "Existing repository files outside this overlay are preserved. No production access or new licensing."
+}

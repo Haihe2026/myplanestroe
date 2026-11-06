@@ -1,0 +1,832 @@
+{
+  "provider": "aisplice",
+  "asset_id": "aisplice-universal",
+  "source": "https://www.aisplice.store/zh/models",
+  "requested_source": "https://www.aisplice.store/catalog",
+  "captured_at": "2026-11-05T02:17:44.070037+00:00",
+  "price_version": "aisplice-public-20261105",
+  "fx_usd_cny": "7",
+  "fx_basis": "运营估算汇率，可配置，非结算汇率",
+  "models": [
+    {
+      "model": "doubao-seedance-2.0",
+      "name": "Seedance 2.0",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".066"
+        },
+        "plus": {
+          "price": ".06402"
+        },
+        "pro": {
+          "price": ".0627"
+        },
+        "max": {
+          "price": ".0594"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "grok-imagine-1.5-video",
+      "name": "Grok Imagine 1.5 Video",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0112"
+        },
+        "plus": {
+          "price": ".010864"
+        },
+        "pro": {
+          "price": ".01064"
+        },
+        "max": {
+          "price": ".01008"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gemini-3-pro-image-preview",
+      "name": "Nano Banana Pro",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".022"
+        },
+        "plus": {
+          "price": ".02134"
+        },
+        "pro": {
+          "price": ".0209"
+        },
+        "max": {
+          "price": ".0198"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-image-2.5-flare",
+      "name": "GPT Image 2.5 Flare",
+      "category": "图片",
+      "unit": "million_tokens",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "input": "5",
+          "output": "30"
+        },
+        "plus": {
+          "input": "4.85",
+          "output": "29.10"
+        },
+        "pro": {
+          "input": "4.75",
+          "output": "28.50"
+        },
+        "max": {
+          "input": "4.50",
+          "output": "27"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-image-2.5-sunburst",
+      "name": "GPT Image 2.5 Sunburst",
+      "category": "图片",
+      "unit": "million_tokens",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "input": "5",
+          "output": "30"
+        },
+        "plus": {
+          "input": "4.85",
+          "output": "29.10"
+        },
+        "pro": {
+          "input": "4.75",
+          "output": "28.50"
+        },
+        "max": {
+          "input": "4.50",
+          "output": "27"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "category": "文本",
+      "unit": "million_tokens",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "input": ".20",
+          "output": "1"
+        },
+        "plus": {
+          "input": ".194",
+          "output": ".97"
+        },
+        "pro": {
+          "input": ".19",
+          "output": ".95"
+        },
+        "max": {
+          "input": ".18",
+          "output": ".90"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "doubao-seedream-5-0-pro",
+      "name": "Seedream 5.0 Pro",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".02925"
+        },
+        "plus": {
+          "price": ".028373"
+        },
+        "pro": {
+          "price": ".027788"
+        },
+        "max": {
+          "price": ".026325"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "suno",
+      "name": "Suno",
+      "category": "音频",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0515"
+        },
+        "plus": {
+          "price": ".049955"
+        },
+        "pro": {
+          "price": ".048925"
+        },
+        "max": {
+          "price": ".04635"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "wan3.0-video-prime",
+      "name": "Wan 3.0 Prime",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".051429"
+        },
+        "plus": {
+          "price": ".049886"
+        },
+        "pro": {
+          "price": ".048857"
+        },
+        "max": {
+          "price": ".046286"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "category": "文本",
+      "unit": "million_tokens",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "input": ".10",
+          "output": ".50"
+        },
+        "plus": {
+          "input": ".097",
+          "output": ".485"
+        },
+        "pro": {
+          "input": ".095",
+          "output": ".475"
+        },
+        "max": {
+          "input": ".09",
+          "output": ".45"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "kling-v3",
+      "name": "Kling V3",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0672"
+        },
+        "plus": {
+          "price": ".065184"
+        },
+        "pro": {
+          "price": ".06384"
+        },
+        "max": {
+          "price": ".06048"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "wan3.0-video",
+      "name": "Wan 3.0",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".032876"
+        },
+        "plus": {
+          "price": ".03189"
+        },
+        "pro": {
+          "price": ".031232"
+        },
+        "max": {
+          "price": ".029588"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "kling-v3-omni",
+      "name": "Kling V3 Omni",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0672"
+        },
+        "plus": {
+          "price": ".065184"
+        },
+        "pro": {
+          "price": ".06384"
+        },
+        "max": {
+          "price": ".06048"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gemini-omni-1.1-flash-ext",
+      "name": "Gemini Omni 1.1 Flash Ext",
+      "category": "视频",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".15"
+        },
+        "plus": {
+          "price": ".1455"
+        },
+        "pro": {
+          "price": ".1425"
+        },
+        "max": {
+          "price": ".135"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "muse-video-ext",
+      "name": "Muse Video Ext",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".024"
+        },
+        "plus": {
+          "price": ".02328"
+        },
+        "pro": {
+          "price": ".0228"
+        },
+        "max": {
+          "price": ".0216"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "tripo-3d",
+      "name": "Tripo 3D",
+      "category": "3D",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".22"
+        },
+        "plus": {
+          "price": ".2134"
+        },
+        "pro": {
+          "price": ".209"
+        },
+        "max": {
+          "price": ".198"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "kling-4.0",
+      "name": "Kling 4.0",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".14"
+        },
+        "plus": {
+          "price": ".1358"
+        },
+        "pro": {
+          "price": ".133"
+        },
+        "max": {
+          "price": ".126"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "veo3.1-fast",
+      "name": "Veo 3.1 Fast",
+      "category": "视频",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".14"
+        },
+        "plus": {
+          "price": ".1358"
+        },
+        "pro": {
+          "price": ".133"
+        },
+        "max": {
+          "price": ".126"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-image-2.5-ext",
+      "name": "GPT Image 2.5 Ext",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0065"
+        },
+        "plus": {
+          "price": ".006305"
+        },
+        "pro": {
+          "price": ".006175"
+        },
+        "max": {
+          "price": ".00585"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gemini-omni-1.1-flash",
+      "name": "Gemini Omni 1.1 Flash",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0296"
+        },
+        "plus": {
+          "price": ".028712"
+        },
+        "pro": {
+          "price": ".02812"
+        },
+        "max": {
+          "price": ".02664"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "grok-imagine-video",
+      "name": "Grok Imagine Video",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".044"
+        },
+        "plus": {
+          "price": ".04268"
+        },
+        "pro": {
+          "price": ".0418"
+        },
+        "max": {
+          "price": ".0396"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "category": "文本",
+      "unit": "million_tokens",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "input": ".20",
+          "output": "1.20"
+        },
+        "plus": {
+          "input": ".194",
+          "output": "1.164"
+        },
+        "pro": {
+          "input": ".19",
+          "output": "1.14"
+        },
+        "max": {
+          "input": ".18",
+          "output": "1.08"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "category": "文本",
+      "unit": "million_tokens",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "input": "1",
+          "output": "5"
+        },
+        "plus": {
+          "input": ".97",
+          "output": "4.85"
+        },
+        "pro": {
+          "input": ".95",
+          "output": "4.75"
+        },
+        "max": {
+          "input": ".90",
+          "output": "4.50"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "doubao-seedance-2.0-fast",
+      "name": "Seedance 2.0 Fast",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".03984"
+        },
+        "plus": {
+          "price": ".038645"
+        },
+        "pro": {
+          "price": ".037848"
+        },
+        "max": {
+          "price": ".035856"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gemini-nano-banana-2.1",
+      "name": "Nano Banana 2.1",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".03"
+        },
+        "plus": {
+          "price": ".0291"
+        },
+        "pro": {
+          "price": ".0285"
+        },
+        "max": {
+          "price": ".027"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-image-2.0-ext-no",
+      "name": "GPT Image 2.0 Ext No",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0065"
+        },
+        "plus": {
+          "price": ".006305"
+        },
+        "pro": {
+          "price": ".006175"
+        },
+        "max": {
+          "price": ".00585"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "category": "文本",
+      "unit": "million_tokens",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "input": ".20",
+          "output": "1"
+        },
+        "plus": {
+          "input": ".194",
+          "output": ".97"
+        },
+        "pro": {
+          "input": ".19",
+          "output": ".95"
+        },
+        "max": {
+          "input": ".18",
+          "output": ".90"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "doubao-seedance-2.0-mini",
+      "name": "Seedance 2.0 Mini",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".018151"
+        },
+        "plus": {
+          "price": ".017606"
+        },
+        "pro": {
+          "price": ".017243"
+        },
+        "max": {
+          "price": ".016336"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gemini-nano-banana-2.1-ext",
+      "name": "Nano Banana 2.1 Ext",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0132"
+        },
+        "plus": {
+          "price": ".012804"
+        },
+        "pro": {
+          "price": ".01254"
+        },
+        "max": {
+          "price": ".01188"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-image-2.5-ext-no",
+      "name": "GPT Image 2.5 Ext No",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0065"
+        },
+        "plus": {
+          "price": ".006305"
+        },
+        "pro": {
+          "price": ".006175"
+        },
+        "max": {
+          "price": ".00585"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gpt-image-2",
+      "name": "GPT Image 2",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0065"
+        },
+        "plus": {
+          "price": ".006305"
+        },
+        "pro": {
+          "price": ".006175"
+        },
+        "max": {
+          "price": ".00585"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "gemini-3.1-flash-lite-image",
+      "name": "Nano Banana 2 Lite",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".009"
+        },
+        "plus": {
+          "price": ".00873"
+        },
+        "pro": {
+          "price": ".00855"
+        },
+        "max": {
+          "price": ".0081"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "doubao-seedance-2.5",
+      "name": "Seedance 2.5",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".09608"
+        },
+        "plus": {
+          "price": ".093198"
+        },
+        "pro": {
+          "price": ".091276"
+        },
+        "max": {
+          "price": ".086472"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "seedream-5-0-flash",
+      "name": "Seedream 5.0 Flash",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".015086"
+        },
+        "plus": {
+          "price": ".014633"
+        },
+        "pro": {
+          "price": ".014332"
+        },
+        "max": {
+          "price": ".013577"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "muse-image-ext",
+      "name": "Muse Image Ext",
+      "category": "图片",
+      "unit": "request",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".0048"
+        },
+        "plus": {
+          "price": ".004656"
+        },
+        "pro": {
+          "price": ".00456"
+        },
+        "max": {
+          "price": ".00432"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    },
+    {
+      "model": "MiniMax-H3",
+      "name": "MiniMax H3",
+      "category": "视频",
+      "unit": "second",
+      "currency": "USD",
+      "tiers": {
+        "ordinary": {
+          "price": ".05712"
+        },
+        "plus": {
+          "price": ".055406"
+        },
+        "pro": {
+          "price": ".054264"
+        },
+        "max": {
+          "price": ".051408"
+        }
+      },
+      "scope": "public_list_price_parameter_tiers_not_exhaustive"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "verified_on": "2026-11-06",
+  "source": "https://aistore.zhaopintong.com/platform-api/gemini/membership-api/plans",
+  "plans": [
+    {
+      "name": "Plus",
+      "price_fen": 2900,
+      "images": 150,
+      "id": "shared_permanent_29",
+      "points": 150000,
+      "period": "permanent",
+      "valid_days": null,
+      "renewal_price_fen": null
+    },
+    {
+      "name": "Pro",
+      "price_fen": 3900,
+      "images": 200,
+      "id": "shared_permanent_39",
+      "points": 200000,
+      "period": "permanent",
+      "valid_days": null,
+      "renewal_price_fen": null
+    },
+    {
+      "name": "Ultra",
+      "price_fen": 4900,
+      "images": 250,
+      "id": "shared_permanent_49",
+      "points": 250000,
+      "period": "permanent",
+      "valid_days": null,
+      "renewal_price_fen": null
+    },
+    {
+      "name": "终身会员",
+      "price_fen": 99900,
+      "images": 5000,
+      "id": "shared_permanent_999",
+      "points": 5000000,
+      "period": "permanent",
+      "valid_days": null,
+      "renewal_price_fen": null
+    }
+  ],
+  "new_generic_image_trial_uses": 0,
+  "note": "Read live plans before checkout; this file never grants quota."
+}

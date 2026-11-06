@@ -1,0 +1,29 @@
+{
+  "verified_on": "2026-11-06",
+  "scope": "whitelisted_asset_metadata_no_secret_material",
+  "active_image_asset_id": "aisplice",
+  "assets": [
+    {
+      "name": "aisplice",
+      "kind": "image",
+      "base_url": "https://www.aisplice.store",
+      "docs_url": "",
+      "model": "ChatGPT-image-2.5",
+      "auth_type": "bearer",
+      "id": "aisplice",
+      "enabled": true,
+      "server_secret_configured": true
+    },
+    {
+      "name": "AiSplice 全类型通用算力",
+      "kind": "general",
+      "base_url": "https://www.aisplice.store/v1",
+      "docs_url": "https://www.aisplice.store/zh/docs",
+      "model": "all",
+      "auth_type": "bearer",
+      "id": "aisplice-universal",
+      "enabled": true,
+      "server_secret_configured": true
+    }
+  ]
+}

@@ -1,19 +1,44 @@
 # myplanestroe · MyPlaneStore 开发阅读镜像
+
+**2026-11-06 新入口：** [通用生图类（临时域名）](resources/shared-image-temporary/README.md) · [上游资源与成本目录](resources/upstreams/README.md) · [给Claude的接入任务](resources/shared-image-temporary/CLAUDE接入指令.md)。
+
+当前站点 **https://aistore.zhaopintong.com**。通用生图走/platform-api/gemini，由服务器使用gpt-image-2.5-ext。供应商Key留服务器；可放入Skill的是参考客户端和协议，不能放入真实凭证。
+公开健康已核对，客户端及合成任务链已测；真实上游调用0次，未验真人扫码/支付/生成。这里是人工同步快照，不是生产权限或持续自动同步。
+
+以下保留原镜像说明；通用生图以本次11月6日资料和当前实际入口为准。
+
 日期：2026-10-29。读取顺序：CLAUDE.md → docs/当前阶段与修改入口.md → infrastructure/effective-services.txt → docs/新品Skill接入说明.md。
 
+
+
 snapshot/：从线上只读提取的源文件、公开网页HTML/CSS/JS、SQL结构、套餐配置及可提供的README。保留版本目录依赖，不是仅一层补丁。
+
 infrastructure/：当时实际systemd ExecStart（不含运行环境变量或凭证文件）。
+
 SOURCE-MANIFEST.json：导出源文件大小和SHA256；SANITIZATION.json：过滤与脱敏清单。
+
 docs/：开发入口和使用说明。docs/当前进度.md：已部署修改与验证边界。
 
+
+
 不含：生产数据库、客户或任务数据、日志、密钥和配置凭证、虚拟环境、二进制图片/字体、结果文件和证据数据集。网页图像标识等二进制素材未打包，离线显示可能缺图，不影响读源码。
+
 本包用于Claude阅读和接续开发，不能解压即生产启动。程序内/opt与/var等绝对路径是原服务器参考；本地需容器映射或改为开发路径、创建合成数据库、安装依赖、填入本地Mock配置。本次没有完成全链本地启动或全量旧测试。
 
+
+
 给Claude复制：
+
 “请读取这个目录的CLAUDE.md及指定文档，按实际runpy/import链核对当前入口；使用现有微信绑定、会员支付和统一服务端生图适配，不把供应商密钥放到Skill。先在本地用合成账户和Mock开发新品Skill；不得访问生产客户数据或调用真实上游，不自动部署。”
+
+
 
 实时访问：这是快照，不会自动同步。现有/ops/是管理员页面，网址本身不赋予权限；本仓库公开可读，未添加外部写入权限；没有创建匿名后台数据链接或只读账号。不能把管理员会话/生产Key作为Claude链接分享。若后续建设实时开发文档服务，应仅暴露接口契约、能力目录、公开价格和版本信息，排除客户、订单、凭证，并使用独立可撤销的只读身份。
 
 
+
+
+
 仓库链接：https://github.com/Haihe2026/myplanestroe
+
 入口：docs/当前进度.md、docs/新品Skill接入说明.md。版本新旧以同步时间与实际入口文档为准；当前是人工同步快照，尚未接上自动发布同步，不等于实时生产监控。

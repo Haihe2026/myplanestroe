@@ -1,0 +1,40 @@
+{
+  "verified_on": "2026-11-06",
+  "exec_start_script_paths": {
+    "skill-platform": "/opt/skill-platform/metered-page-20261105/run_shared.py",
+    "skill-monitor": "/opt/skill-platform/admin-redesign-20261103/run_ops.py"
+  },
+  "shared_entry_chain": [
+    "/opt/skill-platform/metered-page-20261105/run_shared.py",
+    "/opt/skill-platform/provider-costs-20261105/run_shared.py",
+    "/opt/skill-platform/listing-cny-0.4.0/run_shared.py",
+    "/opt/skill-platform/grok-video-0.1.3/run_paid.py",
+    "/opt/skill-platform/grok-video-0.1.2/run_shared.py",
+    "/opt/skill-platform/grok-video-0.1.0/run_shared.py",
+    "/opt/skill-platform/member-0.10.61-wechat/run_shared.py",
+    "/opt/skill-platform/member-0.10.60-new-resource-only/run_shared.py",
+    "/opt/skill-platform/member-0.10.59-child-photo/run_shared.py",
+    "/opt/skill-platform/member-0.10.58/run_shared.py",
+    "/opt/skill-platform/member-0.10.57/run_shared.py",
+    "/opt/skill-platform/member-0.10.56/run_shared.py",
+    "/opt/skill-platform/member-0.10.54/run_shared.py",
+    "/opt/skill-platform/member-0.10.49/run_shared.py",
+    "/opt/skill-platform/member-0.10.48/run_shared.py",
+    "/opt/skill-platform/member-0.10.44/run_shared.py",
+    "/opt/skill-platform/member-0.10.43/run_shared.py",
+    "/opt/skill-platform/member-0.10.41/run_shared.py",
+    "/opt/skill-platform/member-0.10.39/run_shared.py",
+    "/opt/skill-platform/member-0.10.38-candidate/run_shared.py",
+    "/opt/skill-platform/member-0.10.36-candidate/run_shared.py",
+    "/opt/skill-platform/member-0.10.35-r2/run_shared.py",
+    "/opt/skill-platform/member-0.10.34-candidate/run_shared.py",
+    "/opt/skill-platform/member-0.10.32-r2/run_shared.py",
+    "/opt/skill-platform/member-0.10.31/run_shared.py",
+    "/opt/skill-platform/member-0.10.29/run_shared.py",
+    "/opt/skill-platform/member-0.10.28/run_shared.py",
+    "/opt/skill-platform/member-0.10.26/run_shared.py",
+    "/opt/skill-platform/member-0.10.24/run_shared.py",
+    "/opt/skill-platform/member-0.10.16/service/run_shared.py"
+  ],
+  "scope": "Entry paths only; no environment, credentials or customer state. Source mirror is not standalone deployment."
+}
