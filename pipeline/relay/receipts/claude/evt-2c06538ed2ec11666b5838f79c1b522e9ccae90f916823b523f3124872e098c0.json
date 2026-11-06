@@ -1,8 +1,8 @@
 {
   "event_id": "evt-2c06538ed2ec11666b5838f79c1b522e9ccae90f916823b523f3124872e098c0",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "788c03e7-af2f-4bd9-8659-2b0a684016ff",
-  "at": "2026-11-06T23:38:53+08:00",
-  "evidence_ref": null
+  "at": "2026-11-06T23:45:38+08:00",
+  "evidence_ref": "3b96854f2684270b46147ae78a7fc7713894e3b5:pipeline/products/mps-id-photo-background/02-self-test.md"
 }
