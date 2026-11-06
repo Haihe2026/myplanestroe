@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-retry-spec-20261106",
+  "skill_id": "mps-id-photo-background",
+  "source_path": "pipeline/products/mps-id-photo-background/msg-from-muse-20261106-retry.md",
+  "source_ref": "4c50d211e7d506edbff436d2e177e1f5f2358741",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-903b3c4bee53ba19ee4d5773a8dac53a1fec43a0e97f3e5df24775801d82ae2b",
+  "request_kind": "handoff"
+}
