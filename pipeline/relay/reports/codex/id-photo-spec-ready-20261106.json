@@ -1,0 +1,20 @@
+{
+  "at": "2026-11-06T22:24:15+08:00",
+  "outcome": "documentation_ready",
+  "skill_id": "mps-id-photo-background",
+  "stage": "spec_ready",
+  "handoff_to": "claude",
+  "scope": "documentation_only_per_direct_user_instruction",
+  "spec_md": "pipeline/products/mps-id-photo-background/01-dev-spec.md",
+  "spec_json": "pipeline/products/mps-id-photo-background/01-dev-spec.json",
+  "scenes": 10,
+  "demos_planned": 10,
+  "tests_planned": 48,
+  "reference_client_mock_tests_passed": 12,
+  "baseline_contract_checks_passed": 4,
+  "backend_implemented": false,
+  "backend_deployed": false,
+  "client_package_written": false,
+  "real_upstream_calls": 0,
+  "production_mutations": 0
+}

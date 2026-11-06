@@ -3,19 +3,19 @@
   "display_name": "证件照换底助手",
   "display_name_en": "ID Photo Background Assistant",
   "version": "1.0.0",
-  "document_status": "blocked_draft",
-  "ready_for_development": false,
-  "a1_passed": false,
+  "document_status": "ready",
+  "ready_for_development": true,
+  "a1_passed": true,
   "lane": "deploy",
-  "lane_note": "现有图像与支付可复用；完整机器漏斗需要后端变更。尚未编写/测试后端补丁，故不使用DEPLOY_REQUIRED冒充补丁已就绪。",
+  "lane_note": "文档已交付；客户端可按明确目标契约进行Mock开发。目标机器漏斗后端实施与部署是后续依赖，不冒称已上线。",
   "channels": [
     "workbuddy-skill"
   ],
   "source_snapshot": "44a6ed60ea015f260a89b75975f9b21fe39e9e3e",
   "authorization": {
     "source": "human_reply_in_current_chat",
-    "text": "按照自动化SOP执行，接入我们现在正在执行的有效的上游资产和通用生图类支付页面。",
-    "scope": "Codex规格阶段；现有上游、通用生图付费；不扩展生产/财务/发布权限"
+    "text": "按照自动化SOP执行，接入当前有效上游资产和通用生图支付页；本轮Codex只完成开发文档，认证由后续Claude Code处理。",
+    "scope": "开发规格与交接；不包含客户端开发、后端部署、财务操作或公开发布。"
   },
   "read_record": {
     "date": "2026-11-06",
@@ -28,33 +28,7 @@
       "https://open.workbuddy.cn/docs/skill"
     ],
     "applied_flow": "本次人工确认采用自动关口；保留实际后端契约及HARD_STOP；只做WorkBuddy技能版",
-    "unresolved_conflicts": [
-      {
-        "id": "B1",
-        "code": "HARD_STOP",
-        "item": "首次对话与设备漏斗的强制规范不等于现有接口",
-        "detail": "现有白名单8字段、200含receipt并按安装去重；自动SOP第六章要求machine_id、新设备L0、204、IP按日限额及新表/明细。本地合成验证额外machine_id会被拒绝；不能仅换客户端字段宣称已接完整漏斗。改变现有审计/限流触及A.5第150-156行硬边界。",
-        "evidence": [
-          "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9",
-          "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:30",
-          "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:33",
-          "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:34",
-          "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:50"
-        ],
-        "proposed_resolution": "首版兼容实际8字段200回执，仅统计已支持的首次对话/安装与关联，跨技能新设备漏斗标不可得；取得明确规则例外后走快车道。若必须完整机器漏斗，另行批准后端统计设计与部署，不更改既有客户/限流/审计。"
-      },
-      {
-        "id": "B2",
-        "code": "HARD_STOP",
-        "item": "欢迎句认证声明冲突",
-        "detail": "自动SOP固定欢迎句要求写官方认证，同时A.5和固定规则禁止冒用认证；当前没有本新品认证证据。规格不得给Claude一条必然不实的已认证声明。",
-        "evidence": [
-          "docs/sop/sop-image-gen-skill-auto.md:142",
-          "docs/sop/sop-image-gen-skill-auto.md:156"
-        ],
-        "proposed_resolution": "未取得真实认证前使用普通欢迎语：欢迎使用证件照换底助手。取得明确规则例外后再放行；不自行修改共享SOP或伪造资质。"
-      }
-    ]
+    "unresolved_conflicts": []
   },
   "billing": {
     "channel": "general",
@@ -469,42 +443,69 @@
     ]
   },
   "telemetry": {
-    "currently_supported_fields": [
-      "channel",
-      "client_occurred_at",
-      "event_id",
-      "installation_id",
-      "is_test",
-      "skill_id",
-      "skill_name",
-      "skill_version"
-    ],
-    "current_success_status": 200,
-    "machine_id_sent": false,
-    "full_machine_funnel_available": false,
-    "current_protocol": "resources/shared-image-temporary/首次互动接入.md",
-    "is_test_during_development": true
+    "current_contract": {
+      "fields": [
+        "channel",
+        "client_occurred_at",
+        "event_id",
+        "installation_id",
+        "is_test",
+        "skill_id",
+        "skill_name",
+        "skill_version"
+      ],
+      "success_status": 200,
+      "source": "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9"
+    },
+    "target_contract": {
+      "fields": [
+        "event_id",
+        "installation_id",
+        "machine_id",
+        "skill_id",
+        "skill_name",
+        "skill_version",
+        "channel",
+        "client_occurred_at",
+        "is_test"
+      ],
+      "success_status": 204,
+      "installation_id": "按技能/安装独立规范小写随机UUIDv4",
+      "machine_id": "自家技能之间共享的规范小写随机UUIDv4，不读取硬件指纹",
+      "success_persistence": "HTTP204确认后本地记已上报，每安装一次；2秒预算、不自动重试，失败不阻塞业务",
+      "account_link": "在已有合法账户关联时接入安装与机器标识，保持既有身份与鉴权",
+      "disclosure": "匿名随机安装/机器标识仅用于首次互动与安装关联；提供关闭开关，不传消息正文、照片、路径或凭证"
+    },
+    "implementation_required": true,
+    "deployed": false,
+    "is_test_during_development": true,
+    "rule": "不静默退回8字段来宣称完整机器漏斗已满足。目标服务端未就绪时如实标记后端依赖，不阻塞离线首轮。"
   },
   "funnel_steps": [
     {
       "step": "L0",
-      "data": "现有8字段只支持安装×技能×渠道首次互动；跨技能新设备不可得"
+      "definition": "窗口内machine_id历史首现的新设备",
+      "source": "目标首次互动事件和机器首见索引"
     },
     {
       "step": "L1",
-      "data": "既有journey页面/邀请事件；没有新设备IP日哈希口径，不伪造"
+      "definition": "授权页匿名PV与按ip_day_hash去重的访客",
+      "source": "目标页面到达事件；按日哈希不能被解释成永久唯一人数"
     },
     {
       "step": "L2",
-      "data": "已鉴权账户关联及first-dialogue/link，匿名事件之后续接"
+      "definition": "窗口内新建并首次完成关联的账户",
+      "source": "既有账户创建记录与目标关联表"
     },
     {
       "step": "L3",
-      "data": "既有付款页旅程事件；当前聊天无管理员数据，不读取生产客户"
+      "definition": "窗口内新账户到达充值页，按账户去重",
+      "source": "现有合法账户/页面事件"
     },
     {
       "step": "L4",
-      "data": "既有入账/订单账本，只接受服务端已入账；未做真实支付"
+      "definition": "新账户首次实际入账，订单与未挂订单充值逐条去重",
+      "source": "原订单/账本只读投影，不以自述付款认定到账"
     }
   ],
   "sibling_skills": [
@@ -531,310 +532,354 @@
     {
       "id": "T01",
       "group": "first_turn",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "问候、仅图、问能力、带图明确需求均先价值展示，不取账户或付费链接",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T02",
       "group": "first_turn",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "首轮仅允许受控首次对话元数据请求，业务请求函数设为抛错仍能完成",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T03",
       "group": "first_turn",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "离线示例10项，只展示本次脚本返回的绝对路径，两列链接表且同对话去重",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T04",
       "group": "first_turn",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "不要生成新图/只要文字/只看某示例正确分流",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T05",
       "group": "first_turn",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "首轮不查凭证、不调用help/account/health/catalog，不读取照片发送至后端",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T06",
       "group": "confirmation_account",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "认可方向、沉默、授权成功、已充值均不能替代同任务付费同意",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T07",
       "group": "confirmation_account",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "参考照片对外处理同意与付费同意独立；取消时零任务",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T08",
       "group": "confirmation_account",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "原安装身份及微信短链恢复，过期才重取，不新建原账户",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T09",
       "group": "confirmation_account",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "服务端签发链接保留ticket/entry，不在日志或回复暴露凭证",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T10",
       "group": "confirmation_account",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "有可用次数跳过开通充值；无余额先询问是否打开充值页",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T11",
       "group": "confirmation_account",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "凭证401自动清除失效凭证，输出credentialsReset与退出码4",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T12",
       "group": "confirmation_account",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "未获用户明确同意不读取其他技能凭证，sibling_reuse=false",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T13",
       "group": "billing_jobs",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "同键同体恢复、已成功任务重放只结算一次",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T14",
       "group": "billing_jobs",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "402、401、429、5xx后不换键、不缓存错误作成功、不自动新建任务",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T15",
       "group": "billing_jobs",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "未知状态只查原任务，不猜测已扣/未扣或承诺自动退款",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T16",
       "group": "billing_jobs",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "账户到账以实际remaining_uses为准，不将注册或用户自述当到账",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T17",
       "group": "billing_jobs",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "成功先交真实图片，再转述服务端实际费用记录；缺字段不自行计算",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T18",
       "group": "billing_jobs",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "图片下载失败保留原任务查询，不杜撰inline_delivery补取接口",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T19",
       "group": "billing_jobs",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "同设备退出恢复后仍查原任务UUID，任务数据仅本地私有存储",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T20",
       "group": "wait",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "一次返回成功",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T21",
       "group": "wait",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "两轮后成功",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T22",
       "group": "wait",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "窗口结束仍pending保存原任务",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T23",
       "group": "wait",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "首轮网络错误后用原任务查询恢复",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T24",
       "group": "wait",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "全程无应答显示进度无法确认",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T25",
       "group": "wait",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "明确失败仅引用服务端能确认的费用结果",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T26",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "单张PNG/JPEG且真实内容匹配，损坏/超限/无授权在本地拒绝",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T27",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "上游请求只使用1K现有3种画幅，本品默认1024x1536，不宣称2K/4K可用",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T28",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "不改变五官、发型、服装的提示约束与可见结果检查，生成差异不能声明身份完全一致",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T29",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "用户指定目标像素时独立本地裁切另存，重新解码核对实际尺寸；无法保证时受控停止",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T30",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "无机构规格不将一寸/二寸自动等同某个像素或文件大小",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T31",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "原图不修改不移动，输出不覆盖，支持真实本地画廊",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T32",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "图片错误及含敏感凭证错误体不直接对客输出",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T33",
       "group": "input_output",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "未成年人需监护授权；冒用肖像、证件伪造与明确禁止编辑用途拒绝",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T34",
       "group": "telemetry",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "真实首轮含问候/缺图即上报；安装、读取、自检、定时任务不上报",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T35",
       "group": "telemetry",
-      "by": "claude+codex",
-      "desc": "严格8字段、200回执、采用服务端返回ID及receipt，不提交machine_id或正文",
-      "status": "not_run_product_not_implemented"
+      "by": "claude",
+      "desc": "目标契约9字段严格白名单，machine_id为独立随机UUIDv4；目标后端204确认成功，原8字段200协议的兼容性由服务端验收。",
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T36",
       "group": "telemetry",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "标识持久化失败跳过，不临时造身份；去重和开关生效",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T37",
       "group": "telemetry",
-      "by": "claude+codex",
-      "desc": "2秒预算，不阻塞业务；当前实际协议与自动SOP重试差异记录后才实现",
-      "status": "not_run_product_not_implemented"
+      "by": "claude",
+      "desc": "2秒预算、不自动重试、不阻塞主流程；成功持久化一次性标记，标识写不进去则跳过，不临时造身份。",
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T38",
       "group": "telemetry",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "账户后续link幂等，409不覆盖其他账户；凭证只在头部",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T39",
       "group": "telemetry",
-      "by": "claude+codex",
-      "desc": "跨技能新设备L0不可得时明确不可得，不把installation当machine或下载当人数",
-      "status": "not_run_product_not_implemented"
+      "by": "claude",
+      "desc": "按machine_id历史首见计算新设备，老设备安装新技能只进入独立启用指标；不得把安装数或下载数冒充人数。",
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T40",
       "group": "contract_copy",
-      "by": "claude+codex",
-      "desc": "欢迎句无虚构认证；未解决硬冲突时禁止交付可发布包",
-      "status": "not_run_product_not_implemented"
+      "by": "claude",
+      "desc": "欢迎话术按SOP原句逐字一致，固定话术由welcome_copy.py提供，宿主原样转述。",
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T41",
       "group": "contract_copy",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "对客文案不含开发流程、供应商、接口、base64等术语",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T42",
       "group": "contract_copy",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "超时由脚本常量实算，各文档一致，不把设计值冒充实测耗时",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T43",
       "group": "contract_copy",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "退出码0/2/3/4与JSON信号、欢迎话术、示例集合一致",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T44",
       "group": "contract_copy",
-      "by": "claude+codex",
+      "by": "claude",
       "desc": "最终ZIP干净解压独立重跑，头像512×512与ZIP同目录，不覆盖旧包",
-      "status": "not_run_product_not_implemented"
+      "status": "not_run_product_not_implemented",
+      "independent_retest_by": "codex"
     },
     {
       "id": "T45",
@@ -976,33 +1021,7 @@
       "nonempty": true
     }
   },
-  "blocked_reasons": [
-    {
-      "id": "B1",
-      "code": "HARD_STOP",
-      "item": "首次对话与设备漏斗的强制规范不等于现有接口",
-      "detail": "现有白名单8字段、200含receipt并按安装去重；自动SOP第六章要求machine_id、新设备L0、204、IP按日限额及新表/明细。本地合成验证额外machine_id会被拒绝；不能仅换客户端字段宣称已接完整漏斗。改变现有审计/限流触及A.5第150-156行硬边界。",
-      "evidence": [
-        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9",
-        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:30",
-        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:33",
-        "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:34",
-        "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:50"
-      ],
-      "proposed_resolution": "首版兼容实际8字段200回执，仅统计已支持的首次对话/安装与关联，跨技能新设备漏斗标不可得；取得明确规则例外后走快车道。若必须完整机器漏斗，另行批准后端统计设计与部署，不更改既有客户/限流/审计。"
-    },
-    {
-      "id": "B2",
-      "code": "HARD_STOP",
-      "item": "欢迎句认证声明冲突",
-      "detail": "自动SOP固定欢迎句要求写官方认证，同时A.5和固定规则禁止冒用认证；当前没有本新品认证证据。规格不得给Claude一条必然不实的已认证声明。",
-      "evidence": [
-        "docs/sop/sop-image-gen-skill-auto.md:142",
-        "docs/sop/sop-image-gen-skill-auto.md:156"
-      ],
-      "proposed_resolution": "未取得真实认证前使用普通欢迎语：欢迎使用证件照换底助手。取得明确规则例外后再放行；不自行修改共享SOP或伪造资质。"
-    }
-  ],
+  "blocked_reasons": [],
   "decisions": [
     {
       "item": "关口",
@@ -1040,9 +1059,67 @@
       "basis": "未核实的机构要求不能默认通用；美国签证FAQ禁止改变外貌的数字修改"
     },
     {
-      "item": "认证及新机器漏斗",
-      "chosen": "阻塞，提出兼容现有契约的具体方案，不自行降低A1",
-      "basis": "自动SOP A.5/A.7，当前源代码与合成验证"
+      "item": "职责边界",
+      "chosen": "本轮只完成文档，后续由Claude Code按文档开发与衔接实施",
+      "basis": "用户在当前聊天直接限定范围；不再由Codex前置认证核验或后端代码实施"
     }
-  ]
+  ],
+  "document_review_passed": true,
+  "a1_scope": {
+    "type": "documentation_only",
+    "source": "current_chat_direct_human_instruction",
+    "at": "2026-11-06T22:23:26+08:00",
+    "instruction": "认证交由后续Claude Code处理，不由Codex核验或标注是否获得；Codex只完成开发文档并交接。",
+    "exception": "本轮A1检查文档完备性；不要求Codex先实施后端补丁。依赖及验收仍须在后续阶段实际完成。"
+  },
+  "copy": {
+    "welcome_template": "欢迎使用WorkBuddy官方认证技能 证件照换底助手。",
+    "implementation_owner": "claude",
+    "rule": "按SOP固定话术实现；本轮文档不作认证状态判断。"
+  },
+  "backend_requirements": {
+    "owner": "后续闭环实施环节",
+    "implementation_done": false,
+    "deployment_done": false,
+    "production_mutations_authorized": false,
+    "tasks": [
+      {
+        "id": "BE01",
+        "task": "扩展首次互动目标白名单及204应答，同时保留旧8字段200客户端兼容",
+        "acceptance": "未知字段拒绝；UUIDv4严格校验；开发用is_test=true；同安装去重；失败不影响主业务"
+      },
+      {
+        "id": "BE02",
+        "task": "新增机器/安装首见、事件及合法账户关联数据结构",
+        "acceptance": "随机标识，不读硬件；安装×技能×渠道去重；跨技能机器只算一次新设备；历史数据不补造"
+      },
+      {
+        "id": "BE03",
+        "task": "按自动SOP第六章实现IP按日加盐摘要、每日上限及180天明细策略",
+        "acceptance": "不存明文IP；限额与幂等并发一致；明细不返回ip_day_hash；独立迁移、回滚与权限评审，不直接改生产"
+      },
+      {
+        "id": "BE04",
+        "task": "实现L0-L4及三项独立指标的同口径只读报表与管理台明细",
+        "acceptance": "管理台沿原管理员鉴权；离线脚本与在线数字一致；新设备/新账户/老账户区分；订单与未挂订单入账去重；不混用预充值、扣量和利润"
+      },
+      {
+        "id": "BE05",
+        "task": "保持现有通用生图、共享钱包、微信恢复及新资源适配器",
+        "acceptance": "不改客户余额/订单/套餐；无旧上游回退；真实上游0；未部署不得宣称线上已支持目标契约"
+      }
+    ]
+  },
+  "independent_metrics": [
+    "技能启用数：按installation_id首见，区分新/老设备",
+    "技能激活数：技能与账户新绑定，区分新/老账户",
+    "充值笔数：窗口内真实入账去重后按渠道拆分；不等同收入或利润"
+  ],
+  "implementation_status": {
+    "client_package_written": false,
+    "backend_implemented": false,
+    "backend_deployed": false,
+    "documentation_only": true,
+    "real_upstream_calls": 0
+  }
 }
