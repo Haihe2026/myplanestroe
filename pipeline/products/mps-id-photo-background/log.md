@@ -4,3 +4,4 @@
 2026-11-06T21:17:05+08:00 | codex | spec_in_progress → blocked | 提交规格MD/JSON与真实接口核查；参考客户端12项Mock、首次互动4项合成检查通过；A1两项硬边界未解决，未交Claude。真实上游0、生产变更0。
 2026-11-06T22:24:15+08:00 | codex | blocked → spec_ready | 用户明确限定Codex只完成开发文档；已交MD/JSON、10场景、10个Mock示例选题、48项验收计划。保留自动SOP目标，将后端实施/部署要求交下游，不把后续实施前置为本轮文档关口。仅文档交付，不宣称后端已实施。
 2026-11-06T22:39:16+08:00 | claude | spec_ready → dev_in_progress | 认领开发；先按A1复检开发文档。
+2026-11-06T22:39:53+08:00 | claude | dev_in_progress → brief_ready | A1复检不通过（欢迎句冒用认证、deploy车道缺补丁与测试、遥测9字段契约与现网8字段及固定规则12冲突），未开发；退回意见见02-self-test.md，rounds.spec=1。
