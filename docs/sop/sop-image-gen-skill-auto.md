@@ -50,7 +50,7 @@ pipeline/
         ├── 01-dev-spec.md          # Codex：开发文档（人读）
         ├── 01-dev-spec.json        # Codex：开发文档的机器可读摘要
         ├── 02-package/             # Claude Code：Skill 源码
-        │   └── dist/               # 三渠道 ZIP、头像
+        │   └── dist/               # 各渠道 ZIP、头像（当前只有 WorkBuddy 团队版技能包）
         ├── 02-self-test.md         # Claude Code：自测报告
         ├── 03-test-report.md       # Codex：独立测试报告
         ├── 04-listing.md           # Codex：上架记录
@@ -141,7 +141,7 @@ pipeline/
 | 遥测 | 只做首次对话上报（第六章），必做 | 其他统计一律不做，不得在流水线里新增 |
 | 欢迎句 | `欢迎使用WorkBuddy官方认证技能 <技能中文名>。` | 不得改动格式 |
 | 技能 name | `mps-` + 有含义的英文，与仓库内已有技能不重名 | 已上架的技能不得改名；必须改名 → 拦停 |
-| 上架渠道 | `config.yaml` 的 `channels`（默认 WorkBuddy 技能、WorkBuddy 专家、SkillHub 三渠道） | — |
+| 上架渠道 | `config.yaml` 的 `channels`。**当前只跑 WorkBuddy 团队版技能包**（`workbuddy-skill`）；WorkBuddy 专家包和 SkillHub 等流水线跑通后由负责人加进配置 | 配置里没有的渠道一律不打包、不上架 |
 | 上架授权 | `config.yaml` 的 `codex_may_publish` 为 `true` 时 Codex 可直接上架 | 为 `false` 时停在 `test_passed`，不拦停，等负责人上传 |
 | 真机行为验收 | 必做；Codex 用电脑操作真实宿主完成 | 做不了且 `allow_listing_without_host_acceptance` 不是 `true` → 拦停（`HOST_ACCEPTANCE_UNAVAILABLE`） |
 | 官方文档与本 SOP 冲突 | 以 WorkBuddy 官方文档为准继续，并在 `sop-proposals.md` 追加一条 | 官方文档读不到 → 拦停（`OFFICIAL_DOCS_UNREADABLE`） |
@@ -288,7 +288,7 @@ pipeline/
 | 4 后端开发 | Codex（文档） | 快车道：无；部署车道：后端补丁和测试，部署前拦停 | A1 |
 | 5 客户端技能包 | Claude Code | `02-package/` | A2 |
 | 6 测试 | Claude Code 自测 → Codex 独立测 | `02-self-test.md` → `03-test-report.md` | A2 → A3 |
-| 7 上架 | Codex（上架） | 三渠道 ZIP、上架文案、`04-listing.md` | A4 |
+| 7 上架 | Codex（上架） | `channels` 里各渠道的 ZIP（当前只有 WorkBuddy 团队版技能包）、上架文案、`04-listing.md` | A4 |
 | 8 上线数据 | Codex（数据） | `05-metrics/D1、D7、D14、D30` | — |
 
 选品（选什么品、为什么）在本 SOP 之前，由 Muse 完成，产出 `00-brief.md`，格式见附录 B.1。
@@ -746,7 +746,7 @@ Temu 版本额外测：新用户免费 1 次只生效一次，文案保留。
 - 上架包：`mps-<技能>-<版本>.zip`，直接上传，不用解压。每个渠道单独封装，不混用分类和包结构（仓库 `docs/三渠道交付SOP.md`）。
 - 上传后在 `04-listing.md` 记录每个渠道的版本、ID 或 slug、链接、提交时间、审核状态；审核结果出来后更新。没有实测的不得写已通过。
 - 上架文案按第五章写，过一遍自查清单。
-- 专家包和技能包同时发布时，两边文案、计费、欢迎句一致。
+- `channels` 里有多个渠道时，各渠道文案、计费、欢迎句一致。当前只有 WorkBuddy 团队版技能包，Claude Code 只打这一个包，不打专家包和 SkillHub 包。
 - 保留上一版上架包，用于回滚。
 
 ### 阶段 8：上线监控与迭代
@@ -986,7 +986,7 @@ Codex（数据）按 A.8 在 D1、D7、D14、D30 生成数据快照，负责人�
   "display_name_en": "English Name",
   "version": "1.0.0",
   "lane": "fast",
-  "channels": ["workbuddy-skill", "workbuddy-expert", "skillhub"],
+  "channels": ["workbuddy-skill"],
   "billing": { "channel": "general", "free_trial": false, "cost_source": "后端目录位置" },
   "model": { "name": "已登记模型名", "catalog_ref": "resources/upstreams/..." },
   "margin": { "unit_cost": 0.0, "unit_revenue": 0.0, "gross_margin": 0.0 },
@@ -1048,7 +1048,7 @@ Codex（数据）按 A.8 在 D1、D7、D14、D30 生成数据快照，负责人�
 ```yaml
 pipeline_branch: main
 codex_may_publish: true           # Codex 是否可以直接上架
-channels: [workbuddy-skill, workbuddy-expert, skillhub]
+channels: [workbuddy-skill]       # 当前只跑 WorkBuddy 团队版技能包；跑通后可加 workbuddy-expert、skillhub
 allow_listing_without_host_acceptance: false
 sibling_reuse: false              # 同设备账户复用
 min_gross_margin: 0.6

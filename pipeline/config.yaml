@@ -1,7 +1,7 @@
 # 生图类 Skill 自动流水线配置。负责人维护，AI 只读。字段说明见 docs/sop/sop-image-gen-skill-auto.md 附录 B.7。
 pipeline_branch: main
 codex_may_publish: true           # Codex 测试通过后直接上架
-channels: [workbuddy-skill, workbuddy-expert, skillhub]
+channels: [workbuddy-skill]       # 当前只跑 WorkBuddy 团队版技能包；跑通后可加 workbuddy-expert、skillhub
 allow_listing_without_host_acceptance: false
 sibling_reuse: false
 min_gross_margin: 0.6
