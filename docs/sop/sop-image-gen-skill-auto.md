@@ -7,6 +7,8 @@ description: "生图类 Skill 全自动流水线 SOP。Muse 选品 → Codex 写
 
 本 SOP 是「通用生图类 Skill 开发 SOP」（`sop-image-gen-skill.md`）的**流水线版**，供三个 AI 在无人值守的情况下接力完成：
 
+**流水线执行只以本 SOP 为准。**人工版 SOP（`sop-image-gen-skill.md`）的 G1–G4 关口、逐单确认等条款在流水线内一律不适用；不要因引用关系去读人工版做比对；如遇冲突，以本 SOP 为准，不再问负责人。
+
 **Muse 选品 → Codex 写开发文档 → Claude Code 开发 Skill 包 → Codex 测试 → Codex 上架 WorkBuddy → Codex 回收上线数据**
 
 负责人**不参与逐单确认**，只做三件事：维护流水线配置（`pipeline/config.yaml`）、看上线后的数据、处理被拦停的单子和 SOP 改进建议。
