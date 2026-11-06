@@ -105,6 +105,12 @@ def valid_request(req, repository):
     return req
 
 
+def request_event(req):
+    # Keep the v1 envelope compatible; preserve the sender's business type explicitly.
+    return dict(req, schema_version=1, event_id="evt-" + digest(req),
+                kind="request", request_kind=req["kind"])
+
+
 def product_event(repo, ref, status_path, status, input_objects):
     skill = status_path.split("/")[2]
     if not SLUG.fullmatch(skill) or status.get("skill_id") != skill:
@@ -133,8 +139,14 @@ class Relay:
         before = self.db.total_changes
         self.db.execute("INSERT OR IGNORE INTO events(id,payload) VALUES(?,?)",
                         (event["event_id"], json.dumps(event, ensure_ascii=False)))
+        inserted = self.db.total_changes > before
+        # Upgrade unsent legacy payloads only. Published immutable events are never reissued.
+        if not inserted and event.get("request_kind"):
+            old = self.db.execute("SELECT payload,published FROM events WHERE id=?", (event["event_id"],)).fetchone()
+            if old and old[1] == 0 and not json.loads(old[0]).get("request_kind"):
+                self.db.execute("UPDATE events SET payload=? WHERE id=? AND published=0", (json.dumps(event, ensure_ascii=False),event["event_id"]))
         self.db.commit()
-        return self.db.total_changes > before
+        return inserted
 
     def git(self, *args):
         proxy = ["-c", "http.proxy=" + self.cfg["proxy"]] if self.cfg.get("proxy") else []
@@ -164,7 +176,7 @@ class Relay:
             elif re.fullmatch(r"pipeline/relay/requests/[^/]+\.json", path):
                 try:
                     req = valid_request(json.loads(self.git("show", ref + ":" + path)), self.cfg["repository"])
-                    event = dict(req, schema_version=1, event_id="evt-" + digest(req), kind="request")
+                    event = request_event(req)
                     added += int(self.remember(event))
                 except (ValueError, KeyError):
                     rejected.append(path)

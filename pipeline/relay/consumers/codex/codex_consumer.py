@@ -11,7 +11,7 @@ import subprocess
 import sys
 import time
 import uuid
-from relay import ROOT, api, child_env, load_config, now, receipt, run, singleton, write_json
+from relay import ROOT, api, child_env, digest, load_config, now, receipt, run, singleton, valid_request, write_json
 
 BASE = ROOT / "codex-consumer"
 EVENT_RE = re.compile(r"evt-[a-f0-9]{64}\Z")
@@ -31,6 +31,8 @@ def validate_event(event, filename, repo):
         raise ValueError("invalid source path")
     if event.get("kind") not in {"request", "stage_ready", "transport_probe"}:
         raise ValueError("unsupported event kind")
+    if event.get("request_kind") is not None and event["request_kind"] not in {"handoff","question","dependency","retry"}:
+        raise ValueError("invalid request kind")
     if event["kind"] != "transport_probe":
         skill = event.get("skill_id", "")
         if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", skill) or not str(path).startswith(f"pipeline/products/{skill}/"):
@@ -61,6 +63,15 @@ class Consumer:
         return o, base64.b64decode(o["content"]).decode("utf-8")
 
     def execute(self, event):
+        if event.get("kind") == "request" and not event.get("request_kind"):
+            request_id=event.get("request_id", "")
+            if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}",request_id):
+                raise ValueError("legacy request id unavailable")
+            _, original=self.get("pipeline/relay/requests/"+request_id+".json")
+            original=valid_request(json.loads(original),self.cfg["repository"])
+            if "evt-"+digest(original) != event["event_id"]:
+                raise ValueError("legacy original request changed; cannot infer kind")
+            event=dict(event,request_kind=original["kind"])
         source_obj, source = self.get(event["source_path"], event["source_ref"])
         # Tests are deliberately identified by both path and content, not arbitrary remote instructions.
         probe = (event.get("kind") == "transport_probe" or

@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-from relay import Relay, product_event, valid_request, digest, singleton
+from relay import Relay, product_event, valid_request, request_event, digest, singleton
 
 
 class SharedRelayTests(unittest.TestCase):
@@ -80,6 +80,38 @@ class SharedRelayTests(unittest.TestCase):
             valid_request(dict(req, source_repo="other/repo"), "owner/repo")
         with self.assertRaises(ValueError):
             valid_request(dict(req, source_path="pipeline/products/mps-synthetic/../x"), "owner/repo")
+
+    def test_all_request_types_survive_transport(self):
+        for kind in ["handoff", "question", "dependency", "retry"]:
+            req = {"request_id":"req-1", "skill_id":"mps-synthetic", "from":"muse", "to":"codex",
+                   "source_repo":"owner/repo", "source_ref":"a"*40,
+                   "source_path":"pipeline/products/mps-synthetic/00-brief.md", "kind":kind}
+            event = request_event(valid_request(req, "owner/repo"))
+            self.assertEqual(event["kind"], "request")
+            self.assertEqual(event["request_kind"], kind)
+            self.assertEqual(event["event_id"], "evt-"+digest(req))
+
+    def test_request_type_survives_inbox_delivery_and_restart(self):
+        req = {"kind":"question", "to":"codex"}
+        event = request_event(req)
+        with tempfile.TemporaryDirectory() as directory:
+            r = Relay({}, directory);r.remember(event);r.db.close()
+            r = Relay({}, directory);r.flush()
+            saved=json.loads((Path(directory)/"inbox"/"codex"/(event["event_id"]+".json")).read_text(encoding="utf-8"))
+            self.assertEqual(saved["request_kind"], "question")
+            r.db.close()
+
+    def test_pending_legacy_upgrades_without_reissuing_published(self):
+        event=request_event({"kind":"question","to":"codex"})
+        legacy={k:v for k,v in event.items() if k!="request_kind"}
+        with tempfile.TemporaryDirectory() as directory:
+            r=Relay({},directory);r.remember(legacy)
+            self.assertFalse(r.remember(event))
+            self.assertEqual(json.loads(r.db.execute("SELECT payload FROM events").fetchone()[0])["request_kind"],"question")
+            r.db.execute("UPDATE events SET published=1,payload=?",(json.dumps(legacy),));r.db.commit()
+            r.remember(event)
+            self.assertNotIn("request_kind",json.loads(r.db.execute("SELECT payload FROM events").fetchone()[0]))
+            r.db.close()
 
     def test_claim_collision_fails_not_treated_as_success(self):
         from relay import receipt

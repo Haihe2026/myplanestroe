@@ -19,6 +19,30 @@ class ConsumerTests(unittest.TestCase):
     def test_reject_mismatched_filename(self):
         with self.assertRaises(ValueError):validate_event(self.event(),"evt-wrong.json","o/r")
 
+    def test_legacy_kind_recovered_from_hashed_original(self):
+        import json
+        from relay import request_event
+        req={"request_id":"req-probe","from":"claude","to":"codex","skill_id":"mps-relay-probe",
+             "source_repo":"o/r","source_ref":"b"*40,"source_path":"pipeline/products/mps-relay-probe/README.md","kind":"question"}
+        event=request_event(req);event.pop("request_kind")
+        with tempfile.TemporaryDirectory() as base:
+            c=Consumer({"repository":"o/r"},base)
+            with patch.object(c,"get",side_effect=[({},json.dumps(req)),({},"不是产品任务")]):
+                self.assertEqual(c.execute(event)[1],"transport_probe")
+            c.db.close()
+
+    def test_changed_legacy_original_is_rejected(self):
+        import json
+        from relay import request_event
+        req={"request_id":"req-probe","from":"claude","to":"codex","skill_id":"mps-relay-probe",
+             "source_repo":"o/r","source_ref":"b"*40,"source_path":"pipeline/products/mps-relay-probe/README.md","kind":"question"}
+        event=request_event(req);event.pop("request_kind")
+        with tempfile.TemporaryDirectory() as base:
+            c=Consumer({"repository":"o/r"},base)
+            with patch.object(c,"get",return_value=({},json.dumps(dict(req,kind="handoff")))):
+                with self.assertRaises(ValueError):c.execute(event)
+            c.db.close()
+
     def test_remote_claim_prevents_second_execution(self):
         with tempfile.TemporaryDirectory() as base:
             c=Consumer({"repository":"o/r"},base)
