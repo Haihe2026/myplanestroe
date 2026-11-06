@@ -1,0 +1,1048 @@
+{
+  "skill_id": "mps-id-photo-background",
+  "display_name": "证件照换底助手",
+  "display_name_en": "ID Photo Background Assistant",
+  "version": "1.0.0",
+  "document_status": "blocked_draft",
+  "ready_for_development": false,
+  "a1_passed": false,
+  "lane": "deploy",
+  "lane_note": "现有图像与支付可复用；完整机器漏斗需要后端变更。尚未编写/测试后端补丁，故不使用DEPLOY_REQUIRED冒充补丁已就绪。",
+  "channels": [
+    "workbuddy-skill"
+  ],
+  "source_snapshot": "44a6ed60ea015f260a89b75975f9b21fe39e9e3e",
+  "authorization": {
+    "source": "human_reply_in_current_chat",
+    "text": "按照自动化SOP执行，接入我们现在正在执行的有效的上游资产和通用生图类支付页面。",
+    "scope": "Codex规格阶段；现有上游、通用生图付费；不扩展生产/财务/发布权限"
+  },
+  "read_record": {
+    "date": "2026-11-06",
+    "canonical_sop_path": "C:\\Users\\Administrator\\Desktop\\Skill项目\\Claude-Code\\SOP\\sop-image-gen-skill.md",
+    "canonical_sop_sha256": "e820386dd4e0feba2ac502c748bd5e7bc2d0bf28ed17da6a58693051fde2b84f",
+    "auto_sop": "docs/sop/sop-image-gen-skill-auto.md",
+    "auto_sop_sha256": "92d10cd6f3afcb4f06caeb34b1aa0592d77e4a7773bfeba85ee03efc556dc85a",
+    "official_pages": [
+      "https://open.workbuddy.cn/docs/expert",
+      "https://open.workbuddy.cn/docs/skill"
+    ],
+    "applied_flow": "本次人工确认采用自动关口；保留实际后端契约及HARD_STOP；只做WorkBuddy技能版",
+    "unresolved_conflicts": [
+      {
+        "id": "B1",
+        "code": "HARD_STOP",
+        "item": "首次对话与设备漏斗的强制规范不等于现有接口",
+        "detail": "现有白名单8字段、200含receipt并按安装去重；自动SOP第六章要求machine_id、新设备L0、204、IP按日限额及新表/明细。本地合成验证额外machine_id会被拒绝；不能仅换客户端字段宣称已接完整漏斗。改变现有审计/限流触及A.5第150-156行硬边界。",
+        "evidence": [
+          "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9",
+          "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:30",
+          "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:33",
+          "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:34",
+          "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:50"
+        ],
+        "proposed_resolution": "首版兼容实际8字段200回执，仅统计已支持的首次对话/安装与关联，跨技能新设备漏斗标不可得；取得明确规则例外后走快车道。若必须完整机器漏斗，另行批准后端统计设计与部署，不更改既有客户/限流/审计。"
+      },
+      {
+        "id": "B2",
+        "code": "HARD_STOP",
+        "item": "欢迎句认证声明冲突",
+        "detail": "自动SOP固定欢迎句要求写官方认证，同时A.5和固定规则禁止冒用认证；当前没有本新品认证证据。规格不得给Claude一条必然不实的已认证声明。",
+        "evidence": [
+          "docs/sop/sop-image-gen-skill-auto.md:142",
+          "docs/sop/sop-image-gen-skill-auto.md:156"
+        ],
+        "proposed_resolution": "未取得真实认证前使用普通欢迎语：欢迎使用证件照换底助手。取得明确规则例外后再放行；不自行修改共享SOP或伪造资质。"
+      }
+    ]
+  },
+  "billing": {
+    "channel": "general",
+    "backend_product": "gemini",
+    "payment_page": "https://aistore.zhaopintong.com/membership/gemini/",
+    "source_identity": "mps-id-photo-background",
+    "source_header": "X-Skill-Source",
+    "channel_header": "workbuddy_skill",
+    "free_trial": false,
+    "unit": "existing_shared_successful_image_use",
+    "units_per_task": 1,
+    "cost_source": "resources/shared-image-temporary/plans.public.json and live /membership-api/plans",
+    "prices_in_client_copy": false,
+    "account_authorization_link": "server_issued_only",
+    "sibling_reuse": false
+  },
+  "model": {
+    "name": "gpt-image-2.5-ext",
+    "asset_id": "aisplice",
+    "catalog_ref": "resources/upstreams/catalog.json",
+    "route": "photo-retouch-sunburst",
+    "actual_resource_contract": "all-new-resource-v1",
+    "resolution": "1K",
+    "n": 1,
+    "legacy_fallback": false,
+    "public_health_only": true,
+    "real_model_probe_performed": false
+  },
+  "margin": {
+    "unit_cost": 0.0455,
+    "unit_revenue": 0.19333333333333333,
+    "gross_margin": 0.7646551724137931,
+    "currency": "CNY",
+    "min_required": 0.6,
+    "basis": "公开价2026-11-05快照0.0065 USD/请求×假设汇率7；在线最低套餐29/150；未计税费等，非真实结算或净利润",
+    "estimate_only": true
+  },
+  "scenes": [
+    {
+      "key": "white-one",
+      "title": "白底一寸需求",
+      "keywords": [
+        "白底一寸",
+        "明天报名"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "white",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为white指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "blue-one",
+      "title": "蓝底一寸需求",
+      "keywords": [
+        "蓝底一寸",
+        "底色换蓝"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "blue",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为blue指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "red-one",
+      "title": "红底登记照需求",
+      "keywords": [
+        "红底一寸",
+        "毕业登记"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "red",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为red指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "white-two",
+      "title": "白底二寸需求",
+      "keywords": [
+        "白底二寸",
+        "报名表"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "white",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为white指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "blue-two",
+      "title": "蓝底二寸需求",
+      "keywords": [
+        "蓝底二寸",
+        "考试报名"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "blue",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为blue指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "resume-white",
+      "title": "简历白底人像",
+      "keywords": [
+        "简历照",
+        "底色太花"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "white",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为white指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "custom-pixels",
+      "title": "用户指定295×413",
+      "keywords": [
+        "295×413",
+        "像素卡住"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "user_selected",
+      "target_pixels": [
+        295,
+        413
+      ],
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为user_selected指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "edge-clean",
+      "title": "换底边缘检查",
+      "keywords": [
+        "别留蓝边",
+        "头发边缘"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "user_selected",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为user_selected指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "school",
+      "title": "入学登记需求",
+      "keywords": [
+        "入学登记照",
+        "学校照片"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "user_selected",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为user_selected指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    },
+    {
+      "key": "custom-size",
+      "title": "机构提供规格的照片",
+      "keywords": [
+        "单位要求",
+        "指定尺寸"
+      ],
+      "tier": "existing-1K-reference-edit",
+      "ratio": "2:3",
+      "gateway_size": "1024x1536",
+      "background": "user_selected",
+      "target_pixels": null,
+      "size_rule": "其他目标像素由用户提供的机构规格确认；一寸/二寸不自动推断统一像素、DPI或文件大小。",
+      "prompt": "仅将已授权参考照片的背景改为user_selected指定纯色，尽量清理发丝周围原底色；锁定原人物脸部身份、五官比例、表情、发型、衣着、肤色与姿态；不重画面部、不美颜、不换装。"
+    }
+  ],
+  "demos": [
+    {
+      "key": "white-one",
+      "title": "白底一寸需求",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "blue-one",
+      "title": "蓝底一寸需求",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "red-one",
+      "title": "红底登记照需求",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "white-two",
+      "title": "白底二寸需求",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "blue-two",
+      "title": "蓝底二寸需求",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "resume-white",
+      "title": "简历白底人像",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "custom-pixels",
+      "title": "用户指定295×413",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "edge-clean",
+      "title": "换底边缘检查",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "school",
+      "title": "入学登记需求",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    },
+    {
+      "key": "custom-size",
+      "title": "机构提供规格的照片",
+      "method": "synthetic_mock",
+      "created": false,
+      "by": "claude",
+      "disclosure": "合成流程示意，不是真实上游效果，也不是用户结果。"
+    }
+  ],
+  "prompt_baselines": [
+    "真实性与人物身份优先：原人物五官比例/表情/发型/服装等尽力保留，不保证像素一致",
+    "底图无文字，不让模型绘制中文",
+    "不冒用他人肖像或品牌，不伪造证件、资质或通过率"
+  ],
+  "timeouts": {
+    "request_s": 90,
+    "query_s": 15,
+    "poll_interval_s": 5,
+    "poll_attempts": 6,
+    "poll_window_s": 120,
+    "rate_limit_wait_s": 0,
+    "process_margin_s": 30,
+    "outer_s": 240,
+    "status": "design_budget_not_measured_generation_latency"
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/health",
+      "source": "resources/shared-image-temporary/client.py:63",
+      "auth": "none",
+      "notes": "只读配置能力，不证明本单真实生成或肖像保真"
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/membership-api/plans",
+      "source": "resources/shared-image-temporary/client.py:64",
+      "auth": "none",
+      "notes": "下单前读取，不硬编码套餐或收益"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/gemini/quick-entry",
+      "source": "resources/shared-image-temporary/client.py:66",
+      "auth": "original_install_identity",
+      "notes": "原install_secret；仅打开服务端签发的url"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/gemini/quick-entry/status",
+      "source": "resources/shared-image-temporary/client.py:71",
+      "auth": "original_install_identity",
+      "notes": "原安装身份续接；registered不等于付费到账"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/gemini/membership-link",
+      "source": "resources/shared-image-temporary/client.py:74",
+      "auth": "account_bearer",
+      "notes": "正文{}；短期服务端付款链接"
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/balance",
+      "source": "resources/shared-image-temporary/client.py:65",
+      "auth": "account_bearer",
+      "notes": "remaining_uses为总可用次数，不再相加共享/旧余额"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/gemini/skill-key",
+      "source": "resources/shared-image-temporary/client.py:80",
+      "auth": "account_bearer",
+      "notes": "state=ready才保存；不是供应商Key"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/gemini/skill-key/bound",
+      "source": "resources/shared-image-temporary/client.py:83",
+      "auth": "account_bearer",
+      "notes": "先安全保存，再以key字段确认"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/gemini/skill-jobs",
+      "source": "resources/shared-image-temporary/client.py:84",
+      "auth": "skill_bearer",
+      "notes": "原Idempotency-Key与已确认正文，不换键重发"
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/jobs/by-key/{original_key}",
+      "source": "resources/shared-image-temporary/client.py:87",
+      "auth": "skill_or_account_bearer",
+      "notes": "使用原任务键，不自行哈希"
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/jobs/{id}",
+      "source": "resources/shared-image-temporary/client.py:96",
+      "auth": "skill_or_account_bearer",
+      "notes": "原UUID；pending/needs_review不重建"
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/jobs/{id}/image",
+      "source": "resources/shared-image-temporary/client.py:97",
+      "auth": "skill_or_account_bearer",
+      "notes": "成功任务PNG二进制，保存后再交付"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/telemetry/v1/first-dialogue",
+      "source": "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:50",
+      "auth": "none",
+      "response_status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/telemetry/v1/first-dialogue/link",
+      "source": "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:48",
+      "auth": "account_bearer",
+      "response_status": 200
+    }
+  ],
+  "reference_payload": {
+    "verified_fields": {
+      "references": "list[{'mime','content'}];本品仅一张授权照片",
+      "reference_consent": "真实用户同意后才true",
+      "image_engine": "photo-retouch-sunburst",
+      "size": "1024x1536",
+      "confirmed": "同一任务明确同意付费后才true"
+    },
+    "sources": [
+      "snapshot/opt/skill-platform/member-0.10.14/core/image_inputs.py:12",
+      "snapshot/opt/skill-platform/member-0.10.24/sunburst.py:148",
+      "snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py:287"
+    ],
+    "unverified_not_sent": [
+      "model",
+      "n",
+      "quality",
+      "inline_delivery",
+      "dpi",
+      "target_pixels",
+      "machine_id"
+    ]
+  },
+  "telemetry": {
+    "currently_supported_fields": [
+      "channel",
+      "client_occurred_at",
+      "event_id",
+      "installation_id",
+      "is_test",
+      "skill_id",
+      "skill_name",
+      "skill_version"
+    ],
+    "current_success_status": 200,
+    "machine_id_sent": false,
+    "full_machine_funnel_available": false,
+    "current_protocol": "resources/shared-image-temporary/首次互动接入.md",
+    "is_test_during_development": true
+  },
+  "funnel_steps": [
+    {
+      "step": "L0",
+      "data": "现有8字段只支持安装×技能×渠道首次互动；跨技能新设备不可得"
+    },
+    {
+      "step": "L1",
+      "data": "既有journey页面/邀请事件；没有新设备IP日哈希口径，不伪造"
+    },
+    {
+      "step": "L2",
+      "data": "已鉴权账户关联及first-dialogue/link，匿名事件之后续接"
+    },
+    {
+      "step": "L3",
+      "data": "既有付款页旅程事件；当前聊天无管理员数据，不读取生产客户"
+    },
+    {
+      "step": "L4",
+      "data": "既有入账/订单账本，只接受服务端已入账；未做真实支付"
+    }
+  ],
+  "sibling_skills": [
+    {
+      "name": "老照片修复大师",
+      "skill_id": null,
+      "boundary": "老照片画质修复不等于换底",
+      "listing_verified": false
+    },
+    {
+      "name": "头像定制大师",
+      "skill_id": null,
+      "boundary": "风格化头像不等于真实照片换底",
+      "listing_verified": false
+    }
+  ],
+  "non_goals": [
+    "批量多人、换装换发型、五官美化、伪造证件",
+    "直接保证报名/签证等正式审核合格",
+    "供应商Key直连、旧资源回退、新模型或新价目",
+    "虚构官方认证、现场核款、退款、生产部署和上架"
+  ],
+  "tests": [
+    {
+      "id": "T01",
+      "group": "first_turn",
+      "by": "claude+codex",
+      "desc": "问候、仅图、问能力、带图明确需求均先价值展示，不取账户或付费链接",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T02",
+      "group": "first_turn",
+      "by": "claude+codex",
+      "desc": "首轮仅允许受控首次对话元数据请求，业务请求函数设为抛错仍能完成",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T03",
+      "group": "first_turn",
+      "by": "claude+codex",
+      "desc": "离线示例10项，只展示本次脚本返回的绝对路径，两列链接表且同对话去重",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T04",
+      "group": "first_turn",
+      "by": "claude+codex",
+      "desc": "不要生成新图/只要文字/只看某示例正确分流",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T05",
+      "group": "first_turn",
+      "by": "claude+codex",
+      "desc": "首轮不查凭证、不调用help/account/health/catalog，不读取照片发送至后端",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T06",
+      "group": "confirmation_account",
+      "by": "claude+codex",
+      "desc": "认可方向、沉默、授权成功、已充值均不能替代同任务付费同意",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T07",
+      "group": "confirmation_account",
+      "by": "claude+codex",
+      "desc": "参考照片对外处理同意与付费同意独立；取消时零任务",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T08",
+      "group": "confirmation_account",
+      "by": "claude+codex",
+      "desc": "原安装身份及微信短链恢复，过期才重取，不新建原账户",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T09",
+      "group": "confirmation_account",
+      "by": "claude+codex",
+      "desc": "服务端签发链接保留ticket/entry，不在日志或回复暴露凭证",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T10",
+      "group": "confirmation_account",
+      "by": "claude+codex",
+      "desc": "有可用次数跳过开通充值；无余额先询问是否打开充值页",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T11",
+      "group": "confirmation_account",
+      "by": "claude+codex",
+      "desc": "凭证401自动清除失效凭证，输出credentialsReset与退出码4",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T12",
+      "group": "confirmation_account",
+      "by": "claude+codex",
+      "desc": "未获用户明确同意不读取其他技能凭证，sibling_reuse=false",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T13",
+      "group": "billing_jobs",
+      "by": "claude+codex",
+      "desc": "同键同体恢复、已成功任务重放只结算一次",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T14",
+      "group": "billing_jobs",
+      "by": "claude+codex",
+      "desc": "402、401、429、5xx后不换键、不缓存错误作成功、不自动新建任务",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T15",
+      "group": "billing_jobs",
+      "by": "claude+codex",
+      "desc": "未知状态只查原任务，不猜测已扣/未扣或承诺自动退款",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T16",
+      "group": "billing_jobs",
+      "by": "claude+codex",
+      "desc": "账户到账以实际remaining_uses为准，不将注册或用户自述当到账",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T17",
+      "group": "billing_jobs",
+      "by": "claude+codex",
+      "desc": "成功先交真实图片，再转述服务端实际费用记录；缺字段不自行计算",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T18",
+      "group": "billing_jobs",
+      "by": "claude+codex",
+      "desc": "图片下载失败保留原任务查询，不杜撰inline_delivery补取接口",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T19",
+      "group": "billing_jobs",
+      "by": "claude+codex",
+      "desc": "同设备退出恢复后仍查原任务UUID，任务数据仅本地私有存储",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T20",
+      "group": "wait",
+      "by": "claude+codex",
+      "desc": "一次返回成功",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T21",
+      "group": "wait",
+      "by": "claude+codex",
+      "desc": "两轮后成功",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T22",
+      "group": "wait",
+      "by": "claude+codex",
+      "desc": "窗口结束仍pending保存原任务",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T23",
+      "group": "wait",
+      "by": "claude+codex",
+      "desc": "首轮网络错误后用原任务查询恢复",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T24",
+      "group": "wait",
+      "by": "claude+codex",
+      "desc": "全程无应答显示进度无法确认",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T25",
+      "group": "wait",
+      "by": "claude+codex",
+      "desc": "明确失败仅引用服务端能确认的费用结果",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T26",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "单张PNG/JPEG且真实内容匹配，损坏/超限/无授权在本地拒绝",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T27",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "上游请求只使用1K现有3种画幅，本品默认1024x1536，不宣称2K/4K可用",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T28",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "不改变五官、发型、服装的提示约束与可见结果检查，生成差异不能声明身份完全一致",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T29",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "用户指定目标像素时独立本地裁切另存，重新解码核对实际尺寸；无法保证时受控停止",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T30",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "无机构规格不将一寸/二寸自动等同某个像素或文件大小",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T31",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "原图不修改不移动，输出不覆盖，支持真实本地画廊",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T32",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "图片错误及含敏感凭证错误体不直接对客输出",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T33",
+      "group": "input_output",
+      "by": "claude+codex",
+      "desc": "未成年人需监护授权；冒用肖像、证件伪造与明确禁止编辑用途拒绝",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T34",
+      "group": "telemetry",
+      "by": "claude+codex",
+      "desc": "真实首轮含问候/缺图即上报；安装、读取、自检、定时任务不上报",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T35",
+      "group": "telemetry",
+      "by": "claude+codex",
+      "desc": "严格8字段、200回执、采用服务端返回ID及receipt，不提交machine_id或正文",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T36",
+      "group": "telemetry",
+      "by": "claude+codex",
+      "desc": "标识持久化失败跳过，不临时造身份；去重和开关生效",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T37",
+      "group": "telemetry",
+      "by": "claude+codex",
+      "desc": "2秒预算，不阻塞业务；当前实际协议与自动SOP重试差异记录后才实现",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T38",
+      "group": "telemetry",
+      "by": "claude+codex",
+      "desc": "账户后续link幂等，409不覆盖其他账户；凭证只在头部",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T39",
+      "group": "telemetry",
+      "by": "claude+codex",
+      "desc": "跨技能新设备L0不可得时明确不可得，不把installation当machine或下载当人数",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T40",
+      "group": "contract_copy",
+      "by": "claude+codex",
+      "desc": "欢迎句无虚构认证；未解决硬冲突时禁止交付可发布包",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T41",
+      "group": "contract_copy",
+      "by": "claude+codex",
+      "desc": "对客文案不含开发流程、供应商、接口、base64等术语",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T42",
+      "group": "contract_copy",
+      "by": "claude+codex",
+      "desc": "超时由脚本常量实算，各文档一致，不把设计值冒充实测耗时",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T43",
+      "group": "contract_copy",
+      "by": "claude+codex",
+      "desc": "退出码0/2/3/4与JSON信号、欢迎话术、示例集合一致",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T44",
+      "group": "contract_copy",
+      "by": "claude+codex",
+      "desc": "最终ZIP干净解压独立重跑，头像512×512与ZIP同目录，不覆盖旧包",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T45",
+      "group": "host",
+      "by": "codex",
+      "desc": "真实WorkBuddy开新对话逐项验首轮可见行为与链接展示",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T46",
+      "group": "host",
+      "by": "codex",
+      "desc": "收藏仅交付成功后用户同意才写宿主记忆，缺工具如实说明",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T47",
+      "group": "host",
+      "by": "codex",
+      "desc": "宿主无解释器、禁网、无记忆工具分别降级，不宣称已通过",
+      "status": "not_run_product_not_implemented"
+    },
+    {
+      "id": "T48",
+      "group": "host",
+      "by": "codex",
+      "desc": "未验证真实扫码、核款、模型质量与审核，不把Mock当生产效果",
+      "status": "not_run_product_not_implemented"
+    }
+  ],
+  "verification_completed": {
+    "checked_at": "2026-11-06T21:11:39+08:00",
+    "synthetic_contract_checks": {
+      "accepts_eight_existing_fields": true,
+      "same_installation_deduplicates": true,
+      "rejects_unregistered_machine_id": true,
+      "schema_has_no_machine_id": true
+    },
+    "checks_passed": 4,
+    "network_calls": 0,
+    "real_upstream_calls": 0,
+    "production_database_used": false,
+    "reference_client_mock_tests_passed": 12
+  },
+  "public_verification": {
+    "health": {
+      "url": "https://aistore.zhaopintong.com/platform-api/gemini/health",
+      "status": 200,
+      "checked_at": "2026-11-06T13:05:57.664884+00:00",
+      "body": {
+        "status": "ok",
+        "version": "0.10.14",
+        "shared_wallet": true,
+        "automatic_skill_keys": true,
+        "new_user_uses": 0,
+        "provider_configured": true,
+        "reference_editing": true,
+        "image_engines": {
+          "photo-retouch-sunburst": {
+            "configured": true,
+            "reference_editing": true,
+            "text_to_image": false
+          },
+          "gemini-personal-sunburst": {
+            "configured": true,
+            "reference_editing": true,
+            "text_to_image": true
+          }
+        },
+        "image_resource_contract": "all-new-resource-v1"
+      }
+    },
+    "plans": {
+      "url": "https://aistore.zhaopintong.com/platform-api/gemini/membership-api/plans",
+      "status": 200,
+      "checked_at": "2026-11-06T13:05:56.527817+00:00",
+      "body": {
+        "payment_ready": true,
+        "purchase_type": "membership",
+        "auto_renew_ready": false,
+        "rules_confirmed": true,
+        "plans": [
+          {
+            "name": "Plus",
+            "price_fen": 2900,
+            "images": 150,
+            "id": "shared_permanent_29",
+            "points": 150000,
+            "period": "permanent",
+            "valid_days": null,
+            "renewal_price_fen": null
+          },
+          {
+            "name": "Pro",
+            "price_fen": 3900,
+            "images": 200,
+            "id": "shared_permanent_39",
+            "points": 200000,
+            "period": "permanent",
+            "valid_days": null,
+            "renewal_price_fen": null
+          },
+          {
+            "name": "Ultra",
+            "price_fen": 4900,
+            "images": 250,
+            "id": "shared_permanent_49",
+            "points": 250000,
+            "period": "permanent",
+            "valid_days": null,
+            "renewal_price_fen": null
+          },
+          {
+            "name": "终身会员",
+            "price_fen": 99900,
+            "images": 5000,
+            "id": "shared_permanent_999",
+            "points": 5000000,
+            "period": "permanent",
+            "valid_days": null,
+            "renewal_price_fen": null
+          }
+        ],
+        "payment_mode": "manual_qr",
+        "support_wechat": "GMC2B2022",
+        "qr_url": "/membership/payment-qr.png",
+        "monthly_valid_days": null,
+        "audience": "shared",
+        "shared": true
+      }
+    },
+    "payment_page": {
+      "url": "https://aistore.zhaopintong.com/membership/gemini/",
+      "status": 200,
+      "checked_at": "2026-11-06T13:05:56.955509+00:00",
+      "content_type": "text/html",
+      "final_url": "https://aistore.zhaopintong.com/membership/gemini/",
+      "body_bytes": 17583,
+      "nonempty": true
+    }
+  },
+  "blocked_reasons": [
+    {
+      "id": "B1",
+      "code": "HARD_STOP",
+      "item": "首次对话与设备漏斗的强制规范不等于现有接口",
+      "detail": "现有白名单8字段、200含receipt并按安装去重；自动SOP第六章要求machine_id、新设备L0、204、IP按日限额及新表/明细。本地合成验证额外machine_id会被拒绝；不能仅换客户端字段宣称已接完整漏斗。改变现有审计/限流触及A.5第150-156行硬边界。",
+      "evidence": [
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:30",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:33",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:34",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:50"
+      ],
+      "proposed_resolution": "首版兼容实际8字段200回执，仅统计已支持的首次对话/安装与关联，跨技能新设备漏斗标不可得；取得明确规则例外后走快车道。若必须完整机器漏斗，另行批准后端统计设计与部署，不更改既有客户/限流/审计。"
+    },
+    {
+      "id": "B2",
+      "code": "HARD_STOP",
+      "item": "欢迎句认证声明冲突",
+      "detail": "自动SOP固定欢迎句要求写官方认证，同时A.5和固定规则禁止冒用认证；当前没有本新品认证证据。规格不得给Claude一条必然不实的已认证声明。",
+      "evidence": [
+        "docs/sop/sop-image-gen-skill-auto.md:142",
+        "docs/sop/sop-image-gen-skill-auto.md:156"
+      ],
+      "proposed_resolution": "未取得真实认证前使用普通欢迎语：欢迎使用证件照换底助手。取得明确规则例外后再放行；不自行修改共享SOP或伪造资质。"
+    }
+  ],
+  "decisions": [
+    {
+      "item": "关口",
+      "chosen": "本单采用自动SOP",
+      "basis": "当前聊天人工直接确认；不是Muse转述授权"
+    },
+    {
+      "item": "当前有效支付",
+      "chosen": "临时域名/membership/gemini/及服务器签发链接",
+      "basis": "11月6日资源入口、参考客户端、在线200；不使用旧/pay示例"
+    },
+    {
+      "item": "当前有效上游",
+      "chosen": "aisplice新适配器1K单图，不直接调用通用目录其余模型",
+      "basis": "resources/upstreams/README.md、新资源策略、公开健康"
+    },
+    {
+      "item": "真实探针",
+      "chosen": "仅GET公开健康与套餐；真实上游0",
+      "basis": "自动SOP A.5硬边界及CLAUDE.md"
+    },
+    {
+      "item": "标准尺寸",
+      "chosen": "机构规格由用户提供，生成尺寸与最终裁切尺寸分别验证",
+      "basis": "当前网关仅3种画幅；不把一寸推定唯一像素"
+    },
+    {
+      "item": "示例",
+      "chosen": "10个待制作Mock合成示意，明确非真实模型效果",
+      "basis": "自动SOP A1禁止为示例调用真实上游"
+    },
+    {
+      "item": "正式证件用途",
+      "chosen": "对明确禁止编辑的用途不承接；其余须按机构规则核验",
+      "basis": "未核实的机构要求不能默认通用；美国签证FAQ禁止改变外貌的数字修改"
+    },
+    {
+      "item": "认证及新机器漏斗",
+      "chosen": "阻塞，提出兼容现有契约的具体方案，不自行降低A1",
+      "basis": "自动SOP A.5/A.7，当前源代码与合成验证"
+    }
+  ]
+}

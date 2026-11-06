@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-903b3c4bee53ba19ee4d5773a8dac53a1fec43a0e97f3e5df24775801d82ae2b",
+  "checked_at": "2026-11-06T21:17:05+08:00",
+  "request_kind": "handoff",
+  "handling": "received_and_codex_spec_stage_investigated",
+  "business_completed": false,
+  "outcome": "blocked",
+  "a1_passed": false,
+  "user_confirmation": "当前聊天人工直接确认自动SOP及现有有效上游/通用生图付款入口",
+  "source_snapshot": "44a6ed60ea015f260a89b75975f9b21fe39e9e3e",
+  "spec_path": "pipeline/products/mps-id-photo-background/01-dev-spec.md",
+  "spec_json_path": "pipeline/products/mps-id-photo-background/01-dev-spec.json",
+  "blockers": [
+    {
+      "id": "B1",
+      "code": "HARD_STOP",
+      "item": "首次对话与设备漏斗的强制规范不等于现有接口",
+      "detail": "现有白名单8字段、200含receipt并按安装去重；自动SOP第六章要求machine_id、新设备L0、204、IP按日限额及新表/明细。本地合成验证额外machine_id会被拒绝；不能仅换客户端字段宣称已接完整漏斗。改变现有审计/限流触及A.5第150-156行硬边界。",
+      "evidence": [
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:9",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:30",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py:33",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:34",
+        "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:50"
+      ],
+      "proposed_resolution": "首版兼容实际8字段200回执，仅统计已支持的首次对话/安装与关联，跨技能新设备漏斗标不可得；取得明确规则例外后走快车道。若必须完整机器漏斗，另行批准后端统计设计与部署，不更改既有客户/限流/审计。"
+    },
+    {
+      "id": "B2",
+      "code": "HARD_STOP",
+      "item": "欢迎句认证声明冲突",
+      "detail": "自动SOP固定欢迎句要求写官方认证，同时A.5和固定规则禁止冒用认证；当前没有本新品认证证据。规格不得给Claude一条必然不实的已认证声明。",
+      "evidence": [
+        "docs/sop/sop-image-gen-skill-auto.md:142",
+        "docs/sop/sop-image-gen-skill-auto.md:156"
+      ],
+      "proposed_resolution": "未取得真实认证前使用普通欢迎语：欢迎使用证件照换底助手。取得明确规则例外后再放行；不自行修改共享SOP或伪造资质。"
+    }
+  ],
+  "verified": {
+    "checked_at": "2026-11-06T21:11:39+08:00",
+    "synthetic_contract_checks": {
+      "accepts_eight_existing_fields": true,
+      "same_installation_deduplicates": true,
+      "rejects_unregistered_machine_id": true,
+      "schema_has_no_machine_id": true
+    },
+    "checks_passed": 4,
+    "network_calls": 0,
+    "real_upstream_calls": 0,
+    "production_database_used": false,
+    "reference_client_mock_tests_passed": 12
+  },
+  "public_http": {
+    "health": {
+      "url": "https://aistore.zhaopintong.com/platform-api/gemini/health",
+      "status": 200,
+      "checked_at": "2026-11-06T13:05:57.664884+00:00"
+    },
+    "plans": {
+      "url": "https://aistore.zhaopintong.com/platform-api/gemini/membership-api/plans",
+      "status": 200,
+      "checked_at": "2026-11-06T13:05:56.527817+00:00"
+    },
+    "payment_page": {
+      "url": "https://aistore.zhaopintong.com/membership/gemini/",
+      "status": 200,
+      "checked_at": "2026-11-06T13:05:56.955509+00:00"
+    }
+  },
+  "real_upstream_calls": 0,
+  "production_mutations": 0,
+  "product_package_written": false,
+  "independent_worker_started": false,
+  "needs": "确认本单是否可兼容现有8字段200回执并将跨技能机器漏斗标不可得，同时未认证前使用普通欢迎语；否则另行批准后端统计升级并提供认证依据。"
+}

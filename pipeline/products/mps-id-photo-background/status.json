@@ -2,17 +2,24 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "97dfc5db0de78f547a7f8292fc2ad4d249d5dfd6",
-  "stage": "spec_in_progress",
+  "stage": "blocked",
   "owner": "codex",
   "claimed_at": "2026-11-06T21:03:25+08:00",
-  "updated_at": "2026-11-06T21:03:25+08:00",
+  "updated_at": "2026-11-06T21:17:05+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
     "test": 0
   },
-  "lane": "fast",
-  "blocked": null,
+  "lane": "deploy",
+  "blocked": {
+    "at_stage": "spec_in_progress",
+    "by": "codex",
+    "reason_code": "HARD_STOP",
+    "detail": "A1未通过：自动SOP机器漏斗要求与现有8字段协议不符；官方认证欢迎句没有本品认证依据。非执行权限故障。",
+    "needs": "确认本单是否可兼容现有8字段200回执并将跨技能机器漏斗标不可得，同时未认证前使用普通欢迎语；否则另行批准后端统计升级并提供认证依据。",
+    "resume_to": "brief_ready"
+  },
   "versions": {
     "package": null,
     "listed": null
