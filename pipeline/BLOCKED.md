@@ -2,6 +2,7 @@
 
 | 时间 | skill-id | 拦停环节 | 原因代码 | 说明 | 负责人要做的事 | 恢复到 |
 |---|---|---|---|---|---|---|
+| 2026-11-06T23:45:07+08:00 | mps-id-photo-background | dev_in_progress | OFFICIAL_DOCS_UNREADABLE | Claude开发前读取WorkBuddy官方文档失败（网页读取权限无人应答超时）；A1复检已通过，未写包；证据见产品目录02-self-test.md | 让Claude定时运行能无人值守读取 open.workbuddy.cn/docs/skill、/docs/expert，然后置回spec_ready | spec_ready |
 
 ## 已解除记录（开发规格1.0.1）
 

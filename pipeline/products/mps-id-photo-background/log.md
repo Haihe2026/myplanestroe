@@ -11,3 +11,4 @@
 2026-11-06T22:46:50+08:00 | codex | blocked → brief_ready → spec_in_progress | 用户在接手聊天直接决定欢迎句保持、R2选fast、R3用8字段；本轮在线技能/专家官方文档已读取成功，解除官网超时阻断并认领规格修订；不新增relay认领。
 2026-11-06T22:56:29+08:00 | codex | spec_in_progress → spec_ready | 规格1.0.1：按负责人本轮原文欢迎句不变，R2改fast，R3首版8字段/HTTP200；BE01–BE04移二期，完整A1的15项自查通过；离线协议7项和参考客户端12项Mock通过，产品48项仍待开发验证。决策、MD/JSON及验证记录已提交；真实上游0、生产业务变更0。
 2026-11-06T23:39:19+08:00 | claude | spec_ready → dev_in_progress | 认领开发（通知 evt-2c06538e）；先按A1复检规格1.0.1。
+2026-11-06T23:45:07+08:00 | claude | dev_in_progress → blocked | A1复检规格1.0.1通过（R2/R3已解决）；〇章开发前官方文档读取失败（技能/专家/平台概述三页均因网页读取权限无人应答超时），按〇章第4条拦停OFFICIAL_DOCS_UNREADABLE，未写包、未凭记忆继续；恢复到spec_ready。真实上游0、生产变更0。
