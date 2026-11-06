@@ -1,0 +1,17 @@
+# 生图类 Skill 自动流水线配置。负责人维护，AI 只读。字段说明见 docs/sop/sop-image-gen-skill-auto.md 附录 B.7。
+repo_is_private: false            # 当前仓库是公开的。改为私有仓库后再改成 true，否则三个 AI 不写入选品单、开发文档和 Skill 包
+pipeline_branch: main
+codex_may_publish: true           # Codex 测试通过后直接上架
+channels: [workbuddy-skill, workbuddy-expert, skillhub]
+allow_listing_without_host_acceptance: false
+sibling_reuse: false
+min_gross_margin: 0.6
+max_rounds: 3
+max_parallel: 2
+claim_timeout_hours: 6
+rollback:
+  max_failure_rate: 0.2
+schedule:
+  codex_spec: "每 2 小时"
+  claude_dev: "每 2 小时"
+  codex_test: "每 2 小时"
