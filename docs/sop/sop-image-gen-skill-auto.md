@@ -57,7 +57,7 @@ pipeline/
         └── 05-metrics/             # Codex：上线后数据快照（D1、D7、D14、D30）
 ```
 
-**仓库公开性**：选品单、开发文档、未上架的 Skill 包都是商业信息。流水线仓库必须是**私有仓库**；如果 `config.yaml` 里 `repo_is_private` 不是 `true`，三个 AI 都不得写入选品单、开发文档和 Skill 包，直接在 `BLOCKED.md` 写一条「流水线仓库不是私有，停止写入」。
+**仓库公开性**：流水线仓库可以是公开仓库，选品单、开发文档、Skill 包都可以提交。但**任何情况下都不得提交**密钥、Cookie、Token、真实用户数据、真实订单和手机号、邮箱等个人信息（提交规则最后一条）。
 
 **提交规则**：
 - 每次只提交自己负责的文件，提交信息格式：`[<skill-id>] <阶段>: <一句话>`。
@@ -1046,7 +1046,6 @@ Codex（数据）按 A.8 在 D1、D7、D14、D30 生成数据快照，负责人�
 ### B.7 流水线配置 `pipeline/config.yaml`（负责人维护，AI 只读）
 
 ```yaml
-repo_is_private: true             # 不是 true 时三个 AI 停止写入商业文件
 pipeline_branch: main
 codex_may_publish: true           # Codex 是否可以直接上架
 channels: [workbuddy-skill, workbuddy-expert, skillhub]
@@ -1064,7 +1063,7 @@ schedule:
   codex_test: "每 2 小时"
 ```
 
-`config.yaml` 不存在时，三个 AI 都按上面的默认值执行，但 `codex_may_publish` 视为 `false`、`repo_is_private` 视为未确认（即停止写入商业文件，并在 `BLOCKED.md` 提示负责人创建配置）。
+`config.yaml` 不存在时，三个 AI 都按上面的默认值执行，但 `codex_may_publish` 视为 `false`。
 
 ### B.8 拦停原因代码
 
@@ -1080,7 +1079,6 @@ schedule:
 | `OFFICIAL_DOCS_UNREADABLE` | WorkBuddy 官方文档读不到 | 确认文档可访问后恢复 |
 | `TOO_MANY_ROUNDS` | 多轮未通过 | 看测试报告决定修改开发文档或放弃 |
 | `PLATFORM_RULE_UNCLEAR` | 平台规则不明且影响上架 | 向官方确认后恢复 |
-| `REPO_NOT_PRIVATE` | 流水线仓库不是私有 | 改为私有仓库并更新配置 |
 | `ROLLED_BACK` | 上线后触发自动回滚 | 看 D1 快照决定 |
 | `HARD_STOP` | 触碰 A.5「永远拦停」清单 | 人工处理 |
 
@@ -1093,6 +1091,5 @@ schedule:
 | 下游发现上游文件有问题，直接改了别人的文件 | 只写退回意见，按 A.4 退回，不改别人的文件 |
 | 为了让单子继续流动，按自己的理解定了价格或免费试用 | A.5 写「拦停」的事一律拦停，AI 不得自行决定 |
 | 测试的 ZIP 和自测的 ZIP 不是同一个 | 测试报告必须核对 SHA256 |
-| 选品单、开发文档放在公开仓库 | 流水线仓库必须私有，`repo_is_private` 不是 `true` 就停止写入 |
 | 认领后长时间没动，单子卡死 | 超过 `claim_timeout_hours` 可被退回 |
 | 真机没跑就标通过 | 只能标「待验收」，按 A.5 处理 |
