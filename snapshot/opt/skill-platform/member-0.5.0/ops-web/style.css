@@ -167,3 +167,22 @@ main{max-width:1440px;padding:14px 24px 36px}
 #ops-channels .channel-empty details{width:100%;min-width:0;margin:14px 0}
 #ops-channels .channel-skill-chart{display:block;max-width:100%;height:auto;background:#fff;border:1px solid #e2eae5;border-radius:8px}
 #channel-skill-controls{margin-top:14px}#channel-workbuddy-detail{border-top:1px solid #e2eae5;padding-top:16px;font-size:13px}
+
+/* Platform-only download trend. Scoped to the manager channel section. */
+#ops-channels .channel-empty.channel-platform-trend{display:block;min-height:0;padding:0;margin:18px 0 0;background:none;border:0;text-align:left}
+#ops-channels .channel-platform-frame{position:relative;width:100%;min-width:0}
+#ops-channels .channel-platform-chart{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y}
+#ops-channels .channel-platform-chart:focus-visible{outline:2px solid #4e68ed;outline-offset:4px;border-radius:8px}
+#ops-channels .channel-platform-tooltip{position:absolute;z-index:3;width:264px;max-width:calc(100% - 16px);box-sizing:border-box;padding:14px 16px;background:#fff;color:#475065;border:1px solid #dce1ec;border-radius:8px;box-shadow:0 3px 16px #25305325;pointer-events:none;font-size:14px;line-height:1.5}
+#ops-channels .channel-platform-tooltip[hidden]{display:none}
+#ops-channels .channel-platform-tooltip-date{color:#6b7382;margin-bottom:6px}
+#ops-channels .channel-platform-tooltip-row{display:flex;align-items:center;justify-content:space-between;gap:14px;white-space:nowrap}
+#ops-channels .channel-platform-tooltip-row span{display:flex;align-items:center;gap:8px}
+#ops-channels .channel-platform-tooltip-row i{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+#ops-channels .channel-platform-tooltip-row strong{font-size:16px;font-variant-numeric:tabular-nums}
+#ops-channels .channel-platform-tooltip small{display:block;margin-top:6px;font-size:11px;color:#8892a7}
+#ops-channels .channel-platform-legend{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin:10px 0 0;color:#69758f;font-size:13px}
+#ops-channels .channel-platform-legend span{display:flex;align-items:center;gap:8px}
+#ops-channels .channel-platform-legend i{width:12px;height:12px;border:2px solid;border-radius:50%;box-sizing:border-box;background:#fff}
+#ops-channels .channel-platform-note{text-align:center;font-size:11px;margin:10px 0 0;color:#8a94a7}
+@media(max-width:600px){#ops-channels .channel-platform-tooltip{width:244px;font-size:12px;padding:10px 12px}#ops-channels .channel-platform-legend{font-size:12px;gap:18px}}

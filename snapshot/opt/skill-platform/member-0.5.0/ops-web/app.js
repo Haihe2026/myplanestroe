@@ -218,8 +218,20 @@ $('days').addEventListener('change',()=>refresh({manual:true}));$('product').add
  const n=value=>Number.isSafeInteger(value)&&value>=0?value.toLocaleString('zh-CN'):'—';
  const dateNow=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
  const previousDate=(day,offset)=>{const d=new Date(day+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+offset);return d.toISOString().slice(0,10);};
- const delta=(history,day)=>{const a=history[day],b=history[previousDate(day,-1)];if(!a||!b||JSON.stringify(a.skills.map(x=>x.slug).sort())!==JSON.stringify(b.skills.map(x=>x.slug).sort()))return null;const prior=new Map(b.skills.map(x=>[x.slug,x.downloads]));const changes=a.skills.map(x=>Number.isSafeInteger(x.downloads)&&Number.isSafeInteger(prior.get(x.slug))?x.downloads-prior.get(x.slug):-1);return changes.every(v=>v>=0)?changes.reduce((x,y)=>x+y,0):null;};
- let latest=null;const hiddenSkills=new Set(),skillNames=new Map();
+ const delta=(history,day)=>{
+  const a=history[day]?.skills,b=history[previousDate(day,-1)]?.skills;
+  if(!Array.isArray(a)||!Array.isArray(b)||!a.length||a.length!==b.length)return null;
+  const prior=new Map(b.map(s=>[s.slug,s.downloads]));
+  if(prior.size!==b.length||new Set(a.map(s=>s.slug)).size!==a.length)return null;
+  let total=0;
+  for(const s of a){
+   const last=prior.get(s.slug);
+   if(typeof s.slug!=='string'||!s.slug||!Number.isSafeInteger(s.downloads)||s.downloads<0||!Number.isSafeInteger(last)||last<0||s.downloads<last)return null;
+   total+=s.downloads-last;
+  }
+  return Number.isSafeInteger(total)?total:null;
+ };
+ let latest=null;
  function draw(){
   const data=latest,snapshot=data?.skillhub;if(!snapshot)return;
   const panel=document.getElementById('ops-channels'),cards=panel.querySelectorAll('.channel-cards article');
@@ -254,85 +266,136 @@ $('days').addEventListener('change',()=>refresh({manual:true}));$('product').add
   caption.textContent=caption.textContent.replace('尚未接入统计数据','SkillHub 数据日 '+snapshot.date);
   let note=document.getElementById('channel-collection-note');
   if(!note){note=document.createElement('p');note.id='channel-collection-note';note.className='channel-caption';panel.querySelector('.channel-cards').after(note);}
-  note.textContent='最近成功采集：'+snapshot.captured_at.slice(0,19).replace('T',' ')+'（北京时间）；已保存 '+Object.keys(history).length+' 天快照。每条曲线对应一个 Skill。缺失日期留空，计数下降不当作负下载；平台下载计数不等于独立用户数。';
+  note.textContent='最近成功采集：'+snapshot.captured_at.slice(0,19).replace('T',' ')+'（北京时间）；已保存 '+Object.keys(history).length+' 天快照。曲线按 SkillHub、WorkBuddy 两个平台展示，缺失日期留空。';
   const start=document.getElementById('channel-from').value,end=document.getElementById('channel-to').value;
   const empty=panel.querySelector('.channel-empty');
   empty.replaceChildren();
   const el=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
-  let controls=document.getElementById('channel-skill-controls');
-  if(!controls){
-   controls=el('div');controls.id='channel-skill-controls';controls.className='filters';
-   const label=el('label','统计口径 '),mode=el('select');mode.id='channel-skill-mode';mode.setAttribute('aria-label','Skill下载统计口径');
-   for(const [value,text] of [['daily','每日新增'],['cumulative','累计下载']]){const o=el('option',text);o.value=value;mode.append(o);}
-   label.append(mode);controls.append(label);mode.addEventListener('change',draw);
-   const all=el('button','显示全部'),none=el('button','清空选择');all.type=none.type='button';
-   all.addEventListener('click',()=>{hiddenSkills.clear();draw();});none.addEventListener('click',()=>{for(const key of skillNames.keys())hiddenSkills.add(key);draw();});controls.append(all,none);empty.before(controls);
-  }
-  const mode=document.getElementById('channel-skill-mode').value;
-  skillNames.clear();
-  for(const day of Object.keys(history).sort())for(const skill of history[day].skills||[])skillNames.set(skill.slug,skill.name||skill.slug);
-  const keys=[...skillNames.keys()].sort();
-  const values=(key,day)=>{
-   const current=(history[day]?.skills||[]).find(s=>s.slug===key);
-   if(!current||!Number.isSafeInteger(current.downloads)||current.downloads<0)return null;
-   if(mode==='cumulative')return current.downloads;
-   const prior=(history[previousDate(day,-1)]?.skills||[]).find(s=>s.slug===key);
-   if(!prior||!Number.isSafeInteger(prior.downloads)||prior.downloads>current.downloads)return null;
-   return current.downloads-prior.downloads;
+  document.getElementById('channel-skill-controls')?.remove();
+  document.getElementById('channel-workbuddy-detail')?.remove();
+  empty.classList.add('channel-platform-trend');
+  panel.querySelector('.channel-chart-heading p').textContent='SkillHub · WorkBuddy';
+  const days=selectedDays,ns='http://www.w3.org/2000/svg';
+  const valid=value=>Number.isSafeInteger(value)&&value>=0?value:null;
+  const series=[
+   {id:'skillhub',label:'SkillHub 日增量',color:'#4e68ed',values:days.map(day=>delta(history,day))},
+   {id:'workbuddy',label:'WorkBuddy 安装量',color:'#f59b36',values:days.map(day=>valid(allWb[day]?.installs))}
+  ];
+  const mobile=window.matchMedia('(max-width:600px)').matches;
+  const width=mobile?360:1040,height=mobile?280:350;
+  const left=mobile?38:58,right=width-(mobile?14:22),top=24,bottom=height-36;
+  const maximum=Math.max(1,...series.flatMap(s=>s.values.filter(v=>v!==null)));
+  const step=Math.max(1,Math.ceil(maximum/4)),ceiling=step*4;
+  const x=i=>days.length===1?(left+right)/2:left+i/(days.length-1)*(right-left);
+  const y=value=>bottom-value/ceiling*(bottom-top);
+  const frame=el('div');frame.className='channel-platform-frame';
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox','0 0 '+width+' '+height);
+  svg.setAttribute('role','img');svg.setAttribute('tabindex','0');
+  svg.setAttribute('aria-label','SkillHub每日新增下载和WorkBuddy安装量，左右方向键查看日期');
+  svg.classList.add('channel-platform-chart');
+  frame.append(svg);
+  const shape=(tag,attrs,text,parent=svg)=>{
+   const node=document.createElementNS(ns,tag);
+   for(const [key,value] of Object.entries(attrs))node.setAttribute(key,String(value));
+   if(text!==undefined)node.textContent=text;parent.append(node);return node;
   };
-  const days=[];for(let day=start;day<=end&&days.length<366;day=previousDate(day,1))days.push(day);
-  const colors=keys.map((key,i)=>'hsl('+((i*137.508)%360).toFixed(1)+' 65% 38%)');
-  const title=el('h3','SkillHub · 每个Skill'+(mode==='daily'?'每日新增下载':'累计下载'));
-  const explanation=el('p',mode==='daily'?'相邻两日都采到同一个Skill才计算新增；新上架、漏采和计数回退处留空。':'展示每日实测累计值；未采集日期不补零，也不跨缺口连线。');
-  empty.append(title,explanation);
-  const legend=el('div');legend.className='filters';legend.setAttribute('aria-label','选择要显示的Skill');
-  keys.forEach((key,i)=>{const label=el('label'),box=el('input'),name=el('span',skillNames.get(key));box.type='checkbox';box.checked=!hiddenSkills.has(key);box.setAttribute('aria-label',skillNames.get(key));box.addEventListener('change',()=>{box.checked?hiddenSkills.delete(key):hiddenSkills.add(key);draw();});const color=el('span','●');color.style.color=colors[i%colors.length];label.title=key;label.append(box,color,name);legend.append(label);});
-  empty.append(legend);
-  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 1040 380');svg.setAttribute('width','100%');svg.setAttribute('role','img');svg.setAttribute('aria-label',title.textContent);svg.classList.add('channel-skill-chart');
-  const visible=keys.filter(key=>!hiddenSkills.has(key));let max=1;
-  for(const key of visible)for(const day of days){const v=values(key,day);if(v!==null)max=Math.max(max,v);}
-  const x=i=>64+i/Math.max(1,days.length-1)*950,y=v=>330-v/max*270;
-  const shape=(tag,attrs,text)=>{const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,String(v));if(text!==undefined)e.textContent=text;svg.append(e);return e;};
-  for(let i=0;i<=4;i++){const value=Math.round(max*i/4);shape('line',{x1:64,y1:y(value),x2:1014,y2:y(value),stroke:'#dfe8e2'});shape('text',{x:54,y:y(value)+4,'text-anchor':'end','font-size':12,fill:'#65766c'},value);}
-  for(let i=0;i<days.length;i++)if(i===0||i===days.length-1||i%Math.max(1,Math.ceil(days.length/7))===0)shape('text',{x:x(i),y:354,'text-anchor':'middle','font-size':12,fill:'#65766c'},days[i].slice(5));
-  let pointCount=0;
-  for(const key of visible){
-   const color=colors[keys.indexOf(key)%colors.length];let segment=[];
-   const flush=()=>{if(segment.length>1)shape('polyline',{points:segment.join(' '),fill:'none',stroke:color,'stroke-width':2,'data-skill':key});segment=[];};
-   days.forEach((day,i)=>{const value=values(key,day);if(value===null){flush();return;}segment.push(x(i)+','+y(value));pointCount++;
-    const dot=shape('circle',{cx:x(i),cy:y(value),r:3,fill:color,'data-skill':key,tabindex:0});const tooltip=document.createElementNS(ns,'title');tooltip.textContent=skillNames.get(key)+' · '+day+' · '+value;dot.append(tooltip);dot.setAttribute('aria-label',tooltip.textContent);
+  for(let i=0;i<=4;i++){
+   const value=step*i;
+   shape('line',{x1:left,x2:right,y1:y(value),y2:y(value),stroke:'#e8ecf5','stroke-width':1});
+   shape('text',{x:left-10,y:y(value)+4,'text-anchor':'end','font-size':12,fill:'#8892a7'},n(value));
+  }
+  const labelCount=mobile?3:8;
+  const labelIndexes=new Set([0,days.length-1]);
+  for(let i=0;i<labelCount;i++)labelIndexes.add(Math.round(i*Math.max(0,days.length-1)/Math.max(1,labelCount-1)));
+  for(const i of [...labelIndexes].sort((a,b)=>a-b)){
+   if(i<0||!days[i])continue;
+   shape('text',{x:x(i),y:height-12,'text-anchor':'middle','font-size':12,fill:'#8892a7'},days[i].slice(5));
+  }
+  // Each path is limited to observed consecutive dates. No interpolation across missing days.
+  const curve=points=>{
+   let path='M '+points[0][0]+' '+points[0][1];
+   for(let i=1;i<points.length;i++){
+    const a=points[i-1],b=points[i],dx=(b[0]-a[0])/3;
+    // Controls stay between endpoint values, so smoothing never invents an overshoot.
+    path+=' C '+(a[0]+dx)+' '+a[1]+' '+(b[0]-dx)+' '+b[1]+' '+b[0]+' '+b[1];
+   }
+   return path;
+  };
+  for(const s of series){
+   let points=[],segments=0;
+   const flush=()=>{
+    if(points.length>1){
+     const d=curve(points);
+     if(s.id==='skillhub')shape('path',{d:d+' L '+points.at(-1)[0]+' '+bottom+' L '+points[0][0]+' '+bottom+' Z',fill:s.color,'fill-opacity':.045,'data-series-fill':s.id});
+     shape('path',{d,fill:'none',stroke:s.color,'stroke-width':s.id==='skillhub'?3:2.5,'stroke-linecap':'round','stroke-linejoin':'round','data-series':s.id,'data-segment':segments++});
+    }
+    points=[];
+   };
+   s.values.forEach((value,i)=>{
+    if(value===null){flush();return;}
+    points.push([x(i),y(value)]);
+    shape('circle',{cx:x(i),cy:y(value),r:days.length<35?2.5:1.5,fill:s.color,'data-platform':s.id,'data-date':days[i],'data-value':value});
    });flush();
   }
-  empty.append(svg);
-  if(!pointCount)empty.append(el('p',visible.length?'所选日期没有可比较的记录；可切换累计下载查看已有快照。':'请选择至少一个Skill。'));
-  empty.append(el('p','已保存 '+Object.keys(history).filter(d=>d>=start&&d<=end).length+' 天／所选 '+days.length+' 天。日期缺口保持空白。'));
-  const details=el('details'),summary=el('summary','查看逐Skill每日数值');details.append(summary);
-  const wrap=el('div');wrap.className='table-wrap';const table=el('table'),head=el('thead'),tr=el('tr');
-  for(const text of ['日期',...visible.map(key=>skillNames.get(key))])tr.append(el('th',text));head.append(tr);table.append(head);
-  const detailBody=el('tbody');for(const day of [...days].reverse()){const row=el('tr');row.append(el('td',day));for(const key of visible){const v=values(key,day);row.append(el('td',v===null?'—':v.toLocaleString('zh-CN')));}detailBody.append(row);}table.append(detailBody);wrap.append(table);details.append(wrap);empty.append(details);
-  let wbPanel=document.getElementById('channel-workbuddy-detail');
-  if(!wbPanel){wbPanel=el('div');wbPanel.id='channel-workbuddy-detail';empty.after(wbPanel);}
-  wbPanel.replaceChildren(el('h3','WorkBuddy · '+(wb?.period_label||'已记录范围')+'安装量快照'));
-  const wbHistory={...(data.workbuddy_history||{})};if(wb)wbHistory[wb.date]=wb;
-  wbPanel.append(el('p',wb?'最近采集日 '+wb.date+'；已保存 '+Object.keys(wbHistory).length+' 天。这是各采集日看到的滚动周期安装量，不是单日新增，不作差分。':'尚未取得安装统计。'));
-  if(selectedWb?.assets){const list=el('ul');for(const asset of selectedWb.assets)list.append(el('li',asset.name+'：'+asset.installs+' 次'));wbPanel.append(list);}
-  const wbNames=[...new Set(Object.values(wbHistory).flatMap(row=>(row.assets||[]).map(a=>a.name)))].sort();
-  if(wbNames.length){
-   const chart=document.createElementNS(ns,'svg');chart.setAttribute('viewBox','0 0 1040 330');chart.setAttribute('width','100%');chart.setAttribute('role','img');chart.setAttribute('aria-label','WorkBuddy 各资产近30天安装量快照趋势');chart.classList.add('channel-skill-chart');
-   const value=(name,day)=>{const a=(wbHistory[day]?.assets||[]).find(a=>a.name===name);return a&&Number.isSafeInteger(a.installs)&&a.installs>=0?a.installs:null;};
-   let maximum=1;for(const name of wbNames)for(const day of days)maximum=Math.max(maximum,value(name,day)||0);
-   const wy=v=>280-v/maximum*240;
-   const wbShape=(tag,attrs,text)=>{const e=document.createElementNS(ns,tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,String(v));if(text!==undefined)e.textContent=text;chart.append(e);return e;};
-   for(let i=0;i<=4;i++){const v=Math.round(maximum*i/4);wbShape('line',{x1:64,x2:1014,y1:wy(v),y2:wy(v),stroke:'#dfe8e2'});wbShape('text',{x:54,y:wy(v)+4,'text-anchor':'end','font-size':12,fill:'#65766c'},v);}
-   const wbLegend=el('div');wbLegend.className='filters';
-   wbNames.forEach((name,i)=>{const color='hsl('+((i*137.508+35)%360).toFixed(1)+' 70% 38%)';const item=el('span','● '+name);item.style.color=color;wbLegend.append(item);let segment=[];
-    const flush=()=>{if(segment.length>1)wbShape('polyline',{points:segment.join(' '),fill:'none',stroke:color,'stroke-width':2,'data-asset':name});segment=[];};
-    days.forEach((day,j)=>{const v=value(name,day);if(v===null){flush();return;}segment.push(x(j)+','+wy(v));const dot=wbShape('circle',{cx:x(j),cy:wy(v),r:3,fill:color,tabindex:0});const label=document.createElementNS(ns,'title');label.textContent=name+' · '+day+' · 近30天安装量 '+v;dot.append(label);dot.setAttribute('aria-label',label.textContent);});flush();
+  const focus=shape('g',{'aria-hidden':'true'});focus.style.display='none';
+  const rule=shape('line',{x1:left,x2:left,y1:top,y2:bottom,stroke:'#a9b1c3','stroke-dasharray':'4 4'},undefined,focus);
+  const markers=series.map(s=>shape('circle',{r:5,fill:'#fff',stroke:s.color,'stroke-width':2},undefined,focus));
+  const tooltip=el('div');tooltip.className='channel-platform-tooltip';tooltip.hidden=true;tooltip.setAttribute('role','status');frame.append(tooltip);
+  const date=el('div');date.className='channel-platform-tooltip-date';tooltip.append(date);
+  const rows=series.map(s=>{
+   const row=el('div'),label=el('span'),dot=el('i'),value=el('strong');
+   row.className='channel-platform-tooltip-row';dot.style.background=s.color;
+   label.append(dot,document.createTextNode(s.label));row.append(label,value);tooltip.append(row);return value;
+  });
+  const hint=el('small');hint.textContent='WorkBuddy：近30天安装量快照';tooltip.append(hint);
+  let active=days.length-1;
+  const hide=()=>{tooltip.hidden=true;focus.style.display='none';};
+  const show=index=>{
+   if(!days.length)return;
+   active=Math.max(0,Math.min(days.length-1,index));
+   date.textContent=days[active].slice(5);
+   series.forEach((s,i)=>{
+    const value=s.values[active];rows[i].textContent=value===null?'—':n(value);
+    markers[i].style.display=value===null?'none':'';
+    if(value!==null){markers[i].setAttribute('cx',x(active));markers[i].setAttribute('cy',y(value));}
    });
-   for(let i=0;i<days.length;i++)if(i===0||i===days.length-1||i%Math.max(1,Math.ceil(days.length/7))===0)wbShape('text',{x:x(i),y:308,'text-anchor':'middle','font-size':12,fill:'#65766c'},days[i].slice(5));
-   wbPanel.append(wbLegend,chart);
+   rule.setAttribute('x1',x(active));rule.setAttribute('x2',x(active));focus.style.display='';
+   tooltip.hidden=false;
+   const bounds=svg.getBoundingClientRect(),frameBounds=frame.getBoundingClientRect();
+   const px=bounds.left-frameBounds.left+x(active)/width*bounds.width;
+   const tipWidth=tooltip.offsetWidth,pad=8;
+   tooltip.style.left=Math.max(pad,Math.min(frame.clientWidth-tipWidth-pad,px-tipWidth-14))+'px';
+   const observed=series.map(s=>s.values[active]).filter(v=>v!==null);
+   const py=(observed.length?y(Math.max(...observed)):bottom)*bounds.height/height;
+   tooltip.style.top=Math.max(8,Math.min(frame.clientHeight-tooltip.offsetHeight-8,py-tooltip.offsetHeight-12))+'px';
+  };
+  svg.addEventListener('pointermove',event=>{
+   const bounds=svg.getBoundingClientRect(),px=(event.clientX-bounds.left)*width/Math.max(1,bounds.width);
+   show(days.length===1?0:Math.round((px-left)/(right-left)*(days.length-1)));
+  });
+  svg.addEventListener('pointerdown',event=>{
+   if(event.pointerType==='mouse')return;
+   const bounds=svg.getBoundingClientRect(),px=(event.clientX-bounds.left)*width/Math.max(1,bounds.width);
+   show(days.length===1?0:Math.round((px-left)/(right-left)*(days.length-1)));
+  });
+  svg.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse')hide();});
+  svg.addEventListener('focus',()=>show(active));svg.addEventListener('blur',hide);
+  svg.addEventListener('keydown',event=>{
+   if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(event.key))return;
+   event.preventDefault();
+   if(event.key==='Escape')hide();
+   else show(event.key==='Home'?0:event.key==='End'?days.length-1:active+(event.key==='ArrowRight'?1:-1));
+  });
+  empty.append(frame);
+  const legend=el('div');legend.className='channel-platform-legend';
+  for(const s of series){
+   const item=el('span'),dot=el('i');dot.style.borderColor=s.color;
+   item.append(dot,document.createTextNode(s.label));legend.append(item);
   }
-
+  empty.append(legend);
+  const footnote=el('p','WorkBuddy：近30天安装量快照 · 缺失日期留空');footnote.className='channel-platform-note';empty.append(footnote);
+  if(!series.some(s=>s.values.some(v=>v!==null)))empty.append(el('p','所选日期暂无记录'));
   panel.querySelector('.channel-legend').hidden=true;
 
  }
@@ -340,6 +403,8 @@ $('days').addEventListener('change',()=>refresh({manual:true}));$('product').add
  document.querySelectorAll('#ops-channels [data-range]').forEach(button=>button.addEventListener('click',draw));
  document.getElementById('channel-custom').addEventListener('submit',draw);
  document.getElementById('days').addEventListener('change',draw);
+ let resizeFrame=0;
+ window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>{if(latest)draw();});});
 })();
 
 
