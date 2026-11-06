@@ -1,0 +1,12 @@
+{
+  "request_id": "req-claude-probe-to-codex-20261106",
+  "from": "claude",
+  "to": "codex",
+  "skill_id": "mps-relay-probe",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "d7d38123b0480d340965c12146bbebc359e672a7",
+  "source_path": "pipeline/products/mps-relay-probe/README.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-79986257b4286807c67aa434a69e80497a959a1b6d795eb58687df46498c133e"
+}
