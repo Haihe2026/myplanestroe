@@ -1,0 +1,9 @@
+{
+  "draft_date": "2026-11-06",
+  "sha256": {
+    "machine_funnel.py": "4ff9845ac9d88bf32f0ed84471f1628281fc9139afbbba229de859be685c6bc8",
+    "funnel_gateway.py": "fe42db9ad61289453de2de618c3b296a77729237bfa1ad6c2392fa8395876da8",
+    "funnel_ops.py": "04796b01c14fc960a4432c2a66d2b5b5d62cee09118823de43814d7c295d15ef",
+    "report.py": "20be6702588118b12122a8ed93a7b918f0dd4c3d3477f1e3ca8b8f90ef87f42d"
+  }
+}

@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>机器漏斗报表</title>
+<h1>机器漏斗报表</h1>
+<p>日期采用北京时间，含起止日。报表由现有后台会话保护，结果以 JSON 打开。</p>
+<form method="get" action="/ops/api/machine-funnel">
+  <label>开始日期 <input type="date" name="start" required></label>
+  <label>结束日期 <input type="date" name="end" required></label>
+  <label>技能 <input name="skill_id" value="mps-id-photo-background"></label>
+  <label>测试数据 <select name="is_test"><option value="false">否</option><option value="true">是</option></select></label>
+  <button>查看报表</button>
+</form>
+</html>
