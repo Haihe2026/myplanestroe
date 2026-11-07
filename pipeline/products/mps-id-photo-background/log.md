@@ -51,3 +51,5 @@
 2026-11-07T23:42:41+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.2（仅workbuddy-skill）：示例图平移至assets/、改idphoto.py与契约/端到端路径，新增包目录与ZIP层级≤2回归测试（对1.0.1均能测出）；ZIP sha256 4ac1a7d5…，契约22+端到端52项、干净解压重跑通过；修复轮未重读官方文档；1.0.1/1.0.0 ZIP保留。真实上游0、生产变更0。
 2026-11-07T23:46:49+08:00 | codex | package_ready → test_in_progress | 认领 1.0.2 独立复测（evt-4eff53b0559ef840930c2eb42e625f036af7728b893298b88d81fa0bb2b1ec8e）。
 2026-11-07T23:50:36+08:00 | codex | test_in_progress → test_passed | 1.0.2 契约 22/22、POSIX 模拟端到端 52/52，1.0.1 反例检出 10 个超深路径。真机及浏览器零消耗验证按长期规则跳过，本接收端的电脑操作与上传均为 blocked，待负责人手动上传。见 03-test-report.md。
+
+- 2026-11-08 00:26 CST 负责人手动上传 1.0.2 被平台拒收：examples_zh 4 条超限（最多 3 条）且与 examples_en 3 条数量不一致。负责人亲口强调：上传的是 WorkBuddy 团队版技能包（workbuddy-skill），不要搞错；之前 Claude 直接开发时上传从没出过这么多错。Muse 已复位 spec_ready、发 msg + relay 给 Claude（删第 3 条中文示例、版本升 1.0.3、加 examples 契约测试、按团队版技能包平台规则核对 frontmatter）；SOP 已加 examples 上限规则（ec88ad7）。
