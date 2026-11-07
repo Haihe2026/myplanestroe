@@ -1,1 +1,8 @@
-{"event_id": "evt-5bfd7b3d7fb6de3349de4820cc73e7cd5e9728146cf39a703c76dab2764cadfc", "role": "codex", "action": "claimed", "at": "2026-11-07T21:15:00+08:00", "evidence_ref": null, "claim_id": "549d5d39-b7f2-4af6-ae98-6309dd9c7470"}
+{
+  "event_id": "evt-5bfd7b3d7fb6de3349de4820cc73e7cd5e9728146cf39a703c76dab2764cadfc",
+  "role": "codex",
+  "action": "acknowledged",
+  "at": "2026-11-07T21:47:12+08:00",
+  "evidence_ref": "55705d451043ba31d4799158657640aa8d92deaa:pipeline/products/mps-id-photo-background/ack-from-codex-20261107-sop-latest.md",
+  "claim_id": "549d5d39-b7f2-4af6-ae98-6309dd9c7470"
+}
