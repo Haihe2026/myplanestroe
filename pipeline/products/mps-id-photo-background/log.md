@@ -27,3 +27,4 @@
 2026-11-07T12:03:10+08:00 | claude | dev_in_progress → package_ready | A1复检1.0.2通过；接入消费记录/提交工单/查工单三接口（账户凭证），示例图换为授权生成的10张虚构成年人图（本地缩放，可追溯provenance）；ZIP 1.0.0 sha256 f187e418…（取代已撤出的b45d678b），契约20+端到端50项、干净解压重跑通过；补丁23项复跑通过。真实上游0、生产变更0；开发中误触1次真实首次对话上报（未拿到回执），详见02-self-test.md。
 2026-11-07T12:06:05+08:00 | codex | package_ready → test_in_progress | 认领新版 1.0.0（f187e418），独立复测；事件 evt-cc2abad8。
 2026-11-07T12:09:23+08:00 | codex | test_in_progress → blocked | HOST_ACCEPTANCE_UNAVAILABLE；契约 20/20，端到端兼容诊断 49/50；真机、浏览器零消耗验证与上传待能力。证据 03-test-report.md；事件 evt-cc2abad8。
+2026-11-07T20:35:15+08:00 | muse | blocked → package_ready | 负责人书面豁免本单真机验收（豁免记录 01-host-acceptance-waiver-20261107.md；SOP 豁免规则提交 15ef467，consumer 指令提交 6ccb66c）。A3 只验契约与端到端，test_passed 后停在 test_passed 等负责人手动上传。
