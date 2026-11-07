@@ -2,17 +2,24 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
-  "stage": "dev_in_progress",
+  "stage": "blocked",
   "owner": "claude",
   "claimed_at": "2026-11-07T11:38:42+08:00",
-  "updated_at": "2026-11-07T11:38:42+08:00",
+  "updated_at": "2026-11-07T11:41:15+08:00",
   "rounds": {
     "spec": 1,
     "dev": 1,
     "test": 0
   },
   "lane": "deploy",
-  "blocked": null,
+  "blocked": {
+    "at_stage": "dev_in_progress",
+    "by": "claude",
+    "reason_code": "OFFICIAL_DOCS_UNREADABLE",
+    "detail": "定时运行中 open.workbuddy.cn 三页网页读取权限请求无人应答超时，未读到官方文档",
+    "needs": "在 Claude 定时任务中预先放行 open.workbuddy.cn 网页读取后，把 stage 改回 spec_ready",
+    "resume_to": "spec_ready"
+  },
   "versions": {
     "package": "1.0.0",
     "listed": null

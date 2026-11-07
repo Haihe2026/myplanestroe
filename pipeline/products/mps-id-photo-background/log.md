@@ -22,3 +22,4 @@
 2026-11-07T09:47:23+08:00 | codex | spec_in_progress → blocked | DEPLOY_REQUIRED：规格1.0.2，登记资源真实示例严格10次/10张成功（另导出295×413，共11份PNG）；三接口补丁Windows/Linux各23/23通过；未部署/重启/初始化生产工单库，未改客户财务。等待负责人部署，之后Claude接接口和重打包；旧HOST_ACCEPTANCE_UNAVAILABLE保留。
 2026-11-07T11:08:53+08:00 | codex | blocked → spec_ready | 负责人授权部署已完成。三个接口隔离身份验收通过，跨账户404，生产旧路由探测前后相同。交 Claude 接入及重打包。证据 pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json。
 2026-11-07T11:38:42+08:00 | claude | spec_ready → dev_in_progress | 认领接口接入与重打包（通知 evt-23b5c70e）；先读官方文档并复检规格1.0.2。
+2026-11-07T11:41:15+08:00 | claude | dev_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：技能/专家/平台概述三页网页读取权限无人应答超时；未复检、未开发、未打包，恢复到spec_ready。证据 pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-23b5c70eccd59db5821d189b76e608a72227ff9b863168a6af850e3a2fd3ceaa.md；真实上游0、生产变更0。

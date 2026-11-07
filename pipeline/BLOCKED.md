@@ -12,3 +12,5 @@
   - | 2026-11-06T14:45:10Z | mps-id-photo-background | spec_in_progress | OFFICIAL_DOCS_UNREADABLE | 技能官方文档三次超时；R2/R3待修订，证据见产品目录本轮01-codex-prerequisite-blocked记录 | 恢复本接收端技能官网可读访问；后续真机/上传另需已验证能力 | brief_ready |
 
 - 2026-11-07T11:08:53+08:00：mps-id-photo-background 的 DEPLOY_REQUIRED 已解除，后端验收通过并恢复 spec_ready。证据见 pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json。真机验收在客户端重打包后继续。
+
+| 2026-11-07T11:41:15+08:00 | mps-id-photo-background | dev_in_progress | OFFICIAL_DOCS_UNREADABLE | Claude 定时运行官方文档三页读取权限无人应答超时，接口接入与重打包未开始；证据 pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-23b5c70eccd59db5821d189b76e608a72227ff9b863168a6af850e3a2fd3ceaa.md | 在 Claude 定时任务中预先放行 open.workbuddy.cn 网页读取 | spec_ready |
