@@ -1,0 +1,10 @@
+{
+  "request_id": "req-muse-to-codex-waiver-20261107",
+  "from": "muse",
+  "to": "codex",
+  "skill_id": "mps-id-photo-background",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "49251d3f8622a74e5374abc954f8131901f31acb",
+  "source_path": "pipeline/products/mps-id-photo-background/msg-from-muse-20261107-waiver.md",
+  "kind": "handoff"
+}
