@@ -14,7 +14,7 @@ examples_en:
   - "Change this photo to a white background for my application"
   - "I need a blue background ID photo at 295x413 pixels"
   - "Make my resume photo background plain white"
-version: 1.0.1
+version: 1.0.2
 author: "MyPlaneStore"
 ---
 

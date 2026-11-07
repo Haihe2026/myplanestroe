@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-id-photo-background'
-SKILL_VERSION = '1.0.1'
+SKILL_VERSION = '1.0.2'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -291,7 +291,7 @@ def cmd_demo(args):
     os.makedirs(out_dir, mode=0o700, exist_ok=True)
     items = []
     for d in demos:
-        src = os.path.join(base, 'demos', d['file'])
+        src = os.path.join(base, d['file'])
         if not os.path.isfile(src):
             continue
         dst = os.path.join(out_dir, d['file'])

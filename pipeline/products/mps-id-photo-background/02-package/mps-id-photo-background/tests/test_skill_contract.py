@@ -218,18 +218,32 @@ class Contract(unittest.TestCase):
             self.assertEqual(line.split('。')[0].split('、'), titles)
         total = 0
         for d in demos:
-            p = os.path.join(ROOT, 'assets', 'demos', d['file'])
+            p = os.path.join(ROOT, 'assets', d['file'])
             self.assertTrue(os.path.isfile(p))
             total += os.path.getsize(p)
         self.assertLess(total, 1024 * 1024)
         self.assertEqual(sorted(d['key'] for d in demos), sorted(idphoto.SCENES))
+
+    def test_package_dir_depth_at_most_two(self):
+        # 平台只支持两级目录（包根/二级目录/文件）；运行时生成的 __pycache__ 不入包，跳过
+        deep = []
+        for base, dirs, names in os.walk(ROOT):
+            dirs[:] = [d for d in dirs if d != '__pycache__']
+            for n in names:
+                if n.endswith('.pyc') or n.startswith('.'):
+                    continue
+                rel = os.path.relpath(os.path.join(base, n), ROOT).replace(os.sep, '/')
+                if rel.count('/') > 1:
+                    deep.append(rel)
+        self.assertEqual(deep, [])
+        self.assertFalse(os.path.isdir(os.path.join(ROOT, 'assets', 'demos')))
 
     def test_demos_are_fictional_and_small(self):
         meta = json.loads(read('assets', 'demos.json'))
         self.assertIn('虚构', meta['notice'])
         self.assertIn('不是你的真实结果', meta['notice'])
         for d in meta['demos']:
-            p = os.path.join(ROOT, 'assets', 'demos', d['file'])
+            p = os.path.join(ROOT, 'assets', d['file'])
             with open(p, 'rb') as f:
                 self.assertTrue(f.read(8) == b'\x89PNG\r\n\x1a\n', d['file'])
             self.assertLess(os.path.getsize(p), 150 * 1024, d['file'])

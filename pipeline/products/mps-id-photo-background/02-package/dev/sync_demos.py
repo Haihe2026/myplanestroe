@@ -16,7 +16,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', '..', 'demo-assets')
 PKG = os.path.join(HERE, '..', 'mps-id-photo-background')
-OUT = os.path.join(PKG, 'assets', 'demos')
+OUT = os.path.join(PKG, 'assets')  # 示例图与 demos.json 同级（包目录最多两级）
 BOX = (320, 480)          # 等比缩放上限
 COLORS = 128              # 调色板颜色数
 SPECIAL = {'custom-pixels': 'custom-pixels-295x413.png'}

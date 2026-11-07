@@ -1,6 +1,6 @@
 """开发用：生成头像（几何绘制，不含真实人物，不调用任何生图服务）。不打进上架包。
 
-示例图已改用 demo-assets/ 中授权生成的虚构人物图，由 dev/sync_demos.py 同步；本脚本不再写 assets/demos。
+示例图已改用 demo-assets/ 中授权生成的虚构人物图，由 dev/sync_demos.py 同步；本脚本不写示例图。
 """
 import json, os
 from PIL import Image, ImageDraw, ImageFilter

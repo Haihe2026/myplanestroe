@@ -1,3 +1,58 @@
+# 自测报告：mps-id-photo-background 1.0.2（修复轮：包目录层级超限）
+
+- 角色：Claude Code；时间：2026-11-07T23:42:41+08:00（北京时间，定时运行）
+- 官方文档：修复轮，未重读（负责人 2026-11-07 新规则，SOP bb1ce4e 〇节第 2、4 条）。
+- 依据：msg-from-muse-20261107-fix-dir-depth.md、msg-from-muse-20261107-docs-rule.md（提交 40e8cd7）、SOP「包目录结构最多两级」（97a663b）。规格未变，A1 沿用 1.0.2 复检结论，不重做。
+- 包文件（`02-package/dist/`，只打 workbuddy-skill）：
+  - `mps-id-photo-background-1.0.2.zip`：887236 字节，SHA256 `4ac1a7d5c266c35d7d76f0b3dc55cbc9c20cca56e2752ab48ac51f14f56673dc`，24 个文件，根目录 `mps-id-photo-background/`，最深路径为 `根/二级目录/文件`。
+  - 1.0.1（`80e4ec13…`）、1.0.0（`f187e418…`）ZIP 原样保留。头像未改动。
+
+## 本轮改了什么
+
+1. 10 张示例图从 `assets/demos/` 平移到 `assets/`（与 `demos.json` 同级，`git mv`，字节不变），删除 `assets/demos/` 目录；`demos.json` 未改（只写裸文件名）。
+2. `scripts/idphoto.py` `cmd_demo`：读取路径改为 `assets/<文件名>`。用户机器上的复制目标（状态目录下 `demos/`）不在包内，未改。
+3. `tests/test_skill_contract.py`：`test_demos_consistent`、`test_demos_are_fictional_and_small` 改读 `assets/<文件名>`；新增 `test_package_dir_depth_at_most_two`（遍历包目录，跳过运行时 `__pycache__`，断言无三级及以上嵌套、`assets/demos/` 不存在）。
+4. `dev/e2e_check.py`：`test_package_demos_trace_to_provenance` 两处路径同步；新增 `ZipLayout.test_zip_dir_depth_at_most_two`：打开 ZIP（默认 dist 下当前版本 ZIP，或 `--zip <文件>` 指定，可多次），断言每个文件路径 `/` 数 ≤ 2、全部在 `mps-id-photo-background/` 下、无 `assets/demos/`、`assets/` 下 PNG 正好 10 张。当前版本 ZIP 不存在时跳过并说明。
+5. `dev/build.py`：打包前若有文件超过两级直接拒绝打包；`dev/sync_demos.py` 输出目录改为 `assets/`；`dev/build_assets.py` 注释同步。
+6. 版本 1.0.1 → 1.0.2（SKILL.md frontmatter、`_meta.json`、`idphoto.SKILL_VERSION`、`telemetry.SKILL_VERSION`、真机验收单、`dev/build.py`）。
+7. **未改**：demo 链接修复（状态目录去前导点、正斜杠、Markdown 回归测试）保留；授权与充值链接、规格、欢迎句、遥测、付费、话术、后端、生产。
+
+## 结果
+
+| 项 | 结果 |
+|---|---|
+| 契约测试（源码） | 22/22 通过 |
+| 端到端（模拟后端，源码，含 1.0.2 ZIP 层级检查） | 52/52 通过 |
+| 干净解压 1.0.2 ZIP 后契约 | 22/22 通过 |
+| 干净解压后端到端（`--package <解压目录> --zip dist/…-1.0.2.zip`） | 52/52 通过，无跳过 |
+| `unzip -Z1` 列出路径中 `/` 数 > 2 的文件 | 0 个 |
+| 干净解压包执行 `demo`（隔离 HOME、上报关闭） | 10 个示例全部返回，文件已复制 |
+| 回归测试有效性：对 1.0.1 ZIP 跑 `--zip …-1.0.1.zip ZipLayout` | 失败（能测出三级嵌套） |
+| 回归测试有效性：1.0.1 干净解压目录放入新契约测试 | `test_package_dir_depth_at_most_two`、`test_demos_consistent` 失败，`test_demos_are_fictional_and_small` 报错（能测出） |
+| ZIP 不含 `__pycache__`、密钥类文件 | 通过；提交前密钥扫描无命中 |
+| 真实上游调用 / 真实上报 / 生产变更 | 0 / 0 / 0 |
+
+## 偏离与未验证
+
+- 平台上传解析未验证（上传由负责人手动）；层级规则按平台报错原文与 SOP 97a663b 实现。
+- 真机验收按负责人长期规则跳过，未做。
+- 授权链接改通用地址仍未做，理由同 1.0.1（见 `reply-from-claude-20261107.md`）。
+
+## 部署与回滚
+
+- 部署：无后端改动；Codex 复测通过后由负责人手动上传 `mps-id-photo-background-1.0.2.zip`。
+- 回滚：dist 内 1.0.1/1.0.0 ZIP 原样保留；1.0.1 已被平台拒收，不能作为上传回滚版本。
+
+## 复跑
+
+```sh
+cd 02-package/mps-id-photo-background && python3 -m unittest discover -s tests        # 契约 22 项
+cd 02-package && python3 dev/e2e_check.py                                              # 端到端 52 项（含 dist 当前版本 ZIP 层级）
+python3 dev/e2e_check.py --package <干净解压后的 mps-id-photo-background 目录> --zip <ZIP 路径>
+```
+
+---
+
 # 自测报告：mps-id-photo-background 1.0.1（修复轮：示例图链接 Markdown 转义）
 
 - 角色：Claude Code；时间：2026-11-07T21:53:43+08:00（北京时间）

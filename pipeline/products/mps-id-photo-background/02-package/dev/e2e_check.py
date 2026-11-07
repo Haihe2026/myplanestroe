@@ -18,6 +18,11 @@ if '--package' in sys.argv:
     i = sys.argv.index('--package')
     PKG = os.path.abspath(sys.argv[i + 1])
     del sys.argv[i:i + 2]
+ZIPS = []
+while '--zip' in sys.argv:
+    i = sys.argv.index('--zip')
+    ZIPS.append(os.path.abspath(sys.argv[i + 1]))
+    del sys.argv[i:i + 2]
 sys.path.insert(0, os.path.join(PKG, 'scripts'))
 for m in ('idphoto', 'telemetry', 'welcome_copy', 'png_local', 'audit_images'):
     sys.modules.pop(m, None)
@@ -694,9 +699,35 @@ class DemoAssets(unittest.TestCase):
                 raw = f.read()
             expect = it['output_sha256'] if r['source'] == it['file'] else it['additional_export']['sha256']
             self.assertEqual(hashlib.sha256(raw).hexdigest(), expect, r['key'])
-            with open(os.path.join(PKG, 'assets', 'demos', r['package_file']), 'rb') as f:
+            with open(os.path.join(PKG, 'assets', r['package_file']), 'rb') as f:
                 self.assertEqual(hashlib.sha256(f.read()).hexdigest(), r['package_sha256'], r['key'])
-        self.assertEqual(png_local.size_of(open(os.path.join(PKG, 'assets', 'demos', 'custom-pixels.png'), 'rb').read()), (295, 413))
+        self.assertEqual(png_local.size_of(open(os.path.join(PKG, 'assets', 'custom-pixels.png'), 'rb').read()), (295, 413))
+
+
+class ZipLayout(unittest.TestCase):
+    """平台只支持两级目录：ZIP 内路径以包根为第 0 级，'/' 数不得超过 2。"""
+
+    def zips(self):
+        if ZIPS:
+            return ZIPS
+        dist = os.path.join(HERE, '..', 'dist')
+        ver = idphoto.SKILL_VERSION
+        p = os.path.join(dist, 'mps-id-photo-background-%s.zip' % ver)
+        return [p] if os.path.exists(p) else []
+
+    def test_zip_dir_depth_at_most_two(self):
+        import zipfile
+        zs = self.zips()
+        if not zs:
+            self.skipTest('no ZIP for current version yet (pass --zip <file>)')
+        for zp in zs:
+            with zipfile.ZipFile(zp) as z:
+                names = [n for n in z.namelist() if not n.endswith('/')]
+            self.assertTrue(names, zp)
+            self.assertEqual([n for n in names if n.count('/') > 2], [], zp)
+            self.assertTrue(all(n.startswith('mps-id-photo-background/') for n in names), zp)
+            self.assertFalse([n for n in names if '/assets/demos/' in n], zp)
+            self.assertEqual(len([n for n in names if n.startswith('mps-id-photo-background/assets/') and n.endswith('.png')]), 10, zp)
 
 
 class LocalImage(unittest.TestCase):

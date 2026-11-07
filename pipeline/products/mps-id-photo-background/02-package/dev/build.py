@@ -3,7 +3,7 @@ import hashlib, os, sys, zipfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'mps-id-photo-background')
 DIST = os.path.join(HERE, '..', 'dist')
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 out = os.path.join(DIST, 'mps-id-photo-background-%s.zip' % VERSION)
 if os.path.exists(out):
     sys.exit('refuse to overwrite ' + out)
@@ -14,6 +14,9 @@ for base, dirs, names in os.walk(SRC):
         if n.endswith(('.pyc', '.tmp')) or n.startswith('.'):
             continue
         files.append(os.path.join(base, n))
+deep = [f for f in files if os.path.relpath(f, SRC).replace(os.sep, '/').count('/') > 1]
+if deep:
+    sys.exit('directory depth > 2 (platform limit): ' + ', '.join(os.path.relpath(f, SRC) for f in deep))
 with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:
     for f in files:
         arc = os.path.join('mps-id-photo-background', os.path.relpath(f, SRC))
