@@ -1,27 +1,13 @@
 {
-  "skill_id": "mps-id-photo-background",
-  "sop": "sop-image-gen-skill-auto",
-  "sop_version": "79ca222349237e3e4707a829b7d67e11f0e6bace",
-  "stage": "blocked",
-  "owner": null,
-  "claimed_at": null,
-  "updated_at": "2026-11-07T22:02:21+08:00",
-  "rounds": {
-    "spec": 1,
-    "dev": 1,
-    "test": 0
-  },
-  "lane": "deploy",
-  "blocked": {
-    "at_stage": "test_in_progress",
-    "by": "codex",
-    "reason_code": "HOST_ACCEPTANCE_UNAVAILABLE",
-    "detail": "1.0.1 契约 21/21、模拟端到端 51/51。接收端缺少已验证的电脑操作和上传适配器，真机验收、零消耗浏览器验证与上传均受阻。",
-    "needs": "完成 1.0.1 的 WorkBuddy 真机验收和 /pricing 零消耗浏览器验证并存证。通过 A3 后由负责人手动上传。",
-    "resume_to": "package_ready"
-  },
-  "versions": {
-    "package": "1.0.1",
-    "listed": null
-  }
+ "skill_id": "mps-id-photo-background",
+ "sop": "sop-image-gen-skill-auto",
+ "sop_version": "049eab1b7b04b855691d1f24b9602724989cf12c",
+ "stage": "package_ready",
+ "owner": null,
+ "claimed_at": null,
+ "updated_at": "2026-11-07T22:10:58+08:00",
+ "rounds": {"spec": 1, "dev": 1, "test": 0},
+ "lane": "deploy",
+ "blocked": null,
+ "versions": {"package": "1.0.1", "listed": null}
 }
