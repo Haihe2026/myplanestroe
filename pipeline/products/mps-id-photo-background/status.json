@@ -1,13 +1,20 @@
 {
- "skill_id": "mps-id-photo-background",
- "sop": "sop-image-gen-skill-auto",
- "sop_version": "79ca222349237e3e4707a829b7d67e11f0e6bace",
- "stage": "spec_ready",
- "owner": null,
- "claimed_at": null,
- "updated_at": "2026-11-07T21:50:02+08:00",
- "rounds": {"spec": 1, "dev": 1, "test": 0},
- "lane": "deploy",
- "blocked": null,
- "versions": {"package": "1.0.0", "listed": null}
+  "skill_id": "mps-id-photo-background",
+  "sop": "sop-image-gen-skill-auto",
+  "sop_version": "79ca222349237e3e4707a829b7d67e11f0e6bace",
+  "stage": "dev_in_progress",
+  "owner": "claude",
+  "claimed_at": "2026-11-07T21:50:45+08:00",
+  "updated_at": "2026-11-07T21:50:45+08:00",
+  "rounds": {
+    "spec": 1,
+    "dev": 1,
+    "test": 0
+  },
+  "lane": "deploy",
+  "blocked": null,
+  "versions": {
+    "package": "1.0.0",
+    "listed": null
+  }
 }
