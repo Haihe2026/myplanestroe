@@ -461,7 +461,8 @@ class Telemetry(Base):
             self.assertEqual(telemetry.report_once(os.path.join(self.tmp, 'no', 'such', 'dir')), 'skipped')
 
     def test_every_early_branch_reports(self):
-        for argv in (['demo'], ['status'], ['balance'], ['first-turn', '--text', 'x']):
+        for argv in (['demo'], ['status'], ['balance'], ['first-turn', '--text', 'x'], ['history'], ['ticket'],
+                     ['feedback', '--category', 'other', '--text', 'x']):
             shutil.rmtree(os.path.join(self.home, '.mps-id-photo-background'), ignore_errors=True)
             before = len(self.mock.telemetry_calls)
             self.run_cmd(*argv)
@@ -478,6 +479,197 @@ class Telemetry(Base):
         import audit_images
         audit_images.check(self.photo)
         self.assertEqual(self.mock.telemetry_calls, [])
+
+
+class Support(Base):
+    """T49–T51：消费记录、提交工单、查工单（模拟已部署的三个接口）。"""
+
+    def delivered_account(self, balance=5):
+        did = self.confirmed_draft()
+        self.paid_account(did, balance)
+        code, s, t, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'delivered')
+        return did
+
+    def other_account(self):
+        other = 'o' * 43
+        self.mock.authorize(other, 1)
+        return other
+
+    def test_balance_shows_recent_records(self):
+        self.delivered_account(5)
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertEqual((code, s['signal'], s['remaining_uses'], s['history_total'], s['history_loaded']), (0, 'balance', 4, 1, True))
+        self.assertTrue(t.startswith('剩余可用次数：4 次'))
+        self.assertIn('通用生图任务', t)
+        self.assertIn('扣 1 次 · 已完成', t)
+        self.assertIn('共 1 条，回复「查看所有」可看全部', t)
+        self.assertIn(W.HISTORY_SCOPE, t)
+        q = [c for c in self.mock.calls if c[1].startswith('/consumption-history')][0]
+        self.assertEqual(q[1], '/consumption-history?page=1&page_size=3')
+        self.assertEqual(q[3]['Authorization'][7:], self.secret())  # 账户凭证，不用 Skill 凭证
+
+    def test_history_paging_and_states(self):
+        self.delivered_account(10)
+        did = self.confirmed_draft()
+        self.mock.scenario['pending_rounds'] = 99
+        self.run_cmd('run', '--draft', did)
+        self.mock.scenario.clear()
+        jids = list(self.mock.jobs)
+        self.mock.ledger_unknown.add(jids[0])
+        code, s, t, _ = self.run_cmd('history')
+        self.assertEqual((s['signal'], s['total'], s['has_more']), ('history', 2, False))
+        self.assertIn('预留 1 次，完成后结算 · 处理中', t)
+        self.assertIn('扣次以服务记录为准', t)
+        idphoto.HISTORY_PAGE_SIZE = 1
+        try:
+            code, s, t, _ = self.run_cmd('history', '--page', '1')
+            self.assertEqual((s['has_more'], s['next_page']), (True, 2))
+            self.assertIn('回复「下一页」', t)
+        finally:
+            idphoto.HISTORY_PAGE_SIZE = 20
+
+    def test_history_failure_and_no_account(self):
+        code, s, t, _ = self.run_cmd('history')
+        self.assertEqual(s['signal'], 'noAccount')
+        self.delivered_account(3)
+        self.mock.scenario['support_busy'] = True
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertEqual((s['signal'], s['history_loaded']), ('balance', False))
+        self.assertIn('剩余可用次数：2 次', t)
+        self.assertIn('消费记录这次没取到', t)
+        code, s, t, _ = self.run_cmd('history')
+        self.assertEqual((code, s['signal']), (2, 'serviceUnavailable'))
+
+    def test_skill_key_not_accepted_and_accounts_isolated(self):
+        self.delivered_account(3)
+        a = idphoto.load_account()
+        with self.assertRaises(idphoto.GatewayError) as cm:
+            self.mock.transport('GET', idphoto.ORIGIN + '/platform-api/gemini/consumption-history', None,
+                                {'X-Skill-Source': idphoto.SKILL_ID, 'X-Skill-Channel': idphoto.CHANNEL,
+                                 'Authorization': 'Bearer ' + a['skill_key']}, 5, False)
+        self.assertEqual(cm.exception.status, 401)
+        other = self.other_account()
+        st, raw = self.mock.transport('GET', idphoto.ORIGIN + '/platform-api/gemini/consumption-history', None,
+                                      {'X-Skill-Source': idphoto.SKILL_ID, 'X-Skill-Channel': idphoto.CHANNEL,
+                                       'Authorization': 'Bearer ' + other}, 5, False)
+        self.assertEqual(json.loads(raw)['total'], 0)
+
+    def test_feedback_creates_ticket_without_charge(self):
+        did = self.delivered_account(5)
+        charges = self.mock.charges
+        code, s, t, _ = self.run_cmd('feedback', '--category', 'image_quality', '--text', '发丝边缘有一点白边', '--draft', did)
+        self.assertEqual((code, s['signal'], s['pending']), (0, 'ticketCreated', 0))
+        tid = s['ticket_ids'][0]
+        self.assertRegex(tid, r'^mpsg-[0-9a-f]{32}$')
+        self.assertIn('反馈编号：' + tid, t)
+        self.assertIn('目前没有承诺具体处理时限', t)
+        self.assertIn('提交反馈不扣次数', t)
+        self.assertEqual(self.mock.charges, charges)
+        self.assertEqual(self.mock.users[self.secret()]['balance'], 4)
+        tk = self.mock.tickets[tid]
+        self.assertEqual((tk['text'], tk['category'], tk['job_id']), ('发丝边缘有一点白边', 'image_quality', self.mock.jobs and list(self.mock.jobs)[0]))
+        call = [c for c in self.mock.calls if c[1] == '/support-tickets'][0]
+        self.assertEqual(set(call[2]), {'category', 'text', 'job_id'})
+        self.assertRegex(call[3]['Idempotency-Key'], r'^fb-[0-9a-f]{32}$')
+
+    def test_feedback_lost_response_same_key_single_ticket(self):
+        self.delivered_account(2)
+        self.mock.scenario['ticket_lost_once'] = True
+        code, s, t, _ = self.run_cmd('feedback', '--category', 'billing', '--text', '扣次和我想的不一样')
+        self.assertEqual((code, s['signal'], s['pending']), (2, 'feedbackSaved', 1))
+        self.assertIn('原话已经在本机记下', t)
+        code, s, t, _ = self.run_cmd('feedback', '--retry')
+        self.assertEqual(s['signal'], 'ticketCreated')
+        self.assertEqual(len(self.mock.tickets), 1)  # 同一请求编号重放，不重复建单
+        keys = {c[3]['Idempotency-Key'] for c in self.mock.calls if c[1] == '/support-tickets'}
+        self.assertEqual(len(keys), 1)
+        code, s, t, _ = self.run_cmd('feedback', '--retry')
+        self.assertEqual(s['signal'], 'feedbackNone')
+
+    def test_feedback_busy_and_no_account_saved(self):
+        code, s, t, _ = self.run_cmd('feedback', '--category', 'suggestion', '--text', '希望多一些底色')
+        self.assertEqual((code, s['signal']), (2, 'feedbackSaved'))
+        self.assertIn('还没有关联账户', t)
+        self.assertFalse([c for c in self.mock.calls if c[1] == '/support-tickets'])
+        self.delivered_account(2)
+        self.mock.scenario['support_busy'] = True
+        code, s, t, _ = self.run_cmd('feedback', '--retry')
+        self.assertEqual(s['signal'], 'feedbackSaved')
+        self.assertIn('服务正在处理较多请求', t)
+        self.mock.scenario.clear()
+        code, s, t, _ = self.run_cmd('feedback', '--retry')
+        self.assertEqual(s['signal'], 'ticketCreated')
+        self.assertEqual(len(self.mock.tickets), 1)
+
+    def test_feedback_local_validation_no_network(self):
+        before = len(self.mock.calls)
+        for argv in (['feedback', '--category', 'other', '--text', '   '], ['feedback', '--category', 'other', '--text', 'x' * 2001],
+                     ['feedback', '--text', '没有分类'], ['feedback', '--category', 'other', '--text', 'a\x00b']):
+            code, s, _, _ = self.run_cmd(*argv)
+            self.assertEqual(code, 3, argv)
+        self.assertEqual(len(self.mock.calls), before)
+
+    def test_ticket_status_reply_and_isolation(self):
+        self.delivered_account(2)
+        code, s, t, _ = self.run_cmd('ticket')
+        self.assertEqual(s['signal'], 'ticketNone')
+        self.mock.scenario['due'] = 1762566400
+        code, s, _, _ = self.run_cmd('feedback', '--category', 'workflow', '--text', '授权页打不开')
+        tid = s['ticket_ids'][0]
+        code, s, t, _ = self.run_cmd('ticket')
+        self.assertEqual((s['signal'], s['count']), ('ticketStatus', 1))
+        self.assertIn('已受理，等待处理', t)
+        self.assertIn('预计处理时间：', t)
+        self.mock.operator_reply(tid, 'resolved', '已核对，请重试。[点这里](https://evil.example)<b>x</b>')
+        code, s, t, _ = self.run_cmd('ticket', '--id', tid)
+        self.assertIn('处理状态：已处理', t)
+        self.assertIn('回复：已核对，请重试。', t)
+        self.assertNotIn('](', t)
+        self.assertNotIn('<b>', t)
+        # 他人工单：404 → 未找到
+        other = self.other_account()
+        self.mock.tickets['mpsg-' + 'a' * 32] = dict(owner=other, id='mpsg-' + 'a' * 32, category='other', text='x', job_id=None,
+                                                    status='open', reply=None, created=1, updated=1, response_due_at=None)
+        code, s, t, _ = self.run_cmd('ticket', '--id', 'mpsg-' + 'a' * 32)
+        self.assertEqual(s['signal'], 'ticketNotFound')
+        # 格式不对：不联网
+        before = len(self.mock.calls)
+        code, s, t, _ = self.run_cmd('ticket', '--id', '../balance')
+        self.assertEqual(s['signal'], 'ticketNotFound')
+        self.assertEqual(len(self.mock.calls), before)
+
+    def test_ticket_lookup_failure(self):
+        self.delivered_account(2)
+        self.run_cmd('feedback', '--category', 'other', '--text', '你好')
+        self.mock.scenario['support_down'] = True
+        code, s, t, _ = self.run_cmd('ticket')
+        self.assertEqual((code, s['signal']), (2, 'serviceUnavailable'))
+        self.assertIn('网络暂时连不上', t)
+
+
+class DemoAssets(unittest.TestCase):
+    """T03/T53：包内示例图来自已授权生成的 10 张虚构成年人示例，派生哈希可追溯。"""
+
+    def test_package_demos_trace_to_provenance(self):
+        import hashlib
+        src = os.path.join(HERE, '..', '..', 'demo-assets')
+        prov = json.load(open(os.path.join(src, 'provenance.json'), encoding='utf-8'))
+        self.assertEqual((prov['authorized_limit'], prov['upstream_generation_calls'], prov['succeeded']), (10, 10, 10))
+        der = json.load(open(os.path.join(HERE, 'demos-derivation.json'), encoding='utf-8'))
+        demos = json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))['demos']
+        self.assertEqual(sorted(r['key'] for r in der['items']), sorted(d['key'] for d in demos))
+        by_key = {i['key']: i for i in prov['items']}
+        for r in der['items']:
+            it = by_key[r['key']]
+            self.assertTrue(it['fictional_adult'])
+            with open(os.path.join(src, r['source']), 'rb') as f:
+                raw = f.read()
+            expect = it['output_sha256'] if r['source'] == it['file'] else it['additional_export']['sha256']
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), expect, r['key'])
+            with open(os.path.join(PKG, 'assets', 'demos', r['package_file']), 'rb') as f:
+                self.assertEqual(hashlib.sha256(f.read()).hexdigest(), r['package_sha256'], r['key'])
+        self.assertEqual(png_local.size_of(open(os.path.join(PKG, 'assets', 'demos', 'custom-pixels.png'), 'rb').read()), (295, 413))
 
 
 class LocalImage(unittest.TestCase):

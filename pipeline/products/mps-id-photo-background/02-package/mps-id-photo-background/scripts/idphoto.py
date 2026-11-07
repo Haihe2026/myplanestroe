@@ -7,6 +7,7 @@ stdout 第一行是一行 JSON 信号，之后是固定话术；stderr 只放对
 import argparse
 import base64
 import datetime
+import hashlib
 import html
 import json
 import os
@@ -675,6 +676,44 @@ def cmd_paid(args):
     return emit('paymentRegistered', W.payment_registered(), EXIT_WAIT)
 
 
+HISTORY_PREVIEW = 3
+HISTORY_PAGE_SIZE = 20
+TICKET_RE = re.compile(r'mpsg-[a-f0-9]{32}')
+CATEGORIES = ('billing', 'image_quality', 'workflow', 'suggestion', 'other')
+TICKET_TEXT_MAX = 2000
+TICKETS_SHOWN = 3
+
+
+def _local_time(ts):
+    if type(ts) is not int or ts <= 0:
+        return '时间未知'
+    return datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M')
+
+
+def _plain(text, limit=4000):
+    """服务记录里的文字只当纯文本展示：去掉控制字符和 Markdown 链接/图片语法的入口。"""
+    if not isinstance(text, str):
+        return ''
+    text = ''.join(ch if ch in '\n\t' or ord(ch) >= 32 else ' ' for ch in text)[:limit]
+    return text.replace('](', '] (').replace('<', '＜').replace('>', '＞').strip()
+
+
+def _history(a, page, page_size):
+    """返回 (cards, total, has_more)；失败抛 GatewayError。"""
+    r = call('GET', '/consumption-history?page=%d&page_size=%d' % (page, page_size), auth=a['install_secret'])
+    items, total = r.get('items'), r.get('total')
+    if not isinstance(items, list) or type(total) is not int:
+        raise GatewayError(0)
+    cards = []
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+        cards.append(W.history_card(_local_time(it.get('occurred_at')), _plain(it.get('content'), 40) or '生图任务',
+                                    it.get('charged_uses'), it.get('reserved_uses'), it.get('refunded_uses'),
+                                    it.get('status')))
+    return cards, total, page * page_size < total
+
+
 def cmd_balance(args):
     telemetry.report_once(state_dir())
     a = load_account()
@@ -689,7 +728,146 @@ def cmd_balance(args):
     rem = r.get('remaining_uses')
     if not isinstance(rem, int):
         return emit('serviceUnavailable', W.progress_unknown(), EXIT_WAIT)
-    return emit('balance', W.account_summary(rem), EXIT_OK, remaining_uses=rem)
+    try:
+        cards, total, _ = _history(a, 1, HISTORY_PREVIEW)
+    except GatewayError:
+        cards, total = None, None
+    return emit('balance', W.account_summary(rem, cards, total), EXIT_OK, remaining_uses=rem,
+                history_total=total, history_loaded=cards is not None)
+
+
+def cmd_history(args):
+    telemetry.report_once(state_dir())
+    a = load_account()
+    if not a.get('install_secret'):
+        return emit('noAccount', W.account_missing(), EXIT_OK)
+    if not 1 <= args.page <= 100000:
+        return emit('usage', '', EXIT_ERROR)
+    try:
+        cards, total, more = _history(a, args.page, HISTORY_PAGE_SIZE)
+    except GatewayError as e:
+        if e.status == 401:
+            return emit('noAccount', W.account_missing(), EXIT_OK)
+        if e.status == 429:
+            return emit('tooFrequent', W.too_frequent(), EXIT_WAIT)
+        return emit('serviceUnavailable', W.history_unavailable(), EXIT_WAIT)
+    return emit('history', W.history_page(cards, total, args.page, more), EXIT_OK, page=args.page, total=total,
+                has_more=more, next_page=args.page + 1 if more else None)
+
+
+def _due_text(t):
+    due = t.get('response_due_at')
+    return _local_time(due) if type(due) is int and due > 0 else None
+
+
+def _support_state():
+    st = read_json(os.path.join('support', 'state.json'), {}) or {}
+    if not isinstance(st, dict):
+        st = {}
+    st.setdefault('pending', [])
+    st.setdefault('tickets', [])
+    return st
+
+
+def _save_support(st):
+    write_json(os.path.join('support', 'state.json'), st)
+
+
+def _submit_pending(a, st):
+    """逐条提交待交反馈。返回 (已建工单列表, 未交原因或 None)。同一条反馈始终用同一个请求编号。"""
+    done, reason = [], None
+    for item in list(st['pending']):
+        try:
+            r = call('POST', '/support-tickets', item['body'], auth=a['install_secret'], idem=item['key'])
+        except GatewayError as e:
+            if e.status == 404 and item['body'].get('job_id'):
+                # 关联的任务不属于当前账户：去掉关联、换新请求编号，留待下次提交
+                item['body'].pop('job_id')
+                item['key'] = 'fb-' + uuid.uuid4().hex
+                reason = 'busy'
+            elif e.status == 401:
+                reason = 'no_account'
+            elif e.status in (400, 409):
+                st['pending'].remove(item)  # 内容不被接受，不反复提交
+                reason = reason or 'busy'
+            else:
+                reason = 'network' if e.status == 0 else 'busy'
+            _save_support(st)
+            break
+        t = r.get('ticket')
+        if not isinstance(t, dict) or not TICKET_RE.fullmatch(t.get('id') or ''):
+            reason = 'busy'
+            break
+        st['pending'].remove(item)
+        if t['id'] not in [x['id'] for x in st['tickets']]:
+            st['tickets'].append(dict(id=t['id'], created=_now()))
+        _save_support(st)
+        done.append(t)
+    return done, reason
+
+
+def cmd_feedback(args):
+    telemetry.report_once(state_dir())
+    st = _support_state()
+    if not args.retry:
+        text = (args.text or '').strip()
+        if args.category not in CATEGORIES or not text or len(text) > TICKET_TEXT_MAX or \
+                any(ord(ch) < 32 and ch not in '\n\t\r' for ch in text):
+            return emit('usage', '', EXIT_ERROR)
+        body = dict(category=args.category, text=text)
+        if args.draft:
+            d = load_draft(args.draft)
+            jid = d.get('job_id')
+            if isinstance(jid, str) and re.fullmatch(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', jid):
+                body['job_id'] = jid
+        digest = hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+        if digest not in [x.get('digest') for x in st['pending']]:
+            st['pending'].append(dict(digest=digest, key='fb-' + uuid.uuid4().hex, body=body))
+            _save_support(st)
+    elif not st['pending']:
+        return emit('feedbackNone', W.feedback_nothing_pending(), EXIT_OK)
+    a = load_account()
+    if not a.get('install_secret'):
+        return emit('feedbackSaved', W.feedback_saved('no_account'), EXIT_WAIT, pending=len(st['pending']))
+    done, reason = _submit_pending(a, st)
+    if reason and not done:
+        return emit('feedbackSaved', W.feedback_saved(reason), EXIT_WAIT, pending=len(st['pending']))
+    text = '\n\n'.join(W.ticket_created(t['id'], t.get('category'), _due_text(t)) for t in done)
+    if reason:
+        text += '\n\n' + W.feedback_saved(reason)
+    return emit('ticketCreated', text, EXIT_OK, ticket_ids=[t['id'] for t in done], pending=len(st['pending']))
+
+
+def cmd_ticket(args):
+    telemetry.report_once(state_dir())
+    if args.id is not None and not TICKET_RE.fullmatch(args.id):
+        return emit('ticketNotFound', W.ticket_not_found(), EXIT_OK)
+    a = load_account()
+    if not a.get('install_secret'):
+        return emit('noAccount', W.account_missing(), EXIT_OK)
+    ids = [args.id] if args.id else [x['id'] for x in _support_state()['tickets']][-TICKETS_SHOWN:][::-1]
+    if not ids:
+        return emit('ticketNone', W.tickets_none(), EXIT_OK)
+    views = []
+    for tid in ids:
+        try:
+            t = call('GET', '/support-tickets/' + tid, auth=a['install_secret']).get('ticket')
+        except GatewayError as e:
+            if e.status == 404:
+                if args.id:
+                    return emit('ticketNotFound', W.ticket_not_found(), EXIT_OK)
+                continue
+            if e.status == 401:
+                return emit('noAccount', W.account_missing(), EXIT_OK)
+            if e.status == 429:
+                return emit('tooFrequent', W.too_frequent(), EXIT_WAIT)
+            return emit('serviceUnavailable', W.ticket_lookup_failed('network' if e.status == 0 else 'busy'), EXIT_WAIT)
+        if not isinstance(t, dict) or t.get('id') != tid:
+            return emit('serviceUnavailable', W.ticket_lookup_failed('busy'), EXIT_WAIT)
+        views.append(W.ticket_view(tid, t.get('category'), t.get('status'), _plain(t.get('reply')), _due_text(t)))
+    if not views:
+        return emit('ticketNotFound', W.ticket_not_found(), EXIT_OK)
+    return emit('ticketStatus', '\n\n'.join(views), EXIT_OK, count=len(views))
 
 
 def cmd_decline(args):
@@ -698,10 +876,6 @@ def cmd_decline(args):
 
 def cmd_refuse(args):
     return emit('refused', W.refuse_misuse(), EXIT_OK)
-
-
-def cmd_feedback(args):
-    return emit('feedbackUnavailable', W.feedback_unavailable(), EXIT_OK)
 
 
 def _now():
@@ -734,8 +908,17 @@ def parser():
     rg = s.add_parser('regenerate')
     rg.add_argument('--draft', required=True)
     rg.add_argument('--pay-consent', required=True)
-    for name in ('status', 'auth', 'topup', 'paid', 'balance', 'decline', 'feedback', 'refuse'):
+    for name in ('status', 'auth', 'topup', 'paid', 'balance', 'decline', 'refuse'):
         s.add_parser(name)
+    hi = s.add_parser('history')
+    hi.add_argument('--page', type=int, default=1)
+    fb = s.add_parser('feedback')
+    fb.add_argument('--category', choices=CATEGORIES)
+    fb.add_argument('--text')
+    fb.add_argument('--draft')
+    fb.add_argument('--retry', action='store_true')
+    tk = s.add_parser('ticket')
+    tk.add_argument('--id')
     return p
 
 
@@ -743,6 +926,7 @@ COMMANDS = {
     'first-turn': cmd_first_turn, 'demo': cmd_demo, 'plan': cmd_plan, 'confirm': cmd_confirm, 'run': cmd_run,
     'resume': cmd_resume, 'regenerate': cmd_regenerate, 'status': cmd_status, 'auth': cmd_auth, 'topup': cmd_topup,
     'paid': cmd_paid, 'balance': cmd_balance, 'decline': cmd_decline, 'feedback': cmd_feedback, 'refuse': cmd_refuse,
+    'history': cmd_history, 'ticket': cmd_ticket,
 }
 
 

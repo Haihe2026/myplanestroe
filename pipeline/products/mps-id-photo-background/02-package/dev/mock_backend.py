@@ -6,6 +6,10 @@
 - shared_platform.py：/skill-jobs 用 Skill Bearer；/jobs/by-key、/jobs/{id}、/jobs/{id}/image
 - image_inputs.py：references 仅 {mime, content}，需 reference_consent=true，PNG/JPEG，5MB
 - dialogue_store.py / dialogue_gateway.py：首次对话 8 字段白名单、200 返回 event_id/receipt/duplicate；link 只收 event_id/receipt/product
+- backend-patch/gemini-support-20261107/gemini_support.py（已部署，见 01-deployment-verification-20261107.json）：
+  GET /consumption-history（page 1..100000、page_size 1..50，只收这两个参数）、POST /support-tickets（Idempotency-Key 16..100，
+  正文只 category/text/job_id?，同键同体重放、异体 409，job 非本人 404）、GET /support-tickets/{mpsg-32hex}（他人 404）；
+  三者只认账户 Bearer（43 位），Skill 凭证 401；不扣次数
 """
 import base64
 import hashlib
@@ -48,6 +52,9 @@ class Mock:
         self.telemetry_status = None
         self.link_calls = []
         self.membership_links = 0
+        self.tickets = {}        # id -> dict(owner, ...)
+        self.ticket_keys = {}    # (owner, key) -> (id, digest)
+        self.ledger_unknown = set()   # 无账本的任务 id
 
     # 测试辅助 ------------------------------------------------------
     def authorize(self, secret, balance=0):
@@ -152,6 +159,8 @@ class Mock:
             if self.scenario.get('submit_5xx'):
                 err(502)
             return ok(dict(id=jid, status=status, remaining_uses=self.users[s]['balance']))
+        if path.startswith('/consumption-history') or path.startswith('/support-tickets'):
+            return self.support(method, path, body, headers)
         m = re.fullmatch(r'/jobs/by-key/(.+)', path)
         if m and method == 'GET':
             s = self.secret_of(auth)
@@ -190,6 +199,90 @@ class Mock:
                     j['status'] = 'failed' if self.scenario.get('fail') else 'succeeded'
             return ok(dict(id=j['id'], status=j['status']))
         err(404)
+
+    # 消费记录与工单 ------------------------------------------------
+    def support(self, method, path, body, headers):
+        from urllib.parse import urlsplit, parse_qs
+
+        def ok(d):
+            return 200, json.dumps(d).encode()
+
+        def err(code):
+            raise idphoto.GatewayError(code)
+        if self.scenario.get('support_down'):
+            err(0)
+        if self.scenario.get('support_busy'):
+            err(503)
+        auth = headers.get('Authorization', '')
+        if not re.fullmatch(r'Bearer [A-Za-z0-9_-]{43}', auth) or auth[7:] not in self.users:
+            err(401)  # Skill 凭证、失效凭证都不接受
+        uid = auth[7:]
+        u = urlsplit(path)
+        q = parse_qs(u.query, keep_blank_values=True)
+        if u.path == '/consumption-history':
+            if method != 'GET' or set(q) - {'page', 'page_size'} or any(len(v) != 1 for v in q.values()):
+                err(400)
+            page, size = int(q.get('page', ['1'])[0]), int(q.get('page_size', ['20'])[0])
+            if not (1 <= page <= 100000 and 1 <= size <= 50):
+                err(400)
+            mine = [j for j in self.jobs.values() if j['owner'] == uid]
+            mine.reverse()
+            items = []
+            for j in mine[(page - 1) * size: page * size]:
+                known = j['id'] not in self.ledger_unknown
+                st = j['status']
+                charged = (1 if st == 'succeeded' else (0 if st == 'failed' and j.get('refunded') else None)) if known else None
+                items.append(dict(job_id=j['id'], occurred_at=1762480000, content='通用生图任务', status=st,
+                                  charged_uses=charged, reserved_uses=1 if known and st in ('pending', 'needs_review') else None,
+                                  refunded_uses=(1 if j.get('refunded') else 0) if known else None,
+                                  unit='image_use', ledger_available=known))
+            return ok(dict(items=items, total=len(mine), page=page, page_size=size, product='gemini',
+                           scope='current_shared_database_gemini_jobs', content_scope='x'))
+        if u.path == '/support-tickets':
+            if method != 'POST' or q:
+                err(405 if method != 'POST' else 400)
+            key = headers.get('Idempotency-Key') or ''
+            if not re.fullmatch(r'[A-Za-z0-9_.:-]{16,100}', key):
+                err(400)
+            if not isinstance(body, dict) or set(body) - {'category', 'text', 'job_id'}:
+                err(400)
+            if body.get('category') not in ('billing', 'image_quality', 'workflow', 'suggestion', 'other') or \
+                    not isinstance(body.get('text'), str) or not 1 <= len(body['text']) <= 2000 or not body['text'].strip():
+                err(400)
+            jid = body.get('job_id')
+            if jid is not None and (jid not in self.jobs or self.jobs[jid]['owner'] != uid):
+                err(404)
+            digest = hashlib.sha256(json.dumps([body.get('category'), body.get('text'), jid], ensure_ascii=False).encode()).hexdigest()
+            if (uid, key) in self.ticket_keys:
+                tid, d0 = self.ticket_keys[(uid, key)]
+                if d0 != digest:
+                    err(409)
+                return ok(dict(ticket=self.public(tid), replayed=True))
+            tid = 'mpsg-' + uuid.uuid4().hex
+            self.tickets[tid] = dict(owner=uid, id=tid, category=body['category'], text=body['text'], job_id=jid,
+                                     status='open', reply=None, created=1762480000, updated=1762480000,
+                                     response_due_at=self.scenario.get('due'))
+            self.ticket_keys[(uid, key)] = (tid, digest)
+            if self.scenario.get('ticket_lost_once'):
+                self.scenario['ticket_lost_once'] = False
+                err(0)  # 已建单但应答丢失
+            return ok(dict(ticket=self.public(tid), replayed=False))
+        m = re.fullmatch(r'/support-tickets/(.*)', u.path)
+        if m and method == 'GET':
+            if q:
+                err(400)
+            t = self.tickets.get(m.group(1))
+            if not t or t['owner'] != uid:
+                err(404)
+            return ok(dict(ticket=self.public(t['id'])))
+        err(404)
+
+    def public(self, tid):
+        t = self.tickets[tid]
+        return {k: t[k] for k in ('id', 'category', 'text', 'job_id', 'status', 'reply', 'created', 'updated', 'response_due_at')}
+
+    def operator_reply(self, tid, status, reply):
+        self.tickets[tid].update(status=status, reply=reply)
 
     # 首次对话上报 --------------------------------------------------
     def telemetry_transport(self, url, body, headers, timeout):

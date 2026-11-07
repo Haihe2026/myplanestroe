@@ -174,19 +174,114 @@ def credentials_reset():
     return '登录状态已过期，我已清除旧的登录信息。' + REASSURE_SAVED + '接下来重新授权一次即可继续，授权本身不扣费。'
 
 
-def account_summary(remaining):
+def account_summary(remaining, cards=None, total=None):
+    lines = ['剩余可用次数：' + str(remaining) + ' 次']
+    if cards is None:
+        lines.append('消费记录这次没取到，稍后说「消费记录」我再查一次。')
+    elif not cards:
+        lines.append('还没有消费记录。')
+    else:
+        lines.append('最近记录：')
+        lines += cards
+        lines.append('共 ' + str(total) + ' 条，回复「查看所有」可看全部。')
+    lines.append(HISTORY_SCOPE)
+    lines.append('需要补充次数时，回复「充值」我为你打开充值页。')
+    return '\n'.join(lines)
+
+
+HISTORY_SCOPE = '记录包含同一账户在已接入技能里的通用次数使用情况。'
+_JOB_STATUS = {'succeeded': '已完成', 'pending': '处理中', 'needs_review': '核对中', 'failed': '未完成'}
+
+
+def history_card(when, content, charged, reserved, refunded, status):
+    if isinstance(charged, int):
+        fee = '未扣次' if charged == 0 else '扣 ' + str(charged) + ' 次'
+    elif isinstance(reserved, int) and reserved > 0:
+        fee = '预留 ' + str(reserved) + ' 次，完成后结算'
+    else:
+        fee = '扣次以服务记录为准'
+    if isinstance(refunded, int) and refunded > 0:
+        fee += '，已退回 ' + str(refunded) + ' 次'
+    return '- ' + when + ' · ' + content + '\n  ' + fee + ' · ' + _JOB_STATUS.get(status, '其他')
+
+
+def history_page(cards, total, page, has_more):
+    if not cards:
+        return '这一页没有记录，共 ' + str(total) + ' 条。'
+    lines = ['消费记录（第 ' + str(page) + ' 页，共 ' + str(total) + ' 条）：'] + cards
+    if has_more:
+        lines.append('还有更多，回复「下一页」继续看。')
+    lines.append(HISTORY_SCOPE)
+    return '\n'.join(lines)
+
+
+def history_unavailable():
+    return '消费记录这次没取到，稍后说「消费记录」我再查一次。'
+
+
+_CATEGORY = {'billing': '费用与次数', 'image_quality': '出图效果', 'workflow': '使用流程', 'suggestion': '建议与表扬', 'other': '其他'}
+_TICKET_STATUS = {'open': '已受理，等待处理', 'in_progress': '处理中', 'resolved': '已处理'}
+
+
+def _due(due_text):
+    if due_text:
+        return '预计处理时间：' + due_text + ' 前。'
+    return '目前没有承诺具体处理时限，有回复后说「查工单」就能看到。'
+
+
+def ticket_created(ticket_id, category, due_text):
     return '\n'.join([
-        '剩余可用次数：' + str(remaining) + ' 次',
-        '这里目前只能查看剩余次数；需要补充次数时，回复「充值」我为你打开充值页。',
+        '你的反馈已经提交。',
+        '反馈编号：' + ticket_id + '（' + _CATEGORY.get(category, '其他') + '）',
+        _due(due_text),
+        '之后说「查工单」就能看到处理进度和回复。提交反馈不扣次数。',
     ])
+
+
+def ticket_view(ticket_id, category, status, reply, due_text):
+    lines = ['反馈编号：' + ticket_id + '（' + _CATEGORY.get(category, '其他') + '）',
+             '处理状态：' + _TICKET_STATUS.get(status, '处理中')]
+    if reply:
+        lines.append('回复：' + reply)
+    else:
+        lines.append('暂时还没有回复。')
+        lines.append(_due(due_text))
+    return '\n'.join(lines)
+
+
+def tickets_none():
+    return '这台设备上还没有提交过反馈。想反馈问题或提建议，直接告诉我就行。'
+
+
+def ticket_not_found():
+    return '没有找到这个反馈编号，请核对一下编号；也可以直接说「查工单」查看这台设备提交过的反馈。'
+
+
+def feedback_saved(reason):
+    head = {
+        'no_account': '这台设备还没有关联账户，反馈单需要账户才能提交。',
+        'busy': '服务正在处理较多请求，反馈这次没能提交。',
+        'network': '网络暂时连不上，反馈这次没能提交。',
+    }.get(reason, '反馈这次没能提交。')
+    tail = '完成授权后说「提交反馈」，我再交一次。' if reason == 'no_account' else '稍后说「提交反馈」，我再交一次。'
+    return head + '你的原话已经在本机记下，不用重说；' + tail + '提交反馈不扣次数。'
+
+
+def feedback_nothing_pending():
+    return '没有待提交的反馈。'
+
+
+def ticket_lookup_failed(reason_kind):
+    head = '网络暂时连不上' if reason_kind == 'network' else '服务正在处理较多请求'
+    return head + '，这次没查到反馈进度。稍后说「查工单」我再查一次。'
+
+
+def too_frequent():
+    return '查询太频繁了，请稍等一分钟再试。'
 
 
 def account_missing():
     return '这台设备上还没有关联账户。确认好换底方案后，我会带你完成一次授权，授权本身不扣费。'
-
-
-def feedback_unavailable():
-    return '谢谢你的反馈，我已经整理好了你的原话。这里暂时不能直接提交反馈单，后续会尽快开放。'
 
 
 def input_error(filename, problem):

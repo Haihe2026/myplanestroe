@@ -1,0 +1,141 @@
+{
+  "note": "本地缩放与调色板压缩，未新增生图调用；源图见 demo-assets/provenance.json",
+  "box": [
+    320,
+    480
+  ],
+  "colors": 128,
+  "total_bytes": 840692,
+  "items": [
+    {
+      "key": "white-one",
+      "source": "white-one.png",
+      "source_sha256": "9e5aab7426702cc7376ea8b0606a323cbd02be8f29522786c76bf751d48978d9",
+      "source_hash_checked": true,
+      "package_file": "white-one.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 87275,
+      "package_sha256": "e330b9e0f22e3e1c066c251a2fb9727be3049e8a7909ef116cbc8ee706d8541d"
+    },
+    {
+      "key": "blue-one",
+      "source": "blue-one.png",
+      "source_sha256": "052331c6c912bd5f3a6069fc51e35266f86fcb2821c353d99020092229e271e2",
+      "source_hash_checked": true,
+      "package_file": "blue-one.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 86011,
+      "package_sha256": "232d8ad195a0001219a782fc5b2b193d1eaa8900843c63630fe3edbbd365b566"
+    },
+    {
+      "key": "red-one",
+      "source": "red-one.png",
+      "source_sha256": "5afbee1797f8335c1fca5e16cdf5dfa3084c5d51d2b9232c265f6a171190ecb1",
+      "source_hash_checked": true,
+      "package_file": "red-one.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 88113,
+      "package_sha256": "8cd564b880c4f5cbd7ebb187b1b9190f8a46fbc42982af764237e30e7c2a16ae"
+    },
+    {
+      "key": "white-two",
+      "source": "white-two.png",
+      "source_sha256": "c7e1a29d47914fb97f37a950290b70d84ce0c978b71d1167c7f9f38a819cc501",
+      "source_hash_checked": true,
+      "package_file": "white-two.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 83432,
+      "package_sha256": "34a19dcd3114aea6760a2a5a0e323b6bc330c5918ce8a7217a07859b803ba899"
+    },
+    {
+      "key": "blue-two",
+      "source": "blue-two.png",
+      "source_sha256": "f4453bd18edee04accd59acb320d7e755b69d8aa42d21277cfe154318176564e",
+      "source_hash_checked": true,
+      "package_file": "blue-two.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 86852,
+      "package_sha256": "b001caa67d322c368fea14b0f0ff6cef6ce21cc0149797af7ad29ce2c6644923"
+    },
+    {
+      "key": "resume-white",
+      "source": "resume-white.png",
+      "source_sha256": "eaa1a91f2d7f0388445df4d9599dd59740218b60f380c3f23066e19533860cb3",
+      "source_hash_checked": true,
+      "package_file": "resume-white.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 78720,
+      "package_sha256": "e546d2c47eed630b4be45b329169d9ff17f0b321df4e8a9c58fc80a6ef3af8ae"
+    },
+    {
+      "key": "custom-pixels",
+      "source": "custom-pixels-295x413.png",
+      "source_sha256": "837cd69e9493acdd5d07d5deab90cfb1149f678e631277dc4760feccaf71a276",
+      "source_hash_checked": true,
+      "package_file": "custom-pixels.png",
+      "package_size": [
+        295,
+        413
+      ],
+      "package_bytes": 68861,
+      "package_sha256": "0b01b75faeecc8cbd51659f705f84b5efb01ee8f769212f009ab675342310358"
+    },
+    {
+      "key": "edge-clean",
+      "source": "edge-clean.png",
+      "source_sha256": "699a6bcc6974f81891a0260988a5688a260b2479d26fb7900b9c7d2326cfad83",
+      "source_hash_checked": true,
+      "package_file": "edge-clean.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 92481,
+      "package_sha256": "f7faafa5dc8ec6d9a3ea83b9982789b3ab85bea1a33e079754363b74827a403c"
+    },
+    {
+      "key": "school",
+      "source": "school.png",
+      "source_sha256": "261a514588eeb2c4409a10535c1a6a5a4640b085941d76756c9ccfb0621deaad",
+      "source_hash_checked": true,
+      "package_file": "school.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 87684,
+      "package_sha256": "4d876b3c01b46658afe08dafb8495cd28dbfad3885c17823e4cbc52abbd3fbf6"
+    },
+    {
+      "key": "custom-size",
+      "source": "custom-size.png",
+      "source_sha256": "666ef494db37751913ab608d9065b9b264efee2a5ab6368943391374edf88650",
+      "source_hash_checked": true,
+      "package_file": "custom-size.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 81263,
+      "package_sha256": "f85ae153aac02d11081d45a401e31f242cfc21531426527ab6f35a130f808225"
+    }
+  ]
+}

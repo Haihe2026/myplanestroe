@@ -1,4 +1,7 @@
-"""开发用：生成离线示例示意图与头像（合成绘制，不含真实人物，不调用任何生图服务）。不打进上架包。"""
+"""开发用：生成头像（几何绘制，不含真实人物，不调用任何生图服务）。不打进上架包。
+
+示例图已改用 demo-assets/ 中授权生成的虚构人物图，由 dev/sync_demos.py 同步；本脚本不再写 assets/demos。
+"""
 import json, os
 from PIL import Image, ImageDraw, ImageFilter
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'mps-id-photo-background')
@@ -54,15 +57,6 @@ def figure(size, bg, key):
         im.paste(tmp, ((w * 2 - tmp.width) // 2, h * 2 - tmp.height))
         big = im
     return big.resize((w, h), Image.LANCZOS)
-os.makedirs(os.path.join(ROOT, 'assets', 'demos'), exist_ok=True)
-items = []
-for key, title, bg, note, px in DEMOS:
-    size = px or (240, 336)
-    name = key + '.png'
-    figure(size, bg, key).save(os.path.join(ROOT, 'assets', 'demos', name), optimize=True)
-    items.append(dict(key=key, title=title, note=note, file=name))
-json.dump({'notice': '示意图为合成绘制，用于展示效果方向，不是真实处理结果。', 'demos': items},
-          open(os.path.join(ROOT, 'assets', 'demos.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 # 头像 512×512
 av = Image.new('RGB', (512, 512), (67, 142, 219))
 d = ImageDraw.Draw(av)
@@ -73,4 +67,4 @@ av.paste(inner, (126, 94))
 dist = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'dist')
 os.makedirs(dist, exist_ok=True)
 av.save(os.path.join(dist, 'mps-id-photo-background-avatar.png'), optimize=True)
-print('ok', len(items))
+print('ok avatar')

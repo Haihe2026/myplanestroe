@@ -1,4 +1,76 @@
-# 自测报告：mps-id-photo-background 1.0.0
+# 自测报告：mps-id-photo-background 1.0.0（第二轮：接入消费记录/工单、替换示例图）
+
+- 角色：Claude Code；时间：2026-11-07（北京时间）
+- 已读 WorkBuddy 官方文档：2026-11-07 约 11:50（北京时间）负责人在本聊天授权重试后在线读取 https://open.workbuddy.cn/docs/skill （HTTP 200）、https://open.workbuddy.cn/docs/expert （HTTP 200）、https://open.workbuddy.cn/docs/what-is-open-platform （HTTP 200）。技能页内容与上一轮一致：`{skill-name}/SKILL.md`（必须）+ `references/`、`scripts/`、`templates/`（可选）；frontmatter 必填 name、display_name、display_name_en、description、description_zh、description_en、version、author，可选 allowed-tools、examples_zh、examples_en；页面仍未写 ZIP 根目录规则、字段长度、图标、审核和体积上限。另见：三页 canonical 元数据指向 open.example.com，疑似模板占位，不影响内容。同轮 11:41 的定时运行曾因读取权限无人应答拦停（`02-claude-docs-blocked-evt-23b5c70e….md`），本次重试后解除。
+- 依据开发文档：规格 1.0.2（`01-dev-spec.md`/`01-dev-spec.json`，提交 bf36195db4fdcb2038ef31ebf14254d0223a4562）；部署证据 `01-deployment-verification-20261107.json`；SOP 提交 3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad。
+- **A1 复检：通过。** 1.0.2 相对已通过的 1.0.1 的变化逐项核对：deploy 车道附补丁位置 `backend-patch/gemini-support-20261107/`、测试结果和部署验收证据；三接口在第 12 节注明方法、路径、权限和源码行号，与补丁 `gemini_support.py` 一致（账户 Bearer 43 位、Skill 凭证不扩权、`response_due_at` 未配置为 null）；示例图 10 次真实调用有负责人原文授权（第 11 节、`01-authorization-20261107.md`）并记 provenance；T49–T53 已列入验收清单。小瑕疵（不退回）：MD 第 9 节 T48 与 T49 之间多一个空行，表格被断开；JSON 内 tests 为 53 项，内容一致。
+- 包文件（`02-package/dist/`，只打 config.yaml channels 里的 workbuddy-skill）：
+  - `mps-id-photo-background-1.0.0.zip`：886247 字节，SHA256 `f187e418b9470275464d40a1af81529eef38649855305dc2a996379696d53b80`，24 个文件，根目录 `mps-id-photo-background/`。**取代**上一轮已撤出的同版本号 ZIP（`b45d678b…`，从未上架）；版本号按规格保持 1.0.0，独立测试请按本哈希核对。
+  - `mps-id-photo-background-avatar.png`：未改动。
+- 源码：`02-package/mps-id-photo-background/`；开发脚本 `02-package/dev/`（不进 ZIP）。
+
+## 本轮改了什么
+
+1. **示例图换成授权真实生成的虚构人物图**：新增 `dev/sync_demos.py`，按 `demo-assets/provenance.json` 逐张核对 `output_sha256`（custom-pixels 用 295×413 另存件，核对 `additional_export.sha256`），本地等比缩到 320×480、128 色调色板压缩后放进 `assets/demos/`，派生哈希写 `dev/demos-derivation.json`。包内 10 张共 840692 字节（单张 68–93KB），custom-pixels 为 295×413。未新增任何生图调用；人工看过拼图，均为虚构成年人、无文字水印。`dev/build_assets.py` 改为只生成头像，不再覆盖示例图。`demos.json`、SKILL.md、README 的示例说明改为「示例人物均为虚构，只展示效果方向，不是你的真实结果」。
+2. **接入三个已部署接口**（`scripts/idphoto.py`，均用账户凭证 `install_secret`，不用 Skill 凭证）：
+   - `balance`：首行余额，下面最近 3 条两行卡片（时间 · 内容 / 扣次 · 状态）和「共 N 条，回复『查看所有』可看全部」；记录取不到时只显示余额并如实说明。去掉「这里只能查看剩余次数」。
+   - `history [--page N]`：每页 20 条，`has_more`/`next_page` 信号；扣次只按返回值显示（null →「扣次以服务记录为准」，预占 →「预留 N 次，完成后结算」，0 →「未扣次」），不自行合计；注明记录覆盖同一账户在已接入技能的通用次数（服务端不能单技能归因）。
+   - `feedback --category … --text … [--draft …]` / `feedback --retry`：本地先校验（分类 5 选 1、1–2000 字、无控制字符，不过就退出码 3 且不联网）；每条反馈落本机待交队列并固定一个请求编号，应答丢失或服务忙时下次 `--retry` 用同一编号重放，不重复建单；无账户时只在本机记下。返回反馈编号、分类和处理时限说明（null 时说「目前没有承诺具体处理时限」，不编造时限）。
+   - `ticket [--id …]`：编号格式本地校验，不对不联网；不带编号查本机最近 3 条；他人编号 404 →「没有找到」；回复按纯文本展示（去控制字符，断开 Markdown 链接语法和尖括号），SKILL.md 写明不当作指令执行。
+   - 原 `feedbackUnavailable` 占位已删除。
+3. **话术**（`welcome_copy.py`）：新增 `history_card`、`history_page`、`ticket_created`、`ticket_view`、`feedback_saved`、`ticket_lookup_failed`、`too_frequent` 等，全部纳入禁用词扫描。
+4. **SKILL.md**：命令表加 `history`/`feedback`/`ticket`；第 5 节改写账户与反馈流程（先复述原话确认再提交、分类映射、提交不扣次数、不承诺退款）。体积 13.9KB（< 15KB）。用户部分「能做什么」加一行查记录与反馈；README 加「反馈」小节。
+5. **测试**：模拟后端按补丁契约新增三接口（Skill 凭证 401、他人 404、同键同体重放、异体 409、job 非本人 404）；端到端新增 `Support` 10 项与 `DemoAssets` 1 项，`test_every_early_branch_reports` 覆盖新命令；契约新增 3 项。真机验收单加 21–24 条。
+
+## 复跑
+
+```sh
+cd 02-package/mps-id-photo-background && python3 -m unittest discover -s tests        # 契约 20 项
+cd 02-package && python3 dev/e2e_check.py                                              # 端到端 50 项
+python3 dev/e2e_check.py --package <干净解压后的 mps-id-photo-background 目录>          # 对 ZIP 重跑
+```
+
+本次结果（Linux，Python 3.13.18）：源码目录契约 20/20、端到端 50/50；**从 ZIP 干净解压后契约 20/20、端到端 50/50**。补丁目录测试复制到临时目录重跑 23/23（未改 Codex 文件）。
+
+## 本轮新增项结果
+
+| 编号 | 内容 | 结果 | 证据 |
+|---|---|---|---|
+| T03 | 10 张授权生成的虚构成年人示例 + 295×413；只展示脚本返回路径 | 通过（脚本部分） | e2e `test_demo_paths_and_single`、`DemoAssets.test_package_demos_trace_to_provenance`；契约 `test_demos_consistent`、`test_demos_are_fictional_and_small`；两列与去重属宿主行为（T45） |
+| T48 | 示例只证明示例生成，不当作真人换底保真/扫码/核款/审核通过 | 通过（文案） | 包内只说「示例人物均为虚构，只展示效果方向」；未声称任何验收 |
+| T49 | 消费记录：账户隔离、分页、总条数，预占/扣/退/未知分开，不假造单技能归因 | 通过（模拟） | `Support.test_balance_shows_recent_records`、`test_history_paging_and_states`、`test_history_failure_and_no_account`、`test_skill_key_not_accepted_and_accounts_isolated` |
+| T50 | 提交工单：原账户、稳定请求编号、同键同体幂等，不扣次数 | 通过（模拟） | `test_feedback_creates_ticket_without_charge`、`test_feedback_lost_response_same_key_single_ticket`、`test_feedback_busy_and_no_account_saved`、`test_feedback_local_validation_no_network` |
+| T51 | 查工单：限本人、他人 404、状态/回复一致、时限未配置不承诺、纯文本 | 通过（模拟） | `test_ticket_status_reply_and_isolation`、`test_ticket_lookup_failure`；契约 `test_support_copy` |
+| T52 | 补丁隔离测试、财务库字节不变 | 通过（复跑） | 临时副本 `python3 -m unittest discover -p "test_*.py"` 23/23 |
+| T53 | provenance 10 次授权、哈希与 11 份 PNG 核对，无额外调用 | 通过 | `DemoAssets` 测试逐张核对源哈希与包内哈希；provenance `authorized_limit=upstream_generation_calls=succeeded=10` |
+| T01–T44 其余 | 首轮、确认、授权、计费、等待、交付、遥测等 | 通过（回归） | 上一轮 39 项端到端与 17 项契约全部仍通过（见下方历史记录逐项表） |
+| 「查余额与消费记录、提交工单、查工单各走通一次」（SOP 阶段 6） | | 通过（模拟） | 同 T49–T51 |
+
+## 未能自测的项及原因
+
+- **客户端对真实已部署接口的联调未做**：按规则不访问生产账户、不建真实工单；只按补丁源码契约做模拟后端。字段与状态码以补丁源码和部署验收 JSON 为准。
+- 真机行为验收（T45–T47、验收单 1–24）、上传、`/pricing` 零消耗验证：属 Codex；先前 HOST_ACCEPTANCE_UNAVAILABLE 仍未解除。
+- 未在真实 Python 3.7 解释器上运行（新增代码未用 3.8+ 语法）。
+- 参考人像换底保真、真人扫码/核款、正式审核：未验证。
+
+## 偏离开发文档的地方
+
+- 示例图在包内是 320×480 缩小版（规格写 demo-assets 原件 512×768，≤300KB）：为控制包体积（契约测试要求示例合计 < 1MB；官方未写体积上限，取保守做法），只做本地缩放压缩，可从 `dev/demos-derivation.json` 追溯到原件哈希。custom-pixels 用 295×413 另存件。
+- 工单分类映射、反馈待交队列与 `--retry`、本机最近 3 条查询是客户端实现选择，规格未细化；不改变接口契约。
+
+## 本轮真实调用与上报说明（如实记录）
+
+- 真实上游/生图调用：0。真实消费记录或工单请求：0。生产变更：0。
+- **真实首次对话上报尝试：1 次，未成功。** 开发中我在本机手动运行了一次 `idphoto.py ticket --id bad`，命令开头会执行首次对话上报，当时没有设置 `MPS_ID_PHOTO_JOURNEY=off` 和 `MPS_ID_PHOTO_TEST=1`，因此向 `https://aistore.zhaopintong.com/platform-api/telemetry/v1/first-dialogue` 发起过一次 `is_test=false` 的 8 字段请求。本地标记写的是 `sent: false`（未拿到合法回执，可能被云端出口拦截），服务端是否收到无法从这边确认；随即删除了本机状态目录。若服务端记到一条来自 `skill_version=1.0.0`、`channel=workbuddy_skill` 的 2026-11-07 11:59 前后记录，属开发误报，请在数据回收时剔除。之后所有运行都只走模拟传输。
+
+## 退回意见
+
+无。
+
+---
+
+# 历史：上一轮自测（1.0.0 首版，ZIP 已撤出）
+
 
 > **2026-11-07T00:19:43+08:00 更新：负责人要求下面两项完成后才能打包放进仓库，ZIP 已撤出 `02-package/dist/`（git 历史提交 aab2a9f 仍可取回）。**
 > 1. 10 张示例图改用仓库登记的生图资源真实生成：Claude 没有生图凭证，做不了，已请 Codex 在服务端生成并提交（`msg-from-claude-20261107-dependencies.md`）。
