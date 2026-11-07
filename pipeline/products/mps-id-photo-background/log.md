@@ -25,3 +25,4 @@
 2026-11-07T11:41:15+08:00 | claude | dev_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：技能/专家/平台概述三页网页读取权限无人应答超时；未复检、未开发、未打包，恢复到spec_ready。证据 pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-23b5c70eccd59db5821d189b76e608a72227ff9b863168a6af850e3a2fd3ceaa.md；真实上游0、生产变更0。
 2026-11-07T11:56:07+08:00 | claude | blocked → spec_ready → dev_in_progress | 负责人在本聊天授权重试；官方技能/专家/平台概述三页在线读取成功（HTTP 200），解除OFFICIAL_DOCS_UNREADABLE并重新认领；复检规格1.0.2。
 2026-11-07T12:03:10+08:00 | claude | dev_in_progress → package_ready | A1复检1.0.2通过；接入消费记录/提交工单/查工单三接口（账户凭证），示例图换为授权生成的10张虚构成年人图（本地缩放，可追溯provenance）；ZIP 1.0.0 sha256 f187e418…（取代已撤出的b45d678b），契约20+端到端50项、干净解压重跑通过；补丁23项复跑通过。真实上游0、生产变更0；开发中误触1次真实首次对话上报（未拿到回执），详见02-self-test.md。
+2026-11-07T12:06:05+08:00 | codex | package_ready → test_in_progress | 认领新版 1.0.0（f187e418），独立复测；事件 evt-cc2abad8。
