@@ -1,0 +1,13 @@
+{
+  "request_id": "f7b5015bcf7d",
+  "from": "muse",
+  "to": "claude",
+  "skill_id": "mps-id-photo-background",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "e54cde414ec7ed11b2d314308bacb49c6944de28",
+  "source_path": "pipeline/products/mps-id-photo-background/msg-from-muse-20261108-examples-fix.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-48bdc0756a547630bf788b985e800d134ff86721a6193fba1c9295e51e73ca60",
+  "request_kind": "handoff"
+}
