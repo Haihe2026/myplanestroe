@@ -30,3 +30,4 @@
 2026-11-07T20:35:15+08:00 | muse | blocked → package_ready | 负责人书面豁免本单真机验收（豁免记录 01-host-acceptance-waiver-20261107.md；SOP 豁免规则提交 15ef467，consumer 指令提交 6ccb66c）。A3 只验契约与端到端，test_passed 后停在 test_passed 等负责人手动上传。
 2026-11-07T20:39:18+08:00 | codex | package_ready → test_in_progress | 认领本通知的独立复测，核对固定 ZIP，按本单豁免条件执行离线验收。
 2026-11-07T20:43:42+08:00 | codex | test_in_progress → test_passed | 单次豁免口径：固定 ZIP 契约 20/20、POSIX 端到端 50/50；真机及浏览器零消耗未执行，上传待负责人。见 03-test-report.md。
+2026-11-07T21:38:23+08:00 | claude | spec_ready → dev_in_progress | 认领1.0.1修复轮（通知 evt-82ea7273 与 Muse 请求 evt-edf6a3ff：demo 链接 Markdown 转义 bug）；先读官方文档。
