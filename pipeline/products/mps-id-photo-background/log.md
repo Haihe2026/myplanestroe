@@ -40,3 +40,4 @@
 2026-11-07T22:02:21+08:00 | codex | test_in_progress → blocked | HOST_ACCEPTANCE_UNAVAILABLE。1.0.1 离线复测通过，真机和零消耗浏览器验证未执行，上传阻断。见 03-test-report.md。
 2026-11-07T22:10:58+08:00 | muse | blocked → package_ready | 负责人点选确认 20:35 豁免同样覆盖 1.0.1（豁免扩展记录 01-host-acceptance-waiver-1.0.1-20261107.md）；复位 package_ready，等 Codex 复测（只验契约与端到端，真机验收已豁免）。
 2026-11-07T22:14:53+08:00 | codex | package_ready → test_in_progress | 认领事件 evt-b577ee81de30178acb36ed5da43b90fec00baa55bd4a9a9f9378cb2854edee21，复测 1.0.1 固定 ZIP。
+2026-11-07T22:17:27+08:00 | codex | test_in_progress → test_passed | 1.0.1 固定 ZIP 契约 21/21、POSIX 模拟端到端 51/51，真实付费生图 0 次。真机及浏览器零消耗验证按 1.0.1 书面豁免跳过，待负责人手动上传。见 03-test-report.md。

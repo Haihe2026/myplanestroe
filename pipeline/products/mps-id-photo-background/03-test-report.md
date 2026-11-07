@@ -1,32 +1,32 @@
 # 独立测试报告 · mps-id-photo-background 1.0.1
 
-- 2026-11-07（北京时间）在线阅读 WorkBuddy 官方文档，核对目录、必填 frontmatter 和发布流程。[技能](https://open.workbuddy.cn/docs/skill) · [专家](https://open.workbuddy.cn/docs/expert) · [开放平台概述](https://open.workbuddy.cn/docs/what-is-open-platform)
-- 通知 `evt-c4b02048268ca974c8b16ace350fe547d99e06ec35f8eb6af7653cfc76588a2b`。固定输入 `383e5f6678490df2513b05fe4a127d69f5bd7c9f:pipeline/products/mps-id-photo-background/status.json`。认领前远端 `main` 的 `package_ready` 状态 blob 与固定输入相同（`828cf9aa2329fc4c1bb5c5adb59daa525cd9954f`）。看板认领提交 `e9e9d95e1c86f0571b3a2fce5b6f087a033fe040`。
-- 1.0.0 的独立测试和单次真机豁免保存在 `a66055797b590236fa206c2213aeaabd2c9544f3:pipeline/products/mps-id-photo-background/03-test-report.md`。本次是 1.0.1 修复轮，现有豁免记录对应上一轮复位及验收，按原 A3 关口记录。
+- 2026-11-07（北京时间）已读 WorkBuddy 开放平台官方文档，核对 ZIP 结构、必填 frontmatter 和发布步骤。[技能](https://open.workbuddy.cn/docs/skill) · [专家](https://open.workbuddy.cn/docs/expert) · [开放平台概述](https://open.workbuddy.cn/docs/what-is-open-platform)
+- 通知 `evt-b577ee81de30178acb36ed5da43b90fec00baa55bd4a9a9f9378cb2854edee21`。固定输入 `03185cb7311ccf3f6fc0e70d978f3029f47c7f7c:pipeline/products/mps-id-photo-background/status.json`。认领前远端状态为 `package_ready`，状态 blob `6ca963c08de2ba68eb7589198aebbd6d1daa0c33` 与固定输入一致。看板认领提交 `728f24fef31590fc3b923fb55ee7b24085f8c2cf`。
+- 1.0.1 前次独立复测及真机阻断见 [认领前的独立测试报告](https://github.com/Haihe2026/myplanestroe/blob/c22d6740a0a98a729c96c96a4b0c2ed6525f52de/pipeline/products/mps-id-photo-background/03-test-report.md)。本轮按产品目录的 [1.0.1 书面豁免](01-host-acceptance-waiver-1.0.1-20261107.md) 重新独立测试。
 
 ## 干净 ZIP 与独立复跑
 
-- `02-package/dist/mps-id-photo-background-1.0.1.zip`，887098 字节，24 个文件，Git blob `8c5051339587fd2718bb4c1d6220e7fbaa8f8fc1`。SHA256 `80e4ec1379bb686ccfe37269bdc36221bc0a2258949ab6b6f1f1acdd3f071009`，与自测报告一致。唯一根目录、路径、重复项、符号链接和 CRC 检查通过。
-- Ubuntu WSL，非 root，Python 3.12.3。两套测试分别干净解压。验证文件模式 0600、目录模式 0500 下写入被拒绝。通过 `git archive` 从固定提交取原始 ZIP、开发脚本和演示溯源夹具。
-- 使用合成账户、进程内模拟后端。测试进程审计钩子拒绝网络、DNS 和外部进程调用，两套均记录 0 次拦截。真实付费生图、生产变更、核款、真实遥测与上传均为 0 次。
-- 端到端脚本产生未关闭夹具文件的 `ResourceWarning`，全部断言通过。示例路径转义回归通过，覆盖 Windows 路径规则模拟、点开头的上级目录与示例溯源。真实 WorkBuddy 点击效果待验收。
+- [WorkBuddy 团队版 1.0.1 ZIP](02-package/dist/mps-id-photo-background-1.0.1.zip)，887098 字节，24 个文件。Git blob `8c5051339587fd2718bb4c1d6220e7fbaa8f8fc1` 与认领提交一致，SHA256 `80e4ec1379bb686ccfe37269bdc36221bc0a2258949ab6b6f1f1acdd3f071009` 与自测报告一致。唯一根目录、路径、重复项、符号链接及 CRC 检查通过。
+- 从固定提交通过 `git archive` 取 ZIP、开发脚本及演示溯源夹具。Ubuntu WSL、非 root、Python 3.12.3，两个套件分别干净解压。实测文件模式 0600，目录模式 0500 时写入被拒绝。
+- 使用合成账户及进程内模拟后端。审计钩子拦截网络和子进程调用，触发 0 次。真实付费生图、核款、生产变更、真实遥测、上传均为 0 次。
+- 模拟端到端脚本有夹具文件未关闭的 `ResourceWarning`，全部断言通过。示例链接回归通过，包含 Windows 路径模拟及示例溯源。1.0.1 授权链接沿用包内实现。
 
-| 项目 | 测试入口 | 结果 |
+| 项目 | 入口 | 结果 |
 |---|---|---|
-| 契约 | `unittest` 从干净解压的 `tests/` 发现测试 | 21/21，通过，退出 0 |
-| 模拟端到端 | `dev/e2e_check.py --package <干净解压的技能目录> -v` | 51/51，通过，退出 0 |
+| 契约 | `unittest` 从干净解压的 `tests/` 发现测试 | 21/21，通过 |
+| 模拟端到端 | `dev/e2e_check.py --package <干净解压的技能目录> -v` | 51/51，通过 |
 
 ## WorkBuddy 验收与上传
 
-| 项目 | 结果与证据 |
+| 项目 | 结果 |
 |---|---|
-| 包内 `tests/first-turn-preview.md` 场景 1–24 | 全部待验收。接收端缺少已验证的电脑操作适配器，无真实宿主运行及截图。 |
-| 上架前 `/pricing` 零消耗浏览器验证 | 待验证。接收端缺少已验证的电脑操作适配器，无浏览器验证证据。 |
-| WorkBuddy 团队版上传 | blocked。接收端缺少已验证的上传适配器，SOP 由负责人在 A3 通过后手动上传。无审核或发布记录。 |
+| 真机行为验收 | 真机验收已豁免。接收端无已验证的电脑操作适配器，场景 1–24 均未执行，无截图或真实宿主结果。 |
+| 上架前 `/pricing` 零消耗浏览器验证 | 在本版书面豁免范围内，未执行。 |
+| WorkBuddy 团队版上传 | blocked。接收端无已验证的上传适配器。由负责人按 SOP 手动上传，当前无审核或发布结果。 |
 
 ## 结论
 
-离线测试通过，A3 拦停为 `HOST_ACCEPTANCE_UNAVAILABLE`。测试轮次保持 0，发布版本为空。1.0.0 ZIP 保留。1.0.1 授权链接沿用原实现，通用微信扫码地址改动待上游确认。
+1.0.1 按书面豁免范围通过 A3，产品停在 `test_passed`。待负责人手动上传本报告所列的 1.0.1 ZIP。
 
 ## 逐项脚本结果
 
