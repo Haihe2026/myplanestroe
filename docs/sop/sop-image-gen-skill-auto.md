@@ -144,7 +144,7 @@ pipeline/
 | 欢迎句 | `欢迎使用WorkBuddy官方认证技能 <技能中文名>。` | 不得改动格式 |
 | 技能 name | `mps-` + 有含义的英文，与仓库内已有技能不重名 | 已上架的技能不得改名；必须改名 → 拦停 |
 | 上架渠道 | `config.yaml` 的 `channels`。**当前只跑 WorkBuddy 团队版技能包**（`workbuddy-skill`）；WorkBuddy 专家包和 SkillHub 等流水线跑通后由负责人加进配置 | 配置里没有的渠道一律不打包、不上架 |
-| 上架授权 | `config.yaml` 的 `codex_may_publish` 为 `true` 时 Codex 可直接上架 | 为 `false` 时停在 `test_passed`，不拦停，等负责人上传 |
+| 上架授权 | 上传一律负责人手动；流水线到 `test_passed` 即把最终包交付负责人，不尝试上传（`codex_may_publish` 的自动上架口径不再适用） | 负责人上传后由 Muse 或负责人置 `submitted`，再按间隔查审核状态 |
 | 真机行为验收 | 必做；Codex 用电脑操作真实宿主完成 | 做不了且 `allow_listing_without_host_acceptance` 不是 `true` → 拦停（`HOST_ACCEPTANCE_UNAVAILABLE`）；负责人书面豁免该单时不拦停，按「负责人豁免」执行 |
 | 官方文档与本 SOP 冲突 | 以 WorkBuddy 官方文档为准继续，并在 `sop-proposals.md` 追加一条 | 官方文档读不到 → 拦停（`OFFICIAL_DOCS_UNREADABLE`） |
 | 平台规则、字段长度等官方没写清 | 取最保守的写法继续，记入开发文档「决策记录」 | 影响能否上架又无法保守处理 → 拦停 |
@@ -753,7 +753,7 @@ Temu 版本额外测：新用户免费 1 次只生效一次，文案保留。
 
 ### 阶段 7：上架准备（→ A4）
 
-- `config.yaml` 的 `codex_may_publish` 为 `true` 时，Codex 按 `channels` 逐渠道上传；为 `false` 时停在 `test_passed`，ZIP 放在 `02-package/dist/` 等负责人上传。
+- 上传一律负责人手动：流水线到 `test_passed` 即把最终包（`02-package/dist/` 下的 ZIP）交付负责人，不尝试上传；负责人上传后由 Muse 或负责人置 `submitted`。`codex_may_publish` 的自动上架口径不再适用。
 - 上架包：`mps-<技能>-<版本>.zip`，直接上传，不用解压。每个渠道单独封装，不混用分类和包结构（仓库 `docs/三渠道交付SOP.md`）。
 - 上传后在 `04-listing.md` 记录每个渠道的版本、ID 或 slug、链接、提交时间、审核状态；审核结果出来后更新。没有实测的不得写已通过。
 - 上架文案按第五章写，过一遍自查清单。
