@@ -1,8 +1,9 @@
 {
   "event_id": "evt-191739f5d00e672dbae7e994164ccf7c885844a6bb2674fab6b42e82b3d724c6",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "591974d1-67f2-4a04-b3fa-92713787140f",
-  "at": "2026-11-07T22:38:01+08:00",
-  "evidence_ref": null
+  "at": "2026-11-08T03:39:00+08:00",
+  "evidence_ref": "d717a7d5d4cc32bf3a79cf1f75e9b5e721f69f2f:pipeline/products/mps-id-photo-background/02-self-test.md",
+  "note": "22:38 认领后被 OFFICIAL_DOCS_UNREADABLE 拦停；同一 1.0.2 目录层级修复已于 23:42 经 evt-bbd92998 完成并交付，此处补回执，未做新工作。"
 }
