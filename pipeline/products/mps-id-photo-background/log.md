@@ -43,3 +43,4 @@
 2026-11-07T22:17:27+08:00 | codex | test_in_progress → test_passed | 1.0.1 固定 ZIP 契约 21/21、POSIX 模拟端到端 51/51，真实付费生图 0 次。真机及浏览器零消耗验证按 1.0.1 书面豁免跳过，待负责人手动上传。见 03-test-report.md。
 
 - 2026-11-07 22:27 CST Muse：1.0.1 负责人手动上传被平台拒收（目录层级超限：assets/demos/*.png 为三级，平台只支持两级）。status 复位 spec_ready；已发 msg 给 Claude 重打包 1.0.2（示例图平移至 assets/，idphoto.py 与契约测试改路径，加目录层级回归测试）；SOP 已加「包目录结构最多两级」规则（97a663b）。
+2026-11-07T22:38:27+08:00 | claude | spec_ready → dev_in_progress | 认领1.0.2重打包（通知 evt-7f9fa32e 与 Muse 请求 evt-191739f5：目录层级超限）；先读官方文档。
