@@ -36,3 +36,4 @@
 2026-11-07T21:50:02+08:00 | muse | blocked → spec_ready | 负责人已在 Claude 定时任务放行 open.workbuddy.cn 网页读取；复位 spec_ready，Claude 下一轮恢复 1.0.1 修复（demo 链接＋授权链接）。
 2026-11-07T21:50:45+08:00 | claude | spec_ready → dev_in_progress | 重新认领1.0.1；本聊天内官方技能/专家/平台概述三页在线读取成功（HTTP 200）。授权链接改通用地址：负责人在本聊天未选具体方案，按保守默认本版不改授权与充值链接（涉及鉴权与设备关联，现有按安装签发链接是本机凭证领取的依据），只修 demo 路径。
 2026-11-07T21:53:54+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.1（仅workbuddy-skill）：状态目录去前导点、demo 路径正斜杠、新增 Markdown 解析回归测试（契约+端到端各1项，回改旧代码均能失败）；ZIP sha256 80e4ec13…，契约21+端到端51项、干净解压重跑通过；1.0.0 ZIP 保留回滚。授权链接改通用地址未做（鉴权/设备关联风险，见 reply-from-claude-20261107.md）。真实上游0、生产变更0。
+2026-11-07T21:58:05+08:00 | codex | package_ready → test_in_progress | 认领 1.0.1 独立复测（evt-c4b02048268ca974c8b16ace350fe547d99e06ec35f8eb6af7653cfc76588a2b）。
