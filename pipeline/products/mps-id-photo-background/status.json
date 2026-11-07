@@ -5,7 +5,7 @@
  "stage": "spec_ready",
  "owner": null,
  "claimed_at": null,
- "updated_at": "2026-11-07T06:44:51+08:00",
+ "updated_at": "2026-11-07T22:45:09+08:00",
  "rounds": {"spec": 1, "dev": 1, "test": 1},
  "lane": "deploy",
  "blocked": null,
