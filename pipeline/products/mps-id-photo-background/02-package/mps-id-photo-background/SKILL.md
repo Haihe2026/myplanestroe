@@ -8,13 +8,12 @@ description_en: Change the background of an ID photo to white, blue or red, and 
 examples_zh:
   - "帮我把这张照片换成白底一寸的，明天报名要用"
   - "考试报名要蓝底二寸，照片我发你"
-  - "一寸蓝底，像素要295×413，报名系统卡这个"
   - "简历上的照片底色太花了，换成白的干净点"
 examples_en:
   - "Change this photo to a white background for my application"
   - "I need a blue background ID photo at 295x413 pixels"
   - "Make my resume photo background plain white"
-version: 1.0.2
+version: 1.0.3
 author: "MyPlaneStore"
 ---
 

@@ -2,7 +2,7 @@
   "name": "mps-id-photo-background",
   "display_name": "证件照换底助手",
   "display_name_en": "ID Photo Background Assistant",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "channel": "workbuddy_skill",
   "author": "MyPlaneStore",
   "entry": "SKILL.md"

@@ -41,6 +41,31 @@ USER_PART = BODY.split('## 执行规范')[0]
 EXEC_PART = BODY.split('## 执行规范')[1]
 
 
+def parse_frontmatter(text):
+    """最小 YAML 子集解析：顶层 `key: value` 与 `  - "item"` 列表；重复键直接报错。"""
+    lines = text.split('---', 2)[1].strip('\n').split('\n')
+    out, cur = {}, None
+    for ln in lines:
+        if not ln.strip():
+            continue
+        m = re.match(r'^([A-Za-z_][\w-]*):\s*(.*)$', ln)
+        if m:
+            k, v = m.group(1), m.group(2).strip()
+            if k in out:
+                raise ValueError('duplicate frontmatter key: ' + k)
+            if v:
+                out[k], cur = v.strip('"'), None
+            else:
+                out[k], cur = [], k
+            continue
+        m = re.match(r'^\s+-\s+(.*)$', ln)
+        if m and cur is not None:
+            out[cur].append(m.group(1).strip().strip('"'))
+            continue
+        raise ValueError('unparsed frontmatter line: ' + ln)
+    return out
+
+
 def front(key):
     m = re.search(r'^' + key + r':\s*(.*)$', FRONT, re.M)
     return m.group(1).strip().strip('"') if m else None
@@ -85,7 +110,29 @@ class Contract(unittest.TestCase):
         meta = json.loads(read('_meta.json'))
         self.assertEqual((meta['name'], meta['version']), (idphoto.SKILL_ID, idphoto.SKILL_VERSION))
         self.assertIn('examples_zh:', FRONT)
-        self.assertEqual(len(re.findall(r'^  - "', FRONT.split('examples_zh:')[1].split('examples_en:')[0], re.M)), 4)
+
+    def test_frontmatter_platform_parse_rules(self):
+        # WorkBuddy 团队版技能包上传解析规则：必填字段非空、无重复/未知键、语义化版本、
+        # examples_zh/examples_en 各最多 3 条且数量一致（1.0.2 平台拒收教训）。
+        fm = parse_frontmatter(SKILL)
+        required = ('name', 'display_name', 'display_name_en', 'description', 'description_zh',
+                    'description_en', 'version', 'author')
+        allowed = set(required) | {'allowed-tools', 'examples_zh', 'examples_en'}
+        for k in required:
+            self.assertIsInstance(fm.get(k), str, k)
+            self.assertTrue(fm[k].strip(), k)
+        self.assertEqual(set(fm) - allowed, set())
+        self.assertRegex(fm['version'], r'^\d+\.\d+\.\d+$')
+        zh, en = fm.get('examples_zh', []), fm.get('examples_en', [])
+        self.assertIsInstance(zh, list)
+        self.assertIsInstance(en, list)
+        self.assertGreaterEqual(len(zh), 1)
+        self.assertLessEqual(len(zh), 3)
+        self.assertLessEqual(len(en), 3)
+        self.assertEqual(len(zh), len(en))
+        self.assertTrue(all(x.strip() for x in zh + en))
+        self.assertEqual(len(set(zh)), len(zh))
+        self.assertEqual(len(set(en)), len(en))
 
     def test_description_seo(self):
         d = front('description')

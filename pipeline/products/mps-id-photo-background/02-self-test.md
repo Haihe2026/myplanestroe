@@ -1,3 +1,65 @@
+# 自测报告：mps-id-photo-background 1.0.3（修复轮：examples 数量超限）
+
+- 角色：Claude Code；时间：2026-11-08T00:40:27+08:00（北京时间，定时运行）
+- 官方文档：修复轮，未重读（SOP 〇节第 2、4 条）。
+- 依据：msg-from-muse-20261108-examples-fix.md（提交 e54cde4）、SOP〇节「技能包 examples 上限」（ec88ad7）。规格未变，A1 沿用 1.0.2 复检结论，不重做。
+- 包类型：只打 WorkBuddy 团队版技能包（`workbuddy-skill`，config `channels`），不打专家包/SkillHub 包。
+- 包文件（`02-package/dist/`）：
+  - `mps-id-photo-background-1.0.3.zip`：887886 字节，SHA256 `f2903f5a9bb01cd64ab8cfbed9fef2a95e94d13d1c22db9f0a370f479e131e57`，24 个文件，根目录 `mps-id-photo-background/`，最深 `根/二级目录/文件`。
+  - 1.0.2（`4ac1a7d5…`）、1.0.1（`80e4ec13…`）、1.0.0（`f187e418…`）ZIP 原样保留。头像未改动。
+
+## 本轮改了什么
+
+1. SKILL.md frontmatter：删掉第 3 条中文示例「一寸蓝底，像素要295×413，报名系统卡这个」；`examples_zh` 与 `examples_en` 各 3 条（白底报名／蓝底二寸／简历换白），数量一致。`295×413` 仍保留在 description 触发词与正文中。
+2. `tests/test_skill_contract.py`：新增 `test_frontmatter_platform_parse_rules`——按最小 YAML 子集解析 frontmatter（重复键、无法解析的行直接报错），断言 8 个必填字段非空、无平台未列出的键（仅允许必填 + `allowed-tools`、`examples_zh`、`examples_en`）、version 为 x.y.z、`examples_zh` 1–3 条、`examples_en` ≤3 条、两者数量相等、无空条和重复条；旧断言「中文示例 4 条」删除。
+3. `dev/e2e_check.py`：新增 `ZipLayout.test_zip_skill_examples_platform_limits`——直接读 ZIP 内的 SKILL.md，断言 examples 中英各 ≤3 且数量一致、version 与脚本一致（防止源码改了但 ZIP 没重打）。
+4. 版本 1.0.2 → 1.0.3（SKILL.md、`_meta.json`、`idphoto.SKILL_VERSION`、`telemetry.SKILL_VERSION`、真机验收单、`dev/build.py`）。
+5. **未改**：目录层级修复（示例图在 `assets/` 下、最深两级）与 Markdown 回归测试保留；授权与充值链接、规格、欢迎句、遥测、付费、话术、后端、生产均未动。
+
+## 打包前 frontmatter 逐项核对（WorkBuddy 团队版技能包）
+
+| 项 | 1.0.3 |
+|---|---|
+| 必填 name / display_name / display_name_en / description / description_zh / description_en / version / author | 全部存在且非空；name=`mps-id-photo-background`，version=`1.0.3`，author=`MyPlaneStore` |
+| 可选键 | 仅 `examples_zh`、`examples_en`，无其他未列出键 |
+| examples_zh / examples_en | 3 / 3，数量一致，按主题一一对应 |
+| 版本号一致 | SKILL.md、`_meta.json`、脚本两处、ZIP 文件名一致 |
+| 目录层级 | ZIP 内路径 `/` 数 ≤ 2 |
+
+## 结果
+
+| 项 | 结果 |
+|---|---|
+| 契约测试（源码） | 23/23 通过 |
+| 端到端（模拟后端，源码，含 1.0.3 ZIP 层级与 examples 检查） | 53/53 通过 |
+| 干净解压 1.0.3 ZIP 后契约（`python3 -I`） | 23/23 通过 |
+| 干净解压后端到端（`--package <解压目录> --zip dist/…-1.0.3.zip`） | 53/53 通过 |
+| 回归测试有效性：对 1.0.2 ZIP 跑 `--zip …-1.0.2.zip ZipLayout` | `test_zip_skill_examples_platform_limits` 失败（中文 4 条，能测出） |
+| 回归测试有效性：1.0.2 干净解压目录放入新契约测试跑 `-k platform_parse` | 失败「4 not less than or equal to 3」（能测出） |
+| ZIP 密钥类特征扫描 | 无命中 |
+| 真实上游调用 / 真实上报 / 生产变更 | 0 / 0 / 0（测试全程 `MPS_ID_PHOTO_JOURNEY=off`、`MPS_ID_PHOTO_TEST=1`） |
+
+## 偏离与未验证
+
+- 平台上传解析未验证（上传由负责人手动）；examples 规则按平台报错原文与 SOP ec88ad7 实现。官方文档未写的其他解析限制（字段长度等）无法在此验证。
+- 真机验收按负责人长期规则跳过，未做。
+- 授权链接改通用地址仍未做，理由同 1.0.1（见 `reply-from-claude-20261107.md`）。
+
+## 部署与回滚
+
+- 部署：无后端改动；Codex 复测通过后由负责人手动上传 `mps-id-photo-background-1.0.3.zip`。
+- 回滚：dist 内 1.0.2/1.0.1/1.0.0 ZIP 原样保留；1.0.2、1.0.1 已被平台拒收，不能作为上传回滚版本。
+
+## 复跑
+
+```sh
+cd 02-package/mps-id-photo-background && python3 -m unittest discover -s tests        # 契约 23 项
+cd 02-package && python3 dev/e2e_check.py                                              # 端到端 53 项（含 dist 当前版本 ZIP 检查）
+python3 dev/e2e_check.py --package <干净解压后的 mps-id-photo-background 目录> --zip <ZIP 路径>
+```
+
+---
+
 # 自测报告：mps-id-photo-background 1.0.2（修复轮：包目录层级超限）
 
 - 角色：Claude Code；时间：2026-11-07T23:42:41+08:00（北京时间，定时运行）

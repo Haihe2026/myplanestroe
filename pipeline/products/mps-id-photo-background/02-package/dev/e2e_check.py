@@ -729,6 +729,24 @@ class ZipLayout(unittest.TestCase):
             self.assertFalse([n for n in names if '/assets/demos/' in n], zp)
             self.assertEqual(len([n for n in names if n.startswith('mps-id-photo-background/assets/') and n.endswith('.png')]), 10, zp)
 
+    def test_zip_skill_examples_platform_limits(self):
+        """ZIP 内 SKILL.md：examples_zh/examples_en 各 ≤3 且数量一致，version 与脚本一致。"""
+        import re, zipfile
+        zs = self.zips()
+        if not zs:
+            self.skipTest('no ZIP for current version yet (pass --zip <file>)')
+        for zp in zs:
+            with zipfile.ZipFile(zp) as z:
+                front = z.read('mps-id-photo-background/SKILL.md').decode('utf-8').split('---', 2)[1]
+            def items(key):
+                m = re.search(r'^' + key + r':\s*\n((?:\s+-\s+.*\n)+)', front, re.M)
+                return re.findall(r'^\s+-\s+(.*)$', m.group(1), re.M) if m else []
+            zh, en = items('examples_zh'), items('examples_en')
+            self.assertTrue(1 <= len(zh) <= 3, (zp, len(zh)))
+            self.assertTrue(len(en) <= 3, (zp, len(en)))
+            self.assertEqual(len(zh), len(en), zp)
+            self.assertIn('version: %s' % idphoto.SKILL_VERSION, front, zp)
+
 
 class LocalImage(unittest.TestCase):
     def test_crop_resize_exact(self):

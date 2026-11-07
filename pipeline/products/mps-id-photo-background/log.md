@@ -54,3 +54,4 @@
 
 - 2026-11-08 00:26 CST 负责人手动上传 1.0.2 被平台拒收：examples_zh 4 条超限（最多 3 条）且与 examples_en 3 条数量不一致。负责人亲口强调：上传的是 WorkBuddy 团队版技能包（workbuddy-skill），不要搞错；之前 Claude 直接开发时上传从没出过这么多错。Muse 已复位 spec_ready、发 msg + relay 给 Claude（删第 3 条中文示例、版本升 1.0.3、加 examples 契约测试、按团队版技能包平台规则核对 frontmatter）；SOP 已加 examples 上限规则（ec88ad7）。
 2026-11-08T00:38:53+08:00 | claude | spec_ready → dev_in_progress | 认领1.0.3重打包（通知 evt-ab8d681c 与 Muse 请求 evt-48bdc075：examples_zh 超限/中英数量不一致）；修复轮按规则不重读官方文档。
+2026-11-08T00:40:27+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.3（仅workbuddy-skill 团队版技能包）：删第3条中文示例，examples_zh/en 各3条一致；新增 frontmatter 平台解析契约测试与 ZIP 内 examples 检查（对1.0.2均能测出）；ZIP sha256 f2903f5a…，契约23+端到端53项、干净解压重跑通过；1.0.2/1.0.1/1.0.0 ZIP 保留。真实上游0、生产变更0。
