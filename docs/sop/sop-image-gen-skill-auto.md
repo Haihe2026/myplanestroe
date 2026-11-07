@@ -145,7 +145,7 @@ pipeline/
 | 技能 name | `mps-` + 有含义的英文，与仓库内已有技能不重名 | 已上架的技能不得改名；必须改名 → 拦停 |
 | 上架渠道 | `config.yaml` 的 `channels`。**当前只跑 WorkBuddy 团队版技能包**（`workbuddy-skill`）；WorkBuddy 专家包和 SkillHub 等流水线跑通后由负责人加进配置 | 配置里没有的渠道一律不打包、不上架 |
 | 上架授权 | `config.yaml` 的 `codex_may_publish` 为 `true` 时 Codex 可直接上架 | 为 `false` 时停在 `test_passed`，不拦停，等负责人上传 |
-| 真机行为验收 | 必做；Codex 用电脑操作真实宿主完成 | 做不了且 `allow_listing_without_host_acceptance` 不是 `true` → 拦停（`HOST_ACCEPTANCE_UNAVAILABLE`） |
+| 真机行为验收 | 必做；Codex 用电脑操作真实宿主完成 | 做不了且 `allow_listing_without_host_acceptance` 不是 `true` → 拦停（`HOST_ACCEPTANCE_UNAVAILABLE`）；负责人书面豁免该单时不拦停，按「负责人豁免」执行 |
 | 官方文档与本 SOP 冲突 | 以 WorkBuddy 官方文档为准继续，并在 `sop-proposals.md` 追加一条 | 官方文档读不到 → 拦停（`OFFICIAL_DOCS_UNREADABLE`） |
 | 平台规则、字段长度等官方没写清 | 取最保守的写法继续，记入开发文档「决策记录」 | 影响能否上架又无法保守处理 → 拦停 |
 
@@ -156,6 +156,15 @@ pipeline/
 4. 把服务端上游 Key、管理员权限、生产 Cookie 放进 Skill、前端或仓库；
 5. 使用旧资源源执行或回退；
 6. 冒用认证、编造安装、测试、审核或数据结果；测试数据用“模拟：”前缀或布尔标记，不得写入“已获官方认证”等字样。
+
+### 负责人豁免（单单有效，跳过真机验收）
+
+负责人可书面豁免某一单的真机行为验收（及随附的上架前零消耗浏览器验证），只对该单有效，不改全局配置、不改 `allow_listing_without_host_acceptance`。豁免须同时满足：
+
+- 豁免记录写进产品目录（文件名 `01-host-acceptance-waiver-<日期>.md`），注明豁免的单、日期、范围（只豁免真机验收与零消耗验证，不豁免部署、钱、生产类闸门）；
+- 该单的 stage 由 Muse 或负责人复位回 `package_ready`，`blocked` 清空，log 记一笔；
+- Codex 凭豁免记录复测：A3 只验契约与端到端（端到端在可验证 POSIX 文件权限的隔离环境重跑，Windows 下的 POSIX 断言失败不得改测试凑通过）；`03-test-report.md` 注明「真机验收已豁免」，不得写成已通过；
+- 豁免单到 `test_passed` 即停，不拦停，等负责人手动上传；负责人上传后由 Muse 或负责人置 `submitted`。
 
 ### A.6 定时与节奏
 
@@ -1077,7 +1086,7 @@ schedule:
 | `NEW_UPSTREAM_REQUIRED` | 需要新模型或新供应商 | 接入并登记后恢复 |
 | `MARGIN_TOO_LOW` | 毛利率低于阈值 | 调价、换模型或放弃 |
 | `DEPLOY_REQUIRED` | 后端补丁已测好，等部署 | 部署后恢复为 `spec_ready` |
-| `HOST_ACCEPTANCE_UNAVAILABLE` | 真机行为验收做不了 | 人工验收后恢复为 `test_passed`，或改配置 |
+| `HOST_ACCEPTANCE_UNAVAILABLE` | 真机行为验收做不了 | 人工验收后恢复为 `test_passed`，或改配置，或负责人书面豁免该单（见「负责人豁免」） |
 | `OFFICIAL_DOCS_UNREADABLE` | WorkBuddy 官方文档读不到 | 确认文档可访问后恢复 |
 | `TOO_MANY_ROUNDS` | 多轮未通过 | 看测试报告决定修改开发文档或放弃 |
 | `PLATFORM_RULE_UNCLEAR` | 平台规则不明且影响上架 | 向官方确认后恢复 |
