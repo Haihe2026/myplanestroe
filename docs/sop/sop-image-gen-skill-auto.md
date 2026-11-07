@@ -259,6 +259,7 @@ pipeline/
 **官方要点摘要（2026-11-04 阅读；只作索引，以线上文档为准）**
 
 - **技能包**：目录为 `SKILL.md`（必须）+ `references/`、`scripts/`、`templates/`（可选）；正文里用 `@references/xxx.md` 引用参考资料。frontmatter 必填：`name`、`display_name`、`display_name_en`、`description`（用途和触发词）、`description_zh`（详情页中文简介）、`description_en`、`version`、`author`（合作方名称）；可选 `allowed-tools`（工具白名单）、`examples_zh` / `examples_en`（详情页「试试这样用」）。
+- **技能包 examples 上限（2026-11-08 证件照换底 1.0.2 教训）**：`examples_zh` 最多 3 条，`examples_en` 最多 3 条，且两者数量必须一致（中英按主题一一对应）。1.0.2 实测：`examples_zh` 4 条、`examples_en` 3 条，上传时报「examples_zh 最多 3 个示例」「数量必须一致」拒收。契约测试必须加一项：解析 SKILL.md frontmatter，断言 `examples_zh` ≤ 3、`examples_en` ≤ 3、且两者数量相等；测出即返工，不得带病交付。打包前按 WorkBuddy 团队版技能包的平台解析规则逐项核对 frontmatter，不要只依赖自测跑通就交。
 - **专家包**：目录为 `.codebuddy-plugin/plugin.json`、`avatars/`、`agents/<name>.md`、`README.md`。`plugin.json` 必填 `name`、`expertType`（agent / team）、`version`（语义化版本）、英文 `description`、`author`（name、email）、`agents`、`agentName`；展示字段全部必填：`displayName`、`profession`、`displayDescription`（中英，**中文 40–50 字**）、`avatar`、`categoryId`（15 个行业分类之一）、`plugin`（与 name 一致）、`defaultInitPrompt`（**必须和 quickPrompts 第一条一致**）、`tags`（**正好 3 个**）、`quickPrompts`（**正好 3 个**）。专家团另需 `teamInfo`（leadAgent、memberAgents）。
 - **Agent 定义文件**（`agents/*.md`）：frontmatter 必填 `name`、`description`、`displayName`、`profession`，可选 `maxTurns`（默认 50）、`skills`；正文就是系统提示词。**开发者不能自己加工具**，工具由系统分配。
 - **依赖**：MCP 和连接器在 `plugin.json` 的 `dependencies` 里声明（或根目录 `.mcp.json`），认证方式为 oauth / token / none；token 用表单和 `${VAR}` 占位，**禁止在包里硬编码真实 token 或 Key**。
