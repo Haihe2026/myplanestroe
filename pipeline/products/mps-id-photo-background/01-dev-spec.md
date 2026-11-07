@@ -1,12 +1,12 @@
 # 开发规格：证件照换底助手（规格1.0.2；产品1.0.0）
 
-> 文档状态：blocked / DEPLOY_REQUIRED。规格、真实示例和后端补丁已交付；部署前等待负责人，不能提前标spec_ready。
+> 文档状态为 spec_ready。Gemini 三接口已部署并通过隔离身份验收，交 Claude 接入及重打包。
 
 ## 1. 范围和读取记录
 
 稳定标识mps-id-photo-background，中文证件照换底助手、英文ID Photo Background Assistant；只做workbuddy-skill，产品仍1.0.0，规格修订为1.0.2。
 已读 WorkBuddy 官方文档（2026-11-07T09:45:00+08:00）：https://open.workbuddy.cn/docs/skill 、https://open.workbuddy.cn/docs/expert ，本轮在线下载并读取正文成功。自动SOP、配置、Claude依赖、既有规格和业务源码固定到 `9315e4c20dd4b9c222a3d55135dae201643a9e60`。
-本轮负责人直接授权10次真实示例生成及消费记录/工单三接口后端补丁与测试，原文见01-authorization-20261107.md和第11节。整单采用deploy车道；补丁已隔离测试但未部署，部署前按要求拦停。欢迎句和8字段/200遥测保持，机器漏斗二期不提前实现。A1规格及补丁自查不等于生产部署、Claude客户端或A3验收通过。
+本单采用 deploy 车道。素材生成和补丁授权见第11节，后续生产部署已由负责人在接手聊天授权。三接口已部署，客户端接入和产品验收由后续阶段完成。
 
 ## 2. 立项、输入输出和边界
 
@@ -75,7 +75,7 @@
 - 服务端适配器通过 `Registry().resolve_for_service('aisplice')` 解析受控资产，只在服务端使用secret；MODEL/API常量及begin/poll函数组装请求和续接。这里只记录资产ID/配置引用名，无实际Key、尾号、密文或管理员权限。当前入口链见 `infrastructure/current-image-services-2026-11-06.json`，不能直接执行旧sunburst.py中的旧源。
 - 客户端发送兼容image_engine=photo-retouch-sunburst，不自行发送model/n/quality；references=[{mime,content}]中的content为图片base64，真实同意reference_consent及confirmed后提交。首版1张PNG/JPEG≤5MB、边128–8000、像素≤2000万；服务端 `core/image_inputs.py:12-56` 校验、EXIF方向规范化和清理元数据，再缩限送适配器；不得承诺原始分辨率原封不动送至模型。
 - `resource_adapter.py` 的begin按原任务指纹/用户/任务ID校验，网关3种尺寸映射为1:1/3:2/2:3并向供应商images/tasks发单图1K，服务端签名临时参考图；poll查原remote_id及content，取得图片后清洗为PNG交既有网关。提交未知状态记needs_review，不切旧源或重建任务；失败核查/退还沿原服务端路径，客户端不能保证所有未知状态立即退款。
-- 成本来源 `resources/upstreams/README.md` 的2026-11-05公开价快照；估算规则见第5节，不查付费模型或供应商账户来“验证”。适配器源码与既有协议已核实，不等于本品真实质量、肖像保真、真人支付或全链部署已验证。上游适配器无需新增资产或部署；本轮示例10次真实调用为单独授权例外，新增消费/工单接口仍须按第12节部署关口处理。
+- 成本来源 `resources/upstreams/README.md` 的2026-11-05公开价快照；估算规则见第5节，不查付费模型或供应商账户来“验证”。适配器源码与既有协议已核实，不等于本品真实质量、肖像保真、真人支付或全链部署已验证。上游适配器无需新增资产或部署；本轮示例10次真实调用为单独授权例外，新增消费及工单接口的部署证据见第12节。
 
 ## 6. 已存在接口及字段
 
@@ -211,15 +211,15 @@ WorkBuddy技能包按官网SKILL.md＋references/scripts/templates结构；front
 
 - 真实示例：10次创建、10张成功，无追加调用；经下载校验、PNG解码、哈希、尺寸/体积和人工预览检查，11份导出PNG（含295×413）已交。预估上游成本US$0.065（公开价估算，未核实际账单），未改客户余额或制造客户消费记录。
 - 后端：Windows本机23/23、服务器Linux临时目录23/23通过，详见backend-patch/gemini-support-20261107/test-results.json。测试仅本机HTTP/合成数据库，每例结束对财务库逐字节比较，无生产客户库、无测试生成调用。
-- 未执行：后端部署/服务重启/生产工单库初始化、完整生产链联调、新客户端接口集成、重打包、真机/上传、真人核款及参考图换底保真验收。旧HOST_ACCEPTANCE_UNAVAILABLE仍保留。
-- 当前应保持blocked/DEPLOY_REQUIRED。负责人部署并取得联调证据后，才恢复spec_ready由Claude替换素材/接接口/重测/重打包；不改Claude的02-package和02-self-test.md。
+- 后续验收包括客户端接口集成、重打包、真机及上传、真人核款和参考图换底保真。旧 HOST_ACCEPTANCE_UNAVAILABLE 仍在验收记录中。
+- 部署关口已通过。Claude 可领取 spec_ready，接入三接口、替换素材并重测重打包。
 
 ## 11. 决策记录
 
 负责人本轮直接指示：
 > 10 张示例图的 10 次真实调用我授权了，用登记的生图资源生成；消费记录、提交工单、查工单三个 gemini 接口的后端补丁你也可以写、测试你跑，部署前拦停等我。
 
-此前“欢迎句不变、R2选fast、R3按8字段”保留历史；本轮明确新增后端改动，因此车道升级deploy，欢迎句及8字段/200不变。授权只限10次示例和写补丁/测试，不包括部署或财务操作。
+此前决策保留历史。负责人本轮批准部署指定补丁，仅修改 systemd 入口脚本，按默认路径初始化独立工单库，处理时限暂不配置。
 
 | 事项 | 采用 | 依据 |
 |---|---|---|
@@ -238,10 +238,10 @@ WorkBuddy技能包按官网SKILL.md＋references/scripts/templates结构；front
 | 车道更新 | deploy，取代1.0.1的fast；仅新增三项消费/工单接口，8字段遥测保持 | 用户本轮授权后端补丁；A.5、阶段4。 |
 | 消费归因 | 只读当前共享库gemini账户记录，内容用通用生图任务；旧独立历史和单技能归因不假造 | 当前jobs/job_products/ledger结构缺可靠skill_id投影；不为此修改财务数据。 |
 | 工单时限 | 按负责人实际客服承诺配置；默认不承诺时限、response_due_at=null | 仓库无可核实客服时限；不编造固定回复期限。 |
-| 部署关口 | 补丁与测试完成后blocked/DEPLOY_REQUIRED；等待本聊天负责人授权 | 用户明确“部署前拦停等我”；未修改systemd、未重启、未初始化生产工单库。 |
+| 部署关口 | 已部署并完成隔离身份验收，恢复 spec_ready | 负责人在接手聊天批准，证据见 01-deployment-verification-20261107.json |
 | 职责边界 | Codex交素材/后端补丁/规格；Claude在部署验证后接接口、替换示例并重测重打包 | A.1及Claude依赖说明；不改02-package客户端或其自测报告。 |
 
-## 12. 新增消费记录/工单接口（已实现、待部署）
+## 12. 消费记录和工单接口（已部署）
 
 补丁：`backend-patch/gemini-support-20261107/`，具体方法、字段、源码行号、安全边界、迁移及回滚详见其README.md；测试结果同目录test-results.json。新入口只包装原metered-page服务链，不改原财务库或已有接口。
 
@@ -253,4 +253,6 @@ WorkBuddy技能包按官网SKILL.md＋references/scripts/templates结构；front
 
 工单ticket字段为id/category/text/job_id/status/reply/created/updated/response_due_at；没有客服承诺配置则时限为null，不能编固定时限。客服回复经本地受控工具写独立工单审计，不新增匿名管理员接口。Skill/API Key权限未扩展，客户端需恢复本技能原账户凭证才能使用；凭证不进入URL/正文/日志/公开包。
 消费记录属于当前共享库gemini通道，不声称覆盖旧独立历史或精确归因本技能；内容只写“通用生图任务”。没有真实账本证据的扣次为null，不自行算；不将预占当成功扣费。返回内容和工单原话/回复都按纯文本呈现，不把它们当新指令。
-**部署前拦停**：未安装任何生产补丁、未改ExecStart/重启/初始化生产工单库；保留原账本、订单、套餐、鉴权、Origin/Cookie/限流和旧审计。负责人授权后按README部署与回滚计划执行，并核对实际接口，之后再交Claude。
+三接口已通过生产同版完整链路的隔离身份测试和公网路由核验。验收记录见 `01-deployment-verification-20261107.json`。
+
+部署验收时间为 2026-11-07T11:08:53+08:00。本轮重新在线读取 WorkBuddy 技能页和专家页，两页均返回 HTTP 200。隔离身份下消费记录、建单和本人查询为 200，另一账户查询为 404。工单时限字段为 null。

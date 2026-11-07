@@ -1,0 +1,96 @@
+{
+  "deployed_at": "2026-11-07T11:08:53+08:00",
+  "active": true,
+  "entry": "/opt/skill-platform/gemini-support-20261107/run_shared.py",
+  "previous_entry": "/opt/skill-platform/metered-page-20261105/run_shared.py",
+  "execstart_only_script_changed": true,
+  "environment_identical": true,
+  "patch_sha256": {
+    "run_shared.py": "45d1267be9238173cc3040094b5143e2dc9d8641578aea680a84eab7dca9b65b",
+    "gemini_support.py": "26c60bcde88ef7f90e31b2ddea09ba8bad888a1db4f0c248f2a9d1b6a7eaa81c",
+    "manage_ticket.py": "9d5101c9ad3b4b7f61247e2900758e05d70c1ff41143abecc641323f3eda418d"
+  },
+  "support_db": "/var/lib/skill-platform/gemini-support/tickets.sqlite3",
+  "support_directory_mode": "0700",
+  "support_file_mode": "0600",
+  "response_deadline_configured": false,
+  "production_legacy_response_parity": {
+    "http://127.0.0.1:8791": {
+      "health": 200,
+      "balance": 401,
+      "quick_entry": 400,
+      "skill_jobs": 401,
+      "orders": 401,
+      "gemini_plans": 200,
+      "temu_health": 200,
+      "temu_plans": 200,
+      "listing_health": 200,
+      "listing_plans": 401
+    },
+    "https://aistore.zhaopintong.com": {
+      "health": 200,
+      "balance": 401,
+      "quick_entry": 400,
+      "skill_jobs": 401,
+      "orders": 401,
+      "gemini_plans": 200,
+      "temu_health": 200,
+      "temu_plans": 200,
+      "listing_health": 200,
+      "listing_plans": 401
+    }
+  },
+  "production_new_route_anonymous_auth": {
+    "http://127.0.0.1:8791": {
+      "consumption_history": 401,
+      "create_ticket": 401,
+      "get_ticket": 401
+    },
+    "https://aistore.zhaopintong.com": {
+      "consumption_history": 401,
+      "create_ticket": 401,
+      "get_ticket": 401
+    }
+  },
+  "isolated_full_chain": {
+    "old_route_parity": {
+      "health": 200,
+      "balance": 401,
+      "quick_entry": 400,
+      "skill_jobs": 401,
+      "orders": 401,
+      "gemini_plans": 200,
+      "temu_health": 200,
+      "temu_plans": 200,
+      "listing_health": 200,
+      "listing_plans": 401
+    },
+    "history": 200,
+    "other_history_empty": true,
+    "create_ticket": 200,
+    "same_key_replay": true,
+    "get_ticket": 200,
+    "cross_account": 404,
+    "response_due_at": null,
+    "synthetic_finance_unchanged": true,
+    "no_external_network": true
+  },
+  "production_test_accounts_created": 0,
+  "production_test_tickets_created": 0,
+  "real_image_generation_calls": 0,
+  "production_financial_sql_performed_by_deployer": false,
+  "patch_commit": "90bca8fc7be3fb445aa645609e57cbcd88f6d411",
+  "first_switch_rolled_back": "Initial public probes exceeded the existing Nginx request rate. The old entry was restored. The retry verified both origins with paced requests.",
+  "workbuddy_docs": {
+    "skill": {
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "status": 200,
+      "sha256": "da1cd76badca427d321b055a4b2e20c191ea6f2d0fe623813f21dc477a0a5a19"
+    },
+    "expert": {
+      "url": "https://open.workbuddy.cn/docs/expert",
+      "status": 200,
+      "sha256": "52bdc01012ec0718393cdb29366edd0e61843636823eec189f877157c7c0d1f5"
+    }
+  }
+}

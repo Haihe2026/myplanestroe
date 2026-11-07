@@ -20,3 +20,4 @@
 2026-11-07T00:19:43+08:00 | claude | blocked（不变，原因改为DEPLOY_REQUIRED） | 负责人指示：示例图须用登记生图资源真实生成、消费记录/工单须接现有接口，完成前不得打包入库；ZIP撤出dist，到账口径改为即时到账；依赖请求见msg-from-claude-20261107-dependencies.md；恢复到spec_ready。
 2026-11-07T09:31:28+08:00 | codex | blocked → spec_in_progress | 负责人直接授权示例10次真实生图及gemini消费记录/工单三接口补丁和测试；部署前拦停。沿本聊天接手，lane=deploy；其余生产/财务权限不变。
 2026-11-07T09:47:23+08:00 | codex | spec_in_progress → blocked | DEPLOY_REQUIRED：规格1.0.2，登记资源真实示例严格10次/10张成功（另导出295×413，共11份PNG）；三接口补丁Windows/Linux各23/23通过；未部署/重启/初始化生产工单库，未改客户财务。等待负责人部署，之后Claude接接口和重打包；旧HOST_ACCEPTANCE_UNAVAILABLE保留。
+2026-11-07T11:08:53+08:00 | codex | blocked → spec_ready | 负责人授权部署已完成。三个接口隔离身份验收通过，跨账户404，生产旧路由探测前后相同。交 Claude 接入及重打包。证据 pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json。

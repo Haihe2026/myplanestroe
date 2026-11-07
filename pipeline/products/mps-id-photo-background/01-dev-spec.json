@@ -3,11 +3,11 @@
   "display_name": "证件照换底助手",
   "display_name_en": "ID Photo Background Assistant",
   "version": "1.0.0",
-  "document_status": "blocked_pending_backend_deployment",
-  "ready_for_development": false,
+  "document_status": "spec_ready",
+  "ready_for_development": true,
   "a1_passed": true,
   "lane": "deploy",
-  "lane_note": "负责人授权消费记录与工单新增接口，补丁已隔离测试；部署前blocked/DEPLOY_REQUIRED。首次对话仍沿8字段/200，不恢复二期机器漏斗。",
+  "lane_note": "三接口已部署并通过隔离身份验收，首次对话仍沿8字段/200，交 Claude 接入。",
   "channels": [
     "workbuddy-skill"
   ],
@@ -34,7 +34,19 @@
       "expert": "52bdc01012ec0718393cdb29366edd0e61843636823eec189f877157c7c0d1f5"
     },
     "applied_flow": "自动SOP的deploy车道；仅本单真实示例10次获得人类直接例外授权；部署前拦停，不改全局SOP。",
-    "unresolved_conflicts": []
+    "unresolved_conflicts": [],
+    "deployment_read": {
+      "skill": {
+        "url": "https://open.workbuddy.cn/docs/skill",
+        "status": 200,
+        "sha256": "da1cd76badca427d321b055a4b2e20c191ea6f2d0fe623813f21dc477a0a5a19"
+      },
+      "expert": {
+        "url": "https://open.workbuddy.cn/docs/expert",
+        "status": 200,
+        "sha256": "52bdc01012ec0718393cdb29366edd0e61843636823eec189f877157c7c0d1f5"
+      }
+    }
   },
   "billing": {
     "channel": "general",
@@ -516,6 +528,74 @@
       "source": "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py:48",
       "auth": "account_bearer",
       "response_status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/consumption-history",
+      "auth": "account_bearer",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89",
+      "request": {
+        "query": {
+          "page": "integer 1..100000 default 1",
+          "page_size": "integer 1..50 default 20"
+        }
+      },
+      "response_fields": [
+        "items",
+        "total",
+        "page",
+        "page_size",
+        "product",
+        "scope",
+        "content_scope"
+      ],
+      "item_fields": [
+        "job_id",
+        "occurred_at",
+        "content",
+        "status",
+        "charged_uses",
+        "reserved_uses",
+        "refunded_uses",
+        "unit",
+        "ledger_available"
+      ],
+      "response_status": 200,
+      "implementation_status": "deployed_isolated_authenticated_verified"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/gemini/support-tickets",
+      "auth": "account_bearer",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124",
+      "request": {
+        "header": "Idempotency-Key 16..100 stable characters",
+        "fields": {
+          "category": "billing|image_quality|workflow|suggestion|other",
+          "text": "original text 1..2000 chars",
+          "job_id": "optional owned gemini job UUID"
+        }
+      },
+      "response_fields": [
+        "ticket",
+        "replayed"
+      ],
+      "response_status": 200,
+      "implementation_status": "deployed_isolated_authenticated_verified"
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/gemini/support-tickets/{id}",
+      "auth": "account_bearer",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164",
+      "request": {
+        "path": "server-issued mpsg-<32 lowercase hex>"
+      },
+      "response_fields": [
+        "ticket"
+      ],
+      "response_status": 200,
+      "implementation_status": "deployed_isolated_authenticated_verified"
     }
   ],
   "reference_payload": {
@@ -1185,10 +1265,6 @@
   },
   "blocked_reasons": [
     {
-      "reason_code": "DEPLOY_REQUIRED",
-      "detail": "三接口补丁与测试完成，待负责人授权部署；不提前重交spec_ready。"
-    },
-    {
       "reason_code": "HOST_ACCEPTANCE_UNAVAILABLE",
       "detail": "旧真机/上传关口仍待后续实际验收，不因本轮素材/后端测试完成而消失。"
     }
@@ -1271,8 +1347,8 @@
     },
     {
       "item": "部署关口",
-      "chosen": "补丁与测试完成后blocked/DEPLOY_REQUIRED；等待本聊天负责人授权",
-      "basis": "用户明确“部署前拦停等我”；未修改systemd、未重启、未初始化生产工单库。"
+      "chosen": "授权后已部署并验收，恢复 spec_ready",
+      "basis": "pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json"
     },
     {
       "item": "职责边界",
@@ -1286,8 +1362,8 @@
     "source": "docs/sop/sop-image-gen-skill-auto.md A.7",
     "exception": null,
     "lane": "deploy",
-    "backend_patch_and_deploy_gate": "patch_and_tests_complete; DEPLOY_REQUIRED before deployment",
-    "meaning": "A1规格和补丁自查通过不代表部署/客户端/A3通过；当前不能交付spec_ready。"
+    "backend_patch_and_deploy_gate": "approved_and_verified",
+    "meaning": "部署关口通过，客户端接入和 A3 验收在后续阶段。"
   },
   "copy": {
     "welcome_template": "欢迎使用WorkBuddy官方认证技能 证件照换底助手。",
@@ -1298,8 +1374,8 @@
     "required_for_this_release": true,
     "owner": "codex",
     "implementation_done": true,
-    "deployment_done": false,
-    "production_mutations_authorized": false,
+    "deployment_done": true,
+    "production_mutations_authorized": true,
     "patch_dir": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107",
     "test_results": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/test-results.json",
     "tasks": [
@@ -1307,19 +1383,19 @@
         "id": "BE06",
         "task": "gemini账户消费记录只读投影和分页",
         "implemented": true,
-        "deployed": false
+        "deployed": true
       },
       {
         "id": "BE07",
         "task": "独立工单库及账户幂等建单",
         "implemented": true,
-        "deployed": false
+        "deployed": true
       },
       {
         "id": "BE08",
         "task": "按编号查本人状态/回复；本地客服回复审计入口",
         "implemented": true,
-        "deployed": false
+        "deployed": true
       }
     ],
     "preservation_rules": [
@@ -1327,7 +1403,9 @@
       "新路由仅原账户Bearer，Skill/API Key仍不能调用工单；原Nginx/外层限制和审计保留",
       "machine_id/9字段/204及完整新设备漏斗仍属二期，不在本补丁中实现"
     ],
-    "deployment_gate": "DEPLOY_REQUIRED; human approval required before install/restart/production schema initialization"
+    "deployment_gate": "approved_and_verified",
+    "deployment_evidence": "pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json",
+    "deployment_authorization_scope": "仅批准部署指定三接口补丁和独立工单库"
   },
   "independent_metrics": [
     "技能首次对话上报数：按installation×skill×channel去重的服务端受理记录；不是独立设备/人数；新老设备拆分不可得",
@@ -1337,13 +1415,13 @@
   "implementation_status": {
     "client_package_written": false,
     "backend_implemented": true,
-    "backend_deployed": false,
+    "backend_deployed": true,
     "documentation_only": false,
     "real_upstream_calls": 10,
     "backend_change_required": true,
     "phase2_implemented": false,
     "phase2_deployed": false,
-    "note": "新增后端补丁已完成；Claude客户端仍由其维护，未部署、未重打包；机器漏斗二期未实现。"
+    "note": "补丁已部署，Claude 客户端接入与重打包待完成。"
   },
   "document_version": "1.0.2",
   "phase2_backlog": {
@@ -1409,76 +1487,6 @@
     "estimated_cost_usd": 0.065,
     "actual_invoice_verified": false
   },
-  "pending_deployment_endpoints": [
-    {
-      "method": "GET",
-      "path": "/platform-api/gemini/consumption-history",
-      "auth": "account_bearer",
-      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89",
-      "request": {
-        "query": {
-          "page": "integer 1..100000 default 1",
-          "page_size": "integer 1..50 default 20"
-        }
-      },
-      "response_fields": [
-        "items",
-        "total",
-        "page",
-        "page_size",
-        "product",
-        "scope",
-        "content_scope"
-      ],
-      "item_fields": [
-        "job_id",
-        "occurred_at",
-        "content",
-        "status",
-        "charged_uses",
-        "reserved_uses",
-        "refunded_uses",
-        "unit",
-        "ledger_available"
-      ],
-      "response_status": 200,
-      "implementation_status": "implemented_tested_not_deployed"
-    },
-    {
-      "method": "POST",
-      "path": "/platform-api/gemini/support-tickets",
-      "auth": "account_bearer",
-      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124",
-      "request": {
-        "header": "Idempotency-Key 16..100 stable characters",
-        "fields": {
-          "category": "billing|image_quality|workflow|suggestion|other",
-          "text": "original text 1..2000 chars",
-          "job_id": "optional owned gemini job UUID"
-        }
-      },
-      "response_fields": [
-        "ticket",
-        "replayed"
-      ],
-      "response_status": 200,
-      "implementation_status": "implemented_tested_not_deployed"
-    },
-    {
-      "method": "GET",
-      "path": "/platform-api/gemini/support-tickets/{id}",
-      "auth": "account_bearer",
-      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164",
-      "request": {
-        "path": "server-issued mpsg-<32 lowercase hex>"
-      },
-      "response_fields": [
-        "ticket"
-      ],
-      "response_status": 200,
-      "implementation_status": "implemented_tested_not_deployed"
-    }
-  ],
   "support_contract": {
     "ticket_fields": [
       "id",
@@ -1509,9 +1517,11 @@
     "generation_calls": 10,
     "generation_successes": 10,
     "production_financial_database_used": false,
-    "production_deployed": false,
+    "production_deployed": true,
     "client_package_rebuilt": false,
-    "full_production_chain_started": false,
-    "host_acceptance_completed": false
-  }
+    "full_production_chain_started": true,
+    "host_acceptance_completed": false,
+    "deployment_evidence": "pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json"
+  },
+  "deployment_verification": "pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json"
 }
