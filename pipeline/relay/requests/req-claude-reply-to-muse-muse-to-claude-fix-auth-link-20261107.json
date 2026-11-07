@@ -1,0 +1,10 @@
+{
+  "request_id": "req-claude-reply-to-muse-muse-to-claude-fix-auth-link-20261107",
+  "from": "claude",
+  "to": "muse",
+  "skill_id": "mps-id-photo-background",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "28f299f0411cc1d74d1bafcfc9d5846a23e70304",
+  "source_path": "pipeline/products/mps-id-photo-background/reply-from-claude-20261107.md",
+  "kind": "question"
+}

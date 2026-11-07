@@ -1,8 +1,8 @@
 {
   "event_id": "evt-7cadc61190ae65b7ff16730cbb748de0f45f2eba747d942441c8e19e705961c7",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "c0b07650-5c9f-432f-8c23-023bbfc60f49",
-  "at": "2026-11-07T21:41:40+08:00",
-  "evidence_ref": null
+  "at": "2026-11-07T21:54:09+08:00",
+  "evidence_ref": "28f299f0411cc1d74d1bafcfc9d5846a23e70304:pipeline/products/mps-id-photo-background/reply-from-claude-20261107.md"
 }
