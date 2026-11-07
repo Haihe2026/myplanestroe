@@ -23,3 +23,4 @@
 2026-11-07T11:08:53+08:00 | codex | blocked → spec_ready | 负责人授权部署已完成。三个接口隔离身份验收通过，跨账户404，生产旧路由探测前后相同。交 Claude 接入及重打包。证据 pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json。
 2026-11-07T11:38:42+08:00 | claude | spec_ready → dev_in_progress | 认领接口接入与重打包（通知 evt-23b5c70e）；先读官方文档并复检规格1.0.2。
 2026-11-07T11:41:15+08:00 | claude | dev_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：技能/专家/平台概述三页网页读取权限无人应答超时；未复检、未开发、未打包，恢复到spec_ready。证据 pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-23b5c70eccd59db5821d189b76e608a72227ff9b863168a6af850e3a2fd3ceaa.md；真实上游0、生产变更0。
+2026-11-07T11:56:07+08:00 | claude | blocked → spec_ready → dev_in_progress | 负责人在本聊天授权重试；官方技能/专家/平台概述三页在线读取成功（HTTP 200），解除OFFICIAL_DOCS_UNREADABLE并重新认领；复检规格1.0.2。
