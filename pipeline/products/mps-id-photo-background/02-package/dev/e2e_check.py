@@ -88,7 +88,7 @@ class Base(unittest.TestCase):
         return did
 
     def secret(self):
-        with open(os.path.join(self.home, '.mps-id-photo-background', 'account.json')) as f:
+        with open(os.path.join(self.home, 'mps-id-photo-background', 'account.json')) as f:
             return json.load(f)['install_secret']
 
     def paid_account(self, did, balance=5):
@@ -128,6 +128,33 @@ class FirstTurn(Base):
         self.assertIn(W.DEMO_INTRO, t)
         code, s, _, _ = self.run_cmd('demo', 'nope')
         self.assertEqual(code, 3)
+
+    def test_demo_links_survive_markdown(self):
+        """回归：demo 链接按 Markdown 解析后路径仍存在（含点开头上级目录的家目录）。"""
+        import re
+        punct = re.escape('!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
+        try:
+            from markdown_it import MarkdownIt
+            md = MarkdownIt()
+        except ImportError:
+            md = None
+        home = os.path.join(self.tmp, '.dot-parent', 'Administrator')
+        os.makedirs(home)
+        idphoto.STATE_HOME = home
+        code, s, _, _ = self.run_cmd('demo')
+        self.assertEqual((code, len(s['items'])), (0, 10))
+        for it in s['items']:
+            p = it['path']
+            self.assertNotIn('\\', p)
+            self.assertNotIn('/.mps-', p)
+            cell = '**[%s](%s)**<br>%s' % (it['title'], p, it['note'])
+            target = re.sub(r'\\([' + punct + '])', r'\1', re.search(r'\]\(([^()\s]*)\)', cell).group(1))
+            self.assertEqual(target, p)
+            if md is not None:
+                href = re.search(r'href="([^"]*)"', md.render(cell)).group(1)
+                from urllib.parse import unquote
+                self.assertEqual(unquote(href), p)
+            self.assertTrue(os.path.isfile(target))
 
     def test_demo_missing_assets_exit3(self):
         real = idphoto.HERE
@@ -170,7 +197,7 @@ class Confirmation(Base):
 
     def test_target_must_be_given_not_inferred(self):
         did = self.confirmed_draft()
-        d = json.load(open(os.path.join(self.home, '.mps-id-photo-background', 'drafts', did + '.json')))
+        d = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'drafts', did + '.json')))
         self.assertIsNone(d['target'])
 
 
@@ -293,8 +320,8 @@ class AccountBilling(Base):
         did = self.confirmed_draft()
         self.paid_account(did, 3)
         self.run_cmd('run', '--draft', did)
-        d = json.load(open(os.path.join(self.home, '.mps-id-photo-background', 'drafts', did + '.json')))
-        a = json.load(open(os.path.join(self.home, '.mps-id-photo-background', 'account.json')))
+        d = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'drafts', did + '.json')))
+        a = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'account.json')))
         body, _ = idphoto._job_body(d)
         r = idphoto.call('POST', '/skill-jobs', body, auth=a['skill_key'], idem=d['idem'])
         self.assertTrue(r['replayed'])
@@ -304,7 +331,7 @@ class AccountBilling(Base):
         did = self.confirmed_draft()
         self.paid_account(did, 3)
         self.run_cmd('run', '--draft', did)  # 取得 Skill 凭证
-        acc = os.path.join(self.home, '.mps-id-photo-background', 'account.json')
+        acc = os.path.join(self.home, 'mps-id-photo-background', 'account.json')
         self.assertEqual(stat.S_IMODE(os.stat(acc).st_mode), 0o600)
         self.mock.keys.clear()
         did2 = self.confirmed_draft()
@@ -325,7 +352,7 @@ class AccountBilling(Base):
         did = self.confirmed_draft()
         self.paid_account(did, 2)
         self.run_cmd('run', '--draft', did)
-        a = json.load(open(os.path.join(self.home, '.mps-id-photo-background', 'account.json')))
+        a = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'account.json')))
         with self.assertRaises(idphoto.GatewayError) as cm:
             self.mock.transport('POST', idphoto.ORIGIN + '/platform-api/gemini/skill-jobs', dict(prompt='x', confirmed=True, model='m'),
                                 {'X-Skill-Source': idphoto.SKILL_ID, 'X-Skill-Channel': idphoto.CHANNEL, 'Authorization': 'Bearer ' + a['skill_key'],
@@ -426,7 +453,7 @@ class Telemetry(Base):
             self.mock.telemetry_status = status
             code, s, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
             self.assertEqual(code, 0)
-        st = json.load(open(os.path.join(self.home, '.mps-id-photo-background', 'first-dialogue.json')))
+        st = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'first-dialogue.json')))
         self.assertFalse(st['sent'])  # 204 不算成功
         ids = {c[0]['installation_id'] for c in self.mock.telemetry_calls}
         self.assertEqual(len(ids), 1)  # 沿原标识
@@ -443,7 +470,7 @@ class Telemetry(Base):
         self.assertEqual(code, 0)
 
     def test_corrupt_identity_repaired_and_readonly_skipped(self):
-        d = os.path.join(self.home, '.mps-id-photo-background')
+        d = os.path.join(self.home, 'mps-id-photo-background')
         os.makedirs(d, exist_ok=True)
         open(os.path.join(d, 'first-dialogue.json'), 'w').write('garbage')
         self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
@@ -463,7 +490,7 @@ class Telemetry(Base):
     def test_every_early_branch_reports(self):
         for argv in (['demo'], ['status'], ['balance'], ['first-turn', '--text', 'x'], ['history'], ['ticket'],
                      ['feedback', '--category', 'other', '--text', 'x']):
-            shutil.rmtree(os.path.join(self.home, '.mps-id-photo-background'), ignore_errors=True)
+            shutil.rmtree(os.path.join(self.home, 'mps-id-photo-background'), ignore_errors=True)
             before = len(self.mock.telemetry_calls)
             self.run_cmd(*argv)
             self.assertEqual(len(self.mock.telemetry_calls), before + 1, argv)

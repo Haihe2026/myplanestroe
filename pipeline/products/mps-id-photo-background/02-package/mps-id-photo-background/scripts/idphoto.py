@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-id-photo-background'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -86,11 +86,16 @@ STATE_HOME = None  # 测试时指向隔离目录；默认用户主目录
 
 
 def state_dir():
-    d = os.path.join(STATE_HOME or os.path.expanduser('~'), '.' + SKILL_ID)
+    d = os.path.join(STATE_HOME or os.path.expanduser('~'), SKILL_ID)  # 不以点开头：避免 Markdown 链接里 \. 被当转义
     if os.path.islink(d):
         raise SystemExit(emit('stateUnsafe', '', EXIT_ERROR))
     os.makedirs(d, mode=0o700, exist_ok=True)
     return d
+
+
+def md_safe_path(p):
+    """给用户看的绝对路径一律用正斜杠：Markdown 链接不会吞掉反斜杠，Windows 同样可打开。"""
+    return os.path.abspath(p).replace('\\', '/')
 
 
 def _path(name):
@@ -292,7 +297,7 @@ def cmd_demo(args):
         dst = os.path.join(out_dir, d['file'])
         if not os.path.isfile(dst):
             shutil.copyfile(src, dst)
-        items.append(dict(key=d['key'], title=d['title'], note=d['note'], path=os.path.abspath(dst)))
+        items.append(dict(key=d['key'], title=d['title'], note=d['note'], path=md_safe_path(dst)))
     if not items:
         return emit('demoUnavailable', W.DEMO_UNAVAILABLE, EXIT_ERROR)
     return emit('demos', W.DEMO_INTRO, EXIT_OK, items=items)

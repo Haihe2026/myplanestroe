@@ -1,3 +1,51 @@
+# 自测报告：mps-id-photo-background 1.0.1（修复轮：示例图链接 Markdown 转义）
+
+- 角色：Claude Code；时间：2026-11-07T21:53:43+08:00（北京时间）
+- 已读 WorkBuddy 官方文档：2026-11-07T21:53 负责人在本聊天授权重试后在线读取 https://open.workbuddy.cn/docs/skill （HTTP 200）、https://open.workbuddy.cn/docs/expert （HTTP 200）、https://open.workbuddy.cn/docs/what-is-open-platform （HTTP 200）。技能页结构与必填字段与上轮一致（SKILL.md 必须，references/scripts/templates 可选；frontmatter 必填 name、display_name、display_name_en、description、description_zh、description_en、version、author）；仍未写 ZIP 根目录、路径/链接、体积上限规则。同轮 21:41 定时运行曾因读取权限无人应答拦停，本次重试后解除。
+- 依据：msg-from-muse-20261107-fix-demo-path.md（提交 7b2fa69）、SOP「示例预览」Markdown 安全规则（提交 f61a14a，status.sop_version 79ca222）。规格未变，A1 沿用 1.0.2 复检结论，不重做。
+- 包文件（`02-package/dist/`，只打 workbuddy-skill）：
+  - `mps-id-photo-background-1.0.1.zip`：887098 字节，SHA256 `80e4ec1379bb686ccfe37269bdc36221bc0a2258949ab6b6f1f1acdd3f071009`，24 个文件，根目录 `mps-id-photo-background/`。
+  - 上一版 `mps-id-photo-background-1.0.0.zip`（`f187e418…`）原样保留，用于回滚。头像未改动。
+
+## 本轮改了什么
+
+1. `scripts/idphoto.py`：`state_dir()` 目录名去掉前导点（`~/.mps-id-photo-background` → `~/mps-id-photo-background`）；全技能共用，草稿、账户、首次对话标记随之落在新目录。按 Muse 说明旧状态可弃，**未做迁移**：已在本机用过 1.0.0 的用户升级后需重新授权一次。
+2. 新增 `md_safe_path()`：`demo` 返回给用户的路径一律正斜杠（`C:/Users/…/mps-id-photo-background/demos/white-one.png`）。
+3. 版本号 1.0.0 → 1.0.1（SKILL.md frontmatter、`_meta.json`、`idphoto.SKILL_VERSION`、`telemetry.SKILL_VERSION`、真机验收单、`dev/build.py`）。
+4. 测试：
+   - 契约新增 `test_demo_link_markdown_safe`：复现 1.0.0 缺陷（`\.` 被 CommonMark 规则吃掉一个反斜杠），并断言状态目录不以点开头、按 Windows 路径规则（ntpath）输出为正斜杠且 Markdown 解析前后一致。
+   - 端到端新增 `test_demo_links_survive_markdown`：家目录放在点开头的上级目录下跑 `demo`，10 个链接逐个拼成 SKILL.md 规定的表格单元格，按 CommonMark 转义规则和 markdown-it-py 4.2.0（环境有则用）解析，断言解析后路径与原路径一致且文件存在。
+   - 端到端里 9 处状态目录引用同步改名。
+5. **未改**：授权链接与充值链接（见下「偏离」）、规格、欢迎句、遥测、付费、话术、后端、生产。
+
+## 结果
+
+| 项 | 结果 |
+|---|---|
+| 契约测试（源码） | 21/21 通过 |
+| 端到端（模拟后端，源码） | 51/51 通过 |
+| 干净解压 ZIP 后契约（`python3 -I`） | 21/21 通过 |
+| 干净解压 ZIP 后端到端（`--package`） | 51/51 通过 |
+| 回归测试有效性：把状态目录改回点开头、路径改回 `abspath` | 契约 `test_demo_link_markdown_safe` 失败；端到端 `test_demo_links_survive_markdown` 失败（已恢复） |
+| ZIP 不含 `__pycache__`、密钥类文件 | 通过；提交前密钥扫描无命中 |
+| 真实上游调用 / 真实上报 / 生产变更 | 0 / 0 / 0 |
+
+## 偏离与未验证
+
+- **授权链接改通用微信扫码地址（Muse 请求 evt-7cadc611）本版未做。** 现有授权/充值链接由服务端按安装签发（`/quick-entry` 带 install_secret、`/membership-link` 带账户凭证），本机凭证领取依赖它；源码里找不到通用地址回传本机会话的机制，改了可能导致用户扫码后技能仍显示未授权，属鉴权改动（仓库 CLAUDE.md 不得擅改）。已在本聊天向负责人列出选项，负责人未选具体方案，按保守默认不改。回复见 `reply-from-claude-20261107.md`。
+- 真机（Windows WorkBuddy）点开示例链接未验证；Windows 行为由 ntpath 模拟与 Markdown 解析测试覆盖，需 Codex/负责人真机确认。
+- 旧 `.mps-id-photo-background` 目录不迁移、不删除，留在用户机器上。
+
+## 复跑
+
+```sh
+cd 02-package/mps-id-photo-background && python3 -m unittest discover -s tests        # 契约 21 项
+cd 02-package && python3 dev/e2e_check.py                                              # 端到端 51 项
+python3 dev/e2e_check.py --package <干净解压后的 mps-id-photo-background 目录>          # 对 ZIP 重跑
+```
+
+---
+
 # 自测报告：mps-id-photo-background 1.0.0（第二轮：接入消费记录/工单、替换示例图）
 
 - 角色：Claude Code；时间：2026-11-07（北京时间）

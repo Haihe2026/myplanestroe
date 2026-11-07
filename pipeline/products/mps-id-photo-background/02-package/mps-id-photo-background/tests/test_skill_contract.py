@@ -1,10 +1,14 @@
 """契约测试：解压即可运行，不联网。python3 -m unittest discover -s tests"""
 import ast
 import json
+import ntpath
 import os
+import shutil
 import re
 import sys
+import tempfile
 import unittest
+from unittest import mock
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
@@ -15,6 +19,15 @@ import welcome_copy as W  # noqa: E402
 FORBIDDEN = ['上游', '管线', 'pipeline', '模板', '基线', '服务端', 'base64', '接口', 'token', 'Token', '轮询', '缓存',
              '供应商', '模型', 'Muse', 'Codex', 'Claude', '幂等', '字段', '流水线', '状态码', '错误码', '提示词']
 SLOW_PAYMENT = ['核款', '工作日', '人工确认到账', '等待审核到账']
+
+
+_MD_PUNCT = re.escape('!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
+
+
+def md_link_target(md):
+    """按 CommonMark 规则取 `[标题](目标)` 的目标：反斜杠+ASCII标点 视为转义，只留标点。"""
+    m = re.search(r'\]\(([^()\s]*)\)', md)
+    return re.sub(r'\\([' + _MD_PUNCT + '])', r'\1', m.group(1))
 
 
 def read(*p):
@@ -267,6 +280,25 @@ class Contract(unittest.TestCase):
                     with open(os.path.join(base, f), encoding='utf-8') as fh:
                         self.assertIsNone(pat.search(fh.read()), f)
 
+
+    def test_demo_link_markdown_safe(self):
+        # 复现 1.0.0 缺陷：点开头目录名 + 反斜杠路径，Markdown 解析后丢一个反斜杠
+        bad = 'C:\\Users\\Administrator\\.mps-id-photo-background\\demos\\white-one.png'
+        self.assertEqual(md_link_target('**[白底一寸](%s)**' % bad),
+                         'C:\\Users\\Administrator.mps-id-photo-background\\demos\\white-one.png')
+        # 修复后：状态目录不以点开头，输出路径一律正斜杠，解析前后一致
+        home = tempfile.mkdtemp()
+        idphoto.STATE_HOME = home
+        try:
+            self.assertFalse(os.path.basename(idphoto.state_dir()).startswith('.'))
+        finally:
+            idphoto.STATE_HOME = None
+            shutil.rmtree(home, ignore_errors=True)
+        with mock.patch.object(idphoto.os, 'path', ntpath):  # 按 Windows 路径规则跑一遍
+            good = idphoto.md_safe_path('C:\\Users\\Administrator\\mps-id-photo-background\\demos\\white-one.png')
+        self.assertEqual(good, 'C:/Users/Administrator/mps-id-photo-background/demos/white-one.png')
+        self.assertNotIn('\\', good)
+        self.assertEqual(md_link_target('**[白底一寸](%s)**' % good), good)
 
 if __name__ == '__main__':
     unittest.main()
