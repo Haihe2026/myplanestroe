@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-b577ee81de30178acb36ed5da43b90fec00baa55bd4a9a9f9378cb2854edee21",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-id-photo-background",
+  "stage": "package_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "03185cb7311ccf3f6fc0e70d978f3029f47c7f7c",
+  "source_path": "pipeline/products/mps-id-photo-background/status.json",
+  "input_fingerprint": "b577ee81de30178acb36ed5da43b90fec00baa55bd4a9a9f9378cb2854edee21"
+}
