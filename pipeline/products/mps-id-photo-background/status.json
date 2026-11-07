@@ -2,17 +2,32 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad",
-  "stage": "spec_in_progress",
-  "owner": "codex",
-  "claimed_at": "2026-11-07T09:31:28+08:00",
-  "updated_at": "2026-11-07T09:31:28+08:00",
+  "stage": "blocked",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-07T09:47:23+08:00",
   "rounds": {
     "spec": 1,
     "dev": 1,
     "test": 0
   },
   "lane": "deploy",
-  "blocked": null,
+  "blocked": {
+    "at_stage": "spec_in_progress",
+    "by": "codex",
+    "reason_code": "DEPLOY_REQUIRED",
+    "detail": "10次登记资源真实示例成功10张，11份PNG及来源记录已交；gemini消费记录/提交工单/查工单补丁完成，Windows/Linux隔离测试各23/23通过。未部署、未改客户财务、未重打包；部署前等待负责人。",
+    "needs": "负责人审阅backend-patch/gemini-support-20261107/README.md并授权部署；部署后核验三接口，再恢复spec_ready交Claude接入和重打包。原真机/上传验收仍需后续完成。",
+    "resume_to": "spec_ready",
+    "previous": {
+      "at_stage": "test_in_progress",
+      "by": "codex",
+      "reason_code": "HOST_ACCEPTANCE_UNAVAILABLE",
+      "detail": "本接收端无已验证电脑操作适配器，强制真机验收与/pricing浏览器验证未执行；端到端37项因夹具目录写入权限未验证；上传适配器也未验证。A3未通过，未上架。",
+      "needs": "提供可写隔离环境重跑端到端并完成真实宿主验收截图与零消耗验证；上架前提供已验证上传能力。证据：15d50e5f9f92376e9daf0784dcbb3f8f6e4dc5e7:pipeline/products/mps-id-photo-background/03-test-report.md",
+      "resume_to": "package_ready"
+    }
+  },
   "versions": {
     "package": "1.0.0",
     "listed": null

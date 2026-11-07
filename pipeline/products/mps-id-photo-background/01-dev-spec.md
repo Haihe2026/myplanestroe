@@ -1,13 +1,12 @@
-# 开发规格：证件照换底助手（规格1.0.1；产品1.0.0）
+# 开发规格：证件照换底助手（规格1.0.2；产品1.0.0）
 
-> 文档状态：spec_ready。本轮交付开发规格；后续实施、测试和部署状态按实际证据记录。
+> 文档状态：blocked / DEPLOY_REQUIRED。规格、真实示例和后端补丁已交付；部署前等待负责人，不能提前标spec_ready。
 
 ## 1. 范围和读取记录
 
-稳定标识：`mps-id-photo-background`；渠道仅WorkBuddy团队技能版；英文名：ID Photo Background Assistant。规格版本1.0.1，产品首版仍1.0.0。
-已读 WorkBuddy 官方文档（2026-11-06T22:52:59+08:00）：https://open.workbuddy.cn/docs/skill 、https://open.workbuddy.cn/docs/expert 。本轮重新在线下载并完整读取两页正文，成功；原OFFICIAL_DOCS_UNREADABLE阻断已解除。HTML摘要哈希存JSON读取记录，仅作本次证据，下次修订仍须重新在线读取。
-自动SOP、配置、退回意见和源码证据固定到 `3b35efe8ffc52c4c44b1e24b09b7cce5ec7bfcad`；先读现行 `docs/sop/sop-image-gen-skill-auto.md`、`pipeline/config.yaml`、`CLAUDE.md`指定入口、本品选品单/日志/规格/Claude退回报告。
-本单按自动SOP **完整A1**执行，采用 `lane=fast`：仅用现有共享生图、账户、支付及8字段/200首次对话能力，不新增后端改动，不存在首版部署依赖。Codex写规格，Claude Code只负责客户端和自测；二期后端不交Claude实施，不沿用旧A1范围特例。用户本轮决定原文归档于第11节。
+稳定标识mps-id-photo-background，中文证件照换底助手、英文ID Photo Background Assistant；只做workbuddy-skill，产品仍1.0.0，规格修订为1.0.2。
+已读 WorkBuddy 官方文档（2026-11-07T09:45:00+08:00）：https://open.workbuddy.cn/docs/skill 、https://open.workbuddy.cn/docs/expert ，本轮在线下载并读取正文成功。自动SOP、配置、Claude依赖、既有规格和业务源码固定到 `9315e4c20dd4b9c222a3d55135dae201643a9e60`。
+本轮负责人直接授权10次真实示例生成及消费记录/工单三接口后端补丁与测试，原文见01-authorization-20261107.md和第11节。整单采用deploy车道；补丁已隔离测试但未部署，部署前按要求拦停。欢迎句和8字段/200遥测保持，机器漏斗二期不提前实现。A1规格及补丁自查不等于生产部署、Claude客户端或A3验收通过。
 
 ## 2. 立项、输入输出和边界
 
@@ -47,7 +46,7 @@
 
 ## 4. 首轮示例与付费后置
 
-10个示例key与场景逐一对应；由Claude制作离线Mock/合成素材，不为示例调用真实上游，不冒充真实用户结果或真实模型效果。首次真实对话先本地保存需求、真实可见反馈、一个主推方向和两列示例链接，轻确认收尾；问候、仅图、问能力均适用。仅文字不运行示例；授权、充值和任务续接不插新一轮示例。
+10个示例key与场景逐一对应；按负责人本轮一次性授权，Codex使用登记的aisplice/gpt-image-2.5-ext/1K/n=1真实调用10次，10张均成功。素材放demo-assets/，人物全为文生图虚构成年人；不是用户照片，不是“真人原图换底”的对比效果。每张≤300KB，custom-pixels另存295×413，合计11份PNG；本地缩放/压缩不增加生图次数，完整提示词与哈希见provenance.json。首次真实对话先本地保存需求、真实可见反馈、一个主推方向和两列示例链接，轻确认收尾；问候、仅图、问能力均适用。仅文字不运行示例；授权、充值和任务续接不插新一轮示例。
 首轮不取账户/付款链接、不查凭证、不调用业务健康/目录接口、不发起生成；首次互动元数据是唯一例外。用户认可方向不等于同意付费；同任务的范围、照片处理授权、付费执行分别确认后再提交。
 固定欢迎句由Claude在welcome_copy.py实现并逐字测试：`欢迎使用WorkBuddy官方认证技能 证件照换底助手。`。
 授权及充值话术按SOP责任交接闭环；已有可用次数跳过开户充值；用户拒绝不催促；只有服务端真实余额与账单可作为费用依据。
@@ -76,7 +75,7 @@
 - 服务端适配器通过 `Registry().resolve_for_service('aisplice')` 解析受控资产，只在服务端使用secret；MODEL/API常量及begin/poll函数组装请求和续接。这里只记录资产ID/配置引用名，无实际Key、尾号、密文或管理员权限。当前入口链见 `infrastructure/current-image-services-2026-11-06.json`，不能直接执行旧sunburst.py中的旧源。
 - 客户端发送兼容image_engine=photo-retouch-sunburst，不自行发送model/n/quality；references=[{mime,content}]中的content为图片base64，真实同意reference_consent及confirmed后提交。首版1张PNG/JPEG≤5MB、边128–8000、像素≤2000万；服务端 `core/image_inputs.py:12-56` 校验、EXIF方向规范化和清理元数据，再缩限送适配器；不得承诺原始分辨率原封不动送至模型。
 - `resource_adapter.py` 的begin按原任务指纹/用户/任务ID校验，网关3种尺寸映射为1:1/3:2/2:3并向供应商images/tasks发单图1K，服务端签名临时参考图；poll查原remote_id及content，取得图片后清洗为PNG交既有网关。提交未知状态记needs_review，不切旧源或重建任务；失败核查/退还沿原服务端路径，客户端不能保证所有未知状态立即退款。
-- 成本来源 `resources/upstreams/README.md` 的2026-11-05公开价快照；估算规则见第5节，不查付费模型或供应商账户来“验证”。适配器源码与既有协议已核实，不等于本品真实质量、肖像保真、真人支付或全链部署已验证。本轮只做Mock；无需任何新资产、后端配置或部署。
+- 成本来源 `resources/upstreams/README.md` 的2026-11-05公开价快照；估算规则见第5节，不查付费模型或供应商账户来“验证”。适配器源码与既有协议已核实，不等于本品真实质量、肖像保真、真人支付或全链部署已验证。上游适配器无需新增资产或部署；本轮示例10次真实调用为单独授权例外，新增消费/工单接口仍须按第12节部署关口处理。
 
 ## 6. 已存在接口及字段
 
@@ -128,7 +127,7 @@
 | BE04 | 完整L0-L4、三项独立指标、管理台及同口径离线报表 | 新设备等缺口标不可得，不造数、不新增统计 |
 
 BE01–BE04移入JSON的phase2_backlog，由Codex未来另单立项写后端补丁与测试，按原部署关口处理；服务端完成实现、隔离验证并部署后，才由新版客户端启用。Claude本版只实现7.1/7.2，不做二期后端或9字段Mock目标。
-原BE05不是新增实施任务：保持现有通用生图、共享钱包、微信恢复和新资源适配器不变，不改余额/订单/套餐/鉴权/幂等、不回退旧源，真实上游调用0。首版无需后端补丁或迁移，所以fast车道成立。
+原BE05不是新增实施任务：保持现有通用生图、共享钱包、微信恢复和新资源适配器不变，不改余额/订单/套餐/鉴权/幂等、不回退旧源；除本轮授权的10次示例外不新增真实生图调用。遥测本身不需要后端补丁；整单因第12节三接口新增而改deploy，不能再按fast跳过部署关口。
 
 ## 8. 漏斗、相邻技能与非目标
 
@@ -146,13 +145,13 @@ BE01–BE04移入JSON的phase2_backlog，由Codex未来另单立项写后端补�
 
 ## 9. 验收清单与责任
 
-以下48项为待实施验收计划，不冒充已通过。Claude自测后由Codex从相同哈希ZIP干净解压独立重测；宿主行为测试由Codex执行。
+以下53项为产品验收计划（含原48项与本轮新增5项），不冒充已通过。Claude自测后由Codex从相同哈希ZIP干净解压独立重测；宿主行为测试由Codex执行。
 
 | 编号 | 分组 | 负责 | 验收项 |
 |---|---|---|---|
 | T01 | first_turn | claude；codex独立复测 | 问候、仅图、问能力、带图明确需求均先价值展示，不取账户或付费链接 |
 | T02 | first_turn | claude；codex独立复测 | 首轮仅允许受控首次对话元数据请求，业务请求函数设为抛错仍能完成 |
-| T03 | first_turn | claude；codex独立复测 | 离线示例10项，只展示本次脚本返回的绝对路径，两列链接表且同对话去重 |
+| T03 | support_and_demos | claude；codex独立复测 | 10张真实资源生成的虚构成年人物示例和1份295×413另存已交付；只展示脚本实际返回路径，两列且同对话去重；不得称用户真实结果或参考图保真验证。 |
 | T04 | first_turn | claude；codex独立复测 | 不要生成新图/只要文字/只看某示例正确分流 |
 | T05 | first_turn | claude；codex独立复测 | 首轮不查凭证、不调用help/account/health/catalog，不读取照片发送至后端 |
 | T06 | confirmation_account | claude；codex独立复测 | 认可方向、沉默、授权成功、已充值均不能替代同任务付费同意 |
@@ -197,37 +196,61 @@ BE01–BE04移入JSON的phase2_backlog，由Codex未来另单立项写后端补�
 | T45 | host | codex | 真实WorkBuddy开新对话逐项验首轮可见行为与链接展示 |
 | T46 | host | codex | 收藏仅交付成功后用户同意才写宿主记忆，缺工具如实说明 |
 | T47 | host | codex | 宿主无解释器、禁网、无记忆工具分别降级，不宣称已通过 |
-| T48 | host | codex | 未验证真实扫码、核款、模型质量与审核，不把Mock当生产效果 |
+| T48 | support_and_demos | claude；codex独立复测 | 10次授权文生图和人工预览只证明示例生成；真人扫码/核款、参考人像换底质量及正式审核仍未验证，不能把示例或Mock当作这些验收通过。 |
+
+| T49 | support_and_demos | claude；codex独立复测 | 消费记录按账户/product隔离、分页和总条数；不泄露提示词，预占/消费/退款/未知分开；不得假造单技能归因。 |
+| T50 | support_and_demos | claude；codex独立复测 | 提交工单使用原账户和稳定请求键；同键同体幂等、异体409；原话/分类/可选任务所有权校验，不扣次数。 |
+| T51 | support_and_demos | claude；codex独立复测 | 查工单限本人编号，其他账户404；状态/回复与服务端一致；处理时限未配置则不承诺，原话和回复只作纯文本。 |
+| T52 | support_and_demos | claude；codex独立复测 | 后端补丁隔离测试后财务数据库字节不变；原路由委派/鉴权/生成幂等/套餐不改，部署前保持DEPLOY_REQUIRED。 |
+| T53 | support_and_demos | claude；codex独立复测 | demo-assets/provenance.json的10次授权、资产/模型/完整提示词/哈希及11份PNG核对；无真实人物素材、密钥、签名URL或额外调用。 |
 
 设计超时预算：提交90秒；查询每次15秒、间隔5秒、最多6轮，轮询窗口120秒、进程余量30秒，外层240秒。由常量实算并全包一致，不冒充实测耗时；超时保留原任务。
 WorkBuddy技能包按官网SKILL.md＋references/scripts/templates结构；frontmatter包含name、display_name、display_name_en、description、description_zh、description_en、version、author。不要混入专家plugin.json或专家分类。只打当前技能渠道，头像和ZIP同目录，保留旧包；实际分类与宿主能力在后续交付阶段核验。
 
-## 10. 验证与交接
+## 10. 本轮验证与交接状态
 
-上一版记录的参考客户端12项Mock、首次互动4项合成检查及公开GET结果保留为历史证据，不冒充本轮产品已通过。首版客户端尚未开发，48项产品验收计划仍待Claude实现后自测、Codex独立重测。
-本次规格复核及离线8字段/200协议验证结果见同目录 `01-spec-revision-validation.json`；只使用仓库源码、临时合成数据库和本机Mock HTTP，不访问生产账户或付费模型。真实上游调用0、生产业务变更0；未编写Skill客户端包、未部署后端，未执行真人扫码/核款/生成质量/真实WorkBuddy宿主验收。
-规格MD/JSON同步更新R2、R3、T35–T39和决策记录。完整A1自查通过后提交spec_ready，由Claude Code按首版8字段协议重新复检并开发；文档自查不代替A2/A3/A4或实际宿主验收。
+- 真实示例：10次创建、10张成功，无追加调用；经下载校验、PNG解码、哈希、尺寸/体积和人工预览检查，11份导出PNG（含295×413）已交。预估上游成本US$0.065（公开价估算，未核实际账单），未改客户余额或制造客户消费记录。
+- 后端：Windows本机23/23、服务器Linux临时目录23/23通过，详见backend-patch/gemini-support-20261107/test-results.json。测试仅本机HTTP/合成数据库，每例结束对财务库逐字节比较，无生产客户库、无测试生成调用。
+- 未执行：后端部署/服务重启/生产工单库初始化、完整生产链联调、新客户端接口集成、重打包、真机/上传、真人核款及参考图换底保真验收。旧HOST_ACCEPTANCE_UNAVAILABLE仍保留。
+- 当前应保持blocked/DEPLOY_REQUIRED。负责人部署并取得联调证据后，才恢复spec_ready由Claude替换素材/接接口/重测/重打包；不改Claude的02-package和02-self-test.md。
 
 ## 11. 决策记录
 
-负责人本轮在已接手的开发文档聊天直接指示（记录日期2026-11-06）：
-> 欢迎句保持认证格式不变，R2 选改 fast，R3 按 8 字段改，决定写进决策记录，修订后重交 spec_ready。
+负责人本轮直接指示：
+> 10 张示例图的 10 次真实调用我授权了，用登记的生图资源生成；消费记录、提交工单、查工单三个 gemini 接口的后端补丁你也可以写、测试你跑，部署前拦停等我。
 
-此原文授权修订和重交规格，不是认证状态的独立核验证据，也不扩大生产/财务/付费上游权限。R1已由Claude撤回；本轮原样保留欢迎句。R4提及的旧A1特例作废，以完整A1为准。
+此前“欢迎句不变、R2选fast、R3按8字段”保留历史；本轮明确新增后端改动，因此车道升级deploy，欢迎句及8字段/200不变。授权只限10次示例和写补丁/测试，不包括部署或财务操作。
 
 | 事项 | 采用 | 依据 |
 |---|---|---|
 | 关口 | 本单采用自动SOP | 当前聊天人工直接确认；不是Muse转述授权 |
 | 当前有效支付 | 临时域名/membership/gemini/及服务器签发链接 | 11月6日资源入口、参考客户端、在线200；不使用旧/pay示例 |
 | 当前有效上游 | aisplice新适配器1K单图，不直接调用通用目录其余模型 | resources/upstreams/README.md、新资源策略、公开健康 |
-| 真实探针 | 仅GET公开健康与套餐；真实上游0 | 自动SOP A.5硬边界及CLAUDE.md |
 | 标准尺寸 | 机构规格由用户提供，生成尺寸与最终裁切尺寸分别验证 | 当前网关仅3种画幅；不把一寸推定唯一像素 |
-| 示例 | 10个待制作Mock合成示意，明确非真实模型效果 | 自动SOP A1禁止为示例调用真实上游 |
 | 正式证件用途 | 对明确禁止编辑的用途不承接；其余须按机构规则核验 | 未核实的机构要求不能默认通用；美国签证FAQ禁止改变外貌的数字修改 |
 | 欢迎句（R1） | 欢迎使用WorkBuddy官方认证技能 证件照换底助手。 | 用户本轮直接明确保持认证格式不变；现行SOP固定规则1、A.5；Claude已撤回R1。 |
-| R2车道 | fast；不新增后端；BE01–BE04移入二期待办，不作为首版依赖 | 用户本轮明确选择R2方案a；自动SOP A.5遥测行及阶段4快车道。 |
 | R3首次对话契约 | 只发8字段；HTTP200及合法event_id/receipt后标成功；不发machine_id | 用户本轮明确按8字段改；A.5与固定规则12；dialogue_store.py:9和dialogue_gateway.py:50。 |
 | 二期机器漏斗 | 9字段/204、机器标识、新表与报表均延期；首版跨技能新设备漏斗标不可得 | A.5首版兼容默认；不得把目录或Mock当后端已部署。 |
-| A1范围（R4） | 执行A.7完整A1清单，不再使用documentation_only特例 | 本轮指令已归档于本节；fast无后端改动，因此deploy补丁/部署项不适用，并非豁免A1。 |
-| 职责边界 | 本聊天Codex修订MD/JSON和状态；Claude Code按首版8字段契约开发客户端并自测 | 用户接手指示和本轮原文；后端二期由Codex未来另单写补丁及测试，部署按原关口。 |
 | 旧首次互动说明的重试建议 | 以自动SOP的2秒、无自动重试为准；保留8字段、200和回执关联协议 | resources/shared-image-temporary/首次互动接入.md含旧重试建议；自动SOP固定规则12优先。 |
+| 2026-11-07直接授权 | 10 张示例图的 10 次真实调用我授权了，用登记的生图资源生成；消费记录、提交工单、查工单三个 gemini 接口的后端补丁你也可以写、测试你跑，部署前拦停等我。 | pipeline/products/mps-id-photo-background/01-authorization-20261107.md；负责人本聊天直接指示。 |
+| 示例10次例外 | 登记资产aisplice/gpt-image-2.5-ext/1K/n=1实际创建10次并成功10张，不追加调用 | 本次直接授权优先于SOP默认零真实调用；只限本单，调用账与provenance已保存。 |
+| 真实示例边界 | 纯文生图虚构成年人；不是对真实人物照片的换底验证；本地缩放压缩及295×413导出不增加上游调用 | Claude依赖文件要求及本轮实际生成与视觉检查。 |
+| 车道更新 | deploy，取代1.0.1的fast；仅新增三项消费/工单接口，8字段遥测保持 | 用户本轮授权后端补丁；A.5、阶段4。 |
+| 消费归因 | 只读当前共享库gemini账户记录，内容用通用生图任务；旧独立历史和单技能归因不假造 | 当前jobs/job_products/ledger结构缺可靠skill_id投影；不为此修改财务数据。 |
+| 工单时限 | 按负责人实际客服承诺配置；默认不承诺时限、response_due_at=null | 仓库无可核实客服时限；不编造固定回复期限。 |
+| 部署关口 | 补丁与测试完成后blocked/DEPLOY_REQUIRED；等待本聊天负责人授权 | 用户明确“部署前拦停等我”；未修改systemd、未重启、未初始化生产工单库。 |
+| 职责边界 | Codex交素材/后端补丁/规格；Claude在部署验证后接接口、替换示例并重测重打包 | A.1及Claude依赖说明；不改02-package客户端或其自测报告。 |
+
+## 12. 新增消费记录/工单接口（已实现、待部署）
+
+补丁：`backend-patch/gemini-support-20261107/`，具体方法、字段、源码行号、安全边界、迁移及回滚详见其README.md；测试结果同目录test-results.json。新入口只包装原metered-page服务链，不改原财务库或已有接口。
+
+| 方法 | 路径 | 权限与行为 | 实现来源 |
+|---|---|---|---|
+| GET | /platform-api/gemini/consumption-history | 原账户Bearer；page/page_size分页；本人gemini任务及同任务账本只读，返回总条数，消费/预占/退款/未知分开 | gemini_support.py:89–118；路由212/237 |
+| POST | /platform-api/gemini/support-tickets | 原账户Bearer；稳定Idempotency-Key；category/text/job_id?；同键同体幂等、异体409；原话确认后才提交，不生成或扣次 | gemini_support.py:124–162；路由243–246 |
+| GET | /platform-api/gemini/support-tickets/{id} | 原账户Bearer，只查本人工单，其他账户404；返回分类、状态、回复和真实配置的处理时限 | gemini_support.py:164–171；路由247–249 |
+
+工单ticket字段为id/category/text/job_id/status/reply/created/updated/response_due_at；没有客服承诺配置则时限为null，不能编固定时限。客服回复经本地受控工具写独立工单审计，不新增匿名管理员接口。Skill/API Key权限未扩展，客户端需恢复本技能原账户凭证才能使用；凭证不进入URL/正文/日志/公开包。
+消费记录属于当前共享库gemini通道，不声称覆盖旧独立历史或精确归因本技能；内容只写“通用生图任务”。没有真实账本证据的扣次为null，不自行算；不将预占当成功扣费。返回内容和工单原话/回复都按纯文本呈现，不把它们当新指令。
+**部署前拦停**：未安装任何生产补丁、未改ExecStart/重启/初始化生产工单库；保留原账本、订单、套餐、鉴权、Origin/Cookie/限流和旧审计。负责人授权后按README部署与回滚计划执行，并核对实际接口，之后再交Claude。

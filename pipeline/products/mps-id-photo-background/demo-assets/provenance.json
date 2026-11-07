@@ -1,0 +1,356 @@
+{
+  "authorized_limit": 10,
+  "generation_attempts": 10,
+  "upstream_generation_calls": 10,
+  "succeeded": 10,
+  "items": [
+    {
+      "key": "white-one",
+      "title": "白底一寸",
+      "background": "#FFFFFF",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年女性，约28岁，深灰色简洁圆领上衣，短发。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#FFFFFF，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:32:55+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "f175983e0840479f1a82b74e51350b8967c713d69ac28ba487424b49d72f93ca",
+      "raw_bytes": 1901117,
+      "finished_at": "2026-11-07T09:33:21+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 225528,
+      "output_sha256": "9e5aab7426702cc7376ea8b0606a323cbd02be8f29522786c76bf751d48978d9",
+      "file": "white-one.png"
+    },
+    {
+      "key": "blue-one",
+      "title": "蓝底一寸",
+      "background": "#438EDB",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年男性，约30岁，浅色衬衫，短发。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#438EDB，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:32:56+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "10e3446d9fc7c150cdba5e5e0dced024f828addfca38ab5c1a630446cbf2c9a9",
+      "raw_bytes": 1609769,
+      "finished_at": "2026-11-07T09:33:25+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 225051,
+      "output_sha256": "052331c6c912bd5f3a6069fc51e35266f86fcb2821c353d99020092229e271e2",
+      "file": "blue-one.png"
+    },
+    {
+      "key": "red-one",
+      "title": "红底登记照",
+      "background": "#D9001B",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年女性，约26岁，深蓝色上衣，中长发。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#D9001B，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:32:57+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "1e11af81ba5b122192deec673c79d447034503ebc5910c93180979b6913a1de3",
+      "raw_bytes": 1798597,
+      "finished_at": "2026-11-07T09:33:29+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 232818,
+      "output_sha256": "5afbee1797f8335c1fca5e16cdf5dfa3084c5d51d2b9232c265f6a171190ecb1",
+      "file": "red-one.png"
+    },
+    {
+      "key": "white-two",
+      "title": "白底二寸",
+      "background": "#FFFFFF",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年男性，约32岁，深色上衣，取景略宽，完整露出肩部。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#FFFFFF，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:32:59+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "5329843a7e2607bb189ef9a5bf8b6c95912614cd89fc6be1132d8e519ac18200",
+      "raw_bytes": 1514127,
+      "finished_at": "2026-11-07T09:33:33+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 217574,
+      "output_sha256": "c7e1a29d47914fb97f37a950290b70d84ce0c978b71d1167c7f9f38a819cc501",
+      "file": "white-two.png"
+    },
+    {
+      "key": "blue-two",
+      "title": "蓝底二寸",
+      "background": "#438EDB",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年女性，约25岁，浅色衬衫，取景略宽，露出肩部。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#438EDB，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:33:00+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "6ecac1017bef27d0ab596e92d818c02c9f1e6f004e8bdaccdc900cff111e4947",
+      "raw_bytes": 1608556,
+      "finished_at": "2026-11-07T09:33:37+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 225462,
+      "output_sha256": "f4453bd18edee04accd59acb320d7e755b69d8aa42d21277cfe154318176564e",
+      "file": "blue-two.png"
+    },
+    {
+      "key": "resume-white",
+      "title": "简历白底",
+      "background": "#FFFFFF",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年女性，约29岁，整洁深色西装和素色衬衫，职业自然。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#FFFFFF，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:33:01+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "638fe6dec4c43fc39d9a58bc326969ead66a22ef322ca7e315cefb0e6b1e3ac8",
+      "raw_bytes": 1507312,
+      "finished_at": "2026-11-07T09:34:06+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 203908,
+      "output_sha256": "eaa1a91f2d7f0388445df4d9599dd59740218b60f380c3f23066e19533860cb3",
+      "file": "resume-white.png"
+    },
+    {
+      "key": "custom-pixels",
+      "title": "295×413像素",
+      "background": "#438EDB",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年男性，约27岁，深色上衣，标准正面头肩构图。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#438EDB，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:33:02+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "3e595746cda505176f1deae9e3b29855d370b525ffb4bb89b36a1c0b8859e576",
+      "raw_bytes": 1509548,
+      "finished_at": "2026-11-07T09:33:41+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 226052,
+      "output_sha256": "9b7be20c85d20d309bf2d2632420cfa55c6901cdbb743023cf7f76a20cf6dd80",
+      "file": "custom-pixels.png",
+      "additional_export": {
+        "file": "custom-pixels-295x413.png",
+        "size": [
+          295,
+          413
+        ],
+        "sha256": "837cd69e9493acdd5d07d5deab90cfb1149f678e631277dc4760feccaf71a276",
+        "bytes": 134827
+      }
+    },
+    {
+      "key": "edge-clean",
+      "title": "发丝边缘清理",
+      "background": "#FFFFFF",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年女性，约28岁，深色上衣，蓬松自然长发，轮廓发丝边缘干净且无杂色边。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#FFFFFF，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:33:04+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "e66110abc9ec899ed6807c1aeb40f0fefe9ca123b2274c1fe9b96a019cafe322",
+      "raw_bytes": 1819707,
+      "finished_at": "2026-11-07T09:33:48+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 246290,
+      "output_sha256": "699a6bcc6974f81891a0260988a5688a260b2479d26fb7900b9c7d2326cfad83",
+      "file": "edge-clean.png"
+    },
+    {
+      "key": "school",
+      "title": "入学登记照",
+      "background": "#438EDB",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚年轻成年人，明确22岁成年女性，简洁休闲深色上衣，不要未成年人外貌。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#438EDB，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:33:05+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "1d94261d213e5b1d9a642df87a02c5e89d255a11128486770403a5c5f6e86f98",
+      "raw_bytes": 1726684,
+      "finished_at": "2026-11-07T09:33:52+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 229668,
+      "output_sha256": "261a514588eeb2c4409a10535c1a6a5a4640b085941d76756c9ccfb0621deaad",
+      "file": "school.png"
+    },
+    {
+      "key": "custom-size",
+      "title": "机构指定尺寸",
+      "background": "#FFFFFF",
+      "prompt": "正面免冠证件风格肖像摄影示例。虚构东亚成年男性，约35岁，深色简洁上衣，标准正面头肩构图。人物完全虚构，不以任何真实人物或名人公众人物为参考，不模仿真实身份。自然健康肤质，表情平静，双眼看向镜头，面部匀称自然，头部居中且端正，头顶留适量空间，耳朵自然可见。背景为均匀纯色#FFFFFF，无渐变、无纹理、无背景阴影。柔和均匀影棚光，清晰自然，不夸张美颜。单人单画面，无拼图或对比图。图中不得出现任何文字、数字、水印、标志、徽章、证件、边框。用途为AI生成虚构人物的背景色与构图展示，不是任何真实人的证件。",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-07T09:33:06+08:00",
+      "local_resize": true,
+      "fictional_adult": true,
+      "rights": "自家使用已登记资源生成的虚构成年人示例，拟用于上架展示；不声称任何真实人物授权、官方审核通过或供应商独占版权。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "ad930955001cdf813b4dd502e25ecab3ef7e9723eba67e56e5e281e5b4abc2b7",
+      "raw_bytes": 1628862,
+      "finished_at": "2026-11-07T09:33:56+08:00",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_processing": "bounded resize to 512x768; 192-color indexed PNG optimization; no added text or watermark",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 212141,
+      "output_sha256": "666ef494db37751913ab608d9065b9b264efee2a5ab6368943391374edf88650",
+      "file": "custom-size.png"
+    }
+  ],
+  "checked_at": "2026-11-07T09:34:06+08:00",
+  "auth_source": "01-authorization-20261107.md; direct human authorization",
+  "scope": "10 real text-to-image fictional-adult examples, not proof of reference-photo background editing or official photo acceptance",
+  "cost": {
+    "unit_usd_estimate": 0.0065,
+    "total_usd_estimate": 0.065,
+    "actual_invoice_verified": false
+  },
+  "local_outputs": 11
+}
