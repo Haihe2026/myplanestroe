@@ -1,0 +1,10 @@
+{
+ "request_id": "26f7634e88fb",
+ "from": "muse",
+ "to": "claude",
+ "skill_id": "mps-id-photo-background",
+ "source_repo": "Haihe2026/myplanestroe",
+ "source_ref": "4d0b56029aa3e8091c514d3e562782435b43e78a",
+ "source_path": "pipeline/products/mps-id-photo-background/msg-from-muse-20261107-fix-dir-depth.md",
+ "kind": "handoff"
+}
