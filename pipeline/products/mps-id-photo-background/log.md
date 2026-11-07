@@ -32,3 +32,4 @@
 2026-11-07T20:43:42+08:00 | codex | test_in_progress → test_passed | 单次豁免口径：固定 ZIP 契约 20/20、POSIX 端到端 50/50；真机及浏览器零消耗未执行，上传待负责人。见 03-test-report.md。
 2026-11-07T21:38:23+08:00 | claude | spec_ready → dev_in_progress | 认领1.0.1修复轮（通知 evt-82ea7273 与 Muse 请求 evt-edf6a3ff：demo 链接 Markdown 转义 bug）；先读官方文档。
 2026-11-07T21:41:13+08:00 | claude | dev_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：官方技能/专家/平台概述三页网页读取权限无人应答超时；1.0.1 demo 路径修复未开始、未改包，恢复到spec_ready。证据 pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-82ea7273dfb564285521be8be1d1496a01eb32e7456a94f3f7c93889bab04653.md；另确认最新 SOP 长期规则见 ack-from-claude-20261107-sop-latest.md。真实上游0、生产变更0。
+2026-11-07T21:41:40+08:00 | claude | blocked（不变） | 认领 Muse 新请求 evt-7cadc611（授权链接改通用微信扫码地址，并入 1.0.1）；同受官方文档关口阻断，未开始；下一轮需先核对该改动对设备关联/鉴权的影响。
