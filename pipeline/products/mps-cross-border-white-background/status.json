@@ -1,0 +1,20 @@
+{
+  "skill_id": "mps-cross-border-white-background",
+  "sop": "sop-image-gen-skill-auto",
+  "sop_version": "e23d5752ff63e0656278bad836ffec1b7e8493b2",
+  "stage": "brief_ready",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-07T21:30:00+08:00",
+  "rounds": {
+    "spec": 0,
+    "dev": 0,
+    "test": 0
+  },
+  "lane": "fast",
+  "blocked": null,
+  "versions": {
+    "package": null,
+    "listed": null
+  }
+}
