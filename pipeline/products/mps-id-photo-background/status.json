@@ -1,27 +1,13 @@
 {
-  "skill_id": "mps-id-photo-background",
-  "sop": "sop-image-gen-skill-auto",
-  "sop_version": "e23d5752ff63e0656278bad836ffec1b7e8493b2",
-  "stage": "blocked",
-  "owner": "claude",
-  "claimed_at": "2026-11-07T21:38:23+08:00",
-  "updated_at": "2026-11-07T21:41:13+08:00",
-  "rounds": {
-    "spec": 1,
-    "dev": 1,
-    "test": 0
-  },
-  "lane": "deploy",
-  "blocked": {
-    "at_stage": "dev_in_progress",
-    "by": "claude",
-    "reason_code": "OFFICIAL_DOCS_UNREADABLE",
-    "detail": "定时运行官方文档三页网页读取权限无人应答超时，1.0.1 修复未开始",
-    "needs": "在 Claude 定时任务中预先放行 open.workbuddy.cn 网页读取后把 stage 改回 spec_ready",
-    "resume_to": "spec_ready"
-  },
-  "versions": {
-    "package": "1.0.0",
-    "listed": null
-  }
+ "skill_id": "mps-id-photo-background",
+ "sop": "sop-image-gen-skill-auto",
+ "sop_version": "79ca222349237e3e4707a829b7d67e11f0e6bace",
+ "stage": "spec_ready",
+ "owner": null,
+ "claimed_at": null,
+ "updated_at": "2026-11-07T21:50:02+08:00",
+ "rounds": {"spec": 1, "dev": 1, "test": 0},
+ "lane": "deploy",
+ "blocked": null,
+ "versions": {"package": "1.0.0", "listed": null}
 }
