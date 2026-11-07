@@ -3,6 +3,6 @@
   "role": "claude",
   "action": "acknowledged",
   "claim_id": "888b098d-8d70-46a9-b693-bed94a5824e6",
-  "at": "2026-11-07T11:41:26+08:00",
-  "evidence_ref": "df6220a60459581d185a3c9cc2c8ad97b2e35a97:pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-23b5c70eccd59db5821d189b76e608a72227ff9b863168a6af850e3a2fd3ceaa.md"
+  "at": "2026-11-07T12:03:20+08:00",
+  "evidence_ref": "72fc7db22263b5e89d1019288866d23cef1f8abd:pipeline/products/mps-id-photo-background/02-self-test.md"
 }
