@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-7330d10606ec19cf3a14178e1ff4a68c8649bd631ac6d546ac945c518d422746",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-cross-border-white-background",
+  "stage": "brief_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "dd54ac4b4dd5a97f9610dae0f7a7f40187299d2a",
+  "source_path": "pipeline/products/mps-cross-border-white-background/status.json",
+  "input_fingerprint": "7330d10606ec19cf3a14178e1ff4a68c8649bd631ac6d546ac945c518d422746"
+}
