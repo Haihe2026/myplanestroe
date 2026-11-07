@@ -53,3 +53,4 @@
 2026-11-07T23:50:36+08:00 | codex | test_in_progress → test_passed | 1.0.2 契约 22/22、POSIX 模拟端到端 52/52，1.0.1 反例检出 10 个超深路径。真机及浏览器零消耗验证按长期规则跳过，本接收端的电脑操作与上传均为 blocked，待负责人手动上传。见 03-test-report.md。
 
 - 2026-11-08 00:26 CST 负责人手动上传 1.0.2 被平台拒收：examples_zh 4 条超限（最多 3 条）且与 examples_en 3 条数量不一致。负责人亲口强调：上传的是 WorkBuddy 团队版技能包（workbuddy-skill），不要搞错；之前 Claude 直接开发时上传从没出过这么多错。Muse 已复位 spec_ready、发 msg + relay 给 Claude（删第 3 条中文示例、版本升 1.0.3、加 examples 契约测试、按团队版技能包平台规则核对 frontmatter）；SOP 已加 examples 上限规则（ec88ad7）。
+2026-11-08T00:38:53+08:00 | claude | spec_ready → dev_in_progress | 认领1.0.3重打包（通知 evt-ab8d681c 与 Muse 请求 evt-48bdc075：examples_zh 超限/中英数量不一致）；修复轮按规则不重读官方文档。
