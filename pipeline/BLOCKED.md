@@ -2,6 +2,7 @@
 
 | 时间 | skill-id | 拦停环节 | 原因代码 | 说明 | 负责人要做的事 | 恢复到 |
 |---|---|---|---|---|---|---|
+| 2026-11-07T21:34:35+08:00 | mps-cross-border-white-background | spec_in_progress | NEW_UPSTREAM_REQUIRED | 现有共享网关仅证实参考图生成，未提供已核实的商品前景蒙版契约。仓库白底合成器拒绝普通不透明照片，快车道无法验收只换背景并保留商品、包装和文字的核心要求。 证据 pipeline/products/mps-cross-border-white-background/01-codex-capability-blocked-evt-7330d10606ec19cf3a14178e1ff4a68c8649bd631ac6d546ac945c518d422746.md | 提供已登记且有合成样例验证的商品前景蒙版能力，或修订选品单明确只接收已经去背的透明 PNG。 | brief_ready |
 
 ## 已解除记录（开发规格1.0.1）
 
