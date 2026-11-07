@@ -47,3 +47,4 @@
 2026-11-07T22:41:08+08:00 | claude | dev_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：官方技能/专家/平台概述三页网页读取权限无人应答超时；1.0.2 目录层级修复未开始、未改包，resume_to=spec_ready。证据 pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-7f9fa32edbba768e8de972c7f168253ab8caa0df2e3885b1b185a565f65142b3.md；真实上游0、生产变更0。
 
 - 2026-11-07 22:41 CST Claude：认领 1.0.2 修复后按旧规则读官方文档三页，定时任务网页读取权限无人应答超时，被 OFFICIAL_DOCS_UNREADABLE 拦停（dev_in_progress）。22:44 负责人亲口定：官方文档只在首次开发新包时必读，修复轮/升级不重读。Muse 已改 SOP（bb1ce4e：〇节、A.5、错误码表、A1 清单同步），status 复位 spec_ready（时区修正 b13980a），发 msg + relay 请求给 Claude 请其不读文档直接继续 1.0.2。
+2026-11-07T23:38:20+08:00 | claude | spec_ready → dev_in_progress | 认领1.0.2目录层级修复（通知 evt-490aac13 与 Muse 请求 evt-bbd92998）；修复轮按bb1ce4e新规则不重读官方文档。
