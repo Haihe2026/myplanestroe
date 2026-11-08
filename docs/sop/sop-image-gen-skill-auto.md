@@ -146,7 +146,7 @@ pipeline/
 | 上架渠道 | `config.yaml` 的 `channels`。**当前只跑 WorkBuddy 团队版技能包**（`workbuddy-skill`）；WorkBuddy 专家包和 SkillHub 等流水线跑通后由负责人加进配置 | 配置里没有的渠道一律不打包、不上架 |
 | 上架授权 | 上传一律负责人手动；流水线到 `test_passed` 即把最终包交付负责人，不尝试上传（`codex_may_publish` 的自动上架口径不再适用） | 负责人上传后由 Muse 或负责人置 `submitted`，再按间隔查审核状态 |
 | 真机行为验收 | 按「负责人长期豁免」跳过（所有单适用，2026-11-07 定）；A3 改为独立检查（负责人 2026-11-08 定），不跑完整测试 | 不做、不拦停；`03-test-report.md` 记录检查结果，检查合格后置 `test_passed`；负责人上架前自己测试 |
-| 官方文档与本 SOP 冲突 | 以 WorkBuddy 官方文档为准继续，并在 `sop-proposals.md` 追加一条 | 官方文档读不到 → 首次开发新包时拦停（`OFFICIAL_DOCS_UNREADABLE`）；修复轮/升级不拦停 |
+| 官方文档与本 SOP 冲突 | 以 WorkBuddy 官方文档为准继续，并在 `sop-proposals.md` 追加一条 | 内嵌快照缺失/过期 → 首次开发新包时拦停（`OFFICIAL_DOCS_UNREADABLE`），由 Muse 补快照后恢复；线上读取超时不再拦停；修复轮/升级不拦停 |
 | 平台规则、字段长度等官方没写清 | 取最保守的写法继续，记入开发文档「决策记录」 | 影响能否上架又无法保守处理 → 拦停 |
 
 **永远拦停、不得自动处理的事**（来自仓库 `CLAUDE.md` 和固定规则）：
@@ -260,19 +260,20 @@ pipeline/
 
 ## 〇、开工前必读：WorkBuddy 官方开发文档（强制）
 
-**首次开发新包时，流水线里的每个角色开工前必须先读取 WorkBuddy 官方开发文档**（Codex 写开发文档前、Claude Code 开发前、Codex 测试和上架前各读一次）。**修复轮/升级/改动（已有包的修改，如 1.0.1 → 1.0.2）不要求重读官方文档**（负责人 2026-11-07 定）：已有包已按官方文档开发过，改动只涉既定结构/路径，不重读；用已读的文档记录与本 SOP 继续。
+**首次开发新包时，流水线里的每个角色开工前必须先读取 WorkBuddy 官方开发文档**（Codex 写开发文档前、Claude Code 开发前、Codex 测试和上架前各读一次）。**读仓库内嵌快照 `docs/sop/workbuddy-official-docs.md`（负责人 2026-11-08 定），不再每次去线上三页取**：线上读取权限常超时拦停（`OFFICIAL_DOCS_UNREADABLE`），仓库内文件可直接读。快照由 Muse 每日学习维护（线上文档有变即更新快照并记入学习笔记）。**修复轮/升级/改动（已有包的修改，如 1.0.1 → 1.0.2）不要求重读官方文档**（负责人 2026-11-07 定）：已有包已按官方文档开发过，改动只涉既定结构/路径，不重读；用已读的文档记录与本 SOP 继续。
 
-1. **必读入口**：https://open.workbuddy.cn/docs/expert （专家），并按要做的产品类型读对应页面：
+1. **必读入口**：仓库内嵌快照 `docs/sop/workbuddy-official-docs.md`（快照日期 2026-11-08，含技能、专家、开放平台概述三页全文）。按要做的产品类型读对应章节；线上原文仅在快照明确过期或与快照冲突时才去核对：
    - 技能：https://open.workbuddy.cn/docs/skill
+   - 专家：https://open.workbuddy.cn/docs/expert
    - 专家团：https://open.workbuddy.cn/docs/expert-team
    - 连接器：https://open.workbuddy.cn/docs/connector
-   - 开放平台操作指引：https://open.workbuddy.cn/docs/what-is-open-platform
-2. **首次开发新包时，每次开工都重新读线上最新版**，不凭记忆、不只读本 SOP 里的摘要。读完在自己的产出文件开头写一行：「已读 WorkBuddy 官方文档（日期、读了哪几页）」。修复轮/升级不重读，不写这一行。
+   - 开放平台概述：https://open.workbuddy.cn/docs/what-is-open-platform
+2. **首次开发新包时，每次开工都重新读仓库内嵌快照**，不凭记忆、不只读本 SOP 里的摘要。读完在自己的产出文件开头写一行：「已读 WorkBuddy 官方文档快照（快照日期、读了哪几章）」。修复轮/升级不重读，不写这一行。快照由 Muse 每日学习维护；如快照日期超过 7 天或学习笔记提示线上文档有变，先由 Muse 更新快照再开工。
 3. **官方文档优先**：本 SOP 与官方文档冲突时，以官方文档为准继续执行，并在 `pipeline/sop-proposals.md` 追加一条，写明冲突点和官方原文位置。
-4. 读不到文档（网络受限、页面改版）时：**首次开发新包**按 A.3 拦停（`OFFICIAL_DOCS_UNREADABLE`），不得按记忆继续；**修复轮/升级**不拦停，直接按已读记录与本 SOP 继续（文档读不到不影响既定结构的改动）。
+4. 内嵌快照缺失或明确过期时：**首次开发新包**按 A.3 拦停（`OFFICIAL_DOCS_UNREADABLE`），不得按记忆继续（由 Muse 补快照后恢复）；**修复轮/升级**不拦停，直接按已读记录与本 SOP 继续。快照在仓库内，正常情况不触发此拦停——线上读取超时不再是拦停原因。
 5. 官方文档没写清的问题（例如字段长度、审核标准），取最保守的写法继续，记进开发文档「决策记录」，并在 `sop-proposals.md` 追加一条「需向官方确认：……」，由负责人去问。
 
-**官方要点摘要（2026-11-04 阅读；只作索引，以线上文档为准）**
+**官方要点摘要（全文见仓库内嵌快照 `docs/sop/workbuddy-official-docs.md`，快照日期 2026-11-08；以下只作索引，以快照/线上文档为准）**
 
 - **技能包**：目录为 `SKILL.md`（必须）+ `references/`、`scripts/`、`templates/`（可选）；正文里用 `@references/xxx.md` 引用参考资料。frontmatter 必填：`name`、`display_name`、`display_name_en`、`description`（用途和触发词）、`description_zh`（详情页中文简介）、`description_en`、`version`、`author`（合作方名称）；可选 `allowed-tools`（工具白名单）、`examples_zh` / `examples_en`（详情页「试试这样用」）。
 - **技能包 examples 上限与语义对齐（2026-11-08 证件照换底 1.0.2、1.0.3 教训）**：`examples_zh` 最多 3 条，`examples_en` 最多 3 条，且两者数量必须一致（中英按主题一一对应）。1.0.2 实测：`examples_zh` 4 条、`examples_en` 3 条，上传时报「examples_zh 最多 3 个示例」「数量必须一致」拒收。**语义对齐**：每条 `examples_zh[i]` 与 `examples_en[i]` 必须表达同一场景（同一需求、同一尺寸/像素要求），不只数量一致——1.0.3 实测 A3-E01：数量一致（各 3 条）但第二条中英文指向不同场景（中文蓝底二寸考试报名照、英文 295×413 像素），检查打回。契约测试必须加两项：① 解析 SKILL.md frontmatter，断言 `examples_zh` ≤ 3、`examples_en` ≤ 3、且两者数量相等；② 逐条核对每条中英文指向同一场景（对照 `references/scenes.md` 的场景定义），对不上即返工，不得带病交付。打包前按 WorkBuddy 团队版技能包的平台解析规则逐项核对 frontmatter，不要只依赖自测跑通就交。
@@ -834,7 +835,7 @@ Codex（数据）按 A.8 在 D1、D7、D14、D30 生成数据快照，负责人�
 | 首次开口上报挂在走不到的分支上，漏斗第一步一直是 0 | 第一轮由脚本主动发，提前返回的分支返回前都要已发出；上线第一天确认数据进来 |
 | 标识写不进去时临时造一个，同一台机器被算成很多新设备 | 写不进就跳过这次上报，不临时造标识 |
 | 只看单日报表，以为转化很低 | 跨日充值会被单日报表漏掉，看 7 天以上窗口 |
-| 凭记忆或只按 SOP 摘要开发 WorkBuddy 包，字段或目录与官方要求不符，提交后解析失败 | 每次开工先读 WorkBuddy 官方开发文档线上最新版，冲突时以官方为准 |
+| 凭记忆或只按 SOP 摘要开发 WorkBuddy 包，字段或目录与官方要求不符，提交后解析失败 | 每次开工先读仓库内嵌官方文档快照（`docs/sop/workbuddy-official-docs.md`），冲突时以官方为准 |
 | 用户不 @ 技能时，宿主自认为能答就直接回答，技能没被调用 | description 写用户原话加调用倾向句；用户用过一次后，经同意做技能收藏（记忆锚定） |
 | 静默把调用偏好写进宿主记忆 | 必须用户点「收藏」才写，否则审核判为越权 |
 | 把和 AI 的开发对话、修改原因写进了上架简介和 description | 原则性错误。面向用户的文字只写用户需要知道的，上架前逐句检查 |
@@ -1148,7 +1149,7 @@ schedule:
 | `MARGIN_TOO_LOW` | 毛利率低于阈值 | 调价、换模型或放弃 |
 | `DEPLOY_REQUIRED` | 后端补丁已测好，等部署 | 部署后恢复为 `spec_ready` |
 | `HOST_ACCEPTANCE_UNAVAILABLE` | 真机行为验收做不了 | 按「负责人长期豁免」不拦停（所有单适用）：`03-test-report.md` 注明已跳过后置 `test_passed` |
-| `OFFICIAL_DOCS_UNREADABLE` | WorkBuddy 官方文档读不到（仅首次开发新包时适用；修复轮/升级不因读不到文档而拦停） | 确认文档可访问后恢复 |
+| `OFFICIAL_DOCS_UNREADABLE` | 仓库内嵌官方文档快照缺失或明确过期（仅首次开发新包时适用；修复轮/升级不因读不到文档而拦停；线上读取超时不再触发） | Muse 补快照后恢复 |
 | `TOO_MANY_ROUNDS` | 多轮未通过 | 看测试报告决定修改开发文档或放弃 |
 | `PLATFORM_RULE_UNCLEAR` | 平台规则不明且影响上架 | 向官方确认后恢复 |
 | `ROLLED_BACK` | 上线后触发自动回滚 | 看 D1 快照决定 |
