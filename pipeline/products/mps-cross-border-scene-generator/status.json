@@ -5,14 +5,21 @@
   "stage": "brief_ready",
   "owner": null,
   "claimed_at": null,
-  "updated_at": "2026-11-08T09:35:00+08:00",
+  "updated_at": "2026-11-08T09:39:00+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
     "test": 0
   },
   "lane": "fast",
-  "blocked": null,
+  "blocked": {
+    "at_stage": "brief_ready",
+    "by": "muse",
+    "reason_code": "ABANDONED",
+    "detail": "负责人 2026-11-08 定：不做生图，改做亚马逊 Listing 一键生成视频（Grok 视频与 2K 图片成本同为 0.0065 美金，统一付费页 0.20 元/张，共用付费页面）。本单被视频单替代。",
+    "needs": "无需处理，已放弃。",
+    "resume_to": null
+  },
   "versions": {
     "package": null,
     "listed": null
