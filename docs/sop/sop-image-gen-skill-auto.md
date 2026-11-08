@@ -177,9 +177,9 @@ pipeline/
 检查内容（静态验证，不需上游调用、浏览器验证或特殊权限）：
 - ZIP 完整性：SHA256 与记录一致，解压无损坏。
 - 包目录结构：最多两级，无三级及以上嵌套；示例图在 `assets/` 下，`demos.json` 只写裸文件名。
-- Frontmatter：含 name、description、version；`examples_zh` ≤ 3、`examples_en` ≤ 3、两者数量一致；按 WorkBuddy 团队版技能包平台解析规则逐项核对。
+- Frontmatter：含 name、description、version；`examples_zh` ≤ 3、`examples_en` ≤ 3、两者数量一致；每条 `examples_zh[i]` 与 `examples_en[i]` 必须表达同一场景（同一需求、同一尺寸/像素要求），逐条对照核对，不只数数量（2026-11-08 证件照换底 1.0.3 教训 A3-E01：数量一致但第二条中英文指向不同场景）；按 WorkBuddy 团队版技能包平台解析规则逐项核对。
 - 契约：SKILL.md 与开发文档一致；欢迎句格式正确；对客文案无禁用词、无上游信息泄露。
-- 示例图：数量与规格一致，文件存在，路径 Markdown 安全（解析后仍指向存在的文件）。
+- 示例图：数量与规格一致，文件存在，路径 Markdown 安全（解析后仍指向存在的文件）；路径不得含空格（或路径函数必须对空格做 URL 编码），核对须含一条带空格的合成路径（2026-11-08 证件照换底 1.0.4 教训 A3-E02：路径含空格时 Markdown 链接无法解析）。
 - 规格符合性：实现的功能与开发文档一致，不多做、不漏做。
 
 检查合格 → stage 置 `test_passed`，`03-test-report.md` 记录检查结果（写明“独立检查通过”，列出逐项检查结果），即为最终版，交付负责人。检查不合格 → stage 置 `test_failed`，`03-test-report.md` 逐条写缺陷，退回 Claude 修复。
@@ -275,7 +275,7 @@ pipeline/
 **官方要点摘要（2026-11-04 阅读；只作索引，以线上文档为准）**
 
 - **技能包**：目录为 `SKILL.md`（必须）+ `references/`、`scripts/`、`templates/`（可选）；正文里用 `@references/xxx.md` 引用参考资料。frontmatter 必填：`name`、`display_name`、`display_name_en`、`description`（用途和触发词）、`description_zh`（详情页中文简介）、`description_en`、`version`、`author`（合作方名称）；可选 `allowed-tools`（工具白名单）、`examples_zh` / `examples_en`（详情页「试试这样用」）。
-- **技能包 examples 上限（2026-11-08 证件照换底 1.0.2 教训）**：`examples_zh` 最多 3 条，`examples_en` 最多 3 条，且两者数量必须一致（中英按主题一一对应）。1.0.2 实测：`examples_zh` 4 条、`examples_en` 3 条，上传时报「examples_zh 最多 3 个示例」「数量必须一致」拒收。契约测试必须加一项：解析 SKILL.md frontmatter，断言 `examples_zh` ≤ 3、`examples_en` ≤ 3、且两者数量相等；测出即返工，不得带病交付。打包前按 WorkBuddy 团队版技能包的平台解析规则逐项核对 frontmatter，不要只依赖自测跑通就交。
+- **技能包 examples 上限与语义对齐（2026-11-08 证件照换底 1.0.2、1.0.3 教训）**：`examples_zh` 最多 3 条，`examples_en` 最多 3 条，且两者数量必须一致（中英按主题一一对应）。1.0.2 实测：`examples_zh` 4 条、`examples_en` 3 条，上传时报「examples_zh 最多 3 个示例」「数量必须一致」拒收。**语义对齐**：每条 `examples_zh[i]` 与 `examples_en[i]` 必须表达同一场景（同一需求、同一尺寸/像素要求），不只数量一致——1.0.3 实测 A3-E01：数量一致（各 3 条）但第二条中英文指向不同场景（中文蓝底二寸考试报名照、英文 295×413 像素），检查打回。契约测试必须加两项：① 解析 SKILL.md frontmatter，断言 `examples_zh` ≤ 3、`examples_en` ≤ 3、且两者数量相等；② 逐条核对每条中英文指向同一场景（对照 `references/scenes.md` 的场景定义），对不上即返工，不得带病交付。打包前按 WorkBuddy 团队版技能包的平台解析规则逐项核对 frontmatter，不要只依赖自测跑通就交。
 - **专家包**：目录为 `.codebuddy-plugin/plugin.json`、`avatars/`、`agents/<name>.md`、`README.md`。`plugin.json` 必填 `name`、`expertType`（agent / team）、`version`（语义化版本）、英文 `description`、`author`（name、email）、`agents`、`agentName`；展示字段全部必填：`displayName`、`profession`、`displayDescription`（中英，**中文 40–50 字**）、`avatar`、`categoryId`（15 个行业分类之一）、`plugin`（与 name 一致）、`defaultInitPrompt`（**必须和 quickPrompts 第一条一致**）、`tags`（**正好 3 个**）、`quickPrompts`（**正好 3 个**）。专家团另需 `teamInfo`（leadAgent、memberAgents）。
 - **Agent 定义文件**（`agents/*.md`）：frontmatter 必填 `name`、`description`、`displayName`、`profession`，可选 `maxTurns`（默认 50）、`skills`；正文就是系统提示词。**开发者不能自己加工具**，工具由系统分配。
 - **依赖**：MCP 和连接器在 `plugin.json` 的 `dependencies` 里声明（或根目录 `.mcp.json`），认证方式为 oauth / token / none；token 用表单和 `${VAR}` 占位，**禁止在包里硬编码真实 token 或 Key**。
@@ -488,7 +488,7 @@ mps-<技能>/
 
 - 包内放一组**离线示例图**（`assets/demos.json`，8–12 张，覆盖本技能搜索量和使用量最高的场景，个数取偶数；示例资源总大小要控制，以平台上传包大小限制为准，压缩后再放进包里）。示例命令只把包内资源释放到本地，**不联网、不读凭证、不产生费用**；用户说「不要生成新图片」时也可以展示。
 - 交付格式：先说一句「都是效果示例图，不是你的真实结果」，再用**两列的 Markdown 表格**（行数 = 示例数 ÷ 2）给出可点击链接。每格写成 `**[标题](命令实际返回的绝对路径)**<br>一句短说明`。链接一律取命令本次实际返回的路径，不手工拼路径，不用 `![](...)` 内嵌图片或 widget；SKILL.md 里的路径占位符只是模板，绝不能原样发给用户。
-- **示例链接路径必须 Markdown 安全（2026-11-07 证件照换底 1.0.0 教训）**：命令返回的绝对路径会以 Markdown 链接 `[标题](路径)` 发给用户，Markdown 会把反斜杠+标点当转义吃掉——状态目录若以点开头（`.mps-...`），路径里的 `\.` 会被解析成 `.`，丢一个反斜杠，点开就报文件找不到（1.0.0 实测：`C:\Users\Administrator\.mps-id-photo-background\...` 被吃成 `C:\Users\Administrator.mps-id-photo-background\...`）。规则：① 状态目录与资源目录名不得以点开头；② 输出给用户的路径一律用正斜杠 `/`，不用反斜杠；③ 自测与独立测试必须加一项回归测试：把 demo 链接按 Markdown 解析一遍，确认解析后的路径仍指向存在的文件。
+- **示例链接路径必须 Markdown 安全（2026-11-07 证件照换底 1.0.0、2026-11-08 1.0.4 教训）**：命令返回的绝对路径会以 Markdown 链接 `[标题](路径)` 发给用户，Markdown 会把反斜杠+标点当转义吃掉——状态目录若以点开头（`.mps-...`），路径里的 `\.` 会被解析成 `.`，丢一个反斜杠，点开就报文件找不到（1.0.0 实测：`C:\Users\Administrator\.mps-id-photo-background\...` 被吃成 `C:\Users\Administrator.mps-id-photo-background\...`）。规则：① 状态目录与资源目录名不得以点开头；② 输出给用户的路径一律用正斜杠 `/`，不用反斜杠；③ 路径不得含空格，如路径函数生成含空格的路径，必须对空格做 URL 编码（%20）或去掉空格（2026-11-08 1.0.4 教训 A3-E02：路径含空格时 Markdown 链接无法解析，ConvertFrom-Markdown 输出字面文本、无 `<a>` 元素）；④ 自测与独立测试必须加一项回归测试：把 demo 链接按 Markdown 解析一遍，确认解析后的路径仍指向存在的文件，回归测试必须含一条带空格的合成路径。
 - 命令只返回了部分示例时，按实际返回的项缩减表格，不补造图片或路径。命令失败时只重跑同一条命令一次，仍失败就如实说「这次暂时没能展示示例图」，不用真实生成来补图，也不因此引导开通或收费。
 - **同一对话只展示一次**，以当前对话记录为准；仅加载了 SKILL.md、命令执行成功或本地已有缓存，都不算已经向用户展示过。不检查凭证或安装状态来判断要不要展示。
 - 用户说「只要文字」「不要看图」时，只做简短文字说明，不运行示例命令。用户只想看某一个效果时，按对应的示例 key 只展示这一项。用户提到的场景没有对应示例时，如实说明，不拿别的图冒充。
