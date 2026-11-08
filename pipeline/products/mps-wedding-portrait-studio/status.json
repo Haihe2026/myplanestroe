@@ -5,7 +5,7 @@
   "stage": "blocked",
   "owner": "codex",
   "claimed_at": "2026-11-08T12:19:31+08:00",
-  "updated_at": "2026-11-08T12:29:53+08:00",
+  "updated_at": "2026-11-08T13:10:00+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
@@ -14,10 +14,10 @@
   "lane": "fast",
   "blocked": {
     "at_stage": "spec_in_progress",
-    "by": "codex",
-    "reason_code": "HARD_STOP",
-    "detail": "现行 SOP 固定欢迎句含 WorkBuddy 官方认证，产品资料未见该技能可核验的认证凭据。规格 MD/JSON 已编制，A1 未放行。",
-    "needs": "可核验的本技能 WorkBuddy 官方认证凭据，或负责人为未获证实的新技能确定不含认证字样的欢迎语。",
+    "by": "muse",
+    "reason_code": "SEQUENCED_HOLD",
+    "detail": "负责人定串行开发：前一个包（证件照换底助手）未顺利上传，不启动下一单。认证问题已解决：负责人 2026-11-08 明确欢迎句按 SOP 直接写（含官方认证），缺此句式会被 WorkBuddy 拒审，Codex/Claude 不得就认证凭据拦停。",
+    "needs": "等证件照换底助手上传成功（stage 到 submitted 或 listed），再恢复 brief_ready 继续。",
     "resume_to": "brief_ready"
   },
   "versions": {
