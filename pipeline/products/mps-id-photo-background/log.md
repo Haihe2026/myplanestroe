@@ -65,3 +65,4 @@
 2026-11-08T13:40:31+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.5（仅workbuddy-skill）：示例路径空格/括号/尖括号做URL编码（修A3-E02），新增含空格合成路径的Markdown解析回归（契约+端到端，对1.0.4均能测出）；ZIP sha256 c51cd69b…，契约26+端到端53项、干净解压至含空格目录重跑通过；1.0.4及更早ZIP保留。真实上游0、生产变更0。
 2026-11-08T13:43:57+08:00 | codex | package_ready → test_in_progress | 认领 1.0.5 A3 独立检查，沿用接收方已有通知认领 evt-52e3c0758b5da2a064f3a41509080e89d5eefab98f482b83ca9ebf47da4a83f0。
 2026-11-08T13:47:39+08:00 | codex | test_in_progress → blocked | 1.0.5 A3-E02 回归通过。A3-E03 含 # 的示例目录断链，rounds.test=4，超过 max_rounds=3。见 03-test-report.md。真机及上传未执行。
+2026-11-08T17:27:00+08:00 | muse | blocked -> dev_in_progress | 负责人批准继续（超 max_rounds 再走一轮）。解 TOO_MANY_ROUNDS，Claude 修 A3-E03（目录名去 #、路径函数编码 %23），重打 1.0.6。见 msg-from-muse-20261108-fix-a3-e03.md。
