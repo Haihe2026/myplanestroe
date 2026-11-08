@@ -9,3 +9,4 @@
 2026-11-08T18:38:57+08:00 | claude | spec_ready → dev_in_progress | 认领通知 evt-64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad，开始 A1 复检与阶段 5–6 开发。
 2026-11-08T18:41:43+08:00 | claude | dev_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：官方文档三页读取权限无人应答超时，首次开发按〇章拦停，开发未开始；证据 pipeline/products/mps-wedding-portrait-studio/02-claude-docs-blocked-evt-64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad.md
 2026-11-08T19:28:27+08:00 | claude | blocked → spec_ready → dev_in_progress | 负责人在会话中放行 open.workbuddy.cn，官方三页读取成功（pipeline/products/mps-wedding-portrait-studio/02-claude-docs-read-20261108.md），OFFICIAL_DOCS_UNREADABLE 解除；负责人选择立即恢复开发，Claude 重新认领。
+2026-11-08T22:49:45+08:00 | claude | dev_in_progress（续接） | 19:28 认领的会话中断、未留产物；负责人要求在新会话继续。已读仓库内嵌官方文档快照（2026-11-08，二、技能章）；A1 复检通过（15 项齐全，MD/JSON 一致），已知依赖：10 张示例图由 Codex 生成（规格 demo_generation.actual=0）。开始阶段 5。
