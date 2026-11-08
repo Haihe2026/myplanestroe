@@ -1,0 +1,65 @@
+{
+  "notice": "示例人物均为虚构，用于展示效果方向，不是你的真实结果。",
+  "demos": [
+    {
+      "key": "white-studio",
+      "title": "经典白纱影棚",
+      "note": "白纱影棚，干净柔光",
+      "file": "white-studio.png"
+    },
+    {
+      "key": "xiuhe",
+      "title": "中式秀禾服",
+      "note": "红金秀禾，中式布景",
+      "file": "xiuhe.png"
+    },
+    {
+      "key": "garden",
+      "title": "户外草坪婚礼",
+      "note": "草坪花园，暖阳斜光",
+      "file": "garden.png"
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假婚纱",
+      "note": "海平线与沙滩",
+      "file": "seaside.png"
+    },
+    {
+      "key": "oil-wedding",
+      "title": "复古油画婚纱",
+      "note": "复古暖棕，古典侧光",
+      "file": "oil-wedding.png"
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新婚纱",
+      "note": "淡彩留白，轻盈白纱",
+      "file": "korean.png"
+    },
+    {
+      "key": "hanfu",
+      "title": "汉服古风写真",
+      "note": "典雅汉服，清简庭院",
+      "file": "hanfu.png"
+    },
+    {
+      "key": "oil-portrait",
+      "title": "油画艺术写真",
+      "note": "古典单人肖像",
+      "file": "oil-portrait.png"
+    },
+    {
+      "key": "cyber",
+      "title": "赛博朋克写真",
+      "note": "霓虹轮廓光",
+      "file": "cyber.png"
+    },
+    {
+      "key": "japanese",
+      "title": "日系清新写真",
+      "note": "窗边自然光，胶片色感",
+      "file": "japanese.png"
+    }
+  ]
+}
