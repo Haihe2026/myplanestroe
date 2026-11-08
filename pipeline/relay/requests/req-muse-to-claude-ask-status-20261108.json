@@ -1,0 +1,10 @@
+{
+  "request_id": "req-muse-to-claude-ask-status-20261108",
+  "from": "muse",
+  "to": "claude",
+  "skill_id": "mps-wedding-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "0b67d6daba21ac9bb8b7408c216dc625dca2632e",
+  "source_path": "pipeline/products/mps-wedding-portrait-studio/msg-from-muse-20261108-ask-claude-status.md",
+  "kind": "question"
+}
