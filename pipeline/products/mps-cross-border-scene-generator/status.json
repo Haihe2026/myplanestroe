@@ -1,0 +1,20 @@
+{
+  "skill_id": "mps-cross-border-scene-generator",
+  "sop": "sop-image-gen-skill-auto",
+  "sop_version": "05e35d17d9eab8b7df6443c1a196eedb0ee12d8d",
+  "stage": "brief_ready",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-08T09:35:00+08:00",
+  "rounds": {
+    "spec": 0,
+    "dev": 0,
+    "test": 0
+  },
+  "lane": "fast",
+  "blocked": null,
+  "versions": {
+    "package": null,
+    "listed": null
+  }
+}
