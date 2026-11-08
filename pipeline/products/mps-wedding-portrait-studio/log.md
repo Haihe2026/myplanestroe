@@ -8,3 +8,4 @@
 2026-11-08T18:04:36+08:00 | codex | spec_in_progress → spec_ready | 已重读三页 WorkBuddy 文档，复核 A1 与 MD/JSON 一致性。新增双语同场景和空格、# 的回归要求，合成链接用 Markdown 解析后命中现存文件。示例图计划 10 张，本轮真实生成 0 次。交 Claude 开发与 A2。
 2026-11-08T18:38:57+08:00 | claude | spec_ready → dev_in_progress | 认领通知 evt-64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad，开始 A1 复检与阶段 5–6 开发。
 2026-11-08T18:41:43+08:00 | claude | dev_in_progress → blocked | OFFICIAL_DOCS_UNREADABLE：官方文档三页读取权限无人应答超时，首次开发按〇章拦停，开发未开始；证据 pipeline/products/mps-wedding-portrait-studio/02-claude-docs-blocked-evt-64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad.md
+2026-11-08T19:28:27+08:00 | claude | blocked → spec_ready → dev_in_progress | 负责人在会话中放行 open.workbuddy.cn，官方三页读取成功（pipeline/products/mps-wedding-portrait-studio/02-claude-docs-read-20261108.md），OFFICIAL_DOCS_UNREADABLE 解除；负责人选择立即恢复开发，Claude 重新认领。

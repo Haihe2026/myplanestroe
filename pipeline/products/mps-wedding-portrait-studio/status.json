@@ -2,24 +2,17 @@
   "skill_id": "mps-wedding-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "a604523f4bd0e524dda506146d2411e76be43e9c",
-  "stage": "blocked",
+  "stage": "dev_in_progress",
   "owner": "claude",
-  "claimed_at": "2026-11-08T18:38:57+08:00",
-  "updated_at": "2026-11-08T18:41:43+08:00",
+  "claimed_at": "2026-11-08T19:28:27+08:00",
+  "updated_at": "2026-11-08T19:28:27+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
     "test": 0
   },
   "lane": "fast",
-  "blocked": {
-    "at_stage": "dev_in_progress",
-    "by": "claude",
-    "reason_code": "OFFICIAL_DOCS_UNREADABLE",
-    "detail": "首次开发新包，WorkBuddy 官方文档三页读取权限请求无人应答超时，开发未开始",
-    "needs": "在 Claude 定时任务中预先放行 open.workbuddy.cn 网页读取",
-    "resume_to": "spec_ready"
-  },
+  "blocked": null,
   "versions": {
     "package": null,
     "listed": null
