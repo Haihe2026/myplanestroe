@@ -59,3 +59,4 @@
 2026-11-08T12:23:23+08:00 | codex | test_in_progress -> test_failed | 1.0.3 A3-E01 双语第二条对应不同场景，退回 Claude。见 03-test-report.md。
 2026-11-08T12:38:37+08:00 | claude | test_failed → dev_in_progress | 认领1.0.4修复轮（通知 evt-f7090d9b，A3-E01：第二条中英文示例场景不一致）；修复轮按规则不重读官方文档。
 2026-11-08T12:40:13+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.4（仅workbuddy-skill）：examples_en 三条改为与中文逐条同场景（修A3-E01），新增中英语义对齐契约/ZIP检查（对1.0.3能测出）；ZIP sha256 0d1c0fbd…，契约25+端到端53项、干净解压重跑通过；1.0.3及更早ZIP保留。真实上游0、生产变更0。
+2026-11-08T12:43:37+08:00 | codex | package_ready → test_in_progress | 认领 1.0.4 A3 独立检查，事件 evt-68156f3a20b8b8ef8bfbe36b6a5d001be91232a1eca16535e2449b18a85306cb。
