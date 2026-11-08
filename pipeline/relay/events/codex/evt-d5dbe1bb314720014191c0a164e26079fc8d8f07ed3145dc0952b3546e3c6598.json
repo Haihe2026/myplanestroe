@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-why-slow-20261108",
+  "skill_id": "mps-id-photo-background",
+  "source_path": "pipeline/products/mps-id-photo-background/status.json",
+  "source_ref": "99467992a80e6accd7066b846f61b1f5ce39509e",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-d5dbe1bb314720014191c0a164e26079fc8d8f07ed3145dc0952b3546e3c6598",
+  "request_kind": "question"
+}
