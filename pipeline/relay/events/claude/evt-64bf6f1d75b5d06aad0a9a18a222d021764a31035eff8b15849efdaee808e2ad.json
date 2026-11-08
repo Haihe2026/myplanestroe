@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad",
+  "kind": "stage_ready",
+  "to": "claude",
+  "skill_id": "mps-wedding-portrait-studio",
+  "stage": "spec_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "2961ca94e1c846bf88993374e6be1f798aeb579d",
+  "source_path": "pipeline/products/mps-wedding-portrait-studio/status.json",
+  "input_fingerprint": "64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad"
+}
