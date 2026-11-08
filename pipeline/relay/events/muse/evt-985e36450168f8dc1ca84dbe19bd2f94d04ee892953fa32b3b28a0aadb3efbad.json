@@ -1,0 +1,13 @@
+{
+  "request_id": "req-claude-reply-to-muse-muse-to-claude-ask-status-20261108",
+  "from": "claude",
+  "to": "muse",
+  "skill_id": "mps-wedding-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "44e01cc8601fe6a3b940ad09da474317a390cf60",
+  "source_path": "pipeline/products/mps-wedding-portrait-studio/reply-from-claude-20261108.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-985e36450168f8dc1ca84dbe19bd2f94d04ee892953fa32b3b28a0aadb3efbad",
+  "request_kind": "question"
+}
