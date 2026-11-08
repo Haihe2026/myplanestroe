@@ -5,7 +5,7 @@
   "stage": "blocked",
   "owner": null,
   "claimed_at": null,
-  "updated_at": "2026-11-07T21:46:17+08:00",
+  "updated_at": "2026-11-08T09:17:38+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
@@ -14,11 +14,11 @@
   "lane": "deploy",
   "blocked": {
     "at_stage": "spec_in_progress",
-    "by": "codex",
-    "reason_code": "NEW_UPSTREAM_REQUIRED",
-    "detail": "部署车道已获准，但现有资源登记和实际适配路径未提供可核验的商品前景蒙版契约与成本，A1 未通过。",
-    "needs": "登记获准的商品蒙版模型或供应商，提供版本化输入输出契约、成本口径及可离线复现的合成样例。",
-    "resume_to": "brief_ready"
+    "by": "muse",
+    "reason_code": "ABANDONED",
+    "detail": "负责人 2026-11-08 决定放弃本单：选品太窄，直接换掉，按新流程（SOP B.0）重选新技能。",
+    "needs": "无需处理，已放弃。",
+    "resume_to": null
   },
   "versions": {
     "package": null,
