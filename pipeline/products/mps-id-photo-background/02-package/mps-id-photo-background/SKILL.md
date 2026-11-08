@@ -10,10 +10,10 @@ examples_zh:
   - "考试报名要蓝底二寸，照片我发你"
   - "简历上的照片底色太花了，换成白的干净点"
 examples_en:
-  - "Change this photo to a white background for my application"
-  - "I need a blue background ID photo at 295x413 pixels"
-  - "Make my resume photo background plain white"
-version: 1.0.3
+  - "Make this a white background one-inch photo, I need it for an application tomorrow"
+  - "I need a blue background two-inch photo for my exam application, I'll send the photo"
+  - "My resume photo background is too busy, change it to plain white"
+version: 1.0.4
 author: "MyPlaneStore"
 ---
 

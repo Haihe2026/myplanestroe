@@ -4,5 +4,5 @@
 |---|---|---|---|---|---|---|
 | mps-wedding-portrait-studio | 婚纱写真照相馆 | blocked | codex | 0/0/0 | 规格已编制，欢迎语认证依据待核实 | 2026-11-08T12:29:53+08:00 |
 | mps-cross-border-scene-generator | 跨境产品场景图生成助手 | blocked（已放弃） | — | 0/0/0 | 负责人2026-11-08定不做生图、改做Listing视频 | 2026-11-08T09:39:00+08:00 |
-| mps-id-photo-background | 证件照换底助手 | test_failed | — | 1/1/2 | 1.0.3 双语示例场景未对齐，待 Claude 修复 | 2026-11-08T12:23:23+08:00 |
+| mps-id-photo-background | 证件照换底助手 | package_ready | — | 1/1/2 | 1.0.4 中英示例已对齐，待 Codex A3 | 2026-11-08T12:40:13+08:00 |
 | mps-cross-border-white-background | 跨境产品图换白底助手 | blocked（已放弃） | — | 0/0/0 | 负责人2026-11-08定放弃：选品太窄，直接换掉，按B.0重选 | 2026-11-08T09:17:38+08:00 |

@@ -66,6 +66,34 @@ def parse_frontmatter(text):
     return out
 
 
+# 中英示例语义对齐（1.0.3 A3-E01 教训）：按 references/scenes.md 的路由维度提取特征，逐条比较。
+_EX_FEATURES = {
+    'color': [('白', 'white'), ('蓝', 'blue'), ('红', 'red')],
+    'size': [('一寸', r'\b(one|1)[- ]inch\b'), ('二寸', r'\b(two|2)[- ]inch\b')],
+    'pixels': [(r'\d+\s*[x×*]\s*\d+', r'\d+\s*[x×*]\s*\d+')],
+    'resume': [('简历', r'\bresume\b')],
+    'exam': [('考试', r'\bexam'), ],
+    'application': [('报名', r'\bapplication\b')],
+}
+
+
+def example_signature(text, lang):
+    i = 0 if lang == 'zh' else 1
+    t = text if lang == 'zh' else text.lower()
+    sig = {}
+    for dim, pairs in _EX_FEATURES.items():
+        hits = tuple(k for k, pair in enumerate(pairs) if re.search(pair[i], t))
+        sig[dim] = hits
+    return sig
+
+
+def example_misaligned(zh, en):
+    """返回中英数量不同或语义特征不一致的条目下标列表。"""
+    if len(zh) != len(en):
+        return ['count']
+    return [k for k, (a, b) in enumerate(zip(zh, en)) if example_signature(a, 'zh') != example_signature(b, 'en')]
+
+
 def front(key):
     m = re.search(r'^' + key + r':\s*(.*)$', FRONT, re.M)
     return m.group(1).strip().strip('"') if m else None
@@ -133,6 +161,17 @@ class Contract(unittest.TestCase):
         self.assertTrue(all(x.strip() for x in zh + en))
         self.assertEqual(len(set(zh)), len(zh))
         self.assertEqual(len(set(en)), len(en))
+
+    def test_examples_zh_en_same_scene(self):
+        # 第 k 条中文与第 k 条英文必须是同一场景（底色、寸数、像素、简历、考试、报名一一对应）。
+        fm = parse_frontmatter(SKILL)
+        self.assertEqual(example_misaligned(fm['examples_zh'], fm['examples_en']), [])
+
+    def test_examples_alignment_detects_103_regression(self):
+        zh = ['帮我把这张照片换成白底一寸的，明天报名要用', '考试报名要蓝底二寸，照片我发你', '简历上的照片底色太花了，换成白的干净点']
+        en_103 = ['Change this photo to a white background for my application',
+                  'I need a blue background ID photo at 295x413 pixels', 'Make my resume photo background plain white']
+        self.assertIn(1, example_misaligned(zh, en_103))
 
     def test_description_seo(self):
         d = front('description')

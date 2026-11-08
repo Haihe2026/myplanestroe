@@ -746,6 +746,10 @@ class ZipLayout(unittest.TestCase):
             self.assertTrue(len(en) <= 3, (zp, len(en)))
             self.assertEqual(len(zh), len(en), zp)
             self.assertIn('version: %s' % idphoto.SKILL_VERSION, front, zp)
+            sys.path.insert(0, os.path.join(PKG, 'tests'))
+            import test_skill_contract as C
+            strip = lambda xs: [x.strip().strip('"') for x in xs]
+            self.assertEqual(C.example_misaligned(strip(zh), strip(en)), [], zp)
 
 
 class LocalImage(unittest.TestCase):

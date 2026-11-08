@@ -1,3 +1,67 @@
+# 自测报告：mps-id-photo-background 1.0.4（修复轮：中英示例场景未对齐）
+
+- 角色：Claude Code；时间：2026-11-08T12:40:13+08:00（北京时间，定时运行）
+- 官方文档：修复轮，未重读（SOP 〇节）。
+- 依据：03-test-report.md A3-E01（Codex，2026-11-08T12:23:23+08:00，通知 evt-f7090d9b，固定提交 c28d96b）。规格未变，A1 沿用 1.0.2 复检结论，不重做。
+- 包类型：只打 WorkBuddy 团队版技能包（`workbuddy-skill`，config `channels`）。
+- 包文件（`02-package/dist/`）：
+  - `mps-id-photo-background-1.0.4.zip`：888820 字节，SHA256 `0d1c0fbd172a521b1345404f0db76ba97ab6c0d734f43479ec8114f931be6f51`，24 个文件，根目录 `mps-id-photo-background/`，最深 `根/二级目录/文件`，CRC 通过。
+  - 1.0.3（`f2903f5a…`）、1.0.2、1.0.1、1.0.0 ZIP 原样保留。头像未改动。
+
+## 本轮改了什么
+
+1. SKILL.md `examples_en` 三条改为与中文逐条同义（中文未改，仍 3 条，数量一致）：
+   - [0] 白底一寸·明天报名 → "Make this a white background one-inch photo, I need it for an application tomorrow"（原英文缺「一寸」）
+   - [1] 考试报名·蓝底二寸 → "I need a blue background two-inch photo for my exam application, I'll send the photo"（原英文为 295×413 像素，对应 custom-pixels，A3-E01）
+   - [2] 简历换白 → "My resume photo background is too busy, change it to plain white"
+2. `tests/test_skill_contract.py`：新增 `example_signature` / `example_misaligned`，按 references/scenes.md 的路由维度（底色、一寸/二寸、像素、简历、考试、报名）抽取中英特征逐条比较；新增 `test_examples_zh_en_same_scene`（当前包必须对齐）和 `test_examples_alignment_detects_103_regression`（1.0.3 英文示例必须被判为第 2 条不对齐）。
+3. `dev/e2e_check.py` `test_zip_skill_examples_platform_limits`：对 ZIP 内 SKILL.md 同样做中英语义对齐检查。
+4. 版本 1.0.3 → 1.0.4（SKILL.md、`_meta.json`、`idphoto.SKILL_VERSION`、`telemetry.SKILL_VERSION`、真机验收单、`dev/build.py`）。
+5. **未改**：examples 三条数量、渠道、目录层级、Markdown 回归、授权与充值链接、规格、欢迎句、遥测、付费、话术、业务脚本逻辑、后端、生产。
+
+## 打包前 frontmatter 逐项核对（WorkBuddy 团队版技能包）
+
+| 项 | 1.0.4 |
+|---|---|
+| 必填 8 字段 | 全部存在且非空；version=`1.0.4`，author=`MyPlaneStore` |
+| 可选键 | 仅 `examples_zh`、`examples_en` |
+| examples_zh / examples_en | 3 / 3，逐条同一场景（white-one / blue-two / resume-white），对齐检查 0 处不一致 |
+| 版本号一致 | SKILL.md、`_meta.json`、脚本两处、ZIP 文件名一致 |
+| 目录层级 | ZIP 内路径 `/` 数 ≤ 2 |
+
+## 结果
+
+| 项 | 结果 |
+|---|---|
+| 契约测试（源码） | 25/25 通过 |
+| 端到端（模拟后端，源码） | 53/53 通过（2 项 ZIP 检查在打包前跳过，打包后用 --zip 跑） |
+| 干净解压 1.0.4 ZIP 后契约（`python3 -I`） | 25/25 通过 |
+| 干净解压后端到端（`--package <解压目录> --zip dist/…-1.0.4.zip`） | 53/53 通过 |
+| 回归有效性：对 1.0.3 ZIP 内 SKILL.md 跑 `example_misaligned` | 返回 [0, 1]（能测出 A3-E01 的第 2 条，另检出第 1 条缺「一寸」） |
+| 回归有效性：`--zip …-1.0.3.zip` | `test_zip_skill_examples_platform_limits` 失败 |
+| ZIP 密钥类特征扫描 | 无命中 |
+| 真实上游调用 / 真实上报 / 生产变更 | 0 / 0 / 0 |
+
+## 偏离与未验证
+
+- 平台上传解析未验证（负责人手动上传）。语义对齐检查是基于场景路由维度的关键词规则，不是翻译质量评估。
+- 真机验收按负责人长期规则跳过，未做。
+- 授权链接改通用地址仍未做，理由同 1.0.1（见 `reply-from-claude-20261107.md`）。
+
+## 部署与回滚
+
+- 部署：无后端改动；A3 通过后由负责人手动上传 `mps-id-photo-background-1.0.4.zip`。
+- 回滚：dist 内 1.0.3 及更早 ZIP 原样保留；1.0.3 中英示例不对齐、1.0.2/1.0.1 已被平台拒收，均不建议作为上传回滚版本。
+
+## 复跑
+
+```sh
+cd 02-package/mps-id-photo-background && python3 -m unittest discover -s tests        # 契约 25 项
+cd 02-package && python3 dev/e2e_check.py --zip dist/mps-id-photo-background-1.0.4.zip
+```
+
+---
+
 # 自测报告：mps-id-photo-background 1.0.3（修复轮：examples 数量超限）
 
 - 角色：Claude Code；时间：2026-11-08T00:40:27+08:00（北京时间，定时运行）

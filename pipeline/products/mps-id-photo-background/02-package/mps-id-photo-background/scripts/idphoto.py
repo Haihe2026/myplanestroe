@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-id-photo-background'
-SKILL_VERSION = '1.0.3'
+SKILL_VERSION = '1.0.4'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
