@@ -31,3 +31,5 @@
 | 2026-11-08T13:47:39+08:00 | mps-id-photo-background | test_in_progress | TOO_MANY_ROUNDS | 1.0.5 A3-E03：示例目录名含 # 时，链接把其后的路径解析为 URI 片段，无法定位已存在的示例文件。rounds.test=4，超过 max_rounds=3。 证据 pipeline/products/mps-id-photo-background/03-test-report.md | 负责人审阅 A3-E03，协调修复并重新打包，确认可恢复后将修复版置回 package_ready。 | package_ready |
 
 - 2026-11-08T18:04:36+08:00 婚纱写真照相馆的 SEQUENCED_HOLD 已解除。证件照 1.0.6 已 submitted，婚纱写真规格通过 A1 并进入 spec_ready。
+
+| 2026-11-08T18:41:43+08:00 | mps-wedding-portrait-studio | dev_in_progress | OFFICIAL_DOCS_UNREADABLE | Claude 定时运行官方文档三页读取权限无人应答超时，1.0.0 首次开发未开始；证据 pipeline/products/mps-wedding-portrait-studio/02-claude-docs-blocked-evt-64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad.md | 在 Claude 定时任务中预先放行 open.workbuddy.cn 网页读取 | spec_ready |
