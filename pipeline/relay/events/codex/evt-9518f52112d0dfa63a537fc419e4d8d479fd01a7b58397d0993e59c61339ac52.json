@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-9518f52112d0dfa63a537fc419e4d8d479fd01a7b58397d0993e59c61339ac52",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-cross-border-scene-generator",
+  "stage": "brief_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "9c24b1d2cee3b8f7e8bc77c085da1e62f96ae771",
+  "source_path": "pipeline/products/mps-cross-border-scene-generator/status.json",
+  "input_fingerprint": "9518f52112d0dfa63a537fc419e4d8d479fd01a7b58397d0993e59c61339ac52"
+}
