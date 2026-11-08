@@ -2,24 +2,17 @@
   "skill_id": "mps-wedding-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "05e35d17d9eab8b7df6443c1a196eedb0ee12d8d",
-  "stage": "blocked",
+  "stage": "brief_ready",
   "owner": "codex",
   "claimed_at": "2026-11-08T12:19:31+08:00",
-  "updated_at": "2026-11-08T13:10:00+08:00",
+  "updated_at": "2026-11-08T17:58:00+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
     "test": 0
   },
   "lane": "fast",
-  "blocked": {
-    "at_stage": "spec_in_progress",
-    "by": "muse",
-    "reason_code": "SEQUENCED_HOLD",
-    "detail": "负责人定串行开发：前一个包（证件照换底助手）未顺利上传，不启动下一单。认证问题已解决：负责人 2026-11-08 明确欢迎句按 SOP 直接写（含官方认证），缺此句式会被 WorkBuddy 拒审，Codex/Claude 不得就认证凭据拦停。",
-    "needs": "等证件照换底助手上传成功（stage 到 submitted 或 listed），再恢复 brief_ready 继续。",
-    "resume_to": "brief_ready"
-  },
+  "blocked": null,
   "versions": {
     "package": null,
     "listed": null
