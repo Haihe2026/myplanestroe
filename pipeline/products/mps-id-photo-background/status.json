@@ -2,17 +2,24 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "bb1ce4e7a604c56311d368925634971d55e25eb7",
-  "stage": "test_in_progress",
+  "stage": "blocked",
   "owner": "codex",
   "claimed_at": "2026-11-08T13:43:57+08:00",
-  "updated_at": "2026-11-08T13:43:57+08:00",
+  "updated_at": "2026-11-08T13:47:39+08:00",
   "rounds": {
     "spec": 1,
     "dev": 1,
-    "test": 3
+    "test": 4
   },
   "lane": "deploy",
-  "blocked": null,
+  "blocked": {
+    "at_stage": "test_in_progress",
+    "by": "codex",
+    "reason_code": "TOO_MANY_ROUNDS",
+    "detail": "1.0.5 A3-E03：示例目录名含 # 时，链接把其后的路径解析为 URI 片段，无法定位已存在的示例文件。rounds.test=4，超过 max_rounds=3。",
+    "needs": "负责人审阅 A3-E03，协调修复并重新打包，确认可恢复后将修复版置回 package_ready。",
+    "resume_to": "package_ready"
+  },
   "versions": {
     "package": "1.0.5",
     "listed": null

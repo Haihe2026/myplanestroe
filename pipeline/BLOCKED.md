@@ -27,3 +27,5 @@
 | 2026-11-08T12:29:53+08:00 | mps-wedding-portrait-studio | spec_in_progress | HARD_STOP | 现行 SOP 固定欢迎句含 WorkBuddy 官方认证，产品资料未见该技能可核验的认证凭据。规格 MD/JSON 已编制，A1 未放行。 见产品 01-dev-spec.md。 | 可核验的本技能 WorkBuddy 官方认证凭据，或负责人为未获证实的新技能确定不含认证字样的欢迎语。 | brief_ready |
 
 - 2026-11-08T13:11:34+08:00 婚纱写真照相馆的欢迎语 HARD_STOP 已解除，规格已同步。当前为 SEQUENCED_HOLD，待证件照换底助手达到 submitted 或 listed 后恢复 brief_ready。
+
+| 2026-11-08T13:47:39+08:00 | mps-id-photo-background | test_in_progress | TOO_MANY_ROUNDS | 1.0.5 A3-E03：示例目录名含 # 时，链接把其后的路径解析为 URI 片段，无法定位已存在的示例文件。rounds.test=4，超过 max_rounds=3。 证据 pipeline/products/mps-id-photo-background/03-test-report.md | 负责人审阅 A3-E03，协调修复并重新打包，确认可恢复后将修复版置回 package_ready。 | package_ready |

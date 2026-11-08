@@ -1,46 +1,26 @@
-# A3 独立检查 · 证件照换底助手 1.0.4
+# A3 独立检查 · 证件照换底助手 1.0.5
 
-检查时间 2026-11-08T12:46:22+08:00。固定输入为 `8e47d2e59278e47838c2645b06061d0bd65e3479`，产品认领提交为 `bd95f32a4b515051ece059ddc5734704ebc9151e`。通知 `evt-68156f3a20b8b8ef8bfbe36b6a5d001be91232a1eca16535e2449b18a85306cb`。按现行 SOP 从干净解压的团队版 ZIP 做静态检查。
+检查时间 2026-11-08T13:47:39+08:00。通知 `evt-52e3c0758b5da2a064f3a41509080e89d5eefab98f482b83ca9ebf47da4a83f0`。固定输入 `0e49b2fdfc7fe63da8e3af21eb736559b4c64235`。接手前核对的远端 main 为 `e5e9fadfd96ad0bb0e21563f91f0d16240561300`，产品状态 blob 与固定输入一致，版本 1.0.5，`package_ready`，无产品认领人。产品认领提交 `a24b9ac35dc592cfa0d301eea325d49740f9e9c5`。
 
 | 检查项 | 结果 |
 |---|---|
-| ZIP 完整性与目录 | 888820 字节，24 个文件。SHA256 `0d1c0fbd172a521b1345404f0db76ba97ab6c0d734f43479ec8114f931be6f51` 与 A2 记录一致；ZIP Git blob `7d0f7c07cb8a399658c249b33a7271550e053618` 与固定输入一致。CRC、解压、单一包根、目录层级、重复路径、路径穿越和符号链接均已核对。 |
-| Frontmatter | 对照 WorkBuddy 技能页，八个必填字段齐全，版本与元数据和脚本一致。中英各三条且逐条对应白底一寸报名、蓝底二寸考试报名、简历照换白。1.0.3 的 A3-E01 已修复。 |
-| 契约与文案 | 核对首次展示、授权与付费确认、换底与本地裁切、消费记录与工单、8 字段首轮遥测的包内入口。欢迎句与规格一致，对客文案禁用词检查及常见凭证特征扫描无命中。欢迎句核对仅确认与仓库规格一致。 |
-| 示例资源 | 十个场景与规格对应，`demos.json` 仅用裸文件名，十张 PNG 均存在，指定像素示例为 295×413。含空格的目录无法生成有效 Markdown 链接，见 A3-E02。 |
-| 能力边界 | WorkBuddy 真机验收、零消耗浏览器验证和上传均未执行。当前接收端缺少已验证的电脑操作与上传适配器，这些操作为 blocked。A3 按 SOP 只做静态检查。真实付费生图、核款、生产变更均为 0。 |
+| ZIP 完整性与目录 | 889405 字节，24 个文件。SHA256 `c51cd69baaa70fd56ba455c459dd1067ed5713ea38fdac21d38d1bda8fad7707` 与 A2 记录一致，Git blob `6ebd10fb7946e342f0b10350ba73c691c7428230` 与固定输入一致。CRC、干净解压、单一包根、目录层级、重复路径、路径穿越、符号链接检查通过。 |
+| Frontmatter | WorkBuddy 技能页八个必填字段均存在且非空，1.0.5 与元数据和脚本版本一致。中英示例各三条，逐一对应白底一寸报名、蓝底二寸考试报名、简历照换白。 |
+| 契约及规格 | 静态核对首次展示、方案与双重同意、授权和充值、原任务续接、换底和本地另存、消费记录、工单、8 字段遥测及收藏入口。欢迎句与规格一致。对客说明和静态话术的禁用词检查、包内常见凭证特征扫描均无命中。 |
+| 示例资源及链接 | 十个场景与规格对应，`demos.json` 用裸文件名，十张 PNG 存在且各不超过 300 KiB，指定像素示例为 295×413。含空格、括号及百分号的合成目录可解析并定位到文件，A3-E02 已修复。含 `#` 的目录仍断链，见 A3-E03。 |
+| 真机、浏览器及上传 | 本接收端缺少已验证的电脑操作和上传适配器。WorkBuddy 真机行为验收、零消耗浏览器验证和上传均为 blocked，未执行。A3 只做独立检查。平台导入、审核和上架状态未验证。 |
 
-对照 [WorkBuddy 技能](https://open.workbuddy.cn/docs/skill)、[专家](https://open.workbuddy.cn/docs/expert)及[开放平台概述](https://open.workbuddy.cn/docs/what-is-open-platform)。Claude 的契约与模拟端到端结果属于 A2，本轮未重跑完整套件。
+对照 [WorkBuddy 技能](https://open.workbuddy.cn/docs/skill)、[专家](https://open.workbuddy.cn/docs/expert)和[开放平台概述](https://open.workbuddy.cn/docs/what-is-open-platform)。A2 的 26 项契约和 53 项模拟端到端是 Claude 自测记录，本轮未重跑完整套件。真实付费生图、真实遥测、核款和生产变更均为 0。
 
-## A3-E02 · 含空格的路径使示例图链接无法解析
+## A3-E03 · 示例目录名含 `#` 时链接目标被截断
 
-- 复现。由最终 ZIP 解压的 `scripts/idphoto.py` 提取 `md_safe_path()` 单独运行，在含空格的合成状态目录中放入 `white-one.png`。确认该文件存在，将函数输出原样代入 `SKILL.md` 首轮第 4 步的 `**[标题](path)**` 模板。
-- 期望。链接可解析，目标仍指向存在的示例文件。
-- 实际。该函数将反斜杠改为正斜杠，保留目录名中的原始空格。`ConvertFrom-Markdown` 用 `C:/test user/mps-id-photo-background/demos/white-one.png` 对照复现，输出保留链接字面文本，无 `<a>` 元素；去掉空格的对照生成 `<a>`。该路径行为也存在于 1.0.3，现有测试只覆盖无空格路径。[CommonMark 链接规范](https://spec.commonmark.org/0.31.2/#links)
-- 根源与退回意见。包内路径格式化和链接模板组合未处理空格。请 Claude 修正展示路径，并在干净解压的团队版 ZIP 中用包含空格的状态路径验证链接解析及目标存在性。
+1. 在 Windows 干净解压最终 ZIP，从 `scripts/idphoto.py` 提取 `md_safe_path()` 和其字符映射。创建合成目录 `Synthetic#User/demos/`，复制包内 `white-one.png` 并确认存在。
+2. 依 `SKILL.md` 的首轮模板将函数输出原样代入 `**[white-one](path)**`，用 PowerShell 7.6.5 的 `ConvertFrom-Markdown` 解析，提取 `href`。按文件 URI 拆分片段后对路径做百分号解码，再检查是否指向原文件。
+3. 预期为链接路径指向已存在的 `Synthetic#User/demos/white-one.png`。实测 `href` 末段仍是 `Synthetic#User/demos/white-one.png`，URI 片段为 `User/demos/white-one.png`，文件路径截在 `Synthetic`，无法定位原文件。
+4. 同一方法下，`Synthetic User (A) 50%` 转成 `Synthetic%20User%20%28A%29%2050%25` 后可定位文件。独立对照将 `Control#User` 中的 `#` 编成 `%23` 后，片段为空，解码路径指向实际文件。对照只替换测试输入。
 
-A3 独立检查不通过，产品转为 `test_failed`，`rounds.test` 从 2 增至 3。包证据 `8e47d2e59278e47838c2645b06061d0bd65e3479:pipeline/products/mps-id-photo-background/02-package/dist/mps-id-photo-background-1.0.4.zip`。
+## 关口结果
 
----
+A3 独立检查未通过。`rounds.test` 从 3 增至 4，超过 `max_rounds=3`，按 SOP A.3 置 `blocked`（`TOO_MANY_ROUNDS`）。负责人审阅后协调修复并重新打包，确认可恢复时将修复版置回 `package_ready`。真机及上传能力阻断单独记录，产品拦停原因为 A3 缺陷及轮次上限。
 
-# A3 独立检查 · 证件照换底助手 1.0.3
-
-2026-11-08T12:23:23+08:00，由本聊天沿用原接收认领。固定包来源 `1b0b55ad7e165726c97c72de6717e0ca70090772`，产品认领提交 `1db661aa2fb41f6d38cdeb9c83986ea6b660a9e7`。按现行 SOP A3 做独立静态检查。
-
-| 项目 | 结果 |
-|---|---|
-| ZIP | 887886 字节，24 文件，CRC 通过。Git blob `7d38b919f2a67ab48604f5aba041df2d43a472b5`，SHA256 `f2903f5a9bb01cd64ab8cfbed9fef2a95e94d13d1c22db9f0a370f479e131e57`，与固定包及 Claude 自测一致。 |
-| 目录 | 单一包根，最深两级目录，无重复路径、穿越或符号链接。 |
-| 元数据 | 八个必填字段齐全，YAML 无重复键，版本、名称和 WorkBuddy 团队版渠道一致。中英各三条，无空值、重复项。1.0.2 反例仍可检出 4/3 超限。场景对齐失败，见 A3-E01。 |
-| 资源和契约 | 十张 PNG 与 demos.json 裸文件名匹配，素材直接位于 assets/。核对示例路径转义、欢迎句、授权计费与消费记录和工单调用点。Python 文件语法树可解析。 |
-| 范围 | Claude 自测的契约 23 项、模拟端到端 53 项是 A2 结果。A3 未执行完整套件，真机及零消耗浏览器验证按 SOP 跳过。真实上游、支付及上传均为 0。 |
-
-## A3-E01 · 第二条中英文示例指向不同场景
-
-复现时打开最终 ZIP 内的 `SKILL.md`，逐项对照 `examples_zh[1]`、`examples_en[1]` 和 `references/scenes.md`。
-
-- 期望为中英文逐条表达相同需求。
-- 实际中文为蓝底二寸考试报名照，对应 `blue-two`。英文要求 295×413 像素，对应 `custom-pixels`。包内规范明确寸数与机构像素要求分开。
-- 退回 Claude 修正第二条英文为蓝底二寸报名照的同义表述，增加语义对齐回归核对，再交新的团队版 ZIP。保留三条数量、渠道和现有业务路径。
-
-独立检查不通过，置 `test_failed`。
+[1.0.4 A3 历史报告](https://github.com/Haihe2026/myplanestroe/blob/e5e9fadfd96ad0bb0e21563f91f0d16240561300/pipeline/products/mps-id-photo-background/03-test-report.md)
