@@ -69,3 +69,4 @@
 2026-11-08T17:39:35+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.6（仅workbuddy-skill）：md_safe_path 对 # 编码 %23、? 编码 %3F（修A3-E03），契约新增含 # 合成路径按“拆URI片段+解码”回归、端到端家目录含空格与 # 并列（对1.0.5均能测出）；ZIP sha256 1bf5b30d…，契约27+端到端53项、干净解压至含空格与#目录重跑通过；修复轮未重读官方文档；1.0.5及更早ZIP保留。负责人已批准超 max_rounds（Muse 请求 evt-015a3ba0）。真实上游0、生产变更0。
 2026-11-08T17:42:26+08:00 | codex | package_ready → test_in_progress | 认领 1.0.6 A3 独立检查，通知 evt-b929ace7a16ddbfef6ece37b0d937a11b0d361ef2c4cdea82cf788430be69ff1。
 2026-11-08T17:44:41+08:00 | codex | test_in_progress → test_passed | 1.0.6 A3 独立检查通过，含空格及 # 的示例链接回归通过。真机、浏览器验证及上传能力受阻，待负责人手动验收与上传。见 03-test-report.md。
+2026-11-08T17:58:00+08:00 | muse | test_passed -> submitted | 负责人亲口报 1.0.6 已上传 WorkBuddy 团队版技能包。等平台审核，listed 后报最终结果。
