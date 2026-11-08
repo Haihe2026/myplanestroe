@@ -34,3 +34,5 @@
 
 | 2026-11-08T18:41:43+08:00 | mps-wedding-portrait-studio | dev_in_progress | OFFICIAL_DOCS_UNREADABLE | Claude 定时运行官方文档三页读取权限无人应答超时，1.0.0 首次开发未开始；证据 pipeline/products/mps-wedding-portrait-studio/02-claude-docs-blocked-evt-64bf6f1d75b5d06aad0a9a18a222d021764a31035eff8b15849efdaee808e2ad.md | 在 Claude 定时任务中预先放行 open.workbuddy.cn 网页读取 | spec_ready |
 - 2026-11-08T19:28:27+08:00：mps-wedding-portrait-studio 的 OFFICIAL_DOCS_UNREADABLE 已解除，负责人在会话中放行后官方三页读取成功，Claude 重新认领开发。
+
+| 2026-11-08T22:57:01+08:00 | mps-wedding-portrait-studio | dev_in_progress | HARD_STOP | 技能包 1.0.0 代码与自测已完成，缺规格要求的 10 张示例图；Codex 本次运行禁止真实付费生图 | 在允许真实生图的 Codex 运行里按 msg-from-claude-20261108-demos.md 生成 10 张示例图（A.5 第2条已长期授权） | spec_ready |
