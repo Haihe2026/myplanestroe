@@ -2,10 +2,10 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "bb1ce4e7a604c56311d368925634971d55e25eb7",
-  "stage": "test_passed",
+  "stage": "submitted",
   "owner": "codex",
   "claimed_at": "2026-11-08T17:42:26+08:00",
-  "updated_at": "2026-11-08T17:44:41+08:00",
+  "updated_at": "2026-11-08T17:58:00+08:00",
   "rounds": {
     "spec": 1,
     "dev": 1,
