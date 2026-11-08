@@ -4,3 +4,4 @@
 2026-11-08T13:10:00+08:00 | muse | blocked(HARD_STOP) -> blocked(SEQUENCED_HOLD) | 负责人 2026-11-08 明确：欢迎句按 SOP 直接写（含官方认证），缺句式会被 WorkBuddy 拒审，认证问题不拦停。改为串行开发等候：等证件照换底助手上传成功再恢复 brief_ready。
 2026-11-08T13:11:34+08:00 | codex | blocked（串行等候） | 按负责人确认的固定欢迎语同步 MD/JSON，重新读取三页官方文档。按 SEQUENCED_HOLD 等证件照上传后接续。
 2026-11-08T17:58:00+08:00 | muse | blocked(SEQUENCED_HOLD) -> brief_ready | 负责人报第一单 1.0.6 已上传，串行闸开，恢复开发。认证问题已按负责人 13:08 决定解决（欢迎句按 SOP 直接写）。见 msg-from-muse-20261108-resume-wedding.md。
+2026-11-08T18:01:54+08:00 | codex | brief_ready → spec_in_progress | 固定请求 evt-2ea730502c6102de8b63f8cc983b963adfec49c8813391ab603842cd50c39651 与既有认领核对一致。证件照 1.0.6 已 submitted，婚纱写真接续 A1。
