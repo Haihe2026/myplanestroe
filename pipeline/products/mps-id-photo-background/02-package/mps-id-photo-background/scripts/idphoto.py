@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-id-photo-background'
-SKILL_VERSION = '1.0.5'
+SKILL_VERSION = '1.0.6'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -94,11 +94,11 @@ def state_dir():
 
 
 # Markdown 链接目标里会断链的字符：空白、括号、尖括号；% 一并编码，保证可逆
-_MD_LINK_UNSAFE = {' ': '%20', '\t': '%09', '(': '%28', ')': '%29', '<': '%3C', '>': '%3E'}
+_MD_LINK_UNSAFE = {' ': '%20', '\t': '%09', '(': '%28', ')': '%29', '<': '%3C', '>': '%3E', '#': '%23', '?': '%3F'}
 
 
 def md_safe_path(p):
-    """给用户看的绝对路径：正斜杠（Markdown 不吞反斜杠），空格等断链字符做 URL 编码（%20）。"""
+    """给用户看的绝对路径：正斜杠（Markdown 不吞反斜杠），空格等断链字符做 URL 编码（%20）；`#`→%23、`?`→%3F，免得被当成链接片段或查询串截断。"""
     p = os.path.abspath(p).replace('\\', '/').replace('%', '%25')
     return ''.join(_MD_LINK_UNSAFE.get(c, c) for c in p)
 

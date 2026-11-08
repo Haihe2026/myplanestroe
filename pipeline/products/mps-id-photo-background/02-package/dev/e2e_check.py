@@ -143,7 +143,7 @@ class FirstTurn(Base):
             md = MarkdownIt()
         except ImportError:
             md = None
-        home = os.path.join(self.tmp, '.dot-parent', 'test user')  # 含空格（A3-E02）
+        home = os.path.join(self.tmp, '.dot-parent', 'test user', 'Synthetic#User')  # 含空格（A3-E02）与 #（A3-E03）
         os.makedirs(home)
         idphoto.STATE_HOME = home
         code, s, _, _ = self.run_cmd('demo')
@@ -156,11 +156,16 @@ class FirstTurn(Base):
             target = re.sub(r'\\([' + punct + '])', r'\1', re.search(r'\]\(([^()\s]*)\)', cell).group(1))
             self.assertEqual(target, p)
             self.assertNotIn(' ', p)
+            self.assertNotIn('#', p)
             from urllib.parse import unquote
             if md is not None:
                 href = re.search(r'href="([^"]*)"', md.render(cell)).group(1)
                 self.assertEqual(unquote(href), unquote(p))
-            self.assertTrue(os.path.isfile(unquote(target)))
+            # 按 URI 规则先拆片段与查询串再解码（A3-E03 的检查方法），路径须指向存在的文件
+            path, _, frag = target.partition('#')
+            path, _, query = path.partition('?')
+            self.assertEqual((frag, query), ('', ''))
+            self.assertTrue(os.path.isfile(unquote(path)))
 
     def test_demo_missing_assets_exit3(self):
         real = idphoto.HERE

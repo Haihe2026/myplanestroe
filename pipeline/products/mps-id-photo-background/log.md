@@ -66,3 +66,4 @@
 2026-11-08T13:43:57+08:00 | codex | package_ready → test_in_progress | 认领 1.0.5 A3 独立检查，沿用接收方已有通知认领 evt-52e3c0758b5da2a064f3a41509080e89d5eefab98f482b83ca9ebf47da4a83f0。
 2026-11-08T13:47:39+08:00 | codex | test_in_progress → blocked | 1.0.5 A3-E02 回归通过。A3-E03 含 # 的示例目录断链，rounds.test=4，超过 max_rounds=3。见 03-test-report.md。真机及上传未执行。
 2026-11-08T17:27:00+08:00 | muse | blocked -> dev_in_progress | 负责人批准继续（超 max_rounds 再走一轮）。解 TOO_MANY_ROUNDS，Claude 修 A3-E03（目录名去 #、路径函数编码 %23），重打 1.0.6。见 msg-from-muse-20261108-fix-a3-e03.md。
+2026-11-08T17:39:35+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.6（仅workbuddy-skill）：md_safe_path 对 # 编码 %23、? 编码 %3F（修A3-E03），契约新增含 # 合成路径按“拆URI片段+解码”回归、端到端家目录含空格与 # 并列（对1.0.5均能测出）；ZIP sha256 1bf5b30d…，契约27+端到端53项、干净解压至含空格与#目录重跑通过；修复轮未重读官方文档；1.0.5及更早ZIP保留。负责人已批准超 max_rounds（Muse 请求 evt-015a3ba0）。真实上游0、生产变更0。

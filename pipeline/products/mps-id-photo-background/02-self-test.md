@@ -1,3 +1,65 @@
+# 自测报告：mps-id-photo-background 1.0.6（修复轮：示例目录名含 `#` 时链接断开）
+
+- 角色：Claude Code；时间：2026-11-08T17:39:35+08:00（北京时间，定时运行）
+- 官方文档：修复轮，未重读（SOP 〇节；Muse 请求第 4 条）。
+- 依据：03-test-report.md A3-E03（Codex，2026-11-08T13:47:39+08:00）；Muse 请求 `msg-from-muse-20261108-fix-a3-e03.md`（通知 evt-015a3ba0，固定提交 76c33b4）：负责人 2026-11-08 17:25 批准超出 max_rounds 再走一轮，status 已由 Muse 置 dev_in_progress/owner=claude。规格未变，A1 沿用 1.0.2 复检结论。
+- 包类型：只打 WorkBuddy 团队版技能包（`workbuddy-skill`，config `channels`）。
+- 包文件（`02-package/dist/`）：
+  - `mps-id-photo-background-1.0.6.zip`：889982 字节，SHA256 `1bf5b30d216bd12de31b91625fc892b8fcef3ac2198af45ac14eba344882ac23`，24 个文件，根目录 `mps-id-photo-background/`，最深 `根/二级目录/文件`，CRC 通过。
+  - 1.0.5（`c51cd69b…`）及更早 ZIP 原样保留。头像未改动。
+
+## 本轮改了什么
+
+1. `scripts/idphoto.py` `md_safe_path()`：编码表新增 `#`→`%23`、`?`→`%3F`（`?` 同理会被当成查询串截断，一并处理）；其余规则不变（正斜杠、`%` 先编 `%25`、空格 `%20`、制表符、括号、尖括号）。例：`C:\Synthetic#User\mps-id-photo-background\demos\white-one.png` → `C:/Synthetic%23User/mps-id-photo-background/demos/white-one.png`。无这些字符的路径输出与 1.0.5 相同。
+2. 示例目录名：包内示例目录为 `<状态目录>/mps-id-photo-background/demos/`，`assets/` 内文件名均为小写字母与连字符，本身不含 `#` 与空格（契约已有裸文件名检查）；A3-E03 的 `#` 来自用户家目录，靠路径函数编码解决。
+3. `tests/test_skill_contract.py` 新增 `test_demo_link_path_with_hash`：按 A3-E03 检查方法（取 CommonMark 链接目标 → 拆 URI 片段与查询串 → 百分号解码）；原样 `#` 路径断言被截成 `C:/Synthetic`；修复后片段与查询串为空、解码路径完整；`a#b`、`q?x=1`、`m#n?o`、`Synthetic User (A) 50%#2` 逐个可逆；真实合成目录 `Synthetic#User` 与 `test user` 并列，解析后路径均指向存在的文件；markdown-it 生成的 href 同样拆片段后路径完整。原 `test_demo_link_path_with_space` 保留未改。
+4. `dev/e2e_check.py` `test_demo_links_survive_markdown`：模拟家目录改为 `.dot-parent/test user/Synthetic#User`（空格与 `#` 并列），跑真实 `demo` 命令，十个链接逐一断言无 `#`/空格、拆片段与查询串后为空、解码路径文件存在。
+5. 版本 1.0.5 → 1.0.6（SKILL.md、`_meta.json`、`idphoto.SKILL_VERSION`、`telemetry.SKILL_VERSION`、真机验收单、`dev/build.py`）。
+6. **未改**：SKILL.md 正文与 frontmatter 其余字段（examples 中英各 3 条且逐条对齐）、空格编码、目录层级、授权与充值链接、规格、欢迎句、遥测、付费、话术、其他业务逻辑、后端、生产。
+
+## 打包前 frontmatter 逐项核对（WorkBuddy 团队版技能包）
+
+| 项 | 1.0.6 |
+|---|---|
+| 必填 8 字段 | 全部存在且非空；version=`1.0.6`，author=`MyPlaneStore` |
+| 可选键 | 仅 `examples_zh`、`examples_en`（未改动） |
+| examples_zh / examples_en | 3 / 3，逐条同一场景（契约语义对齐检查通过） |
+| 版本号一致 | SKILL.md、`_meta.json`、脚本两处、ZIP 文件名一致 |
+| 目录层级 | ZIP 内路径 `/` 数 ≤ 2 |
+
+## 结果
+
+| 项 | 结果 |
+|---|---|
+| 契约测试（源码） | 27/27 通过 |
+| 端到端（模拟后端，源码） | 53/53 通过（2 项 ZIP 检查在打包前跳过） |
+| 干净解压 1.0.6 ZIP 至含空格与 `#` 的目录 `clean dir#1/` 后契约（`python3 -I`） | 27/27 通过 |
+| 干净解压后端到端（`--package <该解压目录> --zip dist/…-1.0.6.zip`） | 53/53 通过 |
+| 回归有效性：1.0.5 解压包 + 新契约测试 | `test_demo_link_path_with_hash` 失败（未编码 `#`），其余 26 项通过 |
+| 回归有效性：1.0.5 解压包跑新端到端 | `test_demo_links_survive_markdown` 失败，其余通过 |
+| ZIP 密钥类特征扫描 | 无命中 |
+| 真实上游调用 / 真实上报 / 生产变更 | 0 / 0 / 0 |
+
+## 偏离与未验证
+
+- 未在 Windows 真机、PowerShell `ConvertFrom-Markdown` 与 WorkBuddy 宿主里点开 `%23` 链接验证；本轮按 A3-E03 同一拆片段+解码方法在 Linux 用 CommonMark 规则与 markdown-it 验证。宿主对本地文件链接是否百分号解码未验证（负责人上架前自测）。
+- 平台上传解析未验证（负责人手动上传）。真机验收按负责人长期规则跳过。
+- rounds.test 本轮未由 Claude 改动（Codex 检查时计数）；超出 max_rounds 已获负责人批准（见 Muse 请求）。
+
+## 部署与回滚
+
+- 部署：无后端改动；A3 通过后由负责人手动上传 `mps-id-photo-background-1.0.6.zip`。
+- 回滚：dist 内 1.0.5 及更早 ZIP 原样保留；1.0.5 仅在路径含 `#` 时示例链接失效，可作回滚版本。
+
+## 复跑
+
+```sh
+cd 02-package/mps-id-photo-background && python3 -I tests/test_skill_contract.py        # 契约 27 项
+cd 02-package && python3 dev/e2e_check.py --zip dist/mps-id-photo-background-1.0.6.zip
+```
+
+---
+
 # 自测报告：mps-id-photo-background 1.0.5（修复轮：示例图路径含空格时链接无法解析）
 
 - 角色：Claude Code；时间：2026-11-08T13:40:31+08:00（北京时间，定时运行）

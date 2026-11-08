@@ -433,5 +433,51 @@ class Contract(unittest.TestCase):
         self.assertIn('<a href=', html)
         self.assertNotIn('<a href=', MarkdownIt().render('**[白底一寸](%s)**' % raw))
 
+    def test_demo_link_path_with_hash(self):
+        # 复现 1.0.5 缺陷 A3-E03：目录名含 `#` 时，链接目标在 `#` 处被当成 URI 片段截断
+        from urllib.parse import unquote
+
+        def uri_file_part(href):
+            """按 URI 规则拆掉片段与查询串，再百分号解码，得到链接实际指向的本地路径。"""
+            path, _, frag = href.partition('#')
+            path, _, query = path.partition('?')
+            return unquote(path), frag, query
+
+        raw = 'C:/Synthetic#User/mps-id-photo-background/demos/white-one.png'
+        self.assertEqual(uri_file_part(md_link_target('**[白底一寸](%s)**' % raw))[0], 'C:/Synthetic')
+        with mock.patch.object(idphoto.os, 'path', ntpath):
+            good = idphoto.md_safe_path('C:\\Synthetic#User\\mps-id-photo-background\\demos\\white-one.png')
+        self.assertEqual(good, 'C:/Synthetic%23User/mps-id-photo-background/demos/white-one.png')
+        self.assertEqual(md_link_target('**[白底一寸](%s)**' % good), good)
+        self.assertEqual(uri_file_part(good),
+                         ('C:/Synthetic#User/mps-id-photo-background/demos/white-one.png', '', ''))
+        for odd in ('a#b', 'q?x=1', 'm#n?o', 'Synthetic User (A) 50%#2'):
+            enc = idphoto.md_safe_path('/home/' + odd + '/f.png')
+            self.assertNotIn('#', enc)
+            self.assertNotIn('?', enc)
+            self.assertEqual(md_link_target('**[t](%s)**' % enc), enc, odd)
+            self.assertEqual(uri_file_part(enc), ('/home/' + odd + '/f.png', '', ''), odd)
+        # 真实文件：含 `#` 与空格并列的合成目录，解析后的路径仍指向存在的文件
+        home = tempfile.mkdtemp()
+        try:
+            for name in ('Synthetic#User', 'test user'):
+                d = os.path.join(home, name, 'mps-id-photo-background', 'demos')
+                os.makedirs(d)
+                f = os.path.join(d, 'white-one.png')
+                open(f, 'wb').close()
+                target = md_link_target('**[白底一寸](%s)**' % idphoto.md_safe_path(f))
+                path, frag, query = uri_file_part(target)
+                self.assertEqual((frag, query), ('', ''), name)
+                self.assertTrue(os.path.isfile(path), name)
+        finally:
+            shutil.rmtree(home, ignore_errors=True)
+        try:
+            from markdown_it import MarkdownIt
+        except ImportError:
+            return
+        import re as _re
+        href = _re.search(r'href="([^"]*)"', MarkdownIt().render('**[白底一寸](%s)**' % good)).group(1)
+        self.assertEqual(uri_file_part(href)[0], 'C:/Synthetic#User/mps-id-photo-background/demos/white-one.png')
+
 if __name__ == '__main__':
     unittest.main()
