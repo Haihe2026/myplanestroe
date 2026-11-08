@@ -9,24 +9,24 @@
   ],
   "source_ref": "884e58e133ec27483b3a181257ffdea3926f2c53",
   "brief_ref": "ffde7ed7a88995e556f7d9e80a2316b56306c97b",
-  "document_status": "review_blocked",
+  "document_status": "waiting_for_previous_submission",
   "a1_passed": false,
   "ready_for_development": false,
   "read_record": [
     {
       "date": "2026-11-08",
       "url": "https://open.workbuddy.cn/docs/skill",
-      "result": "在线读取成功。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。"
+      "result": "本轮重新在线读取，HTTP 200。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。"
     },
     {
       "date": "2026-11-08",
       "url": "https://open.workbuddy.cn/docs/expert",
-      "result": "在线读取成功。核对专家包结构，确认本单渠道只采用 Skill 格式。"
+      "result": "本轮重新在线读取，HTTP 200。核对专家包结构，确认本单渠道只采用 Skill 格式。"
     },
     {
       "date": "2026-11-08",
       "url": "https://open.workbuddy.cn/docs",
-      "result": "在线读取成功。核对入驻、审核及发布顺序。"
+      "result": "本轮重新在线读取，HTTP 200。核对入驻、审核及发布顺序。"
     }
   ],
   "core_terms": [
@@ -419,19 +419,38 @@
     },
     {
       "item": "欢迎句",
-      "adopted": "认证凭据待核实，带认证字样的模板暂不可写入客户端",
-      "basis": "A.5 固定欢迎句与同节禁止冒用认证同时有效"
+      "adopted": "欢迎使用WorkBuddy官方认证技能 婚纱写真照相馆。",
+      "basis": "2026-11-08，负责人在本聊天明确要求按现行 SOP 固定格式，WorkBuddy 审核状态按实际回执记录。"
     },
     {
       "item": "支付链接",
       "adopted": "只打开服务端按原安装签发的授权或结账链接",
       "basis": "原设备关联，不用通用扫码裸链代替"
+    },
+    {
+      "item": "开发顺序",
+      "adopted": "等证件照换底助手达到 submitted 或 listed，再接续 A1",
+      "basis": "现行 SOP 固定规则 13（c86103c）"
     }
   ],
   "blocked_reasons": [
     {
-      "code": "HARD_STOP",
-      "needs": "可核验的本技能 WorkBuddy 官方认证凭据，或负责人为未获证实的新技能确定不含认证字样的欢迎语。"
+      "code": "SEQUENCED_HOLD",
+      "needs": "等证件照换底助手上传成功（stage 到 submitted 或 listed），再恢复 brief_ready 继续。"
     }
-  ]
+  ],
+  "welcome": {
+    "text": "欢迎使用WorkBuddy官方认证技能 婚纱写真照相馆。",
+    "once_per_chat": true,
+    "decision": "2026-11-08，负责人在本聊天明确要求按现行 SOP 固定格式，WorkBuddy 审核状态按实际回执记录。",
+    "platform_review": "not_submitted"
+  },
+  "serial_gate": {
+    "previous_skill_id": "mps-id-photo-background",
+    "allowed_previous_stages": [
+      "submitted",
+      "listed"
+    ],
+    "sop_ref": "c86103cef3da939ce4f41c8af43c3315134b4c56"
+  }
 }
