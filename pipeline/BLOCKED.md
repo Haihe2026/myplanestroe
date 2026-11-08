@@ -24,3 +24,4 @@
 
 | 2026-11-07T22:02:21+08:00 | mps-id-photo-background | test_in_progress | HOST_ACCEPTANCE_UNAVAILABLE | 1.0.1 契约 21/21、模拟端到端 51/51。接收端缺少已验证的电脑操作和上传适配器，真机验收、零消耗浏览器验证与上传均受阻。 证据 pipeline/products/mps-id-photo-background/03-test-report.md | 完成 1.0.1 的 WorkBuddy 真机验收和 /pricing 零消耗浏览器验证并存证。通过 A3 后由负责人手动上传。 | package_ready |
 | 2026-11-07T22:41:08+08:00 | mps-id-photo-background | dev_in_progress | OFFICIAL_DOCS_UNREADABLE | Claude 定时运行官方文档三页读取权限无人应答超时，1.0.2 目录层级修复与重打包未开始；证据 pipeline/products/mps-id-photo-background/02-claude-docs-blocked-evt-7f9fa32edbba768e8de972c7f168253ab8caa0df2e3885b1b185a565f65142b3.md | 在 Claude 定时任务中预先放行 open.workbuddy.cn 网页读取（紧急：负责人明天报名需 1.0.2） | spec_ready |
+| 2026-11-08T12:29:53+08:00 | mps-wedding-portrait-studio | spec_in_progress | HARD_STOP | 现行 SOP 固定欢迎句含 WorkBuddy 官方认证，产品资料未见该技能可核验的认证凭据。规格 MD/JSON 已编制，A1 未放行。 见产品 01-dev-spec.md。 | 可核验的本技能 WorkBuddy 官方认证凭据，或负责人为未获证实的新技能确定不含认证字样的欢迎语。 | brief_ready |

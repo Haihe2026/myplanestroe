@@ -1,0 +1,437 @@
+{
+  "skill_id": "mps-wedding-portrait-studio",
+  "display_name": "婚纱写真照相馆",
+  "display_name_en": "Wedding & Portrait Studio",
+  "version": "1.0.0",
+  "lane": "fast",
+  "channels": [
+    "workbuddy-skill"
+  ],
+  "source_ref": "884e58e133ec27483b3a181257ffdea3926f2c53",
+  "brief_ref": "ffde7ed7a88995e556f7d9e80a2316b56306c97b",
+  "document_status": "review_blocked",
+  "a1_passed": false,
+  "ready_for_development": false,
+  "read_record": [
+    {
+      "date": "2026-11-08",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "在线读取成功。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。"
+    },
+    {
+      "date": "2026-11-08",
+      "url": "https://open.workbuddy.cn/docs/expert",
+      "result": "在线读取成功。核对专家包结构，确认本单渠道只采用 Skill 格式。"
+    },
+    {
+      "date": "2026-11-08",
+      "url": "https://open.workbuddy.cn/docs",
+      "result": "在线读取成功。核对入驻、审核及发布顺序。"
+    }
+  ],
+  "core_terms": [
+    "AI婚纱照",
+    "AI写真"
+  ],
+  "scenes": [
+    {
+      "key": "white-studio",
+      "series": "婚纱",
+      "title": "经典白纱影棚",
+      "keywords": [
+        "白纱",
+        "棚拍",
+        "经典婚照"
+      ],
+      "size": "1024x1536",
+      "prompt": "白色礼服，灰白无缝背景，大柔光，胸像或半身自然姿势",
+      "demo_file": "white-studio.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "xiuhe",
+      "series": "婚纱",
+      "title": "中式秀禾服",
+      "keywords": [
+        "秀禾",
+        "龙凤褂",
+        "中式婚纱"
+      ],
+      "size": "1024x1536",
+      "prompt": "红金秀禾服，简洁木质布景，对称构图，保留肤色",
+      "demo_file": "xiuhe.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "garden",
+      "series": "婚纱",
+      "title": "户外草坪婚礼",
+      "keywords": [
+        "草坪",
+        "花园",
+        "户外婚礼"
+      ],
+      "size": "1536x1024",
+      "prompt": "浅色礼服和草坪花园，暖阳斜光，人物完整留出空间",
+      "demo_file": "garden.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "seaside",
+      "series": "婚纱",
+      "title": "海边度假婚纱",
+      "keywords": [
+        "海边",
+        "海滩",
+        "度假婚纱"
+      ],
+      "size": "1536x1024",
+      "prompt": "海平线与沙滩，海风自然，服装和光影一致，控制浪花",
+      "demo_file": "seaside.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "oil-wedding",
+      "series": "婚纱",
+      "title": "复古油画婚纱",
+      "keywords": [
+        "油画婚纱",
+        "复古婚照"
+      ],
+      "size": "1024x1536",
+      "prompt": "暖棕复古背景，低调古典侧光，油画质感局限于风格，不覆盖人脸细节",
+      "demo_file": "oil-wedding.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "korean",
+      "series": "婚纱",
+      "title": "韩式清新婚纱",
+      "keywords": [
+        "韩式",
+        "淡雅",
+        "清新婚纱"
+      ],
+      "size": "1024x1536",
+      "prompt": "淡彩影棚和留白，高调漫射光，自然轻妆与轻盈白纱",
+      "demo_file": "korean.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "hanfu",
+      "series": "写真",
+      "title": "汉服古风写真",
+      "keywords": [
+        "汉服",
+        "古风",
+        "古装写真"
+      ],
+      "size": "1024x1536",
+      "prompt": "典雅汉服与清简庭院，柔光，准确的衣襟和自然持袖姿势",
+      "demo_file": "hanfu.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "oil-portrait",
+      "series": "写真",
+      "title": "油画艺术写真",
+      "keywords": [
+        "油画写真",
+        "艺术肖像"
+      ],
+      "size": "1024x1536",
+      "prompt": "古典单人肖像，深暖背景和明暗层次，保留真实脸部特征",
+      "demo_file": "oil-portrait.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "cyber",
+      "series": "写真",
+      "title": "赛博朋克写真",
+      "keywords": [
+        "霓虹",
+        "未来感",
+        "赛博朋克"
+      ],
+      "size": "1024x1536",
+      "prompt": "青紫霓虹城市虚景和轮廓光，脸部有自然填充光，无品牌广告",
+      "demo_file": "cyber.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    },
+    {
+      "key": "japanese",
+      "series": "写真",
+      "title": "日系清新写真",
+      "keywords": [
+        "日系",
+        "自然光",
+        "清新写真"
+      ],
+      "size": "1024x1536",
+      "prompt": "窗边自然光，淡色日常服，轻柔胶片色感，留出头肩空间",
+      "demo_file": "japanese.png",
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+    }
+  ],
+  "reference": {
+    "min": 1,
+    "max": 1,
+    "mime": [
+      "image/png",
+      "image/jpeg"
+    ],
+    "max_bytes": 5242880,
+    "min_side": 128,
+    "max_side": 8000,
+    "max_pixels": 20000000,
+    "consent": "仅限已授权成年人，一张照片。情侣照须两人原本同框且均同意。"
+  },
+  "billing": {
+    "gateway": "https://aistore.zhaopintong.com/platform-api/gemini",
+    "public_checkout": "https://aistore.zhaopintong.com/membership/gemini/",
+    "unit": "每个独立成功任务 1 张",
+    "new_user_trial": 0,
+    "wallet": "现有通用生图次数",
+    "account": "原 install_secret 与原账户 Bearer",
+    "skill_channel": "workbuddy_skill",
+    "sibling_reuse": false,
+    "plan_source": "/membership-api/plans",
+    "idempotency_header": "Idempotency-Key",
+    "checkout": "按原安装关联的服务端短链接",
+    "settlement": "沿现有 manual_qr，报告与核款分开，交易号去重",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/membership-api/plans",
+        "auth_and_body": "无 Bearer，读取当时可用套餐",
+        "source": "client.py:64"
+      },
+      {
+        "method": "GET",
+        "path": "/balance",
+        "auth_and_body": "原账户 Bearer，remaining_uses 是总可用次数",
+        "source": "client.py:65"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry",
+        "auth_and_body": "无 Bearer，原 install_secret，沿服务器签发 URL",
+        "source": "client.py:66–70"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry/status",
+        "auth_and_body": "无 Bearer，原 install_secret，registered 只说明账户注册",
+        "source": "client.py:71–73"
+      },
+      {
+        "method": "POST",
+        "path": "/membership-link",
+        "auth_and_body": "原账户 Bearer，正文 {}，取得短期结账 URL",
+        "source": "client.py:74–76"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-key 与 /skill-key/bound",
+        "auth_and_body": "原账户 Bearer，ready 才私有保存。bound 正文 {key}",
+        "source": "client.py:77–83"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-jobs",
+        "auth_and_body": "Skill Bearer，原 Idempotency-Key，确认后的参考编辑正文",
+        "source": "client.py:84–86"
+      },
+      {
+        "method": "GET",
+        "path": "/jobs/by-key/{key}、/jobs/{id}、/jobs/{id}/image",
+        "auth_and_body": "优先 Skill Bearer，兼容原账户回查。保存 PNG 后交付",
+        "source": "client.py:87–97"
+      },
+      {
+        "method": "GET",
+        "path": "/consumption-history",
+        "auth_and_body": "原账户 Bearer，page/page_size，仅共享 gemini 可见历史",
+        "source": "gemini_support.py:89–118"
+      },
+      {
+        "method": "POST",
+        "path": "/support-tickets",
+        "auth_and_body": "原账户 Bearer，Idempotency-Key，category/text/job_id?",
+        "source": "gemini_support.py:124–162"
+      },
+      {
+        "method": "GET",
+        "path": "/support-tickets/{id}",
+        "auth_and_body": "原账户 Bearer，只查本人，跨账户 404",
+        "source": "gemini_support.py:164–171"
+      }
+    ]
+  },
+  "model": {
+    "asset_id": "aisplice",
+    "server_model": "gpt-image-2.5-ext",
+    "engine": "photo-retouch-sunburst",
+    "resolution": "1K",
+    "n": 1,
+    "quality": "auto",
+    "legacy_fallback": false,
+    "estimated_usd": 0.0065,
+    "fx_estimate": 7,
+    "estimated_cny": 0.0455,
+    "minimum_unit_revenue_cny": 0.1933333333,
+    "estimated_margin": 0.764655,
+    "margin_threshold": 0.6
+  },
+  "request_fields": [
+    "prompt",
+    "size",
+    "confirmed",
+    "image_engine",
+    "references",
+    "reference_consent"
+  ],
+  "demo_generation": {
+    "planned": 10,
+    "actual": 0,
+    "paid_calls_limit": 10,
+    "previews": "虚构成年人效果示意，文生图不验证参考图保真，素材未生成"
+  },
+  "telemetry": {
+    "fields": [
+      "event_id",
+      "installation_id",
+      "skill_id",
+      "skill_name",
+      "skill_version",
+      "channel",
+      "client_occurred_at",
+      "is_test"
+    ],
+    "success_http": 200,
+    "timeout_s": 2,
+    "link_fields": [
+      "event_id",
+      "receipt",
+      "product"
+    ],
+    "product": "gemini"
+  },
+  "timeouts": {
+    "submit_s": 90,
+    "poll_request_s": 15,
+    "poll_window_s": 120,
+    "extra_s": 30,
+    "prebilling_wait_s": 0,
+    "host_min_s": 240
+  },
+  "verification": {
+    "public_get": [
+      "/health",
+      "/membership-api/plans"
+    ],
+    "live_paid_calls": 0,
+    "workbuddy_host": "未验证",
+    "platform_publish": "未验证"
+  },
+  "tests": [
+    {
+      "id": "T01",
+      "area": "首轮与路由",
+      "coverage": "问候、仅图、缺图、直接报需求均走真实首轮，10模板路由和相邻分流，无业务请求或价格抢跑"
+    },
+    {
+      "id": "T02",
+      "area": "授权和边界",
+      "coverage": "拒绝未授权、未成年人、不支持格式或超限，单人婚纱照不补造伴侣，情侣输入不混脸或增人"
+    },
+    {
+      "id": "T03",
+      "area": "本地示例",
+      "coverage": "10 图两列、只用实际绝对路径、文件名裸值、空/缺图/路径编码/同对话去重、失败不调用上游"
+    },
+    {
+      "id": "T04",
+      "area": "支付和恢复",
+      "coverage": "首次扫码、回同安装、原账户余额、取消、超时、注册不等于到账、未确认不出图"
+    },
+    {
+      "id": "T05",
+      "area": "任务契约",
+      "coverage": "1 张参考、6 字段白名单、画幅校验、同键同体、已确认状态、合成签发短链和权限错误"
+    },
+    {
+      "id": "T06",
+      "area": "失败续接",
+      "coverage": "401/402/403/409/429/5xx/网络超时、unknown 查原任务、成功但下载断开走同任务、无重复提交"
+    },
+    {
+      "id": "T07",
+      "area": "支付记录与工单",
+      "coverage": "分页、只读余额、只提交已确认纯文本、同键去重、跨账户404和处理时限为空"
+    },
+    {
+      "id": "T08",
+      "area": "遥测",
+      "coverage": "八字段 200 回执、无正文、关闭与失败静默、同 ID 去重、合法账户 link、失败不污染业务"
+    },
+    {
+      "id": "T09",
+      "area": "打包与文案",
+      "coverage": "必填字段、语言主题一一对应最多3条、两级路径、渠道与版本、无密钥或上游名、欢迎规则"
+    },
+    {
+      "id": "T10",
+      "area": "验收责任",
+      "coverage": "Claude A2 仅 Mock 和合成账户。Codex A3 对固定 ZIP 做静态独立检查。负责人做实际宿主测试并手动上传"
+    }
+  ],
+  "decisions": [
+    {
+      "item": "车道与产品",
+      "adopted": "fast，workbuddy-skill，首版 1.0.0",
+      "basis": "选品单及 config，已核实共享接入，无新后端"
+    },
+    {
+      "item": "账户与计费",
+      "adopted": "原账户及通用生图套餐，默认无免费试用",
+      "basis": "A.5 默认及公共 health、plans 返回"
+    },
+    {
+      "item": "一张照片",
+      "adopted": "单人或已经同框的两位已授权成年人，写真仅单人",
+      "basis": "选品要求一张照片，保守限制输入，避免混脸及无权添加人物"
+    },
+    {
+      "item": "示例",
+      "adopted": "婚纱 6、写真 4，每场景 1 张真实生成的虚构成人效果示意",
+      "basis": "选品单及 A1，实际素材和记录待完成"
+    },
+    {
+      "item": "画幅",
+      "adopted": "1K 人像保真档。草坪和海边推荐 3:2，其余 2:3",
+      "basis": "适配器已映射；无额外高档承诺"
+    },
+    {
+      "item": "首次对话",
+      "adopted": "原 8 字段 HTTP 200，开口新设备数不可得",
+      "basis": "A.5 和固定网关源码"
+    },
+    {
+      "item": "欢迎句",
+      "adopted": "认证凭据待核实，带认证字样的模板暂不可写入客户端",
+      "basis": "A.5 固定欢迎句与同节禁止冒用认证同时有效"
+    },
+    {
+      "item": "支付链接",
+      "adopted": "只打开服务端按原安装签发的授权或结账链接",
+      "basis": "原设备关联，不用通用扫码裸链代替"
+    }
+  ],
+  "blocked_reasons": [
+    {
+      "code": "HARD_STOP",
+      "needs": "可核验的本技能 WorkBuddy 官方认证凭据，或负责人为未获证实的新技能确定不含认证字样的欢迎语。"
+    }
+  ]
+}

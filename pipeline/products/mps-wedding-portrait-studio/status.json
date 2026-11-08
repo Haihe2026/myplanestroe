@@ -2,17 +2,24 @@
   "skill_id": "mps-wedding-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "05e35d17d9eab8b7df6443c1a196eedb0ee12d8d",
-  "stage": "spec_in_progress",
+  "stage": "blocked",
   "owner": "codex",
   "claimed_at": "2026-11-08T12:19:31+08:00",
-  "updated_at": "2026-11-08T12:19:31+08:00",
+  "updated_at": "2026-11-08T12:29:53+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
     "test": 0
   },
   "lane": "fast",
-  "blocked": null,
+  "blocked": {
+    "at_stage": "spec_in_progress",
+    "by": "codex",
+    "reason_code": "HARD_STOP",
+    "detail": "现行 SOP 固定欢迎句含 WorkBuddy 官方认证，产品资料未见该技能可核验的认证凭据。规格 MD/JSON 已编制，A1 未放行。",
+    "needs": "可核验的本技能 WorkBuddy 官方认证凭据，或负责人为未获证实的新技能确定不含认证字样的欢迎语。",
+    "resume_to": "brief_ready"
+  },
   "versions": {
     "package": null,
     "listed": null
