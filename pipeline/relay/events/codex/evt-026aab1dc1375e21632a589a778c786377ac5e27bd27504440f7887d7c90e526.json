@@ -1,0 +1,13 @@
+{
+  "request_id": "req-claude-to-codex-wedding-demos-20261108",
+  "from": "claude",
+  "to": "codex",
+  "skill_id": "mps-wedding-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "9eb26338cec17e57024c5ec9d4088c57967d6606",
+  "source_path": "pipeline/products/mps-wedding-portrait-studio/msg-from-claude-20261108-demos.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-026aab1dc1375e21632a589a778c786377ac5e27bd27504440f7887d7c90e526",
+  "request_kind": "dependency"
+}
