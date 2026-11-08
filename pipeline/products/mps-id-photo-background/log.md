@@ -70,3 +70,4 @@
 2026-11-08T17:42:26+08:00 | codex | package_ready → test_in_progress | 认领 1.0.6 A3 独立检查，通知 evt-b929ace7a16ddbfef6ece37b0d937a11b0d361ef2c4cdea82cf788430be69ff1。
 2026-11-08T17:44:41+08:00 | codex | test_in_progress → test_passed | 1.0.6 A3 独立检查通过，含空格及 # 的示例链接回归通过。真机、浏览器验证及上传能力受阻，待负责人手动验收与上传。见 03-test-report.md。
 2026-11-08T17:58:00+08:00 | muse | test_passed -> submitted | 负责人亲口报 1.0.6 已上传 WorkBuddy 团队版技能包。等平台审核，listed 后报最终结果。
+2026-11-08T20:21:00+08:00 | muse | submitted -> listed | 负责人亲口报审核通过、技能已发布（WorkBuddy 团队版技能包 1.0.6）。流水线首单走通。
