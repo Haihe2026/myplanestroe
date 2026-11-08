@@ -1,0 +1,8 @@
+{
+  "event_id": "evt-4d09f24e1f5196bde0f1f6648f6854620f49918f9813c00ec68c3bbd6c1b94e0",
+  "role": "claude",
+  "action": "claimed",
+  "claim_id": "cd0e56e5-93fd-47ad-9c2f-c9b0cb91ae8a",
+  "at": "2026-11-08T13:38:26+08:00",
+  "evidence_ref": null
+}
