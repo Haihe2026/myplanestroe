@@ -13,7 +13,7 @@ import tempfile
 import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PKG = os.path.join(HERE, '..', 'mps-id-photo-background')
+PKG = os.path.join(HERE, '..', 'mps-wedding-portrait-studio')
 if '--package' in sys.argv:
     i = sys.argv.index('--package')
     PKG = os.path.abspath(sys.argv[i + 1])
@@ -24,15 +24,15 @@ while '--zip' in sys.argv:
     ZIPS.append(os.path.abspath(sys.argv[i + 1]))
     del sys.argv[i:i + 2]
 sys.path.insert(0, os.path.join(PKG, 'scripts'))
-for m in ('idphoto', 'telemetry', 'welcome_copy', 'png_local', 'audit_images'):
+for m in ('studio', 'telemetry', 'welcome_copy', 'png_local', 'audit_images'):
     sys.modules.pop(m, None)
-import idphoto  # noqa: E402
+import studio  # noqa: E402
 import telemetry  # noqa: E402
 import png_local  # noqa: E402
 import welcome_copy as W  # noqa: E402
 sys.path.insert(0, HERE)
 import mock_backend  # noqa: E402
-mock_backend.idphoto = idphoto  # 与被测包同一模块实例
+mock_backend.studio = studio  # 与被测包同一模块实例
 
 
 def jpeg_bytes(w=600, h=800):
@@ -49,14 +49,14 @@ class Base(unittest.TestCase):
         os.makedirs(self.home)
         self.env = dict(os.environ)
         os.environ['HOME'] = self.home
-        idphoto.STATE_HOME = self.home  # 不依赖 HOME/USERPROFILE，Windows 同样隔离
-        os.environ['MPS_ID_PHOTO_TEST'] = '1'
-        os.environ.pop('MPS_ID_PHOTO_JOURNEY', None)
+        studio.STATE_HOME = self.home  # 不依赖 HOME/USERPROFILE，Windows 同样隔离
+        os.environ['MPS_WEDDING_STUDIO_TEST'] = '1'
+        os.environ.pop('MPS_WEDDING_STUDIO_JOURNEY', None)
         self.mock = mock_backend.Mock()
-        idphoto.TRANSPORT = self.mock.transport
+        studio.TRANSPORT = self.mock.transport
         telemetry.TRANSPORT = self.mock.telemetry_transport
-        self._sleep = idphoto.time.sleep
-        idphoto.time.sleep = lambda s: None
+        self._sleep = studio.time.sleep
+        studio.time.sleep = lambda s: None
         self.photos = os.path.join(self.tmp, 'photos')
         os.makedirs(self.photos)
         self.photo = os.path.join(self.photos, 'me.jpg')
@@ -66,8 +66,8 @@ class Base(unittest.TestCase):
             self.photo_bytes = f.read()
 
     def tearDown(self):
-        idphoto.time.sleep = self._sleep
-        idphoto.STATE_HOME = None
+        studio.time.sleep = self._sleep
+        studio.STATE_HOME = None
         os.environ.clear()
         os.environ.update(self.env)
         shutil.rmtree(self.tmp)
@@ -75,17 +75,17 @@ class Base(unittest.TestCase):
     def run_cmd(self, *argv):
         out, errs = io.StringIO(), io.StringIO()
         with contextlib.redirect_stdout(out), contextlib.redirect_stderr(errs):
-            code = idphoto.main(list(argv))
+            code = studio.main(list(argv))
         lines = out.getvalue().split('\n', 1)
         sig = json.loads(lines[0])
         return code, sig, (lines[1] if len(lines) > 1 else ''), errs.getvalue()
 
-    def confirmed_draft(self, target=None, color='white'):
-        _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '帮我换白底', '--image', self.photo, '--has-need')
+    def confirmed_draft(self, scene='white-studio', people=1, shape=None):
+        _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '想做白纱婚纱照', '--image', self.photo, '--has-need')
         did = s['draft_id']
-        args = ['plan', '--draft', did, '--scene', 'white-one', '--color', color]
-        if target:
-            args += ['--target', target]
+        args = ['plan', '--draft', did, '--scene', scene, '--people', str(people)]
+        if shape:
+            args += ['--shape', shape]
         code, s, _, _ = self.run_cmd(*args)
         self.assertEqual(code, 0, s)
         code, s, _, _ = self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')
@@ -93,7 +93,7 @@ class Base(unittest.TestCase):
         return did
 
     def secret(self):
-        with open(os.path.join(self.home, 'mps-id-photo-background', 'account.json')) as f:
+        with open(os.path.join(self.home, 'mps-wedding-portrait-studio', 'account.json')) as f:
             return json.load(f)['install_secret']
 
     def paid_account(self, did, balance=5):
@@ -106,8 +106,8 @@ class FirstTurn(Base):
     def test_first_turn_zero_business_http(self):
         def boom(*a, **k):
             raise AssertionError('business request in first turn')
-        idphoto.TRANSPORT = boom
-        for text, img in (('你好', None), ('', self.photo), ('你能做什么', None), ('白底一寸，明天报名', self.photo)):
+        studio.TRANSPORT = boom
+        for text, img in (('你好', None), ('', self.photo), ('你能做什么', None), ('用这张合照做海边婚纱照', self.photo)):
             argv = ['first-turn', '--defer-entry', '--text', text] + (['--image', img] if img else [])
             code, s, text_out, _ = self.run_cmd(*argv)
             self.assertEqual(code, 0)
@@ -121,15 +121,16 @@ class FirstTurn(Base):
     def test_close_question(self):
         _, _, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
         self.assertIn('你想从哪个方向开始？', t)
-        _, _, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '换白底', '--image', self.photo, '--has-need')
+        _, _, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '想做日系写真', '--image', self.photo, '--has-need')
         self.assertIn('这个方向可以吗？', t)
 
     def test_demo_paths_and_single(self):
-        code, s, t, _ = self.run_cmd('demo', 'custom-pixels')
+        code, s, t, _ = self.run_cmd('demo', 'garden')
         self.assertEqual(len(s['items']), 1)
         p = s['items'][0]['path']
         self.assertTrue(os.path.isabs(p) and os.path.isfile(p))
-        self.assertEqual(png_local.size_of(open(p, 'rb').read()), (295, 413))
+        w, h = png_local.size_of(open(p, 'rb').read())
+        self.assertGreater(w, h)  # 草坪婚礼为横版示例
         self.assertIn(W.DEMO_INTRO, t)
         code, s, _, _ = self.run_cmd('demo', 'nope')
         self.assertEqual(code, 3)
@@ -145,7 +146,7 @@ class FirstTurn(Base):
             md = None
         home = os.path.join(self.tmp, '.dot-parent', 'test user', 'Synthetic#User')  # 含空格（A3-E02）与 #（A3-E03）
         os.makedirs(home)
-        idphoto.STATE_HOME = home
+        studio.STATE_HOME = home
         code, s, _, _ = self.run_cmd('demo')
         self.assertEqual((code, len(s['items'])), (0, 10))
         for it in s['items']:
@@ -168,12 +169,12 @@ class FirstTurn(Base):
             self.assertTrue(os.path.isfile(unquote(path)))
 
     def test_demo_missing_assets_exit3(self):
-        real = idphoto.HERE
-        idphoto.HERE = os.path.join(self.tmp, 'empty', 'scripts')
+        real = studio.HERE
+        studio.HERE = os.path.join(self.tmp, 'empty', 'scripts')
         try:
             code, s, t, _ = self.run_cmd('demo')
         finally:
-            idphoto.HERE = real
+            studio.HERE = real
         self.assertEqual((code, s['signal']), (3, 'demoUnavailable'))
         self.assertIn('这次暂时没能展示示例图', t)
 
@@ -182,7 +183,7 @@ class Confirmation(Base):
     def test_no_consent_no_task(self):
         _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', self.photo)
         did = s['draft_id']
-        self.run_cmd('plan', '--draft', did, '--scene', 'white-one')
+        self.run_cmd('plan', '--draft', did, '--scene', 'white-studio')
         code, s, _, _ = self.run_cmd('run', '--draft', did)
         self.assertEqual((code, s['signal']), (3, 'needsConfirmation'))
         for photo, pay in (('no', 'yes'), ('yes', 'no'), ('', '')):
@@ -192,29 +193,48 @@ class Confirmation(Base):
 
     def test_plan_copy(self):
         _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', self.photo)
-        code, s, t, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'blue-two', '--target', '295x413')
+        code, s, t, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'seaside', '--people', '2')
         self.assertIn('确认开始', t)
         self.assertIn('按张计费', t)
         self.assertIn('发送去处理', t)
+        self.assertIn('两位都是成年人', t)
+        self.assertIn('「海边度假婚纱」婚纱照，两人同框，横版 3:2，1 张', t)
+        for bad in ('¥', '元', '提示词', '模板'):
+            self.assertNotIn(bad, t)
 
     def test_bad_photo_named_no_network(self):
         bad = os.path.join(self.photos, 'broken.png')
         open(bad, 'wb').write(b'not an image')
         _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', bad)
-        code, s, t, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'white-one')
+        code, s, t, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'white-studio')
         self.assertEqual((code, s['signal']), (3, 'photoInvalid'))
         self.assertIn('broken.png', t)
         self.assertEqual(self.mock.calls, [])
 
-    def test_target_must_be_given_not_inferred(self):
+    def test_shape_defaults_from_scene_and_portrait_only_solo(self):
         did = self.confirmed_draft()
-        d = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'drafts', did + '.json')))
-        self.assertIsNone(d['target'])
+        d = json.load(open(os.path.join(self.home, 'mps-wedding-portrait-studio', 'drafts', did + '.json')))
+        self.assertEqual((d['size'], d['people']), ('1024x1536', 1))
+        did = self.confirmed_draft(scene='garden', people=2)
+        d = json.load(open(os.path.join(self.home, 'mps-wedding-portrait-studio', 'drafts', did + '.json')))
+        self.assertEqual((d['size'], d['people']), ('1536x1024', 2))
+        _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', self.photo)
+        code, s, t, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'cyber', '--people', '2')
+        self.assertEqual((code, s['signal']), (3, 'peopleUnsupported'))
+        self.assertIn('只做单人照', t)
+        self.assertEqual(self.mock.calls, [])
+
+    def test_refuse_copy(self):
+        code, s, t, _ = self.run_cmd('refuse')
+        self.assertEqual((code, s['signal']), (0, 'refused'))
+        for must in ('未成年人', '不换脸', '照片里没有的人'):
+            self.assertIn(must, t)
+        self.assertEqual(self.mock.calls, [])
 
 
 class AccountBilling(Base):
     def test_full_flow_auth_topup_deliver(self):
-        did = self.confirmed_draft(target='295x413')
+        did = self.confirmed_draft(scene='seaside', people=2)
         code, s, t, _ = self.run_cmd('run', '--draft', did)
         self.assertEqual((code, s['signal']), (2, 'onboardingPreview'))
         for must in ('授权本身不扣费', '### 现在需要你做的', '打不开', W.REASSURE_SAVED, W.REASSURE_FREE, W.CROSS_SKILL, '不用手机号'):
@@ -235,9 +255,17 @@ class AccountBilling(Base):
         self.mock.users[secret]['balance'] = 3
         code, s, t, err = self.run_cmd('run', '--draft', did)
         self.assertEqual((code, s['signal']), (0, 'delivered'), t)
-        self.assertEqual(len(s['paths']), 2)
+        self.assertEqual(len(s['paths']), 1)
         self.assertTrue(all(os.path.isfile(p) for p in s['paths']))
-        self.assertEqual(png_local.size_of(open(s['paths'][1], 'rb').read()), (295, 413))
+        self.assertEqual(png_local.size_of(open(s['paths'][0], 'rb').read()), (1536, 1024))
+        self.assertTrue(s['paths'][0].endswith('me-seaside.png'))
+        self.assertIn('「海边度假婚纱」', t)
+        self.assertIn('你们两位', t)
+        self.assertNotIn('实际出图尺寸', t)
+        job = [c for c in self.mock.calls if c[1].endswith('/skill-jobs')][-1][2]
+        self.assertEqual(job['size'], '1536x1024')
+        self.assertIn('左侧的人', job['prompt'])
+        self.assertIn('海边度假婚纱', job['prompt'])
         self.assertEqual(s['remaining_uses'], 2)
         self.assertIn('剩余 2 次', t)
         self.assertIn(W.ORIGINAL_KEPT, t)
@@ -331,10 +359,10 @@ class AccountBilling(Base):
         did = self.confirmed_draft()
         self.paid_account(did, 3)
         self.run_cmd('run', '--draft', did)
-        d = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'drafts', did + '.json')))
-        a = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'account.json')))
-        body, _ = idphoto._job_body(d)
-        r = idphoto.call('POST', '/skill-jobs', body, auth=a['skill_key'], idem=d['idem'])
+        d = json.load(open(os.path.join(self.home, 'mps-wedding-portrait-studio', 'drafts', did + '.json')))
+        a = json.load(open(os.path.join(self.home, 'mps-wedding-portrait-studio', 'account.json')))
+        body, _ = studio._job_body(d)
+        r = studio.call('POST', '/skill-jobs', body, auth=a['skill_key'], idem=d['idem'])
         self.assertTrue(r['replayed'])
         self.assertEqual(self.mock.charges, 1)
 
@@ -342,7 +370,7 @@ class AccountBilling(Base):
         did = self.confirmed_draft()
         self.paid_account(did, 3)
         self.run_cmd('run', '--draft', did)  # 取得 Skill 凭证
-        acc = os.path.join(self.home, 'mps-id-photo-background', 'account.json')
+        acc = os.path.join(self.home, 'mps-wedding-portrait-studio', 'account.json')
         self.assertEqual(stat.S_IMODE(os.stat(acc).st_mode), 0o600)
         self.mock.keys.clear()
         did2 = self.confirmed_draft()
@@ -357,17 +385,17 @@ class AccountBilling(Base):
 
     def test_client_rejects_unregistered_field(self):
         with self.assertRaises(ValueError):
-            idphoto.call('POST', '/skill-jobs', dict(prompt='x', model='other'), auth='x', idem='idp-' + 'a' * 32)
+            studio.call('POST', '/skill-jobs', dict(prompt='x', model='other'), auth='x', idem='wps-' + 'a' * 32)
 
     def test_server_rejects_unregistered_field(self):
         did = self.confirmed_draft()
         self.paid_account(did, 2)
         self.run_cmd('run', '--draft', did)
-        a = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'account.json')))
-        with self.assertRaises(idphoto.GatewayError) as cm:
-            self.mock.transport('POST', idphoto.ORIGIN + '/platform-api/gemini/skill-jobs', dict(prompt='x', confirmed=True, model='m'),
-                                {'X-Skill-Source': idphoto.SKILL_ID, 'X-Skill-Channel': idphoto.CHANNEL, 'Authorization': 'Bearer ' + a['skill_key'],
-                                 'Idempotency-Key': 'idp-' + 'b' * 32}, 5, False)
+        a = json.load(open(os.path.join(self.home, 'mps-wedding-portrait-studio', 'account.json')))
+        with self.assertRaises(studio.GatewayError) as cm:
+            self.mock.transport('POST', studio.ORIGIN + '/platform-api/gemini/skill-jobs', dict(prompt='x', confirmed=True, model='m'),
+                                {'X-Skill-Source': studio.SKILL_ID, 'X-Skill-Channel': studio.CHANNEL, 'Authorization': 'Bearer ' + a['skill_key'],
+                                 'Idempotency-Key': 'wps-' + 'b' * 32}, 5, False)
         self.assertEqual(cm.exception.status, 400)
 
     def test_balance_menu_and_decline(self):
@@ -381,9 +409,9 @@ class AccountBilling(Base):
         self.assertEqual(t.strip(), W.DECLINE)
 
     def test_untrusted_link_rejected(self):
-        with self.assertRaises(idphoto.GatewayError):
-            idphoto.trusted_link('https://evil.example/membership/gemini/')
-        self.assertTrue(idphoto.trusted_link('https://myplanestore.com/membership/gemini/#ticket=a').startswith('https://aistore.zhaopintong.com/membership/gemini/#ticket=a'))
+        with self.assertRaises(studio.GatewayError):
+            studio.trusted_link('https://evil.example/membership/gemini/')
+        self.assertTrue(studio.trusted_link('https://myplanestore.com/membership/gemini/#ticket=a').startswith('https://aistore.zhaopintong.com/membership/gemini/#ticket=a'))
 
 
 class Waiting(Base):
@@ -405,7 +433,7 @@ class Waiting(Base):
         did, (c, s, t, _) = self.go(pending_rounds=50)
         self.assertEqual((c, s['signal'], s['progress']), (2, 'jobPending', 'processing'))
         polls = [x for x in self.mock.calls if x[1].startswith('/jobs/') and not x[1].endswith('/image')]
-        self.assertEqual(len(polls), idphoto.POLL_ATTEMPTS)
+        self.assertEqual(len(polls), studio.POLL_ATTEMPTS)
         self.mock.jobs[list(self.mock.jobs)[0]]['rounds'] = 1
         c, s, t, _ = self.run_cmd('resume', '--draft', did)
         self.assertEqual(s['signal'], 'delivered')
@@ -439,7 +467,7 @@ class Waiting(Base):
     def test_size_mismatch_reported(self):
         self.mock.output_size = (1024, 1024)
         _, (c, s, t, _) = self.go()
-        self.assertIn('实际出图尺寸是 1024×1024', t)
+        self.assertIn('实际出图尺寸是 1024×1024，不是 1024×1536', t)
 
 
 class Telemetry(Base):
@@ -451,11 +479,11 @@ class Telemetry(Base):
         body = self.mock.telemetry_calls[0][0]
         self.assertEqual(tuple(body), telemetry.FIELDS)
         self.assertNotIn('machine_id', body)
-        self.assertEqual((body['skill_id'], body['channel'], body['is_test']), ('mps-id-photo-background', 'workbuddy_skill', True))
+        self.assertEqual((body['skill_id'], body['channel'], body['is_test']), ('mps-wedding-portrait-studio', 'workbuddy_skill', True))
         self.assertTrue(telemetry.is_uuid4(body['installation_id']) and telemetry.is_uuid4(body['event_id']))
 
     def test_off_switch(self):
-        os.environ['MPS_ID_PHOTO_JOURNEY'] = 'off'
+        os.environ['MPS_WEDDING_STUDIO_JOURNEY'] = 'off'
         self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
         self.assertEqual(self.mock.telemetry_calls, [])
 
@@ -464,7 +492,7 @@ class Telemetry(Base):
             self.mock.telemetry_status = status
             code, s, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
             self.assertEqual(code, 0)
-        st = json.load(open(os.path.join(self.home, 'mps-id-photo-background', 'first-dialogue.json')))
+        st = json.load(open(os.path.join(self.home, 'mps-wedding-portrait-studio', 'first-dialogue.json')))
         self.assertFalse(st['sent'])  # 204 不算成功
         ids = {c[0]['installation_id'] for c in self.mock.telemetry_calls}
         self.assertEqual(len(ids), 1)  # 沿原标识
@@ -481,7 +509,7 @@ class Telemetry(Base):
         self.assertEqual(code, 0)
 
     def test_corrupt_identity_repaired_and_readonly_skipped(self):
-        d = os.path.join(self.home, 'mps-id-photo-background')
+        d = os.path.join(self.home, 'mps-wedding-portrait-studio')
         os.makedirs(d, exist_ok=True)
         open(os.path.join(d, 'first-dialogue.json'), 'w').write('garbage')
         self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
@@ -501,7 +529,7 @@ class Telemetry(Base):
     def test_every_early_branch_reports(self):
         for argv in (['demo'], ['status'], ['balance'], ['first-turn', '--text', 'x'], ['history'], ['ticket'],
                      ['feedback', '--category', 'other', '--text', 'x']):
-            shutil.rmtree(os.path.join(self.home, 'mps-id-photo-background'), ignore_errors=True)
+            shutil.rmtree(os.path.join(self.home, 'mps-wedding-portrait-studio'), ignore_errors=True)
             before = len(self.mock.telemetry_calls)
             self.run_cmd(*argv)
             self.assertEqual(len(self.mock.telemetry_calls), before + 1, argv)
@@ -559,13 +587,13 @@ class Support(Base):
         self.assertEqual((s['signal'], s['total'], s['has_more']), ('history', 2, False))
         self.assertIn('预留 1 次，完成后结算 · 处理中', t)
         self.assertIn('扣次以服务记录为准', t)
-        idphoto.HISTORY_PAGE_SIZE = 1
+        studio.HISTORY_PAGE_SIZE = 1
         try:
             code, s, t, _ = self.run_cmd('history', '--page', '1')
             self.assertEqual((s['has_more'], s['next_page']), (True, 2))
             self.assertIn('回复「下一页」', t)
         finally:
-            idphoto.HISTORY_PAGE_SIZE = 20
+            studio.HISTORY_PAGE_SIZE = 20
 
     def test_history_failure_and_no_account(self):
         code, s, t, _ = self.run_cmd('history')
@@ -581,15 +609,15 @@ class Support(Base):
 
     def test_skill_key_not_accepted_and_accounts_isolated(self):
         self.delivered_account(3)
-        a = idphoto.load_account()
-        with self.assertRaises(idphoto.GatewayError) as cm:
-            self.mock.transport('GET', idphoto.ORIGIN + '/platform-api/gemini/consumption-history', None,
-                                {'X-Skill-Source': idphoto.SKILL_ID, 'X-Skill-Channel': idphoto.CHANNEL,
+        a = studio.load_account()
+        with self.assertRaises(studio.GatewayError) as cm:
+            self.mock.transport('GET', studio.ORIGIN + '/platform-api/gemini/consumption-history', None,
+                                {'X-Skill-Source': studio.SKILL_ID, 'X-Skill-Channel': studio.CHANNEL,
                                  'Authorization': 'Bearer ' + a['skill_key']}, 5, False)
         self.assertEqual(cm.exception.status, 401)
         other = self.other_account()
-        st, raw = self.mock.transport('GET', idphoto.ORIGIN + '/platform-api/gemini/consumption-history', None,
-                                      {'X-Skill-Source': idphoto.SKILL_ID, 'X-Skill-Channel': idphoto.CHANNEL,
+        st, raw = self.mock.transport('GET', studio.ORIGIN + '/platform-api/gemini/consumption-history', None,
+                                      {'X-Skill-Source': studio.SKILL_ID, 'X-Skill-Channel': studio.CHANNEL,
                                        'Authorization': 'Bearer ' + other}, 5, False)
         self.assertEqual(json.loads(raw)['total'], 0)
 
@@ -707,7 +735,9 @@ class DemoAssets(unittest.TestCase):
             self.assertEqual(hashlib.sha256(raw).hexdigest(), expect, r['key'])
             with open(os.path.join(PKG, 'assets', r['package_file']), 'rb') as f:
                 self.assertEqual(hashlib.sha256(f.read()).hexdigest(), r['package_sha256'], r['key'])
-        self.assertEqual(png_local.size_of(open(os.path.join(PKG, 'assets', 'custom-pixels.png'), 'rb').read()), (295, 413))
+        for d in demos:
+            w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+            self.assertEqual(w > h, studio.SCENES[d['key']][2] == 'landscape', d['key'])
 
 
 class ZipLayout(unittest.TestCase):
@@ -717,8 +747,8 @@ class ZipLayout(unittest.TestCase):
         if ZIPS:
             return ZIPS
         dist = os.path.join(HERE, '..', 'dist')
-        ver = idphoto.SKILL_VERSION
-        p = os.path.join(dist, 'mps-id-photo-background-%s.zip' % ver)
+        ver = studio.SKILL_VERSION
+        p = os.path.join(dist, 'mps-wedding-portrait-studio-%s.zip' % ver)
         return [p] if os.path.exists(p) else []
 
     def test_zip_dir_depth_at_most_two(self):
@@ -731,9 +761,9 @@ class ZipLayout(unittest.TestCase):
                 names = [n for n in z.namelist() if not n.endswith('/')]
             self.assertTrue(names, zp)
             self.assertEqual([n for n in names if n.count('/') > 2], [], zp)
-            self.assertTrue(all(n.startswith('mps-id-photo-background/') for n in names), zp)
+            self.assertTrue(all(n.startswith('mps-wedding-portrait-studio/') for n in names), zp)
             self.assertFalse([n for n in names if '/assets/demos/' in n], zp)
-            self.assertEqual(len([n for n in names if n.startswith('mps-id-photo-background/assets/') and n.endswith('.png')]), 10, zp)
+            self.assertEqual(len([n for n in names if n.startswith('mps-wedding-portrait-studio/assets/') and n.endswith('.png')]), 10, zp)
 
     def test_zip_skill_examples_platform_limits(self):
         """ZIP 内 SKILL.md：examples_zh/examples_en 各 ≤3 且数量一致，version 与脚本一致。"""
@@ -743,7 +773,7 @@ class ZipLayout(unittest.TestCase):
             self.skipTest('no ZIP for current version yet (pass --zip <file>)')
         for zp in zs:
             with zipfile.ZipFile(zp) as z:
-                front = z.read('mps-id-photo-background/SKILL.md').decode('utf-8').split('---', 2)[1]
+                front = z.read('mps-wedding-portrait-studio/SKILL.md').decode('utf-8').split('---', 2)[1]
             def items(key):
                 m = re.search(r'^' + key + r':\s*\n((?:\s+-\s+.*\n)+)', front, re.M)
                 return re.findall(r'^\s+-\s+(.*)$', m.group(1), re.M) if m else []
@@ -751,24 +781,11 @@ class ZipLayout(unittest.TestCase):
             self.assertTrue(1 <= len(zh) <= 3, (zp, len(zh)))
             self.assertTrue(len(en) <= 3, (zp, len(en)))
             self.assertEqual(len(zh), len(en), zp)
-            self.assertIn('version: %s' % idphoto.SKILL_VERSION, front, zp)
+            self.assertIn('version: %s' % studio.SKILL_VERSION, front, zp)
             sys.path.insert(0, os.path.join(PKG, 'tests'))
             import test_skill_contract as C
             strip = lambda xs: [x.strip().strip('"') for x in xs]
             self.assertEqual(C.example_misaligned(strip(zh), strip(en)), [], zp)
-
-
-class LocalImage(unittest.TestCase):
-    def test_crop_resize_exact(self):
-        png = mock_backend.make_png(1024, 1536, (10, 20, 30))
-        out = png_local.crop_resize(png, 295, 413)
-        w, h, rows = png_local.decode(out)
-        self.assertEqual((w, h), (295, 413))
-        self.assertEqual(rows[100][:3], bytes((10, 20, 30)))
-
-    def test_target_too_large(self):
-        with self.assertRaises(ValueError):
-            png_local.crop_resize(mock_backend.make_png(100, 150), 200, 300)
 
 
 if __name__ == '__main__':

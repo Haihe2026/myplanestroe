@@ -566,6 +566,17 @@ class Contract(unittest.TestCase):
                 path, frag, query = uri_file_part(target)
                 self.assertEqual((frag, query), ('', ''), name)
                 self.assertTrue(os.path.isfile(path), name)
+            # 规格 5.1 指定的两条合成路径（A3-E02 空格、A3-E03 #），文件直接放在该目录下
+            for rel in ('Codex Demo Assets/white-studio.png', 'Codex#Demo/white-studio.png'):
+                f = os.path.join(home, *rel.split('/'))
+                os.makedirs(os.path.dirname(f), exist_ok=True)
+                open(f, 'wb').close()
+                target = md_link_target('**[经典白纱影棚](%s)**' % studio.md_safe_path(f))
+                self.assertIsNotNone(target, rel)
+                path, frag, query = uri_file_part(target)
+                self.assertEqual((frag, query), ('', ''), rel)
+                self.assertTrue(os.path.isfile(path), rel)
+                self.assertEqual(os.path.realpath(path), os.path.realpath(f), rel)
         finally:
             shutil.rmtree(home, ignore_errors=True)
         try:

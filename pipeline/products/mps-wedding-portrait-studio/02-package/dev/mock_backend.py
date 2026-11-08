@@ -22,8 +22,8 @@ import zlib
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'mps-id-photo-background', 'scripts'))
-import idphoto  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'mps-wedding-portrait-studio', 'scripts'))
+import studio  # noqa: E402
 
 ALLOWED_JOB = {'prompt', 'size', 'confirmed', 'image_engine', 'references', 'reference_consent', 'role', 'platform', 'slot', 'image_retention', 'reference_purpose'}
 TELEMETRY_FIELDS = {'event_id', 'installation_id', 'skill_id', 'skill_name', 'skill_version', 'channel', 'client_occurred_at', 'is_test'}
@@ -46,7 +46,7 @@ class Mock:
         self.calls = []
         self.charges = 0
         self.scenario = {}
-        self.output_size = (1024, 1536)
+        self.output_size = None  # None：按请求画幅出图；设成元组模拟实际尺寸偏差
         self.telemetry = {}      # installation_id -> record
         self.telemetry_calls = []
         self.telemetry_status = None
@@ -72,7 +72,7 @@ class Mock:
     def transport(self, method, url, body, headers, timeout, binary):
         path = url.split('/platform-api/gemini', 1)[1]
         self.calls.append((method, path, body, dict(headers)))
-        assert headers.get('X-Skill-Source') == 'mps-id-photo-background'
+        assert headers.get('X-Skill-Source') == 'mps-wedding-portrait-studio'
         assert headers.get('X-Skill-Channel') == 'workbuddy_skill'
         assert 'Origin' not in headers and 'Cookie' not in headers
 
@@ -80,7 +80,7 @@ class Mock:
             return 200, json.dumps(d).encode()
 
         def err(code):
-            raise idphoto.GatewayError(code)
+            raise studio.GatewayError(code)
         auth = headers.get('Authorization')
         if path == '/quick-entry' and method == 'POST':
             s = body.get('install_secret')
@@ -130,6 +130,8 @@ class Mock:
                 err(429)
             if set(body) - ALLOWED_JOB or body.get('confirmed') is not True or body.get('image_engine') != 'photo-retouch-sunburst':
                 err(400)
+            if body.get('size') not in ('1024x1024', '1536x1024', '1024x1536'):  # 适配器已映射的三种画幅
+                err(400)
             refs = body.get('references')
             if body.get('reference_consent') is not True or not isinstance(refs, list) or len(refs) != 1 or set(refs[0]) != {'mime', 'content'}:
                 err(422)
@@ -152,7 +154,8 @@ class Mock:
             self.charges += 1
             pend = self.scenario.get('pending_rounds', 0)
             status = 'pending' if pend else ('failed' if self.scenario.get('fail') else 'succeeded')
-            self.jobs[jid] = dict(id=jid, hash=rhash, status=status, rounds=pend, owner=s)
+            self.jobs[jid] = dict(id=jid, hash=rhash, status=status, rounds=pend, owner=s,
+                                  size=tuple(int(x) for x in body['size'].split('x')))
             self.idem[(s, idem)] = jid
             if self.scenario.get('submit_lost'):
                 err(0)  # 已扣费建单，但客户端没收到应答
@@ -187,7 +190,7 @@ class Mock:
                     err(0)
                 if j['status'] != 'succeeded':
                     err(409)
-                return 200, make_png(*self.output_size, rgb=(255, 255, 255))
+                return 200, make_png(*(self.output_size or j['size']), rgb=(255, 255, 255))
             if self.scenario.get('poll_down'):
                 err(0)
             if self.scenario.get('poll_glitch', 0) > 0:
@@ -208,7 +211,7 @@ class Mock:
             return 200, json.dumps(d).encode()
 
         def err(code):
-            raise idphoto.GatewayError(code)
+            raise studio.GatewayError(code)
         if self.scenario.get('support_down'):
             err(0)
         if self.scenario.get('support_busy'):
