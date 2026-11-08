@@ -13,7 +13,7 @@ examples_en:
   - "Make this a white background one-inch photo, I need it for an application tomorrow"
   - "I need a blue background two-inch photo for my exam application, I'll send the photo"
   - "My resume photo background is too busy, change it to plain white"
-version: 1.0.4
+version: 1.0.5
 author: "MyPlaneStore"
 ---
 

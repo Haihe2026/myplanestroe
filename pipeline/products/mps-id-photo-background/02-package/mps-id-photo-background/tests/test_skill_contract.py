@@ -400,5 +400,38 @@ class Contract(unittest.TestCase):
         self.assertNotIn('\\', good)
         self.assertEqual(md_link_target('**[白底一寸](%s)**' % good), good)
 
+    def test_demo_link_path_with_space(self):
+        # 复现 1.0.4 缺陷 A3-E02：状态目录含空格时 `[标题](路径)` 不构成链接
+        from urllib.parse import unquote
+        raw = 'C:/test user/mps-id-photo-background/demos/white-one.png'
+        self.assertIsNone(re.search(r'\]\(([^()\s]*)\)', '**[白底一寸](%s)**' % raw))
+        with mock.patch.object(idphoto.os, 'path', ntpath):
+            good = idphoto.md_safe_path('C:\\test user\\mps-id-photo-background\\demos\\white-one.png')
+        self.assertEqual(good, 'C:/test%20user/mps-id-photo-background/demos/white-one.png')
+        self.assertEqual(md_link_target('**[白底一寸](%s)**' % good), good)
+        for odd in ('a (1)', 'x%20y', 'p<q>', 'tab\tdir'):
+            enc = idphoto.md_safe_path('/home/' + odd + '/f.png')
+            self.assertEqual(md_link_target('**[t](%s)**' % enc), enc, odd)
+            self.assertEqual(unquote(enc), '/home/' + odd + '/f.png')
+        # 真实文件：含空格的合成目录，解析后的目标解码后仍指向存在的文件
+        home = tempfile.mkdtemp()
+        try:
+            d = os.path.join(home, 'test user', 'mps-id-photo-background', 'demos')
+            os.makedirs(d)
+            f = os.path.join(d, 'white-one.png')
+            open(f, 'wb').close()
+            target = md_link_target('**[白底一寸](%s)**' % idphoto.md_safe_path(f))
+            self.assertNotIn(' ', target)
+            self.assertTrue(os.path.isfile(unquote(target)))
+        finally:
+            shutil.rmtree(home, ignore_errors=True)
+        try:
+            from markdown_it import MarkdownIt
+        except ImportError:
+            return
+        html = MarkdownIt().render('**[白底一寸](%s)**' % good)
+        self.assertIn('<a href=', html)
+        self.assertNotIn('<a href=', MarkdownIt().render('**[白底一寸](%s)**' % raw))
+
 if __name__ == '__main__':
     unittest.main()

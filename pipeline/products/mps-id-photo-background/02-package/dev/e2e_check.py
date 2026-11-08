@@ -135,7 +135,7 @@ class FirstTurn(Base):
         self.assertEqual(code, 3)
 
     def test_demo_links_survive_markdown(self):
-        """回归：demo 链接按 Markdown 解析后路径仍存在（含点开头上级目录的家目录）。"""
+        """回归：demo 链接按 Markdown 解析后路径仍存在（含点开头上级目录、含空格的家目录）。"""
         import re
         punct = re.escape('!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
         try:
@@ -143,7 +143,7 @@ class FirstTurn(Base):
             md = MarkdownIt()
         except ImportError:
             md = None
-        home = os.path.join(self.tmp, '.dot-parent', 'Administrator')
+        home = os.path.join(self.tmp, '.dot-parent', 'test user')  # 含空格（A3-E02）
         os.makedirs(home)
         idphoto.STATE_HOME = home
         code, s, _, _ = self.run_cmd('demo')
@@ -155,11 +155,12 @@ class FirstTurn(Base):
             cell = '**[%s](%s)**<br>%s' % (it['title'], p, it['note'])
             target = re.sub(r'\\([' + punct + '])', r'\1', re.search(r'\]\(([^()\s]*)\)', cell).group(1))
             self.assertEqual(target, p)
+            self.assertNotIn(' ', p)
+            from urllib.parse import unquote
             if md is not None:
                 href = re.search(r'href="([^"]*)"', md.render(cell)).group(1)
-                from urllib.parse import unquote
-                self.assertEqual(unquote(href), p)
-            self.assertTrue(os.path.isfile(target))
+                self.assertEqual(unquote(href), unquote(p))
+            self.assertTrue(os.path.isfile(unquote(target)))
 
     def test_demo_missing_assets_exit3(self):
         real = idphoto.HERE

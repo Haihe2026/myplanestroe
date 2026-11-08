@@ -1,3 +1,64 @@
+# 自测报告：mps-id-photo-background 1.0.5（修复轮：示例图路径含空格时链接无法解析）
+
+- 角色：Claude Code；时间：2026-11-08T13:40:31+08:00（北京时间，定时运行）
+- 官方文档：修复轮，未重读（SOP 〇节）。
+- 依据：03-test-report.md A3-E02（Codex，2026-11-08T12:46:22+08:00，通知 evt-4d09f24e，固定提交 3ade6f2）。规格未变，A1 沿用 1.0.2 复检结论，不重做。rounds.test=3 未超过 max_rounds=3，按修复轮继续。
+- 包类型：只打 WorkBuddy 团队版技能包（`workbuddy-skill`，config `channels`）。
+- 包文件（`02-package/dist/`）：
+  - `mps-id-photo-background-1.0.5.zip`：889405 字节，SHA256 `c51cd69baaa70fd56ba455c459dd1067ed5713ea38fdac21d38d1bda8fad7707`，24 个文件，根目录 `mps-id-photo-background/`，最深 `根/二级目录/文件`，CRC 通过。
+  - 1.0.4（`0d1c0fbd…`）、1.0.3、1.0.2、1.0.1、1.0.0 ZIP 原样保留。头像未改动。
+
+## 本轮改了什么
+
+1. `scripts/idphoto.py` `md_safe_path()`：仍转正斜杠；另对 Markdown 链接目标中会断链的字符做 URL 编码——空格→`%20`、制表符→`%09`、`(`/`)`→`%28`/`%29`、`<`/`>`→`%3C`/`%3E`，先把 `%` 编为 `%25` 保证可逆。例：`C:\test user\mps-id-photo-background\demos\white-one.png` → `C:/test%20user/mps-id-photo-background/demos/white-one.png`。无这些字符的路径输出与 1.0.4 完全相同。
+2. `tests/test_skill_contract.py` 新增 `test_demo_link_path_with_space`：含空格的合成 Windows 路径（ntpath 规则）；原样空格路径断言不构成链接；修复后 CommonMark 目标提取与输出一致；括号、尖括号、`%`、制表符逐个可逆；真实含空格合成目录中的文件，解析目标解码后存在；markdown-it 可用时断言修复后生成 `<a>`、原样空格路径不生成。
+3. `dev/e2e_check.py` `test_demo_links_survive_markdown`：模拟家目录改为含空格的 `.dot-parent/test user`，跑真实 `demo` 命令，十个链接逐一断言：无反斜杠、无空格、CommonMark 目标与输出一致、markdown-it href 解码一致、解码后文件存在。
+4. 版本 1.0.4 → 1.0.5（SKILL.md、`_meta.json`、`idphoto.SKILL_VERSION`、`telemetry.SKILL_VERSION`、真机验收单、`dev/build.py`）。
+5. **未改**：SKILL.md 正文与 frontmatter 其余字段（examples 中英各 3 条且逐条对齐）、目录层级、授权与充值链接、规格、欢迎句、遥测、付费、话术、其他业务逻辑、后端、生产。
+
+## 打包前 frontmatter 逐项核对（WorkBuddy 团队版技能包）
+
+| 项 | 1.0.5 |
+|---|---|
+| 必填 8 字段 | 全部存在且非空；version=`1.0.5`，author=`MyPlaneStore` |
+| 可选键 | 仅 `examples_zh`、`examples_en`（未改动） |
+| examples_zh / examples_en | 3 / 3，逐条同一场景（契约语义对齐检查通过） |
+| 版本号一致 | SKILL.md、`_meta.json`、脚本两处、ZIP 文件名一致 |
+| 目录层级 | ZIP 内路径 `/` 数 ≤ 2 |
+
+## 结果
+
+| 项 | 结果 |
+|---|---|
+| 契约测试（源码） | 26/26 通过 |
+| 端到端（模拟后端，源码） | 53/53 通过（2 项 ZIP 检查在打包前跳过） |
+| 干净解压 1.0.5 ZIP 至含空格目录 `clean dir/` 后契约（`python3 -I`） | 26/26 通过 |
+| 干净解压后端到端（`--package <含空格的解压目录> --zip dist/…-1.0.5.zip`） | 53/53 通过 |
+| 回归有效性：1.0.4 包代码 + 新契约测试 `test_demo_link_path_with_space` | 失败（输出 `C:/test user/…`，未编码） |
+| 回归有效性：1.0.4 解压包跑 `test_demo_links_survive_markdown` | 失败（含空格路径无法提取链接目标） |
+| ZIP 密钥类特征扫描 | 无命中 |
+| 真实上游调用 / 真实上报 / 生产变更 | 0 / 0 / 0 |
+
+## 偏离与未验证
+
+- 未在 Windows 真机与 WorkBuddy 宿主里点开 `%20` 链接验证；依据 CommonMark 规范与 markdown-it 解析结果，宿主是否对本地文件链接做百分号解码未验证（负责人上架前自测）。
+- 平台上传解析未验证（负责人手动上传）。真机验收按负责人长期规则跳过。
+- 授权链接改通用地址仍未做，理由同 1.0.1（见 `reply-from-claude-20261107.md`）。
+
+## 部署与回滚
+
+- 部署：无后端改动；A3 通过后由负责人手动上传 `mps-id-photo-background-1.0.5.zip`。
+- 回滚：dist 内 1.0.4 及更早 ZIP 原样保留；1.0.4 仅在路径含空格时示例链接失效，可作为回滚版本。
+
+## 复跑
+
+```sh
+cd 02-package/mps-id-photo-background && python3 -m unittest discover -s tests        # 契约 26 项
+cd 02-package && python3 dev/e2e_check.py --zip dist/mps-id-photo-background-1.0.5.zip
+```
+
+---
+
 # 自测报告：mps-id-photo-background 1.0.4（修复轮：中英示例场景未对齐）
 
 - 角色：Claude Code；时间：2026-11-08T12:40:13+08:00（北京时间，定时运行）

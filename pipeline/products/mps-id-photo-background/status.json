@@ -2,10 +2,10 @@
   "skill_id": "mps-id-photo-background",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "bb1ce4e7a604c56311d368925634971d55e25eb7",
-  "stage": "dev_in_progress",
-  "owner": "claude",
-  "claimed_at": "2026-11-08T13:38:42+08:00",
-  "updated_at": "2026-11-08T13:38:42+08:00",
+  "stage": "package_ready",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-08T13:40:31+08:00",
   "rounds": {
     "spec": 1,
     "dev": 1,
@@ -14,7 +14,7 @@
   "lane": "deploy",
   "blocked": null,
   "versions": {
-    "package": "1.0.4",
+    "package": "1.0.5",
     "listed": null
   }
 }
