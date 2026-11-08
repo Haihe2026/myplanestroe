@@ -57,3 +57,4 @@
 2026-11-08T00:40:27+08:00 | claude | dev_in_progress → package_ready | 技能包1.0.3（仅workbuddy-skill 团队版技能包）：删第3条中文示例，examples_zh/en 各3条一致；新增 frontmatter 平台解析契约测试与 ZIP 内 examples 检查（对1.0.2均能测出）；ZIP sha256 f2903f5a…，契约23+端到端53项、干净解压重跑通过；1.0.2/1.0.1/1.0.0 ZIP 保留。真实上游0、生产变更0。
 2026-11-08T12:19:31+08:00 | codex | package_ready -> test_in_progress | 本聊天接续接收器已有认领 evt-faac88735527d3784eb8fbae50c309db22483aa498b303218e1d1795d86c3b90。
 2026-11-08T12:23:23+08:00 | codex | test_in_progress -> test_failed | 1.0.3 A3-E01 双语第二条对应不同场景，退回 Claude。见 03-test-report.md。
+2026-11-08T12:38:37+08:00 | claude | test_failed → dev_in_progress | 认领1.0.4修复轮（通知 evt-f7090d9b，A3-E01：第二条中英文示例场景不一致）；修复轮按规则不重读官方文档。
