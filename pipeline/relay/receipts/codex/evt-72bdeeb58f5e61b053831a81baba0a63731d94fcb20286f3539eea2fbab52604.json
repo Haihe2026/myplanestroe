@@ -1,1 +1,8 @@
-{"event_id": "evt-72bdeeb58f5e61b053831a81baba0a63731d94fcb20286f3539eea2fbab52604", "role": "codex", "action": "claimed", "at": "2026-11-08T10:26:16+08:00", "evidence_ref": null, "claim_id": "519bb286-7aa2-43d0-89fe-ca63c195c7d3"}
+{
+  "event_id": "evt-72bdeeb58f5e61b053831a81baba0a63731d94fcb20286f3539eea2fbab52604",
+  "role": "codex",
+  "action": "acknowledged",
+  "at": "2026-11-08T12:30:38+08:00",
+  "evidence_ref": "c28d96b2d112e5d6bba5846faea721d661017b8c:pipeline/products/mps-id-photo-background/03-test-report.md",
+  "claim_id": "519bb286-7aa2-43d0-89fe-ca63c195c7d3"
+}

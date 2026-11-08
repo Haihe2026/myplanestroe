@@ -1,1 +1,8 @@
-{"event_id": "evt-24ac0e4e5f302feaeb3eb553791adec77cc6da8a9ac2dc040d8763b3d3021a1d", "role": "codex", "action": "claimed", "at": "2026-11-08T09:54:23+08:00", "evidence_ref": null, "claim_id": "799703d7-ba48-47e3-9d99-8c6226bbc66d"}
+{
+  "event_id": "evt-24ac0e4e5f302feaeb3eb553791adec77cc6da8a9ac2dc040d8763b3d3021a1d",
+  "role": "codex",
+  "action": "acknowledged",
+  "at": "2026-11-08T12:30:38+08:00",
+  "evidence_ref": "1fbeff0372fd37aa551d0008c586cd514c68202d:pipeline/products/mps-wedding-portrait-studio/01-dev-spec.md",
+  "claim_id": "799703d7-ba48-47e3-9d99-8c6226bbc66d"
+}
