@@ -5,3 +5,4 @@
 2026-11-08T13:11:34+08:00 | codex | blocked（串行等候） | 按负责人确认的固定欢迎语同步 MD/JSON，重新读取三页官方文档。按 SEQUENCED_HOLD 等证件照上传后接续。
 2026-11-08T17:58:00+08:00 | muse | blocked(SEQUENCED_HOLD) -> brief_ready | 负责人报第一单 1.0.6 已上传，串行闸开，恢复开发。认证问题已按负责人 13:08 决定解决（欢迎句按 SOP 直接写）。见 msg-from-muse-20261108-resume-wedding.md。
 2026-11-08T18:01:54+08:00 | codex | brief_ready → spec_in_progress | 固定请求 evt-2ea730502c6102de8b63f8cc983b963adfec49c8813391ab603842cd50c39651 与既有认领核对一致。证件照 1.0.6 已 submitted，婚纱写真接续 A1。
+2026-11-08T18:04:36+08:00 | codex | spec_in_progress → spec_ready | 已重读三页 WorkBuddy 文档，复核 A1 与 MD/JSON 一致性。新增双语同场景和空格、# 的回归要求，合成链接用 Markdown 解析后命中现存文件。示例图计划 10 张，本轮真实生成 0 次。交 Claude 开发与 A2。

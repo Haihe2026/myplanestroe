@@ -1,16 +1,16 @@
 # 婚纱写真照相馆开发规格 · 1.0.0
 
-2026-11-08，北京时间。欢迎语已按负责人决定写入。按串行规则等待前一单上传，之后复核 A1。Claude 承担技能实现、自测和团队版打包。Codex 独立检查后交负责人手动上传。
+2026-11-08，北京时间。本轮复核通过 A1，交 Claude 开发。上一单证件照换底助手 1.0.6 已由负责人上传并记为 `submitted`。Claude 承担技能实现、自测和团队版打包。Codex 独立检查后交负责人手动上传。
 
-选品来源 `ffde7ed7a88995e556f7d9e80a2316b56306c97b:pipeline/products/mps-wedding-portrait-studio/00-brief.md`。业务接口、上游资源及编制使用的 SOP 固定于 `884e58e133ec27483b3a181257ffdea3926f2c53`。同仓路径均相对于该提交。
+选品来源 `ffde7ed7a88995e556f7d9e80a2316b56306c97b:pipeline/products/mps-wedding-portrait-studio/00-brief.md`。业务接口与上游资产仍固定于 `884e58e133ec27483b3a181257ffdea3926f2c53`，相应源码路径均相对于该提交。恢复使用的 SOP 固定于 `a604523f4bd0e524dda506146d2411e76be43e9c`。Muse 交接来源为 `e917645d57b91874a6acb0ab697124db2f2472b2:pipeline/products/mps-wedding-portrait-studio/msg-from-muse-20261108-resume-wedding.md`。
 
 ## 1. 官方阅读及立项
 
 | 日期 | 页面 | 读取结果 |
 | --- | --- | --- |
-| 2026-11-08 | [官方文档](https://open.workbuddy.cn/docs/skill) | 本轮重新在线读取，HTTP 200。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。 |
-| 2026-11-08 | [官方文档](https://open.workbuddy.cn/docs/expert) | 本轮重新在线读取，HTTP 200。核对专家包结构，确认本单渠道只采用 Skill 格式。 |
-| 2026-11-08 | [官方文档](https://open.workbuddy.cn/docs) | 本轮重新在线读取，HTTP 200。核对入驻、审核及发布顺序。 |
+| 2026-11-08 | [官方文档](https://open.workbuddy.cn/docs/skill) | 本次恢复复核已重新在线读取。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。 |
+| 2026-11-08 | [官方文档](https://open.workbuddy.cn/docs/expert) | 本次恢复复核已重新在线读取。核对专家包结构，确认本单渠道只采用 Skill 格式。 |
+| 2026-11-08 | [官方文档](https://open.workbuddy.cn/docs) | 本次恢复复核已重新在线读取。核对入驻、审核及发布顺序。 |
 
 产品 ID `mps-wedding-portrait-studio`，选品前固定仓库树检查仅存在本产品目录，未发现同名已发布条目记录。英文名 Wedding & Portrait Studio，唯一渠道 WorkBuddy 团队版 `workbuddy-skill`。沿通用套餐的 fast 车道，无后端补丁。选品单记载的需求证据作内部立项参考，收入与竞品数字不用于公开文案。
 
@@ -83,20 +83,34 @@ L0 记录首次开口事件，跨技能机器级新设备数不可得。L1 打�
 
 包只交 WorkBuddy 团队版。SKILL.md 八必填字段齐全，examples_zh/en 主题逐项对应、各最多三条。包根下最多一层子目录，资源直接在 assets/，固定示例 PNG 10 张。文案避免公开成本、上游和内部接口细节。首轮欢迎句逐字使用「欢迎使用WorkBuddy官方认证技能 婚纱写真照相馆。」，同一对话只显示一次。2026-11-08，负责人在本聊天明确要求按现行 SOP 固定格式，WorkBuddy 审核状态按实际回执记录。
 
+### 5.1 WorkBuddy 示例字段与路径回归
+
+`examples_zh` 和 `examples_en` 各三条。按索引对照同一场景 ID、人物数量要求和画幅，分别检查条数和语义。三条 frontmatter 示例与十张包内效果图分别验收。
+
+| 场景 ID | 画幅 | examples_zh | examples_en |
+| --- | --- | --- | --- |
+| white-studio | 1024x1536 | 用我的照片做经典白纱影棚婚纱照，竖版 2:3。 | Use my photo to make a classic white-gown studio wedding portrait in portrait 2:3. |
+| seaside | 1536x1024 | 用这张两人同框照做海边婚纱照，横版 3:2。 | Use this photo of us together to make a seaside wedding portrait in landscape 3:2. |
+| japanese | 1024x1536 | 用我的单人照做日系自然光写真，竖版 2:3。 | Use my solo photo to make a Japanese-style portrait with natural light in portrait 2:3. |
+
+路径约定沿用已通过首单静态检查的处理方式，参考 `7c2ca69be71cf6e5b7a8f6d5d172f94b0f436913:pipeline/products/mps-id-photo-background/02-package/mps-id-photo-background/scripts/idphoto.py:100`。状态和资源目录名不以点开头。离线示例命令返回其实际落盘的绝对路径，统一正斜杠。路径函数对原始路径做一次转义，至少将空格转为 `%20`、`#` 转为 `%23`，处理原始字面百分号并防止二次编码。宿主直接把返回值填入 Markdown 链接目标。
+
+A2 与 A3 均用本地合成文件覆盖三项回归。A3-E01 检查旧版样例式的双语错配可被检出。A3-E02 用带空格的合成目录 `Codex Demo Assets/white-studio.png`，A3-E03 用带 `#` 的合成目录 `Codex#Demo/white-studio.png`。将链接按 Markdown 解析，确认生成可点击链接，目标未被解析成查询或片段，URL 解码后定位到原来的现存文件。两项路径检查应各自覆盖，只有字符串替换断言不足以通过。A2 由 Claude 执行；A3 按现行静态检查口径对实际 ZIP 及合成路径复核。
+
 ## 6. 验收用例与决策
 
 | 用例 | 范围 | 验收点 |
 | --- | --- | --- |
 | T01 | 首轮与路由 | 问候、仅图、缺图、直接报需求均走真实首轮，10模板路由和相邻分流，无业务请求或价格抢跑 |
 | T02 | 授权和边界 | 拒绝未授权、未成年人、不支持格式或超限，单人婚纱照不补造伴侣，情侣输入不混脸或增人 |
-| T03 | 本地示例 | 10 图两列、只用实际绝对路径、文件名裸值、空/缺图/路径编码/同对话去重、失败不调用上游 |
+| T03 | 本地示例 | 十图两列、只用命令返回的实际绝对路径、文件名裸值、同对话去重。A3-E02 空格与 A3-E03 # 分别解析 Markdown，解码命中现存文件。失败不调用上游 |
 | T04 | 支付和恢复 | 首次扫码、回同安装、原账户余额、取消、超时、注册不等于到账、未确认不出图 |
 | T05 | 任务契约 | 1 张参考、6 字段白名单、画幅校验、同键同体、已确认状态、合成签发短链和权限错误 |
 | T06 | 失败续接 | 401/402/403/409/429/5xx/网络超时、unknown 查原任务、成功但下载断开走同任务、无重复提交 |
 | T07 | 支付记录与工单 | 分页、只读余额、只提交已确认纯文本、同键去重、跨账户404和处理时限为空 |
 | T08 | 遥测 | 八字段 200 回执、无正文、关闭与失败静默、同 ID 去重、合法账户 link、失败不污染业务 |
-| T09 | 打包与文案 | 必填字段、语言主题一一对应最多3条、两级路径、渠道与版本、无密钥或上游名、欢迎规则 |
-| T10 | 验收责任 | Claude A2 仅 Mock 和合成账户。Codex A3 对固定 ZIP 做静态独立检查。负责人做实际宿主测试并手动上传 |
+| T09 | 打包与文案 | 八个必填字段、双语各三条且同场景及同画幅，校验可检出 A3-E01 错配；两级路径、渠道与版本、无密钥或上游名、固定欢迎句 |
+| T10 | 验收责任 | Claude A2 仅 Mock 和合成账户。Codex A3 对固定 ZIP 做独立静态检查。负责人做实际宿主测试并手动上传 |
 
 Claude 的 A2 还需核对欢迎句、无禁用词、等待提示、扣量/幂等、网络零消耗、脚本退出码和超时一致。Codex A3 对实际 ZIP 查 SHA256、两级目录、YAML 字段、双语场景、十张资源、可点击路径和规格契约。按照现行 SOP，负责人完成实际宿主验收及手动上传。
 
@@ -109,7 +123,8 @@ Claude 的 A2 还需核对欢迎句、无禁用词、等待提示、扣量/幂�
 | 画幅 | 1K 人像保真档。草坪和海边推荐 3:2，其余 2:3 | 适配器已映射；无额外高档承诺 |
 | 首次对话 | 原 8 字段 HTTP 200，开口新设备数不可得 | A.5 和固定网关源码 |
 | 欢迎句 | 欢迎使用WorkBuddy官方认证技能 婚纱写真照相馆。 | 2026-11-08，负责人在本聊天明确要求按现行 SOP 固定格式，WorkBuddy 审核状态按实际回执记录。 |
-| 开发顺序 | 等证件照换底助手达到 submitted 或 listed，再接续 A1 | 现行 SOP 固定规则 13（c86103c） |
+| 开发顺序 | 证件照换底助手 1.0.6 已 submitted，现可接续 | 现行 SOP 固定规则 13 与 `7c2ca69be71cf6e5b7a8f6d5d172f94b0f436913:pipeline/products/mps-id-photo-background/status.json` |
+| 示例回归 | 双语语义对齐，实际链接验证空格与 # 的合成路径 | 现行 SOP 的 A3-E01、A3-E02、A3-E03 |
 | 支付链接 | 只打开服务端按原安装签发的授权或结账链接 | 原设备关联，不用通用扫码裸链代替 |
 
-**当前按串行规则排队。** 证件照换底助手达到 `submitted` 或 `listed` 后再复核本规格与 `01-dev-spec.json`，A1 通过后交 Claude。演示素材生产记录、Claude 自测、实际 WorkBuddy 行为和发布结果待后续产出。
+**A1 已通过。** Markdown 与 JSON 复核了十模板、示例选题、共享套餐、成本、源码字段、遥测、验收清单和分工。十张真实示意图及 provenance/audit 由 Codex 按规格另行提供，当前实际生成 0 张。Claude 可开始开发与 Mock 自测，正式包交付前须纳入实际示例及其核查记录。WorkBuddy 宿主、提审和发布状态按实际回执记录。

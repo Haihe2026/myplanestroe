@@ -9,24 +9,24 @@
   ],
   "source_ref": "884e58e133ec27483b3a181257ffdea3926f2c53",
   "brief_ref": "ffde7ed7a88995e556f7d9e80a2316b56306c97b",
-  "document_status": "waiting_for_previous_submission",
-  "a1_passed": false,
-  "ready_for_development": false,
+  "document_status": "spec_ready",
+  "a1_passed": true,
+  "ready_for_development": true,
   "read_record": [
     {
       "date": "2026-11-08",
       "url": "https://open.workbuddy.cn/docs/skill",
-      "result": "本轮重新在线读取，HTTP 200。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。"
+      "result": "本次恢复复核已重新在线读取。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。"
     },
     {
       "date": "2026-11-08",
       "url": "https://open.workbuddy.cn/docs/expert",
-      "result": "本轮重新在线读取，HTTP 200。核对专家包结构，确认本单渠道只采用 Skill 格式。"
+      "result": "本次恢复复核已重新在线读取。核对专家包结构，确认本单渠道只采用 Skill 格式。"
     },
     {
       "date": "2026-11-08",
       "url": "https://open.workbuddy.cn/docs",
-      "result": "本轮重新在线读取，HTTP 200。核对入驻、审核及发布顺序。"
+      "result": "本次恢复复核已重新在线读取。核对入驻、审核及发布顺序。"
     }
   ],
   "core_terms": [
@@ -295,7 +295,9 @@
     "planned": 10,
     "actual": 0,
     "paid_calls_limit": 10,
-    "previews": "虚构成年人效果示意，文生图不验证参考图保真，素材未生成"
+    "previews": "虚构成年人效果示意，文生图不验证参考图保真，素材未生成",
+    "delivery_owner": "codex",
+    "required_before_final_package": true
   },
   "telemetry": {
     "fields": [
@@ -348,7 +350,7 @@
     {
       "id": "T03",
       "area": "本地示例",
-      "coverage": "10 图两列、只用实际绝对路径、文件名裸值、空/缺图/路径编码/同对话去重、失败不调用上游"
+      "coverage": "十图两列、只用命令返回的实际绝对路径、文件名裸值、同对话去重。A3-E02 空格与 A3-E03 # 分别解析 Markdown，解码命中现存文件。失败不调用上游"
     },
     {
       "id": "T04",
@@ -378,12 +380,12 @@
     {
       "id": "T09",
       "area": "打包与文案",
-      "coverage": "必填字段、语言主题一一对应最多3条、两级路径、渠道与版本、无密钥或上游名、欢迎规则"
+      "coverage": "八个必填字段、双语各三条且同场景及同画幅，校验可检出 A3-E01 错配；两级路径、渠道与版本、无密钥或上游名、固定欢迎句"
     },
     {
       "id": "T10",
       "area": "验收责任",
-      "coverage": "Claude A2 仅 Mock 和合成账户。Codex A3 对固定 ZIP 做静态独立检查。负责人做实际宿主测试并手动上传"
+      "coverage": "Claude A2 仅 Mock 和合成账户。Codex A3 对固定 ZIP 做独立静态检查。负责人做实际宿主测试并手动上传"
     }
   ],
   "decisions": [
@@ -429,16 +431,16 @@
     },
     {
       "item": "开发顺序",
-      "adopted": "等证件照换底助手达到 submitted 或 listed，再接续 A1",
-      "basis": "现行 SOP 固定规则 13（c86103c）"
-    }
-  ],
-  "blocked_reasons": [
+      "adopted": "证件照换底助手 1.0.6 已 submitted，现可接续",
+      "basis": "现行 SOP 固定规则 13 与 `7c2ca69be71cf6e5b7a8f6d5d172f94b0f436913:pipeline/products/mps-id-photo-background/status.json`"
+    },
     {
-      "code": "SEQUENCED_HOLD",
-      "needs": "等证件照换底助手上传成功（stage 到 submitted 或 listed），再恢复 brief_ready 继续。"
+      "item": "示例回归",
+      "adopted": "双语语义对齐，实际链接验证空格与 # 的合成路径",
+      "basis": "现行 SOP 的 A3-E01、A3-E02、A3-E03"
     }
   ],
+  "blocked_reasons": [],
   "welcome": {
     "text": "欢迎使用WorkBuddy官方认证技能 婚纱写真照相馆。",
     "once_per_chat": true,
@@ -451,6 +453,42 @@
       "submitted",
       "listed"
     ],
-    "sop_ref": "c86103cef3da939ce4f41c8af43c3315134b4c56"
+    "sop_ref": "c86103cef3da939ce4f41c8af43c3315134b4c56",
+    "previous_stage": "submitted",
+    "previous_version": "1.0.6",
+    "verified_at": "2026-11-08T17:58:00+08:00",
+    "status_ref": "7c2ca69be71cf6e5b7a8f6d5d172f94b0f436913"
+  },
+  "sop_ref": "a604523f4bd0e524dda506146d2411e76be43e9c",
+  "workbuddy_examples": [
+    {
+      "scene": "white-studio",
+      "size": "1024x1536",
+      "zh": "用我的照片做经典白纱影棚婚纱照，竖版 2:3。",
+      "en": "Use my photo to make a classic white-gown studio wedding portrait in portrait 2:3."
+    },
+    {
+      "scene": "seaside",
+      "size": "1536x1024",
+      "zh": "用这张两人同框照做海边婚纱照，横版 3:2。",
+      "en": "Use this photo of us together to make a seaside wedding portrait in landscape 3:2."
+    },
+    {
+      "scene": "japanese",
+      "size": "1024x1536",
+      "zh": "用我的单人照做日系自然光写真，竖版 2:3。",
+      "en": "Use my solo photo to make a Japanese-style portrait with natural light in portrait 2:3."
+    }
+  ],
+  "markdown_demo_paths": {
+    "slashes": "/",
+    "forbid_dot_prefix": true,
+    "encoded_space": "%20",
+    "encoded_hash": "%23",
+    "fixture_paths": [
+      "Codex Demo Assets/white-studio.png",
+      "Codex#Demo/white-studio.png"
+    ],
+    "acceptance": "按 Markdown 解析得到链接，确认无误拆出的 query 或 fragment，解码后定位到原来存在的文件。"
   }
 }

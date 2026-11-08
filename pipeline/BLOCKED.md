@@ -29,3 +29,5 @@
 - 2026-11-08T13:11:34+08:00 婚纱写真照相馆的欢迎语 HARD_STOP 已解除，规格已同步。当前为 SEQUENCED_HOLD，待证件照换底助手达到 submitted 或 listed 后恢复 brief_ready。
 
 | 2026-11-08T13:47:39+08:00 | mps-id-photo-background | test_in_progress | TOO_MANY_ROUNDS | 1.0.5 A3-E03：示例目录名含 # 时，链接把其后的路径解析为 URI 片段，无法定位已存在的示例文件。rounds.test=4，超过 max_rounds=3。 证据 pipeline/products/mps-id-photo-background/03-test-report.md | 负责人审阅 A3-E03，协调修复并重新打包，确认可恢复后将修复版置回 package_ready。 | package_ready |
+
+- 2026-11-08T18:04:36+08:00 婚纱写真照相馆的 SEQUENCED_HOLD 已解除。证件照 1.0.6 已 submitted，婚纱写真规格通过 A1 并进入 spec_ready。
