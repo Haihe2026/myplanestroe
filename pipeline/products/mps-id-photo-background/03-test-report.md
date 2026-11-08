@@ -1,3 +1,28 @@
+# A3 独立检查 · 证件照换底助手 1.0.4
+
+检查时间 2026-11-08T12:46:22+08:00。固定输入为 `8e47d2e59278e47838c2645b06061d0bd65e3479`，产品认领提交为 `bd95f32a4b515051ece059ddc5734704ebc9151e`。通知 `evt-68156f3a20b8b8ef8bfbe36b6a5d001be91232a1eca16535e2449b18a85306cb`。按现行 SOP 从干净解压的团队版 ZIP 做静态检查。
+
+| 检查项 | 结果 |
+|---|---|
+| ZIP 完整性与目录 | 888820 字节，24 个文件。SHA256 `0d1c0fbd172a521b1345404f0db76ba97ab6c0d734f43479ec8114f931be6f51` 与 A2 记录一致；ZIP Git blob `7d0f7c07cb8a399658c249b33a7271550e053618` 与固定输入一致。CRC、解压、单一包根、目录层级、重复路径、路径穿越和符号链接均已核对。 |
+| Frontmatter | 对照 WorkBuddy 技能页，八个必填字段齐全，版本与元数据和脚本一致。中英各三条且逐条对应白底一寸报名、蓝底二寸考试报名、简历照换白。1.0.3 的 A3-E01 已修复。 |
+| 契约与文案 | 核对首次展示、授权与付费确认、换底与本地裁切、消费记录与工单、8 字段首轮遥测的包内入口。欢迎句与规格一致，对客文案禁用词检查及常见凭证特征扫描无命中。欢迎句核对仅确认与仓库规格一致。 |
+| 示例资源 | 十个场景与规格对应，`demos.json` 仅用裸文件名，十张 PNG 均存在，指定像素示例为 295×413。含空格的目录无法生成有效 Markdown 链接，见 A3-E02。 |
+| 能力边界 | WorkBuddy 真机验收、零消耗浏览器验证和上传均未执行。当前接收端缺少已验证的电脑操作与上传适配器，这些操作为 blocked。A3 按 SOP 只做静态检查。真实付费生图、核款、生产变更均为 0。 |
+
+对照 [WorkBuddy 技能](https://open.workbuddy.cn/docs/skill)、[专家](https://open.workbuddy.cn/docs/expert)及[开放平台概述](https://open.workbuddy.cn/docs/what-is-open-platform)。Claude 的契约与模拟端到端结果属于 A2，本轮未重跑完整套件。
+
+## A3-E02 · 含空格的路径使示例图链接无法解析
+
+- 复现。由最终 ZIP 解压的 `scripts/idphoto.py` 提取 `md_safe_path()` 单独运行，在含空格的合成状态目录中放入 `white-one.png`。确认该文件存在，将函数输出原样代入 `SKILL.md` 首轮第 4 步的 `**[标题](path)**` 模板。
+- 期望。链接可解析，目标仍指向存在的示例文件。
+- 实际。该函数将反斜杠改为正斜杠，保留目录名中的原始空格。`ConvertFrom-Markdown` 用 `C:/test user/mps-id-photo-background/demos/white-one.png` 对照复现，输出保留链接字面文本，无 `<a>` 元素；去掉空格的对照生成 `<a>`。该路径行为也存在于 1.0.3，现有测试只覆盖无空格路径。[CommonMark 链接规范](https://spec.commonmark.org/0.31.2/#links)
+- 根源与退回意见。包内路径格式化和链接模板组合未处理空格。请 Claude 修正展示路径，并在干净解压的团队版 ZIP 中用包含空格的状态路径验证链接解析及目标存在性。
+
+A3 独立检查不通过，产品转为 `test_failed`，`rounds.test` 从 2 增至 3。包证据 `8e47d2e59278e47838c2645b06061d0bd65e3479:pipeline/products/mps-id-photo-background/02-package/dist/mps-id-photo-background-1.0.4.zip`。
+
+---
+
 # A3 独立检查 · 证件照换底助手 1.0.3
 
 2026-11-08T12:23:23+08:00，由本聊天沿用原接收认领。固定包来源 `1b0b55ad7e165726c97c72de6717e0ca70090772`，产品认领提交 `1db661aa2fb41f6d38cdeb9c83986ea6b660a9e7`。按现行 SOP A3 做独立静态检查。
