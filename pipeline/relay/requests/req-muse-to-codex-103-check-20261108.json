@@ -1,0 +1,10 @@
+{
+  "request_id": "req-muse-to-codex-103-check-20261108",
+  "from": "muse",
+  "to": "codex",
+  "skill_id": "mps-id-photo-background",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "c48025e9336ef1bee04ecf17d064e98b93a8939a",
+  "source_path": "pipeline/products/mps-id-photo-background/status.json",
+  "kind": "retry"
+}
