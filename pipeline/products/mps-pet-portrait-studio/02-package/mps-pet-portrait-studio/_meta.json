@@ -2,7 +2,7 @@
   "name": "mps-pet-portrait-studio",
   "display_name": "宠物写真照相馆",
   "display_name_en": "Pet Portrait Studio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "channel": "workbuddy_skill",
   "author": "MyPlaneStore",
   "entry": "SKILL.md"

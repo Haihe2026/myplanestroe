@@ -141,6 +141,16 @@ def _rows_bytes(w, h, bpp_bits):
 
 
 def verify(data):
+    """完整校验 PNG；任何解析异常（含坏压缩流）一律转为 ValueError。"""
+    try:
+        return _verify(data)
+    except ValueError:
+        raise
+    except (zlib.error, struct.error, IndexError, TypeError, OverflowError, MemoryError) as e:
+        raise ValueError('undecodable: ' + type(e).__name__)
+
+
+def _verify(data):
     """完整校验 PNG 内容：签名、每个块的长度与 CRC、IHDR/PLTE/IDAT/IEND 次序、
     图像数据可完整解压且字节数与宽高一致、过滤类型合法。通过返回 (width, height)，否则抛 ValueError。
     只读不写；用于在保存和宣布交付之前确认图片可完整解码（截断、拼接残缺都不通过）。"""
@@ -197,9 +207,19 @@ def verify(data):
     out += dec.flush()
     if not dec.eof or len(out) != limit:
         raise ValueError('incomplete image data')
-    if not ihdr[4]:
-        w, h, depth, ctype, _ = ihdr
-        stride = 1 + (w * _BITS[ctype][0] * depth + 7) // 8
-        if any(out[i] > 4 for i in range(0, limit, stride)):
-            raise ValueError('bad filter')
-    return ihdr[0], ihdr[1]
+    w, h, depth, ctype, interlace = ihdr
+    bpp = _BITS[ctype][0] * depth
+    passes = [(w, h)] if not interlace else [
+        ((w - x0 + dx - 1) // dx if w > x0 else 0, (h - y0 + dy - 1) // dy if h > y0 else 0) for x0, y0, dx, dy in _ADAM7]
+    i = 0
+    for pw, ph in passes:  # 逐个子图（非隔行即整图）逐行核对过滤类型
+        if pw == 0 or ph == 0:
+            continue
+        stride = 1 + (pw * bpp + 7) // 8
+        for _ in range(ph):
+            if out[i] > 4:
+                raise ValueError('bad filter')
+            i += stride
+    if i != limit:
+        raise ValueError('incomplete image data')
+    return w, h

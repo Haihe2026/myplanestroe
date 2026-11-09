@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-pet-portrait-studio'
-SKILL_VERSION = '1.0.1'
+SKILL_VERSION = '1.0.2'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -492,7 +492,7 @@ def cmd_run(args):
     if not (d.get('photo_consent') and d.get('pay_consent') and d.get('idem')):
         return emit('needsConfirmation', '', EXIT_ERROR)
     if d.get('state') in UNRESOLVED or (d.get('job_id') and d.get('state') not in ('delivered', 'failed', 'rejected')):
-        return _continue_job(d, allow_resend=True)
+        return _continue_job(d)
     if d.get('state') == 'delivered':
         paths = d.get('delivered') or []
         return emit('alreadyDelivered', W.already_delivered(), EXIT_OK, draft_id=d['draft_id'], paths=paths,
@@ -577,22 +577,35 @@ def _query_auth(a):
     return a.get('skill_key') or a.get('install_secret')
 
 
-def _continue_job(d, allow_resend=False, conflict=False):
-    """结果未确定时只按原键/原任务 ID 查询。仅当查询明确答复「此键下没有任务」、且是新一次运行时，
-    才用同一原键和已保存的固定正文续接提交（服务端同键同体不重复扣费）；不换键、不重读照片。"""
+def _query(path, a, binary=False):
+    """只读查询原任务。401：清掉失效的缓存凭证，从原安装身份恢复后再查一次；任务与原键保持不变。"""
+    try:
+        return call('GET', path, auth=_query_auth(a), binary=binary)
+    except GatewayError as e:
+        if e.status != 401 or not a.get('skill_key'):
+            raise
+    a.pop('skill_key', None)
+    save_account(a)
+    if a.get('install_secret'):
+        _ensure_skill_key(a)  # 原安装身份换取新凭证；失败时下面直接用原安装身份查询
+    return call('GET', path, auth=_query_auth(a), binary=binary)
+
+
+def _continue_job(d, conflict=False):
+    """结果未确定时只按原键/原任务 ID 只读查询，不重新提交、不换键、不重读照片。
+    原键查询返回 404 只表示当前未查到，保持查询态并保留原键与已保存正文，等待核查。"""
     a = load_account()
     if not d.get('job_id'):
         try:
-            r = call('GET', '/jobs/by-key/' + quote(d['idem'], safe=''), auth=_query_auth(a))
+            r = _query('/jobs/by-key/' + quote(d['idem'], safe=''), a)
             uuid.UUID(r.get('id'))
             d.update(job_id=r['id'], state='submitted')
             save_draft(d)
         except GatewayError as e:
+            if e.status == 401:
+                return emit('credentialsReset', W.credentials_reset(), EXIT_RESET, draft_id=d['draft_id'])
             if conflict:
                 return emit('jobConflict', W.same_key_conflict(), EXIT_WAIT, draft_id=d['draft_id'])
-            body = _load_pending(d) if e.status == 404 and allow_resend and a.get('skill_key') else None
-            if body is not None:
-                return _submit(d, a, body)
             return emit('jobPending', W.progress_unknown(), EXIT_WAIT, draft_id=d['draft_id'], progress='unconfirmed')
         except (ValueError, TypeError, AttributeError):
             if conflict:
@@ -609,11 +622,9 @@ def _poll(d, a):
         if attempt:
             time.sleep(POLL_INTERVAL_S)
         try:
-            r = call('GET', '/jobs/' + d['job_id'], auth=_query_auth(a))
+            r = _query('/jobs/' + d['job_id'], a)
         except GatewayError as e:
             if e.status == 401:
-                a.pop('skill_key', None)
-                save_account(a)
                 return emit('credentialsReset', W.credentials_reset(), EXIT_RESET, draft_id=d['draft_id'])
             continue
         reached += 1
@@ -655,14 +666,16 @@ def _gallery(folder):
 
 def _deliver(d, a):
     try:
-        png = call('GET', '/jobs/' + d['job_id'] + '/image', auth=_query_auth(a), binary=True)
-    except GatewayError:
+        png = _query('/jobs/' + d['job_id'] + '/image', a, binary=True)
+    except GatewayError as e:
         d['state'] = 'download_pending'
         save_draft(d)
+        if e.status == 401:
+            return emit('credentialsReset', W.credentials_reset(), EXIT_RESET, draft_id=d['draft_id'])
         return emit('downloadPending', W.download_incomplete(), EXIT_WAIT, draft_id=d['draft_id'])
     try:
         aw, ah = png_local.verify(png)  # 内容完整可解码后才写入结果和画廊
-    except ValueError:
+    except Exception:  # 任何不可解码都不交付
         d['state'] = 'download_pending'  # 保留原任务，之后只读补取同一张图
         save_draft(d)
         return emit('downloadPending', W.download_incomplete(), EXIT_WAIT, draft_id=d['draft_id'], image_incomplete=True)

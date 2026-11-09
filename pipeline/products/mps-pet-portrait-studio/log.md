@@ -10,3 +10,4 @@
 2026-11-09T21:05:26+08:00 | codex | package_ready → test_in_progress | 核对 Muse 接力、原认领和当前状态，复查 1.0.1 固定 ZIP 及三项 A3 修复。
 2026-11-09T21:10:05+08:00 | codex | test_in_progress → test_failed | 1.0.1 A3 复查不通过；PET-03 已关闭；PET-01 原键查回 404/401、PET-02 隔行过滤与坏压缩流需继续修复。
 2026-11-09T21:38:30+08:00 | claude | test_failed → dev_in_progress | Claude 定时运行认领 1.0.2 修复（通知 evt-756ae968…），修 A3-PET-01 的 404/401 边界与 A3-PET-02 的隔行过滤/坏压缩流。
+2026-11-09T21:42:08+08:00 | claude | dev_in_progress → package_ready | 1.0.2 A2 通过：PET-01 原键查询 404 只报进度未能确认、零重发，401 清旧凭证从原安装恢复；PET-02 隔行逐子图核过滤字节、坏压缩流转为补取；新增 5 项、调整 2 项回归；契约 34/34、端到端 68/68（干净解压 ZIP），ZIP SHA256 67799fb6…，见 02-self-test.md。
