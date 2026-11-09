@@ -7,16 +7,6 @@
     accountButton.addEventListener('click', () => tools.showModal());
     byId('tools-close').addEventListener('click', () => tools.close());
   } else accountButton.hidden = true;
-  const guidance = {
-    gemini_permanent_29:'60次轻松起步，把眼前的想法先做出来。永久有效，按自己的节奏用。',
-    gemini_permanent_39:'80次日常常备，商品与内容配图接着做。永久有效，用完再充。',
-    gemini_permanent_49:'100次集中创作，一批素材从容安排。永久有效，随时继续制作。',
-    gemini_permanent_999:'2000次长期畅享，次数永久有效，为持续创作备足用量。',
-    plus:'32次轻松起步，把眼前的想法先做出来。',
-    pro:'43次日常常备，商品与内容配图接着做。',
-    ultra:'54次集中创作，一批素材从容安排。',
-    business:'2000次长期畅享，让创作跟着自己的节奏。'
-  };
   const plans = byId('plans');
   if (!plans) return;
   function update() {
@@ -24,7 +14,7 @@
       const plan = typeof catalog !== 'undefined' ? catalog.find(value=>value.id===button.dataset.id) : null;
       if (!plan) continue;
       const count = button.querySelector('.count');
-      const text = (plan.images ?? plan.points / 1000).toLocaleString('zh-CN') + ' 张生图';
+      const text = (plan.images ?? plan.points / 1000).toLocaleString('zh-CN') + ' 额度';
       if (count.textContent !== text) count.textContent = text;
       if (['ultra','gemini_permanent_49'].includes(plan.id) && !button.querySelector('.recommended')) {
         const badge=document.createElement('small');badge.className='recommended';badge.textContent='推荐';button.append(badge);
@@ -40,7 +30,6 @@
         const currency=document.createElement('small');currency.className='currency';currency.textContent='¥';
         price.replaceChildren(currency,document.createTextNode(plan.price_fen/100));
       }
-      if (button.getAttribute('aria-checked')==='true') byId('plan-guidance').textContent=guidance[plan.id] || '按你的使用需求选择套餐。';
     }
   }
   const observer = new MutationObserver(update);

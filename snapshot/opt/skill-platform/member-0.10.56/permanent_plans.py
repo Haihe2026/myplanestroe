@@ -17,9 +17,9 @@ SHARED_PLANS=catalog(CONFIG['shared'],True)
 RETIRED_SHARED_PLANS=catalog(CONFIG.get('retired_shared', []),True)
 TEMU_PLANS=catalog(CONFIG['temu'],False)
 PLANS=SHARED_PLANS.copy()
-LEGACY_TEMU_PLANS={}
+LEGACY_TEMU_PLANS=catalog(CONFIG.get('retired_temu', []),False)
 def permanent(plan):
-    return (plan in SHARED_PLANS or plan in TEMU_PLANS or plan in RETIRED_SHARED_PLANS
+    return (plan in SHARED_PLANS or plan in TEMU_PLANS or plan in LEGACY_TEMU_PLANS or plan in RETIRED_SHARED_PLANS
             or plan in {'shared_permanent_999', 'gemini_permanent_999', 'business'})
 def snapshot_permanent(order):return permanent(order['plan'])
 def order_permanent(connection,row):return permanent(row['plan'])

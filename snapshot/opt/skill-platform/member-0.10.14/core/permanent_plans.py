@@ -24,6 +24,11 @@ PLANS = {
 }
 
 TEMU_PLANS = {
+    plan_id.replace('shared_', 'temu_', 1): plan.copy()
+    for plan_id, plan in SHARED_PLANS.items()
+}
+
+RETIRED_TEMU_PLANS = {
 
     'temu_permanent_89': {'name': '企业入门', 'price_fen': 8900, 'images': 500},
 
@@ -34,6 +39,7 @@ TEMU_PLANS = {
 }
 
 LEGACY_TEMU_PLANS = {
+    **RETIRED_TEMU_PLANS,
 
     'temu_enterprise_89': {'name': '企业入门', 'price_fen': 8900, 'images': 100},
 

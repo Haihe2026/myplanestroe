@@ -21,7 +21,7 @@ from membership import PLANS
 from paid_registration import install
 from registration_entries import RegistrationEntries
 from skill_access import SkillAccess
-from enterprise import Enterprise, PLANS as ENTERPRISE_PLANS, LEGACY_PLANS as ENTERPRISE_LEGACY_PLANS
+from enterprise import Enterprise, PLANS as ENTERPRISE_PLANS
 
 PRODUCTS = ('gemini', 'temu', 'xhs')
 CURRENT_PRODUCT = ContextVar('product', default='gemini')
@@ -62,7 +62,7 @@ class SharedMembership(ManualMembership):
                 c.execute('INSERT OR IGNORE INTO order_sources VALUES(?,?)', (result['id'], product))
             return self.get_order(uid, result['id'])
         if product == 'temu':
-            plans={**ENTERPRISE_LEGACY_PLANS,**ENTERPRISE_PLANS}
+            plans = ENTERPRISE_PLANS
             if not isinstance(plan,str) or plan not in plans:
                 raise server.Problem(400, '请选择Temu企业套餐')
             if not self.payment_ready:

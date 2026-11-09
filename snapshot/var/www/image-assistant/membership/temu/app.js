@@ -1,5 +1,5 @@
 'use strict';
-let catalog=[], selected='temu_image20_198', signedIn=false, ready=false;
+let catalog=[], selected='temu_permanent_29', signedIn=false, ready=false;
 const el=id=>document.getElementById(id);
 async function api(path,body){
   const response=await fetch('/platform-api/temu/membership-api/'+path,{credentials:'same-origin',cache:'no-store',
@@ -10,16 +10,15 @@ async function api(path,body){
 function choose(id){selected=id;for(const button of el('plans').children){button.setAttribute('aria-checked',String(button.dataset.id===id));button.tabIndex=button.dataset.id===id?0:-1;}
   const plan=catalog.find(p=>p.id===id);const lifetime=['lifetime','permanent'].includes(plan.period);
   el('renewal').disabled=true;el('renewal').checked=false;
-  el('summary').textContent=plan.name+(lifetime?' 次数包':' 月度会员');
-  el('detail').textContent=plan.images+' 张生图 · '+(lifetime?'永久有效':'付款确认后30天有效，到期不结转');
+  el('summary').textContent=plan.name+(lifetime?' 额度包':' 月度会员');
+  el('detail').textContent=plan.images.toLocaleString('zh-CN')+' 额度 · '+(lifetime?'永久有效':'付款确认后30天有效，到期不结转');
   el('total').textContent='¥'+((el('renewal').checked&&!lifetime?plan.renewal_price_fen:plan.price_fen)/100)+(lifetime?'':' / 月');
 }
 function render(){for(const plan of catalog){const button=document.createElement('button');button.type='button';button.className='plan';button.dataset.id=plan.id;button.setAttribute('role','radio');
   const name=document.createElement('b');name.textContent=plan.period==='lifetime'?'终身会员':plan.name;button.append(name);
   const check=document.createElement('span');check.className='check';check.textContent='✓';check.setAttribute('aria-hidden','true');button.append(check);
   const price=document.createElement('span');price.className='price';price.textContent='¥'+plan.price_fen/100;button.append(price);
-  const count=document.createElement('span');count.className='count';count.textContent=plan.images+' 次生图';button.append(count);
-  const points=document.createElement('span');points.className='points';points.textContent=plan.images.toLocaleString('zh-CN')+' 次';button.append(points);
+  const count=document.createElement('span');count.className='count';count.textContent=plan.images.toLocaleString('zh-CN')+' 额度';button.append(count);
   button.addEventListener('click',()=>choose(plan.id));button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowDown','ArrowUp'].includes(event.key))return;event.preventDefault();const direction=['ArrowLeft','ArrowUp'].includes(event.key)?-1:1;const index=(catalog.findIndex(p=>p.id===selected)+direction+catalog.length)%catalog.length;choose(catalog[index].id);el('plans').children[index].focus();});el('plans').append(button);}if(!catalog.some(p=>p.id===selected))selected=catalog[0].id;choose(selected);}
 async function account(){try{const data=await api('account');signedIn=true;el('account').textContent=data.label;el('balance').replaceChildren(document.createTextNode(data.remaining_uses.toLocaleString('zh-CN')+' '));const small=document.createElement('small');small.textContent='次';el('balance').append(small);el('notice').textContent=ready?'已关联原生图账户。扫码付款后联系客服核款，到账后回 WorkBuddy 刷新次数即可。':'已关联原生图账户。收款暂未开放，已有次数可继续使用。';}catch(error){signedIn=false;el('account').textContent='尚未关联生图账户';el('balance').replaceChildren(document.createTextNode('— '));const small=document.createElement('small');small.textContent='次';el('balance').append(small);el('notice').textContent=error.message+'。在 WorkBuddy 对生图助手说“打开会员中心”，无需重新注册。';}updateBuy();document.dispatchEvent(new CustomEvent('image-account-ready',{detail:{signedIn}}));}
 el('refresh').addEventListener('click',account);

@@ -3,7 +3,7 @@
   const product = document.body.dataset.product;
   const byId = id => document.getElementById(id);
   const skillName = {gemini:'Gemini生图器',temu:'Temu图片大师',xhs:'XHS选题大师'}[product] || '当前技能';
-  const names = {shared_permanent_29:'共享Plus',shared_permanent_39:'共享Pro',shared_permanent_49:'共享Ultra',shared_permanent_999:'共享终身会员',plus:'Plus', pro:'Pro', ultra:'Ultra', business:'终身会员',gemini_permanent_29:'Plus',gemini_permanent_39:'Pro',gemini_permanent_49:'Ultra',gemini_permanent_999:'终身会员',temu_enterprise_89:'企业入门',temu_enterprise_198:'企业成长',temu_enterprise_365:'企业批量',temu_permanent_89:'企业入门',temu_permanent_198:'企业成长',temu_permanent_365:'企业批量'};
+  const names = {temu_permanent_5:'体验版',temu_permanent_29:'Plus',temu_permanent_39:'Pro',temu_permanent_49:'Ultra',shared_permanent_29:'共享Plus',shared_permanent_39:'共享Pro',shared_permanent_49:'共享Ultra',shared_permanent_999:'共享终身会员',plus:'Plus', pro:'Pro', ultra:'Ultra', business:'终身会员',gemini_permanent_29:'Plus',gemini_permanent_39:'Pro',gemini_permanent_49:'Ultra',gemini_permanent_999:'终身会员',temu_enterprise_89:'企业入门',temu_enterprise_198:'企业成长',temu_enterprise_365:'企业批量',temu_permanent_89:'企业入门',temu_permanent_198:'企业成长',temu_permanent_365:'企业批量'};
   const states = {pending:'待付款', reported:'待核款', paid:'已到账'};
   const storageKey = 'myplane-account-view-' + product;
   let revision = 0, timer, flight, focusedOrder = null, wanted = false;

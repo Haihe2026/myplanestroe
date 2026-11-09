@@ -10,14 +10,6 @@
   const history=document.createElement('details');history.className='enterprise-history';
   const summary=document.createElement('summary');summary.textContent='我的Temu体验与制作记录';history.append(summary);
   const records=document.createElement('ul');history.append(records);byId('member-account').append(history);
-  const guidance={"temu_permanent_89": "适合日常商品上新，次数永久有效。", "temu_permanent_198": "适合持续上新与多款商品制作，次数永久有效。", "temu_permanent_365": "低至约¥0.18／张，适合批量制作，次数永久有效。", "temu_image20_89": "适合日常商品上新，次数永久有效。", "temu_image20_198": "适合持续上新与多款商品制作，次数永久有效。", "temu_image20_365": "低至约¥0.18／张，适合批量制作，次数永久有效。"};
-  function update(){
-    for(const button of byId('plans').children){
-      if(!button.querySelector('.enterprise-tag')){const tag=document.createElement('small');tag.className='enterprise-tag';tag.textContent=/_(198)$/.test(button.dataset.id)?'成长优选':/_(365)$/.test(button.dataset.id)?'批量备图':'上新起步';button.append(tag);}
-      if(button.getAttribute('aria-checked')==='true'){const plan=typeof catalog!=='undefined'?catalog.find(p=>p.id===button.dataset.id):null;byId('plan-guidance').textContent='<0.20元/张，'+(plan?plan.images.toLocaleString('zh-CN')+'张，':'')+(guidance[button.dataset.id]||'商品图按需制作，次数永久有效。');}
-    }
-  }
-  new MutationObserver(update).observe(byId('plans'),{childList:true,subtree:true,attributes:true,attributeFilter:['aria-checked']});update();
   let serial=0;
   async function refresh(){
     const current=++serial;
