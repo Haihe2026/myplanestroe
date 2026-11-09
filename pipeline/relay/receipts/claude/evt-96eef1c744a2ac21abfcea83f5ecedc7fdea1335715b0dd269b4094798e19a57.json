@@ -1,8 +1,8 @@
 {
   "event_id": "evt-96eef1c744a2ac21abfcea83f5ecedc7fdea1335715b0dd269b4094798e19a57",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "9ae1a16f-1c91-4c0b-8117-dfc4ef7a3f7f",
-  "at": "2026-11-09T12:38:03+08:00",
-  "evidence_ref": null
+  "at": "2026-11-09T12:41:30+08:00",
+  "evidence_ref": "0705e396f287487a6c5dd8fc49398cee32fddf42:pipeline/products/mps-wedding-portrait-studio/02-self-test.md"
 }
