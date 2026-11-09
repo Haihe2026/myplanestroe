@@ -1,0 +1,65 @@
+{
+  "notice": "示例里的猫狗均为 AI 虚构，用于展示效果方向，不是你的真实结果。",
+  "demos": [
+    {
+      "key": "royal-oil",
+      "title": "皇家油画宠物肖像",
+      "note": "深色宫廷，丝绒披肩",
+      "file": "royal-oil.png"
+    },
+    {
+      "key": "cartoon",
+      "title": "卡通动漫宠物",
+      "note": "清爽线条，方形头像",
+      "file": "cartoon.png"
+    },
+    {
+      "key": "cyberpunk",
+      "title": "赛博朋克宠物",
+      "note": "紫青霓虹轮廓光",
+      "file": "cyberpunk.png"
+    },
+    {
+      "key": "ancient-chinese",
+      "title": "古风宠物",
+      "note": "中式庭院，锦缎小披肩",
+      "file": "ancient-chinese.png"
+    },
+    {
+      "key": "astronaut",
+      "title": "宇航员宠物",
+      "note": "透亮面罩，远方星球",
+      "file": "astronaut.png"
+    },
+    {
+      "key": "watercolor",
+      "title": "水彩画宠物",
+      "note": "纸纹淡彩晕染",
+      "file": "watercolor.png"
+    },
+    {
+      "key": "formal",
+      "title": "绅士正装宠物",
+      "note": "小礼服与领结",
+      "file": "formal.png"
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假宠物",
+      "note": "海浪与自然光",
+      "file": "seaside.png"
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日宠物",
+      "note": "暖色灯串与松枝",
+      "file": "christmas.png"
+    },
+    {
+      "key": "explorer",
+      "title": "探险家宠物",
+      "note": "森林小径，清晨光线",
+      "file": "explorer.png"
+    }
+  ]
+}

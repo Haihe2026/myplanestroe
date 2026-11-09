@@ -1,0 +1,141 @@
+{
+  "note": "本地缩放与调色板压缩，未新增生图调用；源图见 demo-assets/provenance.json",
+  "box": [
+    480,
+    480
+  ],
+  "colors": 128,
+  "total_bytes": 966477,
+  "items": [
+    {
+      "key": "royal-oil",
+      "source": "royal-oil.png",
+      "source_sha256": "b068f8335444fa3574e29424e4eaa95e9999cdca9279687666ebaac570d30644",
+      "source_hash_checked": true,
+      "package_file": "royal-oil.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 101239,
+      "package_sha256": "e9922d533177101f0a3e3b08994aef1a4a4cfb90a81a50f5cd7ada8980c21f8a"
+    },
+    {
+      "key": "cartoon",
+      "source": "cartoon.png",
+      "source_sha256": "a34e7cbb1a0c6b971a1691056bd0196799bd8a1f10d866140eb76ffbb2183f84",
+      "source_hash_checked": true,
+      "package_file": "cartoon.png",
+      "package_size": [
+        480,
+        480
+      ],
+      "package_bytes": 142721,
+      "package_sha256": "497046418c8d2bdf3fe1fb7856395f885b066d853a2b17e33449fcf6e6bd9d96"
+    },
+    {
+      "key": "cyberpunk",
+      "source": "cyberpunk.png",
+      "source_sha256": "2be550b58a0c49d0bc1264e4b72113c285cc16b31bf567bee77b3a38c3dfa32b",
+      "source_hash_checked": true,
+      "package_file": "cyberpunk.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 84541,
+      "package_sha256": "13ad424d3b7d5b1cbdec50d99f7450b70501bc0823ffd59254fb5ec2a62a59b1"
+    },
+    {
+      "key": "ancient-chinese",
+      "source": "ancient-chinese.png",
+      "source_sha256": "17796a7f6778548d2cf0082ae0521f9b2dbfc5214929e713c64ecc63a7d387e4",
+      "source_hash_checked": true,
+      "package_file": "ancient-chinese.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 93958,
+      "package_sha256": "53739cbabd8862324259ee9a0146d30cf9a7f729152451eaf772e94433e13116"
+    },
+    {
+      "key": "astronaut",
+      "source": "astronaut.png",
+      "source_sha256": "0bdb74339259fcd6bd687f257923aa74c33108ee17a69f1b782149c9c8515f70",
+      "source_hash_checked": true,
+      "package_file": "astronaut.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 84313,
+      "package_sha256": "f33951d2f81cefd2bc0517d273dec7adc0312af1647db80646f5c9f318752952"
+    },
+    {
+      "key": "watercolor",
+      "source": "watercolor.png",
+      "source_sha256": "555abf0899c12fff57cfcd589672c7a1e930cfaea50525b181a1f486d1de54fc",
+      "source_hash_checked": true,
+      "package_file": "watercolor.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 97011,
+      "package_sha256": "dd5c7741458f7bea8d19933a620769e15394a80d0aaa9ced1a7437677e8edcf3"
+    },
+    {
+      "key": "formal",
+      "source": "formal.png",
+      "source_sha256": "e015613674a469931385860fd40a70b4f27be00435e9b41a25f6745105e7e1f8",
+      "source_hash_checked": true,
+      "package_file": "formal.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 85582,
+      "package_sha256": "9f6ba304926154681e92bed59b62d503690e59fd90d2f20eceeccea5f32b5a14"
+    },
+    {
+      "key": "seaside",
+      "source": "seaside.png",
+      "source_sha256": "7e17741fb693e84e5f19469e623f63423fa26a76b4350d5fffe658299da34b4b",
+      "source_hash_checked": true,
+      "package_file": "seaside.png",
+      "package_size": [
+        480,
+        320
+      ],
+      "package_bytes": 75808,
+      "package_sha256": "1f9aff07c4c276c4f6f4cc34a7a5969b7a86883c59ec79246f00517207e1a6c4"
+    },
+    {
+      "key": "christmas",
+      "source": "christmas.png",
+      "source_sha256": "7eec114d1533f9213b9f437a442f64d94bfa05f334edb112155dd1a873df8716",
+      "source_hash_checked": true,
+      "package_file": "christmas.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 94725,
+      "package_sha256": "4011f08acbae011488ce5c77496c57ab571308dcded138a584bdfdbda2acecf2"
+    },
+    {
+      "key": "explorer",
+      "source": "explorer.png",
+      "source_sha256": "e96d990c2df267681fc5bf0696e31c10f8470e97a969a2cdcd532174a6c703c5",
+      "source_hash_checked": true,
+      "package_file": "explorer.png",
+      "package_size": [
+        480,
+        320
+      ],
+      "package_bytes": 106579,
+      "package_sha256": "4afc4644e13bdfe9046fe3c910eafbf27fa3247927fac656bf47f41617b1cc32"
+    }
+  ]
+}
