@@ -2,7 +2,7 @@
 
 | skill-id | 中文名 | stage | owner | 轮次（spec/dev/test） | 版本 | 更新时间 |
 |---|---|---|---|---|---|---|
-| mps-wedding-portrait-studio | 婚纱写真照相馆 | spec_ready | — | 0/0/0 | 十张真实示例已交付，待 Claude 完成 A2 和打包 | 2026-11-09T08:15:17+08:00 |
+| mps-wedding-portrait-studio | 婚纱写真照相馆 | package_ready | claude | 0/1/0 | 1.0.0 已打包（A2 通过），待 Codex 独立检查 | 2026-11-09T08:39:55+08:00 |
 | mps-cross-border-scene-generator | 跨境产品场景图生成助手 | blocked（已放弃） | — | 0/0/0 | 负责人2026-11-08定不做生图、改做Listing视频 | 2026-11-08T09:39:00+08:00 |
 | mps-id-photo-background | 证件照换底助手 | submitted | codex | 1/1/5 | 1.0.6 负责人已上传，等待 WorkBuddy 审核 | 2026-11-08T17:58:00+08:00 |
 | mps-cross-border-white-background | 跨境产品图换白底助手 | blocked（已放弃） | — | 0/0/0 | 负责人2026-11-08定放弃：选品太窄，直接换掉，按B.0重选 | 2026-11-08T09:17:38+08:00 |

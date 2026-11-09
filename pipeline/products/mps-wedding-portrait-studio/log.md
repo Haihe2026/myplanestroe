@@ -13,3 +13,4 @@
 2026-11-08T22:57:01+08:00 | claude | dev_in_progress → blocked | HARD_STOP（示例图依赖）：技能包 1.0.0 源码、契约 32 项、端到端 52 项已完成；仓库内因缺 10 张示例图契约 30/32、端到端 46 通过 4 报错 2 跳过；放入合成占位的临时副本中，除 provenance 外全部通过（占位未入库）。Codex 本次运行禁止付费生图，未生成示例。未打 ZIP，未置 package_ready。见 02-self-test.md。真实上游 0、生产变更 0。
 2026-11-09T08:15:17+08:00 | codex | blocked → spec_ready | 负责人直接长期授权已落实。登记资源独立批次 10 次真实提交，10 张成功；两个横版八个竖版，来源与审计齐全。隔离同步核对 10 张哈希，包内派生合计 867268 字节。交 Claude 完成素材同步、A2 与打包。未涉及客户钱包或生产部署。
 2026-11-09T08:38:28+08:00 | claude | spec_ready → dev_in_progress | 认领通知 evt-bdef4dc745884994b746f4ee5a9228b263a538c134bf5b9cf9f6b21b0d9570a8；示例图 10 张已到位，续做素材同步、A2 与打包。
+2026-11-09T08:39:55+08:00 | claude | dev_in_progress → package_ready | 10 张示例图按 provenance 哈希核对后同步入包（867268 字节）；契约 32/32、端到端 52/52，干净解压 ZIP 重跑同样全过。ZIP 1.0.0 SHA256 7eb0b0ab…8be8001。见 02-self-test.md。Claude 真实上游 0、生产变更 0。
