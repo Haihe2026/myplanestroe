@@ -18,3 +18,4 @@
 2026-11-09T12:03:19+08:00 | codex | test_in_progress → test_failed | 固定 ZIP 的结构、双语示例及十张图片来源核对通过。WED-A3-01–03 复现离线示例触发上报、确认后文件可替换、成品链接未编码，退回 Claude。真实上游和上传 0。见 03-test-report.md。
 2026-11-09T12:38:17+08:00 | claude | test_failed → dev_in_progress | 认领通知 evt-96eef1c744a2ac21abfcea83f5ecedc7fdea1335715b0dd269b4094798e19a57，修复 WED-A3-01–03（修复轮，不重读官方文档）。
 2026-11-09T12:41:23+08:00 | claude | dev_in_progress → package_ready | 1.0.1 修复 WED-A3-01（demo 零网络）、02（照片哈希绑定，换图作废确认与原键）、03（成品/画廊链接用安全路径）；契约 34/34、端到端 56/56，干净解压同样全过。ZIP SHA256 b26ede26…cd03208，1.0.0 保留。见 02-self-test.md。真实上游 0、生产变更 0。
+2026-11-09T13:54:12+08:00 | codex | package_ready → test_in_progress | 沿用 1.0.1 包事件 evt-7a5c65ff7b194588c4ba96c33704fa78a1d4a08bb5b0073c113c34bbf79f93d5 和 Muse 续接事件 evt-99cf44e0d7e31f558fb1a5fe5e5e31526ac9732072cc340dd21825635ee2a5a3，对同一固定 ZIP 做一次 A3 复查。
