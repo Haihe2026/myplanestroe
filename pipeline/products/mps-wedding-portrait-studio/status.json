@@ -2,24 +2,17 @@
   "skill_id": "mps-wedding-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "a604523f4bd0e524dda506146d2411e76be43e9c",
-  "stage": "blocked",
-  "owner": "claude",
-  "claimed_at": "2026-11-08T19:28:27+08:00",
-  "updated_at": "2026-11-08T22:57:01+08:00",
+  "stage": "spec_ready",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-09T08:15:17+08:00",
   "rounds": {
     "spec": 0,
     "dev": 0,
     "test": 0
   },
   "lane": "fast",
-  "blocked": {
-    "at_stage": "dev_in_progress",
-    "by": "claude",
-    "reason_code": "HARD_STOP",
-    "detail": "技能包代码与测试已完成，缺规格要求的 10 张示例图；Codex 本次运行禁止真实付费生图，未生成（见 01-codex-demo-dependency-blocked-evt-026aab1d….md）",
-    "needs": "在允许真实生图的 Codex 运行里，按 msg-from-claude-20261108-demos.md 生成 10 张示例图到 demo-assets/（SOP A.5 第2条已长期授权示例图，仅需放开 Codex 运行限制）",
-    "resume_to": "spec_ready"
-  },
+  "blocked": null,
   "versions": {
     "package": null,
     "listed": null

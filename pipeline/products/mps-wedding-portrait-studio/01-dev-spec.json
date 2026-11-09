@@ -14,19 +14,19 @@
   "ready_for_development": true,
   "read_record": [
     {
-      "date": "2026-11-08",
+      "date": "2026-11-09",
       "url": "https://open.workbuddy.cn/docs/skill",
-      "result": "本次恢复复核已重新在线读取。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。"
+      "result": "本次示例图交付前已重新在线读取。核对团队版 SKILL.md、必填字段、示例字段、脚本与资源目录。"
     },
     {
-      "date": "2026-11-08",
+      "date": "2026-11-09",
       "url": "https://open.workbuddy.cn/docs/expert",
-      "result": "本次恢复复核已重新在线读取。核对专家包结构，确认本单渠道只采用 Skill 格式。"
+      "result": "本次示例图交付前已重新在线读取。核对专家包结构，确认本单渠道只采用 Skill 格式。"
     },
     {
-      "date": "2026-11-08",
+      "date": "2026-11-09",
       "url": "https://open.workbuddy.cn/docs",
-      "result": "本次恢复复核已重新在线读取。核对入驻、审核及发布顺序。"
+      "result": "本次示例图交付前已重新在线读取。核对入驻、审核及发布顺序。"
     }
   ],
   "core_terms": [
@@ -46,7 +46,7 @@
       "size": "1024x1536",
       "prompt": "白色礼服，灰白无缝背景，大柔光，胸像或半身自然姿势",
       "demo_file": "white-studio.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "xiuhe",
@@ -60,7 +60,7 @@
       "size": "1024x1536",
       "prompt": "红金秀禾服，简洁木质布景，对称构图，保留肤色",
       "demo_file": "xiuhe.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "garden",
@@ -74,7 +74,7 @@
       "size": "1536x1024",
       "prompt": "浅色礼服和草坪花园，暖阳斜光，人物完整留出空间",
       "demo_file": "garden.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "seaside",
@@ -88,7 +88,7 @@
       "size": "1536x1024",
       "prompt": "海平线与沙滩，海风自然，服装和光影一致，控制浪花",
       "demo_file": "seaside.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "oil-wedding",
@@ -101,7 +101,7 @@
       "size": "1024x1536",
       "prompt": "暖棕复古背景，低调古典侧光，油画质感局限于风格，不覆盖人脸细节",
       "demo_file": "oil-wedding.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "korean",
@@ -115,7 +115,7 @@
       "size": "1024x1536",
       "prompt": "淡彩影棚和留白，高调漫射光，自然轻妆与轻盈白纱",
       "demo_file": "korean.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "hanfu",
@@ -129,7 +129,7 @@
       "size": "1024x1536",
       "prompt": "典雅汉服与清简庭院，柔光，准确的衣襟和自然持袖姿势",
       "demo_file": "hanfu.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "oil-portrait",
@@ -142,7 +142,7 @@
       "size": "1024x1536",
       "prompt": "古典单人肖像，深暖背景和明暗层次，保留真实脸部特征",
       "demo_file": "oil-portrait.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "cyber",
@@ -156,7 +156,7 @@
       "size": "1024x1536",
       "prompt": "青紫霓虹城市虚景和轮廓光，脸部有自然填充光，无品牌广告",
       "demo_file": "cyber.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     },
     {
       "key": "japanese",
@@ -170,7 +170,7 @@
       "size": "1024x1536",
       "prompt": "窗边自然光，淡色日常服，轻柔胶片色感，留出头肩空间",
       "demo_file": "japanese.png",
-      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。当前为计划。"
+      "demo_method": "用已登记 aisplice / gpt-image-2.5-ext 生成 1 张虚构成年人物主题示意，再离线缩放。本批次已完成，见 demo-assets/provenance.json。"
     }
   ],
   "reference": {
@@ -293,11 +293,15 @@
   ],
   "demo_generation": {
     "planned": 10,
-    "actual": 0,
+    "actual": 10,
     "paid_calls_limit": 10,
-    "previews": "虚构成年人效果示意，文生图不验证参考图保真，素材未生成",
+    "previews": "已交付虚构成年人物主题示意，文生图不用于证明参考图保真",
     "delivery_owner": "codex",
-    "required_before_final_package": true
+    "required_before_final_package": true,
+    "generation_attempts": 10,
+    "provenance": "demo-assets/provenance.json",
+    "audit": "demo-assets/generation-audit.json",
+    "authorization": "01-demo-authorization-20261109.md"
   },
   "telemetry": {
     "fields": [
@@ -332,9 +336,15 @@
       "/health",
       "/membership-api/plans"
     ],
-    "live_paid_calls": 0,
+    "live_paid_calls": 10,
     "workbuddy_host": "未验证",
-    "platform_publish": "未验证"
+    "platform_publish": "未验证",
+    "demo_asset_sync": {
+      "images": 10,
+      "package_png_bytes": 867268,
+      "source": "02-package/dev/sync_demos.py",
+      "environment": "isolated local fixture"
+    }
   },
   "tests": [
     {
@@ -438,6 +448,11 @@
       "item": "示例回归",
       "adopted": "双语语义对齐，实际链接验证空格与 # 的合成路径",
       "basis": "现行 SOP 的 A3-E01、A3-E02、A3-E03"
+    },
+    {
+      "item": "示例图实际调用",
+      "adopted": "登记资源真实提交 10 次，成功 10 张。两张横图、八张竖图",
+      "basis": "负责人 2026-11-09 直接长期授权；见 01-demo-authorization-20261109.md 和 demo-assets/generation-audit.json"
     }
   ],
   "blocked_reasons": [],

@@ -1,0 +1,29 @@
+{
+  "authorized_limit": 10,
+  "post_attempt_intents": 10,
+  "adapter_tasks": 10,
+  "unique_remote_tasks": 10,
+  "succeeded": 10,
+  "duplicate_generation_posts": 0,
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "customer_financial_database_used": false,
+  "scope": "isolated adapter task database, no customer wallet writes",
+  "source_repo": "Haihe2026/myplanestroe",
+  "skill_id": "mps-wedding-portrait-studio",
+  "batch": "wedding-demos-20261109",
+  "authorization_commit": "859f952fe3957e922b73cf59806ebab499821805",
+  "offline_sync": {
+    "verified_source_hashes": 10,
+    "package_png_bytes": 867268,
+    "package_images": 10,
+    "sync_source_blob": "a64bdc4ae1b39bf1a0bf6fe154234983896cd5de"
+  },
+  "visual_review": {
+    "scenes_checked": 10,
+    "reference_photo_inputs": 0
+  }
+}

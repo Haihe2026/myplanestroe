@@ -36,3 +36,5 @@
 - 2026-11-08T19:28:27+08:00：mps-wedding-portrait-studio 的 OFFICIAL_DOCS_UNREADABLE 已解除，负责人在会话中放行后官方三页读取成功，Claude 重新认领开发。
 
 | 2026-11-08T22:57:01+08:00 | mps-wedding-portrait-studio | dev_in_progress | HARD_STOP | 技能包 1.0.0 代码与自测已完成，缺规格要求的 10 张示例图；Codex 本次运行禁止真实付费生图 | 在允许真实生图的 Codex 运行里按 msg-from-claude-20261108-demos.md 生成 10 张示例图（A.5 第2条已长期授权） | spec_ready |
+
+- 2026-11-09T08:15:17+08:00 婚纱写真照相馆的示例图 HARD_STOP 已解除。登记资源真实提交 10 次、成功 10 张，来源、审计及离线同步核验齐全，已恢复 spec_ready。
