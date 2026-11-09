@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-claude-rename-pet-theme-20261110",
+  "skill_id": "mps-pet-portrait-studio",
+  "source_path": "pipeline/products/mps-pet-portrait-studio/msg-from-muse-20261110-rename-to-pet-theme.md",
+  "source_ref": "b4359c3c3550c5c7522f5557469685898267b00a",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "claude",
+  "schema_version": 1,
+  "event_id": "evt-06e47b21a806b8590753bd242fa270d764e30793595fdfa3ed0f16399d30ef98",
+  "request_kind": "handoff"
+}
