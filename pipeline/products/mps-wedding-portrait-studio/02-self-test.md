@@ -1,10 +1,33 @@
 # 自测报告：mps-wedding-portrait-studio 1.0.0
 
-- 时间：2026-11-08 北京时间，Claude（负责人交互会话续接 19:28 的认领）
-- 已读 WorkBuddy 官方文档快照（`docs/sop/workbuddy-official-docs.md`，快照日期 2026-11-08，读了「二、技能」章）；19:28 另有线上三页读取记录 `02-claude-docs-read-20261108.md`
-- 规格：`01-dev-spec.md` / `01-dev-spec.json` 1.0.0（A1 通过）
+- 时间：2026-11-09 北京时间，Claude 定时运行（认领通知 evt-bdef4dc745884994b746f4ee5a9228b263a538c134bf5b9cf9f6b21b0d9570a8）；接续 2026-11-08 22:57 的示例图拦停
+- 已读 WorkBuddy 官方文档快照（`docs/sop/workbuddy-official-docs.md`，快照日期 2026-11-08，读了「二、技能」章，本次运行重读）
+- 规格：`01-dev-spec.md` / `01-dev-spec.json` 1.0.0（A1 通过；与上次相比只改了示例图交付状态和读取日期）
 - 渠道：只做 `workbuddy-skill`（config.yaml channels）
-- **A2 结论：未通过，不置 package_ready。** 代码、话术和测试都已完成；唯一缺口是 10 张示例图（规格 `demo_generation.required_before_final_package=true`，实际 0 张）。Codex 本次运行禁止真实付费生图，已记录阻断（`01-codex-demo-dependency-blocked-evt-026aab1d….md`）。按 A.3 拦停，等负责人处理。
+- **A2 结论：通过，置 package_ready。**
+- 交付包：`02-package/dist/mps-wedding-portrait-studio-1.0.0.zip`，920365 字节，24 个文件，最多两级，SHA256 `7eb0b0abf669574c4f14ab6df6f95026e34874dcd69500bff90b82ce18be8001`
+
+## 本次（2026-11-09）
+
+1. 示例图同步：`dev/sync_demos.py` 按 `demo-assets/provenance.json` 逐张核对 10 张源图 SHA256 全部一致，本地等比缩放（长边 480）加 128 色调色板压缩，写入 `assets/`（与 `demos.json` 同级）。合计 867268 字节，与 Codex 审计记录 `offline_sync.package_png_bytes` 一致。派生记录 `dev/demos-derivation.json`（源哈希 → 包内哈希）。没有新增生图调用。
+2. 目视核对 10 张包内图：每张与场景对应（白纱影棚、秀禾、花园、海边、油画婚纱、韩式、汉服、油画肖像、赛博、日系），画面内无可读文字、水印、品牌标志；均为虚构成年人（provenance `fictional_adult=true`）。
+3. `dev/build.py` 补一行创建 `dist/` 目录（原脚本在目录不存在时报错），其他不变；仍拒绝覆盖已有 ZIP、拒绝三级目录。
+
+## 测试结果（2026-11-09）
+
+| 运行 | 结果 |
+|---|---|
+| 契约测试（仓库内包） | 32/32 通过 |
+| 端到端（仓库内包，打包前） | 52 项：50 通过，2 项跳过（尚无 ZIP） |
+| 端到端（仓库内包，打包后） | 52/52 通过（含 ZIP 两级目录与内容一致、provenance 追溯） |
+| 干净解压 ZIP 后契约测试 | 32/32 通过 |
+| 干净解压 ZIP 后端到端（`--package <解压目录>`） | 52/52 通过 |
+| ZIP 完整性 | `testzip` 无损坏；最大深度 2；不含 `__pycache__`、dev 目录、`demo-assets/` 原图 |
+| 密钥扫描（产品目录） | 无命中 |
+
+真实上游调用（本次 Claude）：0。生产变更：0。
+
+## 历史记录（2026-11-08，示例图到位前）
 
 ## A1 复检
 
@@ -16,7 +39,7 @@
 - `scripts/studio.py`：沿用证件照换底助手 1.0.6 已通过 A3 的客户端骨架（授权、充值、任务续接、消费记录、工单、首次对话上报、Markdown 安全路径）。新增 10 个场景、`--people 1/2`（写真只做单人）、`--shape portrait/landscape/square`，画幅只发适配器已映射的三种；提示词四段：身份（两人时逐人锁定左右位置）→ 主题视觉 → 无文字 → 安全。
 - `scripts/welcome_copy.py`：两人时的同意话术（两位都是成年人且同意）、单人限制、拒绝话术（未成年人、换脸、合成照片里没有的人）。
 - `references/`：scenes.md（路由表加超时）、prompts.md、platform-rules.md。
-- `assets/demos.json`：10 个 key 和标题，与 SKILL.md、README 一致。**PNG 未入包**（见下）。
+- `assets/demos.json`：10 个 key 和标题，与 SKILL.md、README 一致。（11-08 时 PNG 未入包；11-09 已同步 10 张。）
 - 开发目录 `02-package/dev/`：`mock_backend.py`（新增画幅校验，按请求画幅出图）、`e2e_check.py`、`sync_demos.py`（从 `demo-assets/` 核对 provenance 哈希后缩放入包）、`build.py`（不覆盖已有 ZIP，拒绝三级目录）。
 
 ## 测试结果
@@ -47,11 +70,11 @@
 
 ## 未验证
 
-- 10 张示例图（规格要求的最终包前置条件）：0 张。
-- 真实宿主行为、真实支付、真实生成、平台审核：都没做。真实上游调用 0 次，生产变更 0。
-- WorkBuddy 上传解析：没有 ZIP，未上传。
+- 真实宿主行为（WorkBuddy 内首轮、收藏卡片等）、真实支付、真实生成、平台审核：都没做（真机验收按负责人长期豁免跳过）。Claude 真实上游调用 0 次，生产变更 0。
+- WorkBuddy 上传解析：ZIP 未上传，上传由负责人手动完成。
+- 示例图是文生图效果示意，不证明参考图身份保持效果（规格已注明）。
 
-## 恢复步骤（示例图到位后，Claude 约 10 分钟）
+## 恢复步骤（已于 2026-11-09 执行完毕，保留备查）
 
 1. Codex 把 10 张 PNG 和 `provenance.json`、`generation-audit.json` 放进 `pipeline/products/mps-wedding-portrait-studio/demo-assets/`。
 2. 运行 `python3 02-package/dev/sync_demos.py`（核对哈希、缩放、写 `demos-derivation.json`）。
@@ -59,4 +82,4 @@
 
 ## 部署与回滚
 
-不涉及后端部署。本单是新技能，没有上一版，回滚就是不上传。
+不涉及后端部署。本单是新技能，没有上一版，回滚就是不上传或在平台下架；包源码和 ZIP 都在仓库，可按提交号恢复。

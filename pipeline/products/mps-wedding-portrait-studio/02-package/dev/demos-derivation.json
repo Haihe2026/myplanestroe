@@ -1,0 +1,141 @@
+{
+  "note": "本地缩放与调色板压缩，未新增生图调用；源图见 demo-assets/provenance.json",
+  "box": [
+    480,
+    480
+  ],
+  "colors": 128,
+  "total_bytes": 867268,
+  "items": [
+    {
+      "key": "white-studio",
+      "source": "white-studio.png",
+      "source_sha256": "46ef7b6db935b5d26c953757e5f3cb400841ae94390a0f8cf429c02fca6a0714",
+      "source_hash_checked": true,
+      "package_file": "white-studio.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 82690,
+      "package_sha256": "cd3b3f1380f4d093fbd133046452b5bb670220791342d7b0c214e08595cb8c4e"
+    },
+    {
+      "key": "xiuhe",
+      "source": "xiuhe.png",
+      "source_sha256": "3cdcad6284ac4499ea74329882faf46e15007e66b42472441ca0f5235f6593ca",
+      "source_hash_checked": true,
+      "package_file": "xiuhe.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 93414,
+      "package_sha256": "3647c4de0db0a9fadeb2f6b117cf08bad85f0d72f30b5486d0618c6193ab1c58"
+    },
+    {
+      "key": "garden",
+      "source": "garden.png",
+      "source_sha256": "4ee2941ed31b7e42d1d671309db19ddfc06f3b6cc684d3fee9c6727d3dc9f22f",
+      "source_hash_checked": true,
+      "package_file": "garden.png",
+      "package_size": [
+        480,
+        320
+      ],
+      "package_bytes": 101538,
+      "package_sha256": "7ce36dac4cc6fca5b39944f06195862430f2c2a78bbcf5abed019f12b3ffe42d"
+    },
+    {
+      "key": "seaside",
+      "source": "seaside.png",
+      "source_sha256": "39568d7f9691b5040c0ddf09676814a864c8c8e2c2c0d646ff3cfc6f5ce25f9c",
+      "source_hash_checked": true,
+      "package_file": "seaside.png",
+      "package_size": [
+        480,
+        320
+      ],
+      "package_bytes": 64408,
+      "package_sha256": "81c9190dcbee10df8e9e536c57b801a93da5a6356b08cab8e4fdcbc66fb65e86"
+    },
+    {
+      "key": "oil-wedding",
+      "source": "oil-wedding.png",
+      "source_sha256": "f1d6c25ce5bb047746bc280f33c68a7ba12ac702e5fec4d1c2af22edcc9f6f02",
+      "source_hash_checked": true,
+      "package_file": "oil-wedding.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 94976,
+      "package_sha256": "08c8cad616a980d7a63edd3d0079fdd4353d861ea37c479384cba755af639d23"
+    },
+    {
+      "key": "korean",
+      "source": "korean.png",
+      "source_sha256": "873560c4339a114f467dd9923918ee9a8cd3d7b8717f3aee3332fa872e8ace52",
+      "source_hash_checked": true,
+      "package_file": "korean.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 84804,
+      "package_sha256": "a82d0d56af5defe629a35610de4df9a2dc759550f3bd27f296269d63945e6c39"
+    },
+    {
+      "key": "hanfu",
+      "source": "hanfu.png",
+      "source_sha256": "f5c7b0ccf5c5954532454ef2e61d57b3639d269fb1a368eac846e33d994490ff",
+      "source_hash_checked": true,
+      "package_file": "hanfu.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 83640,
+      "package_sha256": "061a1f215abbf1ade82a68dc6995de0e320703c3480edaf698566395650a226c"
+    },
+    {
+      "key": "oil-portrait",
+      "source": "oil-portrait.png",
+      "source_sha256": "6d109970ce4c285d13ce9081dd17e4243d97ba72d54d0e2e19e8332b7a80174b",
+      "source_hash_checked": true,
+      "package_file": "oil-portrait.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 97324,
+      "package_sha256": "c480464489b339247bc25676ba4c8ff445c8e3443ee8f4339a4894118aca2613"
+    },
+    {
+      "key": "cyber",
+      "source": "cyber.png",
+      "source_sha256": "a253c00b9d14f5b801eeee229e3a95415174a53ae99530be901c0d5d6a285a0b",
+      "source_hash_checked": true,
+      "package_file": "cyber.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 79333,
+      "package_sha256": "16c04961af04e8b39a2735c823a1950ea0dd39a5132a536039961ab936935434"
+    },
+    {
+      "key": "japanese",
+      "source": "japanese.png",
+      "source_sha256": "4f26e8ac48a8bba3569b7aed5b28a4243fd36966a27814b4f460f9cd175864f3",
+      "source_hash_checked": true,
+      "package_file": "japanese.png",
+      "package_size": [
+        320,
+        480
+      ],
+      "package_bytes": 85141,
+      "package_sha256": "6e43cf1249cdc6dd06bade51f0067d0b690316fafb1512fa5d960d83952c9d4a"
+    }
+  ]
+}

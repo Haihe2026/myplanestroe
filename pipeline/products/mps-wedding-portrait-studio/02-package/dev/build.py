@@ -4,6 +4,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'mps-wedding-portrait-studio')
 DIST = os.path.join(HERE, '..', 'dist')
 VERSION = '1.0.0'
+os.makedirs(DIST, exist_ok=True)
 out = os.path.join(DIST, 'mps-wedding-portrait-studio-%s.zip' % VERSION)
 if os.path.exists(out):
     sys.exit('refuse to overwrite ' + out)
