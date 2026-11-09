@@ -1,8 +1,8 @@
 {
   "event_id": "evt-c681f47002eaf93c1f1800d34cc0b901ab9288ceff68812d15d0ca166a1da2c2",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "024baff1-0a9d-4e48-a4c2-d7de98e85ecb",
-  "at": "2026-11-09T17:37:56+08:00",
-  "evidence_ref": null
+  "at": "2026-11-09T17:44:28+08:00",
+  "evidence_ref": "8e4585ae7f3f9eb5d026aad241f917e70eb4b367:pipeline/products/mps-pet-portrait-studio/02-self-test.md"
 }
