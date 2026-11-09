@@ -1,0 +1,770 @@
+{
+  "skill_id": "mps-pet-portrait-studio",
+  "display_name": "宠物写真照相馆",
+  "display_name_en": "Pet Portrait Studio",
+  "version": "1.0.0",
+  "lane": "fast",
+  "channels": [
+    "workbuddy-skill"
+  ],
+  "source_ref": "3e570ea52ac3a566af2a39b4ad6aefbbcd7f4126",
+  "brief_ref": "66a396a6ce070a8a20443e70e5d1f212be0fba6f",
+  "sop_ref": "3e570ea52ac3a566af2a39b4ad6aefbbcd7f4126",
+  "document_status": "spec_ready",
+  "a1_passed": true,
+  "ready_for_development": true,
+  "read_record": [
+    {
+      "date": "2026-11-09",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "在线读到团队版技能、SKILL.md、八个必填字段、脚本和资源目录。"
+    },
+    {
+      "date": "2026-11-09",
+      "url": "https://open.workbuddy.cn/docs/expert",
+      "result": "在线读到专家独立结构，当前只交 Skill。"
+    },
+    {
+      "date": "2026-11-09",
+      "url": "https://open.workbuddy.cn/docs",
+      "result": "在线读到开放平台入口和产品分类。"
+    }
+  ],
+  "core_terms": [
+    "宠物写真",
+    "宠物主题照"
+  ],
+  "scenes": [
+    {
+      "key": "royal-oil",
+      "title": "皇家油画宠物肖像",
+      "ratio": "2:3",
+      "size": "1024x1536",
+      "keywords": [
+        "皇家",
+        "宫廷",
+        "油画挂墙"
+      ],
+      "direction": "深色宫廷背景、深酒红丝绒披肩、传统油画笔触；保留耳形与胸口花纹",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional silver tabby cat with white chest, green eyes, front-facing in a burgundy velvet royal cape, old-master oil paint, dark palace studio. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "cartoon",
+      "title": "卡通动漫宠物",
+      "ratio": "1:1",
+      "size": "1024x1024",
+      "keywords": [
+        "卡通",
+        "动漫",
+        "头像"
+      ],
+      "direction": "清晰线条、柔色块、头像裁切留出耳尖；不要把毛斑概括到消失",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional cream shiba inu with curved ears and a dark nose as a cute hand-drawn anime avatar, pastel aqua backdrop, clean cel shading. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "cyberpunk",
+      "title": "赛博朋克宠物",
+      "ratio": "2:3",
+      "size": "1024x1536",
+      "keywords": [
+        "赛博朋克",
+        "霓虹",
+        "未来感"
+      ],
+      "direction": "紫青霓虹轮廓光、未来街景；毛色留中性色补光，面部无遮挡",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional black tuxedo cat with white chin and chest in a violet and cyan cyberpunk alley, neutral light on face, no signage. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "ancient-chinese",
+      "title": "古风宠物",
+      "ratio": "2:3",
+      "size": "1024x1536",
+      "keywords": [
+        "古风",
+        "汉服",
+        "中式"
+      ],
+      "direction": "传统庭院与锦缎小披肩；服装顺着动物体型，眼鼻无遮挡",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional orange tabby cat in a red Chinese-style silk mantle in a traditional courtyard, plum blossom, soft painted portrait. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "astronaut",
+      "title": "宇航员宠物",
+      "ratio": "2:3",
+      "size": "1024x1536",
+      "keywords": [
+        "宇航员",
+        "太空",
+        "星球"
+      ],
+      "direction": "透亮面罩、星球远景；面罩反光避开双眼，保留口鼻结构",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional golden retriever in an astronaut suit with a transparent visor and clearly visible eyes, distant blue planet. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "watercolor",
+      "title": "水彩画宠物",
+      "ratio": "2:3",
+      "size": "1024x1536",
+      "keywords": [
+        "水彩",
+        "水彩画",
+        "手绘"
+      ],
+      "direction": "纸张纹理、淡色晕染；眼鼻和关键花纹边缘清楚",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional floppy-eared beagle with a white blaze painted in delicate transparent watercolor on textured paper. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "formal",
+      "title": "绅士正装宠物",
+      "ratio": "2:3",
+      "size": "1024x1536",
+      "keywords": [
+        "绅士",
+        "西装",
+        "正装",
+        "礼服"
+      ],
+      "direction": "正装配件和柔和棚灯；领结不挡胸前辨识斑纹",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional dappled dachshund with amber eyes, a small tailored tuxedo and bow tie under soft portrait studio light. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假宠物",
+      "ratio": "3:2",
+      "size": "1536x1024",
+      "keywords": [
+        "海边",
+        "海滩",
+        "度假"
+      ],
+      "direction": "海浪与自然光、横版留景；按原图保留毛发纹理与身体比例",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional calico cat with an orange patch around its left eye on a sunny seaside boardwalk, blue surf, light vacation scarf. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日宠物",
+      "ratio": "2:3",
+      "size": "1024x1536",
+      "keywords": [
+        "圣诞",
+        "节日",
+        "圣诞树"
+      ],
+      "direction": "暖色灯串、松枝与小配饰；避免帽沿遮眼和高光漂白毛色",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional small black poodle with dark eyes, a festive red scarf, warm Christmas tree bokeh and pine branches. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    },
+    {
+      "key": "explorer",
+      "title": "探险家宠物",
+      "ratio": "3:2",
+      "size": "1536x1024",
+      "keywords": [
+        "探险",
+        "户外",
+        "小探险家"
+      ],
+      "direction": "自然地形、轻量探险服饰，脸部及耳朵完整；不增加其他动物",
+      "tier": "1K",
+      "series": "宠物主题写真",
+      "prompt": "Create an original single-pet portrait of a fictional long-haired brown tabby cat in a lightweight explorer bandana on a mossy forest trail, alert ears, natural morning light. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+    }
+  ],
+  "reference": {
+    "min": 1,
+    "max": 1,
+    "mime": [
+      "image/png",
+      "image/jpeg"
+    ],
+    "max_bytes": 5242880,
+    "min_side": 128,
+    "max_side": 8000,
+    "max_pixels": 20000000,
+    "consent": "Own pet or consent from owner; explicit reference and paid consent for exact source SHA-256 and task."
+  },
+  "billing": {
+    "gateway": "https://aistore.zhaopintong.com/platform-api/gemini",
+    "public_checkout": "https://aistore.zhaopintong.com/membership/gemini/",
+    "unit": "每个独立成功任务 1 张",
+    "new_user_trial": 0,
+    "wallet": "现有通用生图次数",
+    "account": "原 install_secret 与原账户 Bearer",
+    "skill_channel": "workbuddy_skill",
+    "sibling_reuse": false,
+    "plan_source": "GET /platform-api/gemini/membership-api/plans",
+    "idempotency_header": "Idempotency-Key",
+    "checkout": "按原安装关联的服务端短链接",
+    "settlement": "沿现有 manual_qr，报告与核款分开，交易号去重",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/membership-api/plans",
+        "auth_and_body": "无 Bearer，读取当时可用套餐",
+        "source": "resources/shared-image-temporary/client.py:64"
+      },
+      {
+        "method": "GET",
+        "path": "/balance",
+        "auth_and_body": "原账户 Bearer，remaining_uses 是总可用次数",
+        "source": "resources/shared-image-temporary/client.py:65"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry",
+        "auth_and_body": "无 Bearer，原 install_secret，沿服务器签发 URL",
+        "source": "resources/shared-image-temporary/client.py:66–70"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry/status",
+        "auth_and_body": "无 Bearer，原 install_secret，registered 只说明账户注册",
+        "source": "resources/shared-image-temporary/client.py:71–73"
+      },
+      {
+        "method": "POST",
+        "path": "/membership-link",
+        "auth_and_body": "原账户 Bearer，正文 {}，取得短期结账 URL",
+        "source": "resources/shared-image-temporary/client.py:74–76"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-key 与 /skill-key/bound",
+        "auth_and_body": "原账户 Bearer，ready 才私有保存。bound 正文 {key}",
+        "source": "resources/shared-image-temporary/client.py:77–83"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-jobs",
+        "auth_and_body": "Skill Bearer，原 Idempotency-Key，确认后的参考编辑正文",
+        "source": "resources/shared-image-temporary/client.py:84–86"
+      },
+      {
+        "method": "GET",
+        "path": "/jobs/by-key/{key}、/jobs/{id}、/jobs/{id}/image",
+        "auth_and_body": "优先 Skill Bearer，兼容原账户回查。保存 PNG 后交付",
+        "source": "resources/shared-image-temporary/client.py:87–97"
+      },
+      {
+        "method": "GET",
+        "path": "/consumption-history",
+        "auth_and_body": "原账户 Bearer，page/page_size，仅共享 gemini 可见历史",
+        "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89–118"
+      },
+      {
+        "method": "POST",
+        "path": "/support-tickets",
+        "auth_and_body": "原账户 Bearer，Idempotency-Key，category/text/job_id?",
+        "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124–162"
+      },
+      {
+        "method": "GET",
+        "path": "/support-tickets/{id}",
+        "auth_and_body": "原账户 Bearer，只查本人，跨账户 404",
+        "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164–171"
+      }
+    ],
+    "channel": "general",
+    "free_trial": false,
+    "cost_source": "resources/upstreams/catalog.json",
+    "observed_public_plans": [
+      {
+        "price_fen": 500,
+        "images": 25
+      },
+      {
+        "price_fen": 2900,
+        "images": 150
+      },
+      {
+        "price_fen": 3900,
+        "images": 200
+      },
+      {
+        "price_fen": 4900,
+        "images": 250
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/membership-api/plans",
+      "auth_and_body": "无 Bearer，读取当时可用套餐",
+      "source": "resources/shared-image-temporary/client.py:64"
+    },
+    {
+      "method": "GET",
+      "path": "/balance",
+      "auth_and_body": "原账户 Bearer，remaining_uses 是总可用次数",
+      "source": "resources/shared-image-temporary/client.py:65"
+    },
+    {
+      "method": "POST",
+      "path": "/quick-entry",
+      "auth_and_body": "无 Bearer，原 install_secret，沿服务器签发 URL",
+      "source": "resources/shared-image-temporary/client.py:66–70"
+    },
+    {
+      "method": "POST",
+      "path": "/quick-entry/status",
+      "auth_and_body": "无 Bearer，原 install_secret，registered 只说明账户注册",
+      "source": "resources/shared-image-temporary/client.py:71–73"
+    },
+    {
+      "method": "POST",
+      "path": "/membership-link",
+      "auth_and_body": "原账户 Bearer，正文 {}，取得短期结账 URL",
+      "source": "resources/shared-image-temporary/client.py:74–76"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-key 与 /skill-key/bound",
+      "auth_and_body": "原账户 Bearer，ready 才私有保存。bound 正文 {key}",
+      "source": "resources/shared-image-temporary/client.py:77–83"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-jobs",
+      "auth_and_body": "Skill Bearer，原 Idempotency-Key，确认后的参考编辑正文",
+      "source": "resources/shared-image-temporary/client.py:84–86"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/by-key/{key}、/jobs/{id}、/jobs/{id}/image",
+      "auth_and_body": "优先 Skill Bearer，兼容原账户回查。保存 PNG 后交付",
+      "source": "resources/shared-image-temporary/client.py:87–97"
+    },
+    {
+      "method": "GET",
+      "path": "/consumption-history",
+      "auth_and_body": "原账户 Bearer，page/page_size，仅共享 gemini 可见历史",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89–118"
+    },
+    {
+      "method": "POST",
+      "path": "/support-tickets",
+      "auth_and_body": "原账户 Bearer，Idempotency-Key，category/text/job_id?",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124–162"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets/{id}",
+      "auth_and_body": "原账户 Bearer，只查本人，跨账户 404",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164–171"
+    }
+  ],
+  "model": {
+    "asset_id": "aisplice",
+    "server_model": "gpt-image-2.5-ext",
+    "engine": "photo-retouch-sunburst",
+    "resolution": "1K",
+    "n": 1,
+    "quality": "auto",
+    "legacy_fallback": false,
+    "estimated_usd": 0.0065,
+    "fx_estimate": 7,
+    "estimated_cny": 0.0455,
+    "minimum_unit_revenue_cny": 0.1933333333,
+    "estimated_margin": 0.764655,
+    "margin_threshold": 0.6,
+    "name": "gpt-image-2.5-ext",
+    "catalog_ref": "3e570ea52ac3a566af2a39b4ad6aefbbcd7f4126:resources/upstreams/catalog.json"
+  },
+  "margin": {
+    "unit_cost": 0.0455,
+    "unit_revenue": 0.19333333333333333,
+    "gross_margin": 0.7646551724137931,
+    "threshold": 0.6
+  },
+  "request_fields": [
+    "prompt",
+    "size",
+    "confirmed",
+    "image_engine",
+    "references",
+    "reference_consent"
+  ],
+  "demos": [
+    {
+      "key": "royal-oil",
+      "title": "皇家油画宠物肖像",
+      "size": "1024x1536",
+      "file": "royal-oil.png",
+      "preview_size": [
+        512,
+        768
+      ],
+      "sha256": "b068f8335444fa3574e29424e4eaa95e9999cdca9279687666ebaac570d30644"
+    },
+    {
+      "key": "cartoon",
+      "title": "卡通动漫宠物",
+      "size": "1024x1024",
+      "file": "cartoon.png",
+      "preview_size": [
+        512,
+        512
+      ],
+      "sha256": "a34e7cbb1a0c6b971a1691056bd0196799bd8a1f10d866140eb76ffbb2183f84"
+    },
+    {
+      "key": "cyberpunk",
+      "title": "赛博朋克宠物",
+      "size": "1024x1536",
+      "file": "cyberpunk.png",
+      "preview_size": [
+        512,
+        768
+      ],
+      "sha256": "2be550b58a0c49d0bc1264e4b72113c285cc16b31bf567bee77b3a38c3dfa32b"
+    },
+    {
+      "key": "ancient-chinese",
+      "title": "古风宠物",
+      "size": "1024x1536",
+      "file": "ancient-chinese.png",
+      "preview_size": [
+        512,
+        768
+      ],
+      "sha256": "17796a7f6778548d2cf0082ae0521f9b2dbfc5214929e713c64ecc63a7d387e4"
+    },
+    {
+      "key": "astronaut",
+      "title": "宇航员宠物",
+      "size": "1024x1536",
+      "file": "astronaut.png",
+      "preview_size": [
+        512,
+        768
+      ],
+      "sha256": "0bdb74339259fcd6bd687f257923aa74c33108ee17a69f1b782149c9c8515f70"
+    },
+    {
+      "key": "watercolor",
+      "title": "水彩画宠物",
+      "size": "1024x1536",
+      "file": "watercolor.png",
+      "preview_size": [
+        512,
+        768
+      ],
+      "sha256": "555abf0899c12fff57cfcd589672c7a1e930cfaea50525b181a1f486d1de54fc"
+    },
+    {
+      "key": "formal",
+      "title": "绅士正装宠物",
+      "size": "1024x1536",
+      "file": "formal.png",
+      "preview_size": [
+        512,
+        768
+      ],
+      "sha256": "e015613674a469931385860fd40a70b4f27be00435e9b41a25f6745105e7e1f8"
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假宠物",
+      "size": "1536x1024",
+      "file": "seaside.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "7e17741fb693e84e5f19469e623f63423fa26a76b4350d5fffe658299da34b4b"
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日宠物",
+      "size": "1024x1536",
+      "file": "christmas.png",
+      "preview_size": [
+        512,
+        768
+      ],
+      "sha256": "7eec114d1533f9213b9f437a442f64d94bfa05f334edb112155dd1a873df8716"
+    },
+    {
+      "key": "explorer",
+      "title": "探险家宠物",
+      "size": "1536x1024",
+      "file": "explorer.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "e96d990c2df267681fc5bf0696e31c10f8470e97a969a2cdcd532174a6c703c5"
+    }
+  ],
+  "demo_generation": {
+    "planned": 10,
+    "actual": 10,
+    "paid_calls_limit": 10,
+    "delivery_owner": "codex",
+    "required_before_final_package": true,
+    "generation_attempts": 10,
+    "provenance": "demo-assets/provenance.json",
+    "audit": "demo-assets/generation-audit.json",
+    "authorization": "90a6c7cb9eb48863ab12876cf370f4091a961e04:pipeline/products/mps-pet-portrait-studio/01-demo-authorization-20261109.md",
+    "duplicate_generation_posts": 0,
+    "visual_review": 10
+  },
+  "telemetry": {
+    "fields": [
+      "event_id",
+      "installation_id",
+      "skill_id",
+      "skill_name",
+      "skill_version",
+      "channel",
+      "client_occurred_at",
+      "is_test"
+    ],
+    "success_http": 200,
+    "timeout_s": 2,
+    "link_fields": [
+      "event_id",
+      "receipt",
+      "product"
+    ],
+    "product": "gemini",
+    "anonymous_endpoint": "/platform-api/telemetry/v1/first-dialogue",
+    "max_body_bytes": 4096,
+    "machine_level_available": false
+  },
+  "funnel_steps": [
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "timeouts": {
+    "submit_s": 90,
+    "poll_request_s": 15,
+    "poll_window_s": 120,
+    "extra_s": 30,
+    "prebilling_wait_s": 0,
+    "host_min_s": 240
+  },
+  "verification": {
+    "public_get": true,
+    "live_customer_calls": 0,
+    "live_reference_identity_verified": false,
+    "live_payment_verified": false,
+    "workbuddy_host": "未验证，A3 长期跳过",
+    "platform_publish": "未提审",
+    "demo_asset_sync": "由 Claude 在 A2 核对"
+  },
+  "sibling_skills": [
+    {
+      "skill_id": "mps-wedding-portrait-studio",
+      "boundary": "人像婚纱或人物写真转婚纱馆。"
+    },
+    {
+      "skill_id": "mps-id-photo-background",
+      "boundary": "证件照换底转证件照。"
+    },
+    {
+      "skill_id": null,
+      "boundary": "无指定原宠物的通用生图可转 Grok 一键生图。"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T01",
+      "area": "首轮与路由",
+      "coverage": "问候、仅图、能力询问、明确需求、照片检查、不要生成、单看示例、10 模板及相邻分流。断言首次交互遥测之外零 HTTP，推荐一个方向、没有支付抢跑、示例去重和固定话术。",
+      "by": "claude"
+    },
+    {
+      "id": "T02",
+      "area": "本地输入与同意",
+      "coverage": "PNG/JPEG 单张尺寸和体积边界、损坏或动画、缺图、未获许可、非猫狗、多只宠物歧义。拍照原件不动，已选原图的 SHA-256、选择的主体与主题/比例绑定，替换后旧双同意和待提交键失效。",
+      "by": "claude"
+    },
+    {
+      "id": "T03",
+      "area": "示例和路径",
+      "coverage": "十图都来自固定清单，假网络与凭证探针零调用；缺文件退出 3。分别用带空格、带 # 的合成现存路径解析 Markdown，覆盖 demo、交付图与画廊。",
+      "by": "claude"
+    },
+    {
+      "id": "T04",
+      "area": "授权与支付",
+      "coverage": "已有原账户跳过授权，无账户同安装授权和恢复，401 清失效凭证、退出码 4、旧任务保存；未到账、拒绝、链接失败、余额不足、分张扣量、付款后仍确认。",
+      "by": "claude"
+    },
+    {
+      "id": "T05",
+      "area": "任务契约",
+      "coverage": "一次一张、三比例、六字段白名单、两项显式同意、参考图与原任务键同体同键、未登记字段在客户端和 Mock 服务端均拒绝，重复与冲突分开。",
+      "by": "claude"
+    },
+    {
+      "id": "T06",
+      "area": "等待与续接",
+      "coverage": "一次完成、两轮后完成、五轮仍在处理、首次网络抖动恢复、全程未能确认、明确失败；模拟 401/402/403/409/422/429/5xx，未知查原任务；余额恢复继续未完成项、成功图片只读补取、失败与策略拒绝不扣，模糊费用照记录。",
+      "by": "claude"
+    },
+    {
+      "id": "T07",
+      "area": "交付与画廊",
+      "coverage": "校验 PNG、非覆盖写入、图先于费用及余额，首张只提示一次调整，保存原图，服务端实际尺寸不符提示，可离线裁切并区分派生图；需要重生成时再确认。",
+      "by": "claude"
+    },
+    {
+      "id": "T08",
+      "area": "账户与遥测",
+      "coverage": "余额、消费记录、提交及查看工单、同键重复、跨账户 404、无预计时间。真实首轮入口与早退分支均走白名单上报，关停/损坏/只读/断网不影响主流程，同安装一次，合法账户才能 link。",
+      "by": "claude"
+    },
+    {
+      "id": "T09",
+      "area": "打包与文案",
+      "coverage": "八个必填字段、三组双语同场景同画幅、两级路径、版本与渠道、禁用词、脚本退出码和各处超时一致。A3-E01 故意错配可检出。",
+      "by": "claude"
+    },
+    {
+      "id": "T10",
+      "area": "收藏与不可用项",
+      "coverage": "收藏卡仅在首次交付后出现，暂不/取消、两级记忆及新对话触发由 Mock 覆盖；不支持写入时如实提示。支付 API 缺失能力、机器漏斗和真机范围按规格记录。",
+      "by": "claude"
+    },
+    {
+      "id": "T11",
+      "area": "固定包独立检查",
+      "coverage": "Codex 从干净目录解压并核对 SHA256、目录和 YAML、双语语义、十图与来源 SHA、实际 Markdown 链接、支付及遥测字段和规格范围。按现行 A3 不跑完整测试。",
+      "by": "codex"
+    }
+  ],
+  "decisions": [
+    {
+      "item": "渠道与命名",
+      "chosen": "仅 workbuddy-skill，版本 1.0.0，仓库 slug 无重名",
+      "basis": "固定 config，WorkBuddy 文档及固定树。市场全量重名未验证。"
+    },
+    {
+      "item": "欢迎语",
+      "chosen": "保留固定欢迎格式，正式审核状态独立据实记录",
+      "basis": "自动 SOP A.5 和负责人在本聊天的决定。"
+    },
+    {
+      "item": "场景与输出",
+      "chosen": "保留选品十个主题。卡通 1:1，海边和探险 3:2，其余 2:3，默认 1K",
+      "basis": "固定选品与现有适配器实际画幅。比例只开放已支持值。"
+    },
+    {
+      "item": "输入与计费",
+      "chosen": "一张经许可的猫狗参考图，一次一张；用通用钱包与套餐，0 次试用",
+      "basis": "自动 SOP A.5、图片解析与公开 health/plans。"
+    },
+    {
+      "item": "车道",
+      "chosen": "fast，使用共享图片、微信关联、钱包和售后接口",
+      "basis": "固定源码及既有核验；本产品不涉及后端补丁和部署。"
+    },
+    {
+      "item": "上游",
+      "chosen": "仅登记新资源和真实支持的路由，无旧源回退",
+      "basis": "固定注册表、目录、适配器与运行策略。"
+    },
+    {
+      "item": "未开放能力",
+      "chosen": "按原任务读图；无经核实的 inline_delivery、分段下载、低余额阈值或免费重做契约，不写进首版 API",
+      "basis": "固定 shared 客户端、网关和六字段白名单。"
+    },
+    {
+      "item": "示例资源",
+      "chosen": "十张从固定主题用虚构猫狗生成，来源与审计入仓",
+      "basis": "负责人长期示例授权、固定选品和执行计划；独立于真实参考编辑验证。"
+    },
+    {
+      "item": "首次对话遥测",
+      "chosen": "首版兼容 8 字段和 HTTP 200；L0 机器级及无可靠现有数据的步骤记不可得",
+      "basis": "自动 SOP A.5 和现有网关。"
+    },
+    {
+      "item": "设备",
+      "chosen": "同设备跨技能自动复用关闭；沿当前原安装恢复",
+      "basis": "固定 config 的 sibling_reuse=false。"
+    },
+    {
+      "item": "时限",
+      "chosen": "90 秒提交，15 秒单次查询，120 秒查询窗，30 秒余量，外层至少 240 秒；计费前额外等待 0",
+      "basis": "固定客户端及自动 SOP；无已核实的收费前快速重试协议。"
+    },
+    {
+      "item": "上传",
+      "chosen": "A3 独立检查后交付 ZIP，由负责人手动测试和上传",
+      "basis": "现行自动 SOP A.3 与负责人在本聊天的确认。"
+    }
+  ],
+  "blocked_reasons": [],
+  "welcome": {
+    "text": "欢迎使用WorkBuddy官方认证技能 宠物写真照相馆。",
+    "once_per_chat": true,
+    "decision": "2026-11-08，负责人在本聊天明确要求按现行 SOP 固定格式，WorkBuddy 审核状态按实际回执记录。",
+    "platform_review": "未提审"
+  },
+  "serial_gate": {
+    "previous_skill_id": "mps-wedding-portrait-studio",
+    "allowed_previous_stages": [
+      "submitted",
+      "listed"
+    ],
+    "previous_stage": "submitted",
+    "previous_version": "1.0.1",
+    "verified_at": "2026-11-09",
+    "status_ref": "3e570ea52ac3a566af2a39b4ad6aefbbcd7f4126:pipeline/products/mps-wedding-portrait-studio/status.json"
+  },
+  "workbuddy_examples": [
+    {
+      "scene": "royal-oil",
+      "size": "1024x1536",
+      "zh": "用我家猫的这张照片做皇家油画写真，竖版 2:3。",
+      "en": "Use this photo of my cat to make a royal oil portrait in portrait 2:3."
+    },
+    {
+      "scene": "cartoon",
+      "size": "1024x1024",
+      "zh": "用我家狗的这张照片做卡通头像，方形 1:1。",
+      "en": "Use this photo of my dog to make a square 1:1 cartoon avatar."
+    },
+    {
+      "scene": "seaside",
+      "size": "1536x1024",
+      "zh": "用我家猫的这张照片做海边度假写真，横版 3:2。",
+      "en": "Use this photo of my cat to make a seaside vacation portrait in landscape 3:2."
+    }
+  ],
+  "markdown_demo_paths": {
+    "slashes": "/",
+    "forbid_dot_prefix": true,
+    "encoded_space": "%20",
+    "encoded_hash": "%23",
+    "fixture_paths": [
+      "Codex Demo Assets/royal-oil.png",
+      "Codex#Demo/royal-oil.png"
+    ],
+    "acceptance": "按 Markdown 解析得到链接，确认无误拆出的 query 或 fragment，解码后定位到原来存在的文件。"
+  }
+}

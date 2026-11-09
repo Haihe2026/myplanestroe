@@ -1,0 +1,338 @@
+{
+  "authorized_limit": 10,
+  "generation_attempts": 10,
+  "upstream_generation_calls": 10,
+  "succeeded": 10,
+  "items": [
+    {
+      "key": "royal-oil",
+      "series": "宠物主题写真",
+      "title": "皇家油画宠物肖像",
+      "prompt": "Create an original single-pet portrait of a fictional silver tabby cat with white chest, green eyes, front-facing in a burgundy velvet royal cape, old-master oil paint, dark palace studio. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-09T16:36:03+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "8c0ece7dad4685639d468a7c0f52a9acba90792ea9e490ad1af3963204f2fc8f",
+      "raw_bytes": 2685103,
+      "file": "royal-oil.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 274510,
+      "output_sha256": "b068f8335444fa3574e29424e4eaa95e9999cdca9279687666ebaac570d30644"
+    },
+    {
+      "key": "cartoon",
+      "series": "宠物主题写真",
+      "title": "卡通动漫宠物",
+      "prompt": "Create an original single-pet portrait of a fictional cream shiba inu with curved ears and a dark nose as a cute hand-drawn anime avatar, pastel aqua backdrop, clean cel shading. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1024
+      ],
+      "generation_date": "2026-11-09T16:36:06+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "945517ba2a8cb4b669b5bb372b567713865e4b501a0511fbe9203797ab36cb33",
+      "raw_bytes": 1865528,
+      "file": "cartoon.png",
+      "actual_generated_size": [
+        1254,
+        1254
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        512
+      ],
+      "output_bytes": 180730,
+      "output_sha256": "a34e7cbb1a0c6b971a1691056bd0196799bd8a1f10d866140eb76ffbb2183f84"
+    },
+    {
+      "key": "cyberpunk",
+      "series": "宠物主题写真",
+      "title": "赛博朋克宠物",
+      "prompt": "Create an original single-pet portrait of a fictional black tuxedo cat with white chin and chest in a violet and cyan cyberpunk alley, neutral light on face, no signage. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-09T16:36:07+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "ff91a35dcb22d1430a1e4d8ba3381368cfecfc444beb9bb29c374ff63084f034",
+      "raw_bytes": 2429186,
+      "file": "cyberpunk.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 205793,
+      "output_sha256": "2be550b58a0c49d0bc1264e4b72113c285cc16b31bf567bee77b3a38c3dfa32b"
+    },
+    {
+      "key": "ancient-chinese",
+      "series": "宠物主题写真",
+      "title": "古风宠物",
+      "prompt": "Create an original single-pet portrait of a fictional orange tabby cat in a red Chinese-style silk mantle in a traditional courtyard, plum blossom, soft painted portrait. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-09T16:36:09+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "e0e264b0c0af149801dcddc5df5756194e9f2efbe1f5712e560bc7af373dfc36",
+      "raw_bytes": 2722406,
+      "file": "ancient-chinese.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 234273,
+      "output_sha256": "17796a7f6778548d2cf0082ae0521f9b2dbfc5214929e713c64ecc63a7d387e4"
+    },
+    {
+      "key": "astronaut",
+      "series": "宠物主题写真",
+      "title": "宇航员宠物",
+      "prompt": "Create an original single-pet portrait of a fictional golden retriever in an astronaut suit with a transparent visor and clearly visible eyes, distant blue planet. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-09T16:36:11+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "6489f6db8d7b5606ab45b4be564eac01162b4faf50d1bc4fdb82157a84d9be1d",
+      "raw_bytes": 2510679,
+      "file": "astronaut.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 210920,
+      "output_sha256": "0bdb74339259fcd6bd687f257923aa74c33108ee17a69f1b782149c9c8515f70"
+    },
+    {
+      "key": "watercolor",
+      "series": "宠物主题写真",
+      "title": "水彩画宠物",
+      "prompt": "Create an original single-pet portrait of a fictional floppy-eared beagle with a white blaze painted in delicate transparent watercolor on textured paper. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-09T16:36:13+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "eb74545ddf897424fb1644834728ee845c83d293ab71e629a6bc4f6831bff6ae",
+      "raw_bytes": 2812389,
+      "file": "watercolor.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 255838,
+      "output_sha256": "555abf0899c12fff57cfcd589672c7a1e930cfaea50525b181a1f486d1de54fc"
+    },
+    {
+      "key": "formal",
+      "series": "宠物主题写真",
+      "title": "绅士正装宠物",
+      "prompt": "Create an original single-pet portrait of a fictional dappled dachshund with amber eyes, a small tailored tuxedo and bow tie under soft portrait studio light. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-09T16:36:16+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "77ddfebd82e89be876b97b0439f8b027d9fdd3471bd34904b18be67b143444ae",
+      "raw_bytes": 2093309,
+      "file": "formal.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 224698,
+      "output_sha256": "e015613674a469931385860fd40a70b4f27be00435e9b41a25f6745105e7e1f8"
+    },
+    {
+      "key": "seaside",
+      "series": "宠物主题写真",
+      "title": "海边度假宠物",
+      "prompt": "Create an original single-pet portrait of a fictional calico cat with an orange patch around its left eye on a sunny seaside boardwalk, blue surf, light vacation scarf. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1536,
+        1024
+      ],
+      "generation_date": "2026-11-09T16:36:18+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "d47bc284028cc869c4586f21edb988cbee4d2a5abab77362b6856105f097d18f",
+      "raw_bytes": 2367072,
+      "file": "seaside.png",
+      "actual_generated_size": [
+        1536,
+        1024
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        768,
+        512
+      ],
+      "output_bytes": 180817,
+      "output_sha256": "7e17741fb693e84e5f19469e623f63423fa26a76b4350d5fffe658299da34b4b"
+    },
+    {
+      "key": "christmas",
+      "series": "宠物主题写真",
+      "title": "圣诞节日宠物",
+      "prompt": "Create an original single-pet portrait of a fictional small black poodle with dark eyes, a festive red scarf, warm Christmas tree bokeh and pine branches. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-09T16:36:20+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "3f37388a93683d96c650b73205e254b87358b34d8cee6ad2d6fed7dca793c8ad",
+      "raw_bytes": 2476821,
+      "file": "christmas.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 237956,
+      "output_sha256": "7eec114d1533f9213b9f437a442f64d94bfa05f334edb112155dd1a873df8716"
+    },
+    {
+      "key": "explorer",
+      "series": "宠物主题写真",
+      "title": "探险家宠物",
+      "prompt": "Create an original single-pet portrait of a fictional long-haired brown tabby cat in a lightweight explorer bandana on a mossy forest trail, alert ears, natural morning light. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1536,
+        1024
+      ],
+      "generation_date": "2026-11-09T16:36:22+08:00",
+      "fictional_pet": true,
+      "rights": "自家通过登记资源生成的虚构猫狗效果示例，供本技能开发、打包与展示使用。",
+      "method": "real_registered_resource_text_to_image_not_reference_edit",
+      "status": "succeeded",
+      "raw_sha256": "ebd971c5459874e76a32c063c4f31ae4af2f77576937c1060fdd64becb1bd625",
+      "raw_bytes": 2705597,
+      "file": "explorer.png",
+      "actual_generated_size": [
+        1536,
+        1024
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 192-color indexed PNG; no added markings",
+      "output_size": [
+        768,
+        512
+      ],
+      "output_bytes": 269881,
+      "output_sha256": "e96d990c2df267681fc5bf0696e31c10f8470e97a969a2cdcd532174a6c703c5"
+    }
+  ],
+  "checked_at": "2026-11-09T16:37:33+08:00",
+  "auth_source": "01-demo-authorization-20261109.md",
+  "auth_ref": "90a6c7cb9eb48863ab12876cf370f4091a961e04",
+  "scope": "Ten fictional pet text-to-image examples; no real reference-photo input.",
+  "cost": {
+    "unit_usd_estimate": 0.0065,
+    "total_usd_estimate": 0.065,
+    "actual_invoice_verified": false
+  },
+  "local_outputs": 10
+}
