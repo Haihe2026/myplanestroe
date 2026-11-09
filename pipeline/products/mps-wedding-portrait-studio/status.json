@@ -2,14 +2,14 @@
   "skill_id": "mps-wedding-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "a604523f4bd0e524dda506146d2411e76be43e9c",
-  "stage": "test_in_progress",
-  "owner": "codex",
-  "claimed_at": "2026-11-09T11:58:50+08:00",
-  "updated_at": "2026-11-09T11:58:50+08:00",
+  "stage": "test_failed",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-09T12:03:19+08:00",
   "rounds": {
     "spec": 0,
     "dev": 1,
-    "test": 0
+    "test": 1
   },
   "lane": "fast",
   "blocked": null,
