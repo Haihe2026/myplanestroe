@@ -4,3 +4,4 @@
 2026-11-09T17:38:14+08:00 | claude | spec_ready → dev_in_progress | Claude 定时运行认领 1.0.0 开发（通知 evt-c681f470…）。
 2026-11-09T17:44:18+08:00 | claude | dev_in_progress → package_ready | 1.0.0 A2 通过：契约 34/34、端到端 56/56（干净解压 ZIP），十张示例图哈希核对后同步；ZIP SHA256 660889b1…，见 02-self-test.md。
 2026-11-09T19:05:03+08:00 | codex | package_ready → test_in_progress | 核对 Muse 接力、A2 固定 ZIP、原回执与当前产品状态，继续 A3 独立检查。
+2026-11-09T19:09:37+08:00 | codex | test_in_progress → test_failed | 1.0.0 A3 不通过：未知任务可丢原键、截断 PNG 被交付、示例缺一张仍报成功。详见 03-test-report.md，退回 Claude 修复。
