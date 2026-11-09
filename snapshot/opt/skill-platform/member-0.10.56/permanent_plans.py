@@ -14,9 +14,12 @@ def catalog(items,per_image):
   result[item['id']]=dict(name=item['name'],price_fen=amount,images=images,pricing_basis='per_image' if per_image else 'promotional_bundle')
  return result
 SHARED_PLANS=catalog(CONFIG['shared'],True)
+RETIRED_SHARED_PLANS=catalog(CONFIG.get('retired_shared', []),True)
 TEMU_PLANS=catalog(CONFIG['temu'],False)
 PLANS=SHARED_PLANS.copy()
 LEGACY_TEMU_PLANS={}
-def permanent(plan):return plan in SHARED_PLANS or plan in TEMU_PLANS
+def permanent(plan):
+    return (plan in SHARED_PLANS or plan in TEMU_PLANS or plan in RETIRED_SHARED_PLANS
+            or plan in {'shared_permanent_999', 'gemini_permanent_999', 'business'})
 def snapshot_permanent(order):return permanent(order['plan'])
 def order_permanent(connection,row):return permanent(row['plan'])

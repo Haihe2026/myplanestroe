@@ -16,33 +16,6 @@
 
   } else accountButton.hidden = true;
 
-  const guidance = {
-
-    shared_image20_29:'145张轻松起步，让第一个想法变成成果。',
-
-    shared_image20_39:'195张日常常备，灵感与工作随时接着做。',
-
-    shared_image20_49:'245张畅快使用，多款技能接力，让好想法持续落地。',
-
-    shared_image20_999:'4,995张长期畅享，为个人创作与团队任务备足用量。',
-
-    gemini_permanent_29:'145张轻松起步，把眼前的想法先做出来。永久有效，按自己的节奏用。',
-
-    gemini_permanent_39:'195张日常常备，商品与内容配图接着做。永久有效，用完再充。',
-
-    gemini_permanent_49:'245张集中创作，一批素材从容安排。永久有效，随时继续制作。',
-
-    gemini_permanent_999:'4,995张长期畅享，次数永久有效，为持续创作备足用量。',
-
-    plus:'32次轻松起步，把眼前的想法先做出来。',
-
-    pro:'43次日常常备，商品与内容配图接着做。',
-
-    ultra:'54次集中创作，一批素材从容安排。',
-
-    business:'4,995张长期畅享，让创作跟着自己的节奏。'
-
-  };
 
   const plans = byId('plans');
 
@@ -90,13 +63,11 @@
 
       }
 
-      if (button.getAttribute('aria-checked')==='true') byId('plan-guidance').textContent=planAllowance(plan)+'，¥'+'0.20'+'／张，次数永久有效。';
 
     }
 
   }
 
-  document.addEventListener('plan-allowance-ready',update);
 
   const observer = new MutationObserver(update);
 

@@ -1,6 +1,7 @@
 """Versioned package identities preserve historical order units and terms."""
 
 SHARED_PLANS = {
+    'shared_permanent_5': {'name': '体验版', 'price_fen': 500, 'images': 25},
 
     'shared_permanent_29': {'name': 'Plus', 'price_fen': 2900, 'images': 150},
 
@@ -8,7 +9,6 @@ SHARED_PLANS = {
 
     'shared_permanent_49': {'name': 'Ultra', 'price_fen': 4900, 'images': 250},
 
-    'shared_permanent_999': {'name': '终身会员', 'price_fen': 99900, 'images': 5000},
 
 }
 
@@ -20,7 +20,6 @@ PLANS = {
 
     'gemini_permanent_49': {'name': 'Ultra', 'price_fen': 4900, 'images': 250},
 
-    'gemini_permanent_999': {'name': '终身会员', 'price_fen': 99900, 'images': 5000},
 
 }
 
@@ -48,9 +47,13 @@ LEGACY_TEMU_PLANS = {
 
 
 
+RETIRED_PERMANENT_IDS = {'shared_permanent_999', 'gemini_permanent_999', 'shared_image20_999'}
+
+
 def permanent(plan):
 
-    return plan == 'business' or plan in SHARED_PLANS or plan in PLANS or plan in TEMU_PLANS or plan in LEGACY_TEMU_PLANS
+    return (plan == 'business' or plan in RETIRED_PERMANENT_IDS
+            or plan in SHARED_PLANS or plan in PLANS or plan in TEMU_PLANS or plan in LEGACY_TEMU_PLANS)
 
 
 

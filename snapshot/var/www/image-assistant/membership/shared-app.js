@@ -4,35 +4,10 @@ let catalog=[], selected='shared_permanent_29', signedIn=false, ready=false;
 
 const el=id=>document.getElementById(id);
 
-let videoCostUses=null;
-
-function planAllowance(plan){
-
-  const units=plan.images ?? plan.points/1000;
-
-  const images=Number.isInteger(units)&&units>=0?units:0;
-
-  const imageText=images.toLocaleString('zh-CN')+' 张生图';
-
-  return Number.isInteger(videoCostUses)&&videoCostUses>0
-
-    ? imageText+' / '+Math.floor(images/videoCostUses).toLocaleString('zh-CN')+' 次视频'
-
-    : imageText;
-
+function planAllowance(plan) {
+  const units = plan.images ?? plan.points / 1000;
+  return (Number.isSafeInteger(units) && units >= 0 ? units.toLocaleString('zh-CN') : '—') + ' 额度';
 }
-
-// Public server configuration determines the conversion. No video jobs are made.
-
-fetch('/platform-api/grok-video/health',{cache:'no-store',credentials:'omit'})
-
-  .then(r=>{if(!r.ok)throw Error('unavailable');return r.json()})
-
-  .then(d=>{if(d.customer_generation_enabled===true&&Number.isInteger(d.video_cost_uses)&&d.video_cost_uses>0){videoCostUses=d.video_cost_uses;document.dispatchEvent(new Event('plan-allowance-ready'));}})
-
-  .catch(()=>{});
-
-
 
 async function api(path,body){
 
@@ -52,7 +27,7 @@ function choose(id){selected=id;for(const button of el('plans').children){button
 
   el('renewal').disabled=true;el('renewal').checked=false;
 
-  el('summary').textContent=plan.name+(lifetime?' 次数包':' 月度会员');
+  el('summary').textContent=plan.name+(lifetime?' 额度包':' 月度会员');
 
   el('detail').textContent=planAllowance(plan)+' · '+(lifetime?'永久有效':'付款确认后30天有效，到期不结转');
 
@@ -70,7 +45,6 @@ function render(){for(const plan of catalog){const button=document.createElement
 
   const count=document.createElement('span');count.className='count';count.textContent=['lifetime','permanent'].includes(plan.period)?'永久有效':'核款到账后30天有效';button.append(count);
 
-  const points=document.createElement('span');points.className='points';points.textContent=plan.images.toLocaleString('zh-CN')+' 次';button.append(points);
 
   button.addEventListener('click',()=>choose(plan.id));button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowDown','ArrowUp'].includes(event.key))return;event.preventDefault();const direction=['ArrowLeft','ArrowUp'].includes(event.key)?-1:1;const index=(catalog.findIndex(p=>p.id===selected)+direction+catalog.length)%catalog.length;choose(catalog[index].id);el('plans').children[index].focus();});el('plans').append(button);}if(!catalog.some(plan=>plan.id===selected))selected=(catalog.find(plan=>plan.price_fen===2900)||catalog[0]).id;choose(selected);}
 
@@ -96,13 +70,13 @@ async function restoreBoundBrowser(){
 
 }
 
-async function account(allowRestore=true){try{const data=await api('account');signedIn=true;el('account').textContent=data.label;el('balance').replaceChildren(document.createTextNode((data.shared_uses ?? 0).toLocaleString('zh-CN')+' '));const small=document.createElement('small');small.textContent='次';el('balance').append(small);el('notice').textContent=ready?'已关联原账户。扫码付款后联系客服核款，到账后回 Skill 客户端 刷新次数即可。':'已关联原账户。收款暂未开放，已有次数可继续使用。';}catch(error){if(allowRestore!==false&&await restoreBoundBrowser())return account(false);signedIn=false;el('account').textContent='尚未关联账户';el('balance').replaceChildren(document.createTextNode('— '));const small=document.createElement('small');small.textContent='次';el('balance').append(small);el('notice').textContent=error.message+'。在 Skill 客户端 对当前技能说“打开会员中心”，无需重新注册。';}el('buy').disabled=!ready||!signedIn;el('buy').textContent=ready?'充值共享次数':'收款暂未开放';document.dispatchEvent(new CustomEvent('image-account-ready',{detail:{signedIn}}));}
+async function account(allowRestore=true){try{const data=await api('account');signedIn=true;el('account').textContent=data.label.replace(/^生图账户/, '额度账户');el('balance').replaceChildren(document.createTextNode((data.shared_uses ?? 0).toLocaleString('zh-CN')+' '));const small=document.createElement('small');small.textContent='额度';el('balance').append(small);el('notice').textContent=ready?'已关联原账户。扫码付款后联系客服核款，到账后回 Skill 客户端 刷新额度即可。':'已关联原账户。收款暂未开放，已有额度可继续使用。';}catch(error){if(allowRestore!==false&&await restoreBoundBrowser())return account(false);signedIn=false;el('account').textContent='尚未关联账户';el('balance').replaceChildren(document.createTextNode('— '));const small=document.createElement('small');small.textContent='额度';el('balance').append(small);el('notice').textContent=error.message+'。在 Skill 客户端 对当前技能说“打开会员中心”，无需重新注册。';}el('buy').disabled=!ready||!signedIn;el('buy').textContent=ready?'充值通用额度':'收款暂未开放';document.dispatchEvent(new CustomEvent('image-account-ready',{detail:{signedIn}}));}
 
 el('refresh').addEventListener('click',account);
 
 el('renewal').addEventListener('change',()=>choose(selected));
 
-function updateBuy(){el('buy').disabled=!ready;el('buy').textContent=ready?(signedIn?'充值共享次数':'关联账户并充值'):'收款暂未开放';}
+function updateBuy(){el('buy').disabled=!ready;el('buy').textContent=ready?(signedIn?'充值通用额度':'关联账户并充值'):'收款暂未开放';}
 
 function showAccountDialog(){el('account-plan').textContent=el('summary').textContent+' · '+el('total').textContent;el('account-feedback').textContent='';el('account-dialog').showModal();document.body.classList.add('payment-open');}
 

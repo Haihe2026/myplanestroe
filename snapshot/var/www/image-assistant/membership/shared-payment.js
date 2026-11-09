@@ -5,15 +5,14 @@ const paymentDialog=document.getElementById('payment-dialog');
 const payEl=id=>document.getElementById(id);
 function displayPaymentOrder(order){
   paymentOrder=order;
-  const qrUrl=new URL(order.qr_url,location.origin);qrUrl.searchParams.set('v','0.10.12');
-  payEl('payment-qr').src=qrUrl.href;payEl('payment-save').href=qrUrl.href;
+  window.mpsAmountQr(order.amount_fen,payEl('payment-qr'),payEl('payment-save'));
   const paid=order.status==='paid';
-  const planName={shared_permanent_29:'Plus',shared_permanent_39:'Pro',shared_permanent_49:'Ultra',shared_permanent_999:'终身会员',plus:'Plus',pro:'Pro',ultra:'Ultra',business:'终身会员',gemini_permanent_29:'Plus',gemini_permanent_39:'Pro',gemini_permanent_49:'Ultra',gemini_permanent_999:'终身会员',temu_enterprise_89:'企业入门',temu_enterprise_198:'企业成长',temu_enterprise_365:'企业批量',temu_permanent_89:'企业入门',temu_permanent_198:'企业成长',temu_permanent_365:'企业批量'}[order.plan]||'会员';
-  payEl('payment-plan').textContent='MyPlaneStore共享次数 · '+planName;
+  const planName={shared_permanent_5:'体验版',shared_permanent_29:'Plus',shared_permanent_39:'Pro',shared_permanent_49:'Ultra',shared_permanent_999:'终身会员',plus:'Plus',pro:'Pro',ultra:'Ultra',business:'终身会员',gemini_permanent_29:'Plus',gemini_permanent_39:'Pro',gemini_permanent_49:'Ultra',gemini_permanent_999:'终身会员',temu_enterprise_89:'企业入门',temu_enterprise_198:'企业成长',temu_enterprise_365:'企业批量',temu_permanent_89:'企业入门',temu_permanent_198:'企业成长',temu_permanent_365:'企业批量'}[order.plan]||'会员';
+  payEl('payment-plan').textContent='MyPlaneStore通用额度 · '+planName;
   payEl('payment-amount').textContent='¥'+(order.amount_fen/100).toFixed(2);
-  payEl('payment-term').textContent=order.units.toLocaleString('zh-CN')+' 次使用 · '+(order.valid_days?'核款到账后30天有效，到期不结转':'永久有效');
+  payEl('payment-term').textContent=order.units.toLocaleString('zh-CN')+' 额度 · '+(order.valid_days?'核款到账后30天有效，到期不结转':'永久有效');
   payEl('payment-order-id').value=order.id;
-  payEl('payment-status').textContent=paid?'充值成功，额度已到账。无需额外领取，请回到技能对话继续使用。':order.status==='reported'?'付款登记已提交，核款确认后发放次数。':'请按上方金额扫码付款，完成后点击“我已付款”。';
+  payEl('payment-status').textContent=paid?'充值成功，额度已到账。无需额外领取，请回到技能对话继续使用。':order.status==='reported'?'付款登记已提交，核款确认后发放额度。':'请按上方金额扫码付款，完成后点击“我已付款”。';
   payEl('payment-qr').hidden=paid;
   payEl('payment-save').hidden=paid;
   payEl('payment-qr').style.display=paid?'none':'';
@@ -67,7 +66,7 @@ async function loadPaymentOrders(){
   const list=payEl('payment-orders');list.replaceChildren();
   try{const data=await api('orders');if(version!==accountGeneration)return;for(const order of data.orders){
     const button=document.createElement('button');button.type='button';button.className='payment-order-row';
-    const names={shared_permanent_29:'Plus',shared_permanent_39:'Pro',shared_permanent_49:'Ultra',shared_permanent_999:'终身会员',plus:'Plus',pro:'Pro',ultra:'Ultra',business:'终身会员',gemini_permanent_29:'Plus',gemini_permanent_39:'Pro',gemini_permanent_49:'Ultra',gemini_permanent_999:'终身会员',temu_enterprise_89:'企业入门',temu_enterprise_198:'企业成长',temu_enterprise_365:'企业批量',temu_permanent_89:'企业入门',temu_permanent_198:'企业成长',temu_permanent_365:'企业批量'};
+    const names={shared_permanent_5:'体验版',shared_permanent_29:'Plus',shared_permanent_39:'Pro',shared_permanent_49:'Ultra',shared_permanent_999:'终身会员',plus:'Plus',pro:'Pro',ultra:'Ultra',business:'终身会员',gemini_permanent_29:'Plus',gemini_permanent_39:'Pro',gemini_permanent_49:'Ultra',gemini_permanent_999:'终身会员',temu_enterprise_89:'企业入门',temu_enterprise_198:'企业成长',temu_enterprise_365:'企业批量',temu_permanent_89:'企业入门',temu_permanent_198:'企业成长',temu_permanent_365:'企业批量'};
     button.textContent=(names[order.plan]||'会员')+' · ¥'+(order.amount_fen/100)+' · '+({paid:'已到账',reported:'待核款',pending:'待付款'}[order.status]||order.status)+' · '+order.id.slice(0,8);
     button.addEventListener('click',()=>window.showPaymentOrder(order));list.append(button);
   }if(!data.orders.length)list.textContent='暂无订单';}
