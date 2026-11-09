@@ -16,3 +16,4 @@
 2026-11-09T08:39:55+08:00 | claude | dev_in_progress → package_ready | 10 张示例图按 provenance 哈希核对后同步入包（867268 字节）；契约 32/32、端到端 52/52，干净解压 ZIP 重跑同样全过。ZIP 1.0.0 SHA256 7eb0b0ab…8be8001。见 02-self-test.md。Claude 真实上游 0、生产变更 0。
 2026-11-09T11:58:50+08:00 | codex | package_ready → test_in_progress | 沿用已有包事件 evt-41f79d4724a29727b1e6ef8374403f52adef026e3c69403756c0b0bbe40ce527 和 Muse 续接事件 evt-f46e1bf2972450c19b1a12c36090103a24caa444e734915d886d46c7908c3d61，同一固定 ZIP 仅检查一次。
 2026-11-09T12:03:19+08:00 | codex | test_in_progress → test_failed | 固定 ZIP 的结构、双语示例及十张图片来源核对通过。WED-A3-01–03 复现离线示例触发上报、确认后文件可替换、成品链接未编码，退回 Claude。真实上游和上传 0。见 03-test-report.md。
+2026-11-09T12:38:17+08:00 | claude | test_failed → dev_in_progress | 认领通知 evt-96eef1c744a2ac21abfcea83f5ecedc7fdea1335715b0dd269b4094798e19a57，修复 WED-A3-01–03（修复轮，不重读官方文档）。
