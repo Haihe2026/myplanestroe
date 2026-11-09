@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-pet-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -54,6 +54,9 @@ SECRET_RE = re.compile(r'[A-Za-z0-9_-]{43}')
 SKILL_KEY_RE = re.compile(r'mpskill_[0-9a-f]{32}_[A-Za-z0-9_-]{43}')
 
 EXIT_OK, EXIT_WAIT, EXIT_ERROR, EXIT_RESET = 0, 2, 3, 4
+
+# 已发出（或可能已发出）生成请求、结果尚未确定的状态：只能按原键/原任务查询，不得改方案、换键或重新生成
+UNRESOLVED = ('submit_unknown', 'submitted', 'download_pending')
 
 # key: (系列, 标题, 推荐画幅, 场景视觉参照)。每张只做一只猫或狗。
 SCENES = {
@@ -301,13 +304,16 @@ def cmd_demo(args):
         demos = [d for d in demos if d['key'] == args.key]
         if not demos:
             return emit('demoNotFound', '', EXIT_ERROR, key=args.key)
+    # 请求范围内缺任何一张都按资源缺失处理（退出 3），不返回残缺的示例列表
+    missing = [d.get('key') for d in demos if not isinstance(d.get('file'), str) or os.path.basename(d['file']) != d['file']
+               or not os.path.isfile(os.path.join(base, d['file']))]
+    if not demos or missing:
+        return emit('demoUnavailable', W.DEMO_UNAVAILABLE, EXIT_ERROR, missing=missing)
     out_dir = os.path.join(state_dir(), 'demos')
     os.makedirs(out_dir, mode=0o700, exist_ok=True)
     items = []
     for d in demos:
         src = os.path.join(base, d['file'])
-        if not os.path.isfile(src):
-            continue
         dst = os.path.join(out_dir, d['file'])
         if not os.path.isfile(dst):
             shutil.copyfile(src, dst)
@@ -320,6 +326,9 @@ def cmd_demo(args):
 def cmd_plan(args):
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
+    locked = _locked(d)
+    if locked:
+        return locked
     if args.scene not in SCENES:
         return emit('sceneInvalid', '', EXIT_ERROR)
     _, title, default_shape, _ = SCENES[args.scene]
@@ -336,18 +345,28 @@ def cmd_plan(args):
     r = audit_images.check(d['images'][0])
     if not r['ok']:
         return emit('photoInvalid', W.input_error(r['file'], audit_images.describe(r['problem'])), EXIT_ERROR, problem=r['problem'])
-    if d.get('state') in ('submitted', 'delivered'):
-        return emit('taskLocked', '', EXIT_ERROR)
     d.update(scene=args.scene, size=SIZES[shape], pet=pet, purpose=args.purpose or '',
-             photo_sha256=_photo_digest(d['images'][0]), photo_consent=False, pay_consent=False, idem=None, state='planned')
+             photo_sha256=_photo_digest(d['images'][0]), photo_consent=False, pay_consent=False, idem=None, job_id=None,
+             state='planned')
     save_draft(d)
     summary = W.plan_summary(title, W.SHAPE_NAMES[shape], PETS[pet])
     return emit('planReady', W.confirm_paid(summary, wait_text()), EXIT_OK, draft_id=d['draft_id'])
 
 
+def _locked(d):
+    """原任务结果未确定（或已交付）时，不允许改方案、重新确认或重新生成，避免覆盖原任务键。"""
+    if d.get('state') in UNRESOLVED or (d.get('job_id') and d.get('state') not in ('delivered', 'failed', 'rejected')):
+        return emit('taskLocked', W.task_kept(), EXIT_WAIT, draft_id=d['draft_id'])
+    if d.get('state') == 'delivered':
+        return emit('taskLocked', '', EXIT_ERROR, draft_id=d['draft_id'])
+    return None
+
+
 def cmd_confirm(args):
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
+    if d.get('state') in UNRESOLVED:
+        return _locked(d)
     if d.get('state') != 'planned':
         return emit('needsPlan', '', EXIT_ERROR)
     if args.photo_consent != 'yes' or args.pay_consent != 'yes':
@@ -368,7 +387,9 @@ def _photo_digest(path):
 
 
 def _photo_changed(d):
-    """确认后照片文件有变化：作废原确认和原任务键，必须重新 plan + confirm。"""
+    """确认后照片文件有变化：作废原确认和原任务键，必须重新 plan + confirm。只发生在提交之前。"""
+    if d.get('state') in UNRESOLVED:
+        return _locked(d)
     d.update(photo_consent=False, pay_consent=False, idem=None, state='photo_changed')
     save_draft(d)
     return emit('photoChanged', W.photo_changed(), EXIT_WAIT, draft_id=d['draft_id'])
@@ -439,13 +460,45 @@ def _membership_link(a):
         return None
 
 
+def _pending_name(idem):
+    return os.path.join('jobs', hashlib.sha256(idem.encode()).hexdigest()[:32] + '.json')
+
+
+def _save_pending(d, body):
+    """提交前原子保存原任务键与固定正文（私有目录，仅当前用户可读写），再把草稿置为结果未知。"""
+    write_json(_pending_name(d['idem']), dict(idem=d['idem'], body=body, saved_at=_now()))
+    d.update(state='submit_unknown', submit_started_at=_now())
+    save_draft(d)
+
+
+def _load_pending(d):
+    p = read_json(_pending_name(d['idem'])) if d.get('idem') else None
+    if isinstance(p, dict) and p.get('idem') == d['idem'] and isinstance(p.get('body'), dict):
+        return p['body']
+    return None
+
+
+def _drop_pending(d):
+    if d.get('idem'):
+        try:
+            os.remove(_path(_pending_name(d['idem'])))
+        except OSError:
+            pass
+
+
 def cmd_run(args):
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
     if not (d.get('photo_consent') and d.get('pay_consent') and d.get('idem')):
         return emit('needsConfirmation', '', EXIT_ERROR)
-    if d.get('job_id') or d.get('state') == 'submit_unknown':
-        return _continue_job(d)
+    if d.get('state') in UNRESOLVED or (d.get('job_id') and d.get('state') not in ('delivered', 'failed', 'rejected')):
+        return _continue_job(d, allow_resend=True)
+    if d.get('state') == 'delivered':
+        paths = d.get('delivered') or []
+        return emit('alreadyDelivered', W.already_delivered(), EXIT_OK, draft_id=d['draft_id'], paths=paths,
+                    links=[md_safe_path(x) for x in paths])
+    if d.get('state') in ('failed', 'rejected'):
+        return emit('needsConfirmation', '', EXIT_ERROR)
     a = load_account()
     st, extra = _account_ready(a)
     if st == 'registration':
@@ -477,33 +530,37 @@ def cmd_run(args):
 
 
 def _submit(d, a, body):
+    _save_pending(d, body)  # 发出前落盘：进程中断后下次只按原键查询
     try:
         r = call('POST', '/skill-jobs', body, auth=a['skill_key'], idem=d['idem'], timeout=REQUEST_TIMEOUT_S)
     except GatewayError as e:
-        if e.status == 401:
+        if e.status == 401:  # 明确未受理：清失效凭证，原任务键保留
             a.pop('skill_key', None)
             save_account(a)
+            d['state'] = 'confirmed'
+            save_draft(d)
             return emit('credentialsReset', W.credentials_reset(), EXIT_RESET, draft_id=d['draft_id'])
-        if e.status == 402:
+        if e.status == 402:  # 明确未建任务、未扣：余额恢复后同键续接
             d['state'] = 'needs_credits'
             save_draft(d)
             return emit('needsCredits', W.topup_ask(), EXIT_WAIT, draft_id=d['draft_id'], link_included=False)
-        if e.status == 429:
+        if e.status == 429:  # 明确未受理：保留当前任务与原键
+            d['state'] = 'confirmed'
+            save_draft(d)
             return emit('serviceBusy', W.busy_kept(), EXIT_WAIT, draft_id=d['draft_id'])
-        if e.status in (400, 403, 409, 413, 422):
+        if e.status == 409:  # 同键冲突：查原任务，查不到就如实说明，保留原记录
+            return _continue_job(d, conflict=True)
+        if e.status in (400, 403, 413, 422):
             d['state'] = 'rejected'
             save_draft(d)
+            _drop_pending(d)
             return emit('jobRejected', W.failure('rejected', 'not_started'), EXIT_ERROR, draft_id=d['draft_id'])
         # 超时、网络或5xx：不重发，只查原任务
-        d['state'] = 'submit_unknown'
-        save_draft(d)
         return _continue_job(d)
     jid = r.get('id')
     try:
         uuid.UUID(jid)
     except (ValueError, TypeError, AttributeError):
-        d['state'] = 'submit_unknown'
-        save_draft(d)
         return _continue_job(d)
     d.update(job_id=jid, state='submitted', remaining_after_submit=r.get('remaining_uses'))
     save_draft(d)
@@ -520,7 +577,9 @@ def _query_auth(a):
     return a.get('skill_key') or a.get('install_secret')
 
 
-def _continue_job(d):
+def _continue_job(d, allow_resend=False, conflict=False):
+    """结果未确定时只按原键/原任务 ID 查询。仅当查询明确答复「此键下没有任务」、且是新一次运行时，
+    才用同一原键和已保存的固定正文续接提交（服务端同键同体不重复扣费）；不换键、不重读照片。"""
     a = load_account()
     if not d.get('job_id'):
         try:
@@ -528,7 +587,16 @@ def _continue_job(d):
             uuid.UUID(r.get('id'))
             d.update(job_id=r['id'], state='submitted')
             save_draft(d)
-        except (GatewayError, ValueError, TypeError, AttributeError):
+        except GatewayError as e:
+            if conflict:
+                return emit('jobConflict', W.same_key_conflict(), EXIT_WAIT, draft_id=d['draft_id'])
+            body = _load_pending(d) if e.status == 404 and allow_resend and a.get('skill_key') else None
+            if body is not None:
+                return _submit(d, a, body)
+            return emit('jobPending', W.progress_unknown(), EXIT_WAIT, draft_id=d['draft_id'], progress='unconfirmed')
+        except (ValueError, TypeError, AttributeError):
+            if conflict:
+                return emit('jobConflict', W.same_key_conflict(), EXIT_WAIT, draft_id=d['draft_id'])
             return emit('jobPending', W.progress_unknown(), EXIT_WAIT, draft_id=d['draft_id'], progress='unconfirmed')
     if d.get('state') == 'download_pending':
         return _deliver(d, a)
@@ -555,6 +623,7 @@ def _poll(d, a):
         if st == 'failed':
             d['state'] = 'failed'
             save_draft(d)
+            _drop_pending(d)
             return emit('jobFailed', W.failure('busy', 'record'), EXIT_ERROR, draft_id=d['draft_id'])
         progress('还在处理中，请稍候。')
     if reached:
@@ -591,6 +660,12 @@ def _deliver(d, a):
         d['state'] = 'download_pending'
         save_draft(d)
         return emit('downloadPending', W.download_incomplete(), EXIT_WAIT, draft_id=d['draft_id'])
+    try:
+        aw, ah = png_local.verify(png)  # 内容完整可解码后才写入结果和画廊
+    except ValueError:
+        d['state'] = 'download_pending'  # 保留原任务，之后只读补取同一张图
+        save_draft(d)
+        return emit('downloadPending', W.download_incomplete(), EXIT_WAIT, draft_id=d['draft_id'], image_incomplete=True)
     folder = _out_dir(d)
     stem = os.path.splitext(os.path.basename(d['images'][0]))[0]
     main_path = _unique(os.path.join(folder, '%s-%s.png' % (stem, d['scene'])))
@@ -598,10 +673,6 @@ def _deliver(d, a):
         f.write(png)
     paths = [main_path]
     notes = []
-    try:
-        aw, ah = png_local.size_of(png)
-    except ValueError:
-        aw = ah = None
     req_w, req_h = (int(x) for x in d['size'].split('x'))
     if aw and (aw, ah) != (req_w, req_h):
         notes.append(W.size_mismatch('%d×%d' % (aw, ah), '%d×%d' % (req_w, req_h)))
@@ -620,6 +691,7 @@ def _deliver(d, a):
     write_json('flags.json', flags)
     d.update(state='delivered', delivered=paths, delivered_at=_now())
     save_draft(d)
+    _drop_pending(d)
     links = [md_safe_path(p) for p in paths]  # 面向用户的链接目标；paths 仍是原始文件路径
     gallery = os.path.join(folder, 'index.html')
     return emit('delivered', W.delivery(links, remaining, first, SCENES[d['scene']][1], '\n'.join(notes), md_safe_path(gallery)),
@@ -641,8 +713,6 @@ def cmd_resume(args):
         d['state'] = 'confirmed'
         save_draft(d)
         return cmd_run(args)
-    if d.get('job_id') or d.get('state') in ('submit_unknown', 'download_pending'):
-        return _continue_job(d)
     return cmd_run(args)
 
 
@@ -650,6 +720,8 @@ def cmd_regenerate(args):
     """仅在用户明确说「重新生成」且再次同意计费时使用：新任务键。"""
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
+    if d.get('state') in UNRESOLVED or (d.get('job_id') and d.get('state') not in ('delivered', 'failed', 'rejected')):
+        return _locked(d)  # 原任务结果未确定：不得用新键覆盖
     if args.pay_consent != 'yes' or not d.get('photo_consent'):
         return emit('needsConfirmation', '', EXIT_ERROR)
     d.update(idem='pps-' + uuid.uuid4().hex, job_id=None, state='confirmed', pay_consent=True)

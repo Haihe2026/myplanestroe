@@ -817,6 +817,252 @@ class RepairA3(Base):
                     self.assertTrue(os.path.isfile(unquote(href)))
 
 
+class RepairPetA3(Base):
+    """宠物写真 1.0.0 A3 退回项回归：A3-PET-01 未知任务保键、A3-PET-02 截断图不交付、A3-PET-03 缺一张示例退出 3。"""
+
+    def draft(self, did):
+        with open(os.path.join(self.home, 'mps-pet-portrait-studio', 'drafts', did + '.json'), encoding='utf-8') as f:
+            return json.load(f)
+
+    def posts(self):
+        return [c for c in self.mock.calls if c[1] == '/skill-jobs']
+
+    def ready(self, balance=3):
+        did = self.confirmed_draft()
+        self.mock.authorize(studio.ensure_install_secret(studio.load_account()), balance)
+        return did
+
+    def interrupting(self, reach_server):
+        real = self.mock.transport
+
+        def t(method, url, body, headers, timeout, binary):
+            if url.endswith('/skill-jobs'):
+                if reach_server:
+                    try:
+                        real(method, url, body, headers, timeout, binary)
+                    except Exception:
+                        pass
+                raise KeyboardInterrupt  # 模拟进程在等待应答时被中断
+            return real(method, url, body, headers, timeout, binary)
+        return t
+
+    # ---- A3-PET-01 ----
+    def test_pet_a3_01_interrupt_persists_key_and_body_before_post(self):
+        for reach in (False, True):
+            with self.subTest(reach_server=reach):
+                self.mock = mock_backend.Mock()
+                studio.TRANSPORT = self.mock.transport
+                telemetry.TRANSPORT = self.mock.telemetry_transport
+                self.home = os.path.join(self.tmp, 'home-%s' % reach)
+                os.makedirs(self.home)
+                studio.STATE_HOME = self.home
+                did = self.ready()
+                idem = self.draft(did)['idem']
+                self.run_cmd('run', '--draft', did)  # 先完成授权与凭证
+                self.assertEqual(self.mock.charges, 1)
+                # 新草稿，提交时中断
+                did = self.ready()
+                idem = self.draft(did)['idem']
+                charges0, posts0 = self.mock.charges, len(self.posts())
+                studio.TRANSPORT = self.interrupting(reach)
+                with self.assertRaises(KeyboardInterrupt):
+                    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                        studio.main(['run', '--draft', did])
+                d = self.draft(did)
+                self.assertEqual((d['state'], d['idem']), ('submit_unknown', idem))
+                saved = studio._load_pending(d)
+                self.assertEqual(set(saved), studio.BODY_FIELDS)
+                self.assertTrue(saved['confirmed'] and saved['reference_consent'])
+                pend = os.path.join(self.home, 'mps-pet-portrait-studio', studio._pending_name(idem))
+                if os.name == 'posix':
+                    self.assertEqual(stat.S_IMODE(os.stat(pend).st_mode), 0o600)
+                # 改方案、重新确认、重新生成都不能覆盖未知任务
+                studio.TRANSPORT = self.mock.transport
+                for argv in (['plan', '--draft', did, '--scene', 'cartoon', '--pet', 'dog'],
+                             ['confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes'],
+                             ['regenerate', '--draft', did, '--pay-consent', 'yes']):
+                    code, s, t, _ = self.run_cmd(*argv)
+                    self.assertEqual((code, s['signal']), (2, 'taskLocked'), argv)
+                    self.assertIn('不重复计费', t)
+                    d = self.draft(did)
+                    self.assertEqual((d['state'], d['idem'], d['scene']), ('submit_unknown', idem, 'royal-oil'))
+                self.assertEqual(len(self.posts()), posts0 + (1 if reach else 0))  # 改方案等操作未发任何提交
+                # 下次运行：先按原键查询；服务端已有 → 不再 POST；明确无此键 → 同键同体续接
+                calls0 = len(self.mock.calls)
+                code, s, t, _ = self.run_cmd('resume', '--draft', did)
+                self.assertEqual(s['signal'], 'delivered', t)
+                after = self.mock.calls[calls0:]
+                self.assertTrue(after[0][1].startswith('/jobs/by-key/'), after[0])
+                new_posts = [c for c in after if c[1] == '/skill-jobs']
+                self.assertEqual(len(new_posts), 0 if reach else 1)
+                for c in new_posts:
+                    self.assertEqual((c[3]['Idempotency-Key'], c[2]), (idem, saved))
+                self.assertEqual(self.mock.charges, charges0 + 1)
+
+    def test_pet_a3_01_unknown_in_same_run_never_resends(self):
+        did = self.ready()
+        self.run_cmd('run', '--draft', did)
+        did = self.ready()
+        real = self.mock.transport
+
+        def lost(method, url, body, headers, timeout, binary):
+            if url.endswith('/skill-jobs'):
+                raise studio.GatewayError(0)  # 未到达服务端，应答丢失
+            return real(method, url, body, headers, timeout, binary)
+        studio.TRANSPORT = lost
+        posts0 = len(self.posts())
+        code, s, t, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual((code, s['signal'], s['progress']), (2, 'jobPending', 'unconfirmed'))
+        self.assertEqual(self.draft(did)['state'], 'submit_unknown')
+        self.assertEqual(len(self.posts()), posts0)  # 同一次运行不重发
+
+    def test_pet_a3_01_409_queries_original_or_reports_conflict(self):
+        did = self.ready()
+        self.run_cmd('run', '--draft', did)
+        # 409 且原键查不到：说明同键冲突，不说「没有扣次数」，保留原记录
+        did = self.ready()
+        idem = self.draft(did)['idem']
+        real = self.mock.transport
+
+        def conflict(method, url, body, headers, timeout, binary):
+            if url.endswith('/skill-jobs'):
+                self.mock.calls.append((method, '/skill-jobs', body, dict(headers)))
+                raise studio.GatewayError(409)
+            return real(method, url, body, headers, timeout, binary)
+        studio.TRANSPORT = conflict
+        charges0 = self.mock.charges
+        code, s, t, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual((code, s['signal']), (2, 'jobConflict'))
+        self.assertIn('费用以服务记录为准', t)
+        self.assertNotIn('没有扣次数', t)
+        self.assertTrue(self.mock.calls[-1][1].startswith('/jobs/by-key/'))
+        d = self.draft(did)
+        self.assertEqual((d['state'], d['idem']), ('submit_unknown', idem))
+        code, s, _, _ = self.run_cmd('plan', '--draft', did, '--scene', 'cartoon', '--pet', 'dog')
+        self.assertEqual(s['signal'], 'taskLocked')
+        self.assertEqual(self.mock.charges, charges0)
+        # 409 且原键下已有任务：接着查原任务并交付，不新建、不重复扣
+        did = self.ready()
+        studio.TRANSPORT = real
+        self.mock.scenario['submit_lost'] = True
+        self.run_cmd('run', '--draft', did)  # 第一次：建单后应答丢失 → 已按原键查回并交付
+        self.mock.scenario.clear()
+        did2 = self.ready()
+        key2 = self.draft(did2)['idem']
+        jid = None
+
+        def conflict_existing(method, url, body, headers, timeout, binary):
+            nonlocal jid
+            if url.endswith('/skill-jobs'):
+                real(method, url, body, headers, timeout, binary)  # 服务端已建单
+                raise studio.GatewayError(409)
+            return real(method, url, body, headers, timeout, binary)
+        studio.TRANSPORT = conflict_existing
+        charges0 = self.mock.charges
+        code, s, t, _ = self.run_cmd('run', '--draft', did2)
+        self.assertEqual(s['signal'], 'delivered', t)
+        self.assertEqual(self.draft(did2)['idem'], key2)
+        self.assertEqual(self.mock.charges, charges0 + 1)
+
+    def test_pet_a3_01_photo_hash_binding_kept(self):
+        """WED-A3-02 不回退：提交前换图仍作废确认与原键；结果未定时换图不改动原任务记录。"""
+        did = self.ready()
+        with open(self.photo, 'wb') as f:
+            f.write(jpeg_bytes(640, 800))
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'photoChanged')
+        self.assertEqual(self.draft(did)['idem'], None)
+        with open(self.photo, 'wb') as f:
+            f.write(jpeg_bytes())
+        did = self.ready()
+        self.run_cmd('run', '--draft', did)
+        did = self.ready()
+        idem = self.draft(did)['idem']
+        studio.TRANSPORT = self.interrupting(False)
+        with self.assertRaises(KeyboardInterrupt):
+            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                studio.main(['run', '--draft', did])
+        studio.TRANSPORT = self.mock.transport
+        with open(self.photo, 'wb') as f:
+            f.write(jpeg_bytes(640, 800))
+        code, s, _, _ = self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')
+        self.assertEqual(s['signal'], 'taskLocked')
+        self.assertEqual((self.draft(did)['idem'], self.draft(did)['state']), (idem, 'submit_unknown'))
+        code, s, _, _ = self.run_cmd('resume', '--draft', did)
+        post = [c for c in self.posts() if c[3]['Idempotency-Key'] == idem]
+        self.assertEqual(s['signal'], 'delivered')
+        refs = post[-1][2]['references'][0]['content']
+        import base64
+        self.assertEqual(base64.b64decode(refs), jpeg_bytes())  # 续接用确认时的原照片正文，不重读新文件
+
+    # ---- A3-PET-02 ----
+    def test_pet_a3_02_truncated_png_not_delivered(self):
+        did = self.ready()
+        real = self.mock.transport
+        cuts = []
+
+        def truncated(method, url, body, headers, timeout, binary):
+            st, raw = real(method, url, body, headers, timeout, binary)
+            if url.endswith('/image') and cuts:
+                return st, raw[:cuts.pop(0)]
+            return st, raw
+        studio.TRANSPORT = truncated
+        for cut in (33, 'half', -12):
+            with self.subTest(cut=cut):
+                full = mock_backend.make_png(1024, 1536, rgb=(255, 255, 255))
+                cuts.append(len(full) // 2 if cut == 'half' else cut)
+                code, s, t, _ = self.run_cmd('resume', '--draft', did) if self.draft(did).get('job_id') else self.run_cmd('run', '--draft', did)
+                self.assertEqual((code, s['signal']), (2, 'downloadPending'), t)
+                self.assertNotIn('delivered', json.dumps(s))
+                self.assertEqual(self.draft(did)['state'], 'download_pending')
+                folder = os.path.join(self.photos, '宠物写真结果')
+                self.assertFalse(os.path.exists(folder) and [f for f in os.listdir(folder) if f.endswith(('.png', '.html'))])
+        posts0 = len(self.posts())
+        code, s, t, _ = self.run_cmd('resume', '--draft', did)
+        self.assertEqual(s['signal'], 'delivered')
+        self.assertEqual(len(self.posts()), posts0)  # 只读补取，不重新生成
+        self.assertEqual(self.mock.charges, 1)
+        png_local.verify(open(s['paths'][0], 'rb').read())
+
+    def test_pet_a3_02_verify_rejects_corruption(self):
+        good = mock_backend.make_png(64, 48)
+        self.assertEqual(png_local.verify(good), (64, 48))
+        bad_crc = bytearray(good)
+        bad_crc[-20] ^= 0xff
+        for data in (good[:33], good[:-12], good[:-1], bytes(bad_crc), b'not a png'):
+            with self.assertRaises(ValueError):
+                png_local.verify(data)
+        for f in sorted(os.listdir(os.path.join(PKG, 'assets'))):
+            if f.endswith('.png'):
+                png_local.verify(open(os.path.join(PKG, 'assets', f), 'rb').read())
+
+    # ---- A3-PET-03 ----
+    def test_pet_a3_03_one_missing_exit3_offline(self):
+        def boom(*a, **k):
+            raise AssertionError('network or credential read in demo')
+        studio.TRANSPORT = boom
+        telemetry.TRANSPORT = boom
+        real_load = studio.load_account
+        studio.load_account = boom
+        root = os.path.join(self.tmp, 'pkg copy')
+        shutil.copytree(os.path.join(PKG, 'assets'), os.path.join(root, 'assets'))
+        os.remove(os.path.join(root, 'assets', 'cartoon.png'))
+        real = studio.HERE
+        studio.HERE = os.path.join(root, 'scripts')
+        try:
+            code, s, t, _ = self.run_cmd('demo')
+            self.assertEqual((code, s['signal'], s['missing']), (3, 'demoUnavailable', ['cartoon']))
+            self.assertIn(W.DEMO_UNAVAILABLE, t)
+            code, s, _, _ = self.run_cmd('demo', 'cartoon')
+            self.assertEqual((code, s['signal']), (3, 'demoUnavailable'))
+            code, s, _, _ = self.run_cmd('demo', 'explorer')  # 范围内不缺：照常返回
+            self.assertEqual((code, s['signal'], len(s['items'])), (0, 'demos', 1))
+        finally:
+            studio.HERE = real
+            studio.load_account = real_load
+        self.assertFalse(os.path.exists(os.path.join(self.home, 'mps-pet-portrait-studio', 'account.json')))
+
+
 class DemoAssets(unittest.TestCase):
     """T03：包内示例图来自已授权生成的 10 张虚构猫狗示例，派生哈希可追溯。"""
 

@@ -127,3 +127,79 @@ def crop_resize(data, tw, th):
             line[ox * 3:ox * 3 + 3] = bytes((r // n, g // n, b // n))
         out.append(bytes(line))
     return encode(tw, th, out)
+
+
+_BITS = {0: (1, (1, 2, 4, 8, 16)), 2: (3, (8, 16)), 3: (1, (1, 2, 4, 8)), 4: (2, (8, 16)), 6: (4, (8, 16))}
+_ADAM7 = ((0, 0, 8, 8), (4, 0, 8, 8), (0, 4, 4, 8), (2, 0, 4, 4), (0, 2, 2, 4), (1, 0, 2, 2), (0, 1, 1, 2))
+
+
+def _rows_bytes(w, h, bpp_bits):
+    """未压缩数据应有的字节数（每行 1 个过滤字节 + 行数据）。"""
+    if w == 0 or h == 0:
+        return 0
+    return h * (1 + (w * bpp_bits + 7) // 8)
+
+
+def verify(data):
+    """完整校验 PNG 内容：签名、每个块的长度与 CRC、IHDR/PLTE/IDAT/IEND 次序、
+    图像数据可完整解压且字节数与宽高一致、过滤类型合法。通过返回 (width, height)，否则抛 ValueError。
+    只读不写；用于在保存和宣布交付之前确认图片可完整解码（截断、拼接残缺都不通过）。"""
+    if not isinstance(data, (bytes, bytearray)) or not data.startswith(SIG):
+        raise ValueError('not png')
+    pos, n = 8, len(data)
+    ihdr = None
+    has_plte = seen_idat = idat_done = False
+    dec = zlib.decompressobj()
+    out = bytearray()
+    limit = None
+    while True:
+        if pos + 12 > n:
+            raise ValueError('truncated')
+        length = struct.unpack('>I', data[pos:pos + 4])[0]
+        kind = bytes(data[pos + 4:pos + 8])
+        end = pos + 12 + length
+        if length > 0x7fffffff or end > n:
+            raise ValueError('truncated')
+        body = data[pos + 8:pos + 8 + length]
+        crc = struct.unpack('>I', data[pos + 8 + length:end])[0]
+        if zlib.crc32(kind + body) & 0xffffffff != crc:
+            raise ValueError('bad crc')
+        if ihdr is None:
+            if kind != b'IHDR' or length != 13:
+                raise ValueError('no header')
+            w, h, depth, ctype, comp, filt, interlace = struct.unpack('>IIBBBBB', body)
+            if not (0 < w <= 1 << 16 and 0 < h <= 1 << 16) or ctype not in _BITS or depth not in _BITS[ctype][1] \
+                    or comp or filt or interlace not in (0, 1):
+                raise ValueError('bad header')
+            ihdr = (w, h, depth, ctype, interlace)
+            bpp = _BITS[ctype][0] * depth
+            if interlace:
+                limit = sum(_rows_bytes((w - x0 + dx - 1) // dx if w > x0 else 0, (h - y0 + dy - 1) // dy if h > y0 else 0, bpp)
+                            for x0, y0, dx, dy in _ADAM7)
+            else:
+                limit = _rows_bytes(w, h, bpp)
+        elif kind == b'PLTE':
+            has_plte = True
+        elif kind == b'IDAT':
+            if idat_done:
+                raise ValueError('split image data')
+            seen_idat = True
+            out += dec.decompress(bytes(body), limit + 1 - len(out))
+            if len(out) > limit:
+                raise ValueError('too much image data')
+        elif kind == b'IEND':
+            break
+        elif seen_idat:
+            idat_done = True
+        pos = end
+    if not seen_idat or (ihdr[3] == 3 and not has_plte):
+        raise ValueError('incomplete')
+    out += dec.flush()
+    if not dec.eof or len(out) != limit:
+        raise ValueError('incomplete image data')
+    if not ihdr[4]:
+        w, h, depth, ctype, _ = ihdr
+        stride = 1 + (w * _BITS[ctype][0] * depth + 7) // 8
+        if any(out[i] > 4 for i in range(0, limit, stride)):
+            raise ValueError('bad filter')
+    return ihdr[0], ihdr[1]

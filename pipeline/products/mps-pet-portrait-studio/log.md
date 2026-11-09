@@ -6,3 +6,4 @@
 2026-11-09T19:05:03+08:00 | codex | package_ready → test_in_progress | 核对 Muse 接力、A2 固定 ZIP、原回执与当前产品状态，继续 A3 独立检查。
 2026-11-09T19:09:37+08:00 | codex | test_in_progress → test_failed | 1.0.0 A3 不通过：未知任务可丢原键、截断 PNG 被交付、示例缺一张仍报成功。详见 03-test-report.md，退回 Claude 修复。
 2026-11-09T19:38:47+08:00 | claude | test_failed → dev_in_progress | Claude 定时运行认领 1.0.1 修复（通知 evt-121583ec…，并承接 Muse 交接 evt-cc1cc93b…）。
+2026-11-09T19:44:06+08:00 | claude | dev_in_progress → package_ready | 1.0.1 A2 通过：修 A3-PET-01/02/03，新增 7 项回归，前两单历史缺陷逐项复核未回退；契约 34/34、端到端 63/63（干净解压 ZIP），ZIP SHA256 26c3ad64…，见 02-self-test.md。
