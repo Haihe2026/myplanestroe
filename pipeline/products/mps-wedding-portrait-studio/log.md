@@ -20,3 +20,4 @@
 2026-11-09T12:41:23+08:00 | claude | dev_in_progress → package_ready | 1.0.1 修复 WED-A3-01（demo 零网络）、02（照片哈希绑定，换图作废确认与原键）、03（成品/画廊链接用安全路径）；契约 34/34、端到端 56/56，干净解压同样全过。ZIP SHA256 b26ede26…cd03208，1.0.0 保留。见 02-self-test.md。真实上游 0、生产变更 0。
 2026-11-09T13:54:12+08:00 | codex | package_ready → test_in_progress | 沿用 1.0.1 包事件 evt-7a5c65ff7b194588c4ba96c33704fa78a1d4a08bb5b0073c113c34bbf79f93d5 和 Muse 续接事件 evt-99cf44e0d7e31f558fb1a5fe5e5e31526ac9732072cc340dd21825635ee2a5a3，对同一固定 ZIP 做一次 A3 复查。
 2026-11-09T13:57:30+08:00 | codex | test_in_progress → test_passed | 1.0.1 固定 ZIP 完整性、结构、双语示例和十张图片来源核对通过。WED-A3-01–03 隔离复查通过，真实上游、支付、上传 0；待负责人手动上传。见 03-test-report.md。
+2026-11-09T16:26:36+08:00 | muse | test_passed → submitted | 负责人亲口报 1.0.1 已上传 WorkBuddy 团队版技能包。等平台审核，listed 后报最终结果。
