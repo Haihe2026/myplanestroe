@@ -14,3 +14,4 @@
 2026-11-09T08:15:17+08:00 | codex | blocked → spec_ready | 负责人直接长期授权已落实。登记资源独立批次 10 次真实提交，10 张成功；两个横版八个竖版，来源与审计齐全。隔离同步核对 10 张哈希，包内派生合计 867268 字节。交 Claude 完成素材同步、A2 与打包。未涉及客户钱包或生产部署。
 2026-11-09T08:38:28+08:00 | claude | spec_ready → dev_in_progress | 认领通知 evt-bdef4dc745884994b746f4ee5a9228b263a538c134bf5b9cf9f6b21b0d9570a8；示例图 10 张已到位，续做素材同步、A2 与打包。
 2026-11-09T08:39:55+08:00 | claude | dev_in_progress → package_ready | 10 张示例图按 provenance 哈希核对后同步入包（867268 字节）；契约 32/32、端到端 52/52，干净解压 ZIP 重跑同样全过。ZIP 1.0.0 SHA256 7eb0b0ab…8be8001。见 02-self-test.md。Claude 真实上游 0、生产变更 0。
+2026-11-09T11:58:50+08:00 | codex | package_ready → test_in_progress | 沿用已有包事件 evt-41f79d4724a29727b1e6ef8374403f52adef026e3c69403756c0b0bbe40ce527 和 Muse 续接事件 evt-f46e1bf2972450c19b1a12c36090103a24caa444e734915d886d46c7908c3d61，同一固定 ZIP 仅检查一次。
