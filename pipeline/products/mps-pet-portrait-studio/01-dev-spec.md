@@ -1,4 +1,4 @@
-# 宠物写真照相馆开发规格
+# 宠物主题照相馆开发规格
 
 版本 `1.0.0`，Skill `mps-pet-portrait-studio`，快车道 `fast`，只交 WorkBuddy 团队版。选品固定于 `66a396a6ce070a8a20443e70e5d1f212be0fba6f:pipeline/products/mps-pet-portrait-studio/00-brief.md`，调研见 `pipeline/research/2026-11-09-round4.md`。SOP、配置和下文业务源码均固定于 `3e570ea52ac3a566af2a39b4ad6aefbbcd7f4126`。上一单婚纱写真 1.0.1 的产品状态已核对为 `submitted`，由负责人手动上传。
 
@@ -16,7 +16,7 @@
 | 2026-11-09 | https://open.workbuddy.cn/docs/expert | 在线读到专家独立结构，当前只交 Skill。 |
 | 2026-11-09 | https://open.workbuddy.cn/docs | 在线读到开放平台入口和产品分类。 |
 
-已对照 2026-11-08 快照 `docs/sop/workbuddy-official-docs.md`（blob `8314aca21d2c9acf042f20f81659639965c038f3`）。SKILL.md frontmatter 提供 `name,display_name,display_name_en,description,description_zh,description_en,version,author`，再加配对的 examples。只交一个根目录，下方最多一层子目录，包内资源与清单都直接放 `assets/`，开发测试和来源审计在工作区。欢迎句逐字使用「欢迎使用WorkBuddy官方认证技能 宠物写真照相馆。」，每个对话只展示一次。平台审核按真实回执记录。
+已对照 2026-11-08 快照 `docs/sop/workbuddy-official-docs.md`（blob `8314aca21d2c9acf042f20f81659639965c038f3`）。SKILL.md frontmatter 提供 `name,display_name,display_name_en,description,description_zh,description_en,version,author`，再加配对的 examples。只交一个根目录，下方最多一层子目录，包内资源与清单都直接放 `assets/`，开发测试和来源审计在工作区。欢迎句逐字使用「欢迎使用WorkBuddy官方认证技能 宠物主题照相馆。」，每个对话只展示一次。平台审核按真实回执记录。
 
 ## 2. 场景路由
 

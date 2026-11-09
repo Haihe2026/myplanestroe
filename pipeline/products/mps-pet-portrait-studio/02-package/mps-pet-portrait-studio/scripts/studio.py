@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""宠物写真照相馆 本地客户端（Python 3.7+ 标准库）。
+"""宠物主题照相馆 本地客户端（Python 3.7+ 标准库）。
 
 stdout 第一行是一行 JSON 信号，之后是固定话术；stderr 只放对客进度。
 退出码：0 完成；2 可续接（等待用户动作）；3 参数或服务错误；4 登录信息已失效并已清除。
@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-pet-portrait-studio'
-SKILL_VERSION = '1.0.2'
+SKILL_VERSION = '1.0.3'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'

@@ -1,8 +1,8 @@
-"""宠物写真照相馆：固定话术。宿主原样转述，不改写。"""
+"""宠物主题照相馆：固定话术。宿主原样转述，不改写。"""
 
 from urllib.parse import unquote
 
-SKILL_NAME = '宠物写真照相馆'
+SKILL_NAME = '宠物主题照相馆'
 
 WELCOME = '欢迎使用WorkBuddy官方认证技能 ' + SKILL_NAME + '。'
 CLOSE_WITH_NEED = '这个方向可以吗？'

@@ -1,7 +1,7 @@
 {
   "skill_id": "mps-pet-portrait-studio",
-  "display_name": "宠物写真照相馆",
-  "display_name_en": "Pet Portrait Studio",
+  "display_name": "宠物主题照相馆",
+  "display_name_en": "Pet Themed Portrait Studio",
   "version": "1.0.0",
   "lane": "fast",
   "channels": [
@@ -720,7 +720,7 @@
   ],
   "blocked_reasons": [],
   "welcome": {
-    "text": "欢迎使用WorkBuddy官方认证技能 宠物写真照相馆。",
+    "text": "欢迎使用WorkBuddy官方认证技能 宠物主题照相馆。",
     "once_per_chat": true,
     "decision": "2026-11-08，负责人在本聊天明确要求按现行 SOP 固定格式，WorkBuddy 审核状态按实际回执记录。",
     "platform_review": "未提审"

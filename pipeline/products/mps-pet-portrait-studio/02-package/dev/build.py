@@ -3,7 +3,7 @@ import hashlib, os, sys, zipfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'mps-pet-portrait-studio')
 DIST = os.path.join(HERE, '..', 'dist')
-VERSION = '1.0.2'
+VERSION = '1.0.3'
 os.makedirs(DIST, exist_ok=True)
 out = os.path.join(DIST, 'mps-pet-portrait-studio-%s.zip' % VERSION)
 if os.path.exists(out):

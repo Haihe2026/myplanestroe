@@ -113,7 +113,7 @@ def _strs(tree):
 
 def copy_strings():
     tree = ast.parse(read('scripts', 'welcome_copy.py'))
-    return [v for v in _strs(tree) if not v.startswith('宠物写真照相馆：固定话术')]
+    return [v for v in _strs(tree) if not v.startswith('宠物主题照相馆：固定话术')]
 
 
 def progress_strings():
@@ -127,7 +127,7 @@ def progress_strings():
 
 class Contract(unittest.TestCase):
     def test_welcome_exact(self):
-        self.assertEqual(W.WELCOME, '欢迎使用WorkBuddy官方认证技能 宠物写真照相馆。')
+        self.assertEqual(W.WELCOME, '欢迎使用WorkBuddy官方认证技能 宠物主题照相馆。')
 
     def test_frontmatter_official_fields(self):
         for k in ('name', 'display_name', 'display_name_en', 'description', 'description_zh', 'description_en', 'version', 'author'):
@@ -198,7 +198,7 @@ class Contract(unittest.TestCase):
 
     def test_description_seo(self):
         d = front('description')
-        self.assertTrue(d.startswith('宠物写真照相馆'))
+        self.assertTrue(d.startswith('宠物主题照相馆'))
         for core in ('宠物写真', '宠物主题照', '猫咪写真', '狗狗写真', '宠物头像', '宠物纪念照', '宠物写真集'):
             self.assertIn(core, d)
         self.assertTrue(front('description_zh').startswith('宠物写真'))

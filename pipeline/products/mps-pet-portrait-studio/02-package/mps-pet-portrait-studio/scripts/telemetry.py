@@ -12,8 +12,8 @@ import urllib.request
 import uuid
 
 SKILL_ID = 'mps-pet-portrait-studio'
-SKILL_NAME = '宠物写真照相馆'
-SKILL_VERSION = '1.0.2'
+SKILL_NAME = '宠物主题照相馆'
+SKILL_VERSION = '1.0.3'
 CHANNEL = 'workbuddy_skill'
 TELEMETRY_ORIGIN = 'https://aistore.zhaopintong.com'
 TELEMETRY_PATH = '/platform-api/telemetry/v1/first-dialogue'

@@ -14,3 +14,4 @@
 2026-11-09T22:52:16+08:00 | codex | package_ready → test_in_progress | 核对 Muse 交接、原回执与当前状态，复查 1.0.2 固定 ZIP 和上一轮两项退回。
 2026-11-09T22:56:34+08:00 | codex | test_in_progress → test_passed | 1.0.2 A3 独立复查通过，PET-01/02 修复，PET-03 无回退；固定 ZIP SHA256 67799fb6…，交负责人手动上传。
 2026-11-10T07:42:21+08:00 | claude | test_passed → dev_in_progress | Claude 定时运行承接 Muse 交接（evt-06e47b21… 改名「宠物主题照相馆」重打包 1.0.3；evt-8f39df04… 交付附 logo＋中文名＋slug），slug 不变、功能不变。
+2026-11-10T07:43:54+08:00 | claude | dev_in_progress → package_ready | 1.0.3 A2 通过：改名「宠物主题照相馆」（slug mps-pet-portrait-studio 不变），功能零改动；附 logo 02-package/dist/logo.png；契约 34/34、端到端 68/68（干净解压 ZIP），PET-01/02/03 及前序缺陷未回退；ZIP SHA256 5e24d182…，见 02-self-test.md。交 Codex A3 复查（只查 1.0.3）。
