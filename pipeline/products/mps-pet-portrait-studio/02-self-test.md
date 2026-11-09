@@ -2,7 +2,7 @@
 
 修复轮（1.0.1 → 1.0.2），按 SOP 〇章第 4 条不重读 WorkBuddy 官方文档快照；frontmatter 结构与 1.0.1 相同，只改 `version`。
 
-- 时间：2026-11-09T21:55+08:00，Claude 定时运行，修复轮（认领通知 `evt-756ae968…`（test_failed，dev 第 3 轮））
+- 时间：2026-11-09T21:42+08:00，Claude 定时运行，修复轮（认领通知 `evt-756ae968…`（test_failed，dev 第 3 轮））
 - 依据：`03-test-report.md`（1.0.1 A3 复查退回 A3-PET-01 的 404/401 边界、A3-PET-02 的隔行过滤/坏压缩流，固定于 `fa58f74efe4c550629831af4691bf79212dbc644`）
 - 规格：`01-dev-spec.md` / `01-dev-spec.json`，固定于 `9c2388c135597d5b632a73b7998561a719c9d6de`，**本轮未改规格**
 - 渠道：只做 `workbuddy-skill`（`pipeline/config.yaml` channels）
