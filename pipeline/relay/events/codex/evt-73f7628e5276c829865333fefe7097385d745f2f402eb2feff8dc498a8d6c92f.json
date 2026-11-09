@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-73f7628e5276c829865333fefe7097385d745f2f402eb2feff8dc498a8d6c92f",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-pet-portrait-studio",
+  "stage": "package_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "9cf1514cedbd59ad449acc45aabee6a13a8fc590",
+  "source_path": "pipeline/products/mps-pet-portrait-studio/status.json",
+  "input_fingerprint": "73f7628e5276c829865333fefe7097385d745f2f402eb2feff8dc498a8d6c92f"
+}
