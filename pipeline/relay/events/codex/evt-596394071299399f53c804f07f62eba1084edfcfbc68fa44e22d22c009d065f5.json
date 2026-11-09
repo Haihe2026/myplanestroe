@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-596394071299399f53c804f07f62eba1084edfcfbc68fa44e22d22c009d065f5",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-wedding-portrait-studio",
+  "stage": "test_passed",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "39f6fb4ec5652ee51ea0fd5532cff7f7f245c1c7",
+  "source_path": "pipeline/products/mps-wedding-portrait-studio/status.json",
+  "input_fingerprint": "596394071299399f53c804f07f62eba1084edfcfbc68fa44e22d22c009d065f5"
+}
