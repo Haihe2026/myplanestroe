@@ -587,5 +587,41 @@ class Contract(unittest.TestCase):
         href = _re.search(r'href="([^"]*)"', MarkdownIt().render('**[经典白纱影棚](%s)**' % good)).group(1)
         self.assertEqual(uri_file_part(href)[0], 'C:/Synthetic#User/mps-wedding-portrait-studio/demos/white-studio.png')
 
+    def test_wed_a3_01_demo_has_no_network(self):
+        """1.0.1：离线示例命令本身零网络（不上报、不发请求）；首次对话上报留在 first-turn。"""
+        tree = ast.parse(read('scripts', 'studio.py'))
+        fn = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+        names = {n.attr if isinstance(n, ast.Attribute) else n.id for n in ast.walk(fn['cmd_demo'])
+                 if isinstance(n, (ast.Attribute, ast.Name))}
+        for bad in ('telemetry', 'report_once', 'call', 'TRANSPORT', 'load_account'):
+            self.assertNotIn(bad, names)
+        self.assertIn('report_once', {n.attr for n in ast.walk(fn['cmd_first_turn']) if isinstance(n, ast.Attribute)})
+
+    def test_wed_a3_03_delivery_links_markdown_safe(self):
+        """1.0.1：成品与画廊链接用 md_safe_path，含空格、含 # 的目录解析后仍指向原文件。"""
+        from urllib.parse import unquote
+        home = tempfile.mkdtemp()
+        try:
+            for name in ('my photos', 'Synthetic#Album'):
+                d = os.path.join(home, name, '婚纱写真结果')
+                os.makedirs(d)
+                f = os.path.join(d, 'me-white-studio.png')
+                g = os.path.join(d, 'index.html')
+                open(f, 'wb').close()
+                open(g, 'wb').close()
+                text = W.delivery([studio.md_safe_path(f)], 3, True, '经典白纱影棚', 1, '', studio.md_safe_path(g))
+                for real in (f, g):
+                    line = next(l for l in text.splitlines() if studio.md_safe_path(real) in l)
+                    target = md_link_target(line)
+                    self.assertIsNotNone(target, name)
+                    path, _, frag = target.partition('#')
+                    path, _, query = path.partition('?')
+                    path = unquote(path)
+                    self.assertEqual((frag, query), ('', ''), name)
+                    self.assertEqual(os.path.realpath(path), os.path.realpath(real), name)
+        finally:
+            shutil.rmtree(home, ignore_errors=True)
+
+
 if __name__ == '__main__':
     unittest.main()

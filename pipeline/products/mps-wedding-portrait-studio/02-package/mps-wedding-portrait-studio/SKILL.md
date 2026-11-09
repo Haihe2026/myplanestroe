@@ -13,7 +13,7 @@ examples_en:
   - "Use my photo to make a classic white-gown studio wedding portrait in portrait 2:3."
   - "Use this photo of us together to make a seaside wedding portrait in landscape 3:2."
   - "Use my solo photo to make a Japanese-style portrait with natural light in portrait 2:3."
-version: 1.0.0
+version: 1.0.1
 author: "MyPlaneStore"
 ---
 
@@ -110,6 +110,7 @@ author: "MyPlaneStore"
 - `jobPending`：`progress=processing` 说仍在处理；`progress=unconfirmed` 说进度未能确认。用户说「继续」→ `resume`，沿原任务查询，不新建任务。
 - `delivered`：先把图交给用户（输出里的链接），再原样转述交付话术（改了什么、保留了什么、剩余次数）。剩余次数直接用输出，**禁止自行计算**。交付话术说明原图没有改动；后续调整需要重新生成时，先说明可能再次按张计费，同意后才 `regenerate`。用户要修改时，每次只改一件事。
 - `jobFailed` / `jobRejected` / `serviceBusy` / `downloadPending`：原样转述，不猜测扣费与否。
+- `photoChanged`：原样转述；用户重新发照片后再 `plan`，明确确认后才 `confirm`、`run`。
 - `credentialsReset`：说明后直接重新运行原 `run`，走授权。**禁止自己修理凭证**：不打开、不改权限、不设环境变量、不装依赖。
 - 输出目录有 `index.html` 画廊，可提示用户一次查看。
 

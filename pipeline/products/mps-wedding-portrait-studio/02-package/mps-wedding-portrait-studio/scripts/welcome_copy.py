@@ -1,5 +1,7 @@
 """婚纱写真照相馆：固定话术。宿主原样转述，不改写。"""
 
+from urllib.parse import unquote
+
 SKILL_NAME = '婚纱写真照相馆'
 
 WELCOME = '欢迎使用WorkBuddy官方认证技能 ' + SKILL_NAME + '。'
@@ -133,10 +135,18 @@ def start_recap(title, series, shape_name, people, count=1):
             '张，尽量保持' + _who(people) + '的五官和身份特征。' + NO_REPEAT)
 
 
-def delivery(paths, remaining, first_time, title, people=1, size_note=''):
+def _link_label(link):
+    name = unquote(link.rsplit('/', 1)[-1])
+    return ''.join('\\' + c if c in '[]\\*_`' else c for c in name)
+
+
+def delivery(links, remaining, first_time, title, people=1, size_note='', gallery_link=''):
+    """links / gallery_link 必须是已做 Markdown 安全编码的链接目标（studio.md_safe_path）。"""
     lines = ['做好了：']
-    for p in paths:
-        lines.append('- [' + p.rsplit('/', 1)[-1] + '](' + p + ')')
+    for p in links:
+        lines.append('- [' + _link_label(p) + '](' + p + ')')
+    if gallery_link:
+        lines.append('- [全部结果一览](' + gallery_link + ')')
     lines.append('这次做成了「' + title + '」主题，换了服装、背景和光影，尽量保持' + _who(people) +
                  '的五官、发际线和肤色；AI 生成的效果可能与本人有差异，请放大看看脸部和手部。')
     if size_note:
@@ -149,6 +159,11 @@ def delivery(paths, remaining, first_time, title, people=1, size_note=''):
     if first_time:
         lines.append('想调整直接说，比如「背景换成海边」「改成横版」「换成秀禾服」。' + ONE_CHANGE + '需要重新生成的调整可能再次按张计费，我会先跟你确认。')
     return '\n'.join(lines)
+
+
+def photo_changed():
+    return ('你确认时用的那张照片，文件后来有了变化。为了不做错照片，这次还没有开始制作，没有产生任何扣费。'
+            '请把要用的照片再发我一次，我按原来的方向重新跟你确认后再开始。')
 
 
 def size_mismatch(actual, requested):

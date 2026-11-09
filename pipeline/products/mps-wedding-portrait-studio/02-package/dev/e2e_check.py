@@ -527,7 +527,7 @@ class Telemetry(Base):
             self.assertEqual(telemetry.report_once(os.path.join(self.tmp, 'no', 'such', 'dir')), 'skipped')
 
     def test_every_early_branch_reports(self):
-        for argv in (['demo'], ['status'], ['balance'], ['first-turn', '--text', 'x'], ['history'], ['ticket'],
+        for argv in (['status'], ['balance'], ['first-turn', '--text', 'x'], ['history'], ['ticket'],
                      ['feedback', '--category', 'other', '--text', 'x']):
             shutil.rmtree(os.path.join(self.home, 'mps-wedding-portrait-studio'), ignore_errors=True)
             before = len(self.mock.telemetry_calls)
@@ -712,6 +712,97 @@ class Support(Base):
         code, s, t, _ = self.run_cmd('ticket')
         self.assertEqual((code, s['signal']), (2, 'serviceUnavailable'))
         self.assertIn('网络暂时连不上', t)
+
+
+class RepairA3(Base):
+    """1.0.1 修复轮回归：WED-A3-01 / 02 / 03。"""
+
+    def test_wed_a3_01_demo_alone_zero_network(self):
+        def boom(*a, **k):
+            raise AssertionError('network in demo')
+        studio.TRANSPORT = boom
+        telemetry.TRANSPORT = boom
+        for argv in (['demo'], ['demo', 'garden']):
+            code, s, _, _ = self.run_cmd(*argv)
+            self.assertEqual(code, 0)
+        self.assertFalse(os.path.exists(os.path.join(self.home, 'mps-wedding-portrait-studio', 'first-dialogue.json')))
+        # 首次真实对话仍上报一次
+        telemetry.TRANSPORT = self.mock.telemetry_transport
+        self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
+        self.run_cmd('demo')
+        self.assertEqual(len(self.mock.telemetry_calls), 1)
+
+    def test_wed_a3_02_photo_replaced_after_confirm(self):
+        did = self.confirmed_draft()
+        draft_file = os.path.join(self.home, 'mps-wedding-portrait-studio', 'drafts', did + '.json')
+        old_idem = json.load(open(draft_file))['idem']
+        with open(self.photo, 'wb') as f:
+            f.write(jpeg_bytes(640, 800))  # 同一路径换成另一张合成图
+        self.mock.authorize(studio.ensure_install_secret(studio.load_account()), 5)
+        code, s, t, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual((code, s['signal']), (2, 'photoChanged'))
+        self.assertIn(W.REASSURE_FREE.rstrip('。').split('，')[1], t)
+        self.assertEqual(self.mock.charges, 0)
+        self.assertFalse([c for c in self.mock.calls if '/skill-jobs' in c[1]])
+        d = json.load(open(draft_file))
+        self.assertEqual((d['idem'], d['photo_consent'], d['pay_consent']), (None, False, False))
+        # 旧确认不能再用
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'needsConfirmation')
+        code, s, _, _ = self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')
+        self.assertEqual(s['signal'], 'needsPlan')
+        # 重新 plan + confirm 后：新键对应新照片
+        self.run_cmd('plan', '--draft', did, '--scene', 'white-studio', '--people', '1')
+        self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')
+        new_idem = json.load(open(draft_file))['idem']
+        self.assertNotEqual(new_idem, old_idem)
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'delivered')
+        self.assertEqual(self.mock.charges, 1)
+
+    def test_wed_a3_02_photo_replaced_between_plan_and_confirm(self):
+        _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', self.photo)
+        did = s['draft_id']
+        self.run_cmd('plan', '--draft', did, '--scene', 'white-studio')
+        with open(self.photo, 'wb') as f:
+            f.write(jpeg_bytes(640, 800))
+        code, s, _, _ = self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')
+        self.assertEqual((code, s['signal']), (2, 'photoChanged'))
+
+    def test_wed_a3_03_delivery_links_space_and_hash(self):
+        import re
+        from urllib.parse import unquote
+        try:
+            from markdown_it import MarkdownIt
+            md = MarkdownIt()
+        except ImportError:
+            md = None
+        for name in ('my photos', 'Synthetic#Album'):
+            folder = os.path.join(self.tmp, name)
+            os.makedirs(folder)
+            self.photo = os.path.join(folder, 'me.jpg')
+            with open(self.photo, 'wb') as f:
+                f.write(jpeg_bytes())
+            did = self.confirmed_draft()
+            self.mock.authorize(studio.ensure_install_secret(studio.load_account()), 5)
+            code, s, t, _ = self.run_cmd('run', '--draft', did)
+            self.assertEqual(s['signal'], 'delivered', t)
+            self.assertTrue(os.path.isfile(s['paths'][0]))
+            targets = [s['links'][0], s['gallery_link']]
+            for target, real in zip(targets, (s['paths'][0], s['gallery'])):
+                self.assertNotIn(' ', target)
+                self.assertNotIn('#', target)
+                self.assertIn('](' + target + ')', t)
+                line = next(l for l in t.splitlines() if '](' + target + ')' in l)
+                got = re.search(r'\]\(([^()\s]*)\)', line).group(1)
+                path, _, frag = got.partition('#')
+                path, _, query = path.partition('?')
+                self.assertEqual((frag, query), ('', ''))
+                self.assertEqual(os.path.abspath(unquote(path)), os.path.abspath(real).replace('\\', '/'))
+                self.assertTrue(os.path.isfile(unquote(path)))
+                if md is not None:
+                    href = re.search(r'href="([^"]*)"', md.render(line)).group(1)
+                    self.assertTrue(os.path.isfile(unquote(href)))
 
 
 class DemoAssets(unittest.TestCase):

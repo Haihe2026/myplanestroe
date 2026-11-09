@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-wedding-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -293,7 +293,7 @@ def cmd_first_turn(args):
 
 
 def cmd_demo(args):
-    telemetry.report_once(state_dir())
+    # 只释放包内示例图：不联网、不读凭证。首次对话上报由同轮的 first-turn 负责。
     base = os.path.join(os.path.dirname(HERE), 'assets')
     try:
         with open(os.path.join(base, 'demos.json'), encoding='utf-8') as f:
@@ -344,7 +344,7 @@ def cmd_plan(args):
     if d.get('state') in ('submitted', 'delivered'):
         return emit('taskLocked', '', EXIT_ERROR)
     d.update(scene=args.scene, size=SIZES[shape], people=people, purpose=args.purpose or '',
-             photo_consent=False, pay_consent=False, state='planned')
+             photo_sha256=_photo_digest(d['images'][0]), photo_consent=False, pay_consent=False, idem=None, state='planned')
     save_draft(d)
     summary = W.plan_summary(series, title, W.SHAPE_NAMES[shape], people)
     return emit('planReady', W.confirm_paid(summary, wait_text(), people), EXIT_OK, draft_id=d['draft_id'])
@@ -357,9 +357,26 @@ def cmd_confirm(args):
         return emit('needsPlan', '', EXIT_ERROR)
     if args.photo_consent != 'yes' or args.pay_consent != 'yes':
         return emit('needsConfirmation', '', EXIT_ERROR)
+    if not d.get('photo_sha256') or _photo_digest(d['images'][0]) != d['photo_sha256']:
+        return _photo_changed(d)
     d.update(photo_consent=True, pay_consent=True, idem='wps-' + uuid.uuid4().hex, state='confirmed', confirmed_at=_now())
     save_draft(d)
     return emit('confirmed', '', EXIT_OK, draft_id=d['draft_id'])
+
+
+def _photo_digest(path):
+    try:
+        with open(path, 'rb') as f:
+            return hashlib.sha256(f.read()).hexdigest()
+    except OSError:
+        return None
+
+
+def _photo_changed(d):
+    """确认后照片文件有变化：作废原确认和原任务键，必须重新 plan + confirm。"""
+    d.update(photo_consent=False, pay_consent=False, idem=None, state='photo_changed')
+    save_draft(d)
+    return emit('photoChanged', W.photo_changed(), EXIT_WAIT, draft_id=d['draft_id'])
 
 
 def _job_body(d):
@@ -368,7 +385,10 @@ def _job_body(d):
     if not r['ok']:
         return None, emit('photoInvalid', W.input_error(r['file'], audit_images.describe(r['problem'])), EXIT_ERROR, problem=r['problem'])
     with open(path, 'rb') as f:
-        content = base64.b64encode(f.read()).decode()
+        raw = f.read()
+    if not d.get('photo_sha256') or hashlib.sha256(raw).hexdigest() != d['photo_sha256']:
+        return None, _photo_changed(d)
+    content = base64.b64encode(raw).decode()
     body = dict(prompt=build_prompt(d['scene'], d['people']), size=d['size'], confirmed=True, image_engine=IMAGE_ENGINE,
                 references=[dict(mime=r['mime'], content=content)], reference_consent=True)
     return body, None
@@ -605,8 +625,11 @@ def _deliver(d, a):
     write_json('flags.json', flags)
     d.update(state='delivered', delivered=paths, delivered_at=_now())
     save_draft(d)
-    return emit('delivered', W.delivery(paths, remaining, first, SCENES[d['scene']][1], d['people'], '\n'.join(notes)), EXIT_OK, draft_id=d['draft_id'],
-                paths=paths, gallery=os.path.join(folder, 'index.html'), remaining_uses=remaining, ask_favorite=first)
+    links = [md_safe_path(p) for p in paths]  # 面向用户的链接目标；paths 仍是原始文件路径
+    gallery = os.path.join(folder, 'index.html')
+    return emit('delivered', W.delivery(links, remaining, first, SCENES[d['scene']][1], d['people'], '\n'.join(notes), md_safe_path(gallery)),
+                EXIT_OK, draft_id=d['draft_id'], paths=paths, links=links, gallery=gallery, gallery_link=md_safe_path(gallery),
+                remaining_uses=remaining, ask_favorite=first)
 
 
 def cmd_resume(args):
