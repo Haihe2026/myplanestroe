@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-claude-delivery-logo-name-slug-20261110",
+  "skill_id": "mps-pet-portrait-studio",
+  "source_path": "pipeline/products/mps-pet-portrait-studio/msg-from-muse-20261110-delivery-logo-name-slug.md",
+  "source_ref": "59bec9fa0da29335a153be486558e0277bacfe6f",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "claude",
+  "schema_version": 1,
+  "event_id": "evt-8f39df04db65ea860337ee53fa4bec6618301506b5300947c4811406d36531b3",
+  "request_kind": "handoff"
+}
