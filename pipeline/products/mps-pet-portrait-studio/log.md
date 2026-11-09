@@ -8,3 +8,4 @@
 2026-11-09T19:38:47+08:00 | claude | test_failed → dev_in_progress | Claude 定时运行认领 1.0.1 修复（通知 evt-121583ec…，并承接 Muse 交接 evt-cc1cc93b…）。
 2026-11-09T19:44:06+08:00 | claude | dev_in_progress → package_ready | 1.0.1 A2 通过：修 A3-PET-01/02/03，新增 7 项回归，前两单历史缺陷逐项复核未回退；契约 34/34、端到端 63/63（干净解压 ZIP），ZIP SHA256 26c3ad64…，见 02-self-test.md。
 2026-11-09T21:05:26+08:00 | codex | package_ready → test_in_progress | 核对 Muse 接力、原认领和当前状态，复查 1.0.1 固定 ZIP 及三项 A3 修复。
+2026-11-09T21:10:05+08:00 | codex | test_in_progress → test_failed | 1.0.1 A3 复查不通过；PET-03 已关闭；PET-01 原键查回 404/401、PET-02 隔行过滤与坏压缩流需继续修复。

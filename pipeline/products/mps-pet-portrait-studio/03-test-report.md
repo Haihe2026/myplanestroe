@@ -1,43 +1,35 @@
-# 宠物写真照相馆 1.0.0 A3 独立检查报告
+# 宠物写真照相馆 1.0.1 A3 独立复查报告
 
-**独立检查不通过。** 退回 Claude 修复后重打包。
+**独立检查不通过。** A3-PET-03 已修复，A3-PET-01 与 A3-PET-02 的部分边界仍需修复。
 
-- 时间 2026-11-09T19:09:37+08:00，环境 Windows，ZIP 干净解压后逐文件检查。定向回归使用合成状态和内存 Mock，覆盖失败边界。真实上游调用 0，客户照片、支付和生产凭证均未使用。
-- 固定资料提交 `5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7`。ZIP 为 `02-package/dist/mps-pet-portrait-studio-1.0.0.zip`，1,021,859 字节，SHA256 `660889b11d3f03bf35d05b5006a18c9325e7d84f4d56e09b45a962c20f189ade`。与原 A3 通知固定提交和 Claude `02-self-test.md` 中的同一文件匹配。
-- 2026-11-09 已重新在线读取 WorkBuddy 技能和专家文档，核对团队技能包格式。对照仓库 2026-11-08 官方文档快照。[技能](https://open.workbuddy.cn/docs/skill) · [专家](https://open.workbuddy.cn/docs/expert)
-- 真机验收已跳过（负责人长期规则，2026-11-07）。按现行 A3 口径跳过浏览器验证及完整测试重跑。
+- 时间 2026-11-09T21:10:05+08:00。使用 Windows 干净解压目录、合成图片和内存 Mock，针对退回项复现。真实上游调用 0，真机验收已跳过（负责人长期规则，2026-11-07）。按 A3 口径跳过完整测试重跑及浏览器验证。
+- 固定资料提交 `20f8a83721fc01a96ff4c28c72c6535b53a39bef`。复查 ZIP 为 `02-package/dist/mps-pet-portrait-studio-1.0.1.zip`，1,024,515 字节，SHA256 `26c3ad64f64a22e3515854e17e1c1a0f9893b67db8a36cbe77b064417b6597e0`。与旧复查通知固定提交及 A2 记录匹配。[固定 ZIP](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/02-package/dist/mps-pet-portrait-studio-1.0.1.zip) · [A2 报告](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/02-self-test.md)
+- 2026-11-09 重新在线读取 WorkBuddy 技能文档，主机 HTTPS 请求返回 200，核对技能基础结构和 frontmatter。[WorkBuddy 技能文档](https://open.workbuddy.cn/docs/skill)
+- 上一版 A3 证据保留在固定提交。[1.0.0 A3 报告](https://github.com/Haihe2026/myplanestroe/blob/aa95c62fc3d8f0bde74e7a014e2c4ec331bf8e08/pipeline/products/mps-pet-portrait-studio/03-test-report.md)
 
-## 检查结果
+## 逐项复查
 
-| 项目 | 结果 | 证据 |
+| 项目 | 结果 | 独立证据 |
 |---|---|---|
-| ZIP 完整性与结构 | 通过 | SHA256 一致，CRC 正常，24 个文件，无重复名称或符号链接，包根下最多一层子目录。 |
-| Frontmatter 与对客文案 | 通过 | YAML 无重复键，八个必填字段齐备。中英三组分别对应猫皇家油画竖版、狗卡通头像方版、猫海边度假横版。固定欢迎语与规格一致，公开简介、展示正文及 README 未发现列明的禁用词或供应商名称。 |
-| 场景、网关与遥测 | 部分通过 | 十个场景尺寸与规格相符，POST 正文六字段、首轮遥测八字段与 2 秒预算一致。同路径换图后两项确认和旧键作废，阻止发送替换后的图。原任务未知续接存在 A3-PET-01。 |
-| 示例图 | 部分通过 | 包内十张 PNG 与来源及派生 SHA-256 逐一匹配，画幅正确，合计 966,477 字节。直接运行全部或单项 demo 时，网络和凭证探针均为零。单项资源缺失处理存在 A3-PET-03。 |
-| Markdown 路径 | 通过 | 分别在带空格与带井号的合成目录中，用 ConvertFrom-Markdown 解析 demo、成品、画廊三类链接，六条均解码到现存原文件，未误拆为片段。 |
-| 成品完整性 | 不通过 | 截断的 PNG 会被写入输出和画廊并宣布交付，见 A3-PET-02。 |
+| ZIP 完整性与结构 | 通过 | SHA256、字节数与 A2 一致，CRC 正常，24 个文件，两级路径，无同名或符号链接。检查的两个 Python 文件与固定源码 Git blob 一致。 |
+| Frontmatter、欢迎句与公开文案 | 通过 | 八个必填字段齐全，三组中英示例分别为皇家油画竖版、卡通头像方版、海边度假横版。欢迎句逐字匹配，公开简介、展示正文及 README 未见列明的禁用词或供应商名称。 |
+| 规格契约 | 部分通过 | 十个场景画幅、六字段生成正文和八字段遥测一致。首次发送前替换同路径文件会作废确认和旧键。提交状态已未知时，重规划、确认和重生成均锁定原任务。查回策略见 A3-PET-01。 |
+| 十张素材及缺图处理 | 通过 | 10/10 来源与派生哈希匹配，PNG 可读，共 966,477 字节。demo 独立运行零网络、零凭证读取。单缺 cartoon.png 时，全量和该单项均退出 3 并报告缺失，其余单项可用。A3-PET-03 关闭。 |
+| Markdown 路径 | 通过 | 分别在含空格、井号的目录解析示例、成品、画廊三类链接，六条均命中现存文件。 |
+| 成品完整性 | 部分通过 | 33 字节截断、截半、去掉 IEND 都进入 downloadPending，未写结果。异常的隔行过滤字节和坏压缩流仍未正确处理，见 A3-PET-02。 |
 
-## 退回项
+## 仍需修复
 
-### A3-PET-01 原任务结果未知时可丢失任务键
+### A3-PET-01 原任务查回的 404 与 401 边界
 
-- 复现一。对已确认草稿运行提交，在合成传输收到 POST 时模拟进程中断。检查提交前保存记录。
-- 实际一。进入 POST 前无持久化提交意图或请求正文，草稿仍是 `confirmed`。下次 `run` 可再次走生成 POST。
-- 复现二。把同一草稿置为 `submit_unknown`、保留旧键且不设 job_id，对同一 draft 执行 `plan` 再 `confirm`。另用独立 Mock 让提交返回 409。
-- 实际二。重规划返回 `planReady` 并清空旧键，再确认产生新键。409 分支不查原任务，直接显示照片无法处理且没有扣次数。存在无法继续查询原任务及重复提交风险，未发生真实扣费。
-- 期望。首发前在私有状态原子保存原键、固定正文及可续接状态。未确定前只查原键/任务 ID，保留原记录。改方案或重新生成不能覆盖未知任务。409 应查原任务或说明同键冲突，费用按服务记录判断。回归覆盖进程中断、同一草稿重新规划与 409。[规格](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/01-dev-spec.md#L100) · [重规划](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L320-L345) · [提交与续接](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L442-L535)
+- 已确认修复。模拟 POST 期间进程中断，磁盘上已保存原键、固定六字段正文及 `submit_unknown`。原图随后换掉，锁仍有效，补发路径也仍取旧正文。409 查原键后提示以服务记录为准，保留原键。
+- 复现一。针对该未定草稿执行 `resume`，让原键查询只返回普通 404，且无任何未扣或未受理的业务证据。实际请求序列为 GET by-key、POST skill-jobs、GET by-key（本次 Mock 让 POST 返回 409）。固定共享后端的 404 只表示当前未查到，并要求保留任务等待核查。预期保持查询态，保留原键和正文，只有明确未受理且未扣的可恢复状态才能同键续接。该复现只证明发出额外 POST，未发生真实生成或扣费。[规格](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/01-dev-spec.md#L100) · [后端查回](https://github.com/Haihe2026/myplanestroe/blob/3e570ea52ac3a566af2a39b4ad6aefbbcd7f4126/snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py#L442-L451) · [客户端续接](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L580-L603)
+- 复现二。未定草稿的缓存 Skill 凭证已失效，让原键查询连续返回 401，两次 `resume` 均用同一过期凭证并返回 `jobPending`，没有清理凭证。预期保留原任务，从原安装身份恢复，继续原键查询并覆盖 401 回归。[凭证选择与查回](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L576-L603)
 
-### A3-PET-02 截断 PNG 被宣告交付
+### A3-PET-02 部分不可解码 PNG 被交付或使脚本异常退出
 
-- 复现。对一个 Mock 成功任务，让图片 GET 返回某正常 PNG 的前 33 字节，仅含签名与 IHDR。运行解压 ZIP 内的交付逻辑。
-- 实际。返回 `delivered`，生成可点击文件和画廊条目，但图像校验无法读取该 33 字节文件。
-- 期望。校验图片内容完整后再写入正式结果和画廊、宣布交付。截断或不可解码时保留原任务并进入只读补取流程。[规格](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/01-dev-spec.md#L102) · [图片读取](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L225-L249) · [成品交付](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L587-L627)
+- 复现一。构造 1×1 Adam7 RGB PNG，块长度与 CRC 正确，IDAT 解压数据为 `05 00 00 00`，过滤字节 5 无效。独立 PNG 解码拒绝该图片，但当前校验接受，并返回 `delivered`、生成文件及画廊条目。正常过滤字节 0 的对照样本通过。
+- 复现二。构造块 CRC 正确、但 IDAT 内容为非法 zlib 流的 PNG。实际从交付函数抛出未处理的 `zlib.error`，没有返回 `downloadPending`。
+- 预期。拒绝不可解码的 PNG，统一进入原任务只读补取分支。覆盖隔行模式的非法过滤字节与无效压缩流，且不生成结果文件或画廊条目。[规格](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/01-dev-spec.md#L102) · [PNG 校验](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/png_local.py#L143-L205) · [交付处理](https://github.com/Haihe2026/myplanestroe/blob/20f8a83721fc01a96ff4c28c72c6535b53a39bef/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L656-L679)
 
-### A3-PET-03 缺一张示例时仍返回成功
-
-- 复现。在隔离复制的 `assets/` 中保留清单，移去 `cartoon.png`，运行全量 demo。
-- 实际。脚本返回退出码 0、信号 `demos` 和 9 项结果。
-- 期望。请求范围内缺任何一张时报告资源缺失并退出 3，保持离线且不读凭证。新增「只缺一张」回归，用单项 demo 核对范围。[规格](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/01-dev-spec.md#L76) · [示例命令](https://github.com/Haihe2026/myplanestroe/blob/5cbe2ee3ce644459da5c04a75b376ff1fd57d5e7/pipeline/products/mps-pet-portrait-studio/02-package/mps-pet-portrait-studio/scripts/studio.py#L292-L317)
-
-按自动 SOP A.4 更新为 `test_failed`，测试轮次加一。后续由 Claude 修复并提交新 ZIP 和 A2 证据，再按固定新 ZIP 独立检查。
+按 SOP A.4 更新为 `test_failed`，测试轮次加一。Claude 修复这两项并提交新 ZIP 与 A2 证据后，再对固定新版复查。
