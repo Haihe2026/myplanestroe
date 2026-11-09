@@ -1,0 +1,153 @@
+[
+  {
+    "key": "royal-oil",
+    "title": "皇家油画宠物肖像",
+    "ratio": "2:3",
+    "size": "1024x1536",
+    "keywords": [
+      "皇家",
+      "宫廷",
+      "油画挂墙"
+    ],
+    "direction": "深色宫廷背景、深酒红丝绒披肩、传统油画笔触；保留耳形与胸口花纹",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional silver tabby cat with white chest, green eyes, front-facing in a burgundy velvet royal cape, old-master oil paint, dark palace studio. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "cartoon",
+    "title": "卡通动漫宠物",
+    "ratio": "1:1",
+    "size": "1024x1024",
+    "keywords": [
+      "卡通",
+      "动漫",
+      "头像"
+    ],
+    "direction": "清晰线条、柔色块、头像裁切留出耳尖；不要把毛斑概括到消失",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional cream shiba inu with curved ears and a dark nose as a cute hand-drawn anime avatar, pastel aqua backdrop, clean cel shading. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "cyberpunk",
+    "title": "赛博朋克宠物",
+    "ratio": "2:3",
+    "size": "1024x1536",
+    "keywords": [
+      "赛博朋克",
+      "霓虹",
+      "未来感"
+    ],
+    "direction": "紫青霓虹轮廓光、未来街景；毛色留中性色补光，面部无遮挡",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional black tuxedo cat with white chin and chest in a violet and cyan cyberpunk alley, neutral light on face, no signage. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "ancient-chinese",
+    "title": "古风宠物",
+    "ratio": "2:3",
+    "size": "1024x1536",
+    "keywords": [
+      "古风",
+      "汉服",
+      "中式"
+    ],
+    "direction": "传统庭院与锦缎小披肩；服装顺着动物体型，眼鼻无遮挡",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional orange tabby cat in a red Chinese-style silk mantle in a traditional courtyard, plum blossom, soft painted portrait. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "astronaut",
+    "title": "宇航员宠物",
+    "ratio": "2:3",
+    "size": "1024x1536",
+    "keywords": [
+      "宇航员",
+      "太空",
+      "星球"
+    ],
+    "direction": "透亮面罩、星球远景；面罩反光避开双眼，保留口鼻结构",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional golden retriever in an astronaut suit with a transparent visor and clearly visible eyes, distant blue planet. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "watercolor",
+    "title": "水彩画宠物",
+    "ratio": "2:3",
+    "size": "1024x1536",
+    "keywords": [
+      "水彩",
+      "水彩画",
+      "手绘"
+    ],
+    "direction": "纸张纹理、淡色晕染；眼鼻和关键花纹边缘清楚",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional floppy-eared beagle with a white blaze painted in delicate transparent watercolor on textured paper. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "formal",
+    "title": "绅士正装宠物",
+    "ratio": "2:3",
+    "size": "1024x1536",
+    "keywords": [
+      "绅士",
+      "西装",
+      "正装",
+      "礼服"
+    ],
+    "direction": "正装配件和柔和棚灯；领结不挡胸前辨识斑纹",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional dappled dachshund with amber eyes, a small tailored tuxedo and bow tie under soft portrait studio light. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "seaside",
+    "title": "海边度假宠物",
+    "ratio": "3:2",
+    "size": "1536x1024",
+    "keywords": [
+      "海边",
+      "海滩",
+      "度假"
+    ],
+    "direction": "海浪与自然光、横版留景；按原图保留毛发纹理与身体比例",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional calico cat with an orange patch around its left eye on a sunny seaside boardwalk, blue surf, light vacation scarf. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "christmas",
+    "title": "圣诞节日宠物",
+    "ratio": "2:3",
+    "size": "1024x1536",
+    "keywords": [
+      "圣诞",
+      "节日",
+      "圣诞树"
+    ],
+    "direction": "暖色灯串、松枝与小配饰；避免帽沿遮眼和高光漂白毛色",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional small black poodle with dark eyes, a festive red scarf, warm Christmas tree bokeh and pine branches. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  },
+  {
+    "key": "explorer",
+    "title": "探险家宠物",
+    "ratio": "3:2",
+    "size": "1536x1024",
+    "keywords": [
+      "探险",
+      "户外",
+      "小探险家"
+    ],
+    "direction": "自然地形、轻量探险服饰，脸部及耳朵完整；不增加其他动物",
+    "tier": "1K",
+    "series": "宠物主题写真",
+    "prompt": "Create an original single-pet portrait of a fictional long-haired brown tabby cat in a lightweight explorer bandana on a mossy forest trail, alert ears, natural morning light. One pet only, clear face, natural species anatomy, distinctive visible markings, no people, no lettering, no logos, no watermark, clean finished portfolio example."
+  }
+]
