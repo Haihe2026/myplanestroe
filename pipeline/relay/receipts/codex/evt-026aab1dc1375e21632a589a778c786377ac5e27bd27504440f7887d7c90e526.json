@@ -1,1 +1,8 @@
-{"event_id": "evt-026aab1dc1375e21632a589a778c786377ac5e27bd27504440f7887d7c90e526", "role": "codex", "action": "claimed", "at": "2026-11-08T22:50:53+08:00", "evidence_ref": null, "claim_id": "a9d23e4d-86a0-40a0-9f42-858256a28bc6"}
+{
+  "event_id": "evt-026aab1dc1375e21632a589a778c786377ac5e27bd27504440f7887d7c90e526",
+  "role": "codex",
+  "action": "acknowledged",
+  "at": "2026-11-09T08:16:27+08:00",
+  "evidence_ref": "ca12a85dd98b4804c3d2949cacb2ad6df3cea2ef:pipeline/products/mps-wedding-portrait-studio/demo-assets/generation-audit.json",
+  "claim_id": "a9d23e4d-86a0-40a0-9f42-858256a28bc6"
+}
