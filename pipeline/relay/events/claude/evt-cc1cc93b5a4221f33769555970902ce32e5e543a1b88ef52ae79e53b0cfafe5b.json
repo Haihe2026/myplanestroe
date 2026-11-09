@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-claude-fix-no-repeat-pet-20261109",
+  "skill_id": "mps-pet-portrait-studio",
+  "source_path": "pipeline/products/mps-pet-portrait-studio/msg-from-muse-20261109-fix-no-repeat.md",
+  "source_ref": "b70238771d2430093257744cb20d5b0a713c842f",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "claude",
+  "schema_version": 1,
+  "event_id": "evt-cc1cc93b5a4221f33769555970902ce32e5e543a1b88ef52ae79e53b0cfafe5b",
+  "request_kind": "handoff"
+}
