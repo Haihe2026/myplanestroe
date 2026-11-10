@@ -232,7 +232,8 @@ class AccountBilling(Base):
             self.assertIn(must, t)
         self.assertNotIn('¥', t)
         code, s, t, _ = self.run_cmd('paid')
-        self.assertIn('已收到你的付款登记', t)
+        self.assertEqual(s['signal'], 'creditsPending')  # 1.0.8 A3-PAY-01：自述付款不等于到账，只按服务端次数
+        self.assertIn('还没看到这笔到账', t)
         self.mock.users[secret]['balance'] = 3
         code, s, t, err = self.run_cmd('run', '--draft', did)
         self.assertEqual((code, s['signal']), (0, 'delivered'), t)
@@ -501,7 +502,7 @@ class Telemetry(Base):
             self.assertEqual(telemetry.report_once(os.path.join(self.tmp, 'no', 'such', 'dir')), 'skipped')
 
     def test_every_early_branch_reports(self):
-        for argv in (['demo'], ['status'], ['balance'], ['first-turn', '--text', 'x'], ['history'], ['ticket'],
+        for argv in (['status'], ['balance'], ['first-turn', '--text', 'x'], ['history'], ['ticket'], ['topup'], ['paid'],
                      ['feedback', '--category', 'other', '--text', 'x']):
             shutil.rmtree(os.path.join(self.home, 'mps-id-photo-background'), ignore_errors=True)
             before = len(self.mock.telemetry_calls)
@@ -882,6 +883,262 @@ class NoRepeat(Base):
                 self.assertNotIn('?', tgt)
                 self.assertTrue(os.path.isfile(unquote(tgt)), tgt)
             self.assertNotIn('%', ''.join(re.findall(r'- \[([^\]]+)\]', t)))  # 显示名是原文件名
+
+
+class PayA3Fix(Base):
+    """1.0.8：A3-PAY-01（paid 走关联入口、到账只认服务端）、PAY-02（失效链接不转述）、PAY-04（demo 不联网）。"""
+
+    def offline(self, *a, **k):
+        raise idphoto.GatewayError(0)
+
+    def link_of(self, t):
+        import re
+        m = re.search(r'\]\((https://[^)\s]+)\)', t)
+        return m.group(1) if m else None
+
+    def qe_calls(self):
+        return [c for c in self.mock.calls if c[1] == '/quick-entry']
+
+    # ---- PAY-01
+    def test_pay01_fresh_paid_gives_link_account(self):
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal'], s['link_included']), (2, 'linkAccount', True))
+        self.assertTrue(self.link_of(t).startswith('https://aistore.zhaopintong.com/membership/gemini/register/'))
+        self.assertNotIn('已收到', t)
+        self.assertIn('「付好了」', t)
+        self.assertEqual(len(self.secret()), 43)
+        qe = self.qe_calls()
+        self.assertEqual(len(qe), 1)
+        self.assertEqual(qe[0][2], {'install_secret': self.secret()})
+        self.assertNotIn('Authorization', qe[0][3])
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_pay01_fresh_paid_offline_honest(self):
+        idphoto.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertEqual(t.strip(), '网络暂时没连上，没有扣任何次数，稍后再说一次「付好了」。')
+        self.assertNotIn('已收到', t)
+
+    def test_pay01_fresh_paid_busy(self):
+        def busy(*a, **k):
+            raise idphoto.GatewayError(503)
+        idphoto.TRANSPORT = busy
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('服务正在处理较多请求', t)
+        self.assertNotIn('网络', t)
+
+    def test_pay01_paid_before_scan_relinks(self):
+        self.run_cmd('topup')  # 本机已有标识，用户还没扫码
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assertNotIn('已收到', t)
+        self.assertEqual({c[2]['install_secret'] for c in self.qe_calls()}, {self.secret()})
+
+    def test_pay01_paid_not_arrived_is_not_claimed(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 0)
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal'], s['remaining_uses']), (2, 'creditsPending', 0))
+        self.assertIn('还没看到这笔到账', t)
+        self.assertNotIn('已收到', t)
+
+    def test_pay01_paid_arrived_by_server(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal'], s['remaining_uses']), (0, 'creditsAvailable', 3))
+        self.assertIn('剩余可用次数：3 次', t)
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_pay01_paid_with_account_offline(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        idphoto.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('网络暂时没连上', t)
+        self.assertNotIn('剩余', t)
+
+    def test_pay01_resume_after_paid_still_server_checked(self):
+        did = self.confirmed_draft()
+        self.paid_account(did, 0)
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'needsCredits')
+        code, s, _, _ = self.run_cmd('paid')
+        self.assertEqual(s['signal'], 'creditsPending')
+        self.mock.users[self.secret()]['balance'] = 2
+        code, s, _, _ = self.run_cmd('paid')
+        self.assertEqual(s['signal'], 'creditsAvailable')
+        code, s, _, _ = self.run_cmd('resume', '--draft', did)
+        self.assertEqual(s['signal'], 'delivered')
+
+    # ---- PAY-02
+    def quick_entry_with(self, *answers):
+        real = self.mock.transport
+        seq = list(answers)
+
+        def t(method, url, body, headers, timeout, binary):
+            if url.endswith('/quick-entry'):
+                self.mock.calls.append((method, '/quick-entry', body, dict(headers)))
+                return 200, json.dumps(seq.pop(0) if len(seq) > 1 else seq[0]).encode()
+            return real(method, url, body, headers, timeout, binary)
+        idphoto.TRANSPORT = t
+
+    REG = 'https://myplanestore.com/membership/gemini/register/#entry=synthetic'
+
+    def test_pay02_expired_link_not_relayed(self):
+        self.quick_entry_with(dict(status='registration', url=self.REG, expires_in=0))
+        for cmd, word in (('status', '我的账户'), ('topup', '充值'), ('paid', '付好了'), ('balance', '查余额'), ('history', '查余额')):
+            before = len(self.qe_calls())
+            code, s, t, _ = self.run_cmd(cmd)
+            self.assertEqual(s['signal'], 'serviceUnavailable', cmd)
+            self.assertNotIn('http', t, cmd)
+            self.assertIn('这一步还没完成', t, cmd)
+            self.assertIn('「' + word + '」', t, cmd)
+            self.assertNotIn('网络', t, cmd)
+            self.assertEqual(len(self.qe_calls()) - before, 2, cmd)  # 沿原安装身份重取一次
+        self.assertEqual({c[2]['install_secret'] for c in self.qe_calls()}, {self.secret()})
+
+    def test_pay02_expired_at_past_not_relayed(self):
+        self.quick_entry_with(dict(status='registration', url=self.REG, expires_at=1))
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('http', t)
+
+    def test_pay02_expired_then_fresh_relayed(self):
+        self.quick_entry_with(dict(status='registration', url=self.REG, expires_in=0),
+                              dict(status='registration', url=self.REG + '2', expires_in=300))
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'linkAccount')
+        self.assertEqual(self.link_of(t), 'https://aistore.zhaopintong.com/membership/gemini/register/#entry=synthetic2')
+        self.assertEqual(len(self.qe_calls()), 2)
+        self.assertEqual(len({c[2]['install_secret'] for c in self.qe_calls()}), 1)
+
+    def test_pay02_valid_link_relayed(self):
+        self.quick_entry_with(dict(status='registration', url=self.REG, expires_in=300))
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'linkAccount')
+        self.assertEqual(len(self.qe_calls()), 1)
+
+    def test_pay02_external_domain_rejected(self):
+        self.quick_entry_with(dict(status='registration', url='https://evil.example/membership/gemini/register/', expires_in=300))
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('evil', t)
+        self.assertNotIn('http', t)
+
+    def test_pay02_expired_checkout_and_run(self):
+        self.quick_entry_with(dict(status='checkout', url='https://myplanestore.com/membership/gemini/#ticket=x', expires_in=0))
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('http', t)
+        did = self.confirmed_draft()
+        code, s, t, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('这一步还没完成', t)
+        self.assertNotIn('http', t)
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_pay02_expired_membership_link(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        real = self.mock.transport
+        n = []
+
+        def t(method, url, body, headers, timeout, binary):
+            if url.endswith('/membership-link'):
+                n.append(1)
+                return 200, json.dumps(dict(url='https://myplanestore.com/membership/#ticket=x', expires_in=0)).encode()
+            return real(method, url, body, headers, timeout, binary)
+        idphoto.TRANSPORT = t
+        code, s, t_, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('http', t_)
+        self.assertIn('这一步还没完成', t_)
+        self.assertEqual(len(n), 2)
+
+    # ---- PAY-04
+    def test_pay04_demo_zero_network_two_fresh_dirs(self):
+        import socket
+        import urllib.request
+        hits = []
+
+        def refuse(*a, **k):
+            hits.append(a[:1])
+            raise AssertionError('network in demo')
+        saved = (socket.create_connection, urllib.request.urlopen, urllib.request.OpenerDirector.open)
+        idphoto.TRANSPORT = refuse
+        telemetry.TRANSPORT = refuse
+        socket.create_connection = refuse
+        urllib.request.urlopen = refuse
+        urllib.request.OpenerDirector.open = refuse
+        try:
+            for i in range(2):
+                fresh = os.path.join(self.tmp, 'fresh-%d' % i)
+                os.makedirs(fresh)
+                idphoto.STATE_HOME = fresh
+                code, s, _, _ = self.run_cmd('demo')
+                self.assertEqual((code, len(s['items'])), (0, 10))
+                code, s, _, _ = self.run_cmd('demo', 'white-one')
+                self.assertEqual((code, len(s['items'])), (0, 1))
+                st = os.path.join(fresh, 'mps-id-photo-background')
+                self.assertEqual(sorted(os.listdir(st)), ['demos'])  # 不建安装标识、不碰凭证
+        finally:
+            socket.create_connection, urllib.request.urlopen, urllib.request.OpenerDirector.open = saved
+        self.assertEqual(hits, [])
+        self.assertEqual(self.mock.telemetry_calls, [])
+        self.assertEqual(self.mock.calls, [])
+
+    def test_pay04_demo_subprocess_proxy_probe(self):
+        """独立进程、全新目录、所有出站经本地探针：demo 0 次连接；first-turn 作对照应被探针记到。"""
+        import socket
+        import subprocess
+        import threading
+        srv = socket.socket()
+        srv.bind(('127.0.0.1', 0))
+        srv.listen(8)
+        srv.settimeout(0.2)
+        port = srv.getsockname()[1]
+        hits = []
+        stop = threading.Event()
+
+        def accept():
+            while not stop.is_set():
+                try:
+                    c, _ = srv.accept()
+                except OSError:
+                    continue
+                hits.append(1)
+                c.close()  # 拒绝：不转发
+        th = threading.Thread(target=accept, daemon=True)
+        th.start()
+        script = os.path.join(PKG, 'scripts', 'idphoto.py')
+
+        def run(argv, fresh):
+            env = {k: v for k, v in os.environ.items() if 'proxy' not in k.lower()}
+            proxy = 'http://127.0.0.1:%d' % port
+            env.update(HOME=fresh, USERPROFILE=fresh, HTTPS_PROXY=proxy, HTTP_PROXY=proxy, https_proxy=proxy,
+                       http_proxy=proxy, MPS_ID_PHOTO_TEST='1')
+            env.pop('MPS_ID_PHOTO_JOURNEY', None)
+            return subprocess.run([sys.executable, '-I', script] + argv, env=env, capture_output=True, timeout=60)
+        try:
+            for i in range(2):
+                fresh = os.path.join(self.tmp, 'proc-%d' % i)
+                os.makedirs(fresh)
+                r = run(['demo'], fresh)
+                self.assertEqual(r.returncode, 0, r.stdout)
+                self.assertEqual(len(json.loads(r.stdout.decode('utf-8').split('\n', 1)[0])['items']), 10)
+            self.assertEqual(hits, [])
+            ctl = os.path.join(self.tmp, 'proc-ctl')
+            os.makedirs(ctl)
+            run(['first-turn', '--defer-entry', '--text', 'x'], ctl)
+            self.assertGreaterEqual(len(hits), 1)  # 探针有效：真正的首轮入口会尝试上报
+        finally:
+            stop.set()
+            th.join(2)
+            srv.close()
 
 
 class DemoAssets(unittest.TestCase):

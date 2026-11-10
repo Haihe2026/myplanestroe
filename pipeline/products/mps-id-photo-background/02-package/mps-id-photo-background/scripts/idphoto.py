@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-id-photo-background'
-SKILL_VERSION = '1.0.7'
+SKILL_VERSION = '1.0.8'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -243,6 +243,19 @@ def trusted_link(url):
     return urlunsplit(('https', 'aistore.zhaopintong.com', u.path, u.query, u.fragment))
 
 
+LINK_EXPIRED = 'expired'  # 失败状态：服务端给的链接已失效（重取一次仍失效）
+
+
+def link_fresh(r):
+    """服务端随链接给了有效期元数据时核对：expires_in ≤ 0、非数字，或 expires_at 已过，都算已失效，不转述。"""
+    for key, floor in (('expires_in', 0), ('expires_at', time.time())):
+        if key in r:
+            v = r[key]
+            if isinstance(v, bool) or not isinstance(v, (int, float)) or v <= floor:
+                return False
+    return True
+
+
 # ---------------------------------------------------------------- 提示词
 
 def color_of(arg):
@@ -281,7 +294,7 @@ def cmd_first_turn(args):
 
 
 def cmd_demo(args):
-    telemetry.report_once(state_dir())
+    """离线示例：不联网、不读账户凭证、不做首次对话上报（上报只在真正的首轮入口 first-turn 及业务命令里做）。"""
     base = os.path.join(os.path.dirname(HERE), 'assets')
     try:
         with open(os.path.join(base, 'demos.json'), encoding='utf-8') as f:
@@ -389,23 +402,27 @@ def _job_body(d):
 def _account_ready(a):
     """返回 (状态, 附带)：('ready', quota) / ('registration', url) / ('checkout', url) / ('error', status)"""
     secret = ensure_install_secret(a)
-    try:
-        r = call('POST', '/quick-entry', {'install_secret': secret})
-    except GatewayError as e:
-        return 'error', e.status
-    st = r.get('status')
-    if st == 'ready':
-        telemetry.link_account(state_dir(), secret)
-        return 'ready', r
-    if st in ('registration', 'checkout'):
+    for attempt in range(2):  # 链接已失效时沿原安装身份重取一次
+        try:
+            r = call('POST', '/quick-entry', {'install_secret': secret})
+        except GatewayError as e:
+            return 'error', e.status
+        st = r.get('status')
+        if st == 'ready':
+            telemetry.link_account(state_dir(), secret)
+            return 'ready', r
+        if st not in ('registration', 'checkout'):
+            return 'error', 0
         try:
             url = trusted_link(r.get('url'))
         except GatewayError:
             return 'error', 0
+        if not link_fresh(r):
+            continue
         if st == 'checkout':
             telemetry.link_account(state_dir(), secret)
         return st, url
-    return 'error', 0
+    return 'error', LINK_EXPIRED
 
 
 def _ensure_skill_key(a):
@@ -431,16 +448,23 @@ def _ensure_skill_key(a):
 
 
 def _membership_link(a):
-    """返回 (链接, None) 或 (None, 状态)：状态 0 = 连接失败、超时、坏响应或链接不可信；非 0 = 服务端返回的错误码。"""
-    try:
-        r = call('POST', '/membership-link', {}, auth=a['install_secret'])
-        return trusted_link(r.get('url')), None
-    except GatewayError as e:
-        return None, e.status
+    """返回 (链接, None) 或 (None, 状态)：状态 0 = 连接失败、超时、坏响应或链接不可信；LINK_EXPIRED = 重取一次仍已失效；
+    其余 = 服务端返回的错误码。"""
+    for attempt in range(2):
+        try:
+            r = call('POST', '/membership-link', {}, auth=a['install_secret'])
+            url = trusted_link(r.get('url'))
+        except GatewayError as e:
+            return None, e.status
+        if link_fresh(r):
+            return url, None
+    return None, LINK_EXPIRED
 
 
 def _fail_kind(status):
-    """状态 0 是网络没连上；非 0 是服务正在处理较多请求。不得把网络故障说成服务繁忙。"""
+    """状态 0 是网络没连上；链接已失效是「这一步还没完成」；其余是服务正在处理较多请求。不得把网络故障说成服务繁忙。"""
+    if status == LINK_EXPIRED:
+        return 'incomplete'
     return 'network' if status == 0 else 'busy'
 
 
@@ -474,8 +498,7 @@ def cmd_run(args):
             return emit('needsCredits', W.topup_ask(), EXIT_WAIT, draft_id=d['draft_id'], link_included=False)
         return emit('needsCredits', W.final_step(extra), EXIT_WAIT, draft_id=d['draft_id'], link_included=True)
     if st == 'error':
-        kind = 'network' if extra == 0 else 'busy'
-        return emit('serviceUnavailable', W.failure(kind, 'not_started'), EXIT_ERROR)
+        return emit('serviceUnavailable', W.failure(_fail_kind(extra), 'not_started'), EXIT_ERROR)
     k = _ensure_skill_key(a)
     if k == 'needs_credits':
         url, status = _membership_link(a)
@@ -718,7 +741,7 @@ def cmd_auth(args):
         return emit('needsCredits', W.final_step(extra), EXIT_WAIT, link_included=True)
     if st == 'ready':
         return emit('ready', '', EXIT_OK)
-    return emit('serviceUnavailable', W.failure('network' if extra == 0 else 'busy', 'not_started'), EXIT_ERROR)
+    return emit('serviceUnavailable', W.failure(_fail_kind(extra), 'not_started'), EXIT_ERROR)
 
 
 def cmd_topup(args):
@@ -744,9 +767,37 @@ def cmd_topup(args):
     return emit('topupLink', W.topup_link(url), EXIT_WAIT)
 
 
+def _server_balance(a):
+    """返回 (剩余次数, None) 或 (None, 状态)。到账只认服务端返回的次数。"""
+    try:
+        rem = call('GET', '/balance', auth=a['install_secret']).get('remaining_uses')
+    except GatewayError as e:
+        return None, e.status
+    if type(rem) is not int:
+        return None, 0
+    return rem, None
+
+
 def cmd_paid(args):
+    """用户说「付好了」：本机没账户先走一次性关联入口；有账户只按服务端次数说明，不凭用户自述认定到账。"""
     telemetry.report_once(state_dir())
-    return emit('paymentRegistered', W.payment_registered(), EXIT_WAIT)
+    word = '付好了'
+    a = load_account()
+    if not a.get('install_secret'):
+        r = _account_entry(a, word)
+        if r is not None:
+            return r
+    rem, err = _server_balance(a)
+    if err == 401:  # 服务端还不认识本机安装标识：关联还没完成
+        r = _account_entry(a, word)
+        if r is not None:
+            return r
+        rem, err = _server_balance(a)
+    if err is not None:
+        return emit('serviceUnavailable', W.account_failure(_fail_kind(err if err != 401 else 503), word), EXIT_WAIT)
+    if rem < 1:
+        return emit('creditsPending', W.paid_not_yet(), EXIT_WAIT, remaining_uses=rem)
+    return emit('creditsAvailable', W.paid_confirmed(rem), EXIT_OK, remaining_uses=rem)
 
 
 HISTORY_PREVIEW = 3

@@ -104,8 +104,14 @@ def topup_link(url):
     ])
 
 
-def payment_registered():
-    return '已收到你的付款登记。到账是即时的，稍等一下说一声「继续」我再查一次。图片需求已保留，到账就接着做。'
+def paid_not_yet():
+    """用户说已付款，但账户里还没有可用次数：如实说没查到，不当作已到账。"""
+    return '我刚查了一次，还没看到这笔到账，也没有扣任何次数。到账是即时的，稍等一下再说一次「付好了」，我再查；还没付款的话说「充值」，我给你充值页。'
+
+
+def paid_confirmed(remaining):
+    """账户里已有可用次数：只报查到的次数。"""
+    return '查到了，账户当前剩余可用次数：' + str(remaining) + ' 次。有进行中的照片，说「继续」我按原方案接着做；还没开始的话，把照片发我就行。'
 
 
 def credits_not_yet():
@@ -152,6 +158,7 @@ def failure(reason_kind, charge_kind):
     reason = {
         'busy': '服务正在处理较多请求',
         'network': '网络连不上',
+        'incomplete': '这一步还没完成',
         'rejected': '这张照片暂时无法按这个要求处理',
         'input': '照片文件不符合要求',
     }[reason_kind]
@@ -307,6 +314,7 @@ def account_failure(reason_kind, retry_word='充值'):
     reason = {
         'network': '网络暂时没连上',
         'busy': '服务正在处理较多请求，这一步还没完成',
+        'incomplete': '这次没拿到可用的链接，这一步还没完成',
     }[reason_kind]
     return reason + '，没有扣任何次数，稍后再说一次「' + retry_word + '」。'
 

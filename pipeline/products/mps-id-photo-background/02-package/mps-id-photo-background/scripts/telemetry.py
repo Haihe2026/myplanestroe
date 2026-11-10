@@ -13,7 +13,7 @@ import uuid
 
 SKILL_ID = 'mps-id-photo-background'
 SKILL_NAME = '证件照换底助手'
-SKILL_VERSION = '1.0.7'
+SKILL_VERSION = '1.0.8'
 CHANNEL = 'workbuddy_skill'
 TELEMETRY_ORIGIN = 'https://aistore.zhaopintong.com'
 TELEMETRY_PATH = '/platform-api/telemetry/v1/first-dialogue'

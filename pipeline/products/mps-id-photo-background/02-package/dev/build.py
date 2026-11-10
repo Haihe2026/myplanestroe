@@ -3,7 +3,7 @@ import hashlib, os, sys, zipfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'mps-id-photo-background')
 DIST = os.path.join(HERE, '..', 'dist')
-VERSION = '1.0.7'
+VERSION = '1.0.8'
 out = os.path.join(DIST, 'mps-id-photo-background-%s.zip' % VERSION)
 if os.path.exists(out):
     sys.exit('refuse to overwrite ' + out)
