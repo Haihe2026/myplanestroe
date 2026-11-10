@@ -16,7 +16,7 @@ from safe_http import request,RemoteProblem
 
 API='https://www.aisplice.store/v1'
 MODEL='gpt-image-2.5-ext'
-MEDIA='https://myplanestore.com/platform-api/temu/expert-input/'
+MEDIA='https://aistore.zhaopintong.com/platform-api/temu/expert-input/'
 ROUTE='expert-resource-20261027'
 
 

@@ -16,6 +16,8 @@ import uuid
 import warnings
 
 ORIGIN='https://myplanestore.com'
+TEMPORARY_HOST='aistore.zhaopintong.com'
+TEMPORARY_ORIGIN='https://'+TEMPORARY_HOST
 PREFIX='/platform-api/temu'
 CONTRACT='temu-render-v1'
 PRIVATE_ENGINE='temu-merchant-sunburst'
@@ -242,6 +244,20 @@ def install(server,shared):
         delivery=Delivery(store,server,shared,validator)
         store.temu_delivery=delivery
         class Handler(parent):
+            def send(self,status,result,*args,**kwargs):
+                if status in (200,202) and isinstance(result,dict) and self.headers.get('Host') == TEMPORARY_HOST:
+                    path=urllib.parse.urlsplit(self.path).path
+                    fields=()
+                    if path in (PREFIX+'/quick-entry',PREFIX+'/quick-entry/status',PREFIX+'/membership-link'):
+                        fields=('url',)
+                    elif path == PREFIX+'/render-jobs' or path.startswith(PREFIX+'/render-jobs/'):
+                        fields=('status_url','image_url','preview_url')
+                    for field in fields:
+                        url=result.get(field)
+                        if isinstance(url,str) and url.startswith(ORIGIN+'/'):
+                            result={**result,field:TEMPORARY_ORIGIN+url[len(ORIGIN):]}
+                return super().send(status,result,*args,**kwargs)
+
             def run_request(self):
                 parsed=urllib.parse.urlsplit(self.path)
                 path=parsed.path

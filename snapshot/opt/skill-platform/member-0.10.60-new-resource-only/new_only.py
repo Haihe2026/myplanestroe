@@ -24,7 +24,7 @@ class Adapter(PriorAdapter):
     def signed_input(self,i,expires):
         import hmac
         sig=hmac.new(self.signer,('new-only-input:v1:'+self.namespace+':'+i+':'+str(expires)).encode(),hashlib.sha256).hexdigest()
-        return 'https://myplanestore.com/platform-api/image-resource/input/'+self.namespace+'/'+i+'?expires='+str(expires)+'&signature='+sig
+        return 'https://aistore.zhaopintong.com/platform-api/image-resource/input/'+self.namespace+'/'+i+'?expires='+str(expires)+'&signature='+sig
 
 def adapter(namespace):
     with _lock:
