@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-remind-a3-pet-104-20261110",
+  "skill_id": "mps-pet-portrait-studio",
+  "source_path": "pipeline/products/mps-pet-portrait-studio/msg-from-muse-20261110-remind-codex-a3-pending.md",
+  "source_ref": "878bf0e3163a1b2af0ea327b572f4d31c4c7a365",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-c0fd92fd781e266930ba6364a6869286e056b7bda4113b5b543b6c23eb6998ce",
+  "request_kind": "handoff"
+}
