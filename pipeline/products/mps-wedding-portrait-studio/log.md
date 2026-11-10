@@ -24,3 +24,4 @@
 2026-11-10T22:39:19+08:00 | claude | submitted → dev_in_progress | 认领通知 evt-d52ed2c41b27af02ec242c2ea8e2011dcb54adf8f0640a33a54da2d36e3ed35c（Muse 交接 req-muse-to-claude-fix-wedding-102-pay-conversion-20261110），按 SOP 第七章做 1.0.2 付费转化整改；1.0.1 保留。
 2026-11-10T22:44:23+08:00 | claude | dev_in_progress → package_ready | 1.0.2 按 SOP 第七章整改：topup/status/balance/history 无账户走一次性关联入口给链接，断网/繁忙按状态区分；SKILL.md 加接管规则、description 账户类说法与「婚纱写真照相馆充值」触发词（保持 25 个）、收藏核对；契约 42/42、端到端 68/68，干净解压同样全过。ZIP SHA256 6dd25935…87fc62，1.0.0/1.0.1 保留。WED-A3-01–03、A3-E01–E03 复核未回退。真实上游 0、生产变更 0。见 02-self-test.md。
 2026-11-10T23:21:15+08:00 | codex | package_ready → test_in_progress | 核对 1.0.2 固定 ZIP 与当前包状态，接续付费转化 A3。
+2026-11-10T23:22:00+08:00 | codex | test_in_progress → test_failed | 1.0.2 A3 不通过；新用户 paid 无关联入口、失效短链仍输出、简介末句漏账户；退回 Claude 修复。

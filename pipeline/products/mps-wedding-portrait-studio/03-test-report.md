@@ -1,26 +1,30 @@
-# A3 独立检查 · 婚纱写真照相馆 1.0.1
+# 婚纱写真照相馆 1.0.2 A3 独立检查
 
-2026-11-09T13:57:30+08:00，Codex 在本聊天接续。固定包事件 `evt-7a5c65ff7b194588c4ba96c33704fa78a1d4a08bb5b0073c113c34bbf79f93d5`、包提交 `49a6b48548560beb6626a4fe23b7bed1821dc255`。Muse 续接事件 `evt-99cf44e0d7e31f558fb1a5fe5e5e31526ac9732072cc340dd21825635ee2a5a3`、固定交接提交 `82c56f67cc747b4de055e5fcfa4d7d41ad68d7b4`。两条事件的指纹、原认领和同一 ZIP 均已核对。
+**独立检查不通过。** 置为 test_failed，由 Claude 按接力修复。
 
-**独立检查通过。** 版本 1.0.1 为 WorkBuddy 团队版待上传包。上传及平台审核由负责人处理，平台未提交。
+- 时间 2026-11-10T23:22:00+08:00，Windows 干净解压。只做静态及 Mock 定向验证。真实上游调用和真实付款均为零。按 SOP 第 7.5 节豁免跳过 WorkBuddy 真机验收及浏览器验证。
+- 固定包事件 `evt-1989061bb2b2bc210123b01741f150fc844c5e28b613f1f4fcce640d959ecd8e`，源提交 `d740b588f7e518d22b42f2d9610bbe6b98846a91`。ZIP 923,945 字节，SHA256 `6dd25935bddd8aa18fd67963e3f6571e0766be6d13870aad6e78bef92787fc62`，与 Claude A2 一致。[固定 ZIP](https://github.com/Haihe2026/myplanestroe/blob/d740b588f7e518d22b42f2d9610bbe6b98846a91/pipeline/products/mps-wedding-portrait-studio/02-package/dist/mps-wedding-portrait-studio-1.0.2.zip) · [A2 报告](https://github.com/Haihe2026/myplanestroe/blob/d740b588f7e518d22b42f2d9610bbe6b98846a91/pipeline/products/mps-wedding-portrait-studio/02-self-test.md) · [付费转化 SOP](https://github.com/Haihe2026/myplanestroe/blob/2f30b615c2b249e9d8776a65307f7450b5bc1a77/docs/sop/sop-image-gen-skill-auto.md#七付费转化自检2026-11-10-真机实测整改强制)
 
-| 项目 | 结果 |
-| --- | --- |
-| ZIP | 921555 字节、24 个文件，CRC 全部通过。Git blob `0561229306779954aa7d73250e47b24e05499024`，SHA256 `b26ede2626c357dbb178ad10f41188aaaece2bc5e4f63d67bd1a8ff26cd03208`。固定包、Muse 交接和最新输入中的 ZIP 一致。 |
-| 结构 | 单一包根，最多两级目录，干净解压。没有重复路径、路径穿越或符号链接。 |
-| Frontmatter 与文案 | 8 个必填字段齐全且无重复键，版本、名称和 WorkBuddy 团队版渠道一致。中英文各 3 条且逐条与规格的场景、人数和画幅对齐。欢迎语与规格逐字一致。对客简介、README 和固定话术未命中本轮扫描的内部禁用词及上游名。 |
-| 示例资产 | 10 张 PNG 与清单裸文件名对应，两张横版、八张竖版。包内 SHA256 与派生清单逐项一致，派生来源 SHA256 与 provenance 对齐，图片合计 867268 字节。 |
-| 功能契约 | 10 个场景的系列、标题、默认画幅与规格一致。Python 可静态解析。参考图正文白名单、原键、确认及成品链接按下表复核。 |
-| 范围 | Claude 契约 34/34、模拟端到端 56/56 属 A2 结果。本轮只做静态检查和隔离函数核对。真实上游调用、上报、支付和平台上传均为 0。真机及浏览器验证按现行 SOP 跳过。 |
+## 核对结果
 
-## 1.0.0 三项退回的复查
+| 检查项 | 结果 | 证据 |
+|---|---|---|
+| ZIP 完整性及结构 | 通过 | 24 个文件，CRC 正常，最多两级，无同名或符号链接。包内 SKILL.md、入口、话术、遥测与固定源文件的 Git blob 一致。 |
+| Frontmatter、接管、收藏与遥测 | 部分通过 | 八项必填字段，三组中英语义和尺寸一致，欢迎句固定，接管规则在执行规范首节，含禁止编造和禁止宿主替代生图，收藏 ID 一致，无隐藏注释。15352 字节，25 个触发词含充值。八字段、2 秒、渠道与版本一致。简介末句见 A3-PAY-03。 |
+| 示例及路径 | 通过 | 十张 PNG 可读，来源和派生哈希逐项匹配。空格目录、井号目录的两条实际 Markdown 链接均解码命中。独立 demo 零网络、零凭证读取。 |
+| 账户入口及话术 | 部分通过 | 五个命令 `topup/status/auth/balance/history` 在全新账户状态都使用持久化安装标识调用一次 `quick-entry`，可给关联链接。模拟状态 0 与 503 的充值话术区分网络和繁忙，非第一方域链接被拒。其余见 A3-PAY-01/02。 |
 
-| 项目 | 包内证据和复现 | 结果 |
-| --- | --- | --- |
-| WED-A3-01 离线示例零网络 | `scripts/studio.py:295–320`。将可能的网络、账户及遥测入口替换为触发即失败的探针。直接执行 `demo` 返回 10 张，单项 `garden` 返回 1 张，探针均未触发。静态核对 `first-turn` 仍调用首次对话上报。 | 通过 |
-| WED-A3-02 换图废止原确认及原键 | `scripts/studio.py:353–394,447–481`。确认时核对照片 SHA256，构造请求使用已核对的同一份字节。用同路径合成图分别覆盖确认前、确认后的替换。返回 `photoChanged`，两项同意和原键均清空，提交探针未触发。旧流程无法续发，重新规划和确认后生成新键，请求体绑定新照片。 | 通过 |
-| WED-A3-03 成品与画廊链接 | `scripts/studio.py:592–631`。用隔离回包调用包内交付函数，分别将文件写入含空格和含 `#` 的两个合成目录。Markdown 解析后四条链接均未拆出片段或查询，解码后逐个定位到原 PNG 和画廊文件。文件操作路径与编码后的对客目标分开。 | 通过 |
+## 退回项
 
-[1.0.0 的退回报告](https://github.com/Haihe2026/myplanestroe/blob/ce8d0a7628f5c0c5ad51195f2dbfe2aad12c99ee/pipeline/products/mps-wedding-portrait-studio/03-test-report.md) · [固定 1.0.1 ZIP](https://github.com/Haihe2026/myplanestroe/blob/49a6b48548560beb6626a4fe23b7bed1821dc255/pipeline/products/mps-wedding-portrait-studio/02-package/dist/mps-wedding-portrait-studio-1.0.1.zip)
+### A3-PAY-01 全新环境的「已付款」分支没有关联入口
 
-状态置 `test_passed`，待负责人手动验收与上传。正式提交及审核结果以实际平台记录为准。
+在无账户、无凭证的全新隔离目录调用 `paid`，Mock 准备返回注册关联链接。实际没有请求 `/quick-entry`，直接返回 `paymentRegistered` 和「已收到你的付款登记」，无关联链接。SOP 7.2 把 `paid` 列入账户菜单。预期新用户走既有一次性关联入口，到账只依据服务端证据。请补齐 `paid` 的全新环境和断网回归。[入口代码](https://github.com/Haihe2026/myplanestroe/blob/d740b588f7e518d22b42f2d9610bbe6b98846a91/pipeline/products/mps-wedding-portrait-studio/02-package/mps-wedding-portrait-studio/scripts/studio.py#L745) · [SOP 7.2](https://github.com/Haihe2026/myplanestroe/blob/2f30b615c2b249e9d8776a65307f7450b5bc1a77/docs/sop/sop-image-gen-skill-auto.md#72-脚本必须整改)
+
+### A3-PAY-02 已失效的第一方短链仍被转述
+
+Mock 给 `/quick-entry` 返回允许域、允许路径的注册链接，带服务端字段 `expires_in=0`。实际 `topup` 仍回显链接；同一有效期正常样本给链接，外部域样本被拒。现有入口提供 `expires_in`。预期对带失效元数据的链接停止转述，沿原安装身份安全重取或如实提示。请覆盖过期、有效和外部域三类。[链接校验](https://github.com/Haihe2026/myplanestroe/blob/d740b588f7e518d22b42f2d9610bbe6b98846a91/pipeline/products/mps-wedding-portrait-studio/02-package/mps-wedding-portrait-studio/scripts/studio.py#L252) · [关联入口](https://github.com/Haihe2026/myplanestroe/blob/d740b588f7e518d22b42f2d9610bbe6b98846a91/pipeline/products/mps-wedding-portrait-studio/02-package/mps-wedding-portrait-studio/scripts/studio.py#L397) · [现有服务端有效期](https://github.com/Haihe2026/myplanestroe/blob/2d50217ed9c4e653d37c35ae3fa611a0f096db9c/snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py#L45-L51)
+
+### A3-PAY-03 简介末句缺账户场景
+
+简介正文有充值、付费链接、余额、订单说法，最终唯一调用倾向句只列生图领域。SOP 7.3.2 要求在该末句一并涵盖本技能账户问题。请保留已核对的触发词与正文，修正末句并加断言。[包内简介](https://github.com/Haihe2026/myplanestroe/blob/d740b588f7e518d22b42f2d9610bbe6b98846a91/pipeline/products/mps-wedding-portrait-studio/02-package/mps-wedding-portrait-studio/SKILL.md#L5) · [SOP 7.3.2](https://github.com/Haihe2026/myplanestroe/blob/2f30b615c2b249e9d8776a65307f7450b5bc1a77/docs/sop/sop-image-gen-skill-auto.md#732-description决定宿主会不会选中技能)
+
