@@ -1,3 +1,102 @@
+# 自测报告：mps-wedding-portrait-studio 1.0.2（SOP 第七章付费转化整改）
+
+## 交付三样
+
+| 项 | 值 |
+|---|---|
+| 中文名字（display_name） | **婚纱写真照相馆**（不变） |
+| slug（SKILL.md name） | **mps-wedding-portrait-studio**（不变） |
+| logo | 仓库内没有本产品的 logo 文件（1.0.0/1.0.1 均未入库），本次未生成新 logo；沿用负责人上传 1.0.1 时所用的同一 logo。见未验证项 |
+| 英文名（display_name_en） | Wedding & Portrait Studio |
+| 技能包 | `02-package/dist/mps-wedding-portrait-studio-1.0.2.zip`，923945 字节，24 个文件，最多两级，SHA256 `6dd25935bddd8aa18fd67963e3f6571e0766be6d13870aad6e78bef92787fc62` |
+
+- 时间：2026-11-10T22:44:13+08:00，Claude 定时运行；承接 Muse 交接 `evt-d52ed2c4…`（请求 `req-muse-to-claude-fix-wedding-102-pay-conversion-20261110`，源 `msg-from-muse-20261110-fix-102-pay-conversion.md`）。通知里的 source_ref `200535e1…` 不含该文件；按 git 历史该文件由 Muse 在提交 `2715157` 加入，内容与 main 一致，按此执行。
+- 依据：`docs/sop/sop-image-gen-skill-auto.md` 第七章（文件哈希 `f086414c…`，已用 `git hash-object` 核对；提交 `2f30b61`），与 Muse 指令一致。
+- 升级轮，按 SOP 〇章第 4 条不重读官方文档快照。渠道只做 `workbuddy-skill`（config.yaml）。
+- 只改客户端脚本、SKILL.md 和测试；不动后端、定价、套餐、0 次免费试用口径。
+- 旧包保留：1.0.0、1.0.1 ZIP 未改动（1.0.1 SHA256 仍为 `b26ede26…cd03208`）。
+- **A2 结论：通过，置 package_ready。**
+
+## 改动（逐条对应 Muse 指令）
+
+| 指令 | 改动 | 证据 |
+|---|---|---|
+| A1 `topup` 无账户死胡同 | `cmd_topup`：无安装标识时生成并持久化 `install_secret`，调 `POST /quick-entry`（入参 `install_secret`，无 Bearer）：`registration`→新信号 `linkAccount`（关联链接 +「扫码确认后会直接进入充值页…关联本身不扣费」）；`checkout`→`topupLink`；`ready`→接上本机凭证后调 `POST /membership-link` 给充值链接；有标识但 `/membership-link` 返回 401（还没关联）也改走关联入口；断网→「网络暂时没连上，没有扣任何次数，稍后再说一次「充值」。」；链接全部经 `trusted_link` 校验，异常链接不转述 | E `PayConversion` 12 项 |
+| A1 `balance` / `status`（及 `history`）无账户 | 同样走关联入口（新 helper `_account_entry`），不再回 `noAccount`；`balance`/`history` 遇 401 也走关联入口；`status` 无标识时 `checkout` 给最后一步充值链接、`ready` 报 `registered` | E `test_fresh_status_and_balance_have_way_out`、`test_fresh_history_gives_link`、`test_balance_menu_and_decline`、`test_history_failure_and_no_account`；C `test_failure_kind_by_status` |
+| A2 失败原因不误报 | `_membership_link` 改为返回 (链接, 状态)；新增 `_fail_kind`：状态 0→`network`，非 0→`busy`。`cmd_topup`、`cmd_run` 充值链接分支按状态传参；`_ensure_skill_key` 断网返回 network；`status`/`balance` 已有标识时查询失败也按状态说明。`W.failure()` 未改 | E `test_fresh_topup_offline_honest`、`test_fresh_topup_server_busy`、`test_topup_membership_link_network_not_busy`、`test_run_needs_credits_link_failure_kind`、`test_fresh_status_offline` |
+| A3 新测试 | 全新环境（无账户、无凭证）直接 `topup`：有可点链接（`/membership/gemini/register/`），断网时如实断网说明 | E `test_fresh_topup_gives_link_account`、`test_fresh_topup_offline_honest` |
+| B1 接管规则 | 执行规范最前面加「### 零、接管规则（每一轮都适用）」，按 SOP 7.3.1 模板替换名词；账户命令/续接命令固定；转介证件照换底助手（证件照换底）、宠物主题照相馆（宠物写真）、Grok一键生图（通用画面）；含禁止编造故障、禁止宿主自带生图、欢迎句逐字照写不加空格 | C `test_takeover_rules_first` |
+| B2 description | 加「本技能也负责婚纱写真照相馆的充值、付费链接、余额和订单查询。」；触发词加「婚纱写真照相馆充值」，同时删去与「油画写真」「AI portrait」重叠的「艺术肖像」，总数保持 25；末尾调用倾向句原样保留，全文只一句 | C `test_description_account_and_triggers`、`test_description_seo` |
+| B3 技能收藏核对 | 不符处已改：「用户级（有项目级时也写项目级）」→「用户级、项目级各一条」；收藏内容补「以及婚纱写真照相馆的充值、付费链接、余额和订单等问题」；选项写成「收藏 / 暂不」；「用户点『收藏』后」才写；「每个对话最多问一次」并入问询条件。其余（只在首次成功交付后问一次、取消方法、不支持时如实说、不含个人信息、合规说明行）原已符合 | C `test_favorite_section` |
+| B4 欢迎句 | SKILL.md 首轮第 1 步与接管规则都写「逐字照写，中文和英文之间不加空格」；`welcome_copy.WELCOME` 未动 | C `test_welcome_exact`、`test_welcome_rule_and_copy` |
+| B5 隐藏注释 | SKILL.md、README.md 无 `<!--`（改完再扫一遍） | C `test_no_hidden_html_comment` |
+| C1 版本 | `version: 1.0.2`：SKILL.md frontmatter、`_meta.json`、`studio.SKILL_VERSION`、`telemetry.SKILL_VERSION`、`dev/build.py`、`tests/first-turn-preview.md` 一致 | C 版本一致性测试；E ZIP 内 SKILL.md 版本检查 |
+
+其他：
+- SKILL.md 篇幅：加接管规则后超过 15KB 上限（契约 `test_size`），压缩了执行规范第 1–6 节的重复说法（规则不删，必需句全保留），现为 15352 字节（< 15360）。
+- 授权话术原有「不用 API Key」（对客文字含 Key，违反 7.4），改为「也不用填写任何密钥」；新增契约 `test_customer_copy_no_site_or_key`。
+- 新信号 `linkAccount` 已写进 SKILL.md；`noAccount` 现在只在查工单时出现。
+
+## SOP 7.4 出包阻断项自检
+
+| 检查项 | 结果 |
+|---|---|
+| 接管规则，含禁止编造故障、禁止宿主自带生图 | 通过（C `test_takeover_rules_first`） |
+| 全新环境 `topup` 有链接或如实断网说明 | 通过（E `test_fresh_topup_gives_link_account` / `_offline_honest`） |
+| description 末尾一句调用倾向句、触发词 15–25（25）、用户原话、账户类说法 | 通过 |
+| 技能收藏章节 + 合规说明，收藏内容里技能 name 与 SKILL.md 一致 | 通过 |
+| 无隐藏 HTML 注释 | 通过 |
+| frontmatter 含 slug、version、显示名；name/slug 不改 | 通过：沿用已提交版本的字段写法 `name`（即 slug）、`display_name`、`version`，未改字段名 |
+| 版本号大于平台最新版 | 1.0.2 > 1.0.1（log.md 记 1.0.1 已上传、审核中）；平台实时最新版本本环境查不到，见未验证项 |
+| 专家包 tags | 不适用（只打技能包） |
+| 首次对话上报字段与开关 | 通过：8 个白名单字段未变、版本随包 1.0.2、渠道 `workbuddy_skill`、`MPS_WEDDING_STUDIO_JOURNEY=off` 可关（C `test_telemetry_contract`、E Telemetry 类） |
+| 全包无旧口径；对客文字无网站名/Key/URL/接口/token | 通过（C `test_forbidden_words`、`test_customer_copy_no_site_or_key`、`test_no_slow_payment_wording`）。「同一账户的通用次数在已接入的技能间共享」是现行通用套餐口径（Muse 指令：通用套餐口径不变），保留 |
+
+## 测试结果（2026-11-10）
+
+| 运行 | 结果 |
+|---|---|
+| 契约测试（仓库内包） | 42/42 通过（原 34 + 新增 PayConversion 8） |
+| 端到端（仓库内包，带 `--zip`） | 68/68 通过（原 56 + PayConversion 12；其中 2 项原 noAccount 断言改为 linkAccount） |
+| 干净解压 ZIP 后契约测试 | 42/42 通过 |
+| 干净解压 ZIP 后端到端（`--package <解压目录> --zip <ZIP>`） | 68/68 通过，无跳过 |
+| ZIP 完整性 | `testzip` 无损坏；24 个文件（与 1.0.1 清单相同）；最大深度 2；无 `__pycache__`、dev |
+| 与 1.0.1 对比 | 变化的包内文件 7 个：SKILL.md、_meta.json、scripts/studio.py、telemetry.py、welcome_copy.py、tests/first-turn-preview.md、tests/test_skill_contract.py；`png_local.py`、`audit_images.py`、`references/`、`assets/`、README 字节一致 |
+| 真实上游调用 | 0（端到端全部走 `dev/mock_backend.py`；本次没有对真实站点运行任何命令） |
+
+## 修复不重犯（历史缺陷逐项复核，均在干净解压 ZIP 上通过）
+
+| 历史缺陷 | 状态 | 证据 |
+|---|---|---|
+| WED-A3-01 demo 零网络（只允许 first-turn 的 `telemetry.report_once`） | 未回退 | C `test_wed_a3_01_demo_has_no_network`；E `test_wed_a3_01_demo_alone_zero_network` |
+| WED-A3-02 照片哈希绑定，换图作废确认与原 Idempotency-Key | 未回退 | E `test_wed_a3_02_photo_replaced_after_confirm`、`test_wed_a3_02_photo_replaced_between_plan_and_confirm` |
+| WED-A3-03 成品/画廊 Markdown 链接用 `md_safe_path` | 未回退 | E `test_wed_a3_03_delivery_links_space_and_hash` |
+| A3-E01 examples_zh 与 examples_en 逐条对齐（各 3 条、数量一致） | 未回退（examples 未改） | C `test_examples_zh_en_same_scene`、`test_examples_match_spec_scenes`；E `test_zip_skill_examples_platform_limits` |
+| A3-E02 示例路径含空格 | 未回退 | C `test_demo_link_path_with_space`；E `test_demo_links_survive_markdown` |
+| A3-E03 示例路径/目录名含 # | 未回退 | C `test_demo_link_path_with_hash` |
+| 包目录最多两级、示例在 `assets/`、`demos.json` 裸文件名、解压后无三级文件、10 张示例图齐全 | 未回退（assets 字节与 1.0.1 一致） | E `test_zip_dir_depth_at_most_two`、`test_package_demos_trace_to_provenance`；C `test_demos_consistent`、`test_demos_are_fictional_and_small` |
+
+## 偏离开发文档
+
+- 账户命令无账户时改为返回 `linkAccount` 关联链接。为负责人指令整改（SOP 第七章），`01-dev-spec` 未同步修改（规格未写这一细节，无矛盾）。
+- `rounds.dev` 未加：负责人指令整改，不是测试退回。
+
+## 未验证项
+
+- 7.5 真机验收：按负责人 2026-11-10 定「豁免继续」，未做；Flash 小模型下接管规则是否被遵守只能由负责人实测确认。
+- 平台上该 slug 实际最新版本（含审核中版本）：本环境查不到；1.0.1 仍在审核，由负责人上传时确认 1.0.2 大于平台最新版。
+- logo：仓库内无文件，未核对；由负责人沿用 1.0.1 上传时的 logo。
+- 服务端 `/quick-entry` 真实返回格式：按脚本已在用的格式（与 `run`/`auth` 同一入口）对接，仅用模拟后端验证。
+
+## 部署与回滚
+
+- 部署：无服务端改动。走 Codex A3 独立检查（对 1.0.2 新包），通过后负责人手动上传 ZIP，附 logo、中文名、slug。
+- 回滚：仓库 `dist/` 中 1.0.1 ZIP 未改动，可直接重传；1.0.0 也保留。
+
+---
+
+# 以下为历史版本自测记录
+
 # 自测报告：mps-wedding-portrait-studio 1.0.1
 
 - 时间：2026-11-09T12:41:12+08:00，Claude 定时运行，修复轮（认领通知 evt-96eef1c744a2ac21abfcea83f5ecedc7fdea1335715b0dd269b4094798e19a57；依据 03-test-report.md WED-A3-01–03）

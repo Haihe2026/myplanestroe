@@ -400,7 +400,8 @@ class AccountBilling(Base):
 
     def test_balance_menu_and_decline(self):
         code, s, t, _ = self.run_cmd('balance')
-        self.assertEqual(s['signal'], 'noAccount')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))  # 1.0.2：无账户给关联链接，不回死胡同
+        self.assertIn('](https://aistore.zhaopintong.com/membership/gemini/register/', t)
         did = self.confirmed_draft()
         self.paid_account(did, 7)
         code, s, t, _ = self.run_cmd('balance')
@@ -597,7 +598,8 @@ class Support(Base):
 
     def test_history_failure_and_no_account(self):
         code, s, t, _ = self.run_cmd('history')
-        self.assertEqual(s['signal'], 'noAccount')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assertIn('关联本身不扣费', t)
         self.delivered_account(3)
         self.mock.scenario['support_busy'] = True
         code, s, t, _ = self.run_cmd('balance')
@@ -803,6 +805,125 @@ class RepairA3(Base):
                 if md is not None:
                     href = re.search(r'href="([^"]*)"', md.render(line)).group(1)
                     self.assertTrue(os.path.isfile(unquote(href)))
+
+
+class PayConversion(Base):
+    """1.0.2 SOP 第七章：全新环境账户命令有出路；失败原因按网络/繁忙如实区分。"""
+
+    def offline(self, *a, **k):
+        raise studio.GatewayError(0)
+
+    def assert_link(self, t, path):
+        import re
+        m = re.search(r'\]\((https://[^)\s]+)\)', t)
+        self.assertIsNotNone(m, t)
+        self.assertTrue(m.group(1).startswith('https://aistore.zhaopintong.com' + path), m.group(1))
+
+    def test_fresh_topup_gives_link_account(self):
+        self.assertFalse(os.path.exists(os.path.join(self.home, 'mps-wedding-portrait-studio', 'account.json')))
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal'], s['link_included']), (2, 'linkAccount', True))
+        self.assert_link(t, '/membership/gemini/register/')
+        self.assertIn('扫码确认后会直接进入充值页', t)
+        self.assertIn('关联本身不扣费', t)
+        self.assertNotIn('免费', t)
+        self.assertEqual(len(self.secret()), 43)  # 安装标识已生成并持久化
+        qe = [c for c in self.mock.calls if c[1] == '/quick-entry']
+        self.assertEqual(len(qe), 1)
+        self.assertNotIn('Authorization', qe[0][3])  # 一次性关联入口无 Bearer
+        self.assertEqual(qe[0][2], {'install_secret': self.secret()})
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_fresh_topup_offline_honest(self):
+        studio.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (3, 'serviceUnavailable'))
+        self.assertEqual(t.strip(), '网络暂时没连上，没有扣任何次数，稍后再说一次「充值」。')
+        self.assertNotIn('较多请求', t)
+
+    def test_fresh_topup_server_busy(self):
+        def busy(*a, **k):
+            raise studio.GatewayError(503)
+        studio.TRANSPORT = busy
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('服务正在处理较多请求', t)
+        self.assertNotIn('网络', t)
+
+    def test_topup_secret_unregistered_401_falls_back(self):
+        self.run_cmd('topup')  # 已有本机标识但用户还没扫码，/membership-link 401
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+
+    def test_topup_registered_zero_balance_checkout(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 0)
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (2, 'topupLink'))
+        self.assert_link(t, '/membership/')
+
+    def test_topup_ready_account_link(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'topupLink')
+        self.assertEqual(self.mock.membership_links, 1)
+
+    def test_topup_membership_link_network_not_busy(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        studio.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('网络暂时没连上', t)
+        self.assertNotIn('较多请求', t)
+
+    def test_topup_untrusted_link_not_relayed(self):
+        real = self.mock.transport
+
+        def evil(method, url, body, headers, timeout, binary):
+            if url.endswith('/quick-entry'):
+                return 200, json.dumps(dict(status='registration', url='https://evil.example/membership/gemini/register/')).encode()
+            return real(method, url, body, headers, timeout, binary)
+        studio.TRANSPORT = evil
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('evil', t)
+        self.assertNotIn('http', t)
+
+    def test_fresh_status_and_balance_have_way_out(self):
+        code, s, t, _ = self.run_cmd('status')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertEqual(s['signal'], 'linkAccount')
+        self.mock.authorize(self.secret(), 4)
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertEqual((s['signal'], s['remaining_uses']), ('balance', 4))
+
+    def test_fresh_status_offline(self):
+        studio.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('status')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('网络暂时没连上，没有扣任何次数', t)
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertIn('网络暂时没连上，没有扣任何次数', t)
+
+    def test_fresh_history_gives_link(self):
+        code, s, t, _ = self.run_cmd('history')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+
+    def test_run_needs_credits_link_failure_kind(self):
+        did = self.confirmed_draft()
+        self.paid_account(did, 0)
+        studio.TRANSPORT = self.offline  # 取充值链接断网：返回状态 0，按网络没连上说明
+        a = studio.load_account()
+        url, status = studio._membership_link(a)
+        self.assertEqual((url, status), (None, 0))
+        self.assertEqual(studio._fail_kind(0), 'network')
+        self.assertEqual(studio._fail_kind(503), 'busy')
 
 
 class DemoAssets(unittest.TestCase):
