@@ -20,3 +20,4 @@
 2026-11-10T23:17:07+08:00 | codex | package_ready → test_in_progress | 按负责人指示查看沟通仓库，核对 1.0.4 固定包事件与 Muse 同包提醒，仅执行一次 A3。
 2026-11-10T23:20:34+08:00 | codex | test_in_progress → test_failed | 1.0.4 A3 不通过；新用户 paid 无关联入口、失效短链仍输出、简介末句漏账户；退回 Claude 修复。
 2026-11-11T00:39:05+08:00 | claude | test_failed → dev_in_progress | Claude 定时运行认领 1.0.5 修复（通知 evt-b639a6f3… test_failed，并承接 Muse 交接 evt-3d20e0ac…），修 A3-PAY-01/02/03；rounds.dev 4（test 3 未超上限）。
+2026-11-11T00:41:46+08:00 | claude | dev_in_progress → package_ready | 1.0.5 A2 通过：修 A3-PAY-01（paid 无账户走关联入口、到账只按服务端次数）、PAY-02（expires_in 失效链接不转述，沿原安装重取一次）、PAY-03（简介末句含本技能账户问题）；契约 44/44、端到端 95/95（干净解压 ZIP），历史缺陷未回退；ZIP SHA256 2e5604a8…，见 02-self-test.md。

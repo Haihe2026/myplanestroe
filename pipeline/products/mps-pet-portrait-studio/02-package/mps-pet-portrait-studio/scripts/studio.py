@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-pet-portrait-studio'
-SKILL_VERSION = '1.0.4'
+SKILL_VERSION = '1.0.5'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -260,6 +260,18 @@ def trusted_link(url):
     return urlunsplit(('https', 'aistore.zhaopintong.com', u.path, u.query, u.fragment))
 
 
+def link_fresh(r):
+    """服务端附带有效期（expires_in）时，只有正整数秒才算有效；0、负数、非整数都视为已失效，不转述。
+    未附带有效期的链接沿用域名、路径校验。"""
+    if 'expires_in' not in r:
+        return True
+    v = r.get('expires_in')
+    return type(v) is int and v > 0
+
+
+EXPIRED = 'expired'  # 链接已失效（区别于网络 0 和服务端错误码）
+
+
 # ---------------------------------------------------------------- 提示词
 
 def build_prompt(scene, pet):
@@ -411,12 +423,18 @@ def _job_body(d):
 
 
 def _account_ready(a):
-    """返回 (状态, 附带)：('ready', quota) / ('registration', url) / ('checkout', url) / ('error', status)"""
+    """返回 (状态, 附带)：('ready', quota) / ('registration', url) / ('checkout', url) / ('error', status)
+    链接已失效时沿原安装身份重取一次；仍失效返回 ('error', EXPIRED)，不转述失效链接。"""
     secret = ensure_install_secret(a)
-    try:
-        r = call('POST', '/quick-entry', {'install_secret': secret})
-    except GatewayError as e:
-        return 'error', e.status
+    for _ in range(2):
+        try:
+            r = call('POST', '/quick-entry', {'install_secret': secret})
+        except GatewayError as e:
+            return 'error', e.status
+        if r.get('status') not in ('registration', 'checkout') or link_fresh(r):
+            break
+    else:
+        return 'error', EXPIRED
     st = r.get('status')
     if st == 'ready':
         telemetry.link_account(state_dir(), secret)
@@ -456,15 +474,21 @@ def _ensure_skill_key(a):
 
 def _membership_link(a):
     """返回 (链接, None) 或 (None, 状态)：状态 0 = 连接失败、超时、坏响应或链接不可信；非 0 = 服务端返回的错误码。"""
-    try:
-        r = call('POST', '/membership-link', {}, auth=a['install_secret'])
-        return trusted_link(r.get('url')), None
-    except GatewayError as e:
-        return None, e.status
+    for _ in range(2):
+        try:
+            r = call('POST', '/membership-link', {}, auth=a['install_secret'])
+            if not link_fresh(r):
+                continue  # 已失效：沿原安装身份重取一次
+            return trusted_link(r.get('url')), None
+        except GatewayError as e:
+            return None, e.status
+    return None, EXPIRED
 
 
 def _fail_kind(status):
-    """状态 0 是网络没连上；非 0 是服务正在处理较多请求。不得把网络故障说成服务繁忙。"""
+    """状态 0 是网络没连上；链接已失效是这一步还没完成；其他是服务正在处理较多请求。不得把网络故障说成服务繁忙。"""
+    if status == EXPIRED:
+        return 'stale'
     return 'network' if status == 0 else 'busy'
 
 
@@ -530,8 +554,7 @@ def cmd_run(args):
             return emit('needsCredits', W.topup_ask(), EXIT_WAIT, draft_id=d['draft_id'], link_included=False)
         return emit('needsCredits', W.final_step(extra), EXIT_WAIT, draft_id=d['draft_id'], link_included=True)
     if st == 'error':
-        kind = 'network' if extra == 0 else 'busy'
-        return emit('serviceUnavailable', W.failure(kind, 'not_started'), EXIT_ERROR)
+        return emit('serviceUnavailable', W.failure(_fail_kind(extra), 'not_started'), EXIT_ERROR)
     k = _ensure_skill_key(a)
     if k == 'needs_credits':
         url, status = _membership_link(a)
@@ -796,7 +819,7 @@ def cmd_auth(args):
         return emit('needsCredits', W.final_step(extra), EXIT_WAIT, link_included=True)
     if st == 'ready':
         return emit('ready', '', EXIT_OK)
-    return emit('serviceUnavailable', W.failure('network' if extra == 0 else 'busy', 'not_started'), EXIT_ERROR)
+    return emit('serviceUnavailable', W.failure(_fail_kind(extra), 'not_started'), EXIT_ERROR)
 
 
 def cmd_topup(args):
@@ -822,9 +845,48 @@ def cmd_topup(args):
     return emit('topupLink', W.topup_link(url), EXIT_WAIT)
 
 
+def _paid_entry(a):
+    """已付款分支的一次性关联入口：registration 给关联链接；checkout 如实说未到账并给充值页；
+    error 如实说网络/繁忙/过期；ready 已接上本机凭证，返回 None 由调用方去查服务端次数。"""
+    st, extra = _account_ready(a)  # 没有安装标识就先生成并持久化
+    if st == 'registration':
+        return emit('linkAccount', W.account_link(extra, '付好了'), EXIT_WAIT, link_included=True)
+    if st == 'checkout':
+        return emit('creditsPending', W.paid_not_yet(extra), EXIT_WAIT, link_included=True)
+    if st == 'error':
+        return emit('serviceUnavailable', W.account_failure(_fail_kind(extra), '付好了'), EXIT_ERROR)
+    return None
+
+
 def cmd_paid(args):
+    """用户说已付款：只按服务端查到的次数说话，不把用户自述当作到账。
+    本机没有账户（或服务端还不认识本机）时，与其他账户命令一样走一次性关联入口给链接。"""
     telemetry.report_once(state_dir())
-    return emit('paymentRegistered', W.payment_registered(), EXIT_WAIT)
+    a = load_account()
+    if not a.get('install_secret'):
+        r = _paid_entry(a)
+        if r is not None:
+            return r
+    try:
+        r = call('GET', '/balance', auth=a['install_secret'])
+    except GatewayError as e:
+        if e.status != 401:
+            return emit('serviceUnavailable', W.account_failure(_fail_kind(e.status), '付好了'), EXIT_WAIT)
+        # 401：服务端还不认识本机安装标识，改走一次性关联入口
+        r = _paid_entry(a)
+        if r is not None:
+            return r
+        try:
+            r = call('GET', '/balance', auth=a['install_secret'])
+        except GatewayError as e2:
+            return emit('serviceUnavailable', W.account_failure(_fail_kind(e2.status), '付好了'), EXIT_WAIT)
+    rem = r.get('remaining_uses')
+    if not isinstance(rem, int) or isinstance(rem, bool):
+        return emit('serviceUnavailable', W.progress_unknown(), EXIT_WAIT)
+    if rem < 1:
+        return emit('creditsPending', W.paid_not_yet(), EXIT_WAIT, remaining_uses=rem)
+    telemetry.link_account(state_dir(), a['install_secret'])
+    return emit('creditsConfirmed', W.paid_confirmed(rem), EXIT_OK, remaining_uses=rem)
 
 
 HISTORY_PREVIEW = 3

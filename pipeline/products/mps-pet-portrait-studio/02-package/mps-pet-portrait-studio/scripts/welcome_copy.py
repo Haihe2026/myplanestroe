@@ -110,8 +110,17 @@ def topup_link(url):
     ])
 
 
-def payment_registered():
-    return '已收到你的付款登记。到账是即时的，稍等一下说一声「继续」我再查一次。图片需求已保留，到账就接着做。'
+def paid_confirmed(remaining):
+    """只在查到可用次数后使用。"""
+    return '我刚查了一次，账户剩余可用次数 ' + str(remaining) + ' 次。说一声「继续」，我按原方案接着做。'
+
+
+def paid_not_yet(url=None):
+    """用户说已付款但还没查到到账：如实说，不当作已到账。"""
+    lines = ['我刚查了一次，还没看到这笔到账，没有扣任何次数。图片需求已保留，稍等一下再说「付好了」或「继续」，我再查。']
+    if url:
+        lines.append('还没付款的话，充值页在这里：[打开充值页](' + url + ')，页面打不开或过期了，跟我说「重新取充值链接」。')
+    return '\n'.join(lines)
 
 
 def credits_not_yet():
@@ -162,6 +171,7 @@ def failure(reason_kind, charge_kind):
     reason = {
         'busy': '服务正在处理较多请求',
         'network': '网络连不上',
+        'stale': '刚取到的链接已经过期，这一步还没完成',
         'rejected': '这张照片暂时无法按这个主题处理',
         'input': '照片文件不符合要求',
     }[reason_kind]
@@ -331,6 +341,7 @@ def account_failure(reason_kind, retry_word='充值'):
     reason = {
         'network': '网络暂时没连上',
         'busy': '服务正在处理较多请求，这一步还没完成',
+        'stale': '刚取到的链接已经过期，这一步还没完成',
     }[reason_kind]
     return reason + '，没有扣任何次数，稍后再说一次「' + retry_word + '」。'
 
