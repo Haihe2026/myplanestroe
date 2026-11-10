@@ -71,3 +71,4 @@
 2026-11-08T17:44:41+08:00 | codex | test_in_progress → test_passed | 1.0.6 A3 独立检查通过，含空格及 # 的示例链接回归通过。真机、浏览器验证及上传能力受阻，待负责人手动验收与上传。见 03-test-report.md。
 2026-11-08T17:58:00+08:00 | muse | test_passed -> submitted | 负责人亲口报 1.0.6 已上传 WorkBuddy 团队版技能包。等平台审核，listed 后报最终结果。
 2026-11-08T20:21:00+08:00 | muse | submitted -> listed | 负责人亲口报审核通过、技能已发布（WorkBuddy 团队版技能包 1.0.6）。流水线首单走通。
+2026-11-10T21:44:17+08:00 | claude | listed → dev_in_progress | Claude 定时运行承接 Muse 交接 evt-bd6d1b3e…（负责人定：按 SOP 第七章付费转化自检整改，1.0.6 出 1.0.7；负责人指令整改，非测试退回，rounds.dev 不加）。
