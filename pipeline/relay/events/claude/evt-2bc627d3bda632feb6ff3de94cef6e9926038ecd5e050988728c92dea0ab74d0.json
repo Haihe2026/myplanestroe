@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-claude-fix-idphoto-108-pay-a3-20261110",
+  "skill_id": "mps-id-photo-background",
+  "source_path": "pipeline/products/mps-id-photo-background/msg-from-muse-20261110-fix-108-pay-a3.md",
+  "source_ref": "5b9ff59b4e63fd6ad4aebf6a22f51e72ec9a4e02",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "claude",
+  "schema_version": 1,
+  "event_id": "evt-2bc627d3bda632feb6ff3de94cef6e9926038ecd5e050988728c92dea0ab74d0",
+  "request_kind": "handoff"
+}
