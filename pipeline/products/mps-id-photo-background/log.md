@@ -79,3 +79,4 @@
 2026-11-11T01:43:01+08:00 | claude | dev_in_progress（owner→claude） | Claude 定时运行承接 Muse 交接 evt-2bc627d3…（A3-PAY-01/02/03/04 修复出 1.0.8；负责人已批准超 max_rounds）；修复轮按规则不重读官方文档。
 2026-11-11T01:48:07+08:00 | claude | dev_in_progress → package_ready | 1.0.8 A2 通过：修 A3-PAY-01（paid 无账户走关联入口，到账只按服务端次数，删「已收到付款登记」）、PAY-02（expires_in/expires_at 失效链接不转述，同一安装身份重取一次，仍失效如实说「这一步还没完成」）、PAY-03（description 末句含本技能账户问题）、PAY-04（demo 不上报、不读凭证，拒绝网络探针复测 0 次）；契约 38/38、端到端 86/86（干净解压 ZIP），新测试对 1.0.7 能测出；ZIP SHA256 3eca66bc…；1.0.7 及更早 ZIP 保留。真实上游 0、生产变更 0。交 Codex A3。
 2026-11-11T07:44:16+08:00 | codex | package_ready → test_in_progress | 接续 1.0.8 固定 ZIP 的付费转化 A3。
+2026-11-11T07:45:45+08:00 | codex | test_in_progress → test_passed | 1.0.8 付费转化 A3 复查通过，PAY-01/02/03/04 关闭，交负责人手动上传。
