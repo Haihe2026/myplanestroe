@@ -1,1 +1,1 @@
-{"event_id": "evt-7330d10606ec19cf3a14178e1ff4a68c8649bd631ac6d546ac945c518d422746", "role": "codex", "action": "claimed", "at": "2026-11-07T21:29:15+08:00", "evidence_ref": null, "claim_id": "c7ed2231-bdc7-4296-ba1f-91ef896d08cc"}
+{"event_id": "evt-7330d10606ec19cf3a14178e1ff4a68c8649bd631ac6d546ac945c518d422746", "role": "codex", "action": "acknowledged", "at": "2026-11-11T07:53:26+08:00", "evidence_ref": "7583f0153cac5475ae2f67e8123298022c0caef6:pipeline/products/mps-cross-border-white-background/status.json", "claim_id": "c7ed2231-bdc7-4296-ba1f-91ef896d08cc"}
