@@ -1,1 +1,1 @@
-{"event_id": "evt-4eff53b0559ef840930c2eb42e625f036af7728b893298b88d81fa0bb2b1ec8e", "role": "codex", "action": "claimed", "at": "2026-11-07T23:44:15+08:00", "evidence_ref": null, "claim_id": "95f20dba-6f44-4562-9f24-cbd69fda65fb"}
+{"event_id": "evt-4eff53b0559ef840930c2eb42e625f036af7728b893298b88d81fa0bb2b1ec8e", "role": "codex", "action": "acknowledged", "at": "2026-11-11T07:52:26+08:00", "evidence_ref": "a596e52efe23f96012c9e40d09d0decc6c012d2d:pipeline/products/mps-id-photo-background/status.json", "claim_id": "95f20dba-6f44-4562-9f24-cbd69fda65fb"}
