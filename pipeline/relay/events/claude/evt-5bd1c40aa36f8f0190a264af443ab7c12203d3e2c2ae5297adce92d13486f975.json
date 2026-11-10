@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-claude-fix-pet-104-pay-conversion-20261110",
+  "skill_id": "mps-pet-portrait-studio",
+  "source_path": "pipeline/products/mps-pet-portrait-studio/msg-from-muse-20261110-fix-104-pay-conversion.md",
+  "source_ref": "5aa5ad7a0861d9a0227b948365a122a8185f2753",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "claude",
+  "schema_version": 1,
+  "event_id": "evt-5bd1c40aa36f8f0190a264af443ab7c12203d3e2c2ae5297adce92d13486f975",
+  "request_kind": "handoff"
+}
