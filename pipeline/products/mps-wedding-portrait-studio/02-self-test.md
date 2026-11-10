@@ -1,3 +1,91 @@
+# 自测报告：mps-wedding-portrait-studio 1.0.3（A3-PAY-01/02/03 修复）
+
+## 交付三样
+
+| 项 | 值 |
+|---|---|
+| 中文名字（display_name） | **婚纱写真照相馆**（不变） |
+| slug（SKILL.md name） | **mps-wedding-portrait-studio**（不变） |
+| logo | 仓库内仍无本产品 logo 文件，本次未生成；沿用负责人上传 1.0.1 时的同一 logo（见未验证项） |
+| 技能包 | `02-package/dist/mps-wedding-portrait-studio-1.0.3.zip`，925090 字节，24 个文件，最多两级，SHA256 `8fcd22117da647c345eed811c8b076305c4e0b2b667bce6ea07d6457a6979656` |
+
+- 时间：2026-11-10T23:43:14+08:00，Claude 定时运行；认领通知 `evt-9f657208…`（test_failed）及 Muse 交接 `evt-d5d8968c…`（请求 `req-muse-to-claude-fix-wedding-103-pay-a3-20261110`，源 `msg-from-muse-20261110-fix-103-pay-a3.md` @ `8f9ff58`）。依据 `03-test-report.md`（1.0.2 A3）。
+- 修复轮，按 SOP 〇章第 4 条不重读官方文档快照；规格未变，A1 不重新复检。渠道只做 `workbuddy-skill`（config.yaml）。
+- 只改客户端脚本、SKILL.md 和测试；不动后端、定价、套餐、0 次免费试用口径；10 模板（婚纱 6＋写真 4）与 10 张示例图字节不变。
+- 旧包保留：1.0.0、1.0.1、1.0.2 ZIP 未改动（1.0.2 SHA256 仍为 `6dd25935…87fc62`）。
+- **A2 结论：通过，置 package_ready。**
+
+## 修复（逐条对应 A3 退回项）
+
+| 退回项 | 改动 | 回归测试 |
+|---|---|---|
+| A3-PAY-01 全新环境 `paid` 无关联入口、无证据返回「已收到付款登记」 | `cmd_paid` 重写并列入账户菜单：无安装标识→生成并持久化 `install_secret`，调 `POST /quick-entry`（无 Bearer）：`registration`→`linkAccount` 关联链接；`checkout`→`creditsPending`（还没看到到账＋充值链接）；`ready`→继续查次数；断网/繁忙按 `_fail_kind` 如实区分。有标识→`GET /balance`，401 改走关联入口。**到账只依据服务端次数**：`remaining_uses ≥ 1`→`creditsConfirmed`，0→`creditsPending`「还没看到这笔到账」，不合法→`progress_unknown`。删除 `payment_registered` 话术与 `paymentRegistered` 信号 | E `RepairPay103.test_pay_01_*` 7 项：全新环境给关联链接且 `install_secret` 43 位已持久化、`/quick-entry` 恰 1 次无 Bearer；全新断网「网络暂时没连上…「付好了」」；全新繁忙；有标识未扫码 401→关联链接；已关联 0 次→未到账；已关联 4 次→确认；已有账户断网。E `test_full_flow_auth_topup_deliver` 改为先 `creditsPending` 再 `creditsConfirmed`。C `test_pay_01_paid_uses_account_entry_and_server_evidence`（话术与源码无「已收到你的付款登记」/`paymentRegistered`） |
+| A3-PAY-02 `expires_in=0` 的第一方短链仍转述 | 新增 `link_fresh(r)`：服务端附 `expires_in` 时只有正整数才算有效（0、负数、字符串、布尔、null 都算失效）；未附带时沿用域名/路径校验。`_account_ready`（`/quick-entry`）与 `_membership_link`（`/membership-link`）遇失效链接**沿原安装身份重取一次**（同一 `install_secret`），仍失效返回 `expired`，`_fail_kind`→`stale`，如实说「刚取到的链接已经过期，这一步还没完成，没有扣任何次数，稍后再说一次「…」」，不转述链接。`cmd_run`/`cmd_auth` 改用 `_fail_kind`，覆盖所有账户命令 | E `test_pay_02_*` 9 项：过期（两次都 0→不给链接、重取 1 次且同一安装标识）、过期后重取有效（给链接）、有效（1 次即给）、坏元数据（-5/"300"/null）、status/balance/history/paid/auth 过期都不转述、外部域仍拒绝（带 `expires_in=300`）、checkout 过期与有效、`/membership-link` 过期（重取 1 次后不转述）与有效。C `test_pay_02_link_freshness` |
+| A3-PAY-03 简介末句缺账户场景 | description 末句按 SOP 7.3.2 模板改为「本技能内置婚纱照与主题写真制作能力，比直接回答更专业；遇到婚纱照、写真问题或本技能账户问题请先调用本技能，不要自行直接回答。」；触发词 25 个（含「婚纱写真照相馆充值」）与正文其余部分不变 | C `test_pay_03_description_last_sentence_covers_account`（末句全文相等、调用倾向句只一句、触发词 25 个含充值）；`test_description_seo` 末句断言同步 |
+
+其他：版本 1.0.2→1.0.3（SKILL.md、_meta.json、studio.py、telemetry.py、tests/first-turn-preview.md、dev/build.py）。SKILL.md 15KB 上限（契约 `test_size`）：末句加长后删去命令表下「外层超时」一行末尾重复的「详见 @references/scenes.md」（同一引用在首轮第 3 步仍在），现 15345 字节（< 15360）。
+
+## SOP 7.4 出包阻断项自检
+
+| 检查项 | 结果 |
+|---|---|
+| 接管规则，含禁止编造故障、禁止宿主自带生图 | 通过（未改；C `test_takeover_rules_first`） |
+| 全新环境 `topup`（及 `paid`）有链接或如实断网说明 | 通过（E `test_fresh_topup_*`、`test_pay_01_fresh_paid_*`） |
+| description 末尾一句调用倾向句（含本技能账户问题）、触发词 25、用户原话、账户类说法 | 通过 |
+| 技能收藏章节 + 合规说明 | 通过（未改） |
+| 无隐藏 HTML 注释 | 通过 |
+| frontmatter name/slug、display_name、version；name/slug 不改 | 通过 |
+| 版本号大于平台最新版 | 1.0.3 > 1.0.2 > 1.0.1；平台实时最新版本本环境查不到，见未验证项 |
+| 首次对话上报字段与开关 | 通过：8 字段、版本随包 1.0.3、渠道 `workbuddy_skill`、可关 |
+| 全包无旧口径；对客文字无网站名/Key/URL/接口/token | 通过（C `test_forbidden_words`、`test_customer_copy_no_site_or_key`） |
+
+## 测试结果（2026-11-10）
+
+| 运行 | 结果 |
+|---|---|
+| 修复前基线（1.0.2 源码） | 契约 42/42、端到端 68/68 |
+| 契约测试（仓库内包） | 45/45 通过（+ RepairPay103 3 项） |
+| 端到端（仓库内包，带 `--zip`） | 84/84 通过（+ RepairPay103 16 项） |
+| 干净解压 ZIP 后契约测试 | 45/45 通过 |
+| 干净解压 ZIP 后端到端（`--package <解压目录> --zip <ZIP>`） | 84/84 通过，无跳过 |
+| ZIP 完整性 | `testzip` 无损坏；24 个文件（清单与 1.0.2 相同）；最大深度 2；无 `__pycache__`、dev |
+| 与 1.0.2 对比 | 变化的包内文件 7 个：SKILL.md、_meta.json、scripts/studio.py、telemetry.py（仅版本）、welcome_copy.py、tests/first-turn-preview.md（仅版本）、tests/test_skill_contract.py；`png_local.py`、`audit_images.py`、`references/`、`assets/`、README 字节一致 |
+| 真实上游调用 | 0（端到端全部走 `dev/mock_backend.py`；本次没有对真实站点运行任何命令） |
+| 密钥扫描（本次改动） | 无命中 |
+
+## 修复不重犯（均在干净解压 ZIP 上通过）
+
+| 历史缺陷 | 状态 | 证据 |
+|---|---|---|
+| A3-PAY-01/02/03（本轮） | 已修 | 见上 |
+| WED-A3-01 demo 零网络 | 未回退 | C `test_wed_a3_01_demo_has_no_network`；E `test_wed_a3_01_demo_alone_zero_network` |
+| WED-A3-02 照片哈希绑定 | 未回退 | E `test_wed_a3_02_photo_replaced_*` |
+| WED-A3-03 成品/画廊链接安全路径 | 未回退 | E `test_wed_a3_03_delivery_links_space_and_hash` |
+| A3-E01 中英示例逐条对齐 | 未回退（examples 未改） | C `test_examples_zh_en_same_scene`；E `test_zip_skill_examples_platform_limits` |
+| A3-E02/E03 示例路径空格与 # | 未回退 | C `test_demo_link_path_with_space`、`_with_hash`；E `test_demo_links_survive_markdown` |
+| PET-01/02/03（宠物单缺陷） | 本轮未触及：本包任务查询、PNG 校验、示例判定代码与 1.0.2 相同（diff 只涉账户/链接函数） | 本包没有 PET 专项回归用例，未单独验证；原有任务续接（`/jobs/by-key`）、示例 10 张齐全用例全过 |
+| 1.0.2 整改项（topup/balance/status/history 无账户走关联入口、断网与繁忙区分、接管规则、description 账户类说法、收藏核对） | 未回退 | E `PayConversion` 12 项；C `PayConversion` 8 项 |
+
+## 偏离开发文档
+
+- 无新增偏离。`paid` 新增信号 `creditsConfirmed`（到账已查实），`creditsPending` 沿用既有信号；SKILL.md 未逐一列出这两个信号（篇幅上限），按「stdout 话术原样转述」通则处理，`paid` 一行的「不能将用户自述当作已到账，到账以服务端真实次数为准」保留。
+
+## 未验证项
+
+- 7.5 真机验收：按负责人豁免未做。
+- 平台上该 slug 实际最新版本（含审核中版本）：本环境查不到，由负责人上传时确认 1.0.3 大于平台最新版。
+- logo：仓库内无文件，未核对。
+- 服务端 `/quick-entry`、`/membership-link` 实际是否每次都附 `expires_in`：源码快照可见 `expires_in=300`；未附带时本包沿用域名/路径校验，仅用模拟后端验证。
+
+## 部署与回滚
+
+- 部署：无服务端改动。交 Codex A3 独立检查（1.0.3 新包），通过后负责人手动上传 ZIP。
+- 回滚：`dist/` 中 1.0.2、1.0.1、1.0.0 ZIP 未改动，可直接重传。
+
+---
+
+# 以下为历史版本自测记录
+
 # 自测报告：mps-wedding-portrait-studio 1.0.2（SOP 第七章付费转化整改）
 
 ## 交付三样

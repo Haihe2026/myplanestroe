@@ -250,9 +250,13 @@ class AccountBilling(Base):
         for must in ('只剩最后一步', '### 现在需要你做的', '打不开', W.REASSURE_SAVED, W.REASSURE_FREE):
             self.assertIn(must, t)
         self.assertNotIn('¥', t)
-        code, s, t, _ = self.run_cmd('paid')
-        self.assertIn('已收到你的付款登记', t)
+        code, s, t, _ = self.run_cmd('paid')  # 1.0.3：用户自述不算到账，只按服务端次数说
+        self.assertEqual((code, s['signal'], s['remaining_uses']), (2, 'creditsPending', 0))
+        self.assertNotIn('已收到你的付款登记', t)
         self.mock.users[secret]['balance'] = 3
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal'], s['remaining_uses']), (0, 'creditsConfirmed', 3))
+        self.assertIn('剩余可用次数 3 次', t)
         code, s, t, err = self.run_cmd('run', '--draft', did)
         self.assertEqual((code, s['signal']), (0, 'delivered'), t)
         self.assertEqual(len(s['paths']), 1)
@@ -998,6 +1002,200 @@ class ZipLayout(unittest.TestCase):
             import test_skill_contract as C
             strip = lambda xs: [x.strip().strip('"') for x in xs]
             self.assertEqual(C.example_misaligned(strip(zh), strip(en)), [], zp)
+
+
+class RepairPay103(Base):
+    """1.0.3 A3-PAY-01/02 回归：全新环境 paid 走关联入口、到账只看服务端；失效短链不转述。"""
+    offline = PayConversion.offline
+    assert_link = PayConversion.assert_link
+
+    def quick_entry_calls(self):
+        return [c for c in self.mock.calls if c[1] == '/quick-entry']
+
+    # ---- A3-PAY-01 ----
+    def test_pay_01_fresh_paid_gives_link_account(self):
+        self.assertFalse(os.path.exists(os.path.join(self.home, 'mps-wedding-portrait-studio', 'account.json')))
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal'], s['link_included']), (2, 'linkAccount', True))
+        self.assert_link(t, '/membership/gemini/register/')
+        self.assertNotIn('已收到你的付款登记', t)
+        self.assertNotIn('免费', t)
+        self.assertEqual(len(self.secret()), 43)  # 安装标识已生成并持久化
+        qe = self.quick_entry_calls()
+        self.assertEqual(len(qe), 1)
+        self.assertNotIn('Authorization', qe[0][3])
+        self.assertEqual(qe[0][2], {'install_secret': self.secret()})
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_pay_01_fresh_paid_offline_honest(self):
+        studio.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal']), (3, 'serviceUnavailable'))
+        self.assertEqual(t.strip(), '网络暂时没连上，没有扣任何次数，稍后再说一次「付好了」。')
+        self.assertNotIn('付款登记', t)
+
+    def test_pay_01_fresh_paid_busy(self):
+        def busy(*a, **k):
+            raise studio.GatewayError(503)
+        studio.TRANSPORT = busy
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('服务正在处理较多请求', t)
+        self.assertNotIn('网络', t)
+
+    def test_pay_01_paid_secret_unregistered_401_falls_back(self):
+        self.run_cmd('paid')  # 已有本机标识但还没扫码，/balance 401
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+
+    def test_pay_01_paid_registered_zero_balance_not_credited(self):
+        self.run_cmd('paid')
+        self.mock.authorize(self.secret(), 0)
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal'], s['remaining_uses']), (2, 'creditsPending', 0))
+        self.assertIn('还没看到这笔到账', t)
+        self.assertNotIn('付款登记', t)
+
+    def test_pay_01_paid_registered_with_balance_confirmed(self):
+        self.run_cmd('paid')
+        self.mock.authorize(self.secret(), 4)
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual((code, s['signal'], s['remaining_uses']), (0, 'creditsConfirmed', 4))
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_pay_01_paid_existing_account_offline(self):
+        self.run_cmd('paid')
+        self.mock.authorize(self.secret(), 4)
+        studio.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('paid')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('网络暂时没连上', t)
+        self.assertNotIn('付款登记', t)
+
+    # ---- A3-PAY-02 ----
+    def quick_entry_with(self, *expires):
+        """按顺序给 /quick-entry 的注册链接附 expires_in；用完后沿用最后一个。"""
+        real = self.mock.transport
+        seq = list(expires)
+
+        def tr(method, url, body, headers, timeout, binary):
+            if url.endswith('/quick-entry'):
+                code, raw = real(method, url, body, headers, timeout, binary)
+                d = json.loads(raw)
+                d['expires_in'] = seq.pop(0) if len(seq) > 1 else seq[0]
+                return code, json.dumps(d).encode()
+            return real(method, url, body, headers, timeout, binary)
+        studio.TRANSPORT = tr
+
+    def test_pay_02_expired_link_not_relayed(self):
+        self.quick_entry_with(0)
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (3, 'serviceUnavailable'))
+        self.assertNotIn('http', t)
+        self.assertIn('已经过期', t)
+        self.assertIn('没有扣任何次数', t)
+        self.assertNotIn('网络', t)
+        qe = self.quick_entry_calls()
+        self.assertEqual(len(qe), 2)  # 沿原安装身份重取一次
+        self.assertEqual(qe[0][2], qe[1][2])
+        self.assertEqual(qe[1][2], {'install_secret': self.secret()})
+
+    def test_pay_02_expired_then_fresh_refetched(self):
+        self.quick_entry_with(0, 300)
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+        self.assertEqual(len(self.quick_entry_calls()), 2)
+
+    def test_pay_02_valid_link_relayed(self):
+        self.quick_entry_with(300)
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+        self.assertEqual(len(self.quick_entry_calls()), 1)
+
+    def test_pay_02_bad_expiry_metadata_not_relayed(self):
+        for bad in (-5, '300', None):
+            self.quick_entry_with(bad)
+            code, s, t, _ = self.run_cmd('topup')
+            self.assertEqual(s['signal'], 'serviceUnavailable', bad)
+            self.assertNotIn('http', t, bad)
+
+    def test_pay_02_expired_link_other_commands(self):
+        for cmd, word in (('status', '我的账户'), ('balance', '查余额'), ('history', '消费记录'), ('paid', '付好了')):
+            self.quick_entry_with(0)
+            code, s, t, _ = self.run_cmd(cmd)
+            self.assertEqual(s['signal'], 'serviceUnavailable', cmd)
+            self.assertNotIn('http', t, cmd)
+            self.assertIn('已经过期', t, cmd)
+        self.quick_entry_with(0)
+        code, s, t, _ = self.run_cmd('auth')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('http', t)
+
+    def test_pay_02_external_domain_still_rejected(self):
+        real = self.mock.transport
+
+        def evil(method, url, body, headers, timeout, binary):
+            if url.endswith('/quick-entry'):
+                return 200, json.dumps(dict(status='registration', url='https://evil.example/membership/gemini/register/#entry=x', expires_in=300)).encode()
+            return real(method, url, body, headers, timeout, binary)
+        studio.TRANSPORT = evil
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('evil', t)
+        self.assertNotIn('http', t)
+
+    def test_pay_02_checkout_expired_link(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 0)
+        self.quick_entry_with(0)
+        code, s, t, _ = self.run_cmd('auth')  # checkout 分支：失效充值链接不转述
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('http', t)
+        self.assertIn('已经过期', t)
+        self.quick_entry_with(300)
+        code, s, t, _ = self.run_cmd('auth')
+        self.assertEqual((s['signal'], s['link_included']), ('needsCredits', True))
+
+    def test_pay_02_membership_link_expired(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        real = self.mock.transport
+        n = []
+
+        def tr(method, url, body, headers, timeout, binary):
+            code, raw = real(method, url, body, headers, timeout, binary)
+            if url.endswith('/membership-link'):
+                n.append(1)
+                d = json.loads(raw)
+                d['expires_in'] = 0
+                raw = json.dumps(d).encode()
+            return code, raw
+        studio.TRANSPORT = tr
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('http', t)
+        self.assertIn('已经过期', t)
+        self.assertEqual(len(n), 2)
+
+    def test_pay_02_membership_link_valid_expiry(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        real = self.mock.transport
+
+        def tr(method, url, body, headers, timeout, binary):
+            code, raw = real(method, url, body, headers, timeout, binary)
+            if url.endswith('/membership-link'):
+                d = json.loads(raw)
+                d['expires_in'] = 300
+                raw = json.dumps(d).encode()
+            return code, raw
+        studio.TRANSPORT = tr
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'topupLink')
+        self.assert_link(t, '/membership/')
 
 
 if __name__ == '__main__':

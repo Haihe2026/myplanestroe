@@ -26,3 +26,4 @@
 2026-11-10T23:21:15+08:00 | codex | package_ready → test_in_progress | 核对 1.0.2 固定 ZIP 与当前包状态，接续付费转化 A3。
 2026-11-10T23:22:00+08:00 | codex | test_in_progress → test_failed | 1.0.2 A3 不通过；新用户 paid 无关联入口、失效短链仍输出、简介末句漏账户；退回 Claude 修复。
 2026-11-10T23:38:56+08:00 | claude | test_failed → dev_in_progress | 认领通知 evt-9f657208…（test_failed）及 Muse 交接 evt-d5d8968c…（req-muse-to-claude-fix-wedding-103-pay-a3-20261110），修复 A3-PAY-01/02/03 出 1.0.3（修复轮，不重读官方文档）。
+2026-11-10T23:43:27+08:00 | claude | dev_in_progress → package_ready | 1.0.3 修复 A3-PAY-01（paid 无账户走关联入口，到账只看服务端次数，删除无证据的付款登记话术）、PAY-02（expires_in 失效链接沿原安装身份重取一次，仍失效不转述）、PAY-03（简介末句含本技能账户问题，触发词 25 不变）；契约 45/45、端到端 84/84，干净解压同样全过。ZIP SHA256 8fcd2211…6979656，1.0.0–1.0.2 保留。真实上游 0、生产变更 0。见 02-self-test.md。
