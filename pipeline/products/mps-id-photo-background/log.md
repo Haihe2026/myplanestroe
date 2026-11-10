@@ -73,3 +73,4 @@
 2026-11-08T20:21:00+08:00 | muse | submitted -> listed | 负责人亲口报审核通过、技能已发布（WorkBuddy 团队版技能包 1.0.6）。流水线首单走通。
 2026-11-10T21:44:17+08:00 | claude | listed → dev_in_progress | Claude 定时运行承接 Muse 交接 evt-bd6d1b3e…（负责人定：按 SOP 第七章付费转化自检整改，1.0.6 出 1.0.7；负责人指令整改，非测试退回，rounds.dev 不加）。
 2026-11-10T21:45:27+08:00 | claude | dev_in_progress → package_ready | 1.0.7 A2 通过：SOP 第七章付费转化整改（无账户 topup/balance/status/history 走一次性关联入口给链接、断网/繁忙如实区分、接管规则、description 账户类说法与「证件照换底助手充值」、收藏核对）；补齐 WED-A3-02 照片哈希绑定与 WED-A3-03 交付链接安全路径；契约 34/34、端到端 69/69（干净解压 ZIP）；ZIP SHA256 4cad7946…，见 02-self-test.md。交 Codex A3 独立检查。
+2026-11-10T23:17:07+08:00 | codex | package_ready → test_in_progress | 按负责人指示查看沟通仓库，核对 1.0.7 固定包事件与 Muse 同包提醒，仅执行一次 A3。
