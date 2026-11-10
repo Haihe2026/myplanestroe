@@ -1,5 +1,7 @@
 """证件照换底助手：固定话术。宿主原样转述，不改写。"""
 
+from urllib.parse import unquote
+
 SKILL_NAME = '证件照换底助手'
 
 WELCOME = '欢迎使用WorkBuddy官方认证技能 ' + SKILL_NAME + '。'
@@ -45,7 +47,7 @@ def auth(url, expires_hint='几分钟'):
         '',
         '### 现在需要你做的',
         '1. 点开授权链接：[打开授权页](' + url + ')',
-        '2. 按页面提示完成确认，不用手机号、不用验证码、不用 API Key。',
+        '2. 按页面提示完成确认，不用手机号、不用验证码，也不用填写任何密钥。',
         '3. 链接' + expires_hint + '内有效；页面打不开或链接过期了，跟我说一声「重新取链接」，方案不受影响。',
         '',
         '做完跟我说一声「好了」，我接着按你确认的方案换底。',
@@ -115,10 +117,11 @@ def start_recap(background, target, count=1):
     return '开始制作：把照片背景换成' + background + target_text + '，共' + str(count) + '张，人物五官、发型和衣着尽量保持原样。' + NO_REPEAT
 
 
-def delivery(paths, remaining, first_time, target_note=''):
+def delivery(links, remaining, first_time, target_note=''):
+    """links 是已做 Markdown 安全编码的路径；显示名还原成原文件名。"""
     lines = ['做好了：']
-    for p in paths:
-        lines.append('- [' + p.rsplit('/', 1)[-1] + '](' + p + ')')
+    for p in links:
+        lines.append('- [' + unquote(p.rsplit('/', 1)[-1]).replace('[', '［').replace(']', '］') + '](' + p + ')')
     lines.append('这次只替换了背景并清理了发丝边缘，人物五官、发型和衣着尽量保持原样；AI处理可能有细微差异，请放大检查边缘。')
     if target_note:
         lines.append(target_note)
@@ -130,6 +133,11 @@ def delivery(paths, remaining, first_time, target_note=''):
     if first_time:
         lines.append('想调整直接说，比如「底色再浅一点」「换成蓝底」「另存一份 295×413」。' + ONE_CHANGE + '需要重新生成的调整可能再次按张计费，我会先跟你确认。')
     return '\n'.join(lines)
+
+
+def photo_changed():
+    return ('你确认时用的那张照片，文件后来有了变化。为了不做错照片，这次还没有开始制作，没有产生任何扣费。'
+            '请把要用的照片再发我一次，我按原来的方向重新跟你确认后再开始。')
 
 
 def size_mismatch(actual, requested):
@@ -278,6 +286,29 @@ def ticket_lookup_failed(reason_kind):
 
 def too_frequent():
     return '查询太频繁了，请稍等一分钟再试。'
+
+
+def account_link(url, retry_word='充值'):
+    """本机还没有账户的新用户要充值、付费链接或查账户时：给关联链接，不回死胡同。"""
+    return '\n'.join([
+        '这台设备还没有关联账户，先关联一次就能充值和查账户。',
+        '',
+        '### 现在需要你做的',
+        '1. 点开关联链接：[关联账户](' + url + ')',
+        '2. 扫码确认后会直接进入充值页，档位和金额都在页面上，按需选择；关联本身不扣费。',
+        '3. 链接几分钟内有效；页面打不开或过期了，再跟我说一次「' + retry_word + '」，我重新取链接。',
+        '',
+        CROSS_SKILL,
+    ])
+
+
+def account_failure(reason_kind, retry_word='充值'):
+    """账户类命令没拿到结果：按网络/繁忙如实说明，不猜原因。"""
+    reason = {
+        'network': '网络暂时没连上',
+        'busy': '服务正在处理较多请求，这一步还没完成',
+    }[reason_kind]
+    return reason + '，没有扣任何次数，稍后再说一次「' + retry_word + '」。'
 
 
 def account_missing():

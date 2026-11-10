@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-id-photo-background'
-SKILL_VERSION = '1.0.6'
+SKILL_VERSION = '1.0.7'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -336,7 +336,7 @@ def cmd_plan(args):
     if d.get('state') in ('submitted', 'delivered'):
         return emit('taskLocked', '', EXIT_ERROR)
     d.update(scene=args.scene, color=list(color), target=target, purpose=args.purpose or '',
-             photo_consent=False, pay_consent=False, state='planned')
+             photo_sha256=_photo_digest(d['images'][0]), photo_consent=False, pay_consent=False, idem=None, state='planned')
     save_draft(d)
     summary = '把照片背景换成' + color[0] + ('，并另存一份 %d×%d 像素' % tuple(target) if target else '')
     return emit('planReady', W.confirm_paid(summary, wait_text()), EXIT_OK, draft_id=d['draft_id'])
@@ -349,9 +349,26 @@ def cmd_confirm(args):
         return emit('needsPlan', '', EXIT_ERROR)
     if args.photo_consent != 'yes' or args.pay_consent != 'yes':
         return emit('needsConfirmation', '', EXIT_ERROR)
+    if not d.get('photo_sha256') or _photo_digest(d['images'][0]) != d['photo_sha256']:
+        return _photo_changed(d)
     d.update(photo_consent=True, pay_consent=True, idem='idp-' + uuid.uuid4().hex, state='confirmed', confirmed_at=_now())
     save_draft(d)
     return emit('confirmed', '', EXIT_OK, draft_id=d['draft_id'])
+
+
+def _photo_digest(path):
+    try:
+        with open(path, 'rb') as f:
+            return hashlib.sha256(f.read()).hexdigest()
+    except OSError:
+        return None
+
+
+def _photo_changed(d):
+    """确认后照片文件有变化：作废原确认和原任务键，必须重新 plan + confirm。"""
+    d.update(photo_consent=False, pay_consent=False, idem=None, state='photo_changed')
+    save_draft(d)
+    return emit('photoChanged', W.photo_changed(), EXIT_WAIT, draft_id=d['draft_id'])
 
 
 def _job_body(d):
@@ -360,7 +377,10 @@ def _job_body(d):
     if not r['ok']:
         return None, emit('photoInvalid', W.input_error(r['file'], audit_images.describe(r['problem'])), EXIT_ERROR, problem=r['problem'])
     with open(path, 'rb') as f:
-        content = base64.b64encode(f.read()).decode()
+        raw = f.read()
+    if not d.get('photo_sha256') or hashlib.sha256(raw).hexdigest() != d['photo_sha256']:
+        return None, _photo_changed(d)  # 只发送确认时核对过的同一份字节
+    content = base64.b64encode(raw).decode()
     body = dict(prompt=build_prompt(*d['color']), size=GATEWAY_SIZE, confirmed=True, image_engine=IMAGE_ENGINE,
                 references=[dict(mime=r['mime'], content=content)], reference_consent=True)
     return body, None
@@ -394,7 +414,9 @@ def _ensure_skill_key(a):
     try:
         r = call('POST', '/skill-key', {}, auth=a['install_secret'])
     except GatewayError as e:
-        return 'needs_auth' if e.status == 401 else 'error'
+        if e.status == 401:
+            return 'needs_auth'
+        return 'network' if e.status == 0 else 'error'
     if r.get('state') == 'pending_payment':
         return 'needs_credits'
     if r.get('state') != 'ready' or not SKILL_KEY_RE.fullmatch(r.get('key') or ''):
@@ -409,11 +431,28 @@ def _ensure_skill_key(a):
 
 
 def _membership_link(a):
+    """返回 (链接, None) 或 (None, 状态)：状态 0 = 连接失败、超时、坏响应或链接不可信；非 0 = 服务端返回的错误码。"""
     try:
         r = call('POST', '/membership-link', {}, auth=a['install_secret'])
-        return trusted_link(r.get('url'))
-    except GatewayError:
-        return None
+        return trusted_link(r.get('url')), None
+    except GatewayError as e:
+        return None, e.status
+
+
+def _fail_kind(status):
+    """状态 0 是网络没连上；非 0 是服务正在处理较多请求。不得把网络故障说成服务繁忙。"""
+    return 'network' if status == 0 else 'busy'
+
+
+def _account_entry(a, retry_word):
+    """本机没有账户（或服务端还不认识本机）时的出路：确保安装标识 → 一次性关联入口。
+    registration 给关联链接；error 如实说网络/繁忙；checkout/ready 已接上本机凭证，返回 None 由调用方继续。"""
+    st, extra = _account_ready(a)
+    if st == 'registration':
+        return emit('linkAccount', W.account_link(extra, retry_word), EXIT_WAIT, link_included=True)
+    if st == 'error':
+        return emit('serviceUnavailable', W.account_failure(_fail_kind(extra), retry_word), EXIT_ERROR)
+    return None
 
 
 def cmd_run(args):
@@ -439,12 +478,12 @@ def cmd_run(args):
         return emit('serviceUnavailable', W.failure(kind, 'not_started'), EXIT_ERROR)
     k = _ensure_skill_key(a)
     if k == 'needs_credits':
-        url = _membership_link(a)
+        url, status = _membership_link(a)
         if not url:
-            return emit('serviceUnavailable', W.failure('busy', 'not_started'), EXIT_ERROR)
+            return emit('serviceUnavailable', W.failure(_fail_kind(status), 'not_started'), EXIT_ERROR)
         return emit('needsCredits', W.final_step(url), EXIT_WAIT, draft_id=d['draft_id'], link_included=True)
     if k != 'ok':
-        return emit('serviceUnavailable', W.failure('busy', 'not_started'), EXIT_ERROR)
+        return emit('serviceUnavailable', W.failure('network' if k == 'network' else 'busy', 'not_started'), EXIT_ERROR)
     body, err = _job_body(d)
     if err is not None:
         return err
@@ -607,8 +646,11 @@ def _deliver(d, a):
     write_json('flags.json', flags)
     d.update(state='delivered', delivered=paths, delivered_at=_now())
     save_draft(d)
-    return emit('delivered', W.delivery(paths, remaining, first, '\n'.join(notes)), EXIT_OK, draft_id=d['draft_id'],
-                paths=paths, gallery=os.path.join(folder, 'index.html'), remaining_uses=remaining, ask_favorite=first)
+    links = [md_safe_path(p) for p in paths]  # 面向用户的链接目标；paths 仍是原始文件路径
+    gallery = os.path.join(folder, 'index.html')
+    return emit('delivered', W.delivery(links, remaining, first, '\n'.join(notes)), EXIT_OK, draft_id=d['draft_id'],
+                paths=paths, links=links, gallery=gallery, gallery_link=md_safe_path(gallery), remaining_uses=remaining,
+                ask_favorite=first)
 
 
 def cmd_resume(args):
@@ -645,11 +687,20 @@ def cmd_status(args):
     telemetry.report_once(state_dir())
     a = load_account()
     if not a.get('install_secret'):
-        return emit('noAccount', W.account_missing(), EXIT_WAIT)
+        # 新用户：不回死胡同，走一次性关联入口
+        st, extra = _account_ready(a)
+        if st == 'registration':
+            return emit('linkAccount', W.account_link(extra, '我的账户'), EXIT_WAIT, link_included=True)
+        if st == 'checkout':
+            return emit('needsCredits', W.final_step(extra), EXIT_WAIT, link_included=True)
+        if st == 'error':
+            return emit('serviceUnavailable', W.account_failure(_fail_kind(extra), '我的账户'), EXIT_ERROR)
+        rem = extra.get('remaining_uses')
+        return emit('registered', '', EXIT_OK, remaining_uses=rem if isinstance(rem, int) else None)
     try:
         r = call('POST', '/quick-entry/status', {'install_secret': a['install_secret']})
-    except GatewayError:
-        return emit('serviceUnavailable', W.progress_unknown(), EXIT_WAIT)
+    except GatewayError as e:
+        return emit('serviceUnavailable', W.account_failure(_fail_kind(e.status), '我的账户'), EXIT_WAIT)
     if r.get('status') != 'registered':
         return emit('authPending', W.auth_pending(), EXIT_WAIT)
     telemetry.link_account(state_dir(), a['install_secret'])
@@ -673,11 +724,23 @@ def cmd_auth(args):
 def cmd_topup(args):
     telemetry.report_once(state_dir())
     a = load_account()
-    if not a.get('install_secret'):
-        return emit('noAccount', W.account_missing(), EXIT_WAIT)
-    url = _membership_link(a)
+    if a.get('install_secret'):
+        url, status = _membership_link(a)
+        if url:
+            return emit('topupLink', W.topup_link(url), EXIT_WAIT)
+        if status != 401:
+            return emit('serviceUnavailable', W.account_failure(_fail_kind(status), '充值'), EXIT_ERROR)
+        # 401：服务端还不认识本机安装标识（关联未完成），改走一次性关联入口
+    st, extra = _account_ready(a)  # 没有安装标识就先生成并持久化
+    if st == 'registration':
+        return emit('linkAccount', W.account_link(extra, '充值'), EXIT_WAIT, link_included=True)
+    if st == 'checkout':
+        return emit('topupLink', W.topup_link(extra), EXIT_WAIT)
+    if st == 'error':
+        return emit('serviceUnavailable', W.account_failure(_fail_kind(extra), '充值'), EXIT_ERROR)
+    url, status = _membership_link(a)  # ready：本机凭证已接上，取充值链接
     if not url:
-        return emit('serviceUnavailable', W.failure('busy', 'not_started'), EXIT_ERROR)
+        return emit('serviceUnavailable', W.account_failure(_fail_kind(status), '充值'), EXIT_ERROR)
     return emit('topupLink', W.topup_link(url), EXIT_WAIT)
 
 
@@ -728,13 +791,16 @@ def cmd_balance(args):
     telemetry.report_once(state_dir())
     a = load_account()
     if not a.get('install_secret'):
-        return emit('noAccount', W.account_missing(), EXIT_OK)
+        r = _account_entry(a, '查余额')
+        if r is not None:
+            return r
     try:
         r = call('GET', '/balance', auth=a['install_secret'])
     except GatewayError as e:
         if e.status == 401:
-            return emit('noAccount', W.account_missing(), EXIT_OK)
-        return emit('serviceUnavailable', W.progress_unknown(), EXIT_WAIT)
+            r = _account_entry(a, '查余额')
+            return r if r is not None else emit('serviceUnavailable', W.account_failure('busy', '查余额'), EXIT_WAIT)
+        return emit('serviceUnavailable', W.account_failure(_fail_kind(e.status), '查余额'), EXIT_WAIT)
     rem = r.get('remaining_uses')
     if not isinstance(rem, int):
         return emit('serviceUnavailable', W.progress_unknown(), EXIT_WAIT)
@@ -749,15 +815,18 @@ def cmd_balance(args):
 def cmd_history(args):
     telemetry.report_once(state_dir())
     a = load_account()
-    if not a.get('install_secret'):
-        return emit('noAccount', W.account_missing(), EXIT_OK)
     if not 1 <= args.page <= 100000:
         return emit('usage', '', EXIT_ERROR)
+    if not a.get('install_secret'):
+        r = _account_entry(a, '查余额')
+        if r is not None:
+            return r
     try:
         cards, total, more = _history(a, args.page, HISTORY_PAGE_SIZE)
     except GatewayError as e:
         if e.status == 401:
-            return emit('noAccount', W.account_missing(), EXIT_OK)
+            r = _account_entry(a, '查余额')
+            return r if r is not None else emit('serviceUnavailable', W.history_unavailable(), EXIT_WAIT)
         if e.status == 429:
             return emit('tooFrequent', W.too_frequent(), EXIT_WAIT)
         return emit('serviceUnavailable', W.history_unavailable(), EXIT_WAIT)

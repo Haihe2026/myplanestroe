@@ -2,6 +2,7 @@
 
 运行：python3 dev/e2e_check.py   （可加 --package <解压后的技能目录> 对干净解压的 ZIP 重跑）
 """
+import base64
 import contextlib
 import io
 import json
@@ -372,7 +373,8 @@ class AccountBilling(Base):
 
     def test_balance_menu_and_decline(self):
         code, s, t, _ = self.run_cmd('balance')
-        self.assertEqual(s['signal'], 'noAccount')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))  # 1.0.7：无账户给关联链接，不回死胡同
+        self.assertIn('](https://aistore.zhaopintong.com/membership/gemini/register/', t)
         did = self.confirmed_draft()
         self.paid_account(did, 7)
         code, s, t, _ = self.run_cmd('balance')
@@ -569,7 +571,8 @@ class Support(Base):
 
     def test_history_failure_and_no_account(self):
         code, s, t, _ = self.run_cmd('history')
-        self.assertEqual(s['signal'], 'noAccount')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assertIn('关联本身不扣费', t)
         self.delivered_account(3)
         self.mock.scenario['support_busy'] = True
         code, s, t, _ = self.run_cmd('balance')
@@ -684,6 +687,201 @@ class Support(Base):
         code, s, t, _ = self.run_cmd('ticket')
         self.assertEqual((code, s['signal']), (2, 'serviceUnavailable'))
         self.assertIn('网络暂时连不上', t)
+
+
+class PayConversion(Base):
+    """1.0.7 SOP 第七章：全新环境账户命令有出路；失败原因按网络/繁忙如实区分。"""
+
+    def offline(self, *a, **k):
+        raise idphoto.GatewayError(0)
+
+    def assert_link(self, t, path):
+        import re
+        m = re.search(r'\]\((https://[^)\s]+)\)', t)
+        self.assertIsNotNone(m, t)
+        self.assertTrue(m.group(1).startswith('https://aistore.zhaopintong.com' + path), m.group(1))
+
+    def test_fresh_topup_gives_link_account(self):
+        self.assertFalse(os.path.exists(os.path.join(self.home, 'mps-id-photo-background', 'account.json')))
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal'], s['link_included']), (2, 'linkAccount', True))
+        self.assert_link(t, '/membership/gemini/register/')
+        self.assertIn('扫码确认后会直接进入充值页', t)
+        self.assertIn('关联本身不扣费', t)
+        self.assertNotIn('免费', t)
+        self.assertEqual(len(self.secret()), 43)  # 安装标识已生成并持久化
+        qe = [c for c in self.mock.calls if c[1] == '/quick-entry']
+        self.assertEqual(len(qe), 1)
+        self.assertNotIn('Authorization', qe[0][3])  # 一次性关联入口无 Bearer
+        self.assertEqual(qe[0][2], {'install_secret': self.secret()})
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_fresh_topup_offline_honest(self):
+        idphoto.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (3, 'serviceUnavailable'))
+        self.assertEqual(t.strip(), '网络暂时没连上，没有扣任何次数，稍后再说一次「充值」。')
+        self.assertNotIn('较多请求', t)
+
+    def test_fresh_topup_server_busy(self):
+        def busy(*a, **k):
+            raise idphoto.GatewayError(503)
+        idphoto.TRANSPORT = busy
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('服务正在处理较多请求', t)
+        self.assertNotIn('网络', t)
+
+    def test_topup_secret_unregistered_401_falls_back(self):
+        self.run_cmd('topup')  # 已有本机标识但用户还没扫码，/membership-link 401
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+
+    def test_topup_registered_zero_balance_checkout(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 0)
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual((code, s['signal']), (2, 'topupLink'))
+        self.assert_link(t, '/membership/')
+
+    def test_topup_ready_account_link(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'topupLink')
+        self.assertEqual(self.mock.membership_links, 1)
+
+    def test_topup_membership_link_network_not_busy(self):
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        idphoto.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('网络暂时没连上', t)
+        self.assertNotIn('较多请求', t)
+
+    def test_topup_untrusted_link_not_relayed(self):
+        real = self.mock.transport
+
+        def evil(method, url, body, headers, timeout, binary):
+            if url.endswith('/quick-entry'):
+                return 200, json.dumps(dict(status='registration', url='https://evil.example/membership/gemini/register/')).encode()
+            return real(method, url, body, headers, timeout, binary)
+        idphoto.TRANSPORT = evil
+        code, s, t, _ = self.run_cmd('topup')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertNotIn('evil', t)
+        self.assertNotIn('http', t)
+
+    def test_fresh_status_and_balance_have_way_out(self):
+        code, s, t, _ = self.run_cmd('status')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertEqual(s['signal'], 'linkAccount')
+        self.mock.authorize(self.secret(), 4)
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertEqual((s['signal'], s['remaining_uses']), ('balance', 4))
+
+    def test_fresh_status_offline(self):
+        idphoto.TRANSPORT = self.offline
+        code, s, t, _ = self.run_cmd('status')
+        self.assertEqual(s['signal'], 'serviceUnavailable')
+        self.assertIn('网络暂时没连上，没有扣任何次数', t)
+        code, s, t, _ = self.run_cmd('balance')
+        self.assertIn('网络暂时没连上，没有扣任何次数', t)
+
+    def test_fresh_history_gives_link(self):
+        code, s, t, _ = self.run_cmd('history')
+        self.assertEqual((code, s['signal']), (2, 'linkAccount'))
+        self.assert_link(t, '/membership/gemini/register/')
+
+    def test_run_needs_credits_link_failure_kind(self):
+        did = self.confirmed_draft()
+        self.paid_account(did, 0)
+        idphoto.TRANSPORT = self.offline  # 取充值链接断网：返回状态 0，按网络没连上说明
+        a = idphoto.load_account()
+        url, status = idphoto._membership_link(a)
+        self.assertEqual((url, status), (None, 0))
+        self.assertEqual(idphoto._fail_kind(0), 'network')
+        self.assertEqual(idphoto._fail_kind(503), 'busy')
+
+
+class NoRepeat(Base):
+    """1.0.7 修复不重犯：WED-A3-01/02/03 在本技能上的对应复核。"""
+
+    def test_wed_a3_01_demo_alone_zero_network(self):
+        def boom(*a, **k):
+            raise AssertionError('network in demo')
+        idphoto.TRANSPORT = boom
+        telemetry.TRANSPORT = boom  # 首次对话上报失败即弃，不影响示例
+        code, s, _, _ = self.run_cmd('demo')
+        self.assertEqual((code, len(s['items'])), (0, 10))
+        code, s, _, _ = self.run_cmd('demo', 'white-one')
+        self.assertEqual((code, len(s['items'])), (0, 1))
+        self.assertEqual(self.mock.calls, [])
+
+    def test_wed_a3_02_photo_changed_before_confirm(self):
+        _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '换白底', '--image', self.photo, '--has-need')
+        did = s['draft_id']
+        self.assertEqual(self.run_cmd('plan', '--draft', did, '--scene', 'white-one')[0], 0)
+        with open(self.photo, 'wb') as f:
+            f.write(jpeg_bytes(640, 800))
+        code, s, t, _ = self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')
+        self.assertEqual((code, s['signal']), (2, 'photoChanged'))
+        self.assertIn('没有产生任何扣费', t)
+        d = idphoto.load_draft(did)
+        self.assertEqual((d['photo_consent'], d['pay_consent'], d['idem']), (False, False, None))
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'needsConfirmation')
+        self.assertEqual([c for c in self.mock.calls if c[1] == '/skill-jobs'], [])
+
+    def test_wed_a3_02_photo_changed_after_confirm(self):
+        did = self.confirmed_draft()
+        self.paid_account(did, 3)
+        old_idem = idphoto.load_draft(did)['idem']
+        with open(self.photo, 'wb') as f:
+            f.write(jpeg_bytes(640, 800))
+        code, s, t, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual((code, s['signal']), (2, 'photoChanged'))
+        self.assertEqual([c for c in self.mock.calls if c[1] == '/skill-jobs'], [])
+        self.assertEqual(self.mock.charges, 0)
+        self.assertIsNone(idphoto.load_draft(did)['idem'])
+        self.assertEqual(self.run_cmd('plan', '--draft', did, '--scene', 'white-one')[0], 0)
+        self.assertEqual(self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')[0], 0)
+        new_idem = idphoto.load_draft(did)['idem']
+        self.assertNotEqual(new_idem, old_idem)
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'delivered')
+        jobs = [c for c in self.mock.calls if c[1] == '/skill-jobs']
+        self.assertEqual(jobs[-1][3]['Idempotency-Key'], new_idem)
+        with open(self.photo, 'rb') as f:
+            sent = base64.b64encode(f.read()).decode()
+        self.assertEqual(jobs[-1][2]['references'][0]['content'], sent)
+
+    def test_wed_a3_03_delivery_links_space_and_hash(self):
+        from urllib.parse import unquote
+        import re
+        for sub in ('test user', 'Synthetic#User'):
+            folder = os.path.join(self.tmp, sub)
+            os.makedirs(folder)
+            self.photo = os.path.join(folder, 'me.jpg')
+            with open(self.photo, 'wb') as f:
+                f.write(jpeg_bytes())
+            did = self.confirmed_draft(target='295x413')
+            if sub == 'test user':
+                self.paid_account(did, 5)
+            code, s, t, _ = self.run_cmd('run', '--draft', did)
+            self.assertEqual(s['signal'], 'delivered', s)
+            targets = re.findall(r'\]\(([^)\s]+)\)', t) + [s['gallery_link']]
+            self.assertEqual(len(targets), 3)
+            for tgt in targets:
+                self.assertNotIn(' ', tgt)
+                self.assertNotIn('#', tgt)
+                self.assertNotIn('?', tgt)
+                self.assertTrue(os.path.isfile(unquote(tgt)), tgt)
+            self.assertNotIn('%', ''.join(re.findall(r'- \[([^\]]+)\]', t)))  # 显示名是原文件名
 
 
 class DemoAssets(unittest.TestCase):
