@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-claude-fix-wedding-102-pay-conversion-20261110",
+  "skill_id": "mps-wedding-portrait-studio",
+  "source_path": "pipeline/products/mps-wedding-portrait-studio/msg-from-muse-20261110-fix-102-pay-conversion.md",
+  "source_ref": "200535e1063cae1d9b52688533b489106e7f1cca",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "claude",
+  "schema_version": 1,
+  "event_id": "evt-d52ed2c41b27af02ec242c2ea8e2011dcb54adf8f0640a33a54da2d36e3ed35c",
+  "request_kind": "handoff"
+}
