@@ -1,17 +1,34 @@
-# A3 独立检查 · 证件照换底助手 1.0.6
+# 证件照换底助手 1.0.7 A3 独立检查
 
-检查时间 2026-11-08T17:44:41+08:00。通知 `evt-b929ace7a16ddbfef6ece37b0d937a11b0d361ef2c4cdea82cf788430be69ff1`。固定输入 `6c944b4abb2e2964cb2ec17fe26727151505af26`。接手前核对的远端 main 为 `7e41a5ff00dda8ccba9d8ccaebd956f3d8d407de`，状态 blob `423bd0105ad7f8ff4237854da2f54f5647964208` 与固定输入一致。产品认领提交 `73a79b8e8739757ff49ec9ce8b10671d28d029e6`。第 5 轮依据产品内的负责人超轮次批准记录，见 [本轮交接说明](msg-from-muse-20261108-fix-a3-e03.md)。
+**独立检查不通过。** 测试轮次已超过上限，置为 blocked。
 
-2026-11-08 在线读取 [WorkBuddy 技能](https://open.workbuddy.cn/docs/skill)、[专家](https://open.workbuddy.cn/docs/expert)及[开放平台概述](https://open.workbuddy.cn/docs/what-is-open-platform)。
+- 时间 2026-11-10T23:20:34+08:00，Windows 干净解压。只做静态及 Mock 定向验证。真实上游调用和真实付款均为零。按 SOP 第 7.5 节豁免跳过 WorkBuddy 真机验收及浏览器验证。
+- 固定包事件 `evt-177dddd554881dbaaf2a7db415678bec61311ee2ff25ab2606005a1840cc1268`，源提交 `30798453e6c866c50aeb8498a41eac6ab5ebe95d`。ZIP 893,096 字节，SHA256 `4cad79460a0d683a76d20f3fac477d351d71428025eb2397ed422ec84f6ed921`，与 Claude A2 一致。[固定 ZIP](https://github.com/Haihe2026/myplanestroe/blob/30798453e6c866c50aeb8498a41eac6ab5ebe95d/pipeline/products/mps-id-photo-background/02-package/dist/mps-id-photo-background-1.0.7.zip) · [A2 报告](https://github.com/Haihe2026/myplanestroe/blob/30798453e6c866c50aeb8498a41eac6ab5ebe95d/pipeline/products/mps-id-photo-background/02-self-test.md) · [付费转化 SOP](https://github.com/Haihe2026/myplanestroe/blob/2f30b615c2b249e9d8776a65307f7450b5bc1a77/docs/sop/sop-image-gen-skill-auto.md#七付费转化自检2026-11-10-真机实测整改强制)
 
-| 检查项 | 结果 |
-|---|---|
-| ZIP 完整性与目录 | 889982 字节，24 个文件。SHA-256 `1bf5b30d216bd12de31b91625fc892b8fcef3ac2198af45ac14eba344882ac23` 与 A2 记录一致，Git blob `11813372b8031531a7cdb1647776cee1e66b01e7` 与固定输入及远端认领提交一致。CRC、干净解压、单一包根、目录层级、重复路径、路径穿越、符号链接检查通过。 |
-| Frontmatter | WorkBuddy 技能页八个必填字段非空，版本与 ZIP、元数据及两个脚本一致。中英文各三条，逐条对应白底一寸报名、蓝底二寸考试报名、简历照换白。 |
-| 契约及规格 | 静态对照开发规格核查首次展示、两项同意、授权和充值、原任务续接、换底与本地另存、消费记录、工单、8 字段遥测及收藏入口。欢迎句与规格逐字相符。面向用户的说明、市场字段、固定话术、进度及示例说明的禁用词扫描与包内常见凭证特征扫描均无命中。与 1.0.5 ZIP 逐文件比对，运行实现只改版本常量和路径转义，其他差异在元数据及测试材料。 |
-| 示例资源及链接 | 十个场景与规格逐项对应。demos.json 使用裸文件名，十张 PNG 存在且均不超过 300 KiB，指定像素示例为 295×413。用 ZIP 中提取的路径函数生成两列 Markdown 表格，Windows PowerShell 7.6.5 的 ConvertFrom-Markdown 解析。含空格、括号及百分号、含 `#`、以及同时含空格与 `#` 的三组合成目录，各 10/10 个链接在拆分 URI 后无片段及查询串，解码路径均指向实际文件。A3-E02 回归与 A3-E03 修复通过。 |
-| WorkBuddy 真机与上传 | 本接收端缺少已验证的电脑操作和上传适配器。真机行为验收、零消耗浏览器验证和上传均为 blocked，未执行。宿主点击、平台解析、审核和上架均未验证。 |
+## 核对结果
 
-**A3 独立检查通过。** 产品置 `test_passed`，轮次记为 5，按看板规则交负责人手动验收和上传。A2 的 27 项契约及 53 项模拟端到端来自 Claude 自测，本轮按 A3 规则执行静态检查及本地路径回归。真实付费生图、真实遥测、核款、生产变更和上传均为 0。
+| 检查项 | 结果 | 证据 |
+|---|---|---|
+| ZIP 完整性及结构 | 通过 | 24 个文件，CRC 正常，最多两级，无同名或符号链接。包内 SKILL.md、入口、话术、遥测与固定源文件的 Git blob 一致。 |
+| Frontmatter、接管、收藏与遥测 | 部分通过 | 八项必填字段，三组中英语义和尺寸一致，欢迎句固定，接管规则在执行规范首节，含禁止编造和禁止宿主替代生图，收藏 ID 一致，无隐藏注释。15344 字节，23 个触发词含充值。八字段、2 秒、渠道与版本一致。简介末句见 A3-PAY-03。 |
+| 示例及路径 | 部分通过 | 十张 PNG 可读，来源和派生哈希逐项匹配。空格目录、井号目录的两条实际 Markdown 链接均解码命中。独立示例命令联网见 A3-PAY-04。 |
+| 账户入口及话术 | 部分通过 | 五个命令 `topup/status/auth/balance/history` 在全新账户状态都使用持久化安装标识调用一次 `quick-entry`，可给关联链接。模拟状态 0 与 503 的充值话术区分网络和繁忙，非第一方域链接被拒。其余见 A3-PAY-01/02。 |
 
-[固定输入的 1.0.6 ZIP](https://github.com/Haihe2026/myplanestroe/blob/6c944b4abb2e2964cb2ec17fe26727151505af26/pipeline/products/mps-id-photo-background/02-package/dist/mps-id-photo-background-1.0.6.zip) · [1.0.5 A3 历史报告](https://github.com/Haihe2026/myplanestroe/blob/6c944b4abb2e2964cb2ec17fe26727151505af26/pipeline/products/mps-id-photo-background/03-test-report.md)
+## 退回项
+
+### A3-PAY-01 全新环境的「已付款」分支没有关联入口
+
+在无账户、无凭证的全新隔离目录调用 `paid`，Mock 准备返回注册关联链接。实际没有请求 `/quick-entry`，直接返回 `paymentRegistered` 和「已收到你的付款登记」，无关联链接。SOP 7.2 把 `paid` 列入账户菜单。预期新用户走既有一次性关联入口，到账只依据服务端证据。请补齐 `paid` 的全新环境和断网回归。[入口代码](https://github.com/Haihe2026/myplanestroe/blob/30798453e6c866c50aeb8498a41eac6ab5ebe95d/pipeline/products/mps-id-photo-background/02-package/mps-id-photo-background/scripts/idphoto.py#L747) · [SOP 7.2](https://github.com/Haihe2026/myplanestroe/blob/2f30b615c2b249e9d8776a65307f7450b5bc1a77/docs/sop/sop-image-gen-skill-auto.md#72-脚本必须整改)
+
+### A3-PAY-02 已失效的第一方短链仍被转述
+
+Mock 给 `/quick-entry` 返回允许域、允许路径的注册链接，带服务端字段 `expires_in=0`。实际 `topup` 仍回显链接；同一有效期正常样本给链接，外部域样本被拒。现有入口提供 `expires_in`。预期对带失效元数据的链接停止转述，沿原安装身份安全重取或如实提示。请覆盖过期、有效和外部域三类。[链接校验](https://github.com/Haihe2026/myplanestroe/blob/30798453e6c866c50aeb8498a41eac6ab5ebe95d/pipeline/products/mps-id-photo-background/02-package/mps-id-photo-background/scripts/idphoto.py#L238) · [关联入口](https://github.com/Haihe2026/myplanestroe/blob/30798453e6c866c50aeb8498a41eac6ab5ebe95d/pipeline/products/mps-id-photo-background/02-package/mps-id-photo-background/scripts/idphoto.py#L389) · [现有服务端有效期](https://github.com/Haihe2026/myplanestroe/blob/2d50217ed9c4e653d37c35ae3fa611a0f096db9c/snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py#L45-L51)
+
+### A3-PAY-03 简介末句缺账户场景
+
+简介正文有充值、付费链接、余额、订单说法，最终唯一调用倾向句只列生图领域。SOP 7.3.2 要求在该末句一并涵盖本技能账户问题。请保留已核对的触发词与正文，修正末句并加断言。[包内简介](https://github.com/Haihe2026/myplanestroe/blob/30798453e6c866c50aeb8498a41eac6ab5ebe95d/pipeline/products/mps-id-photo-background/02-package/mps-id-photo-background/SKILL.md#L5) · [SOP 7.3.2](https://github.com/Haihe2026/myplanestroe/blob/2f30b615c2b249e9d8776a65307f7450b5bc1a77/docs/sop/sop-image-gen-skill-auto.md#732-description决定宿主会不会选中技能)
+
+### A3-PAY-04 独立示例命令发出遥测请求
+
+在两个全新隔离目录分别直接运行 `demo`。网络探针各记录一次 `/platform-api/telemetry/v1/first-dialogue` 请求，虽然两个示例路径都可解析。按阶段 6 的示例离线要求，把匿名遥测留在真正的首轮入口，单独运行 demo 时不联网且不读凭证。用新目录和拒绝网络的探针复测。[示例脚本](https://github.com/Haihe2026/myplanestroe/blob/30798453e6c866c50aeb8498a41eac6ab5ebe95d/pipeline/products/mps-id-photo-background/02-package/mps-id-photo-background/scripts/idphoto.py#L283) · [SOP](https://github.com/Haihe2026/myplanestroe/blob/2f30b615c2b249e9d8776a65307f7450b5bc1a77/docs/sop/sop-image-gen-skill-auto.md)
+

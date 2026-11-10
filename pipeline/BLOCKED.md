@@ -39,3 +39,5 @@
 
 - 2026-11-09T08:15:17+08:00 婚纱写真照相馆的示例图 HARD_STOP 已解除。登记资源真实提交 10 次、成功 10 张，来源、审计及离线同步核验齐全，已恢复 spec_ready。
 - 2026-11-09T08:39:55+08:00：mps-wedding-portrait-studio 的示例图 HARD_STOP（2026-11-08T22:57）已解除：Codex 交付 10 张示例图，Claude 完成 A2 并打包，置 package_ready。
+
+| 2026-11-10T23:20:34+08:00 | mps-id-photo-background | test_in_progress | TOO_MANY_ROUNDS | 1.0.7 本轮 A3 仍有付费转化和独立示例缺陷，累计测试退回 6 次，超过 max_rounds=3。 证据 pipeline/products/mps-id-photo-background/03-test-report.md | 负责人确认继续修订后，Claude 修复并提交新版。 | package_ready |
