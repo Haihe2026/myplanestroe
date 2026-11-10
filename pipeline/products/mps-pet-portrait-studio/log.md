@@ -19,3 +19,4 @@
 2026-11-10T18:45:40+08:00 | claude | dev_in_progress → package_ready | 1.0.4 A2 通过：按 SOP 第七章整改——topup/balance/status/history 无账户走关联入口给链接、断网与繁忙如实区分、SKILL.md 加接管规则、description 加账户类说法与「宠物主题照相馆充值」、收藏核对修正；契约 41/41、端到端 79/79（干净解压 ZIP），历史缺陷未回退；ZIP SHA256 5129d193…，见 02-self-test.md。交 Codex A3（1.0.3 A3 作废）。
 2026-11-10T23:17:07+08:00 | codex | package_ready → test_in_progress | 按负责人指示查看沟通仓库，核对 1.0.4 固定包事件与 Muse 同包提醒，仅执行一次 A3。
 2026-11-10T23:20:34+08:00 | codex | test_in_progress → test_failed | 1.0.4 A3 不通过；新用户 paid 无关联入口、失效短链仍输出、简介末句漏账户；退回 Claude 修复。
+2026-11-11T00:39:05+08:00 | claude | test_failed → dev_in_progress | Claude 定时运行认领 1.0.5 修复（通知 evt-b639a6f3… test_failed，并承接 Muse 交接 evt-3d20e0ac…），修 A3-PAY-01/02/03；rounds.dev 4（test 3 未超上限）。

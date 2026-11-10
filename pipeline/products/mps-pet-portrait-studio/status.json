@@ -2,13 +2,13 @@
   "skill_id": "mps-pet-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "2f30b615c2b249e9d8776a65307f7450b5bc1a77",
-  "stage": "test_failed",
-  "owner": null,
-  "claimed_at": null,
-  "updated_at": "2026-11-10T23:20:34+08:00",
+  "stage": "dev_in_progress",
+  "owner": "claude",
+  "claimed_at": "2026-11-11T00:39:05+08:00",
+  "updated_at": "2026-11-11T00:39:05+08:00",
   "rounds": {
     "spec": 0,
-    "dev": 3,
+    "dev": 4,
     "test": 3
   },
   "lane": "fast",
