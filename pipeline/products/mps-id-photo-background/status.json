@@ -3,9 +3,9 @@
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "2f30b615c2b249e9d8776a65307f7450b5bc1a77",
   "stage": "dev_in_progress",
-  "owner": null,
-  "claimed_at": null,
-  "updated_at": "2026-11-10T23:53:32+08:00",
+  "owner": "claude",
+  "claimed_at": "2026-11-11T01:43:01+08:00",
+  "updated_at": "2026-11-11T01:43:01+08:00",
   "rounds": {
     "spec": 1,
     "dev": 2,
