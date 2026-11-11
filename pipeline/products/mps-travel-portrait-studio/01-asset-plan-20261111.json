@@ -1,0 +1,184 @@
+{
+  "skill_id": "mps-travel-portrait-studio",
+  "date": "2026-11-11T18:58:59+08:00",
+  "source_ref": "1d62248ea8cd9ab4f0b9d03bfe5289247c6cfd94",
+  "demos": 10,
+  "logo": 1,
+  "paid_generation_limit": 11,
+  "authorization": "本聊天用户长期授权：开发Skill所需示例图、每技能一张主题logo，无需再次授权。",
+  "identity_test": "harbin 为虚构单一成年人原图；其余九张用同一合成图参考编辑。仅覆盖此合成成人，不等于真人或儿童身份保真验证。",
+  "transport": "隔离new_only.Adapter任务库；仅将signed_input URL覆盖为固定提交公开合成图。源码SHA匹配后方可调用，不写生产输入库、钱包、配置或服务。生产签名素材路由未验证。",
+  "retries": "各key一次生成POST；模糊提交只查原任务；不得盲重发或追加生成。",
+  "scenes": [
+    {
+      "key": "harbin",
+      "title": "哈尔滨冰雪主题",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "哈尔滨",
+        "冰雪大世界",
+        "冰雕",
+        "雪景"
+      ],
+      "direction": "An imaginative Harbin-inspired winter ice sculpture park at blue hour, crystalline cyan ice towers, soft snow, warm pale winter coat and scarf; elegant joyful travel portrait. No claim of an exact real landmark.",
+      "prompt": "Use case: photorealistic-natural. Asset type: Skill offline travel portrait example. Create a photorealistic original synthetic adult travel portrait. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. An imaginative Harbin-inspired winter ice sculpture park at blue hour, crystalline cyan ice towers, soft snow, warm pale winter coat and scarf; elegant joyful travel portrait. No claim of an exact real landmark. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "yabuli",
+      "title": "亚布力滑雪主题",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "亚布力",
+        "滑雪",
+        "雪服",
+        "雪山"
+      ],
+      "direction": "A Yabuli-inspired alpine ski resort, snowy slopes and fir trees, stylish modest coral ski jacket and ski pants, goggles resting on head leaving eyes visible, standing safely holding unbranded skis; no dangerous stunt.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Yabuli-inspired alpine ski resort, snowy slopes and fir trees, stylish modest coral ski jacket and ski pants, goggles resting on head leaving eyes visible, standing safely holding unbranded skis; no dangerous stunt. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "sanya",
+      "title": "三亚海岛暖冬",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "三亚",
+        "海岛",
+        "暖冬",
+        "海滩",
+        "海边",
+        "度假写真"
+      ],
+      "direction": "A Sanya-inspired tropical beach with turquoise sea, soft white sand and palm trees, breezy modest pale-yellow summer dress, warm sunset, natural coastal wind, no bridal styling.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Sanya-inspired tropical beach with turquoise sea, soft white sand and palm trees, breezy modest pale-yellow summer dress, warm sunset, natural coastal wind, no bridal styling. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "santorini",
+      "title": "圣托里尼蓝白",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "圣托里尼",
+        "蓝白",
+        "爱琴海",
+        "地中海"
+      ],
+      "direction": "A Santorini-inspired Greek island terrace, whitewashed walls, blue domed roofs and distant Aegean sea, tasteful flowing sky-blue casual dress, luminous Mediterranean daylight, no wedding clothing.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Santorini-inspired Greek island terrace, whitewashed walls, blue domed roofs and distant Aegean sea, tasteful flowing sky-blue casual dress, luminous Mediterranean daylight, no wedding clothing. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "kyoto",
+      "title": "京都古风樱花",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "京都",
+        "和服",
+        "古寺",
+        "日式"
+      ],
+      "direction": "A Kyoto-inspired traditional wooden street and subtle temple garden during cherry blossom season; tasteful fully clothed pastel kimono with correct overlapping collar and obi, gentle spring light, no religious insignia.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Kyoto-inspired traditional wooden street and subtle temple garden during cherry blossom season; tasteful fully clothed pastel kimono with correct overlapping collar and obi, gentle spring light, no religious insignia. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "xian",
+      "title": "西安汉服古城",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "西安",
+        "汉服",
+        "唐风",
+        "城墙"
+      ],
+      "direction": "A Xian-inspired old city wall and Chinese traditional pavilion at golden hour; elegant fully clothed Tang-inspired hanfu in soft red and cream, natural traditional styling, no royal or religious insignia.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Xian-inspired old city wall and Chinese traditional pavilion at golden hour; elegant fully clothed Tang-inspired hanfu in soft red and cream, natural traditional styling, no royal or religious insignia. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "desert",
+      "title": "沙漠星空",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "沙漠",
+        "星空",
+        "西部",
+        "驼队"
+      ],
+      "direction": "Western desert dunes under a rich starry twilight sky, subtle distant camel caravan silhouettes without riders, modest terracotta travel outfit and simple scarf, plausible soft warm face lighting and cool sky, no fantasy planet.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. Western desert dunes under a rich starry twilight sky, subtle distant camel caravan silhouettes without riders, modest terracotta travel outfit and simple scarf, plausible soft warm face lighting and cool sky, no fantasy planet. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "sakura",
+      "title": "樱花季写真",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "樱花季",
+        "武汉",
+        "无锡",
+        "春日"
+      ],
+      "direction": "A Wuhan/Wuxi-inspired lakeside cherry blossom avenue with abundant pale-pink flowers, soft pastel green casual spring dress, gentle spring daylight, no temple or kimono, spacious natural travel composition.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Wuhan/Wuxi-inspired lakeside cherry blossom avenue with abundant pale-pink flowers, soft pastel green casual spring dress, gentle spring daylight, no temple or kimono, spacious natural travel composition. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "grassland",
+      "title": "草原蒙古包",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "草原",
+        "蒙古包",
+        "蓝天",
+        "夏季"
+      ],
+      "direction": "Open green summer grassland, distant white Mongolian-style yurts under a blue sky; tasteful modest contemporary Mongolian-inspired deel travel costume with simple belt, no sacred or tribal insignia, warm natural sunlight.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. Open green summer grassland, distant white Mongolian-style yurts under a blue sky; tasteful modest contemporary Mongolian-inspired deel travel costume with simple belt, no sacred or tribal insignia, warm natural sunlight. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "oldtown",
+      "title": "古城灯火夜景",
+      "series": "旅行打卡主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "古城",
+        "丽江",
+        "凤凰",
+        "夜景",
+        "灯火"
+      ],
+      "direction": "A Lijiang/Fenghuang-inspired old town riverside at blue hour, wooden houses and soft warm lantern reflections, modest teal casual linen outfit, realistically balanced face light, no readable shop signs, no wedding styling.",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Lijiang/Fenghuang-inspired old town riverside at blue hour, wooden houses and soft warm lantern reflections, modest teal casual linen outfit, realistically balanced face light, no readable shop signs, no wedding styling. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "logo",
+      "title": "旅行打卡主题 logo",
+      "series": "主题 logo",
+      "size": "1024x1024",
+      "prompt": "Use case: stylized-concept. Asset type: polished premium 3D travel portrait studio app icon. An original sculpted ivory camera with a glass lens showing a tiny luminous blue globe, one delicate airplane trail curves upward behind it, subtle ice-crystal blue and tropical coral accents, rounded-square cream background, ceramic and frosted-glass materials, rich depth, soft contact shadows, refined studio lighting. Camera and travel immediately readable at small size, one clear focal silhouette, premium playful quality. No text, letters, numbers, logo, brands, domain names, watermark, flat vector graphics or generic line icon."
+    }
+  ]
+}
