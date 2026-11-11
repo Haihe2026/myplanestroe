@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-9507b2d4ba2032b024f7cf8bba4be92e55fdc79596f0de06510c7311a4ce64e7",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-maternity-portrait-studio",
+  "stage": "test_passed",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "6609dcdcee449424740e621f1f187eef3cb04eb7",
+  "source_path": "pipeline/products/mps-maternity-portrait-studio/status.json",
+  "input_fingerprint": "9507b2d4ba2032b024f7cf8bba4be92e55fdc79596f0de06510c7311a4ce64e7"
+}
