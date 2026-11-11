@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-72f2034201e453ab196a33517be3e0eab673f9a04513d0a778e1d58bcde78933",
+  "claim_id": "6e9e1a80-0b88-4d77-ab9a-d17a04db2589",
+  "role": "codex",
+  "skill_id": "mps-maternity-portrait-studio",
+  "at": "2026-11-12T02:01:34+08:00",
+  "source_ref": "108761fb56bc6712d22b387386d4105841bcb69b",
+  "result": "test_passed",
+  "version": "1.0.1",
+  "evidence_ref": "6609dcdcee449424740e621f1f187eef3cb04eb7:pipeline/products/mps-maternity-portrait-studio/03-test-report.md",
+  "result_commit": "6609dcdcee449424740e621f1f187eef3cb04eb7",
+  "original_receipt_preserved": {
+    "event_id": "evt-72f2034201e453ab196a33517be3e0eab673f9a04513d0a778e1d58bcde78933",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T01:55:39+08:00",
+    "evidence_ref": "3a81cd6226762fb02c2d782de9d282a422fcca24:pipeline/products/mps-maternity-portrait-studio/status.json",
+    "claim_id": "6e9e1a80-0b88-4d77-ab9a-d17a04db2589"
+  },
+  "duplicate_event_claim": false,
+  "open_findings": [],
+  "closures": [
+    {
+      "id": "MAT-A3-01",
+      "result": "closed",
+      "file": "SKILL.md",
+      "lines": [
+        6,
+        7,
+        8
+      ],
+      "basis": "三项长描述合法双引号标量；标准PyYAML直接解析最终ZIP原始frontmatter成功，重复键检查通过，无内存投影。随包测试补严格子集和可用时真实YAML解析，A2记录最终ZIP正反例。"
+    },
+    {
+      "id": "MAT-A3-02",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        644,
+        648,
+        651,
+        652,
+        898,
+        900,
+        906,
+        914
+      ],
+      "basis": "未提交run先完整验图/源SHA，再账户HTTP；needs_credits无job_id的resume也先预检。未知/已提交仍优先只查原键/ID，不因本地图坏掉重建任务或解锁。"
+    },
+    {
+      "id": "MAT-A3-03",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        451,
+        453,
+        455,
+        457,
+        459
+      ],
+      "related_sources": [
+        "SKILL.md:99–100",
+        "scripts/welcome_copy.py:66–88"
+      ],
+      "basis": "合并提问明确问成年人；本人/成年/在孕期未知→needsEligibility一次合并补问，只有明确other/no按真实原因拒绝；未成年不再要求换图，不索证明或看图估年龄。"
+    }
+  ],
+  "zip": {
+    "ref": "108761fb56bc6712d22b387386d4105841bcb69b",
+    "path": "pipeline/products/mps-maternity-portrait-studio/02-package/dist/mps-maternity-portrait-studio-1.0.1.zip",
+    "sha256": "f958c1cc8eb4351e1fc7fc66adbaa5b62be03600ac15d08f8194bfc6447be8a6",
+    "bytes": 2353236
+  },
+  "logo": {
+    "ref": "108761fb56bc6712d22b387386d4105841bcb69b",
+    "path": "pipeline/products/mps-maternity-portrait-studio/02-package/dist/logo.png",
+    "sha256": "940b00c1a771779945a666de96a73dcbc7346c6435b5fdc7fded7028902ac333",
+    "bytes": 359488,
+    "external": true
+  },
+  "inspection_scope": "A3独立静态复查；最终ZIP原始YAML标准解析成功，无诊断投影；只求值已审纯路径函数，无客户端业务/完整A2执行。",
+  "published_report_and_evidence_bytes_verified": true,
+  "other_product_files_and_board_rows_untouched": true,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "client_modified_by_codex": false,
+  "development_documents_modified": false,
+  "appendix_d": "not performed; pending fixed Muse msg+relay per D.2; D.6 applies",
+  "delivery_gate": "A3 passed; Appendix D and host/platform acceptance not claimed passed",
+  "next_role": "muse",
+  "next_action": "核对固定1.0.1 ZIP/外置logo/A3报告，按D.2给Codex发本机导入安装测验msg+relay，写清版本/固定提交/ZIP与logo；按D.6控制同根因重试；不付费生图、不点发布，正式上传负责人手动。",
+  "authority": "本事件不扩展生产/财务/部署/发布/跨聊天权限，不新建worker、AI心跳或周期监测。"
+}
