@@ -1,0 +1,13 @@
+{
+  "request_id": "req-muse-to-claude-fix-family-101-fam-a3-20261111",
+  "from": "muse",
+  "to": "claude",
+  "skill_id": "mps-family-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "3f41e75882c42aa5f0b6a579d797a17adfafa56b",
+  "source_path": "pipeline/products/mps-family-portrait-studio/msg-from-muse-20261111-fix-101-fam-a3.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-df3f5438c31e5b6b1cbf1b332a33709f771202ba7ab3e889093918156a803ebf",
+  "request_kind": "handoff"
+}
