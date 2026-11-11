@@ -1,0 +1,156 @@
+{
+  "note": "原字节复制，未缩放、未重编码、未新增生图调用；源图见 demo-assets/provenance.json",
+  "total_bytes": 2279205,
+  "items": [
+    {
+      "key": "studio",
+      "title": "白纱轻盈棚拍",
+      "stage": "middle",
+      "source": "studio.png",
+      "source_sha256": "05730be75a2db76aa82dffd07059fd352cef811d9d7700133a6e263a7d7eb105",
+      "package_file": "studio.png",
+      "package_sha256": "05730be75a2db76aa82dffd07059fd352cef811d9d7700133a6e263a7d7eb105",
+      "package_bytes": 231084,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪阳光",
+      "stage": "early",
+      "source": "lawn.png",
+      "source_sha256": "080869ac2b4834961b52b3ee858816f9b5721e1a01adf7b68b7e922782d0fb8a",
+      "package_file": "lawn.png",
+      "package_sha256": "080869ac2b4834961b52b3ee858816f9b5721e1a01adf7b68b7e922782d0fb8a",
+      "package_bytes": 225221,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "flowers",
+      "title": "花海仙气",
+      "stage": "middle",
+      "source": "flowers.png",
+      "source_sha256": "b3376ed396fd3b57fd04b7002b74741c70cca46de1a7dafef4443d1c7e53805f",
+      "package_file": "flowers.png",
+      "package_sha256": "b3376ed396fd3b57fd04b7002b74741c70cca46de1a7dafef4443d1c7e53805f",
+      "package_bytes": 251388,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "oil",
+      "title": "复古油画",
+      "stage": "late",
+      "source": "oil.png",
+      "source_sha256": "60dd1e664b87785002bb888809708d604c746be2a541d0cae7071018a7173b51",
+      "package_file": "oil.png",
+      "package_sha256": "60dd1e664b87785002bb888809708d604c746be2a541d0cae7071018a7173b51",
+      "package_bytes": 256462,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "home",
+      "title": "简约家居温馨",
+      "stage": "early",
+      "source": "home.png",
+      "source_sha256": "d62f33b492ee5847c553d1df082b4448040317871874383e6157d64c271364d1",
+      "package_file": "home.png",
+      "package_sha256": "d62f33b492ee5847c553d1df082b4448040317871874383e6157d64c271364d1",
+      "package_bytes": 243953,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "beach",
+      "title": "海边度假暖阳",
+      "stage": "middle",
+      "source": "beach.png",
+      "source_sha256": "41b87bac7691289721524620e9a5797874a07cd6f3c00167a96ed8ce4da74276",
+      "package_file": "beach.png",
+      "package_sha256": "41b87bac7691289721524620e9a5797874a07cd6f3c00167a96ed8ce4da74276",
+      "package_bytes": 179264,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "qipao",
+      "title": "旗袍雅致",
+      "stage": "late",
+      "source": "qipao.png",
+      "source_sha256": "21b8d6d599426c983cc16b486d08960fd26e4fa4fa6984c5f558fd45ebd36cca",
+      "package_file": "qipao.png",
+      "package_sha256": "21b8d6d599426c983cc16b486d08960fd26e4fa4fa6984c5f558fd45ebd36cca",
+      "package_bytes": 215149,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新",
+      "stage": "early",
+      "source": "korean.png",
+      "source_sha256": "1e18cd87f5a167c5f99df05a75e28c121cc0aef6fa72041dd6e1c87d1d08a595",
+      "package_file": "korean.png",
+      "package_sha256": "1e18cd87f5a167c5f99df05a75e28c121cc0aef6fa72041dd6e1c87d1d08a595",
+      "package_bytes": 216543,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "forest",
+      "title": "森系清新",
+      "stage": "middle",
+      "source": "forest.png",
+      "source_sha256": "44270b233e2a503d4363e2494c19275bfedf020486a5c5699faa95c73db5451f",
+      "package_file": "forest.png",
+      "package_sha256": "44270b233e2a503d4363e2494c19275bfedf020486a5c5699faa95c73db5451f",
+      "package_bytes": 242388,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "night",
+      "title": "夜景灯火温馨",
+      "stage": "late",
+      "source": "night.png",
+      "source_sha256": "a2b6753ca9986b56c1121de290dcfb76eb61d0b1be196ecd700fe1111ee6d0da",
+      "package_file": "night.png",
+      "package_sha256": "a2b6753ca9986b56c1121de290dcfb76eb61d0b1be196ecd700fe1111ee6d0da",
+      "package_bytes": 217753,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    }
+  ]
+}

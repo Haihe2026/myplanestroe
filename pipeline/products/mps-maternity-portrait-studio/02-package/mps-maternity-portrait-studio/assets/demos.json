@@ -1,0 +1,75 @@
+{
+  "notice": "示例人物均为虚构的成年人，只展示效果方向，不是你的真实结果；每张标注的视觉档只是这张示例的呈现，不是给你的默认选择，也不代表医学孕周；AI 生成孕期写真，非实拍。",
+  "demos": [
+    {
+      "key": "studio",
+      "title": "白纱轻盈棚拍",
+      "stage": "middle",
+      "note": "柔光影棚，白色孕期纱裙；本图为中期视觉档；AI 生成孕期写真，非实拍",
+      "file": "studio.png"
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪阳光",
+      "stage": "early",
+      "note": "草坪日光，日常孕期装；本图为早期视觉档；AI 生成孕期写真，非实拍",
+      "file": "lawn.png"
+    },
+    {
+      "key": "flowers",
+      "title": "花海仙气",
+      "stage": "middle",
+      "note": "花海柔光，孕期纱裙；本图为中期视觉档；AI 生成孕期写真，非实拍",
+      "file": "flowers.png"
+    },
+    {
+      "key": "oil",
+      "title": "复古油画",
+      "stage": "late",
+      "note": "油画质感，深色长裙；本图为晚期视觉档；AI 生成孕期写真，非实拍",
+      "file": "oil.png"
+    },
+    {
+      "key": "home",
+      "title": "简约家居温馨",
+      "stage": "early",
+      "note": "窗边暖光，居家舒适；本图为早期视觉档；AI 生成孕期写真，非实拍",
+      "file": "home.png"
+    },
+    {
+      "key": "beach",
+      "title": "海边度假暖阳",
+      "stage": "middle",
+      "note": "海边暖阳，孕期长裙；本图为中期视觉档；AI 生成孕期写真，非实拍",
+      "file": "beach.png"
+    },
+    {
+      "key": "qipao",
+      "title": "旗袍雅致",
+      "stage": "late",
+      "note": "素雅影棚，孕期旗袍；本图为晚期视觉档；AI 生成孕期写真，非实拍",
+      "file": "qipao.png"
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新",
+      "stage": "early",
+      "note": "淡雅影棚，低饱和服装；本图为早期视觉档；AI 生成孕期写真，非实拍",
+      "file": "korean.png"
+    },
+    {
+      "key": "forest",
+      "title": "森系清新",
+      "stage": "middle",
+      "note": "林间散射光，端庄裙装；本图为中期视觉档；AI 生成孕期写真，非实拍",
+      "file": "forest.png"
+    },
+    {
+      "key": "night",
+      "title": "夜景灯火温馨",
+      "stage": "late",
+      "note": "夜色灯火，长裙开衫；本图为晚期视觉档；AI 生成孕期写真，非实拍",
+      "file": "night.png"
+    }
+  ]
+}
