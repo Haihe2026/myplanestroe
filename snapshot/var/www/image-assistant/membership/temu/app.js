@@ -24,7 +24,12 @@ async function account(){try{const data=await api('account');signedIn=true;el('a
 el('refresh').addEventListener('click',account);
 el('renewal').addEventListener('change',()=>choose(selected));
 function updateBuy(){el('buy').disabled=!ready;el('buy').textContent=ready?(signedIn?'付款给企业助力':'关联账户后付款'):'收款暂未开放';}
-function showAccountDialog(){el('account-plan').textContent=el('summary').textContent+' · '+el('total').textContent;el('account-feedback').textContent='';el('account-dialog').showModal();document.body.classList.add('payment-open');}
+function showAccountDialog(){
+ const product='temu';
+ try{sessionStorage.setItem('mps-auth-checkout-'+product,JSON.stringify({plan:selected,at:Date.now()}));}catch(_){}
+ const args=new URLSearchParams({product,return_to:location.pathname});
+ location.assign('/auth/wechat/#'+args.toString());
+}
 document.addEventListener('image-account-ready',()=>{updateBuy();if(signedIn&&el('account-dialog').open)el('account-dialog').close();});
 el('account-close').addEventListener('click',()=>el('account-dialog').close());
 el('account-dialog').addEventListener('close',()=>document.body.classList.remove('payment-open'));
@@ -41,3 +46,15 @@ window.addEventListener('hashchange',async()=>{
   catch(error){el('notice').textContent=error.message+'。请从 WorkBuddy 重新打开会员中心。';updateBuy();}
 });
 (async()=>{const ticket=new URLSearchParams(location.hash.slice(1)).get('ticket');history.replaceState(null,'',location.pathname);try{const data=await api('plans');catalog=data.plans;ready=data.payment_ready===true;render();if(ticket)await api('redeem',{ticket});await account();}catch(error){el('notice').textContent=error.message+'。请从 WorkBuddy 重新打开会员中心。';updateBuy();}})();
+
+document.addEventListener('image-account-ready',event=>{
+ if(!event.detail.signedIn||!ready)return;
+ const key='mps-auth-checkout-temu';
+ try{
+  const pending=JSON.parse(sessionStorage.getItem(key)||'null');
+  if(!pending||Date.now()-pending.at<0||Date.now()-pending.at>15*60*1000)return;
+  if(!catalog.some(plan=>plan.id===pending.plan))return;
+  sessionStorage.removeItem(key);choose(pending.plan);
+  queueMicrotask(()=>{if(signedIn&&ready)el('buy').click();});
+ }catch(_){}
+});
