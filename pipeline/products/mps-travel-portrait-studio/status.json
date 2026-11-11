@@ -1,8 +1,8 @@
 {
   "blocked": null,
-  "claimed_at": null,
+  "claimed_at": "2026-11-11T22:50:53+08:00",
   "lane": "fast",
-  "owner": null,
+  "owner": "codex",
   "rounds": {
     "dev": 3,
     "spec": 0,
@@ -11,8 +11,8 @@
   "skill_id": "mps-travel-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
-  "stage": "package_ready",
-  "updated_at": "2026-11-11T22:46:31+08:00",
+  "stage": "test_in_progress",
+  "updated_at": "2026-11-11T22:50:53+08:00",
   "versions": {
     "listed": null,
     "package": "1.0.2"
