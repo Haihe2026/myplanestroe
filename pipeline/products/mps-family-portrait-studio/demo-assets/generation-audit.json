@@ -1,0 +1,33 @@
+{
+  "authorized_limit": 11,
+  "post_attempt_intents": 11,
+  "adapter_tasks": 11,
+  "unique_remote_tasks": 11,
+  "succeeded": 11,
+  "duplicate_generation_posts": 0,
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "customer_financial_database_used": false,
+  "scope": "isolated adapter task database, no customer wallet writes",
+  "upstream_generation_calls": 11,
+  "demo_generation_calls": 10,
+  "logo_generation_calls": 1,
+  "source_ref": "2d32cc074e7d054068708a82578119bd8ad2993f",
+  "authorization_commit": "3d487d8c146afd63614c714e2326cc7cd0ad1630",
+  "harness_sha256": "2e02b5a22bd9b58064cba480cf7d008d729778e5e40987a2aeb2a71b517d5672",
+  "public_synthetic_reference": {
+    "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/feb42dd382e0d0b0854e89a8820805a08d27453d/pipeline/products/mps-family-portrait-studio/demo-assets/studio.png",
+    "sha256": "5db792d8357c92f1102396b1f0fb3972c6370c8155eb39a492117dfa235c9ddc",
+    "fictional_adults": true,
+    "source_commit": "feb42dd382e0d0b0854e89a8820805a08d27453d",
+    "people": 4
+  },
+  "production_signed_input_route_exercised": false,
+  "customer_photo_used": false,
+  "real_payment_tested": false,
+  "estimated_total_usd": 0.0715,
+  "actual_invoice_verified": false
+}

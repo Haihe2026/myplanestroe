@@ -1,0 +1,84 @@
+{
+  "event": {
+    "schema_version": 1,
+    "event_id": "evt-19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d",
+    "kind": "stage_ready",
+    "to": "codex",
+    "skill_id": "mps-family-portrait-studio",
+    "stage": "brief_ready",
+    "source_repo": "Haihe2026/myplanestroe",
+    "source_ref": "bbe6b53a30b87602d35aef8f9bc043fa729614bb",
+    "source_path": "pipeline/products/mps-family-portrait-studio/status.json",
+    "input_fingerprint": "19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d"
+  },
+  "original_receipt": {
+    "event_id": "evt-19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d",
+    "role": "codex",
+    "action": "claimed",
+    "at": "2026-11-11T08:29:42+08:00",
+    "evidence_ref": null,
+    "claim_id": "144b376d-ae91-43d8-aa3f-221f8f082769"
+  },
+  "event_blob": "95eda5fc6fff4edf88e5537c81415daaf4107ea2",
+  "receipt_blob": "84b8c5ccd519e1229a25c6ea1d0489f34b49b76a",
+  "fingerprint_recomputed": "19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d",
+  "fingerprint_matches": true,
+  "claim_matches_local": true,
+  "duplicate_event_claim_created": false,
+  "brief_blob": "51aa4f21d02c4c31665582159fac5181609e4a11",
+  "status_blob_before_product_claim": "e21ab35e285675e0c4c55d6f263e4e67bb072663",
+  "sop_blob": "5cbe73634ad7aa9767ed6a9e0997300f52d79cea",
+  "config_blob": "966a0d8fdd9d680d4652fa2cba8aacca174aa74e",
+  "business_source_ref": "2d32cc074e7d054068708a82578119bd8ad2993f",
+  "sources": [
+    {
+      "path": "resources/shared-image-temporary/client.py",
+      "blob": "bea554745f369b74ba9be71a8f5493822e84a338"
+    },
+    {
+      "path": "resources/shared-image-temporary/README.md",
+      "blob": "b816093810b42dded284736b2d695618846d4ed0"
+    },
+    {
+      "path": "resources/upstreams/code-map.json",
+      "blob": "bf9f18b58e772643743a99667a5d3926bf45251a"
+    },
+    {
+      "path": "resources/upstreams/assets.public.json",
+      "blob": "f54048b056d841b2175e2626fd994fe59a5d1a04"
+    },
+    {
+      "path": "resources/upstreams/catalog.json",
+      "blob": "78c630cecb11e24893449ae60a5012890b93e123"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/child_resource.py",
+      "blob": "fff13531e9e02491c20cf5ac45dce755b576d59c"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+      "blob": "280a7cbdd3aec75d2a3572661d7e8cf45ea1813f"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/image_inputs.py",
+      "blob": "749b820fccb6f04797488932d48401a01fea6396"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.24/sunburst.py",
+      "blob": "648703366d49d4a14b3cece881402f075a0ad5d2"
+    },
+    {
+      "path": "pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json",
+      "blob": "b8d11901e02c6097464f6a575e42720c5f688b48"
+    },
+    {
+      "path": "pipeline/products/mps-pet-portrait-studio/01-dev-spec.json",
+      "blob": "a4d766bba4fe25de0ba0c78fc1ff068422180a73"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+      "blob": "6dc884f93f56cdb0ca95f71eac6e50bd066ee07f"
+    }
+  ],
+  "authorization_scope": "开发文档、所需示例10张及主题logo1张；不新增部署/生产财务/发布/跨聊天权限。"
+}

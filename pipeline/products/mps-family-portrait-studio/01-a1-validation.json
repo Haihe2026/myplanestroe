@@ -1,0 +1,127 @@
+{
+  "skill_id": "mps-family-portrait-studio",
+  "checked_at": "2026-11-11T08:57:00+08:00",
+  "result": "pass",
+  "checklist_count": 16,
+  "checks": [
+    {
+      "item": 1,
+      "label": "立项和命名",
+      "result": "pass",
+      "evidence": "MD §1；固定 brief 和队列树；23 个词和上单 submitted。"
+    },
+    {
+      "item": 2,
+      "label": "官方在线读取",
+      "result": "pass",
+      "evidence": "2026-11-11 本次在线 skill/expert；另读 11-08 仓库快照。"
+    },
+    {
+      "item": 3,
+      "label": "场景路由",
+      "result": "pass",
+      "evidence": "MD §3 十个场景/口语/实际画幅；仅三受支持尺寸。"
+    },
+    {
+      "item": 4,
+      "label": "提示词三基线与逐人保留",
+      "result": "pass",
+      "evidence": "MD §4 真实性第一段、文字、安全；P1…Pn 逐人锁定，不臆测身份。"
+    },
+    {
+      "item": 5,
+      "label": "示例计划、来源与审阅",
+      "result": "pass",
+      "evidence": "10 张真实生成示例，9 次合成参考编辑；来源/审计/逐张目检齐全。"
+    },
+    {
+      "item": 6,
+      "label": "主题 logo",
+      "result": "pass",
+      "evidence": "立体相框家庭主题；512×512 PNG；427328 字节；Claude 不替换。"
+    },
+    {
+      "item": 7,
+      "label": "计费与支付后端",
+      "result": "pass",
+      "evidence": "MD §7 具体鉴权/恢复/动态套餐/钱包/核款去重/失败续接。"
+    },
+    {
+      "item": 8,
+      "label": "目录、适配器与毛利",
+      "result": "pass",
+      "evidence": "固定登记→.60→.59→.57，三尺寸/n1/1K；模型估算毛利76.47%。"
+    },
+    {
+      "item": 9,
+      "label": "车道与真实状态",
+      "result": "pass",
+      "evidence": "现有实现、Claude 待开发、无部署、真人/支付/生产签名路由未验证分开列。"
+    },
+    {
+      "item": 10,
+      "label": "接口字段及原任务恢复",
+      "result": "pass",
+      "evidence": "接口均附固定源码；六字段；unknown/404 只查，先存 submit_unknown。"
+    },
+    {
+      "item": 11,
+      "label": "首次对话漏斗",
+      "result": "pass",
+      "evidence": "8 字段200；2秒4096B；机器及缺证步骤不可得，不新增遥测。"
+    },
+    {
+      "item": 12,
+      "label": "相邻技能",
+      "result": "pass",
+      "evidence": "婚纱/证件照/宠物明确分界。"
+    },
+    {
+      "item": 13,
+      "label": "不承接及接管范围",
+      "result": "pass",
+      "evidence": "输入3–4人、单图；授权/监护人；不合成缺席人物；账户无死胡同。"
+    },
+    {
+      "item": 14,
+      "label": "验收职责",
+      "result": "pass",
+      "evidence": "Claude A2 Mock 全部适用项；Codex A3 静态独立检查；不自动上传。"
+    },
+    {
+      "item": 15,
+      "label": "决策记录",
+      "result": "pass",
+      "evidence": "首版人数/单图、固定欢迎、fast、8字段、原账户、合成参考验证范围和手动上传。"
+    },
+    {
+      "item": 16,
+      "label": "MD/JSON 一致与秘密扫描",
+      "result": "pass",
+      "evidence": "逐项对应；三对双语场景/人数/尺寸一致；校验各图哈希/人数范围/来源。"
+    }
+  ],
+  "asset_files": 11,
+  "real_calls": {
+    "demos": 10,
+    "logo": 1,
+    "total": 11,
+    "extra_tests": 0
+  },
+  "document_sha256": {
+    "01-dev-spec.md": "2605c7f97f372533c6a66f4961112f11013d0c02b88559d8f5c8765c13296c2d",
+    "01-dev-spec.json": "416ffa3cd76484f02817b39da5b1ce7950d11e9f19d0e82c1879972aaecbdcc0"
+  },
+  "secret_scan": "pass",
+  "limitations": [
+    "全部为虚构成年人样本，不是客户真实肖像验证。",
+    "只用一组四人基准，不覆盖三人、儿童、低清/遮挡、更多人数或多张单照合成。",
+    "绘画风格改变皮肤和局部细节，不作像素或通用保真保证。",
+    "隔离适配器替换 signed_input 为固定公开合成图；生产签名输入路由未端到端实测。",
+    "未执行真实支付、客户钱包操作或 WorkBuddy 宿主行为验收。"
+  ],
+  "claude_a2": "pending",
+  "codex_a3": "pending",
+  "production_deployments": 0,
+  "publishing": "owner manual"
+}

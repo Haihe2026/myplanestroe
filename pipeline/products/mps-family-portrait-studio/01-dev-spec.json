@@ -1,0 +1,911 @@
+{
+  "skill_id": "mps-family-portrait-studio",
+  "display_name": "全家福写真照相馆",
+  "display_name_en": "Family Portrait Studio",
+  "version": "1.0.0",
+  "lane": "fast",
+  "channels": [
+    "workbuddy-skill"
+  ],
+  "source_ref": "2d32cc074e7d054068708a82578119bd8ad2993f",
+  "brief_ref": "bbe6b53a30b87602d35aef8f9bc043fa729614bb",
+  "sop_ref": "2d32cc074e7d054068708a82578119bd8ad2993f",
+  "document_status": "spec_ready",
+  "a1_passed": true,
+  "ready_for_development": true,
+  "read_record": [
+    {
+      "date": "2026-11-11",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "本次在线读取成功，核对 SKILL.md 与八个必填字段、配对 examples、references/scripts/templates 结构。"
+    },
+    {
+      "date": "2026-11-11",
+      "url": "https://open.workbuddy.cn/docs/expert",
+      "result": "本次在线读取成功；仅用于区分专家独立包结构，当前不交付专家包。"
+    }
+  ],
+  "core_terms": [
+    "全家福写真",
+    "全家福主题照"
+  ],
+  "scenes": [
+    {
+      "key": "new-year-red",
+      "title": "新年红团圆照",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "春节",
+        "新年",
+        "红色",
+        "团圆"
+      ],
+      "direction": "Elegant red Chinese New Year family studio, understated silk clothing, red lantern bokeh, no written characters."
+    },
+    {
+      "key": "gongbi",
+      "title": "中式工笔画全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "工笔画",
+        "国风",
+        "中式"
+      ],
+      "direction": "Chinese fine-line gongbi painting on warm ivory silk, delicate botanical background, refined traditional clothing."
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "草坪",
+        "户外",
+        "绿地"
+      ],
+      "direction": "Natural spring lawn and leafy trees, soft daylight, harmonious cream and sage casual clothing."
+    },
+    {
+      "key": "studio",
+      "title": "简约棚拍全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "棚拍",
+        "简约",
+        "影楼"
+      ],
+      "direction": "Minimalist warm beige portrait studio, pale linen clothing, soft professional photographic lighting, realistic natural skin and clear face details."
+    },
+    {
+      "key": "oil",
+      "title": "复古油画全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "油画",
+        "复古",
+        "古典"
+      ],
+      "direction": "Old master oil painting, muted brown and teal palette, tasteful vintage clothes, dark atmospheric backdrop."
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "海边",
+        "海滩",
+        "度假"
+      ],
+      "direction": "Airy seaside holiday portrait on a beach, sea-blue and off-white clothing, gentle sunset, natural beach light."
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "圣诞",
+        "圣诞树",
+        "节日"
+      ],
+      "direction": "Warm Christmas room, pine branches and golden fairy lights, subtle red and green knitwear, faces unobstructed."
+    },
+    {
+      "key": "longevity",
+      "title": "寿宴金寿全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "寿宴",
+        "祝寿",
+        "金寿"
+      ],
+      "direction": "Dignified longevity celebration, restrained golden and burgundy festive interior, elegant Chinese formal dress, no text or numbers."
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "韩式",
+        "清新",
+        "奶油色"
+      ],
+      "direction": "Fresh Korean-style family studio portrait, creamy pale background, natural light and soft pastel clothing, photorealistic."
+    },
+    {
+      "key": "countryside",
+      "title": "田园乡村全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "田园",
+        "乡村",
+        "乡野"
+      ],
+      "direction": "Warm countryside portrait with a rustic wooden fence and wildflowers, coordinated linen clothing, gentle natural light."
+    }
+  ],
+  "reference": {
+    "min": 1,
+    "max": 1,
+    "mime": [
+      "image/png",
+      "image/jpeg"
+    ],
+    "max_bytes": 5242880,
+    "min_side": 128,
+    "max_side": 8000,
+    "max_pixels": 20000000,
+    "consent": "Each depicted adult consents; a guardian consents for every minor. Explicit permission to send this exact file to the image service and compute supplier; separate paid execution consent tied to frozen task and source SHA256.",
+    "people_min": 3,
+    "people_max": 4,
+    "single_existing_group_photo": true,
+    "multi_individual_photo_composite": false
+  },
+  "billing": {
+    "gateway": "https://aistore.zhaopintong.com/platform-api/gemini",
+    "public_checkout": "https://aistore.zhaopintong.com/membership/gemini/",
+    "unit": "每个独立成功任务 1 张",
+    "new_user_trial": 0,
+    "wallet": "现有通用生图次数",
+    "account": "原 install_secret 与原账户 Bearer",
+    "skill_channel": "workbuddy_skill",
+    "sibling_reuse": false,
+    "plan_source": "GET /platform-api/gemini/membership-api/plans",
+    "idempotency_header": "Idempotency-Key",
+    "checkout": "按原安装关联的服务端短链接",
+    "settlement": "沿现有 manual_qr，报告与核款分开，交易号去重",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/membership-api/plans",
+        "auth_and_body": "无 Bearer，读取当时可用套餐",
+        "source": "resources/shared-image-temporary/client.py:64"
+      },
+      {
+        "method": "GET",
+        "path": "/balance",
+        "auth_and_body": "原账户 Bearer，remaining_uses 是总可用次数",
+        "source": "resources/shared-image-temporary/client.py:65"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry",
+        "auth_and_body": "无 Bearer，原 install_secret，沿服务器签发 URL",
+        "source": "resources/shared-image-temporary/client.py:66–70"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry/status",
+        "auth_and_body": "无 Bearer，原 install_secret，registered 只说明账户注册",
+        "source": "resources/shared-image-temporary/client.py:71–73"
+      },
+      {
+        "method": "POST",
+        "path": "/membership-link",
+        "auth_and_body": "原账户 Bearer，正文 {}，取得短期结账 URL",
+        "source": "resources/shared-image-temporary/client.py:74–76"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-key 与 /skill-key/bound",
+        "auth_and_body": "原账户 Bearer，ready 才私有保存。bound 正文 {key}",
+        "source": "resources/shared-image-temporary/client.py:77–83"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-jobs",
+        "auth_and_body": "Skill Bearer，原 Idempotency-Key，确认后的参考编辑正文",
+        "source": "resources/shared-image-temporary/client.py:84–86"
+      },
+      {
+        "method": "GET",
+        "path": "/jobs/by-key/{key}、/jobs/{id}、/jobs/{id}/image",
+        "auth_and_body": "优先 Skill Bearer，兼容原账户回查。保存 PNG 后交付",
+        "source": "resources/shared-image-temporary/client.py:87–97"
+      },
+      {
+        "method": "GET",
+        "path": "/consumption-history",
+        "auth_and_body": "原账户 Bearer，page/page_size，仅共享 gemini 可见历史",
+        "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89–118"
+      },
+      {
+        "method": "POST",
+        "path": "/support-tickets",
+        "auth_and_body": "原账户 Bearer，Idempotency-Key，category/text/job_id?",
+        "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124–162"
+      },
+      {
+        "method": "GET",
+        "path": "/support-tickets/{id}",
+        "auth_and_body": "原账户 Bearer，只查本人，跨账户 404",
+        "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164–171"
+      }
+    ],
+    "channel": "general",
+    "free_trial": false,
+    "cost_source": "resources/upstreams/catalog.json",
+    "observed_public_plans": [
+      {
+        "price_fen": 500,
+        "images": 25
+      },
+      {
+        "price_fen": 2900,
+        "images": 150
+      },
+      {
+        "price_fen": 3900,
+        "images": 200
+      },
+      {
+        "price_fen": 4900,
+        "images": 250
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/membership-api/plans",
+      "auth_and_body": "无 Bearer，读取当时可用套餐",
+      "source": "resources/shared-image-temporary/client.py:64"
+    },
+    {
+      "method": "GET",
+      "path": "/balance",
+      "auth_and_body": "原账户 Bearer，remaining_uses 是总可用次数",
+      "source": "resources/shared-image-temporary/client.py:65"
+    },
+    {
+      "method": "POST",
+      "path": "/quick-entry",
+      "auth_and_body": "无 Bearer，原 install_secret，沿服务器签发 URL",
+      "source": "resources/shared-image-temporary/client.py:66–70"
+    },
+    {
+      "method": "POST",
+      "path": "/quick-entry/status",
+      "auth_and_body": "无 Bearer，原 install_secret，registered 只说明账户注册",
+      "source": "resources/shared-image-temporary/client.py:71–73"
+    },
+    {
+      "method": "POST",
+      "path": "/membership-link",
+      "auth_and_body": "原账户 Bearer，正文 {}，取得短期结账 URL",
+      "source": "resources/shared-image-temporary/client.py:74–76"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-key 与 /skill-key/bound",
+      "auth_and_body": "原账户 Bearer，ready 才私有保存。bound 正文 {key}",
+      "source": "resources/shared-image-temporary/client.py:77–83"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-jobs",
+      "auth_and_body": "Skill Bearer，原 Idempotency-Key，确认后的参考编辑正文",
+      "source": "resources/shared-image-temporary/client.py:84–86"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/by-key/{key}、/jobs/{id}、/jobs/{id}/image",
+      "auth_and_body": "优先 Skill Bearer，兼容原账户回查。保存 PNG 后交付",
+      "source": "resources/shared-image-temporary/client.py:87–97"
+    },
+    {
+      "method": "GET",
+      "path": "/consumption-history",
+      "auth_and_body": "原账户 Bearer，page/page_size，仅共享 gemini 可见历史",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89–118"
+    },
+    {
+      "method": "POST",
+      "path": "/support-tickets",
+      "auth_and_body": "原账户 Bearer，Idempotency-Key，category/text/job_id?",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124–162"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets/{id}",
+      "auth_and_body": "原账户 Bearer，只查本人，跨账户 404",
+      "source": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164–171"
+    }
+  ],
+  "model": {
+    "asset_id": "aisplice",
+    "server_model": "gpt-image-2.5-ext",
+    "engine": "photo-retouch-sunburst",
+    "resolution": "1K",
+    "n": 1,
+    "quality": "auto",
+    "legacy_fallback": false,
+    "estimated_usd": 0.0065,
+    "fx_estimate": 7,
+    "estimated_cny": 0.0455,
+    "minimum_unit_revenue_cny": 0.1933333333,
+    "estimated_margin": 0.764655,
+    "margin_threshold": 0.6,
+    "name": "gpt-image-2.5-ext",
+    "catalog_ref": "2d32cc074e7d054068708a82578119bd8ad2993f:resources/upstreams/catalog.json"
+  },
+  "margin": {
+    "unit_cost": 0.0455,
+    "unit_revenue": 0.19333333333333333,
+    "gross_margin": 0.7646551724137931,
+    "threshold": 0.6
+  },
+  "request_fields": [
+    "prompt",
+    "size",
+    "confirmed",
+    "image_engine",
+    "references",
+    "reference_consent"
+  ],
+  "demos": [
+    {
+      "key": "new-year-red",
+      "title": "新年红团圆照",
+      "size": "1536x1024",
+      "file": "new-year-red.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "6a5241d763039d22e8e44f701476f1d0102a1f2aeadd3d7fca8866fca1905a14"
+    },
+    {
+      "key": "gongbi",
+      "title": "中式工笔画全家福",
+      "size": "1536x1024",
+      "file": "gongbi.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "3ca678ae407239cb3c6e5af5b5c633e8ac555aa8ebbb1d6853f92a8720c7365e"
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪全家福",
+      "size": "1536x1024",
+      "file": "lawn.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "dbfc37c023ce09e51f45f1e0ff149612f838afddaeb4ccd46312680c56fa00b9"
+    },
+    {
+      "key": "studio",
+      "title": "简约棚拍全家福",
+      "size": "1536x1024",
+      "file": "studio.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "5db792d8357c92f1102396b1f0fb3972c6370c8155eb39a492117dfa235c9ddc"
+    },
+    {
+      "key": "oil",
+      "title": "复古油画全家福",
+      "size": "1536x1024",
+      "file": "oil.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "8d0c79d607695276a847f3455613c4ee1d8d742c7e171a61bfe17b23e8853a44"
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假全家福",
+      "size": "1536x1024",
+      "file": "seaside.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "56580ba6d9c4536c2d02d09b0b80a742d54a6b6c42ad98571a3a513e74bf3d2b"
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日全家福",
+      "size": "1536x1024",
+      "file": "christmas.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "a81b7ff20c762315fb4deb8c21066d053b738cb22cc20e1303b0dee096eae879"
+    },
+    {
+      "key": "longevity",
+      "title": "寿宴金寿全家福",
+      "size": "1536x1024",
+      "file": "longevity.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "1d44638bda9b8351ee170680bd5e92c645a3d8511e432d0778720a6c2c08697d"
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新全家福",
+      "size": "1536x1024",
+      "file": "korean.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "18dee1efcde8f2d9a4d51e8e8b80181052d15f4ad01816538803b3ff7feb08da"
+    },
+    {
+      "key": "countryside",
+      "title": "田园乡村全家福",
+      "size": "1536x1024",
+      "file": "countryside.png",
+      "preview_size": [
+        768,
+        512
+      ],
+      "sha256": "7c61c14de054cfbccf2e4a37987cea32532c7f30383b03bbf43c1beed0bdbf6c"
+    }
+  ],
+  "demo_generation": {
+    "planned": 10,
+    "actual": 10,
+    "paid_calls_limit": 10,
+    "delivery_owner": "codex",
+    "required_before_spec_ready": true,
+    "provenance": "demo-assets/provenance.json",
+    "audit": "demo-assets/generation-audit.json",
+    "authorization": "3d487d8c146afd63614c714e2326cc7cd0ad1630:pipeline/products/mps-family-portrait-studio/01-asset-plan-20261111.json",
+    "generation_attempts": 10,
+    "duplicate_generation_posts": 0,
+    "visual_review": 10
+  },
+  "telemetry": {
+    "fields": [
+      "event_id",
+      "installation_id",
+      "skill_id",
+      "skill_name",
+      "skill_version",
+      "channel",
+      "client_occurred_at",
+      "is_test"
+    ],
+    "success_http": 200,
+    "timeout_s": 2,
+    "link_fields": [
+      "event_id",
+      "receipt",
+      "product"
+    ],
+    "product": "gemini",
+    "anonymous_endpoint": "/platform-api/telemetry/v1/first-dialogue",
+    "max_body_bytes": 4096,
+    "machine_level_available": false
+  },
+  "funnel_steps": [
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "timeouts": {
+    "submit_s": 90,
+    "poll_request_s": 15,
+    "poll_window_s": 120,
+    "extra_s": 30,
+    "prebilling_wait_s": 0,
+    "host_min_s": 240
+  },
+  "verification": {
+    "public_get": true,
+    "live_customer_calls": 0,
+    "live_reference_identity_verified": false,
+    "live_payment_verified": false,
+    "workbuddy_host": "未验证，A3 长期跳过",
+    "platform_publish": "未提审",
+    "demo_asset_sync": "由 Claude 在 A2 核对",
+    "synthetic_four_adult_reference_edit": "九次参考编辑已审阅，详见 01-asset-review.json；不构成真实客户身份保证。",
+    "reference_transport": "isolated adapter with a fixed public synthetic GitHub input; production signed input route not exercised"
+  },
+  "sibling_skills": [
+    {
+      "skill_id": "mps-wedding-portrait-studio",
+      "boundary": "一至两人婚纱写真转婚纱馆；3–4 人家庭合照主题编辑由本品承接。"
+    },
+    {
+      "skill_id": "mps-id-photo-background",
+      "boundary": "证件用途转证件照换底。"
+    },
+    {
+      "skill_id": "mps-pet-portrait-studio",
+      "boundary": "纯宠物写真转宠物主题照相馆。"
+    }
+  ],
+  "tests": [
+    {
+      "id": "T01",
+      "area": "首轮与路由",
+      "coverage": "问候、仅图、能力询问、明确需求、照片检查、不要生成、单看示例、10 模板及相邻分流。断言首次交互遥测之外零 HTTP，推荐一个方向、没有支付抢跑、示例去重和固定话术。",
+      "by": "claude"
+    },
+    {
+      "id": "T02",
+      "area": "本地输入与同意",
+      "coverage": "PNG/JPEG 一张合照的体积/尺寸/像素、损坏/动画、缺图；3 人和 4 人正例，1/2/5 人及多张单照、遮挡/模糊不可辨反例；逐人 P1…Pn 对应及人数/位置确认，缺成人许可或监护人许可不提交；替换源 SHA 或更改主题/画幅/人数清除待提交键和双确认，已提交任务仍原样续查。",
+      "by": "claude"
+    },
+    {
+      "id": "T03",
+      "area": "示例和路径",
+      "coverage": "十图都来自固定清单，假网络与凭证探针零调用；缺文件退出 3。分别用带空格、带 # 的合成现存路径解析 Markdown，覆盖 demo、交付图与画廊。",
+      "by": "claude"
+    },
+    {
+      "id": "T04",
+      "area": "授权与支付",
+      "coverage": "已有原账户跳过授权，无账户同安装授权和恢复，401 清失效凭证、退出码 4、旧任务保存；未到账、拒绝、链接失败、余额不足、分张扣量、付款后仍确认。",
+      "by": "claude"
+    },
+    {
+      "id": "T05",
+      "area": "任务契约",
+      "coverage": "一次一张，默认 3:2、仅三种受支持尺寸；六字段请求白名单；人数与逐人特征仅进入提示词和私有快照，绝不添加 identity_ids/people_count/age 或 provider URL 等传输字段；双确认、同体同键、冲突与回放。",
+      "by": "claude"
+    },
+    {
+      "id": "T06",
+      "area": "等待与续接",
+      "coverage": "一次完成、两轮后完成、五轮仍在处理、首次网络抖动恢复、全程未能确认、明确失败；模拟 401/402/403/409/422/429/5xx，未知查原任务；余额恢复继续未完成项、成功图片只读补取、失败与策略拒绝不扣，模糊费用照记录。",
+      "by": "claude"
+    },
+    {
+      "id": "T07",
+      "area": "交付与画廊",
+      "coverage": "校验 PNG、非覆盖写入、图先于费用及余额，首张只提示一次调整，保存原图，服务端实际尺寸不符提示，可离线裁切并区分派生图；需要重生成时再确认。",
+      "by": "claude"
+    },
+    {
+      "id": "T08",
+      "area": "账户与遥测",
+      "coverage": "余额、消费记录、提交及查看工单、同键重复、跨账户 404、无预计时间。真实首轮入口与早退分支均走白名单上报，关停/损坏/只读/断网不影响主流程，同安装一次，合法账户才能 link。",
+      "by": "claude"
+    },
+    {
+      "id": "T09",
+      "area": "打包与文案",
+      "coverage": "八个必填字段、三组双语同场景同画幅、两级路径、版本与渠道、禁用词、脚本退出码和各处超时一致。A3-E01 故意错配可检出。",
+      "by": "claude"
+    },
+    {
+      "id": "T10",
+      "area": "收藏与不可用项",
+      "coverage": "收藏卡仅在首次交付后出现，暂不/取消、两级记忆及新对话触发由 Mock 覆盖；不支持写入时如实提示。支付 API 缺失能力、机器漏斗和真机范围按规格记录。",
+      "by": "claude"
+    },
+    {
+      "id": "T11",
+      "area": "固定包独立检查",
+      "coverage": "Codex 从干净目录解压并核对 SHA256、目录和 YAML、双语语义、十图与来源 SHA、实际 Markdown 链接、支付及遥测字段和规格范围。按现行 A3 不跑完整测试。",
+      "by": "codex"
+    },
+    {
+      "id": "T12",
+      "area": "多人保真和示例来源",
+      "by": "claude",
+      "coverage": "Mock 中拒绝人数改变、换位/融合面孔、不辨识主体和未经许可的参考；十图 key/标题/尺寸/SHA 对照来源，logo 原字节复制并核对 512×512 PNG ≤500KB；真实调用 0。主观身份检验不能由 Mock 宣称通过，按本规格合成样本审阅记录披露局限。"
+    },
+    {
+      "id": "T13",
+      "area": "第七章账户接管",
+      "by": "claude",
+      "coverage": "全新用户分别运行 status/auth/topup/balance/paid/history，均走原安装 quick-entry 或如实断网；registration/checkout/ready、短链域名/路径/过期/缺期限、0 与 HTTP 错误文案；Skill401 恢复并只查原任务；paid 只核真实状态，不把自述当入账；执行说明最前接管规则和 15–25 触发词、唯一调用倾向句。"
+    },
+    {
+      "id": "T14",
+      "area": "未知任务与坏图恢复",
+      "by": "claude",
+      "coverage": "先持久化 submit_unknown 再发 POST；模拟进程退出、超时、5xx、查询404、409及持久401，禁止换键/重发生成；锁住 replan/confirm/regenerate；损坏 zlib/CRC/PNG/Adam7 保留 download_pending，仅 GET 只读补取，不重复收费；不能声称推迟后端结算。"
+    }
+  ],
+  "decisions": [
+    {
+      "item": "首版输入",
+      "chosen": "一张已有 3–4 人合照；不接多张个人照合成、5 人以上或 1–2 人写真",
+      "basis": "实际适配器仅接受图像数组，无逐人身份绑定；保守缩小选品。"
+    },
+    {
+      "item": "画幅与档位",
+      "chosen": "十场景默认 3:2 人像推荐档；仅已支持三尺寸，不提供 2K/4K 或打印级承诺",
+      "basis": "固定 .59/.60 实现；横版留足多人脸部空间。"
+    },
+    {
+      "item": "欢迎句",
+      "chosen": "欢迎使用WorkBuddy官方认证技能 全家福写真照相馆。",
+      "basis": "本聊天用户固定格式要求；审核独立记录。"
+    },
+    {
+      "item": "计费与车道",
+      "chosen": "通用套餐、0 试用、fast、无部署",
+      "basis": "自动 SOP A.5 与公开 health/plans、固定源码。"
+    },
+    {
+      "item": "实际接口优先",
+      "chosen": "不引入 inline_delivery、Range、低余额标识、503 快速重试、face-ID 等未证实字段",
+      "basis": "固定源码和六字段白名单；未知任务只查询，404 也不授权重提。"
+    },
+    {
+      "item": "隐私与肖像",
+      "chosen": "成人逐人许可、未成年人监护人许可；素材不入遥测/Git/公开工单",
+      "basis": "既有 reference_consent；需单独确认当次付费。"
+    },
+    {
+      "item": "示例与 logo",
+      "chosen": "10 张虚构成人示例 + 1 张 logo；各 key 一次 POST，失败不盲重发",
+      "basis": "用户长期明确授权；固定资产计划。"
+    },
+    {
+      "item": "示例参考传输",
+      "chosen": "隔离适配器仅覆盖 signed_input URL，使用固定提交公开合成示例",
+      "basis": "不写生产输入库或钱包；此验证不能证明生产签名 URL 和真人身份锁定。"
+    },
+    {
+      "item": "遥测",
+      "chosen": "现有八字段/200，不发 machine_id；新设备漏斗缺证不可得",
+      "basis": "自动 SOP 当前兼容决定与 .58 网关/白名单。"
+    },
+    {
+      "item": "账号",
+      "chosen": "原 install_secret 持久恢复；sibling_reuse=false；新用户账户命令必须有出口",
+      "basis": "固定配置和 SOP 第七章。"
+    },
+    {
+      "item": "结算语义",
+      "chosen": "客户端先校验 PNG 再宣布交付；服务端可能已按任务完成结算，坏图仅重取原图",
+      "basis": "不在 fast 改动账本/结算时机，不承诺本地落盘前未扣。"
+    },
+    {
+      "item": "验收与上传",
+      "chosen": "Claude A2 Mock 完整自测；Codex A3 独立静态检查；最终包负责人手动测和上传",
+      "basis": "当前 SOP；不再恢复旧聊天任务或 AI 心跳。"
+    }
+  ],
+  "blocked_reasons": [],
+  "welcome": {
+    "text": "欢迎使用WorkBuddy官方认证技能 全家福写真照相馆。",
+    "once_per_chat": true,
+    "decision": "用户要求保留 SOP 固定格式；平台审核状态仍按真实回执。",
+    "platform_review": "未提审"
+  },
+  "serial_gate": {
+    "previous_skill_id": "mps-pet-portrait-studio",
+    "allowed_previous_stages": [
+      "submitted",
+      "listed"
+    ],
+    "previous_stage": "submitted",
+    "previous_version": "1.0.5",
+    "verified_at": "2026-11-11",
+    "status_ref": "2d32cc074e7d054068708a82578119bd8ad2993f:pipeline/products/mps-pet-portrait-studio/status.json",
+    "all_previous_submitted": true
+  },
+  "workbuddy_examples": [
+    {
+      "scene": "new-year-red",
+      "size": "1536x1024",
+      "zh": "用这张四人合照做新年红全家福，横版 3:2。",
+      "en": "Turn this photo of four people into a red New Year family portrait in landscape 3:2."
+    },
+    {
+      "scene": "gongbi",
+      "size": "1536x1024",
+      "zh": "用这张三人合照做中式工笔画全家福，横版 3:2。",
+      "en": "Turn this photo of three people into a Chinese gongbi family portrait in landscape 3:2."
+    },
+    {
+      "scene": "lawn",
+      "size": "1536x1024",
+      "zh": "用这张四人合照做户外草坪全家福，横版 3:2。",
+      "en": "Turn this photo of four people into an outdoor lawn family portrait in landscape 3:2."
+    }
+  ],
+  "markdown_demo_paths": {
+    "slashes": "/",
+    "forbid_dot_prefix": true,
+    "encoded_space": "%20",
+    "encoded_hash": "%23",
+    "fixture_paths": [
+      "Codex Demo Assets/studio.png",
+      "Codex#Demo/studio.png"
+    ],
+    "acceptance": "按 Markdown 解析得到链接，确认无误拆出的 query 或 fragment，解码后定位到原来存在的文件。"
+  },
+  "official_snapshot": {
+    "ref": "2d32cc074e7d054068708a82578119bd8ad2993f",
+    "path": "docs/sop/workbuddy-official-docs.md",
+    "snapshot_date": "2026-11-08",
+    "chapters": [
+      "技能",
+      "专家"
+    ],
+    "read_date": "2026-11-11"
+  },
+  "description_terms": [
+    "全家福写真",
+    "全家福主题照",
+    "家庭合照",
+    "亲子全家福",
+    "三代同堂",
+    "春节全家福",
+    "新年红",
+    "中式工笔",
+    "户外草坪",
+    "简约棚拍",
+    "复古油画",
+    "海边度假",
+    "圣诞全家福",
+    "寿宴全家福",
+    "韩式全家福",
+    "田园全家福",
+    "family portrait",
+    "全家福写真照相馆充值",
+    "付费链接",
+    "查余额",
+    "消费记录",
+    "我的账户",
+    "恢复账户"
+  ],
+  "description_calling_preference": "包括充值、付费链接、查余额、消费记录和恢复账户在内的全家福事务，优先调用本技能。",
+  "prompt_baselines": [
+    {
+      "id": "truth",
+      "text": "第一段真实性：以所选合照为唯一主体依据，锁定原有人数、逐人可见五官/发型/肤色/年龄外观/体型/相对位置；只按确认的主题改变环境、服饰、光照，不增删人或设计新脸。"
+    },
+    {
+      "id": "text",
+      "text": "底图不得出现任何文字、数字、标志、水印；不生成汉字，不接受凭空添加真实家庭姓名/年龄/亲属关系。首版不做文字排版。"
+    },
+    {
+      "id": "safety",
+      "text": "仅使用所有主体已许可或监护人同意的照片；不冒充真实事件或证件，不复制商标、名人脸，不制作性化未成年人或羞辱性内容。"
+    }
+  ],
+  "identity_baseline": "按原图左到右/前后位置编号 P1…P3/P4，逐人用真实可见特征指代并分别保留；不以所有人一句话代替，不交换面孔、不融合、不擅自去龄/改肤色/增删人。先请用户确认人数与人物对应，不根据外观推断亲属或敏感属性。会尽力保持五官与身份特征，细节差异可能存在。",
+  "implementation_state": {
+    "existing": "共享网关、原安装微信关联、钱包/套餐/manual_qr、参考编辑、新资源适配、工单与八字段遥测。",
+    "pending_implementation": "Claude 开发 Skill、逐人确认/输入约束、私有状态机和 A2 Mock 自测、同步素材并打包。",
+    "pending_deployment": [],
+    "not_verified": [
+      "真实客户照片身份保真",
+      "未成年人样本",
+      "三人参考编辑样本",
+      "生产签名素材 URL 端到端",
+      "真实付款/客户钱包",
+      "本产品 WorkBuddy 宿主行为",
+      "平台审核/上架"
+    ]
+  },
+  "account_commands": [
+    "status",
+    "auth",
+    "topup",
+    "balance",
+    "paid",
+    "history"
+  ],
+  "runtime_contract": {
+    "max_prompt_characters": 6000,
+    "private_modes": {
+      "directory": "0700",
+      "file": "0600",
+      "windows": "current user ACL"
+    },
+    "frozen_before_post": [
+      "original_key",
+      "original_body",
+      "source_sha256",
+      "scene",
+      "size",
+      "people_map",
+      "paid_consent",
+      "reference_consent",
+      "submit_unknown"
+    ],
+    "unknown_actions": [
+      "GET original by-key",
+      "GET original job",
+      "GET original image"
+    ],
+    "unknown_forbidden": [
+      "new key",
+      "generation POST replay",
+      "replan",
+      "confirm",
+      "regenerate"
+    ],
+    "query_404": "retain unknown; never proves non-submission",
+    "invalid_png": "download_pending, validate complete PNG including zlib/CRC and Adam7 before delivery; GET original image only",
+    "recovery_401": "clear expired Skill credential, restore original install identity, save/bind key, at most two read queries; persistent invalidity exit 4 with task preserved",
+    "checkout_link": "HTTPS allowlisted first-party domain/path and explicit freshness; refetch expired link once using same identity; no invented or stale links"
+  },
+  "source_contracts": {
+    "gateway_client": "2d32cc074e7d054068708a82578119bd8ad2993f:resources/shared-image-temporary/client.py",
+    "reference": "2d32cc074e7d054068708a82578119bd8ad2993f:snapshot/opt/skill-platform/member-0.10.14/core/image_inputs.py",
+    "payment": "2d32cc074e7d054068708a82578119bd8ad2993f:snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py",
+    "gateway": "2d32cc074e7d054068708a82578119bd8ad2993f:snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py",
+    "adapter": "2d32cc074e7d054068708a82578119bd8ad2993f:snapshot/opt/skill-platform/member-0.10.59-child-photo/child_resource.py",
+    "new_only": "2d32cc074e7d054068708a82578119bd8ad2993f:snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+    "catalog": "2d32cc074e7d054068708a82578119bd8ad2993f:resources/upstreams/catalog.json"
+  },
+  "logo": {
+    "file": "02-package/dist/logo.png",
+    "generation_calls_limit": 1,
+    "width": 512,
+    "height": 512,
+    "max_bytes": 512000,
+    "direction": "暖杏色、陶瓷质感四位家庭成员半身相框；有纵深、立体光影、无文字商标，避免平面 ico。",
+    "delivery_owner": "codex",
+    "claude_action": "原字节保留，不重新生成或替换；打包报告核对 SHA256。",
+    "sha256": "29f6d8428ef741af4554083b1149ef4d5c026032ae03086a457e881de2a119b2",
+    "bytes": 427328,
+    "actual_generation_calls": 1,
+    "provenance": "01-logo-provenance.json"
+  }
+}
