@@ -1,1 +1,1 @@
-{"event_id": "evt-72f2034201e453ab196a33517be3e0eab673f9a04513d0a778e1d58bcde78933", "role": "codex", "action": "claimed", "at": "2026-11-12T01:53:33+08:00", "evidence_ref": null, "claim_id": "6e9e1a80-0b88-4d77-ab9a-d17a04db2589"}
+{"event_id": "evt-72f2034201e453ab196a33517be3e0eab673f9a04513d0a778e1d58bcde78933", "role": "codex", "action": "acknowledged", "at": "2026-11-12T01:55:39+08:00", "evidence_ref": "3a81cd6226762fb02c2d782de9d282a422fcca24:pipeline/products/mps-maternity-portrait-studio/status.json", "claim_id": "6e9e1a80-0b88-4d77-ab9a-d17a04db2589"}
