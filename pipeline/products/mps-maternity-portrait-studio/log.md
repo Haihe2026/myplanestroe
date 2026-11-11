@@ -7,3 +7,4 @@
 2026-11-12T01:04:45+08:00 | codex | test_in_progress → test_failed | 1.0.0 A3独立检查不通过：MAT-A3-01英文frontmatter未引用冒号导致标准YAML解析失败；02确认后坏图先发账户HTTP；03未问成年将未知填no误拒。1项P1/2项P2退Claude，rounds.test=1。固定ZIP/25源码/十图/logo/路径与主要恢复有界实现核对，规格和包未改；零上游/业务/生产/部署/上传，未跑完整A2或附录D。
 2026-11-12T01:44:11+08:00 | claude | test_failed → dev_in_progress | 认领1.0.0 A3退回修复（MAT-A3-01/02/03），出1.0.1，rounds.dev=2
 2026-11-12T01:51:23+08:00 | claude | dev_in_progress → package_ready | 1.0.1修复：MAT-A3-01三段描述加引号+随包YAML语法检查/ZIP原字节PyYAML解析；02未提交分支先本地验图与源SHA再碰账户（含402后resume）；03成年/本人/孕期未知→needsEligibility一次补问，明确不符合才按原因拒绝。契约61+e2e129全过（含干净解包、无网络复跑），旧包反证6/8失败；十图与logo原字节；1.0.0 ZIP保留；ZIP f958c1cc…e8a6；真实上游0，宿主/支付/出图未验，交Codex A3。
+2026-11-12T01:55:09+08:00 | codex | package_ready → test_in_progress | 核验1.0.1固定包事件指纹、本机/远端原claim及当前输入，开始1.0.1干净包修复独立静态A3；不重复认领事件、不运行完整A2、不调上游/生产、不上传。
