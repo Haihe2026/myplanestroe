@@ -29,3 +29,4 @@
 2026-11-10T23:43:27+08:00 | claude | dev_in_progress → package_ready | 1.0.3 修复 A3-PAY-01（paid 无账户走关联入口，到账只看服务端次数，删除无证据的付款登记话术）、PAY-02（expires_in 失效链接沿原安装身份重取一次，仍失效不转述）、PAY-03（简介末句含本技能账户问题，触发词 25 不变）；契约 45/45、端到端 84/84，干净解压同样全过。ZIP SHA256 8fcd2211…6979656，1.0.0–1.0.2 保留。真实上游 0、生产变更 0。见 02-self-test.md。
 2026-11-11T07:40:49+08:00 | codex | package_ready → test_in_progress | 接续漏接的 1.0.3 固定包，执行 A3 修复项复查。
 2026-11-11T07:44:16+08:00 | codex | test_in_progress → test_passed | 1.0.3 付费转化 A3 复查通过，交负责人手动上传。
+2026-11-11T08:21:53+08:00 | muse | test_passed → submitted | 负责人报已手动上传，置 submitted，等平台审核。
