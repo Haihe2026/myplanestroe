@@ -1,0 +1,55 @@
+{
+  "authorized_limit": 1,
+  "post_attempt_intents": 1,
+  "adapter_tasks": 1,
+  "unique_remote_tasks": 1,
+  "succeeded": 1,
+  "duplicate_generation_posts": 0,
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "customer_financial_database_used": false,
+  "scope": "one theme logo",
+  "event_id": "evt-00046c7083b8c68141491d85838b60a908db881465454a3d6c46bf216638d110",
+  "skill_id": "mps-pet-portrait-studio",
+  "authorized_in_chat": "2026-11-11; standing approval of one logo per skill",
+  "provenance": {
+    "key": "logo",
+    "series": "theme-logo",
+    "title": "����������������� logo",
+    "prompt": "Create a finished premium 3D application icon for a pet portrait photography studio. One original warm, playful composition with a friendly orange-and-white kitten and a small cream golden puppy shown together in a beautifully lit close-up portrait, emerging slightly forward from a simple rounded photographic portrait frame. Keep both faces large and immediately recognizable at small sizes, natural expressive eyes, detailed soft fur, gentle joyful character. A small subtle polished camera-lens motif integrated into the bottom of the portrait frame makes the photography purpose clear. Sculpted ivory frame, warm apricot and coral background with a restrained teal accent, tactile ceramic and brushed satin materials, realistic depth, soft studio key light, delicate rim light, subtle contact shadows, polished high-end app-icon finish. Centered square composition with generous safe margins, clean uncluttered background. Entirely original, fictional pets. No letters, words, numbers, typography, signatures, watermark, provider names, brand marks or logos. Avoid flat vector art, flat pictograms, a grid or multiple icon variations, cropped ears, extra animals, busy scenery.",
+    "asset_id": "aisplice",
+    "model": "gpt-image-2.5-ext",
+    "requested_size": [
+      1024,
+      1024
+    ],
+    "generation_date": "2026-11-11T08:29:05+08:00",
+    "fictional_pet": true,
+    "rights": "�Լ�ͨ���Ǽ���Դ���ɵ��鹹è������ logo���������ܿ����������չʾʹ�á�",
+    "method": "real_registered_resource_text_to_image_not_reference_edit",
+    "status": "succeeded",
+    "raw_sha256": "3329c2c575cd0c553dd9496ba8b554a675ca5050d60fb0e1fc7606d8bc48bf61",
+    "raw_bytes": 2400181,
+    "file": "logo.png",
+    "actual_generated_size": [
+      1254,
+      1254
+    ],
+    "local_resize": true,
+    "local_processing": "resize; true-color PNG; no added markings",
+    "output_size": [
+      512,
+      512
+    ],
+    "output_bytes": 405487,
+    "output_sha256": "4945dcd1edaa03964e5837180c01fccc32415c84be997e8db56ea7ff8e538e9a"
+  },
+  "visual_review": {
+    "size_checked": 512,
+    "small_size_checked": 64,
+    "text_or_branding_seen": false
+  }
+}
