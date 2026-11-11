@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-d231ce7459640cac983960dec22b41ba2f13f96be1766b612492106b824e0443",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-travel-portrait-studio",
+  "stage": "test_passed",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "02c394415c9e955a955737ecd934e0d3efb55bcd",
+  "source_path": "pipeline/products/mps-travel-portrait-studio/status.json",
+  "input_fingerprint": "d231ce7459640cac983960dec22b41ba2f13f96be1766b612492106b824e0443"
+}
