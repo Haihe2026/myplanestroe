@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-4605ea976659beb0c9057148e7285b97ea77bc0e80c76e88d63603b127d1c333",
+  "claim_id": "3a7de877-dc11-439e-ad51-ae19d4afa871",
+  "source_ref": "72647f0105e0b03c3e22fafee4288367588c3de0",
+  "request_fingerprint_verified": true,
+  "recorded_at": "2026-11-11T14:11:53+08:00",
+  "skill_id": "mps-family-portrait-studio",
+  "version": "1.0.1",
+  "zip_sha256": "1138fe6925145fc8c7a0013f661d32af48a521dd707ad9980fd3411b39194756",
+  "zip_bytes": 2740120,
+  "attempt_type": "native visual mouse retry",
+  "tool": "mcp__cua_repl unified Computer Use",
+  "direct_node_repl_sky_calls_in_this_attempt": 0,
+  "supported_documented_capabilities": [
+    "native coordinate mouse click",
+    "drag",
+    "scroll",
+    "keyboard input",
+    "native window screenshot"
+  ],
+  "target_app": "WorkBuddy",
+  "bound_unique_window": true,
+  "app_version_from_automatic_accessibility_metadata": "V5.9.3",
+  "automatic_accessibility_returned": true,
+  "accessibility_not_accepted_as_visual_test": true,
+  "setup": [
+    {
+      "step": "Initial name binding",
+      "result": "Windows adapter required a returned windowId; corrected via listWindows and getApp({windowId})."
+    },
+    {
+      "step": "Bind returned WorkBuddy window",
+      "result": "succeeded; automatic accessibility text returned"
+    }
+  ],
+  "capture_attempts": [
+    {
+      "attempt": 1,
+      "method": "app.getScreenshot()",
+      "error": "window capture timed out: timed out waiting on channel"
+    },
+    {
+      "attempt": 2,
+      "recovery": "Re-enumerated windows, confirmed same unique WorkBuddy target, then retried app.getScreenshot()",
+      "error": "window capture timed out: timed out waiting on channel"
+    }
+  ],
+  "screenshots_received": 0,
+  "mouse_inputs_executed": 0,
+  "keyboard_inputs_executed": 0,
+  "zip_import_attempted": false,
+  "test_photo_sent": false,
+  "package_loading_verified": false,
+  "welcome_verified": false,
+  "ten_demos_display_verified": false,
+  "first_turn_verified": false,
+  "interpretation": "The documented driver supports mouse/keyboard. The observed blocker is obtaining a fresh native screenshot needed for visual targeting; no evidence establishes a package defect or the deeper cause of capture timeout.",
+  "result": "blocked",
+  "reason_code": "COMPUTER_USE_CAPTURE_TIMEOUT",
+  "a3_result": "pass",
+  "product_stage": "test_passed",
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "real_payment_actions": 0,
+  "production_changes": 0,
+  "platform_submissions": 0,
+  "raw_accessibility_or_private_app_urls_published": false
+}

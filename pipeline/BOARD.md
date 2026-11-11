@@ -7,4 +7,4 @@
 | mps-cross-border-scene-generator | 跨境产品场景图生成助手 | blocked（已放弃） | — | 0/0/0 | 负责人2026-11-08定不做生图、改做Listing视频 | 2026-11-08T09:39:00+08:00 |
 | mps-id-photo-background | 证件照换底助手 | submitted | — | 1/2/6 | 1.0.8 已上传，等平台审核；平台在架 1.0.6 | 2026-11-11T08:21:53+08:00 |
 | mps-cross-border-white-background | 跨境产品图换白底助手 | blocked（已放弃） | — | 0/0/0 | 负责人2026-11-08定放弃：选品太窄，直接换掉，按B.0重选 | 2026-11-08T09:17:38+08:00 |
-| mps-family-portrait-studio | 全家福写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过；附录D截图两次超时blocked，交付待处理 | 2026-11-11T13:22:57+08:00 |
+| mps-family-portrait-studio | 全家福写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过；附录D鼠标重跑内置看屏仍超时，交付待处理 | 2026-11-11T14:11:53+08:00 |
