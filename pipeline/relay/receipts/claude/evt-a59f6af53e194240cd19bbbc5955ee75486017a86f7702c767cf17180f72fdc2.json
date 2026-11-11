@@ -1,8 +1,8 @@
 {
   "event_id": "evt-a59f6af53e194240cd19bbbc5955ee75486017a86f7702c767cf17180f72fdc2",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "fb091288-0245-496e-8b5e-d2cf77548b22",
-  "at": "2026-11-11T21:38:27+08:00",
-  "evidence_ref": null
+  "at": "2026-11-11T21:50:42+08:00",
+  "evidence_ref": "ca3c32d1a1b6b9b93285360f2017c7d0a72e75f0:pipeline/products/mps-travel-portrait-studio/02-self-test.md"
 }
