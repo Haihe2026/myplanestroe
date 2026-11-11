@@ -1,1 +1,1 @@
-{"event_id":"evt-ce9ded4dbc5f6ffb9593a0201b75774ba811f9d3e9f19108aaa5193848baad4b","role":"muse","action":"claimed","claim_id":"6c760775-512c-48a7-9345-fc49b5c34c9d","at":"2026-11-11T23:05:13+08:00","evidence_ref":null}
+{"event_id":"evt-ce9ded4dbc5f6ffb9593a0201b75774ba811f9d3e9f19108aaa5193848baad4b","role":"muse","action":"acknowledged","claim_id":"6c760775-512c-48a7-9345-fc49b5c34c9d","at":"2026-11-11T23:05:13+08:00","evidence_ref":"02c394415c9e955a955737ecd934e0d3efb55bcd:pipeline/products/mps-travel-portrait-studio/03-test-report.md"}
