@@ -1,0 +1,172 @@
+{
+  "skill_id": "mps-family-portrait-studio",
+  "date": "2026-11-11T08:44:12+08:00",
+  "source_ref": "2d32cc074e7d054068708a82578119bd8ad2993f",
+  "demos": 10,
+  "logo": 1,
+  "paid_generation_limit": 11,
+  "authorization": "本聊天用户长期授权：开发 Skill 所需示例图；每技能一张主题 logo，无需再次授权。",
+  "identity_test": "studio 为虚构四位成年人原图；其余九张引用该图逐人编辑。只验证合成成人样本，真人合照、未成年人、多人单照合成均未实测。",
+  "transport": "隔离 new_only.Adapter 任务库；示例 harness 仅将 signed_input URL 替换为固定提交公开合成图，模型/请求/凭证解析不变；不写生产输入库、钱包、配置或服务。生产签名素材路由本次不实测。",
+  "retries": "每 key 一次生成 POST；模糊提交只查原任务，不盲重发；耗尽或失败不增调用。",
+  "scenes": [
+    {
+      "key": "new-year-red",
+      "title": "新年红团圆照",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "春节",
+        "新年",
+        "红色",
+        "团圆"
+      ],
+      "direction": "Elegant red Chinese New Year family studio, understated silk clothing, red lantern bokeh, no written characters.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Elegant red Chinese New Year family studio, understated silk clothing, red lantern bokeh, no written characters. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "gongbi",
+      "title": "中式工笔画全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "工笔画",
+        "国风",
+        "中式"
+      ],
+      "direction": "Chinese fine-line gongbi painting on warm ivory silk, delicate botanical background, refined traditional clothing.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Chinese fine-line gongbi painting on warm ivory silk, delicate botanical background, refined traditional clothing. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "草坪",
+        "户外",
+        "绿地"
+      ],
+      "direction": "Natural spring lawn and leafy trees, soft daylight, harmonious cream and sage casual clothing.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Natural spring lawn and leafy trees, soft daylight, harmonious cream and sage casual clothing. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "studio",
+      "title": "简约棚拍全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "棚拍",
+        "简约",
+        "影楼"
+      ],
+      "direction": "Minimalist warm beige portrait studio, pale linen clothing, soft professional photographic lighting, realistic natural skin and clear face details.",
+      "prompt": "Create an original realistic group portrait. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Minimalist warm beige portrait studio, pale linen clothing, soft professional photographic lighting, realistic natural skin and clear face details. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "oil",
+      "title": "复古油画全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "油画",
+        "复古",
+        "古典"
+      ],
+      "direction": "Old master oil painting, muted brown and teal palette, tasteful vintage clothes, dark atmospheric backdrop.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Old master oil painting, muted brown and teal palette, tasteful vintage clothes, dark atmospheric backdrop. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "海边",
+        "海滩",
+        "度假"
+      ],
+      "direction": "Airy seaside holiday portrait on a beach, sea-blue and off-white clothing, gentle sunset, natural beach light.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Airy seaside holiday portrait on a beach, sea-blue and off-white clothing, gentle sunset, natural beach light. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "圣诞",
+        "圣诞树",
+        "节日"
+      ],
+      "direction": "Warm Christmas room, pine branches and golden fairy lights, subtle red and green knitwear, faces unobstructed.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Warm Christmas room, pine branches and golden fairy lights, subtle red and green knitwear, faces unobstructed. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "longevity",
+      "title": "寿宴金寿全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "寿宴",
+        "祝寿",
+        "金寿"
+      ],
+      "direction": "Dignified longevity celebration, restrained golden and burgundy festive interior, elegant Chinese formal dress, no text or numbers.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Dignified longevity celebration, restrained golden and burgundy festive interior, elegant Chinese formal dress, no text or numbers. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "韩式",
+        "清新",
+        "奶油色"
+      ],
+      "direction": "Fresh Korean-style family studio portrait, creamy pale background, natural light and soft pastel clothing, photorealistic.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Fresh Korean-style family studio portrait, creamy pale background, natural light and soft pastel clothing, photorealistic. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "countryside",
+      "title": "田园乡村全家福",
+      "series": "全家福主题写真",
+      "size": "1536x1024",
+      "ratio": "3:2",
+      "tier": "1K",
+      "keywords": [
+        "田园",
+        "乡村",
+        "乡野"
+      ],
+      "direction": "Warm countryside portrait with a rustic wooden fence and wildflowers, coordinated linen clothing, gentle natural light.",
+      "prompt": "Edit the supplied synthetic group photograph into the requested setting. Keep P1, P2, P3, P4 in their original left-to-right order; preserve each distinct face, age, hair, facial proportions and eyewear separately, with no face blending. Exactly four fictional East Asian adults, arranged left to right: P1 a 68-year-old woman with a silver wavy bob and oval face; P2 a 72-year-old man with short silver hair, rectangular spectacles and a grey moustache; P3 a 35-year-old woman with a straight dark chin-length bob and round face; P4 a 40-year-old man with short curly black hair, square jaw and neat short beard. All four distinct people, no children, no other people, no missing person, no duplicated faces. All faces fully visible, waist-up, comfortable spacing. Warm countryside portrait with a rustic wooden fence and wildflowers, coordinated linen clothing, gentle natural light. No text, lettering, logos, brands or watermark. No extra limbs or unnatural fingers. Finished professional portfolio example."
+    },
+    {
+      "key": "logo",
+      "title": "全家福主题 logo",
+      "series": "主题 logo",
+      "size": "1024x1024",
+      "prompt": "Design a polished premium 3D app icon for a family portrait studio. A warm ivory sculpted photo frame contains a close cheerful four-person multigenerational family bust group: silver-haired grandmother and grandfather, adult daughter and adult son. Charming original ceramic miniature characters, warm terracotta and soft apricot accents, subtle camera aperture impression behind the frame, rounded-square cream background, refined studio lighting, realistic porcelain and frosted-glass texture, rich depth and soft shadows, strong clean silhouette readable at small size. No text, letters, numbers, logos, brands, watermarks, flat vector graphics or generic line icons."
+    }
+  ]
+}
