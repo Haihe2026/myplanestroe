@@ -1,0 +1,25 @@
+{
+  "deployed_on": "2026-11-11",
+  "origin": "https://aistore.zhaopintong.com",
+  "shared_entry": "/opt/skill-platform/gemini-support-20261107/run_shared.py",
+  "scope": "wechat_entry_recovery_and_payment_page_continuity",
+  "synthetic_backend_tests_passed": 14,
+  "synthetic_checkout_flows_passed": 44,
+  "synthetic_auth_ui_cases_passed": 10,
+  "widths": [
+    1440,
+    390
+  ],
+  "live_public_pages_and_health": "HTTP200",
+  "nginx_config_test": "passed",
+  "real_oauth_exchanges": 0,
+  "real_provider_calls": 0,
+  "real_payment_tests": 0,
+  "not_verified": [
+    "real_user_wechat_scan_after_this_deployment",
+    "all_skill_hosts",
+    "bank_payment_confirmation"
+  ],
+  "legacy_lost_entry_boundary": "Entries lost before encrypted retention was installed cannot recover a missing client credential. Verified WeChat identity still permits website login/payment; re-associate through a valid Skill entry if required.",
+  "sanitization": "No keys, cookies, customer records, database, logs, real QR images or private support identifiers."
+}
