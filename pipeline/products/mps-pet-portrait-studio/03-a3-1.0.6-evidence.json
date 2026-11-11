@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-pet-portrait-studio",
+  "version": "1.0.6",
+  "event_id": "evt-75e3269bd8910771b013a9311932156a5bef966868bac51636afb9a39152c066",
+  "claim_id": "251a0223-577c-4a65-8e67-1ee6237030cc",
+  "source_ref": "79fc8a58c7912780cb8baa3245d27d0f3e9ffe8c",
+  "input_fingerprint_verified": "75e3269bd8910771b013a9311932156a5bef966868bac51636afb9a39152c066",
+  "checked_at": "2026-11-11T09:51:57+08:00",
+  "result": "independent_check_passed",
+  "inspection": {
+    "version": "1.0.6",
+    "zip_sha256": "3224973893da8623ae7e6bfc8e9bca578d1099c303fa7277f283d448572798c2",
+    "zip_bytes": 1028163,
+    "files": 24,
+    "maximum_relative_depth": 2,
+    "identical_files": 19,
+    "version_only_changes": {
+      "mps-pet-portrait-studio/SKILL.md": [
+        "-version: 1.0.5",
+        "+version: 1.0.6"
+      ],
+      "mps-pet-portrait-studio/_meta.json": [
+        "-  \"version\": \"1.0.5\",",
+        "+  \"version\": \"1.0.6\","
+      ],
+      "mps-pet-portrait-studio/scripts/studio.py": [
+        "-SKILL_VERSION = '1.0.5'",
+        "+SKILL_VERSION = '1.0.6'"
+      ],
+      "mps-pet-portrait-studio/scripts/telemetry.py": [
+        "-SKILL_VERSION = '1.0.5'",
+        "+SKILL_VERSION = '1.0.6'"
+      ],
+      "mps-pet-portrait-studio/tests/first-turn-preview.md": [
+        "-- 核对宿主实际加载的是本版 SKILL.md（version 1.0.5；市场安装副本路径可能带 `__skillhub` 后缀）。",
+        "+- 核对宿主实际加载的是本版 SKILL.md（version 1.0.6；市场安装副本路径可能带 `__skillhub` 后缀）。"
+      ]
+    },
+    "logo": {
+      "sha256": "4945dcd1edaa03964e5837180c01fccc32415c84be997e8db56ea7ff8e538e9a",
+      "bytes": 405487,
+      "width": 512,
+      "height": 512,
+      "external_to_zip": true
+    },
+    "metadata": {
+      "name": "mps-pet-portrait-studio",
+      "display_name": "宠物主题照相馆",
+      "keywords": 21,
+      "skill_md_bytes": 15314,
+      "paired_examples": [
+        [
+          "用我家猫的这张照片做皇家油画写真，竖版 2:3。",
+          "Use this photo of my cat to make a royal oil portrait in portrait 2:3."
+        ],
+        [
+          "用我家狗的这张照片做卡通头像，方形 1:1。",
+          "Use this photo of my dog to make a square 1:1 cartoon avatar."
+        ],
+        [
+          "用我家猫的这张照片做海边度假写真，横版 3:2。",
+          "Use this photo of my cat to make a seaside vacation portrait in landscape 3:2."
+        ]
+      ]
+    },
+    "six_field_request": true,
+    "eight_field_telemetry": true,
+    "new_upstream_calls": 0,
+    "full_a2_rerun": false
+  },
+  "assets_and_links": {
+    "demos": [
+      {
+        "key": "royal-oil",
+        "file": "royal-oil.png",
+        "sha256": "e9922d533177101f0a3e3b08994aef1a4a4cfb90a81a50f5cd7ada8980c21f8a",
+        "source_sha256": "b068f8335444fa3574e29424e4eaa95e9999cdca9279687666ebaac570d30644"
+      },
+      {
+        "key": "cartoon",
+        "file": "cartoon.png",
+        "sha256": "497046418c8d2bdf3fe1fb7856395f885b066d853a2b17e33449fcf6e6bd9d96",
+        "source_sha256": "a34e7cbb1a0c6b971a1691056bd0196799bd8a1f10d866140eb76ffbb2183f84"
+      },
+      {
+        "key": "cyberpunk",
+        "file": "cyberpunk.png",
+        "sha256": "13ad424d3b7d5b1cbdec50d99f7450b70501bc0823ffd59254fb5ec2a62a59b1",
+        "source_sha256": "2be550b58a0c49d0bc1264e4b72113c285cc16b31bf567bee77b3a38c3dfa32b"
+      },
+      {
+        "key": "ancient-chinese",
+        "file": "ancient-chinese.png",
+        "sha256": "53739cbabd8862324259ee9a0146d30cf9a7f729152451eaf772e94433e13116",
+        "source_sha256": "17796a7f6778548d2cf0082ae0521f9b2dbfc5214929e713c64ecc63a7d387e4"
+      },
+      {
+        "key": "astronaut",
+        "file": "astronaut.png",
+        "sha256": "f33951d2f81cefd2bc0517d273dec7adc0312af1647db80646f5c9f318752952",
+        "source_sha256": "0bdb74339259fcd6bd687f257923aa74c33108ee17a69f1b782149c9c8515f70"
+      },
+      {
+        "key": "watercolor",
+        "file": "watercolor.png",
+        "sha256": "dd5c7741458f7bea8d19933a620769e15394a80d0aaa9ced1a7437677e8edcf3",
+        "source_sha256": "555abf0899c12fff57cfcd589672c7a1e930cfaea50525b181a1f486d1de54fc"
+      },
+      {
+        "key": "formal",
+        "file": "formal.png",
+        "sha256": "9f6ba304926154681e92bed59b62d503690e59fd90d2f20eceeccea5f32b5a14",
+        "source_sha256": "e015613674a469931385860fd40a70b4f27be00435e9b41a25f6745105e7e1f8"
+      },
+      {
+        "key": "seaside",
+        "file": "seaside.png",
+        "sha256": "1f9aff07c4c276c4f6f4cc34a7a5969b7a86883c59ec79246f00517207e1a6c4",
+        "source_sha256": "7e17741fb693e84e5f19469e623f63423fa26a76b4350d5fffe658299da34b4b"
+      },
+      {
+        "key": "christmas",
+        "file": "christmas.png",
+        "sha256": "4011f08acbae011488ce5c77496c57ab571308dcded138a584bdfdbda2acecf2",
+        "source_sha256": "7eec114d1533f9213b9f437a442f64d94bfa05f334edb112155dd1a873df8716"
+      },
+      {
+        "key": "explorer",
+        "file": "explorer.png",
+        "sha256": "4afc4644e13bdfe9046fe3c910eafbf27fa3247927fac656bf47f41617b1cc32",
+        "source_sha256": "e96d990c2df267681fc5bf0696e31c10f8470e97a969a2cdcd532174a6c703c5"
+      }
+    ],
+    "markdown_fixtures": [
+      {
+        "case": "Codex Demo Assets",
+        "encoded_space": true,
+        "encoded_hash": false,
+        "parsed_link_count": 1,
+        "target_exists": true,
+        "unexpected_fragment": false
+      },
+      {
+        "case": "Codex#Demo",
+        "encoded_space": true,
+        "encoded_hash": true,
+        "parsed_link_count": 1,
+        "target_exists": true,
+        "unexpected_fragment": false
+      }
+    ],
+    "customer_copy_scan": "pass",
+    "parser": "markdown-it-py 3.0.0 commonmark",
+    "new_network_or_upstream_calls_by_package": 0,
+    "fixture_scope": "only extracted pure md_safe_path function; no package commands or backend exercised"
+  },
+  "previous_a3": "79fc8a58c7912780cb8baa3245d27d0f3e9ffe8c:pipeline/products/mps-pet-portrait-studio/03-test-report.md",
+  "scope": "Independent A3 static inspection and pure local path fixtures. No full A2 rerun, backend exercise, live generation, payment or production writes.",
+  "host_acceptance": "真机验收及浏览器验证已跳过（负责人长期规则）；未冒称通过。",
+  "upload": "owner manual",
+  "previous_submission": "1.0.5 remains awaiting platform review; untouched"
+}
