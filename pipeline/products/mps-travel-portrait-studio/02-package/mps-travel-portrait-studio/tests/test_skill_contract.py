@@ -21,6 +21,32 @@ FORBIDDEN = ['上游', '管线', 'pipeline', '模板', '基线', '服务端', 'b
 SLOW_PAYMENT = ['核款', '工作日', '人工确认到账', '等待审核到账']
 
 
+def synth_png(w, h, rgb=(200, 180, 160)):
+    """标准库合成的完整 PNG。"""
+    import struct
+    import zlib
+
+    def chunk(k, b):
+        return struct.pack('>I', len(b)) + k + b + struct.pack('>I', zlib.crc32(k + b) & 0xffffffff)
+    raw = b''.join(b'\x00' + bytes(rgb) * w for _ in range(h))
+    return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 2, 0, 0, 0))
+            + chunk(b'IDAT', zlib.compress(raw)) + chunk(b'IEND', b''))
+
+
+def synth_jpeg(w, h):
+    """标准库合成的合法基线灰度 JPEG（每块 DC=0、AC 直接 EOB），可完整解码。"""
+    import struct
+
+    def seg(m, body):
+        return b'\xff' + bytes([m]) + struct.pack('>H', len(body) + 2) + body
+    nbits = -(-w // 8) * -(-h // 8) * 2
+    scan = b'\x00' * (nbits // 8) + (bytes([(1 << (8 - nbits % 8)) - 1]) if nbits % 8 else b'')
+    one = bytes([1] + [0] * 15)
+    return (b'\xff\xd8' + seg(0xDB, b'\x00' + b'\x01' * 64) + seg(0xC0, b'\x08' + struct.pack('>HH', h, w) + b'\x01\x01\x11\x00')
+            + seg(0xC4, b'\x00' + one + b'\x00' + b'\x10' + one + b'\x00')
+            + seg(0xDA, b'\x01\x01\x00\x00\x3f\x00') + scan + b'\xff\xd9')
+
+
 _MD_PUNCT = re.escape('!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
 
 
@@ -283,6 +309,8 @@ class Contract(unittest.TestCase):
         targets = [('SKILL用户部分', USER_PART), ('README', read('README.md')), ('platform-rules', read('references', 'platform-rules.md'))]
         targets += [('话术', s) for s in copy_strings()] + [('进度', s) for s in progress_strings()]
         for name, text in targets:
+            # 唯一例外：规格要求的传图同意必须告知接收方类别（RECIPIENTS 整词），只豁免这一个完整说法，不豁免单独的「供应商」
+            text = text.replace(W.RECIPIENTS, '图片服务')
             for w in FORBIDDEN:
                 self.assertNotIn(w, text, '%s 含 %s' % (name, w))
 
@@ -431,11 +459,17 @@ class Contract(unittest.TestCase):
                  '西安古城夜景': 'xian', '汉服古城夜景': 'xian', '古城夜景': 'oldtown', '丽江古城': 'oldtown',
                  '去不了哈尔滨，想用我的单人照做一张冰雪主题写真': 'harbin', '亚布力滑雪': 'yabuli', '三亚海边': 'sanya',
                  '圣托里尼': 'santorini', '沙漠星空': 'desert', '草原星空': 'grassland', '蒙古包': 'grassland',
-                 '你好': None, '': None, None: None}
+                 '你好': None, '': None, None: None,
+                 # A3-TRV-04：特异服饰不随词序被泛化风格覆盖
+                 '樱花下穿和服': 'kyoto', '樱花季穿和服拍照': 'kyoto', '春日樱花日式街巷': 'kyoto',
+                 '古城夜景穿汉服': 'xian', '夜景灯火下的汉服': 'xian', '古城唐风': 'xian', '灯火古城唐风写真': 'xian',
+                 '春日樱花': 'sakura', '樱花季': 'sakura', '夜景灯火': 'oldtown', '凤凰夜景': 'oldtown',
+                 '三亚穿汉服': 'sanya', '京都汉服': 'kyoto', '西安和服': 'xian', '樱花下穿汉服': 'xian',
+                 '古城夜景穿和服': 'kyoto', '哈尔滨古城夜景汉服': 'harbin'}
         for text, want in cases.items():
             self.assertEqual(r(text), want, text)
         self.assertEqual({r(w) for _, ws in studio.ROUTE_DESTINATIONS for w in ws}, set(studio.SCENES))
-        for key, words in studio.ROUTE_DESTINATIONS + studio.ROUTE_STYLES:
+        for key, words in studio.ROUTE_DESTINATIONS + studio.ROUTE_OUTFITS + studio.ROUTE_STYLES:
             row = next(l for l in read('references', 'scenes.md').splitlines() if ('| ' + key + ' |') in l)
             for w in words:
                 self.assertIn(w, row + read('references', 'scenes.md').split('## 消歧')[1], (key, w))
@@ -474,8 +508,8 @@ class Contract(unittest.TestCase):
 
     def _img(self, home):
         img = os.path.join(home, 'me.png')
-        with open(img, 'wb') as f:  # 最小合法 PNG 头：256x256
-            f.write(b'\x89PNG\r\n\x1a\n' + b'\x00\x00\x00\rIHDR' + (256).to_bytes(4, 'big') * 2 + b'\x08\x02\x00\x00\x00' + b'\x00' * 4)
+        with open(img, 'wb') as f:  # 完整合法 PNG：256x256（1.0.1 起参考图要完整解码，只有头的假 PNG 不再放行）
+            f.write(synth_png(256, 256))
         return img
 
     def test_plan_people_rules(self):
@@ -594,8 +628,19 @@ class Contract(unittest.TestCase):
         self.assertNotIn('监护人', self_)
         self.assertNotIn('保留人物', guard)
         for t in (self_, guard):
-            for must in ('按张计费', '确认开始', '可能与本人有差异', '三件事', '发送去处理', 'AI 生成旅行主题写真，非实地拍摄', '凭证'):
+            for must in ('按张计费', '确认开始', '可能与本人有差异', '三件事', 'AI 生成旅行主题写真，非实地拍摄', '凭证'):
                 self.assertIn(must, t)
+            # A3-TRV-05：本人与监护人文案都含「这张照片」与接收方类别，且为独立的第 2 项
+            item2 = [l for l in t.splitlines() if l.startswith('2. ')]
+            self.assertEqual(len(item2), 1, t)
+            for must in ('这张照片', '图片服务及算力供应商', '只用于本次制作'):
+                self.assertIn(must, item2[0])
+            self.assertEqual(sum(l[:3] in ('1. ', '2. ', '3. ') for l in t.splitlines()), 3)
+        self.assertEqual(W.RECIPIENTS, '图片服务及算力供应商')
+        # 白标：接收方只说类别，不点名品牌、模型或技术
+        for bad in ('gemini', 'Gemini', 'sunburst', 'OpenAI', 'Google', '模型', '密钥'):
+            self.assertNotIn(bad, W.UPLOAD_CONSENT)
+        self.assertIn('图片服务及算力供应商', EXEC_PART)
         for must in ('不换脸', '名人或他人', '监护人', '单人照'):
             self.assertIn(must, W.refuse_misuse())
         self.assertIn('没有产生任何扣费', W.needs_clearer_photo())
@@ -910,6 +955,95 @@ class PayRegression(unittest.TestCase):
         self.assertIn('已经过期', W.account_failure('stale'))
         self.assertNotIn('网络', W.account_failure('stale'))
         self.assertIn('已经过期', W.failure('stale', 'not_started'))
+
+
+class TravelRepair101(unittest.TestCase):
+    """1.0.1：A3-TRV-01/02/03 的随包回归（完整端到端见开发目录的检查脚本）。"""
+
+    def test_trv01_key_needs_explicit_bound_true(self):
+        key = 'mpskill_' + 'a' * 32 + '_' + 'b' * 43
+        self.assertTrue(studio.SKILL_KEY_RE.fullmatch(key))
+        for resp in ({'bound': False}, {}, {'bound': 'true'}, {'bound': 1}, GatewayErr(0), GatewayErr(500), GatewayErr(401)):
+            home = tempfile.mkdtemp()
+            studio.STATE_HOME = home
+            seen = []
+
+            def call(method, path, body=None, auth=None, **k):
+                seen.append(path)
+                if path == '/skill-key':
+                    return {'state': 'ready', 'key': key}
+                if isinstance(resp, GatewayErr):
+                    raise studio.GatewayError(resp.status)
+                return resp
+            try:
+                with mock.patch.object(studio, 'call', call):
+                    a = {'install_secret': 's' * 43}
+                    self.assertNotEqual(studio._ensure_skill_key(a), 'ok', resp)
+                    saved = studio.load_account()
+                    self.assertEqual((saved.get('skill_key'), saved.get('skill_key_bound')), (key, False), resp)
+                    self.assertNotEqual(studio._ensure_skill_key(saved), 'ok', resp)  # 重启后仍须确认
+                    self.assertEqual(seen, ['/skill-key', '/skill-key/bound', '/skill-key/bound'], resp)
+                with mock.patch.object(studio, 'call', lambda m, p, b=None, auth=None, **k: {'bound': True}):
+                    self.assertEqual(studio._ensure_skill_key(saved), 'ok')
+                    self.assertIs(studio.load_account().get('skill_key_bound'), True)
+            finally:
+                studio.STATE_HOME = None
+                shutil.rmtree(home)
+
+    def test_trv02_damaged_inputs_rejected(self):
+        import struct
+        import zlib
+        import audit_images
+        png = synth_png(200, 200)
+        i = png.index(b'IDAT')
+        n = struct.unpack('>I', png[i - 4:i])[0]
+
+        def with_idat(new):
+            return (png[:i - 4] + struct.pack('>I', len(new)) + b'IDAT' + new
+                    + struct.pack('>I', zlib.crc32(b'IDAT' + new) & 0xffffffff) + png[i + 8 + n:])
+        jpg = synth_jpeg(200, 200)
+        sos = jpg.index(b'\xff\xda')
+        bad = [png[:i + 6] + b'\x00' + png[i + 7:], with_idat(png[i + 4:i + 4 + n][:n // 2]), png[:-12], png[:-20],
+               jpg[:sos], jpg[:sos] + b'\xff\xd9', jpg[:sos + 20], jpg[:sos + 20] + b'\xff\xd9']
+        home = tempfile.mkdtemp()
+        try:
+            for k, data in enumerate(bad):
+                p = os.path.join(home, 'bad%d.%s' % (k, 'png' if k < 4 else 'jpg'))
+                with open(p, 'wb') as f:
+                    f.write(data)
+                r = audit_images.check(p)
+                self.assertEqual((r['ok'], r['problem'], r['file']), (False, 'damaged', os.path.basename(p)), k)
+            for name, data in (('good.png', png), ('good.jpg', jpg)):
+                p = os.path.join(home, name)
+                with open(p, 'wb') as f:
+                    f.write(data)
+                self.assertTrue(audit_images.check(p)['ok'], name)
+        finally:
+            shutil.rmtree(home)
+
+    def test_trv03_attempt_once_even_after_failure(self):
+        home = tempfile.mkdtemp()
+        calls = []
+
+        def boom(*a):
+            calls.append(a)
+            raise OSError('down')
+        try:
+            with mock.patch.object(telemetry, 'TRANSPORT', boom), mock.patch.dict(os.environ, {telemetry.OFF_SWITCH: 'on'}):
+                self.assertEqual(telemetry.report_once(home), 'failed')
+                for _ in range(3):
+                    self.assertEqual(telemetry.report_once(home), 'already')
+            self.assertEqual(len(calls), 1)
+        finally:
+            shutil.rmtree(home)
+
+
+class GatewayErr(object):
+    def __init__(self, status):
+        self.status = status
+
+    def __repr__(self):
+        return 'GatewayError(%s)' % self.status
 
 
 if __name__ == '__main__':

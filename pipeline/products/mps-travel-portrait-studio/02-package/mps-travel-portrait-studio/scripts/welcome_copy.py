@@ -36,6 +36,11 @@ def plan_summary(title, shape_name, outfit):
     return '「' + title + '」旅行主题写真，单人，服装：' + outfit + '，' + shape_name + '，1 张'
 
 
+# 本次照片传输同意：告知接收方类别（不点名具体品牌或技术），本人与监护人两种文案共用这一条
+RECIPIENTS = '图片服务及算力供应商'
+UPLOAD_CONSENT = '同意把这张照片发送给' + RECIPIENTS + '处理，只用于本次制作'
+
+
 def confirm_paid(summary, wait_text, features, guardian):
     """方案与付费确认：只有用户明确肯定回答后才能继续。人物特征只复述用户自己确认过的可见特征。"""
     owner = ('这张照片里的孩子由你作为监护人提供，你同意用这张照片制作' if guardian
@@ -48,7 +53,7 @@ def confirm_paid(summary, wait_text, features, guardian):
         '预计等待' + wait_text + '。' + LIKENESS,
         '开始前需要你确认三件事：',
         '1. ' + owner + '；',
-        '2. 同意把这张照片发送去处理，只用于本次制作；',
+        '2. ' + UPLOAD_CONSENT + '；',
         '3. 同意按张计费开始制作，费用以充值页和本次服务记录为准。',
         '三件都同意的话，回复「确认开始」。',
     ])

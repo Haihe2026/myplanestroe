@@ -35,11 +35,21 @@ import mock_backend  # noqa: E402
 mock_backend.studio = studio  # 与被测包同一模块实例
 
 
-def jpeg_bytes(w=600, h=800):
-    # 最小合法 JPEG 头（SOF0 含尺寸），足够本地与模拟后端校验
-    return (b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00'
-            b'\xff\xc0\x00\x11\x08' + h.to_bytes(2, 'big') + w.to_bytes(2, 'big') + b'\x03\x01\x22\x00\x02\x11\x01\x03\x11\x01'
-            b'\xff\xda\x00\x08\x01\x01\x00\x00\x3f\x00' + b'\x00' * 64 + b'\xff\xd9')
+def jpeg_bytes(w=600, h=800, note=b''):
+    """标准库合成的合法基线灰度 JPEG（每块 DC=0、AC 直接 EOB，各 1 比特 0），任意尺寸、可完整解码。
+    1.0.1 起参考图要完整解码校验（A3-TRV-02），旧版只有 SOF 头加零字节的假 JPEG 已不再放行。"""
+    import struct
+
+    def seg(m, body):
+        return b'\xff' + bytes([m]) + struct.pack('>H', len(body) + 2) + body
+    blocks = -(-w // 8) * -(-h // 8)
+    nbits = blocks * 2
+    scan = b'\x00' * (nbits // 8) + (bytes([(1 << (8 - nbits % 8)) - 1]) if nbits % 8 else b'')
+    one = bytes([1] + [0] * 15)
+    return (b'\xff\xd8' + seg(0xE0, b'JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00') + (seg(0xFE, note) if note else b'')
+            + seg(0xDB, b'\x00' + b'\x01' * 64) + seg(0xC0, b'\x08' + struct.pack('>HH', h, w) + b'\x01\x01\x11\x00')
+            + seg(0xC4, b'\x00' + one + b'\x00' + b'\x10' + one + b'\x00')
+            + seg(0xDA, b'\x01\x01\x00\x00\x3f\x00') + scan + b'\xff\xd9')
 
 
 class Base(unittest.TestCase):
@@ -288,7 +298,7 @@ class Confirmation(Base):
                                      '--features', '短发戴眼镜', '--outfit', '浅蓝色连衣裙')
         self.assertIn('确认开始', t)
         self.assertIn('按张计费', t)
-        self.assertIn('发送去处理', t)
+        self.assertIn('同意把这张照片发送给图片服务及算力供应商处理，只用于本次制作', t)
         self.assertIn('监护人', t)
         self.assertIn('AI 生成旅行主题写真，非实地拍摄', t)
         self.assertIn('我会按你确认的样子保留人物：短发戴眼镜', t)
@@ -603,14 +613,15 @@ class Telemetry(Base):
             self.mock.telemetry_status = status
             code, s, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
             self.assertEqual(code, 0)
-        st = json.load(open(os.path.join(self.home, 'mps-travel-portrait-studio', 'first-dialogue.json')))
+        with open(os.path.join(self.home, 'mps-travel-portrait-studio', 'first-dialogue.json')) as f:
+            st = json.load(f)
         self.assertFalse(st['sent'])  # 204 不算成功
-        ids = {c[0]['installation_id'] for c in self.mock.telemetry_calls}
-        self.assertEqual(len(ids), 1)  # 沿原标识
+        self.assertTrue(st['attempted'])
+        self.assertEqual(len(self.mock.telemetry_calls), 1)  # A3-TRV-03：第一次失败后不再重发
         self.mock.telemetry_status = None
         self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
         self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
-        self.assertEqual(len(self.mock.telemetry_calls), 4)
+        self.assertEqual(len(self.mock.telemetry_calls), 1)
 
     def test_transport_exception_swallowed(self):
         def boom(*a):
@@ -1675,6 +1686,278 @@ class TravelSpec(Base):
         self.assertEqual(set(body['references'][0]), {'mime', 'content'})
         self.assertNotIn('http', body['prompt'])
 
+
+
+class RepairTravel101(Base):
+    """1.0.1 修复 A3-TRV-01/02/03（TRV-04/05 在契约测试与 Confirmation 用例里）。"""
+    wrap = OriginalTaskSpec.wrap
+    draft = OriginalTaskSpec.draft
+    ready = OriginalTaskSpec.ready
+
+    def fresh(self):
+        shutil.rmtree(os.path.join(self.home, 'mps-travel-portrait-studio'), ignore_errors=True)
+        self.mock = mock_backend.Mock()
+        studio.TRANSPORT = self.mock.transport
+        telemetry.TRANSPORT = self.mock.telemetry_transport
+
+    def account(self):
+        with open(os.path.join(self.home, 'mps-travel-portrait-studio', 'account.json')) as f:
+            return json.load(f)
+
+    def job_posts(self):
+        return [c for c in self.mock.calls if c[0] == 'POST' and c[1] == '/skill-jobs']
+
+    def bound_calls(self):
+        return [c for c in self.mock.calls if c[1] == '/skill-key/bound']
+
+    # ---- A3-TRV-01：绑定必须明确 bound=true，未确认不得新生成 ----
+
+    BAD_BOUND = ('false', 'missing', 'timeout', 500, 401, 'garbage', 'truthy')
+
+    def test_trv01_bound_not_confirmed_never_generates(self):
+        for mode in self.BAD_BOUND:
+            self.fresh()
+            did = self.ready()
+            self.mock.scenario['bound'] = mode
+            for _ in range(2):  # 第二次 = 重启后再跑（状态全部从磁盘重新加载）
+                code, s, t, _ = self.run_cmd('run', '--draft', did)
+                self.assertEqual((code, s['signal']), (3, 'serviceUnavailable'), mode)
+                self.assertEqual(self.job_posts(), [], mode)
+                a = self.account()
+                self.assertTrue(a.get('skill_key'), mode)  # 合法凭证已私存
+                self.assertIs(a.get('skill_key_bound'), False, mode)  # 但未确认
+                d = self.draft(did)
+                self.assertEqual(d['state'], 'confirmed', mode)  # 没有提交，不锁任务
+                self.assertIn('还没有开始生成，没有扣次数', t, mode)
+            self.assertEqual(len([c for c in self.mock.calls if c[1] == '/skill-key']), 1, mode)  # 凭证只领一次
+            self.assertEqual(len(self.bound_calls()), 2, mode)  # 每次命令只确认一次，不自动重试
+            self.assertEqual(self.mock.charges, 0, mode)
+            # 补确认成功的正例：同一草稿、同一任务键继续
+            idem = self.draft(did)['idem']
+            self.mock.scenario.pop('bound')
+            code, s, _, _ = self.run_cmd('run', '--draft', did)
+            self.assertEqual(s['signal'], 'delivered', mode)
+            self.assertIs(self.account().get('skill_key_bound'), True)
+            self.assertEqual(len(self.job_posts()), 1, mode)
+            self.assertEqual(self.job_posts()[0][3].get('Idempotency-Key'), idem)
+            self.assertEqual(self.mock.charges, 1, mode)
+
+    def test_trv01_bound_confirmed_before_first_post(self):
+        did = self.ready()
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual(s['signal'], 'delivered')
+        paths = [c[1] for c in self.mock.calls if c[0] == 'POST']
+        self.assertLess(paths.index('/skill-key/bound'), paths.index('/skill-jobs'))
+        self.assertEqual(self.bound_calls()[0][2], {'key': self.account()['skill_key']})
+        # 已确认后不再重复确认
+        did2 = self.confirmed_draft()
+        self.run_cmd('run', '--draft', did2)
+        self.assertEqual(len(self.bound_calls()), 1)
+
+    def test_trv01_cached_unbound_key_after_restart(self):
+        did = self.ready()
+        self.run_cmd('run', '--draft', did)
+        p = os.path.join(self.home, 'mps-travel-portrait-studio', 'account.json')
+        for legacy in (False, None):  # 未确认标记；或缺标记（旧缓存）都按未确认处理
+            a = self.account()
+            if legacy is None:
+                a.pop('skill_key_bound', None)
+            else:
+                a['skill_key_bound'] = legacy
+            with open(p, 'w') as f:
+                json.dump(a, f)
+            self.mock.scenario['bound'] = 'false'
+            did2 = self.confirmed_draft()
+            before = len(self.job_posts())
+            code, s, _, _ = self.run_cmd('run', '--draft', did2)
+            self.assertEqual((code, s['signal']), (3, 'serviceUnavailable'), legacy)
+            self.assertEqual(len(self.job_posts()), before, legacy)
+            self.mock.scenario.pop('bound')
+            code, s, _, _ = self.run_cmd('run', '--draft', did2)
+            self.assertEqual(s['signal'], 'delivered', legacy)
+            self.assertEqual(len(self.job_posts()), before + 1, legacy)
+
+    def test_trv01_401_recovery_requires_bound(self):
+        for mode in self.BAD_BOUND:
+            self.fresh()
+            did = self.ready()
+            self.run_cmd('run', '--draft', did)  # 先拿到已确认的凭证并交付一张
+            did2 = self.confirmed_draft()
+            self.mock.scenario['bound'] = mode
+
+            def hook(real, method, url, body, headers, timeout, binary):
+                if method == 'POST' and url.endswith('/skill-jobs'):
+                    raise studio.GatewayError(401)
+                return real(method, url, body, headers, timeout, binary)
+            self.wrap(hook)
+            code, s, _, _ = self.run_cmd('run', '--draft', did2)
+            self.assertEqual((code, s['signal'], s.get('task_kept')), (4, 'credentialsReset', True), mode)
+            self.assertEqual(len(self.posts), 1, mode)
+            d = self.draft(did2)
+            idem, digest = d['idem'], d['body_sha256']
+            self.assertEqual(d['state'], 'submit_unknown', mode)  # 原任务仍锁定，不因绑定失败解锁
+            # 之后不论绑定是否恢复，都只按原键查询，不再发生成请求
+            for fix in (False, True):
+                if fix:
+                    self.mock.scenario.pop('bound', None)
+                code, s, _, _ = self.run_cmd('resume', '--draft', did2)
+                self.assertIn(s['signal'], ('jobPending', 'credentialsReset'), (mode, fix))
+                self.assertEqual(len(self.posts), 1, (mode, fix))
+                d = self.draft(did2)
+                self.assertEqual((d['state'], d['idem'], d['body_sha256']), ('submit_unknown', idem, digest), (mode, fix))
+
+    # ---- A3-TRV-02：损坏参考图本地拒绝、点名文件、零业务请求 ----
+
+    def _bad_inputs(self):
+        import struct
+        import zlib
+        png = mock_backend.make_png(256, 300)
+        i = png.index(b'IDAT')
+        n = struct.unpack('>I', png[i - 4:i])[0]
+        body = png[i + 4:i + 4 + n]
+
+        def with_idat(new):
+            return (png[:i - 4] + struct.pack('>I', len(new)) + b'IDAT' + new
+                    + struct.pack('>I', zlib.crc32(b'IDAT' + new) & 0xffffffff) + png[i + 8 + n:])
+        jpg = jpeg_bytes(256, 300)
+        sos = jpg.index(b'\xff\xda')
+        return {
+            'png-bad-crc.png': png[:i + 6] + bytes([png[i + 6] ^ 0x55]) + png[i + 7:],
+            'png-zlib-cut.png': with_idat(body[:len(body) // 2]),
+            'png-zlib-garbage.png': with_idat(body[:2] + b'\xff' * (len(body) - 2)),
+            'png-no-iend.png': png[:-12],
+            'png-truncated.png': png[:len(png) - 30],
+            'png-short-rows.png': with_idat(zlib.compress(b'\x00' * 100)),
+            'jpg-sof-only.jpg': jpg[:sos],
+            'jpg-sof-eoi.jpg': jpg[:sos] + b'\xff\xd9',
+            'jpg-scan-cut.jpg': jpg[:sos + 14 + (len(jpg) - sos - 16) // 2],
+            'jpg-scan-cut-eoi.jpg': jpg[:sos + 14 + (len(jpg) - sos - 16) // 2] + b'\xff\xd9',
+            'jpg-no-dht.jpg': jpg.replace(b'\xff\xc4', b'\xff\xfe', 1),
+        }
+
+    def test_trv02_damaged_inputs_rejected_before_any_request(self):
+        for name, data in self._bad_inputs().items():
+            self.fresh()
+            p = os.path.join(self.photos, name)
+            with open(p, 'wb') as f:
+                f.write(data)
+            _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '想做三亚写真', '--image', p)
+            code, s, t, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'sanya')
+            self.assertEqual((code, s['signal'], s.get('problem')), (3, 'photoInvalid', 'damaged'), name)
+            self.assertIn(name, t)
+            self.assertEqual(self.mock.calls, [], name)  # 业务 HTTP 为 0
+
+    def test_trv02_damaged_after_confirm_no_post(self):
+        for name, data in self._bad_inputs().items():
+            self.fresh()
+            did = self.ready()
+            with open(self.photo, 'wb') as f:
+                f.write(data)  # 确认后同一路径被换成损坏文件
+            n = len(self.mock.calls)
+            code, s, t, _ = self.run_cmd('run', '--draft', did)
+            self.assertEqual(code, 3, name)
+            self.assertEqual(s['signal'], 'photoInvalid', name)
+            self.assertIn('me.jpg', t)
+            self.assertEqual(self.job_posts(), [], name)
+            self.assertFalse([c for c in self.mock.calls[n:] if c[1] == '/skill-jobs'], name)
+            with open(self.photo, 'wb') as f:
+                f.write(self.photo_bytes)
+
+    def test_trv02_valid_png_and_jpeg_still_pass(self):
+        import audit_images
+        cases = {'ok.png': mock_backend.make_png(256, 300), 'ok.jpg': jpeg_bytes(257, 301),
+                 'ok-note.jpg': jpeg_bytes(640, 800, b'synthetic')}
+        for name, data in cases.items():
+            p = os.path.join(self.photos, name)
+            with open(p, 'wb') as f:
+                f.write(data)
+            r = audit_images.check(p)
+            self.assertTrue(r['ok'], (name, r))
+            _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', p)
+            code, s, _, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'harbin')
+            self.assertEqual((code, s['signal']), (0, 'planReady'), name)
+
+    # ---- A3-TRV-03：首次对话上报同安装只尝试一次，失败后任何命令都不重报 ----
+
+    def _fail_modes(self):
+        def boom(*a):
+            raise OSError('down')
+
+        def timeout(*a):
+            raise TimeoutError('slow')
+        return {'exception': boom, 'timeout': timeout, 'non200': lambda *a: (503, b''),
+                '204': lambda *a: (204, b''), 'badjson': lambda *a: (200, b'{oops'),
+                'badreceipt': lambda *a: (200, json.dumps({'event_id': 'x', 'receipt': 'y'}).encode())}
+
+    def test_trv03_failed_first_report_never_resent(self):
+        for mode, fn in self._fail_modes().items():
+            self.fresh()
+            calls = []
+
+            def t(*a, _fn=fn):
+                calls.append(a)
+                return _fn(*a)
+            telemetry.TRANSPORT = t
+            _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '想做哈尔滨写真', '--image', self.photo)
+            did = s['draft_id']
+            for argv in (['demo'], ['plan', '--draft', did, '--scene', 'harbin'], ['confirm', '--draft', did, '--pay-consent', 'yes'],
+                         ['run', '--draft', did], ['resume', '--draft', did], ['status'], ['balance'], ['history'],
+                         ['first-turn', '--defer-entry', '--text', '你好']):
+                self.run_cmd(*argv)
+            self.assertEqual(len(calls), 1, mode)
+            with open(os.path.join(self.home, 'mps-travel-portrait-studio', 'first-dialogue.json')) as f:
+                st = json.load(f)
+            self.assertEqual((st.get('attempted'), st.get('sent')), (True, False), mode)
+            self.assertEqual(telemetry.report_once(os.path.join(self.home, 'mps-travel-portrait-studio')), 'already')
+            self.assertEqual(len(calls), 1, mode)
+
+    def test_trv03_nested_resume_run_reports_once(self):
+        os.environ['MPS_TRAVEL_PORTRAIT_JOURNEY'] = 'off'
+        did = self.confirmed_draft()  # 关闭开关下建草稿：不产生上报状态
+        self.assertFalse(os.path.exists(os.path.join(self.home, 'mps-travel-portrait-studio', 'first-dialogue.json')))
+        os.environ.pop('MPS_TRAVEL_PORTRAIT_JOURNEY')
+        for mode, fn in self._fail_modes().items():
+            p = os.path.join(self.home, 'mps-travel-portrait-studio', 'first-dialogue.json')
+            if os.path.exists(p):
+                os.remove(p)
+            calls = []
+
+            def t(*a, _fn=fn):
+                calls.append(a)
+                return _fn(*a)
+            telemetry.TRANSPORT = t
+            self.run_cmd('resume', '--draft', did)  # resume 内部会转入 run，两处入口共只尝试一次
+            self.run_cmd('resume', '--draft', did)
+            self.assertEqual(len(calls), 1, mode)
+
+    def test_trv03_attempt_not_persisted_means_not_sent(self):
+        real_save = telemetry._save
+        calls = []
+        telemetry.TRANSPORT = lambda *a: calls.append(a) or (200, b'')
+
+        def save(path, d):
+            if d.get('attempted'):
+                return False  # 「已尝试」写不进去
+            return real_save(path, d)
+        telemetry._save = save
+        try:
+            d = os.path.join(self.tmp, 'tel')
+            os.makedirs(d)
+            self.assertEqual(telemetry.report_once(d), 'skipped')
+            self.assertEqual(telemetry.report_once(d), 'skipped')
+        finally:
+            telemetry._save = real_save
+        self.assertEqual(calls, [])
+
+    def test_trv03_success_then_link_unchanged(self):
+        self.run_cmd('first-turn', '--defer-entry', '--text', '你好')
+        with open(os.path.join(self.home, 'mps-travel-portrait-studio', 'first-dialogue.json')) as f:
+            st = json.load(f)
+        self.assertTrue(st['sent'] and st['attempted'] and st['receipt'])
+        did = self.ready()
+        self.run_cmd('run', '--draft', did)
+        self.assertEqual(len(self.mock.telemetry_calls), 1)
+        self.assertTrue(self.mock.link_calls)
 
 if __name__ == '__main__':
     unittest.main(verbosity=1)

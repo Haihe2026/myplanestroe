@@ -120,6 +120,26 @@ class Mock:
                 self.keys[u['key']] = s
             return ok(dict(state='ready', key=u['key']))
         if path == '/skill-key/bound' and method == 'POST':
+            # A3-TRV-01：scenario['bound'] 可设 false / missing / timeout / 500 / 401 / garbage，模拟绑定未确认
+            s = auth and auth[7:] in self.users and auth[7:]
+            if not s:
+                err(401)
+            mode = self.scenario.get('bound')
+            if mode == 'timeout':
+                err(0)
+            if mode in (500, 401):
+                err(mode)
+            if mode == 'false':
+                return ok(dict(bound=False))
+            if mode == 'missing':
+                return ok(dict())
+            if mode == 'garbage':
+                return 200, b'not json'
+            if mode == 'truthy':
+                return ok(dict(bound='true'))
+            if body.get('key') != self.users[s]['key']:
+                return ok(dict(bound=False))
+            self.users[s]['bound'] = True
             return ok(dict(bound=True))
         if path == '/skill-jobs' and method == 'POST':
             tok = (auth or '')[7:]

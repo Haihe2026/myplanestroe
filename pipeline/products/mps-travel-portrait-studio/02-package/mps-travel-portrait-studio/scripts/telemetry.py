@@ -1,4 +1,4 @@
-"""首次对话上报：每个安装只发一次，只发8个元数据字段，有界2秒、不重试、失败即弃。
+"""首次对话上报：每个安装只尝试一次（发出前先持久化「已尝试」，失败也不再重发），只发8个元数据字段，有界2秒、不重试、失败即弃。
 
 关闭开关：环境变量 MPS_TRAVEL_PORTRAIT_JOURNEY=off
 """
@@ -13,7 +13,7 @@ import uuid
 
 SKILL_ID = 'mps-travel-portrait-studio'
 SKILL_NAME = '旅行打卡写真照相馆'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 TELEMETRY_ORIGIN = 'https://aistore.zhaopintong.com'
 TELEMETRY_PATH = '/platform-api/telemetry/v1/first-dialogue'
@@ -94,8 +94,11 @@ def report_once(state_dir):
             d = dict(installation_id=str(uuid.uuid4()), event_id=str(uuid.uuid4()), sent=False)
             if not _save(path, d) or _load(path) is None:
                 return 'skipped'  # 写不进去就跳过，不临时造标识
-        if d.get('sent'):
-            return 'already'
+        if d.get('sent') or d.get('attempted'):
+            return 'already'  # 同安装只尝试一次：之前失败的也不再重发
+        d['attempted'] = True
+        if not _save(path, d) or not (_load(path) or {}).get('attempted'):
+            return 'skipped'  # 发出前必须先持久化「已尝试」；写不进去就不发
         body = dict(event_id=d['event_id'], installation_id=d['installation_id'], skill_id=SKILL_ID,
                     skill_name=SKILL_NAME, skill_version=SKILL_VERSION, channel=CHANNEL,
                     client_occurred_at=datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat(timespec='seconds'),

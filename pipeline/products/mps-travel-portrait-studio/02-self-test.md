@@ -1,82 +1,95 @@
-# 自测报告：mps-travel-portrait-studio 1.0.0
+# 自测报告：mps-travel-portrait-studio 1.0.1
 
-- 已读 WorkBuddy 官方文档快照（快照日期 2026-11-08，读了「二、技能」章：目录结构、frontmatter 八必填字段与 examples、references/scripts/templates 用法、解析失败排查）。首次开发新包，2026-11-11 本次运行重读。
-- 依据开发文档：`01-dev-spec.md` / `01-dev-spec.json` @ `bf71982dce5534161ef3f3702d333832ec3fe6a9`（relay 事件 `evt-095b6a8a…` 的 source_ref），A1 复检见下；开发文档未改动。
-- 时间：2026-11-11T20:38–21:40+08:00，Claude 定时运行。渠道只做 `config.yaml` 的 `workbuddy-skill`。
-- **A2 结论：通过，置 package_ready。** 真实上游调用 0；后端业务调用 0（全部进程内 Mock、合成账户）；生产变更 0；未上传、未发布。
-
-## A1 复检（认领时）
-
-16 项逐条对照通过：立项字段与词表、name 查重（§1）；官方文档读取记录（§2）；场景路由表（§3）；提示词要点与三条基线+身份基线（§4）；10 张示例及生成方式（§5，provenance 10/10 成功）；主题 logo 方向（§6，文件在 `02-package/dist/logo.png`）；计费默认值（§7、A.5，0 次试用、通用套餐）；模型与成本（§8，毛利 76.47% ≥ 60%）；fast 车道（§9）；接口与源码位置（§7 表）；漏斗对应表（§10）；相邻技能与分界句、不承接清单（§11）；验收用例 T01–T17 与 S6-01–57（§13）；决策记录（§15）；JSON 与 MD 一致（`01-a1-validation.json` result=passed，`a1_passed=true`）。无退回意见。
+- 修复轮（A3 退回 1.0.0，`rounds.dev=2`），按 SOP 〇章不重读官方文档；沿用 1.0.0 自测时的读取记录（快照 2026-11-08「二、技能」章）。
+- 依据：`03-test-report.md`（A3-TRV-01–05，固定 ZIP `d4a1d5ce…` SHA `fcecdcef…e1cd`）与 Muse 交接 `msg-from-muse-20261111-fix-100-trv-a3.md`（@ `e764fa37`）；开发文档 `01-dev-spec.md/json` 未改动，未放宽规格。
+- 时间：2026-11-11T21:38–21:55+08:00，Claude 定时运行。渠道只做 `config.yaml` 的 `workbuddy-skill`。
+- **A2 结论：通过，置 package_ready。** 真实上游调用 0；后端业务调用 0（进程内 Mock、合成账户）；生产变更 0；未上传、未发布。
 
 ## 交付
 
 | 项 | 值 |
 |---|---|
-| 技能包 | `02-package/dist/mps-travel-portrait-studio-1.0.0.zip`，2404375 字节，24 个文件，最多两级，SHA256 `fcecdcefd5f158212da556115618fd2467de757022f8e1c13e0978482999e1cd` |
-| 版本 | 1.0.0（SKILL.md `version`、`_meta.json`、`studio.SKILL_VERSION`、遥测 `SKILL_VERSION`、`build.py` 一致）；本 slug 平台无已上传版本 |
-| logo | `dist/logo.png` 原字节未动：512×512 PNG，350096 字节，SHA256 `d8177d72fbc14acc0e2371fd5af976ced0302c2cab395c1937a4dfa9d66acee9`（= `01-logo-provenance.json` / 规格 JSON） |
-| 十张示例 | `dev/sync_demos.py` 从 `demo-assets/` 原字节复制到 `assets/`（未缩放、未重编码、无新增生图），10 张 SHA 与 `01-dev-spec.json` demos 逐一相等；派生记录 `dev/demos-derivation.json`，合计 2342553 字节 |
-| 不进 ZIP | `dev/`（Mock 后端、端到端检查、打包与同步脚本）、`demo-assets/`、来源审计文件 |
+| 技能包 | `02-package/dist/mps-travel-portrait-studio-1.0.1.zip`，2413912 字节，25 个文件（新增 `scripts/jpeg_local.py`），最多两级，SHA256 `f8ab627c7adaedc99a5410e61e7f68afe7efeb91ce644532da00a48bad5da4b1` |
+| 版本 | 1.0.1（SKILL.md `version`、`_meta.json`、`studio.SKILL_VERSION`、遥测 `SKILL_VERSION`、`build.py` 一致）；本 slug 平台无已上传版本，1.0.1 > 1.0.0 |
+| 旧包 | `dist/mps-travel-portrait-studio-1.0.0.zip` 保留未动（SHA `fcecdcef…e1cd`） |
+| logo | `dist/logo.png` 原字节未动，SHA256 `d8177d72fbc14acc0e2371fd5af976ced0302c2cab395c1937a4dfa9d66acee9` |
+| 十张示例 | `assets/*.png` 与 `demos.json` 未改动（git 无差异），SHA 与规格 JSON、`dev/demos-derivation.json` 一致 |
+| 欢迎句 | 「欢迎使用WorkBuddy官方认证技能 旅行打卡写真照相馆。」逐字未变 |
 
-## 实现要点（相对全家福 1.0.1 基座的改动）
+## 本轮修复（逐项）
 
-- 基座：复制 `mps-family-portrait-studio` 1.0.1（已过 A3 的原任务幂等、401 只查原键、缺示例整组退出 3、链接有效期、Markdown 安全路径等）后改为单人旅行产品；全家福包未改动。
-- `studio.py`：十个旅行场景（默认竖版 2:3，1024×1536）；`route_scene()` 两层路由（先明确目的地，再服饰/风格；同层取原话最先出现者），`first-turn` 输出 `suggested_scene`；`plan` 改为 `--subject self/guardian --single yes/no --face-clear yes/no [--features] [--outfit]`，多人 `peopleUnsupported`、看不清 `needsClearerPhoto`、描述超 40 字或含链接语法 `textInvalid`；`confirm` 三项独立同意 `--owner-consent --upload-consent --pay-consent`；任务键前缀 `tps-`；`build_prompt()` 单人身份锁定为第一段，再动作/服装、文字基线、安全基线；输出目录「旅行打卡写真结果」，`index.html` 一览页与交付话术均带「AI 生成旅行主题写真，非实地拍摄」。请求体仍只六字段。
-- `welcome_copy.py`：欢迎句逐字「欢迎使用WorkBuddy官方认证技能 旅行打卡写真照相馆。」；确认话术含非实拍与「不能当作真实去过当地的凭证」；单人/监护人同意文案；转介全家福（三人及以上）。
-- `SKILL.md`（15355 字节 < 15KB）、`README.md`、`references/*.md`、`assets/demos.json`（每项 note 带非实拍标注）、`tests/first-turn-preview.md` 全部重写为旅行产品。
+### A3-TRV-01 绑定未确认仍可生成 → 已修
+- `studio._ensure_skill_key`：凭证保存与绑定确认拆成两个状态。合法 Key 先私存为 `skill_key_bound=False`，再由新函数 `_confirm_bound` POST `/skill-key/bound`；只有 HTTP 200 且 `bound` 恰为 `true` 才记为已绑定并返回 `ok`。`bound=false`、缺字段、`"true"` 字符串、坏响应、超时/断网、5xx、401 一律返回未就绪，`run` 以「还没有开始生成，没有扣次数」结束，**不发生成 POST**，草稿保持 `confirmed`、原任务键不变。
+- 已缓存但未确认的 Key（含进程重启、旧缓存缺标记）每次命令先确认一次再生成；凭证只领一次，不重复 `/skill-key`；每条命令只确认一次，不自动重试。
+- 401 恢复（`_recover_skill_key`）同样必须确认绑定；确认失败 → 退出 4、`task_kept=true`，原任务仍 `submit_unknown`、原键原体，之后只按原键查询。清凭证时同时清绑定标记。
+- 回归：e2e `RepairTravel101.test_trv01_bound_not_confirmed_never_generates`（7 种未确认 × 两次运行即重启，生成 POST=0，补确认后同键交付且只扣 1 次）、`test_trv01_bound_confirmed_before_first_post`（顺序：bound 先于 skill-jobs；已确认后不再重复确认）、`test_trv01_cached_unbound_key_after_restart`（标记为 false 或缺失）、`test_trv01_401_recovery_requires_bound`（7 种 × 恢复前后均只查原键，POST 始终 1 次）；契约 `TravelRepair101.test_trv01_key_needs_explicit_bound_true`。
+
+### A3-TRV-02 损坏参考图只验尺寸头 → 已修
+- `audit_images._png_info` 改为完整流式校验：签名、IHDR 在首、每块 CRC、索引色须有 PLTE、IDAT 连续、IEND 收尾且无尾随、zlib 完整（`eof` 且无多余数据）、每条扫描行过滤类型 0–4、总长度与尺寸一致（含 Adam7）；超限尺寸在展开前拒绝。
+- 新增 `scripts/jpeg_local.py`（标准库）：逐段解析标记与段长，量化表/Huffman 表引用必须已定义，按 Huffman 表把每个扫描的熵编码数据完整解一遍（基线 SOF0/1 与渐进 SOF2，含 DC/AC 首扫描与修正扫描、EOBRUN、RST 序号与区间数），必须解出全部 MCU、不读过数据末尾、以 EOI 收尾；不做 IDCT。算术编码/无损/分层等少见编码点名文件并提示另存为普通 JPG 或 PNG（`unsupported_jpeg`），不放行。
+- `plan` 与 `run`（`_job_body`）两处都走同一检查；坏输入退出 3、`photoInvalid`、话术点名文件，业务 HTTP 与生成 POST 为 0。
+- 回归：e2e `test_trv02_damaged_inputs_rejected_before_any_request`（PNG 坏 CRC、IDAT zlib 截断且 CRC 合法、zlib 垃圾、缺 IEND、文件截断、扫描行不足；JPEG 只有 SOF、SOF+EOI、扫描截断、扫描截断后补 EOI、缺 DHT，共 11 例，`mock.calls==[]`）、`test_trv02_damaged_after_confirm_no_post`（确认后同路径换成上述坏文件，零生成 POST）、`test_trv02_valid_png_and_jpeg_still_pass`；契约 `test_trv02_damaged_inputs_rejected`。e2e/契约的 JPEG 夹具改为标准库合成、可完整解码的基线 JPEG（旧夹具只有 SOF 头加零字节，本身就是 TRV-02 所说的坏输入）。
+- 开发机额外交叉核对（不随包、不进测试，Pillow 12.3 仅在本机生成样本）：Pillow 生成的基线/渐进、4:4:4/4:2:2/4:2:0、灰度、CMYK、带 RST（1/3/7 块）、优化 Huffman 共 38 张 JPEG 全部通过；SOF-only/中段截断/缺 EOI/截断补 EOI 全部拒绝；4000×3000 噪声图（8.1MB 基线 6.1 秒、5.7MB 渐进 9.3 秒，均超出 5MB 上限，实际上限内更快）。随机单比特翻转约 14% 被判损坏——JPEG 位翻转多数仍可完整解码，这是格式本身的性质，不是漏检。
+
+### A3-TRV-03 首次对话失败后自动重报 → 已修
+- `telemetry.report_once`：发出前先原子持久化 `attempted=true` 并回读确认，写不进去就返回 `skipped` 不发；之后 `sent` 或 `attempted` 任一为真即 `already`，失败的那一次也不再重发。成功回执仍单独校验后存回执，用于既有 `/first-dialogue/link`（409 不覆盖逻辑未动）。关闭开关、只读、损坏标识的原行为保留。
+- 回归：e2e `test_trv03_failed_first_report_never_resent`（异常/超时/非 200/204/坏 JSON/坏回执 × 9 条后续命令含 plan/confirm/run/resume/status/balance/history/再次 first-turn，总尝试恒为 1，重启后 `report_once`=already）、`test_trv03_nested_resume_run_reports_once`（同一次 resume→run 只尝试 1 次）、`test_trv03_attempt_not_persisted_means_not_sent`、`test_trv03_success_then_link_unchanged`；原 `Telemetry.test_failure_does_not_block_and_no_retry_loop` 的期望由「恢复后再发、共 4 次」改为「共 1 次」（旧期望正是缺陷本身）；契约 `test_trv03_attempt_once_even_after_failure`。
+
+### A3-TRV-04 特异服饰被词序覆盖 → 已修
+- 路由改三层：明确目的地 `ROUTE_DESTINATIONS` → 特异服饰 `ROUTE_OUTFITS`（和服/古寺/日式→kyoto；汉服/唐风/城墙→xian）→ 泛化风格 `ROUTE_STYLES`；只有同层内取最先出现者，跨层不看词序。十个主题总数不变。`references/scenes.md` 消歧节与 SKILL.md 首轮第 3 条同步。
+- 回归：契约 `test_route_precedence` 新增「樱花下穿和服」「樱花季穿和服拍照」「春日樱花日式街巷」→kyoto，「古城夜景穿汉服」「夜景灯火下的汉服」「古城唐风」「灯火古城唐风写真」→xian，裸「春日樱花」「樱花季」→sakura、裸「夜景灯火」「凤凰夜景」→oldtown，「三亚穿汉服」→sanya、「京都汉服」→kyoto、「西安和服」→xian、「哈尔滨古城夜景汉服」→harbin（目的地最高）；scenes.md 覆盖三层全部关键词。
+
+### A3-TRV-05 传图同意未告知接收方类别 → 已修
+- `welcome_copy` 新增常量 `RECIPIENTS='图片服务及算力供应商'`、`UPLOAD_CONSENT`；确认话术第 2 项改为「同意把这张照片发送给图片服务及算力供应商处理，只用于本次制作」，本人与监护人两种文案共用；只说类别，不点名品牌、模型或技术。SKILL.md 执行规范第 3 条、scenes.md 三项同意同步。三个 flags 独立、缺一不设 `reference_consent`、换图需重确认、已提交任务原键续接的逻辑未动。
+- 对客禁用词清单含「供应商」：只对规格要求的完整说法「图片服务及算力供应商」做唯一豁免，单独出现「供应商」仍会被测出。
+- 回归：契约 `test_consent_copy`（本人/监护人各一条，第 2 项含「这张照片」「图片服务及算力供应商」「只用于本次制作」，恰 3 项，白标词不出现）；e2e `Confirmation.test_plan_copy`（监护人路径逐字断言）。
+
+## 反证（修复前代码能被新测试检出）
+
+把 1.0.0 的 `studio.py`/`telemetry.py`/`audit_images.py`/`welcome_copy.py` 放回包副本（只把版本号改成 1.0.1、给旧 welcome_copy 补常量以便加载）后重跑：e2e 11 项失败/报错（TRV-01×3、TRV-02×2、TRV-03×5、TRV-05 `test_plan_copy`），契约 5 项失败（`test_route_precedence` TRV-04、`test_consent_copy` TRV-05、TravelRepair101×3）。换回 1.0.1 代码全部通过。
 
 ## 测试结果（合成账户与进程内 Mock，真实上游 0）
 
 | 套件 | 结果 |
 |---|---|
-| 契约（随包）`python3 -m unittest discover -s tests`（仓库内，含与 `01-dev-spec.json` 的逐项比对） | 51/51 OK |
-| 端到端 `python3 dev/e2e_check.py` | 103 OK + 2 跳过（ZIP 项需 `--zip`） |
-| 干净解压 1.0.0 ZIP：契约；`e2e_check.py --package <解压目录> --zip dist/…-1.0.0.zip` | 51/51 OK（规格 JSON 比对在解压包内跳过）；105/105 OK |
-| 反证（T14 要求「移植前先证明 FAM-01/02/03 类故障可被检出」）：把全家福 1.0.0 的 `_submit_unauthorized` 与 `cmd_demo` 拼回本包副本再跑 e2e | 7 项失败/报错：FAM-01×2（含旧代码 404 后走重提分支）、FAM-02×2、FAM-03×2、`test_skill_key_expired_reset_exit4`；换回本包代码全过 |
+| 契约（随包）`python3 -m unittest discover -s tests`（仓库内，含与 `01-dev-spec.json` 比对） | 54/54 OK |
+| 端到端 `python3 dev/e2e_check.py` | 114 OK + 2 跳过（ZIP 项需 `--zip`） |
+| 干净解压 1.0.1 ZIP：契约；`e2e_check.py --package <解压目录> --zip dist/…-1.0.1.zip` | 54/54 OK；116/116 OK |
 | 密钥/上游扫描（技能凭证、`sk-`、`Bearer`、上游域名与模型名） | 包与 dev 无命中 |
+| SKILL.md 大小 | 15355 字节 < 15KB |
 | Python | 3.13（脚本按 3.7+ 标准库编写） |
 
-## 规格验收项对照（T01–T15 归 Claude A2）
+## 前序缺陷逐项复核（未回退）
 
-| 编号 | 结果 | 证据（用例） |
+| 类别 | 结论 | 证据 |
 |---|---|---|
-| T01 首轮与路由 | 通过 | e2e `FirstTurn.test_first_turn_zero_business_http`（问候/仅图/能力/明确需求，唯一网络动作是首次上报 1 次）、`test_close_question`、`test_demo_paths_and_single`（单项只出该项、未知 key 退出 3）；`TravelSpec.test_t01_suggested_scene_in_first_turn`；契约 `test_route_precedence`（京都/樱花、西安/古城消歧，十主题可达）、`test_first_turn_copy_clean`。「只要文字/不要看图」「以已实际展示的记录去重」是宿主行为，写入 SKILL.md 第 1 节，脚本侧无法验证 |
-| T02 单人输入与三项确认 | 通过 | 契约 `test_plan_people_rules`、`test_consent_and_lock_rules`、`test_consent_copy`；e2e `Confirmation.*`、`test_guardian_wording_and_three_consents`、`test_bad_photo_named_no_network`、`RepairA3.test_wed_a3_02_*`（换图后作废确认与未提交键） |
-| T03 离线示例与路径 | 通过 | 契约 `test_demos_consistent`、`test_fam_03_demo_missing_one_exit3`、`test_demo_link_path_with_space/hash`（含规格三条合成路径 `Travel Demo Assets/`、`Travel#Demo/`、`Travel%Demo/`，真实建文件、Markdown 解析、无 query/fragment、定位原文件）、`test_wed_a3_01_demo_has_no_network`；e2e `test_demo_links_survive_markdown`、`test_fam03_*`、`DemoAssets.test_package_demos_trace_to_provenance` |
-| T04 新旧账户与 Key | 通过 | e2e `PayConversion.*`（六入口无账户均给关联入口或如实断网/繁忙）、`RepairPay103.*`、`test_existing_account_skips_auth_and_topup` |
-| T05 计费与确认 | 通过 | e2e `test_full_flow_auth_topup_deliver`、`test_mid_task_insufficient_asks_first`、`test_replay_same_key_charged_once`、`TravelSpec.test_t13_reported_payment_not_credited`；契约 `test_skill_required_rules`（不算同意付费执行的情形） |
-| T06 失败与等待 | 通过 | e2e `Waiting.*`（一次/两轮/五轮仍处理/抖动恢复/始终不可达/明确失败）、`OriginalTaskSpec.*`（401/404/409/5xx 只查原键）；契约 `test_timeouts_consistent`（90/15/120/30/0/240 逐处比对） |
-| T07 PNG 与交付 | 通过 | 契约 `test_png_verify`（CRC/zlib/Adam7）；e2e `test_corrupt_png_kept_pending_then_get_only`、`test_download_fail_keeps_task`、`test_size_mismatch_reported`、`test_wed_a3_03_delivery_links_space_and_hash`（含 `Travel%Demo`） |
-| T08 历史与工单 | 通过 | e2e `Support.*`（10 项） |
-| T09 八字段遥测 | 通过 | e2e `Telemetry.*`（7 项，含每个早退分支前已上报、关闭开关 `MPS_TRAVEL_PORTRAIT_JOURNEY=off`、409 不覆盖）；契约 `test_telemetry_contract` |
-| T10 平台字段与目录 | 通过 | 契约 `test_frontmatter_*`、`test_examples_*`（三对与规格逐字一致、中英同场景/单人/2:3/1024×1536，错配可检出）、`test_package_dir_depth_at_most_two`；e2e `ZipLayout.*`；logo SHA 见上 |
-| T11 接管与收藏 | 通过（声明检查） | 契约 `PayConversion.test_takeover_rules_first`、`test_favorite_section`、`test_no_hidden_html_comment`。真实宿主记忆写入与不 @ 自动选中未验证 |
-| T12 身份与可见 AI 标注 | 通过 | 契约 `test_prompt_baselines`（单人锁定、不含 28/东亚/女性）、`test_disclosure_everywhere`；e2e `test_full_flow_auth_topup_deliver`（交付话术与 `index.html` 含标注、提示词无示例人物属性）、`TravelSpec.test_t12_demo_items_all_disclosed` |
-| T13 微信与支付 Mock | 通过（客户端侧） | e2e `TravelSpec.test_t13_link_expiry_comes_from_server_not_fixed`（1800/900/300 秒均按服务端有效期转述，脚本无 30 分钟硬编码）、`test_t13_callback_links_account_while_client_closed`（模拟回调完成关联、客户端零请求、重复回调幂等、之后 `status` 为已关联）、`test_t13_reported_payment_not_credited`；`test_pay_02_*`（缺期限/过期不转述）。Cookie/state/verifier、302 跳转与第 6 分钟二维码属服务端网页逻辑，本包不持有也不实现 |
-| T14 原任务持久化 | 通过 | e2e `OriginalTaskSpec.test_submit_unknown_persisted_before_post_and_locked`、`test_fam01_*`、`test_fam02_*`、`test_poll_401_recovers_once_then_persistent_keeps_task`；契约 `test_fam_01_02_unauthorized_submit_never_resubmits_or_unlocks`；反证见上 |
-| T15 资源与预算边界 | 通过 | e2e `TravelSpec.test_t15_request_body_has_only_six_fields`、`test_client_rejects_unregistered_field`、`test_server_rejects_unregistered_field`；契约 `test_body_whitelist`；示例 10 张 SHA 与规格一致，logo SHA 一致 |
-| T16/T17 | 不属 Claude | Codex A3 与附录 D |
+| FAM-01/02（401 后 404 重提、恢复失败解除原任务保护） | 未回退；与 TRV-01 同属原任务/绑定保护，新增 `test_trv01_401_recovery_requires_bound` 覆盖「恢复时绑定失败」 | e2e `test_fam01_*`×3、`test_fam02_*`×2、`test_poll_401_recovers_once_then_persistent_keeps_task`；契约 `test_fam_01_02_unauthorized_submit_never_resubmits_or_unlocks` |
+| FAM-03（缺一张示例仍成功） | 未回退 | e2e `test_fam03_*`×3；契约 `test_fam_03_demo_missing_one_exit3` |
+| PAY-01/02/03/04 | 未回退；PAY-04 与 TRV-03 同属遥测/离线类，demo 仍零网络 | e2e `test_pay_01_*`×7、`test_pay_02_*`×9、`test_wed_a3_01_demo_alone_zero_network`；契约 `test_pay_01_*`、`test_pay_02_link_freshness`、`test_pay_03_description_last_sentence_covers_account`、`test_wed_a3_01_demo_has_no_network` |
+| PET-01/02/03（原任务未知不丢键、截断 PNG 不宣告交付、缺示例不报成功） | 未回退 | e2e `test_submit_unknown_persisted_before_post_and_locked`、`test_corrupt_png_kept_pending_then_get_only`、`test_fam03_*` |
+| A3-E01–03（中英示例对齐、路径无空格与 #） | 未回退 | 契约 `test_examples_zh_en_same_scene`、`test_examples_alignment_detects_misalignment`、`test_demo_link_path_with_space`、`test_demo_link_path_with_hash` |
+| WED-A3-01–03（demo 离线、确认后文件不可替换、成品链接编码） | 未回退；TRV-03 修复不影响 demo 零业务网络 | e2e `test_wed_a3_01_*`、`test_wed_a3_02_*`×2、`test_wed_a3_03_delivery_links_space_and_hash`；契约 `test_wed_a3_03_delivery_links_markdown_safe` |
+| 11-07 斜杠案（状态目录不以点开头、md_safe_path、反斜杠转正斜杠） | 未回退 | 契约 `test_demo_link_markdown_safe`；e2e `test_demo_links_survive_markdown` |
 
-阶段 6 S6-01–S6-57：适用项均落在上表用例（S6-08/09 首轮零 HTTP，S6-10 示例 key/标题一致、缺失退出 3，S6-24/25/26 新环境 topup/无账户入口/断网不报繁忙，S6-43 未登记字段客户端与服务端各一次，S6-45 禁用词含 AST 取脚本字符串，S6-47/48/49/51 尺寸提示、画廊、点名文件、不覆盖）。S6-39/40/41/42 按规格判不适用（无 Range/inline_delivery/计费前重试契约，sibling_reuse=false），代码未新增相关字段，契约 `test_body_whitelist` 断言无 `inline_delivery`。S6-52/53/55/57 只做声明检查，真实宿主行为未验证。
+T01–T15 其余项（首轮、示例、计费确认、等待、PNG 交付、售后、平台字段、收藏声明、非实拍标注、微信/支付 Mock、请求体六字段）沿用 1.0.0 用例，全部仍通过，见上表套件结果。
 
 ## 偏离开发文档的地方
 
-1. `first-turn` 额外输出 `suggested_scene`（规格 §3 路由与 T01 消歧的脚本化实现，供宿主参考；只在本地计算，零网络）。不改变对客话术。
-2. 服装默认值写在脚本场景表里（规格 §4 各场景要点原文的服装部分）；用户另行确认的服装经 `--outfit` 传入，同样冻结在方案里，改动需重新 `plan` + 确认。
-3. 「只要文字/不要看图」「同一对话只展示一次（以实际展示为准）」「收藏」等宿主侧行为只写入 SKILL.md 执行规范，脚本无法感知对话历史，未做脚本断言。
-4. 沿用全家福基座的 `X-Skill-Device`：只按操作系统区分 desktop/unknown，不判断 mobile/cloud（无可靠依据时报 unknown，规格「不伪装环境」）。
+1. 沿用 1.0.0 已记的 4 条（`suggested_scene`、服装默认值在场景表、宿主侧行为只写 SKILL.md、`X-Skill-Device` 不判 mobile/cloud）。
+2. 本轮新增：JPEG 完整解码校验只支持 Huffman 基线/扩展顺序/渐进 8 位（手机与常见软件导出的 JPEG 均属此类）；算术编码、无损、分层、12 位 JPEG 本地拒绝并提示另存，不放行到服务端。规格未写这类编码，按「完整可解码、不可解码先本地拒绝」取保守处理。
+3. 对客禁用词「供应商」对规格要求的「图片服务及算力供应商」一处豁免（理由见 TRV-05）。
 
 ## 未验证项
 
-- 真人/儿童保真、生产签名输入路由、本产品在 WorkBuddy 宿主的实际行为（加载、欢迎、示例、收藏、不 @ 自动选中），A3 后由附录 D 本机导入另测。
-- 真实微信扫码与手机/异浏览器跳转、真实付款与到账、客户钱包；平台审核与上架。
-- 约 2.4MB 包的平台接受情况。
+- 真人/儿童保真、生产签名输入路由、WorkBuddy 宿主实际行为（加载、欢迎、示例、收藏、不 @ 自动选中），A3 后由附录 D 本机导入另测。
+- 真实 `/skill-key/bound` 生产响应形态（本轮按规格「bound=true 才算确认」实现，只在 Mock 验证）。
+- 真实微信扫码、手机/异浏览器跳转、真实付款与到账、客户钱包；平台审核与上架；约 2.4MB 包的平台接受情况。
+- 大尺寸真实手机照片的 JPEG 校验耗时只在开发机用合成噪声图估算，未在用户机器实测。
 
 ## 部署与回滚
 
-- 部署：无（fast 车道，无后端改动、无迁移、无重启）。负责人手动上传 1.0.0 ZIP；logo 为 `dist/logo.png`。
-- 回滚：1.0.0 为首版，未上架；不上传或平台下架即可，无数据迁移。
+- 部署：无（fast 车道，无后端改动、无迁移、无重启）。负责人手动上传 1.0.1 ZIP；logo 为 `dist/logo.png`。
+- 回滚：1.0.0 未上架、1.0.1 也未上传；不上传或平台下架即可，无数据迁移。本机状态新增字段 `skill_key_bound`、`attempted` 向后兼容（缺字段按未确认/未尝试处理）。
 
 ## 退回意见
 

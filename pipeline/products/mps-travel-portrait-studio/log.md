@@ -12,3 +12,4 @@
 2026-11-11T21:01:19+08:00 | 负责人 | test_in_progress → test_in_progress | 新令：第五个包附录D实操测试不通即撤回，直接走A3通过交付，负责人自己测试后上架；交付后未回复（睡了）即继续按流程走第六个包，一直操作下去。
 2026-11-11T21:11:53+08:00 | codex | test_in_progress → test_failed | 1.0.0固定ZIP A3不通过，TRV-01–05：bound未确认仍生成、坏输入仅验头、首次上报失败自动重试、特异服饰路由被词序覆盖、传图告知未含接收方类别。结构/SHA/十图/logo/Markdown检查通过；rounds.test=1，包和规格均未修改，零上游/业务调用；交Claude修复重跑A2，未进入附录D或上传。
 2026-11-11T21:38:46+08:00 | claude | test_failed → dev_in_progress | 认领通知 evt-6c73e074…（test_failed）及 Muse 交接 evt-a59f6af5…（req-muse-to-claude-fix-travel-100-20261111），修复 A3-TRV-01–05 出 1.0.1（修复轮，不重读官方文档）。
+2026-11-11T21:50:24+08:00 | claude | dev_in_progress → package_ready | 修复 A3-TRV-01–05 出 1.0.1：绑定须 bound=true 才可新生成（缓存/重启/401 恢复同样确认）；PNG 流式完整校验+新增标准库 JPEG 熵数据完整解码；首次上报发出前先持久化已尝试、失败不重发；路由三层（目的地→和服/汉服等服饰→泛化风格）；传图同意告知「图片服务及算力供应商」。契约 54/54、e2e 114+2 跳过、干净解压 54/54 与 116/116；1.0.0 代码反证 e2e 11 项/契约 5 项可检出；前序 FAM/PAY/PET/A3-E/WED/斜杠类复核未回退。ZIP SHA f8ab627c…a4b1，logo/十图原字节，1.0.0 包保留；真实上游 0，未上传。

@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-travel-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -97,8 +97,11 @@ ROUTE_DESTINATIONS = (
     ('desert', ('沙漠', '驼队')), ('grassland', ('草原', '蒙古包')), ('sakura', ('武汉', '无锡')),
     ('oldtown', ('丽江', '凤凰古城')),
 )
-ROUTE_STYLES = (
+# 特异服饰/风格（无明确目的地时优先于泛化风格，不随词序互换：「樱花下穿和服」→kyoto，「古城夜景穿汉服」→xian）
+ROUTE_OUTFITS = (
     ('kyoto', ('和服', '古寺', '日式')), ('xian', ('汉服', '唐风', '城墙')),
+)
+ROUTE_STYLES = (
     ('harbin', ('冰雕', '雪景')), ('yabuli', ('滑雪', '雪服', '雪山')),
     ('sanya', ('海岛', '暖冬', '海滩', '海边', '度假写真')), ('santorini', ('蓝白', '地中海')),
     ('desert', ('星空', '西部')), ('sakura', ('樱花季', '樱花', '春日')),
@@ -179,6 +182,8 @@ def load_account():
         a.pop('install_secret')
     if a.get('skill_key') and not SKILL_KEY_RE.fullmatch(a['skill_key']):
         a.pop('skill_key')
+    if not a.get('skill_key'):
+        a.pop('skill_key_bound', None)
     return a
 
 
@@ -296,10 +301,10 @@ EXPIRED = 'expired'  # 链接已失效（区别于网络 0 和服务端错误码
 # ---------------------------------------------------------------- 提示词
 
 def route_scene(text):
-    """按口语关键词给一个主推场景：先看明确目的地，再看服饰/风格词；同一层取原话里最先出现的。
-    没有命中返回 None，由宿主按 scenes.md 现场判断并先确认。"""
+    """按口语关键词给一个主推场景，三层优先级：明确目的地 → 特异服饰（和服/汉服/唐风等）→ 泛化风格（樱花、古城、夜景等）；
+    只有同一层内才取原话里最先出现的，不同层之间不看词序。没有命中返回 None，由宿主按 scenes.md 现场判断并先确认。"""
     text = text or ''
-    for table in (ROUTE_DESTINATIONS, ROUTE_STYLES):
+    for table in (ROUTE_DESTINATIONS, ROUTE_OUTFITS, ROUTE_STYLES):
         hits = [(text.find(w), key) for key, words in table for w in words if w in text]
         if hits:
             return min(hits)[1]
@@ -517,24 +522,41 @@ def _account_ready(a):
 
 
 def _ensure_skill_key(a):
-    if a.get('skill_key'):
+    """返回 'ok' 只表示：本机有合法技能凭证，且服务端已明确确认绑定（bound=true）。
+    凭证保存与绑定成功是两个独立状态：合法凭证先私存（skill_key_bound=False），再单独确认绑定；
+    确认失败（bound 不是 true、缺字段、超时、断网、5xx、401）时凭证保留但不得用于新生成，下次命令再确认一次；
+    已缓存但未确认的凭证（含进程重启后）同样先确认。只影响新生成，不改动已提交任务的原键和原请求体。"""
+    if not a.get('skill_key'):
+        try:
+            r = call('POST', '/skill-key', {}, auth=a['install_secret'])
+        except GatewayError as e:
+            if e.status == 401:
+                return 'needs_auth'
+            return 'network' if e.status == 0 else 'error'
+        if r.get('state') == 'pending_payment':
+            return 'needs_credits'
+        if r.get('state') != 'ready' or not SKILL_KEY_RE.fullmatch(r.get('key') or ''):
+            return 'error'
+        a['skill_key'] = r['key']
+        a['skill_key_bound'] = False
+        save_account(a)  # 先安全保存（未确认），再单独确认绑定
+    if a.get('skill_key_bound') is True:
         return 'ok'
+    return _confirm_bound(a)
+
+
+def _confirm_bound(a):
+    """POST /skill-key/bound，只有 HTTP 200 且 bound 恰为 true 才记为已绑定；其余一律未确认。"""
     try:
-        r = call('POST', '/skill-key', {}, auth=a['install_secret'])
+        r = call('POST', '/skill-key/bound', {'key': a['skill_key']}, auth=a['install_secret'])
     except GatewayError as e:
         if e.status == 401:
             return 'needs_auth'
         return 'network' if e.status == 0 else 'error'
-    if r.get('state') == 'pending_payment':
-        return 'needs_credits'
-    if r.get('state') != 'ready' or not SKILL_KEY_RE.fullmatch(r.get('key') or ''):
+    if not isinstance(r, dict) or r.get('bound') is not True:
         return 'error'
-    a['skill_key'] = r['key']
-    save_account(a)  # 先安全保存再确认
-    try:
-        call('POST', '/skill-key/bound', {'key': a['skill_key']}, auth=a['install_secret'])
-    except GatewayError:
-        pass  # 下次使用时服务端仍可识别；不影响已保存凭证
+    a['skill_key_bound'] = True
+    save_account(a)
     return 'ok'
 
 
@@ -646,10 +668,11 @@ def _submit(d, a, body):
 def _recover_skill_key(a):
     """技能凭证失效：清除后用原安装身份恢复一次（持久化新凭证并确认绑定）。返回是否恢复成功。"""
     a.pop('skill_key', None)
+    a.pop('skill_key_bound', None)
     save_account(a)
     if not a.get('install_secret'):
         return False
-    return _ensure_skill_key(a) == 'ok'
+    return _ensure_skill_key(a) == 'ok'  # 恢复同样必须确认绑定
 
 
 def _submit_unauthorized(d, a):
@@ -665,6 +688,7 @@ def _submit_unauthorized(d, a):
     except GatewayError as e:
         if e.status == 401:
             a.pop('skill_key', None)  # 只清本机失效凭证；任务仍是 submit_unknown
+            a.pop('skill_key_bound', None)
             save_account(a)
             return _keep_reset(d)
         return emit('jobPending', W.progress_unknown(), EXIT_WAIT, draft_id=d['draft_id'], progress='unconfirmed')
