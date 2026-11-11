@@ -1,0 +1,121 @@
+{
+  "at": "2026-11-12T00:04:46+08:00",
+  "reviewed_assets": 11,
+  "demo_count": 10,
+  "logo_count": 1,
+  "result": "pass",
+  "stage_distribution": {
+    "early": 3,
+    "middle": 4,
+    "late": 3
+  },
+  "items": [
+    {
+      "key": "studio",
+      "file": "demo-assets/studio.png",
+      "sha256": "05730be75a2db76aa82dffd07059fd352cef811d9d7700133a6e263a7d7eb105",
+      "maternity_stage": "middle",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，白色有衬里孕期纱裙、胸腹遮盖、柔光棚拍；面部清楚、无头纱捧花，无字品牌或其他人物。"
+    },
+    {
+      "key": "lawn",
+      "file": "demo-assets/lawn.png",
+      "sha256": "080869ac2b4834961b52b3ee858816f9b5721e1a01adf7b68b7e922782d0fb8a",
+      "maternity_stage": "early",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，绿色合宜长裙、草坪阳光；可见但相对柔和的衣物下腹部轮廓。此图标记early是创作标签，不由画面证明具体月份。"
+    },
+    {
+      "key": "flowers",
+      "file": "demo-assets/flowers.png",
+      "sha256": "b3376ed396fd3b57fd04b7002b74741c70cca46de1a7dafef4443d1c7e53805f",
+      "maternity_stage": "middle",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，粉色端庄裙装、花海，衣物下圆润轮廓；与同组面部大致一致，无文字品牌或其他人。"
+    },
+    {
+      "key": "oil",
+      "file": "demo-assets/oil.png",
+      "sha256": "60dd1e664b87785002bb888809708d604c746be2a541d0cae7071018a7173b51",
+      "maternity_stage": "late",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，深红端庄长裙、油画式暖棕背景，轮廓更饱满；无露腹、低俗姿态或婚礼标识。"
+    },
+    {
+      "key": "home",
+      "file": "demo-assets/home.png",
+      "sha256": "d62f33b492ee5847c553d1df082b4448040317871874383e6157d64c271364d1",
+      "maternity_stage": "early",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，针织上衣与长裤、家居暖光，轮廓较柔和；无婴儿或他人，无字品牌。"
+    },
+    {
+      "key": "beach",
+      "file": "demo-assets/beach.png",
+      "sha256": "41b87bac7691289721524620e9a5797874a07cd6f3c00167a96ed8ce4da74276",
+      "maternity_stage": "middle",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，黄色端庄孕期长裙、泛化海边暖阳；无目的地标志或婚礼造型，无字品牌。"
+    },
+    {
+      "key": "qipao",
+      "file": "demo-assets/qipao.png",
+      "sha256": "21b8d6d599426c983cc16b486d08960fd26e4fa4fa6984c5f558fd45ebd36cca",
+      "maternity_stage": "late",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，青色宽松孕期旗袍、屏风影棚，衣物下较饱满轮廓；不是秀禾婚礼装，无字品牌。"
+    },
+    {
+      "key": "korean",
+      "file": "demo-assets/korean.png",
+      "sha256": "1e18cd87f5a167c5f99df05a75e28c121cc0aef6fa72041dd6e1c87d1d08a595",
+      "maternity_stage": "early",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，淡蓝上衣长裙、明亮简约影棚，较柔和的轮廓；无其他人或文字品牌。"
+    },
+    {
+      "key": "forest",
+      "file": "demo-assets/forest.png",
+      "sha256": "44270b233e2a503d4363e2494c19275bfedf020486a5c5699faa95c73db5451f",
+      "maternity_stage": "middle",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，绿色端庄长裙、森林散射光，圆润轮廓；与草坪主题背景有区分，无字品牌。"
+    },
+    {
+      "key": "night",
+      "file": "demo-assets/night.png",
+      "sha256": "a2b6753ca9986b56c1121de290dcfb76eb61d0b1be196ecd700fe1111ee6d0da",
+      "maternity_stage": "late",
+      "result": "accepted_for_development_example",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "单一合成成年人，棕色端庄衣裙加开衫、坐姿暖灯夜景，较饱满轮廓；面部清楚，无字品牌、婴儿或他人。"
+    },
+    {
+      "key": "logo",
+      "file": "02-package/dist/logo.png",
+      "sha256": "940b00c1a771779945a666de96a73dcbc7346c6435b5fdc7fded7028902ac333",
+      "maternity_stage": null,
+      "result": "accepted_logo",
+      "method": "Codex actual individual image view plus demo contact sheet; not medical/biometric validation",
+      "observations": "玫瑰/象牙陶瓷缎面立体孕妈剪影、镜头圆框，有纵深；服装合宜，无字、商标或婴儿，非平面ico。"
+    }
+  ],
+  "limitations": [
+    "All portraits are the same completely fictional adult development subject; no real pregnant customer photo, medical document or pregnancy verification used.",
+    "Early/middle/late are artistic prompt/manifest tags, not medically validated month-to-belly standards. Lawn early still has a visible rounded contour; clothing, pose and individual variation prevent judging exact stage from the picture.",
+    "The set shows differing clothing/scene/contour presentation and broadly similar visible adult identity; no biometric identity guarantee, quantitative belly-control test or all30-combination acceptance is claimed.",
+    "512x768 indexed PNG previews show some texture/gradient quantization; they are offline illustrative previews, not print-quality promises.",
+    "Production signed reference transport, real users, OAuth/mobile checkout/payment, WorkBuddy behavior and platform review are not validated by these images.",
+    "AI disclosure and the example visual-stage tag must remain in user-visible demo notes/delivery text; images contain no burned-in label."
+  ]
+}

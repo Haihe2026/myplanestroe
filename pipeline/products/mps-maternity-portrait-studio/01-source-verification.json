@@ -1,0 +1,405 @@
+{
+  "skill_id": "mps-maternity-portrait-studio",
+  "checked_at": "2026-11-12T00:11:09+08:00",
+  "observed_head": "c06d1cc7e9d12aae5e198a438a32170c3396f743",
+  "source_ref": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be",
+  "event_id": "evt-26d3006f8ab9602547f9680b8a02e71fd9598798e0ee3a8d4e0bada1fe04f743",
+  "original_claim_id": "ce84c3dc-13b3-4592-85d2-a9ac40f2c8d1",
+  "local_and_remote_claim_match": true,
+  "receipt_action": "acknowledged",
+  "original_receipt_preserved": true,
+  "event_fixed_source": "815868881762e1578aa24a1f30fad993d3435e3d",
+  "event_source_path": "pipeline/products/mps-maternity-portrait-studio/status.json",
+  "stage_input_fingerprint": "26d3006f8ab9602547f9680b8a02e71fd9598798e0ee3a8d4e0bada1fe04f743",
+  "fixed_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-maternity-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
+    "stage": "brief_ready",
+    "updated_at": "2026-11-11T23:17:00+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "fixed_input_blobs": {
+    "pipeline/products/mps-maternity-portrait-studio/00-brief.md": "5dfd752277f8b65abbdb351bb304382c3b502baf"
+  },
+  "original_request": "固定brief_ready状态与00-brief.md：本人单人孕妈写真、10主题及3视觉档，Codex规格和所需资产，Claude真实开发。",
+  "product_claim_commit": "d7c2fdeea44ff0bceca0f34d3df4dff41b61b541",
+  "serial_gate": {
+    "all_previous_submitted": true,
+    "checked_ref": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be",
+    "products": {
+      "mps-id-photo-background": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.8",
+          "listed": "1.0.6"
+        }
+      },
+      "mps-pet-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.5",
+          "listed": null
+        }
+      },
+      "mps-wedding-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.3",
+          "listed": null
+        }
+      },
+      "mps-family-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.1",
+          "listed": null
+        }
+      },
+      "mps-travel-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "listed": null,
+          "package": "1.0.2"
+        }
+      }
+    }
+  },
+  "observed_status": {
+    "blocked": null,
+    "claimed_at": "2026-11-11T23:29:56+08:00",
+    "lane": "fast",
+    "owner": "codex",
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-maternity-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
+    "stage": "spec_in_progress",
+    "updated_at": "2026-11-11T23:29:56+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "critical_blobs": {
+    "pipeline/products/mps-maternity-portrait-studio/00-brief.md": "5dfd752277f8b65abbdb351bb304382c3b502baf",
+    "docs/sop/sop-image-gen-skill-auto.md": "99ef71e0a2d84535193031ca8f5c6c269ec68799",
+    "pipeline/config.yaml": "966a0d8fdd9d680d4652fa2cba8aacca174aa74e"
+  },
+  "source_files": [
+    {
+      "path": "docs/sop/sop-image-gen-skill-auto.md",
+      "blob": "99ef71e0a2d84535193031ca8f5c6c269ec68799",
+      "sha256": "796e6dd601854fab9f07849a4e2565c8663e0a7d2c7ded278b422b2bf63576dd",
+      "bytes": 136910,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "docs/sop/workbuddy-official-docs.md",
+      "blob": "8314aca21d2c9acf042f20f81659639965c038f3",
+      "sha256": "33a29b76acfc689905662e4af257eb6ce277b33df22477052351e7822b5314c2",
+      "bytes": 21327,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/config.yaml",
+      "blob": "966a0d8fdd9d680d4652fa2cba8aacca174aa74e",
+      "sha256": "dec70c4404c8c948733e8f3c9ada432442aae28d562ec4548f030f66627d4077",
+      "bytes": 627,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-maternity-portrait-studio/00-brief.md",
+      "blob": "5dfd752277f8b65abbdb351bb304382c3b502baf",
+      "sha256": "f16178f4b12e460873002948b5d24973b99882f662445c7cf64b2922fbaa4a22",
+      "bytes": 8916,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-maternity-portrait-studio/status.json",
+      "blob": "c938b255e7245bc52f4cba5d1f4781e7f9ef7fd0",
+      "sha256": "631c8cc6640c7f9a07c9088fc4398568a7dabdf5f2f6184591f6943e6bf1befb",
+      "bytes": 418,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-maternity-portrait-studio/log.md",
+      "blob": "db0cf5d33923480debef4292076b5438028c92ad",
+      "sha256": "0d5671ece9fbb631f8ecb529bf2fc2763a99807c0e462f21f28b577da6a67017",
+      "bytes": 192,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/research/2026-11-11-round7.md",
+      "blob": "3ac496c75b045f68c40df051daed5eefacc0a0e8",
+      "sha256": "01ee8400c808b10f86d47ee855a72beeea4e85def9656c3a20df012cbec5bac3",
+      "bytes": 27909,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "resources/upstreams/catalog.json",
+      "blob": "78c630cecb11e24893449ae60a5012890b93e123",
+      "sha256": "75114b568ea17433ead900bfe27419ec9d349f19328fa89755cddcfe0c2b19c7",
+      "bytes": 18353,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "resources/upstreams/code-map.json",
+      "blob": "bf9f18b58e772643743a99667a5d3926bf45251a",
+      "sha256": "683ac2918a7c3cdb277064d176947c01d5b57c51f6a11418dabea8b711014580",
+      "bytes": 684,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "resources/upstreams/assets.public.json",
+      "blob": "f54048b056d841b2175e2626fd994fe59a5d1a04",
+      "sha256": "d17755109c49b74625de319d05bf2d9b4dc1fdb104758e1384fe74d0458fa5a4",
+      "bytes": 774,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "resources/shared-image-temporary/client.py",
+      "blob": "bea554745f369b74ba9be71a8f5493822e84a338",
+      "sha256": "8f22241a86f4b6aabe83938bf28b44816c92f41eae48de3be0d7f5cbdc244ded",
+      "bytes": 7037,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/image_inputs.py",
+      "blob": "749b820fccb6f04797488932d48401a01fea6396",
+      "sha256": "6359236f2e5415f30c84fa2f07a46e59f99b141fdc370959b2b9a9ba233a2b43",
+      "bytes": 3478,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py",
+      "blob": "7b1030c0c27a5a5478b34a6b1b2fb0d1067e806b",
+      "sha256": "360d5ab5d06c9e5dd34e1ad0976bd1a9d4d0dfdb7f51d204b1a5f5f9874be25e",
+      "bytes": 7418,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/membership.py",
+      "blob": "acdae154db7c8711d02e70bc81e4b2c1502e4bc0",
+      "sha256": "8a094b164c9dc0be8178d315c2d916f9aeea5d55aaefd231b0ee87498d59d509",
+      "bytes": 7826,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/skill_access.py",
+      "blob": "8578245333199aa82a9b4de9265625d7bd35672a",
+      "sha256": "75e02c73869f60b92256703c26ed19033c20bf3dba1dc327d5ddc1a43f79dfc3",
+      "bytes": 5203,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/registration_entries.py",
+      "blob": "950191ee007d7ee4b7a6ec3ef937c32449011e67",
+      "sha256": "71e3666f871d77dd5db6fc30fd942316f0061baa74765ecf89eb468e93ea3ba4",
+      "bytes": 3793,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py",
+      "blob": "3adf3ab108565cbd45f65aca37e79a3cd11e798c",
+      "sha256": "733f56c643b1324fa48ef600ed3f6f7d4838a184f9ee0d658211c8e6603f16b5",
+      "bytes": 31663,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.24/sunburst.py",
+      "blob": "648703366d49d4a14b3cece881402f075a0ad5d2",
+      "sha256": "e81ddb973ecaa68815d5bb380e58938e0727c63bfb9ccb730e7b70f6dec81eb4",
+      "bytes": 10601,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.52/asset_registry.py",
+      "blob": "279e7699bc1f449e36ea23e36272c9c3e876864d",
+      "sha256": "28fd277ca7d3f90351cbcff47d8bc149f1d76a18175363d4ac6e864881915982",
+      "bytes": 7476,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py",
+      "blob": "019291627ed9ed940f0d4962498b6e372a634a5a",
+      "sha256": "ededb46f576c820c6f976b69a8a3b69af72e6020a1da26688eddfe9620bc16e3",
+      "bytes": 9406,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.57/safe_http.py",
+      "blob": "f72c50a332c97c2abb024f8769ad8ed9732718bf",
+      "sha256": "3e2733bc189ae76a880b3ec6e145f18842d04cbe3d0ce89b613b61e2f56767e0",
+      "bytes": 2378,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py",
+      "blob": "d64f757ce218d9d639de391fcfe69625c2a47cfc",
+      "sha256": "cf853d6d82a1d55c735c015d1dd2bbb2785df994c591e9a305426d005d3f5801",
+      "bytes": 7413,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py",
+      "blob": "aba439df33c4659f412e09edc3cf2f78a49c199f",
+      "sha256": "7b07d6c625cf404b5d6daf51dc791e73b4545cd0fcfbe4472bcd8526d7ac85b6",
+      "bytes": 3245,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/child_resource.py",
+      "blob": "fff13531e9e02491c20cf5ac45dce755b576d59c",
+      "sha256": "1eaa1e6b7f5470978ce45ca3408fba0fce33810a804d26e89db3aa439dedceca",
+      "bytes": 6659,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+      "blob": "280a7cbdd3aec75d2a3572661d7e8cf45ea1813f",
+      "sha256": "192bdfc286edab9b4b7fcba82c859f81c6d2bf75d25dd87fa7288052f5ead0c5",
+      "bytes": 10645,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new-only-policy.json",
+      "blob": "ad380cf34bdd2801a49686fa2be08e2a77d0f40f",
+      "sha256": "f4d6db6e49ed8803fc26b2e3b7e10364f135cbe08eb7af84127e7655b29291fe",
+      "bytes": 139,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+      "blob": "870e6627f0cc1baa0a1e9e7f99c4da682168b3d9",
+      "sha256": "9a0c92acfe4b64fb54535369fc99f35937bd50efbd89a1d06737f470cf875fb2",
+      "bytes": 21574,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_entries.py",
+      "blob": "756a5a68d7fe938fb121117551099e0300d921b6",
+      "sha256": "2c67a09222de252d55c79894708581af9b57d50c8e39ed81bdc11f6ceefc3200",
+      "bytes": 2939,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-family-portrait-studio/backend-patch/wechat-binding-20261111/wechat_binding.py",
+      "blob": "55eb0cf32d0df820d3553831c00c4ccd2116b75d",
+      "sha256": "8fb426f481015acccea592ef40ce3c338a8178d2baee9fc22ca6f483b6a76121",
+      "bytes": 19235,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-family-portrait-studio/backend-patch/wechat-binding-20261111/wechat.js",
+      "blob": "01d436cb85a79e0dd233700b66083d56dd2a80a9",
+      "sha256": "0728dee07670ad487ec47543023e20a70d58aa3b83f5580b125f26296df2aaf2",
+      "bytes": 5394,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-family-portrait-studio/01-wechat-binding-deployment-20261111.json",
+      "blob": "31c27f43264da50ce40af75d2079cec40b9b81c1",
+      "sha256": "3b788036b364c942868f9c237318be6d274a67a6af9adf53d4f8d3afe418fc93",
+      "bytes": 12120,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py",
+      "blob": "6b160791acec7c3e0cf87f8ada2cf5ac849a4c0b",
+      "sha256": "26c60bcde88ef7f90e31b2ddea09ba8bad888a1db4f0c248f2a9d1b6a7eaa81c",
+      "bytes": 14146,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json",
+      "blob": "b8d11901e02c6097464f6a575e42720c5f688b48",
+      "sha256": "5ef0c67b16fd79eb3b4c9d80de8485b04d1f5f0349ba284464c52d37f9ff5152",
+      "bytes": 3081,
+      "method": "identical previously read source, latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-travel-portrait-studio/01-dev-spec.md",
+      "blob": "2e551e0214d394e49c1631a94a775377b1d1b8e1",
+      "sha256": "6ff1dcaca3db1004406d64166cbca1576febc1d26999691105992afe455c94f5",
+      "bytes": 57639,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-travel-portrait-studio/01-dev-spec.json",
+      "blob": "a5a902ab878477ca7533802c31c0b16ed3f6e95f",
+      "sha256": "6e81b6ebc90963089210bc4793e41f7faf9d0795d5ce1a47d011642471ecdeb7",
+      "bytes": 67572,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-travel-portrait-studio/03-test-report.md",
+      "blob": "e0fea394ae64a0af9a9ead92602ac6e8426de9e3",
+      "sha256": "3f95657d780da7b2a828decc95bfa9cb87430fd692dd7dec0e7951f198f6f2f3",
+      "bytes": 10105,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "infrastructure/wechat-checkout-20261111.public.json",
+      "blob": "f4064677e2d3af95f4fab4a69cceff6848d43f05",
+      "sha256": "a15968ce7dfcceebc965768177448af5941ce9e33aca5685f35ab5ce0537f88b",
+      "bytes": 1044,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "snapshot/var/www/image-assistant/auth/wechat/automatic-qr-20261111.js",
+      "blob": "4ef7564e6d8b0ede7dc6e2a47a8c519fb145e22c",
+      "sha256": "b44ad412fe9a598a6148d7162d1c3f03da765984177f234668450410e58d50e8",
+      "bytes": 8022,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/run_shared.py",
+      "blob": "725387865696e31978cdc52c0b0f807c6d2fc2ec",
+      "sha256": "a4d20450bbb73764cd6d0726be303153a574423dfcd16f02eabb16604136f44f",
+      "bytes": 781,
+      "method": "fresh fixed GitHub API"
+    }
+  ],
+  "official_read": {
+    "at": "2026-11-12T00:04:49+08:00",
+    "date": "2026-11-12",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "http_status": 200,
+    "bytes": 277042,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c",
+    "result": "fresh online read: SKILL.md/frontmatter, bilingual examples, references/scripts/templates and structure read; workbuddy-skill only, expert not applicable"
+  },
+  "authorization_plan": {
+    "commit_sha": "f625d81915405059dfeb90ef59f058a17d558e5f",
+    "paid_generation_limit": 11
+  },
+  "synthetic_reference": {
+    "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/c06d1cc7e9d12aae5e198a438a32170c3396f743/pipeline/products/mps-maternity-portrait-studio/demo-assets/studio.png",
+    "sha256": "05730be75a2db76aa82dffd07059fd352cef811d9d7700133a6e263a7d7eb105",
+    "fictional_adults": true,
+    "source_commit": "c06d1cc7e9d12aae5e198a438a32170c3396f743",
+    "people": 1,
+    "source_stage": "middle artistic preset; not a medical standard"
+  },
+  "no_duplicate_event_claim": true,
+  "no_worker_or_heartbeat": true,
+  "authorization": "本聊天长期授权开发Skill所需示例图及每技能1张logo；本单11次已记审计。仓库资料不扩展生产/财务/部署/上架/跨聊天权限。",
+  "scope": "本产品规格与所需资产；不修改Claude源码、共享认证或财务，负责人手动上传。"
+}

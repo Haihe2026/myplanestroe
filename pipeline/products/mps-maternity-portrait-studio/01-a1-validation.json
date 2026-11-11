@@ -1,0 +1,131 @@
+{
+  "skill_id": "mps-maternity-portrait-studio",
+  "checked_at": "2026-11-12T00:11:40+08:00",
+  "result": "pass",
+  "checklist_count": 16,
+  "checks": [
+    {
+      "item": 1,
+      "label": "立项/词表/串行前置",
+      "result": "pass",
+      "evidence": "MD §1全字段/词表及真实前五submitted；同slug查重、外部市场未全量核验分开。"
+    },
+    {
+      "item": 2,
+      "label": "本次官方在线读取",
+      "result": "pass",
+      "evidence": "最终写稿前在线读取，日期/URL/内容SHA匹配；仅Skill。"
+    },
+    {
+      "item": 3,
+      "label": "十主题及独立三档",
+      "result": "pass",
+      "evidence": "MD §3–4：主题/特异词优先，三档默认None，由本人自述；不估孕期/换算周数/医学标准。"
+    },
+    {
+      "item": 4,
+      "label": "基线/本人单人/三独立同意",
+      "result": "pass",
+      "evidence": "本人成人孕期、无证明要求；三同意/接收方类别明确；示例29岁/发肤属性不套用户。"
+    },
+    {
+      "item": 5,
+      "label": "真实示例/阶段分布/审计",
+      "result": "pass",
+      "evidence": "10真调用示例+1logo合计11，无重POST；逐图PNG/尺寸/SHA匹配；3/4/3仅创作标签非医学验证。"
+    },
+    {
+      "item": 6,
+      "label": "立体主题logo",
+      "result": "pass",
+      "evidence": "512×512PNG，359488字节，原SHA及孕妈立体主题目检；Claude不替换。"
+    },
+    {
+      "item": 7,
+      "label": "支付/钱包/核款闭环",
+      "result": "pass",
+      "evidence": "MD §7具体网页订单/报付款/鉴权与Origin精确映射、同事务核款幂等；不赋Skill核款权。"
+    },
+    {
+      "item": 8,
+      "label": "资源/适配/成本",
+      "result": "pass",
+      "evidence": "固定.60→.59→.57及目录，1K/n1/auto/3尺寸；毛利估算76.47%，非实账。"
+    },
+    {
+      "item": 9,
+      "label": "fast及真实状态",
+      "result": "pass",
+      "evidence": "MD §9分列已实现/待Claude/无部署/未验证；10示例不证明真人、30组合或专项孕周能力。"
+    },
+    {
+      "item": 10,
+      "label": "接口/六字段/恢复",
+      "result": "pass",
+      "evidence": "14共享/售后与4微信根路由固定源码；绑定401原身份恢复，unknown/404只GET原任务，阶段不是API字段。"
+    },
+    {
+      "item": 11,
+      "label": "一次上报/漏斗",
+      "result": "pass",
+      "evidence": "8字段/200/2秒4096B；attempted写前回读，失败不重报；孕期/健康不进上报，缺证步骤不可得。"
+    },
+    {
+      "item": 12,
+      "label": "相邻能力分界",
+      "result": "pass",
+      "evidence": "≥3人才转全家福，2人不误转；孕期海边/白纱不抢旅行/婚礼，证件宠物有界。"
+    },
+    {
+      "item": 13,
+      "label": "不承接/接管/首轮",
+      "result": "pass",
+      "evidence": "无假孕、医疗、他人/儿童；首轮文字跳过与实际展示去重，无匹配期别示例不冒充。"
+    },
+    {
+      "item": 14,
+      "label": "验收逐项及角色",
+      "result": "pass",
+      "evidence": "17组+57项逐项对照；A2 Mock、Codex A3静态、D.2固定派活与D.6适用，无自动上传。"
+    },
+    {
+      "item": 15,
+      "label": "决策记录",
+      "result": "pass",
+      "evidence": "16事项/采用/依据，含资格、三档、10+1、当前微信、费用、401/资源上限、两人边界和D.6。"
+    },
+    {
+      "item": 16,
+      "label": "MD/JSON一致与秘密扫描",
+      "result": "pass",
+      "evidence": "16节/核心JSON/三对中英主题档位与尺寸/图片SHA一致；无私钥Cookie实际凭据。"
+    }
+  ],
+  "stage6_cases": 57,
+  "asset_files": 11,
+  "real_calls": {
+    "demos": 10,
+    "logo": 1,
+    "total": 11,
+    "extra_tests": 0
+  },
+  "document_sha256": {
+    "01-dev-spec.md": "a6483b847168aa20f50756d1c100133eb578d18badf404dcaa1f088bf693f2c8",
+    "01-dev-spec.json": "fa37053b18a5b2e642baabf0643f4d15d346a27718aa4cd66fa5b42e82099505"
+  },
+  "independent_review": "Two read-only final A1 reviews passed after payment/OAuth JSON/citations and exact Origin mapping were completed.",
+  "secret_scan": "pass",
+  "limitations": [
+    "All portraits are the same completely fictional adult development subject; no real pregnant customer photo, medical document or pregnancy verification used.",
+    "Early/middle/late are artistic prompt/manifest tags, not medically validated month-to-belly standards. Lawn early still has a visible rounded contour; clothing, pose and individual variation prevent judging exact stage from the picture.",
+    "The set shows differing clothing/scene/contour presentation and broadly similar visible adult identity; no biometric identity guarantee, quantitative belly-control test or all30-combination acceptance is claimed.",
+    "512x768 indexed PNG previews show some texture/gradient quantization; they are offline illustrative previews, not print-quality promises.",
+    "Production signed reference transport, real users, OAuth/mobile checkout/payment, WorkBuddy behavior and platform review are not validated by these images.",
+    "AI disclosure and the example visual-stage tag must remain in user-visible demo notes/delivery text; images contain no burned-in label."
+  ],
+  "claude_a2": "pending",
+  "codex_a3": "pending",
+  "appendix_d": "pending after A3 fixed Muse task; D.6 applies",
+  "production_deployments_this_product": 0,
+  "publishing": "owner manual"
+}

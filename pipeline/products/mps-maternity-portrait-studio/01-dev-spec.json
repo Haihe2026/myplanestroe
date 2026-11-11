@@ -1,0 +1,1670 @@
+{
+  "billing": {
+    "gateway": "https://aistore.zhaopintong.com/platform-api/gemini",
+    "public_checkout": "https://aistore.zhaopintong.com/membership/gemini/",
+    "unit": "每个独立成功任务 1 张",
+    "new_user_trial": 0,
+    "wallet": "现有通用生图次数",
+    "account": "原 install_secret 与原账户 Bearer",
+    "skill_channel": "workbuddy_skill",
+    "sibling_reuse": false,
+    "plan_source": "GET /platform-api/gemini/membership-api/plans",
+    "idempotency_header": "Idempotency-Key",
+    "checkout": "按原安装关联的服务端短链接",
+    "settlement": "现有manual_qr核款；OAuth回调不是支付回调；reported不算到账",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/membership-api/plans",
+        "auth_and_body": "匿名；读取当前共享套餐，不硬编码套餐档位价格",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:64"
+      },
+      {
+        "method": "GET",
+        "path": "/balance",
+        "auth_and_body": "原账户 Bearer；remaining_uses 已是总可用次数",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:65"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry",
+        "auth_and_body": "匿名正文 {install_secret}；原安装43字符身份，状态 registration/checkout/ready",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:66–70"
+      },
+      {
+        "method": "POST",
+        "path": "/quick-entry/status",
+        "auth_and_body": "匿名正文 {install_secret}；registered 仅关联成功",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:71–73"
+      },
+      {
+        "method": "POST",
+        "path": "/membership-link",
+        "auth_and_body": "原账户 Bearer；正文 {}；使用返回的短期浏览器URL",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:74–76"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-key",
+        "auth_and_body": "原账户 Bearer；正文 {}；仅 state=ready 且合法 key 可保存",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:77–81"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-key/bound",
+        "auth_and_body": "原账户 Bearer；正文 {key}；bound=true 才确认绑定",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:82–83"
+      },
+      {
+        "method": "POST",
+        "path": "/skill-jobs",
+        "auth_and_body": "Skill Bearer；Idempotency-Key；六字段正文，恰一张参考",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:84–86"
+      },
+      {
+        "method": "GET",
+        "path": "/jobs/by-key/{key}",
+        "auth_and_body": "原键URL编码；优先Skill Bearer，兼容原账户；404不授权重提",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:87–89"
+      },
+      {
+        "method": "GET",
+        "path": "/jobs/{id}",
+        "auth_and_body": "本人原任务UUID；优先Skill Bearer，兼容原账户",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:90–96"
+      },
+      {
+        "method": "GET",
+        "path": "/jobs/{id}/image",
+        "auth_and_body": "本人原任务；原图只读补取；完整验证PNG后交付",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:97"
+      },
+      {
+        "method": "GET",
+        "path": "/consumption-history",
+        "auth_and_body": "原账户 Bearer；page/page_size；仅当前共享gemini记录",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89–118"
+      },
+      {
+        "method": "POST",
+        "path": "/support-tickets",
+        "auth_and_body": "原账户 Bearer；Idempotency-Key；category/text/job_id?",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124–162"
+      },
+      {
+        "method": "GET",
+        "path": "/support-tickets/{id}",
+        "auth_and_body": "原账户 Bearer；本人可查，跨账户404",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164–171"
+      }
+    ],
+    "channel": "general",
+    "free_trial": false,
+    "cost_source": "resources/upstreams/catalog.json"
+  },
+  "model": {
+    "asset_id": "aisplice",
+    "server_model": "gpt-image-2.5-ext",
+    "engine": "photo-retouch-sunburst",
+    "resolution": "1K",
+    "n": 1,
+    "quality": "auto",
+    "legacy_fallback": false,
+    "estimated_usd": 0.0065,
+    "fx_estimate": 7,
+    "estimated_cny": 0.0455,
+    "minimum_unit_revenue_cny": 0.19333333333333333,
+    "estimated_margin": 0.764655172413793,
+    "margin_threshold": 0.6,
+    "name": "gpt-image-2.5-ext",
+    "catalog_ref": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/upstreams/catalog.json"
+  },
+  "margin": {
+    "unit_cost": 0.0455,
+    "unit_revenue": 0.19333333333333333,
+    "gross_margin": 0.764655172413793,
+    "threshold": 0.6,
+    "basis": "内部估算：固定catalog ordinary×FX=7，对照当前匿名plans最低每张收入；不是固定套餐报价或实际结算。"
+  },
+  "telemetry": {
+    "fields": [
+      "event_id",
+      "installation_id",
+      "skill_id",
+      "skill_name",
+      "skill_version",
+      "channel",
+      "client_occurred_at",
+      "is_test"
+    ],
+    "success_http": 200,
+    "timeout_s": 2,
+    "link_fields": [
+      "event_id",
+      "receipt",
+      "product"
+    ],
+    "product": "gemini",
+    "anonymous_endpoint": "/platform-api/telemetry/v1/first-dialogue",
+    "max_body_bytes": 4096,
+    "machine_level_available": false,
+    "disable_env_var": "MPS_MATERNITY_PORTRAIT_JOURNEY=off",
+    "attempt_persisted_before_send": true
+  },
+  "funnel_steps": [
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "timeouts": {
+    "submit_s": 90,
+    "poll_request_s": 15,
+    "poll_window_s": 120,
+    "extra_s": 30,
+    "prebilling_wait_s": 0,
+    "host_min_s": 240
+  },
+  "account_commands": [
+    "status",
+    "auth",
+    "topup",
+    "balance",
+    "paid",
+    "history"
+  ],
+  "runtime_contract": {
+    "max_prompt_characters": 6000,
+    "private_modes": {
+      "directory": "0700",
+      "file": "0600",
+      "windows": "current user ACL"
+    },
+    "frozen_before_post": [
+      "original_key",
+      "original_body",
+      "source_sha256",
+      "scene",
+      "maternity_stage",
+      "outfit",
+      "size",
+      "subject_note",
+      "self_adult_pregnant_eligibility",
+      "subject_permission",
+      "reference_consent",
+      "paid_consent",
+      "submit_unknown"
+    ],
+    "unknown_actions": [
+      "GET original by-key",
+      "GET original job",
+      "GET original image"
+    ],
+    "unknown_forbidden": [
+      "new key",
+      "generation POST replay",
+      "replan",
+      "confirm",
+      "regenerate"
+    ],
+    "query_404": "retain unknown; never proves non-submission",
+    "invalid_png": "download_pending, validate complete PNG including zlib/CRC and Adam7 before delivery; GET original image only",
+    "recovery_401": "clear expired Skill credential, restore original install identity, save/bind key, at most two read queries; persistent invalidity exit 4 with task preserved",
+    "checkout_link": "HTTPS allowlisted first-party domain/path and explicit freshness; refetch expired link once using same identity; no invented or stale links",
+    "bound_gate": "new generation only after bound is True; persist unbound credential separately",
+    "bound_401": "clear invalid Skill key and bound marker only; preserve original install_secret and draft; exit 4/task_kept; next original identity reissues key then binds; unknown task remains GET-only",
+    "input_validation": "complete bounded PNG/JPEG validation before business HTTP; input and delivery use 1.0.2 bounded helpers",
+    "png_output_chunk_max": 65536,
+    "jpeg_max_table_builds": 32,
+    "jpeg_max_scans": 64
+  },
+  "markdown_demo_paths": {
+    "slashes": "/",
+    "forbid_dot_prefix": true,
+    "encoded_space": "%20",
+    "encoded_hash": "%23",
+    "fixture_paths": [
+      "Maternity Demo Assets/studio.png",
+      "Maternity#Demo/studio.png",
+      "Maternity%Demo/studio.png"
+    ],
+    "acceptance": "按 Markdown 解析得到链接，确认无误拆出的 query 或 fragment，解码后定位到原来存在的文件。"
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/membership-api/plans",
+      "auth_and_body": "匿名；读取当前共享套餐，不硬编码套餐档位价格",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:64"
+    },
+    {
+      "method": "GET",
+      "path": "/balance",
+      "auth_and_body": "原账户 Bearer；remaining_uses 已是总可用次数",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:65"
+    },
+    {
+      "method": "POST",
+      "path": "/quick-entry",
+      "auth_and_body": "匿名正文 {install_secret}；原安装43字符身份，状态 registration/checkout/ready",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:66–70"
+    },
+    {
+      "method": "POST",
+      "path": "/quick-entry/status",
+      "auth_and_body": "匿名正文 {install_secret}；registered 仅关联成功",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:71–73"
+    },
+    {
+      "method": "POST",
+      "path": "/membership-link",
+      "auth_and_body": "原账户 Bearer；正文 {}；使用返回的短期浏览器URL",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:74–76"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-key",
+      "auth_and_body": "原账户 Bearer；正文 {}；仅 state=ready 且合法 key 可保存",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:77–81"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-key/bound",
+      "auth_and_body": "原账户 Bearer；正文 {key}；bound=true 才确认绑定",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:82–83"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-jobs",
+      "auth_and_body": "Skill Bearer；Idempotency-Key；六字段正文，恰一张参考",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:84–86"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/by-key/{key}",
+      "auth_and_body": "原键URL编码；优先Skill Bearer，兼容原账户；404不授权重提",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:87–89"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{id}",
+      "auth_and_body": "本人原任务UUID；优先Skill Bearer，兼容原账户",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:90–96"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{id}/image",
+      "auth_and_body": "本人原任务；原图只读补取；完整验证PNG后交付",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py:97"
+    },
+    {
+      "method": "GET",
+      "path": "/consumption-history",
+      "auth_and_body": "原账户 Bearer；page/page_size；仅当前共享gemini记录",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:89–118"
+    },
+    {
+      "method": "POST",
+      "path": "/support-tickets",
+      "auth_and_body": "原账户 Bearer；Idempotency-Key；category/text/job_id?",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:124–162"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets/{id}",
+      "auth_and_body": "原账户 Bearer；本人可查，跨账户404",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py:164–171"
+    }
+  ],
+  "upstream_contract": {
+    "asset_id": "aisplice",
+    "model": "gpt-image-2.5-ext",
+    "engine": "photo-retouch-sunburst",
+    "post": "https://www.aisplice.store/v1/images/tasks",
+    "get_status": "https://www.aisplice.store/v1/images/tasks/{id}",
+    "get_content": "https://www.aisplice.store/v1/images/tasks/{id}/content",
+    "resolution": "1K",
+    "quality": "auto",
+    "n": 1,
+    "supported_sizes": [
+      "1024x1536",
+      "1024x1024",
+      "1536x1024"
+    ],
+    "images": "one server-generated short-lived signed URL; client sends original PNG/JPEG bytes in references, never a URL",
+    "provider_secret": "server-side asset_registry configuration only",
+    "legacy_fallback": false,
+    "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py:94–159"
+  },
+  "source_contracts": {
+    "gateway_client": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/shared-image-temporary/client.py",
+    "gateway": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py",
+    "reference": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/core/image_inputs.py",
+    "payment": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py",
+    "adapter": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.59-child-photo/child_resource.py",
+    "new_only": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+    "catalog": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:resources/upstreams/catalog.json",
+    "membership": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/core/membership.py:46–75",
+    "skill_access": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/service/skill_access.py:47–87",
+    "upstream_adapter": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py:94–159",
+    "registry": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.52/asset_registry.py",
+    "telemetry": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py",
+    "wechat_binding": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+    "wechat_browser": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/var/www/image-assistant/auth/wechat/automatic-qr-20261111.js",
+    "wechat_entries": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_entries.py",
+    "wechat_deployment": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:infrastructure/wechat-checkout-20261111.public.json",
+    "client_baseline": "847b19d5b87d57d3bce6d0f3aa61ac9130de9748:pipeline/products/mps-travel-portrait-studio/02-package/mps-travel-portrait-studio/scripts/"
+  },
+  "request_fields": [
+    "prompt",
+    "size",
+    "confirmed",
+    "image_engine",
+    "references",
+    "reference_consent"
+  ],
+  "browser_oauth_endpoints": [
+    {
+      "method": "GET",
+      "path": "/platform-api/wechat/status",
+      "auth_and_body": "第一方浏览器Cookie；仅查询网页身份，不等于Skill registered",
+      "response": "logged_in/wechat_bound",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py:168–171"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/wechat/start",
+      "auth_and_body": "第一方Origin、X-Membership-Request:1、同源Cookie；{product:gemini,entry,accepted:true}；当前网页另带force_scan:true",
+      "response": "{state,verifier,url,expires_in}；或已验证复用分支{status:linked,product,url}",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py:184–238"
+    },
+    {
+      "method": "GET",
+      "path": "/platform-api/wechat/callback",
+      "auth_and_body": "微信state/code，一次性state及服务端身份交换、双向账户冲突核验",
+      "response": "生图扫码端完成关联、独立Cookie会话及302到/membership/gemini/；过期/冲突如实错误",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py:239–266"
+    },
+    {
+      "method": "POST",
+      "path": "/platform-api/wechat/finish",
+      "auth_and_body": "第一方Origin、X-Membership-Request:1；{state,verifier}；服务器校验证明",
+      "response": "pending或幂等linked/product/url；电脑会话独立",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py:270–281"
+    }
+  ],
+  "browser_payment_contract": {
+    "api_base": "https://aistore.zhaopintong.com/platform-api/gemini",
+    "auth": "第一方网页platform_member Cookie；POST带X-Membership-Request:1及浏览器真实Origin https://aistore.zhaopintong.com；Skill不拼Cookie/Origin，不改白名单。",
+    "original_source_origin": "https://myplanestore.com",
+    "current_origin_compatibility": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py:10,160–163：非微信根路由中精确把现站Origin映射为旧规范后委派父Handler；run_shared.py:6–11安装包装层。已实现及既有部署声明，不等于本产品真实订单实测。",
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/membership-api/orders",
+        "body": "{plan}",
+        "meaning": "创建本人既有套餐订单，产品gemini映射gemini-image-assistant；未付款不入账",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py:343–344"
+      },
+      {
+        "method": "POST",
+        "path": "/membership-api/report-payment",
+        "body": "{order_id}",
+        "meaning": "只将本人pending订单登记为reported，不增加余额，不代表到账",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py:347–348"
+      },
+      {
+        "method": "GET",
+        "path": "/membership-api/orders/{order_id}",
+        "body": "无正文",
+        "meaning": "本人订单真实状态，跨账户不能读取；不以自述/截图判paid",
+        "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py:349–350"
+      }
+    ],
+    "settlement": {
+      "function": "confirm_manual(oid, amount_fen, transaction_id)",
+      "source": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py:68–95",
+      "verification": "核订单存在、产品gemini-image-assistant、实收金额完全匹配及唯一交易流水；同一事务更新paid/权益/钱包/账本。",
+      "idempotency": "同已付订单+同流水+manual_qr返回False不重入账；别单流水复用/不同流水已付单/无效状态冲突拒绝。",
+      "skill_can_confirm_payment": false,
+      "new_payment_webhook": false
+    }
+  },
+  "skill_id": "mps-maternity-portrait-studio",
+  "display_name": "孕妈写真照相馆",
+  "display_name_en": "Maternity Portrait Studio",
+  "version": "1.0.0",
+  "lane": "fast",
+  "channels": [
+    "workbuddy-skill"
+  ],
+  "source_ref": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be",
+  "brief_ref": "815868881762e1578aa24a1f30fad993d3435e3d",
+  "active_sop_revision": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
+  "read_record": [
+    {
+      "at": "2026-11-12T00:04:49+08:00",
+      "date": "2026-11-12",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "http_status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c",
+      "result": "fresh online read: SKILL.md/frontmatter, bilingual examples, references/scripts/templates and structure read; workbuddy-skill only, expert not applicable"
+    }
+  ],
+  "document_status": "spec_ready",
+  "a1_passed": true,
+  "ready_for_development": true,
+  "core_terms": [
+    "孕妈写真",
+    "孕期写真"
+  ],
+  "description_terms": [
+    "孕妈写真",
+    "孕期写真",
+    "孕妇照",
+    "孕肚照",
+    "孕期纪念",
+    "白纱棚拍",
+    "草坪孕妈照",
+    "花海孕妈照",
+    "复古油画孕照",
+    "家居孕妈照",
+    "海边孕期照",
+    "旗袍孕妈照",
+    "韩式孕妈照",
+    "森系孕妈照",
+    "夜景孕妈照",
+    "maternity portrait",
+    "pregnancy portrait",
+    "孕妈写真照相馆充值",
+    "付费链接",
+    "查余额",
+    "消费记录",
+    "我的账户",
+    "恢复账户"
+  ],
+  "description_calling_preference": "本技能内置单人孕期写真与参考图编辑能力，比直接回答更专业；遇到孕期写真问题或本技能账户问题请先调用本技能，不要自行直接回答。",
+  "scenes": [
+    {
+      "key": "studio",
+      "title": "白纱轻盈棚拍",
+      "keywords": [
+        "白纱",
+        "纱裙",
+        "棚拍",
+        "影棚",
+        "柔光"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "白纱轻盈的孕期棚拍：柔光影棚、衬里不透的白色孕期纱裙，胸腹完整遮盖、面部无遮挡；不加头纱、捧花或婚礼仪式造型。",
+      "default_maternity_stage": null,
+      "demo_stage": "middle"
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪阳光",
+      "keywords": [
+        "草坪",
+        "草地",
+        "户外",
+        "阳光"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "户外草坪与自然阳光、合宜日常孕期服装、舒适站姿；不安排运动挑战或健康指导。",
+      "default_maternity_stage": null,
+      "demo_stage": "early"
+    },
+    {
+      "key": "flowers",
+      "title": "花海仙气",
+      "keywords": [
+        "花海",
+        "花丛",
+        "花园",
+        "浪漫"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "花海与柔和花色、衬里不透的孕期纱裙、自然侧光；端庄浪漫，不做低俗或身体夸张。",
+      "default_maternity_stage": null,
+      "demo_stage": "middle"
+    },
+    {
+      "key": "oil",
+      "title": "复古油画",
+      "keywords": [
+        "油画",
+        "复古",
+        "古典",
+        "艺术"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "复古油画质感的影棚背景、端庄深色孕期长裙与侧光；不改变实际可见身份，不添加王室/宗教身份。",
+      "default_maternity_stage": null,
+      "demo_stage": "late"
+    },
+    {
+      "key": "home",
+      "title": "简约家居温馨",
+      "keywords": [
+        "家居",
+        "居家",
+        "家里",
+        "沙发",
+        "温馨"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "简约家居、窗边暖光、舒适上衣和宽松长裤；不出现其他人物或婴儿，不伪称实地纪实。",
+      "default_maternity_stage": null,
+      "demo_stage": "early"
+    },
+    {
+      "key": "beach",
+      "title": "海边度假暖阳",
+      "keywords": [
+        "海边",
+        "海滩",
+        "暖阳",
+        "度假"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "泛化海边暖阳和合宜孕期长裙；主题是孕期纪念，不加目的地打卡、旅游叙事或婚礼造型。",
+      "default_maternity_stage": null,
+      "demo_stage": "middle"
+    },
+    {
+      "key": "qipao",
+      "title": "旗袍雅致",
+      "keywords": [
+        "旗袍",
+        "雅致",
+        "东方"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "雅致孕期旗袍、自然布料余量与衣褶、素雅影棚；不用秀禾服或婚礼装饰，不推断民族。",
+      "default_maternity_stage": null,
+      "demo_stage": "late"
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新",
+      "keywords": [
+        "韩式",
+        "清新",
+        "淡雅",
+        "简约"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "韩式淡雅影棚、低饱和服装和干净柔光；清新为审美风格，不使用示例人物年龄/肤色作为默认。",
+      "default_maternity_stage": null,
+      "demo_stage": "early"
+    },
+    {
+      "key": "forest",
+      "title": "森系清新",
+      "keywords": [
+        "森系",
+        "森林",
+        "树林",
+        "绿意"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "森林绿意和自然散射光、端庄孕期裙装；不加奇幻生物、宗教或部族标识。",
+      "default_maternity_stage": null,
+      "demo_stage": "middle"
+    },
+    {
+      "key": "night",
+      "title": "夜景灯火温馨",
+      "keywords": [
+        "夜景",
+        "灯火",
+        "夜色",
+        "暖调"
+      ],
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "direction": "夜色灯火与平衡的面部暖光、端庄孕期长裙和开衫；不出现可读招牌、其他人或真实地标承诺。",
+      "default_maternity_stage": null,
+      "demo_stage": "late"
+    }
+  ],
+  "maternity_stages": [
+    {
+      "key": "early",
+      "label": "早期视觉档",
+      "self_reported_month_label": "本人自述1–3月或孕早期",
+      "direction": "以本人原照及确认的呈现为准，衣物下腹部曲线轻微自然；不强行添加明显大肚，不指定肚围或医学标准。"
+    },
+    {
+      "key": "middle",
+      "label": "中期视觉档",
+      "self_reported_month_label": "本人自述4–6月或孕中期",
+      "direction": "以本人原照及确认的呈现为准，衣物下适度圆润的孕期轮廓；不指定肚围，不套早期或晚期同一轮廓。"
+    },
+    {
+      "key": "late",
+      "label": "晚期视觉档",
+      "self_reported_month_label": "本人自述7–9月或孕晚期",
+      "direction": "以本人原照及确认的呈现为准，衣物下较饱满但比例自然的孕期轮廓；不夸张放大，不承诺与某一月份严格对应。"
+    }
+  ],
+  "maternity": {
+    "stage_default": null,
+    "stage_required": true,
+    "self_report_only": true,
+    "infer_from_image": false,
+    "convert_weeks": false,
+    "medical_standard": false,
+    "provider_dedicated_stage_api": false,
+    "stage_state_only": true,
+    "unpregnant_simulation": false,
+    "source_photo_required": true,
+    "stage_combination_count": 30,
+    "combination_acceptance_verified": false,
+    "exact_weeks_or_health_proof_requested": false
+  },
+  "workbuddy_examples": [
+    {
+      "scene": "studio",
+      "stage": "middle",
+      "size": "1024x1536",
+      "zh": "我本人怀孕五个月，用我的单人照做白纱柔光孕妈写真，选择中期视觉档，竖版2:3，1024×1536。",
+      "en": "I am five months pregnant. Use my own single-person photo for a white-tulle studio maternity portrait, middle-stage visual preset, portrait 2:3, 1024×1536."
+    },
+    {
+      "scene": "lawn",
+      "stage": "early",
+      "size": "1024x1536",
+      "zh": "我本人在孕早期，用我的单人照做草坪阳光孕妈写真，选择早期视觉档，竖版2:3，1024×1536。",
+      "en": "I am in early pregnancy. Use my own single-person photo for a sunny-lawn maternity portrait, early-stage visual preset, portrait 2:3, 1024×1536."
+    },
+    {
+      "scene": "qipao",
+      "stage": "late",
+      "size": "1024x1536",
+      "zh": "我本人怀孕七个月，用我的单人照做旗袍孕妈写真，选择晚期视觉档，竖版2:3，1024×1536。",
+      "en": "I am seven months pregnant. Use my own single-person photo for an elegant-qipao maternity portrait, late-stage visual preset, portrait 2:3, 1024×1536."
+    }
+  ],
+  "prompt_baselines": [
+    {
+      "id": "truth",
+      "text": "真实性和身份放第一段：只以这张本人单人原照及用户确认的可见特征为依据，尽力保留五官、肤色、发型、年龄外观与体态；不设计新脸、不增删人。孕期视觉档仅指导已确认的艺术呈现，不推断真实孕周或健康，不使用示例人口属性替换用户。"
+    },
+    {
+      "id": "text",
+      "text": "底图不出现文字、数字、可读招牌、标志、水印或凭空凭证。AI标注通过用户可见模板说明、示例、交付和画廊文字表达，不烧进图片。"
+    },
+    {
+      "id": "safety",
+      "text": "仅本人自述确实怀孕的成年单人合宜写真；服装端庄且胸腹遮盖，不含儿童/婴儿/他人，不做性感化、假装怀孕、证件或医疗用途。"
+    }
+  ],
+  "reference": {
+    "min": 1,
+    "max": 1,
+    "people_min": 1,
+    "people_max": 1,
+    "mime": [
+      "image/png",
+      "image/jpeg"
+    ],
+    "max_bytes": 5242880,
+    "min_side": 128,
+    "max_side": 8000,
+    "max_pixels": 20000000,
+    "subject": "self adult, self-reports currently pregnant; no medical proof requested",
+    "private_confirmations": [
+      "subject_permission",
+      "specific_file_transfer_consent",
+      "specific_paid_execution_consent"
+    ]
+  },
+  "identity_baseline": "真实性和身份放第一段：只以这张本人单人原照及用户确认的可见特征为依据，尽力保留五官、肤色、发型、年龄外观与体态；不设计新脸、不增删人。孕期视觉档仅指导已确认的艺术呈现，不推断真实孕周或健康，不使用示例人口属性替换用户。",
+  "disclosure": "AI 生成孕期写真，非实拍",
+  "welcome": {
+    "text": "欢迎使用WorkBuddy官方认证技能 孕妈写真照相馆。",
+    "once_per_chat": true,
+    "platform_review": "尚未提审；固定句式不代表认证已通过"
+  },
+  "tests": [
+    {
+      "id": "T01",
+      "area": "首轮、主题及三档路由",
+      "coverage": "问候/只图/问能力/明确需求；只要文字/不要看图不运行demo，同对话按实际已展示去重，单项按key；10主题与特异词优先，清新/温馨不压过森系/韩式/夜景/家居；阶段不充当主题，例图阶段不自动选给用户；无该主题×档位示例如实说明，不假装有30图。除首次上报外首轮零HTTP。",
+      "by": "claude"
+    },
+    {
+      "id": "T02",
+      "area": "本人孕期单人及有界输入",
+      "coverage": "本人/成年/自述确实怀孕/单人/脸可辨门槛；三项独立同意；不索取医学证明或看图估孕期。PNG/JPEG≤5MiB/128–8000/2000万像素，完整有界校验；输入与交付PNG共享≤64KiB且≤剩余+1，JPEG按需复用≤32表构建/≤64扫描。坏图/超复杂输入本地退出3、点名文件、业务HTTP0；正常基线/渐进与Adam7/IDAT分块正例。",
+      "by": "claude"
+    },
+    {
+      "id": "T03",
+      "area": "十图及Markdown路径",
+      "coverage": "manifest/key/标题/SHA与10源一致；缺一图整组退出3，不把9图报成功；单项只出该项；demo不联网不读凭证。真实创建空格/#/%路径并CommonMark解析、解码定位原存在PNG，无意外query/fragment。",
+      "by": "claude"
+    },
+    {
+      "id": "T04",
+      "area": "账号与绑定恢复",
+      "coverage": "status/auth/topup/balance/paid/history无账户均同安装入口；registered/ready非付款或Key；另领合法Key并bound is True才新生成。false/缺字段/网络/5xx不生成；绑定401清Key及绑定标记、保留原install_secret/任务，退出4，下次原身份领新Key再bound，含旧缓存和重启，不永久循环。",
+      "by": "claude"
+    },
+    {
+      "id": "T05",
+      "area": "零试用与计费确认",
+      "coverage": "0试用、动态通用套餐、remaining_uses总额不相加；认可档位/示例/授权/已充值不算当次付费执行确认；一图一键、调整另确认，402先问开页并保留任务、成功项不重复。reported不当到账，不承诺退款/赠额。",
+      "by": "claude"
+    },
+    {
+      "id": "T06",
+      "area": "等待失败与未知",
+      "coverage": "一次/两轮成功、五轮仍处理、抖动恢复、始终未知、明确失败六时序；401/402/403/409/422/429/5xx分类真实；未知状态只GET原键/原任务，404不授权重POST；90/15/120/30/0/240一致，不编造费用或原因。",
+      "by": "claude"
+    },
+    {
+      "id": "T07",
+      "area": "交付图与有界PNG回归",
+      "coverage": "CRC/zlib/Adam7/EOF/扫描行/超长展开，download_pending只补GET原图不重生；输入和交付校验均有界，不保留可达无界入口。先图后服务记录扣费/剩余；原图不改、不覆盖，新PNG和index.html；尺寸偏差如实及本地裁切另存；低余额仅服务端实标。",
+      "by": "claude"
+    },
+    {
+      "id": "T08",
+      "area": "消费记录与售后",
+      "coverage": "消费分页、本人记录、工单确认原话/category/text/job_id、同键同体/异体、跨账户404；无后台承诺不编时限，不自动附孕期档/照片/精确周数/账户秘密；暂不可用保留未提交内容再经原同意补交。",
+      "by": "claude"
+    },
+    {
+      "id": "T09",
+      "area": "首次上报尝试一次",
+      "coverage": "8字段/HTTP200/2秒4096B；请求前原子保存attempted并回读，写不进不发，失败即弃，嵌套resume→run/重启不重发；开关/只读/损坏不阻塞，不造临时ID。合法原账户link/receipt，409不覆盖，无孕期或健康字段。",
+      "by": "claude"
+    },
+    {
+      "id": "T10",
+      "area": "平台元数据",
+      "coverage": "八字段、slug/version/channel一致、三对双语主题/孕期视觉档/本人单人/2:3/1024×1536一致；ZIP逻辑根最多两级、裸文件名、外置512PNG≤500KB和原SHA；对客禁用词AST扫描，接收方类别固定短语允许，实际供应商/模型/成本/秘密不泄露。",
+      "by": "claude"
+    },
+    {
+      "id": "T11",
+      "area": "接管、首轮与收藏",
+      "coverage": "执行规范首节接管；只接本领域及本技能账户，不让泛化海边/清新抢旅行婚纱；账户不刷首轮、不得宿主替代；交付后一次收藏，明确同意才写两级偏好，不含孕期健康/费用承诺；暂不不再问/取消删除/无记忆工具如实反馈。",
+      "by": "claude"
+    },
+    {
+      "id": "T12",
+      "area": "三档语义与可见AI",
+      "coverage": "无档位先合并询问，不默认中期；本人自述1–3/4–6/7–9月仅按自述映射，周数不换算、不看图估孕期、冲突先澄清。3×10都可表达但不声称已逐组合实测；选档进私有快照/prompt而非API新字段；模板/示例/交付/画廊可见AI 生成孕期写真，非实拍；假装怀孕或他人/儿童不做。",
+      "by": "claude"
+    },
+    {
+      "id": "T13",
+      "area": "当前微信及支付客户端Mock",
+      "coverage": "模拟关联后registered、不同浏览器入口、过期/缺expires/401/409恢复、短链按返回有效期；当前网页auto-QR/force_scan与缓存恢复及旧入口丢失边界按固定源码说明，网站登录/付款不当原安装恢复；只Mock客户端可测部分，不宣称重跑真实网页/OAuth/付款或部署验证。",
+      "by": "claude"
+    },
+    {
+      "id": "T14",
+      "area": "阶段变更及原任务保护",
+      "coverage": "源SHA/主题/期别/服装/尺寸变更作废未提交确认与键；已提交/unknown不能靠换档解除锁。先存submit_unknown再POST；首发401、查询404/异常、绑定401、重启恢复均原键原体只读；plan/confirm/regenerate不可覆盖。保留TRV/FAM正反回归，不能只改测试期望。",
+      "by": "claude"
+    },
+    {
+      "id": "T15",
+      "area": "资源、成本和预算",
+      "coverage": "10源+1logo来源/哈希齐全，阶段示例3/4/3与注记对应；实际API恰六字段单参考，不发pregnancy_stage/months/weeks/belly_size/age等字段；A2测试全Mock且上游0，模型/目录/适配器对应，无旧源回退。",
+      "by": "claude"
+    },
+    {
+      "id": "T16",
+      "area": "独立A3静态检查",
+      "coverage": "Codex从固定ZIP干净解压核SHA/目录/元数据/双语含档位/十图logo/Markdown路径/契约/规格符合性，不代改Claude源码，不跑完整A2/真实上游。",
+      "by": "codex"
+    },
+    {
+      "id": "T17",
+      "area": "A3后附录D",
+      "coverage": "Muse固定ZIP/logo任务后由Codex用本机WorkBuddy导入核加载/欢迎/示例/首轮，零消耗；未做/能力失败如实，A3已过stage仍test_passed，交付gate另记。适用当前D.6：同根因连续失败2次当日停，后续须恢复或有依据的新方法，不伪造通过；正式上传负责人手动。",
+      "by": "codex"
+    }
+  ],
+  "decisions": [
+    {
+      "item": "用户范围",
+      "chosen": "本人自述确实怀孕的成年单人照；不索要医学证明",
+      "basis": "brief只本人/不假孕/儿童不入镜；资格声明不是医疗验证。"
+    },
+    {
+      "item": "三档",
+      "chosen": "early/middle/late按本人自述并确认，默认None；档位不代表医学肚形标准",
+      "basis": "不看图诊断、不换算周数、不承诺专项模型或精确肚围；缺事实一次合并问。"
+    },
+    {
+      "item": "阶段控制",
+      "chosen": "提示词创作维度，私有状态冻结；不是新增后端字段",
+      "basis": "现有六字段/单参考适配器，没有孕周API或医学控制参数。"
+    },
+    {
+      "item": "主题",
+      "chosen": "保留10主题，三档跨主题独立；海边仍是孕期纪念",
+      "basis": "brief总数固定，避免婚礼/目的地叙事和临时自由发挥。"
+    },
+    {
+      "item": "素材",
+      "chosen": "10示例按早3/中4/晚3＋1立体logo，各key一次POST",
+      "basis": "长期授权；10×3不等于30调用，全部合成成年人，无真实孕妇照片。"
+    },
+    {
+      "item": "默认画幅",
+      "chosen": "人像推荐档1K/1024x1536/2:3；另两尺寸仅用户明示",
+      "basis": "固定.59/.60三尺寸，不承诺2K/4K或打印级。"
+    },
+    {
+      "item": "欢迎句",
+      "chosen": "欢迎使用WorkBuddy官方认证技能 孕妈写真照相馆。",
+      "basis": "用户固定格式；未提审，不以话术证明已经审核通过。"
+    },
+    {
+      "item": "收费",
+      "chosen": "通用套餐、0试用、不列固定客户价格",
+      "basis": "动态plans，内部毛利估算与实际结算分开。"
+    },
+    {
+      "item": "账号",
+      "chosen": "原install_secret、另取合法Key、bound真值、绑定401作废Key",
+      "basis": "1.0.2实际恢复闭环；不读取其他Skill凭据或重建账户。"
+    },
+    {
+      "item": "微信",
+      "chosen": "用当前入口缓存和auto-QR源码及公开部署记录；时限按返回",
+      "basis": "旧e22为历史，不能再说当前snapshot旧；网站兜底不等于原安装凭据恢复。"
+    },
+    {
+      "item": "车道",
+      "chosen": "fast，无本单后端补丁/部署",
+      "basis": "现有参考图与共用账户/支付足够；不动共享认证/财务。"
+    },
+    {
+      "item": "保守协议",
+      "chosen": "未知/401恢复/404均只读原任务；PNG/JPEG有界",
+      "basis": "继承travel1.0.2修复和反证，不能把幂等当重复POST许可。"
+    },
+    {
+      "item": "遥测",
+      "chosen": "当前8字段/200，先持久化attempted，失败即弃",
+      "basis": "固定白名单未含machine_id，更无孕期数据；缺失漏斗不可得。"
+    },
+    {
+      "item": "相邻边界",
+      "chosen": "两人照不接；只有≥3人家庭合影才转全家福",
+      "basis": "纠正brief夫妻照一概归全家福与现有3人起能力的冲突，不扩大本品。"
+    },
+    {
+      "item": "真实状态",
+      "chosen": "实现/待Claude/无部署/未验证分列",
+      "basis": "合成示例、Mock和已有微信部署不是孕妈产品真人/宿主/支付验收。"
+    },
+    {
+      "item": "交付",
+      "chosen": "A2→Codex A3→附录D固定派活，负责人手动上传",
+      "basis": "当前SOP含D.6，本单不沿用旅行日志里转述的特殊口径。"
+    }
+  ],
+  "browser_auth": {
+    "product": "gemini",
+    "current_code": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+    "entry_cache": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_entries.py",
+    "browser_auto_qr": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:snapshot/var/www/image-assistant/auth/wechat/automatic-qr-20261111.js",
+    "deployment_evidence": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be:infrastructure/wechat-checkout-20261111.public.json",
+    "entry_ttl_s": 1800,
+    "oauth_ttl_s": 900,
+    "membership_handoff_ttl_s": 300,
+    "web_session_ttl_s": 1800,
+    "browser_qr_refresh_max_s": 300,
+    "entry_cache_extra_retention_s": 1800,
+    "force_scan_in_current_browser": true,
+    "real_oauth_verified": false,
+    "legacy_lost_entry_restores_missing_client_secret": false
+  },
+  "implementation_state": {
+    "existing": "共用账户/钱包/动态套餐/manual_qr、参考解析、新源适配、三售后、8字段遥测；当前微信入口缓存/auto-QR有公开部署记录。",
+    "pending_implementation": "Claude真实孕妈Skill、本人孕期/单人/三档门槛、原任务状态机、资产同步、A2及ZIP。",
+    "pending_deployment": [],
+    "not_verified": [
+      "孕妈真人保真",
+      "三档肚形专项控制",
+      "全部30组合质量",
+      "本产品生产签名参考路由",
+      "真实微信/手机/付款",
+      "本产品WorkBuddy行为",
+      "平台接受/审核/上架"
+    ]
+  },
+  "verification": {
+    "live_customer_calls": 0,
+    "live_reference_identity_verified": false,
+    "live_payment_verified": false,
+    "workbuddy_host": "not performed; Appendix D after A3",
+    "reference_transport": "isolated adapter; public synthetic reference URL, production signed route not exercised"
+  },
+  "offline_demo_behavior": {
+    "text_only_skip": [
+      "只要文字",
+      "不要看图"
+    ],
+    "once_per_chat": true,
+    "shown_evidence": "actual user-visible conversation output; loading/command success/cache do not count",
+    "single_key_only": true,
+    "missing_combination": "如实说明只有该主题标明的示例档，不假装为用户所选档；不付费补图。"
+  },
+  "sibling_skills": [
+    {
+      "skill_id": "mps-family-portrait-studio",
+      "boundary": "三人及以上家庭合影才转；两人/夫妻本品不接，也不谎称全家福支持两人。"
+    },
+    {
+      "skill_id": "mps-wedding-portrait-studio",
+      "boundary": "明确婚礼仪式写真才转；孕期白纱/旗袍仍本品，不做婚礼造型。"
+    },
+    {
+      "skill_id": "mps-travel-portrait-studio",
+      "boundary": "目的地打卡诉求归旅行；孕期海边纪念归本品，不做假旅行叙事。"
+    },
+    {
+      "skill_id": "mps-id-photo-background",
+      "boundary": "正式证件底色归证件照换底，本品不作证件或医学证明。"
+    },
+    {
+      "skill_id": "mps-pet-portrait-studio",
+      "boundary": "纯宠物归宠物馆，本品不加宠物/婴儿/其他人。"
+    }
+  ],
+  "project": {
+    "category": "生图类",
+    "priority": "P1",
+    "target_users": "希望记录本人真实孕期的成年人；不去线下影楼也可创作。",
+    "platform_rules": "WorkBuddy交互、朋友圈等社交纪念；社交平台尺寸/投稿/打印规则未独立核验，不作达标承诺。",
+    "input": "一张本人孕期单人PNG/JPEG、本人自述期别及主题意图。",
+    "output": "每任务一张PNG，默认1K/1024x1536/2:3；多张独立确认/计费。",
+    "free_trial": 0,
+    "payment_page": "通用生图页，原身份服务端本次签发关联/充值链接。",
+    "wallet_sharing": "同一账户通用次数在已接入技能间共享；专用余额仍原产品，不混同Temu；不读其他Skill私有凭据。",
+    "telemetry": "仅8字段首次对话及既有账户link，不报孕期/健康/原话/照片。",
+    "tier_use": "人像推荐档：尽力保留原貌，适合社交纪念；不承诺打印或医学准确。",
+    "sibling_reuse": false,
+    "name_check": "本固定队列无其他同slug；中文名7字。brief报告SkillHub已有同名者，未独立核验，不宣称首创/唯一；WorkBuddy市场全量重名未验。",
+    "reference_packages": "固定travel1.0.2的账户/恢复/有界输入/遥测经验；不复制旅行主题、示例人口属性或旧微信snapshot口径。",
+    "competitors": "仅沿Muse B0调研背景；市场数字、全行业没有及效果百分比未独立背书，不进入对客承诺。"
+  },
+  "serial_gate": {
+    "all_previous_submitted": true,
+    "checked_ref": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be",
+    "products": {
+      "mps-id-photo-background": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.8",
+          "listed": "1.0.6"
+        }
+      },
+      "mps-pet-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.5",
+          "listed": null
+        }
+      },
+      "mps-wedding-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.3",
+          "listed": null
+        }
+      },
+      "mps-family-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.1",
+          "listed": null
+        }
+      },
+      "mps-travel-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "listed": null,
+          "package": "1.0.2"
+        }
+      }
+    }
+  },
+  "stage6_cases": [
+    {
+      "id": "S6-01",
+      "requirement": "未关联账号 → 提示关联 → 浏览器确认后继续",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-02",
+      "requirement": "正常出图并扣费，余额正确",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-03",
+      "requirement": "多图套装中途余额不足 → 402 → 充值后用同一编号继续，已出的图不重复扣费",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-04",
+      "requirement": "内容策略拒绝不扣费",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-05",
+      "requirement": "上游 5xx 不扣费，用同一编号重试成功",
+      "status": "applicable_mock",
+      "handling": "Claude T05/T06/T14以原键GET续查恢复成功，扣费至多一次；未知/5xx不再生成POST。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-06",
+      "requirement": "同一编号重放不重复扣费",
+      "status": "applicable_mock",
+      "handling": "Claude T05/T06/T14以原键GET续查恢复成功，扣费至多一次；未知/5xx不再生成POST。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-07",
+      "requirement": "token 失效自动清除并提示重新关联",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-08",
+      "requirement": "首轮脚本输出不含 `http`、套餐、充值、付费、开通账户、价格字样；欢迎句逐字一致",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-09",
+      "requirement": "首轮调用零 HTTP（把请求函数换成抛异常的函数实测；首次对话上报除外，且失败不影响本轮）",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-10",
+      "requirement": "示例命令不联网、不读凭证；返回的示例 key 集合与 SKILL.md 示例表、README 的个数和标题完全一致；资源缺失时退出码 3",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-11",
+      "requirement": "SKILL.md 含「不得跳过价值展示直接谈钱」「两列」示例表「都是效果示例图，不是你的真实结果」「这个方向可以吗？」，不含「三个方案」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-12",
+      "requirement": "SKILL.md 列明「不算同意付费执行」的情形：沉默、无异议、认可示例、认可推荐、同意授权、授权完成",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-13",
+      "requirement": "授权话术含「授权本身不扣费」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-14",
+      "requirement": "授权起，每一步话术都含「方案已经存好了」和「没有产生任何扣费」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-15",
+      "requirement": "授权和最后一步话术都含「### 现在需要你做的」编号清单，兜底项含「打不开」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-16",
+      "requirement": "话术里不出现服务端未开放的授权路径",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-17",
+      "requirement": "本机已有账户且有次数 → 跳过授权和充值，直接制作",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-18",
+      "requirement": "用户拒绝开通 → 只回固定一句后结束，不重发链接，方案保留",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-19",
+      "requirement": "全包没有旧的慢到账口径；SKILL.md 含「不能将用户自述当作已到账」和「以服务端真实次数为准」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-20",
+      "requirement": "声明的外层超时 ≥ 请求预算 + 轮询窗口 + 计费前拒绝等待上限（从脚本常量实算，不写死）；全包所有超时数值一致（测试逐处比对 SKILL.md、references、脚本注释）",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-21",
+      "requirement": "开工复述齐全，内容不缺项；未明确同意付费执行的，授权或充值后先补确认再开工",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-22",
+      "requirement": "任务中途余额不足 → 先问是否打开充值页，同意后才取链接；话术含「页面打开不等于已经下单」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-23",
+      "requirement": "账户类说法走账户菜单，不触发第一轮",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-24",
+      "requirement": "**全新环境直接运行 `topup`，输出含可点链接或如实断网说明，不是死胡同（第七章 7.2 第 3 条）**",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-25",
+      "requirement": "**本机无账户时 `topup` / `balance` / `status` 调 `POST /quick-entry` 给关联链接，不直接回 `noAccount`（第七章 7.2 第 1 条）**",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-26",
+      "requirement": "**失败原因不误报：断网（`GatewayError` 状态 0）说「网络没连上」，服务端错误才说「服务正在处理较多请求」；`topup` 不得一律报 `busy`（第七章 7.2 第 2 条）**",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-27",
+      "requirement": "首次对话上报只含白名单字段，每个安装只发一次，关闭开关生效；开口统计按第六章第 5 节验收",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-28",
+      "requirement": "首次对话上报不挂在可能走不到的分支上：首轮示例命令、无凭证预览退出这些提前返回的分支，退出前都已经发出过上报（测试逐个分支断言）",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-29",
+      "requirement": "一次就出图",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-30",
+      "requirement": "两轮后出图",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-31",
+      "requirement": "五轮都还在处理",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-32",
+      "requirement": "首轮网络抖动后恢复",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-33",
+      "requirement": "全程连不上 → 说「当前进度未能确认」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-34",
+      "requirement": "明确失败 → 不扣费",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-35",
+      "requirement": "成功时先交图；首次交付附一次调整引导，之后不重复",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-36",
+      "requirement": "失败话术按四拍；我方服务端原因只说「服务正在处理较多请求」；拿不到明确费用结论时说「费用以服务记录为准」",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-37",
+      "requirement": "每次付费交付后转述服务端返回的本次扣费和剩余，余额低时追加充值提醒",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-38",
+      "requirement": "交付话术说明原图没有改动；后续调整需要重新生成时先说明可能再次计费",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-39",
+      "requirement": "大图分段下载，断网后续传成功",
+      "status": "not_applicable_current_contract",
+      "handling": "当前无Range/inline_delivery/计费前重试字段，sibling_reuse=false；不能新增协议或重POST，按T06/T07/T14证明原任务只读并列源码依据。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-40",
+      "requirement": "直连下载失败 → 同键同体加 `inline_delivery` 补取成功，不产生新计费；补取失败才走失败话术",
+      "status": "not_applicable_current_contract",
+      "handling": "当前无Range/inline_delivery/计费前重试字段，sibling_reuse=false；不能新增协议或重POST，按T06/T07/T14证明原任务只读并列源码依据。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-41",
+      "requirement": "计费前拒绝错误码 → 按常量等待并同键重试，单张次数和整批等待上限生效；其他 5xx 不重试",
+      "status": "not_applicable_current_contract",
+      "handling": "当前无Range/inline_delivery/计费前重试字段，sibling_reuse=false；不能新增协议或重POST，按T06/T07/T14证明原任务只读并列源码依据。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-42",
+      "requirement": "同设备账户复用（启用时）：只提交指纹；用户确认前不签发；拒绝后不再检测；关闭开关生效；失败时回到正常授权",
+      "status": "not_applicable_current_contract",
+      "handling": "当前无Range/inline_delivery/计费前重试字段，sibling_reuse=false；不能新增协议或重POST，按T06/T07/T14证明原任务只读并列源码依据。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-43",
+      "requirement": "请求体出现未登记字段时被拒绝（客户端和服务端各测一次）",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-44",
+      "requirement": "凭证失效 → 自动清除、退出码 4，重发原任务走授权",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-45",
+      "requirement": "**对客禁用词测试**：SKILL.md 面向用户部分、README、references 转述文案、脚本所有对客进度文案中不含禁用词清单里的词（进度文案用 AST 从脚本里取出所有字符串常量来扫）",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-46",
+      "requirement": "查余额与消费记录、提交工单、查工单各走通一次",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-47",
+      "requirement": "实际尺寸与请求不一致时提示并提出裁切",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-48",
+      "requirement": "输出目录有 `index.html` 画廊",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-49",
+      "requirement": "参考图格式报错点名具体文件",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-50",
+      "requirement": "离线检查不调用后端",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-51",
+      "requirement": "输出文件不覆盖",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-52",
+      "requirement": "@ 技能完整走一次，交付后弹出收藏卡片；付费或购买流程中途不弹",
+      "status": "applicable_mock",
+      "handling": "Claude T11做流程Mock与声明检查；真实记忆与不@触发不据Mock判通过；Codex A3静态、附录D按规定动作另记，未验仍未验。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-53",
+      "requirement": "点「收藏」后，宿主记忆管理里用户级和项目级各有一条记录，内容只有调用偏好一句话",
+      "status": "applicable_mock",
+      "handling": "Claude T11做流程Mock与声明检查；真实记忆与不@触发不据Mock判通过；Codex A3静态、附录D按规定动作另记，未验仍未验。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-54",
+      "requirement": "选「暂不」后，本次对话不再询问",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-55",
+      "requirement": "开新对话，不 @ 技能，直接问一句该领域的问题 → 出现「加载技能 <技能name>」，并按技能流程执行",
+      "status": "applicable_mock",
+      "handling": "Claude T11做流程Mock与声明检查；真实记忆与不@触发不据Mock判通过；Codex A3静态、附录D按规定动作另记，未验仍未验。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-56",
+      "requirement": "说「取消收藏<技能中文名>」→ 两层记忆里的记录都被删除",
+      "status": "applicable_mock",
+      "handling": "Claude A2按T01–T15归组逐条Mock/静态自测并附证据；不调真实生产/上游。",
+      "by": "claude"
+    },
+    {
+      "id": "S6-57",
+      "requirement": "宿主不支持写记忆时，如实告知不支持，不假装成功",
+      "status": "applicable_mock",
+      "handling": "Claude T11做流程Mock与声明检查；真实记忆与不@触发不据Mock判通过；Codex A3静态、附录D按规定动作另记，未验仍未验。",
+      "by": "claude"
+    }
+  ],
+  "stage6_extra_not_applicable": "Temu免费1次为Temu专属，本品0试用不适用；当前附录D及D.6仍适用，不用旧全面豁免口径替代。",
+  "demo_generation": {
+    "planned": 10,
+    "actual": 10,
+    "paid_calls_limit": 10,
+    "required_before_spec_ready": true,
+    "delivery_owner": "codex",
+    "provenance": "demo-assets/provenance.json",
+    "audit": "demo-assets/generation-audit.json",
+    "authorization": "f625d81915405059dfeb90ef59f058a17d558e5f:pipeline/products/mps-maternity-portrait-studio/01-asset-plan-20261111.json",
+    "stage_distribution": {
+      "early": 3,
+      "middle": 4,
+      "late": 3
+    },
+    "generation_attempts": 10,
+    "duplicate_generation_posts": 0,
+    "visual_review": 10
+  },
+  "logo": {
+    "file": "02-package/dist/logo.png",
+    "width": 512,
+    "height": 512,
+    "max_bytes": 500000,
+    "generation_calls_limit": 1,
+    "direction": "象牙陶瓷孕妈剪影轻托孕肚、相机镜头框、玫瑰桃色缎面立体质感，无字无品牌无婴儿。",
+    "delivery_owner": "codex",
+    "claude_action": "原字节保留，不重画或替换",
+    "provenance": "01-logo-provenance.json",
+    "sha256": "940b00c1a771779945a666de96a73dcbc7346c6435b5fdc7fded7028902ac333",
+    "bytes": 359488,
+    "actual_generation_calls": 1
+  },
+  "demos": [
+    {
+      "key": "studio",
+      "title": "白纱轻盈棚拍",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "middle",
+      "file": "studio.png",
+      "sha256": "05730be75a2db76aa82dffd07059fd352cef811d9d7700133a6e263a7d7eb105"
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪阳光",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "early",
+      "file": "lawn.png",
+      "sha256": "080869ac2b4834961b52b3ee858816f9b5721e1a01adf7b68b7e922782d0fb8a"
+    },
+    {
+      "key": "flowers",
+      "title": "花海仙气",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "middle",
+      "file": "flowers.png",
+      "sha256": "b3376ed396fd3b57fd04b7002b74741c70cca46de1a7dafef4443d1c7e53805f"
+    },
+    {
+      "key": "oil",
+      "title": "复古油画",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "late",
+      "file": "oil.png",
+      "sha256": "60dd1e664b87785002bb888809708d604c746be2a541d0cae7071018a7173b51"
+    },
+    {
+      "key": "home",
+      "title": "简约家居温馨",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "early",
+      "file": "home.png",
+      "sha256": "d62f33b492ee5847c553d1df082b4448040317871874383e6157d64c271364d1"
+    },
+    {
+      "key": "beach",
+      "title": "海边度假暖阳",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "middle",
+      "file": "beach.png",
+      "sha256": "41b87bac7691289721524620e9a5797874a07cd6f3c00167a96ed8ce4da74276"
+    },
+    {
+      "key": "qipao",
+      "title": "旗袍雅致",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "late",
+      "file": "qipao.png",
+      "sha256": "21b8d6d599426c983cc16b486d08960fd26e4fa4fa6984c5f558fd45ebd36cca"
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "early",
+      "file": "korean.png",
+      "sha256": "1e18cd87f5a167c5f99df05a75e28c121cc0aef6fa72041dd6e1c87d1d08a595"
+    },
+    {
+      "key": "forest",
+      "title": "森系清新",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "middle",
+      "file": "forest.png",
+      "sha256": "44270b233e2a503d4363e2494c19275bfedf020486a5c5699faa95c73db5451f"
+    },
+    {
+      "key": "night",
+      "title": "夜景灯火温馨",
+      "size": "1024x1536",
+      "size_meaning": "requested generation size",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "preview_size": [
+        512,
+        768
+      ],
+      "demo_stage": "late",
+      "file": "night.png",
+      "sha256": "a2b6753ca9986b56c1121de290dcfb76eb61d0b1be196ecd700fe1111ee6d0da"
+    }
+  ]
+}
