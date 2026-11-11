@@ -1,0 +1,65 @@
+{
+  "notice": "示例人物均为虚构的成年人，用于展示效果方向，不是你的真实结果。",
+  "demos": [
+    {
+      "key": "new-year-red",
+      "title": "新年红团圆照",
+      "note": "红色团圆氛围，灯笼柔光",
+      "file": "new-year-red.png"
+    },
+    {
+      "key": "gongbi",
+      "title": "中式工笔画全家福",
+      "note": "绢本工笔，细腻花木",
+      "file": "gongbi.png"
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪全家福",
+      "note": "春日草坪，柔和日光",
+      "file": "lawn.png"
+    },
+    {
+      "key": "studio",
+      "title": "简约棚拍全家福",
+      "note": "暖米色影棚，干净柔光",
+      "file": "studio.png"
+    },
+    {
+      "key": "oil",
+      "title": "复古油画全家福",
+      "note": "古典油画，深色氛围",
+      "file": "oil.png"
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假全家福",
+      "note": "沙滩海风，傍晚柔光",
+      "file": "seaside.png"
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日全家福",
+      "note": "松枝金灯，温暖客厅",
+      "file": "christmas.png"
+    },
+    {
+      "key": "longevity",
+      "title": "寿宴金寿全家福",
+      "note": "金色酒红，庄重家宴",
+      "file": "longevity.png"
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新全家福",
+      "note": "奶油色背景，清新自然",
+      "file": "korean.png"
+    },
+    {
+      "key": "countryside",
+      "title": "田园乡村全家福",
+      "note": "木栅栏野花，田园暖光",
+      "file": "countryside.png"
+    }
+  ]
+}

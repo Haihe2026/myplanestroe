@@ -1,0 +1,146 @@
+{
+  "note": "原字节复制，未缩放、未重编码、未新增生图调用；源图见 demo-assets/provenance.json",
+  "total_bytes": 2676159,
+  "items": [
+    {
+      "key": "new-year-red",
+      "title": "新年红团圆照",
+      "source": "new-year-red.png",
+      "source_sha256": "6a5241d763039d22e8e44f701476f1d0102a1f2aeadd3d7fca8866fca1905a14",
+      "package_file": "new-year-red.png",
+      "package_sha256": "6a5241d763039d22e8e44f701476f1d0102a1f2aeadd3d7fca8866fca1905a14",
+      "package_bytes": 239159,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "gongbi",
+      "title": "中式工笔画全家福",
+      "source": "gongbi.png",
+      "source_sha256": "3ca678ae407239cb3c6e5af5b5c633e8ac555aa8ebbb1d6853f92a8720c7365e",
+      "package_file": "gongbi.png",
+      "package_sha256": "3ca678ae407239cb3c6e5af5b5c633e8ac555aa8ebbb1d6853f92a8720c7365e",
+      "package_bytes": 304905,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪全家福",
+      "source": "lawn.png",
+      "source_sha256": "dbfc37c023ce09e51f45f1e0ff149612f838afddaeb4ccd46312680c56fa00b9",
+      "package_file": "lawn.png",
+      "package_sha256": "dbfc37c023ce09e51f45f1e0ff149612f838afddaeb4ccd46312680c56fa00b9",
+      "package_bytes": 272459,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "studio",
+      "title": "简约棚拍全家福",
+      "source": "studio.png",
+      "source_sha256": "5db792d8357c92f1102396b1f0fb3972c6370c8155eb39a492117dfa235c9ddc",
+      "package_file": "studio.png",
+      "package_sha256": "5db792d8357c92f1102396b1f0fb3972c6370c8155eb39a492117dfa235c9ddc",
+      "package_bytes": 271475,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "oil",
+      "title": "复古油画全家福",
+      "source": "oil.png",
+      "source_sha256": "8d0c79d607695276a847f3455613c4ee1d8d742c7e171a61bfe17b23e8853a44",
+      "package_file": "oil.png",
+      "package_sha256": "8d0c79d607695276a847f3455613c4ee1d8d742c7e171a61bfe17b23e8853a44",
+      "package_bytes": 281201,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "seaside",
+      "title": "海边度假全家福",
+      "source": "seaside.png",
+      "source_sha256": "56580ba6d9c4536c2d02d09b0b80a742d54a6b6c42ad98571a3a513e74bf3d2b",
+      "package_file": "seaside.png",
+      "package_sha256": "56580ba6d9c4536c2d02d09b0b80a742d54a6b6c42ad98571a3a513e74bf3d2b",
+      "package_bytes": 237121,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "christmas",
+      "title": "圣诞节日全家福",
+      "source": "christmas.png",
+      "source_sha256": "a81b7ff20c762315fb4deb8c21066d053b738cb22cc20e1303b0dee096eae879",
+      "package_file": "christmas.png",
+      "package_sha256": "a81b7ff20c762315fb4deb8c21066d053b738cb22cc20e1303b0dee096eae879",
+      "package_bytes": 266504,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "longevity",
+      "title": "寿宴金寿全家福",
+      "source": "longevity.png",
+      "source_sha256": "1d44638bda9b8351ee170680bd5e92c645a3d8511e432d0778720a6c2c08697d",
+      "package_file": "longevity.png",
+      "package_sha256": "1d44638bda9b8351ee170680bd5e92c645a3d8511e432d0778720a6c2c08697d",
+      "package_bytes": 279334,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新全家福",
+      "source": "korean.png",
+      "source_sha256": "18dee1efcde8f2d9a4d51e8e8b80181052d15f4ad01816538803b3ff7feb08da",
+      "package_file": "korean.png",
+      "package_sha256": "18dee1efcde8f2d9a4d51e8e8b80181052d15f4ad01816538803b3ff7feb08da",
+      "package_bytes": 244647,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "countryside",
+      "title": "田园乡村全家福",
+      "source": "countryside.png",
+      "source_sha256": "7c61c14de054cfbccf2e4a37987cea32532c7f30383b03bbf43c1beed0bdbf6c",
+      "package_file": "countryside.png",
+      "package_sha256": "7c61c14de054cfbccf2e4a37987cea32532c7f30383b03bbf43c1beed0bdbf6c",
+      "package_bytes": 279354,
+      "size": [
+        768,
+        512
+      ],
+      "byte_identical": true
+    }
+  ]
+}

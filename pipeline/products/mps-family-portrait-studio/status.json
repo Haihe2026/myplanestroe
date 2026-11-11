@@ -2,19 +2,19 @@
   "skill_id": "mps-family-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "e81a0925a0a8b67ad8ae8708da9c8650dd790751",
-  "stage": "dev_in_progress",
-  "owner": "claude",
-  "claimed_at": "2026-11-11T10:39:08+08:00",
-  "updated_at": "2026-11-11T10:39:08+08:00",
+  "stage": "package_ready",
+  "owner": null,
+  "claimed_at": null,
+  "updated_at": "2026-11-11T10:51:15+08:00",
   "rounds": {
     "spec": 0,
-    "dev": 0,
+    "dev": 1,
     "test": 0
   },
   "lane": "fast",
   "blocked": null,
   "versions": {
-    "package": null,
+    "package": "1.0.0",
     "listed": null
   }
 }
