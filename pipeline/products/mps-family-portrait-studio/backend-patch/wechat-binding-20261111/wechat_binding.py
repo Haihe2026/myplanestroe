@@ -14,7 +14,6 @@ LOCK=threading.RLock()
 ENTRY_TTL=1800
 OAUTH_TTL=900
 AUTO_LINK_PRODUCTS=('gemini','temu','pet')
-START_COOKIE='mps_wechat_start'
 def digest(s):return hashlib.sha256(s.encode()).hexdigest()
 def valid(s):return isinstance(s,str) and re.fullmatch(r'[A-Za-z0-9_-]{43}',s) is not None
 def cookie(headers,name):
@@ -195,7 +194,6 @@ def handler(parent,store,server):
                 if c.execute('SELECT count(*) FROM wechat_login_states').fetchone()[0]>=2048:raise Problem(429,'登录请求较多，请稍后重试')
                 c.execute('INSERT INTO wechat_login_states VALUES(?,?,?,?,?,NULL,?,?,?)',(digest(state),digest(verifier),product,server.digest(entry) if entry else ('trade:'+digest(trade_code) if trade_code else None),uid,'pending',now+ttl,now))
             url='https://open.weixin.qq.com/connect/qrconnect?'+urllib.parse.urlencode(dict(appid=cfg['appid'],redirect_uri=CALLBACK,response_type='code',scope='snsapi_login',state=state))+'#wechat_redirect'
-            if product in AUTO_LINK_PRODUCTS:self.wechat_cookies=[START_COOKIE+'='+verifier+'; HttpOnly; Secure; SameSite=Lax; Path=/platform-api/wechat/; Max-Age='+str(ttl)]
             return self.send(200,dict(state=state,verifier=verifier,url=url,expires_in=ttl))
         def callback(self):
             if self.command!='GET':raise Problem(405,'请求方式无效')
@@ -216,12 +214,13 @@ def handler(parent,store,server):
                     r=c.execute('SELECT * FROM wechat_login_states WHERE hash=?',(digest(state),)).fetchone()
                 # Non-image products retain their existing finish-time proofs.
                 uid=complete(r) if r['product'] in AUTO_LINK_PRODUCTS else None
-            proof=cookie(self.headers,START_COOKIE)
-            if uid and valid(proof) and secrets.compare_digest(digest(proof),r['verifier']):
+            # The single-use state and successful OAuth identity exchange prove
+            # this scan. Issue this browser its own fresh session; never copy the
+            # initiating computer's session or require its cookie on the phone.
+            if uid:
                 self.account_cookies(uid,r['product'])
-                self.wechat_cookies.append(START_COOKIE+'=; HttpOnly; Secure; SameSite=Lax; Path=/platform-api/wechat/; Max-Age=0')
                 self.send_response(302);self.send_header('Location','/membership/'+r['product']+'/');self.send_header('Cache-Control','no-store');self.send_header('Referrer-Policy','no-referrer');self.send_header('Content-Length','0');self.end_headers();return
-            message='关联完成。电脑上的页面会自动进入付费页面；也可以直接回到原 Skill 对话说『继续』。' if uid else '微信授权完成。请回到刚才的账户页面继续，随后回原 Skill 对话。'
+            message='微信授权完成。请回到刚才的账户页面继续，随后回原 Skill 对话。'
             data=('<!doctype html><meta charset="utf-8"><meta name="referrer" content="no-referrer"><title>微信授权完成</title><p>'+message+'</p>').encode()
             self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8');self.send_header('Cache-Control','no-store');self.send_header('Referrer-Policy','no-referrer');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
         def account_cookies(self,uid,product):

@@ -1,8 +1,8 @@
 {
-  "at": "2026-11-11T16:48:24+08:00",
+  "at": "2026-11-11T17:04:45+08:00",
   "url": "https://open.workbuddy.cn/docs/skill",
   "status": 200,
   "bytes": 277042,
   "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c",
-  "result": "fresh online read succeeded; team Skill structure checked; expert channel not applicable to this backend patch"
+  "result": "fresh online read succeeded; backend patch only, expert channel not applicable"
 }

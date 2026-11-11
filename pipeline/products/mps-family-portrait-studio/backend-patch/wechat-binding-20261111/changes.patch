@@ -1,17 +1,16 @@
 --- a/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py
 +++ b/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py
-@@ -11,6 +11,10 @@
+@@ -11,6 +11,9 @@
  CALLBACK=ORIGINS[1]+'/platform-api/wechat/callback'
  PRODUCTS=('gemini','temu','pet','trade-leads')
  LOCK=threading.RLock()
 +ENTRY_TTL=1800
 +OAUTH_TTL=900
 +AUTO_LINK_PRODUCTS=('gemini','temu','pet')
-+START_COOKIE='mps_wechat_start'
  def digest(s):return hashlib.sha256(s.encode()).hexdigest()
  def valid(s):return isinstance(s,str) and re.fullmatch(r'[A-Za-z0-9_-]{43}',s) is not None
  def cookie(headers,name):
-@@ -47,12 +51,20 @@
+@@ -47,12 +50,20 @@
          with entries.lock:
              entries.pending={k:r for k,r in entries.pending.items() if r['expires']>now}
              if len(entries.pending)>=2048 or sum(r['ip']==ip for r in entries.pending.values())>=12:raise Problem(429,'账户入口较多，请稍后重试')
@@ -35,7 +34,7 @@
              if result.get('status') in ('ready','checkout'):
                  uid=store.user(secret)
                  with store.connect() as c:bound=c.execute('SELECT 1 FROM wechat_identities WHERE user_id=?',(uid,)).fetchone()
-@@ -66,6 +78,49 @@
+@@ -66,6 +77,49 @@
          h=store.membership.handoff(uid)
          t=urllib.parse.parse_qs(urllib.parse.urlsplit(h['url']).fragment)['ticket'][0]
          return store.membership.redeem(t)
@@ -85,7 +84,7 @@
      class Handler(parent):
          def log_message(self,*a):pass
          def end_headers(self):
-@@ -112,6 +167,7 @@
+@@ -112,6 +166,7 @@
                      except Problem:original=None
                      if uid and original and uid!=original:raise Problem(409,'账户不一致，请保留原账户联系客服')
                      uid=original or uid
@@ -93,7 +92,7 @@
              elif trade_code:
                  if product!='trade-leads' or not re.fullmatch('[A-Z2-9]{8}',trade_code):raise Problem(400,'外贸获客入口无效')
                  with store.connect() as c:row=c.execute('SELECT account_id FROM trade_links WHERE code_hash=? AND expires>?',(digest(trade_code),time.time())).fetchone()
-@@ -133,13 +189,14 @@
+@@ -133,13 +188,13 @@
                      token=store.device_links.link_entry(product,entry,True,raw) if entry else session(uid)
                      self.wechat_cookies=[device,'platform_member='+token+'; HttpOnly; Secure; SameSite=Strict; Path=/platform-api/; Max-Age=1800']
                      return self.send(200,dict(status='linked',product=product,url='/pay?skill=trade-leads' if product=='trade-leads' else '/membership/'+product+'/'))
@@ -106,12 +105,11 @@
 +                c.execute('INSERT INTO wechat_login_states VALUES(?,?,?,?,?,NULL,?,?,?)',(digest(state),digest(verifier),product,server.digest(entry) if entry else ('trade:'+digest(trade_code) if trade_code else None),uid,'pending',now+ttl,now))
              url='https://open.weixin.qq.com/connect/qrconnect?'+urllib.parse.urlencode(dict(appid=cfg['appid'],redirect_uri=CALLBACK,response_type='code',scope='snsapi_login',state=state))+'#wechat_redirect'
 -            return self.send(200,dict(state=state,verifier=verifier,url=url,expires_in=300))
-+            if product in AUTO_LINK_PRODUCTS:self.wechat_cookies=[START_COOKIE+'='+verifier+'; HttpOnly; Secure; SameSite=Lax; Path=/platform-api/wechat/; Max-Age='+str(ttl)]
 +            return self.send(200,dict(state=state,verifier=verifier,url=url,expires_in=ttl))
          def callback(self):
              if self.command!='GET':raise Problem(405,'请求方式无效')
              q=urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query);state=q.get('state',[''])[0];code=q.get('code',[''])[0]
-@@ -151,10 +208,27 @@
+@@ -151,10 +206,28 @@
              except Exception:
                  with store.connect() as c:c.execute("UPDATE wechat_login_states SET status='failed' WHERE hash=?",(digest(state),))
                  raise Problem(503,'微信授权未完成，请在原页面重新扫码') from None
@@ -125,12 +123,13 @@
 +                    r=c.execute('SELECT * FROM wechat_login_states WHERE hash=?',(digest(state),)).fetchone()
 +                # Non-image products retain their existing finish-time proofs.
 +                uid=complete(r) if r['product'] in AUTO_LINK_PRODUCTS else None
-+            proof=cookie(self.headers,START_COOKIE)
-+            if uid and valid(proof) and secrets.compare_digest(digest(proof),r['verifier']):
++            # The single-use state and successful OAuth identity exchange prove
++            # this scan. Issue this browser its own fresh session; never copy the
++            # initiating computer's session or require its cookie on the phone.
++            if uid:
 +                self.account_cookies(uid,r['product'])
-+                self.wechat_cookies.append(START_COOKIE+'=; HttpOnly; Secure; SameSite=Lax; Path=/platform-api/wechat/; Max-Age=0')
 +                self.send_response(302);self.send_header('Location','/membership/'+r['product']+'/');self.send_header('Cache-Control','no-store');self.send_header('Referrer-Policy','no-referrer');self.send_header('Content-Length','0');self.end_headers();return
-+            message='关联完成。电脑上的页面会自动进入付费页面；也可以直接回到原 Skill 对话说『继续』。' if uid else '微信授权完成。请回到刚才的账户页面继续，随后回原 Skill 对话。'
++            message='微信授权完成。请回到刚才的账户页面继续，随后回原 Skill 对话。'
 +            data=('<!doctype html><meta charset="utf-8"><meta name="referrer" content="no-referrer"><title>微信授权完成</title><p>'+message+'</p>').encode()
              self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8');self.send_header('Cache-Control','no-store');self.send_header('Referrer-Policy','no-referrer');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
 -        def finish(self,b):
@@ -142,7 +141,7 @@
              state=b.get('state');verifier=b.get('verifier')
              if not valid(state) or not valid(verifier):raise Problem(401,'请重新扫码')
              with LOCK:
-@@ -162,40 +236,8 @@
+@@ -162,40 +235,8 @@
                  if not r:raise Problem(401,'扫码已过期，请重新扫码')
                  if r['status'] in ('pending','exchanging'):return self.send(200,dict(status='pending'))
                  if r['status'] not in ('approved','used'):raise Problem(401,'扫码未完成，请重新扫码')

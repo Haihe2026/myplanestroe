@@ -254,32 +254,27 @@ class BindingTests(unittest.TestCase):
     def test_01_desktop_kept_open(self):
         secret, _, start, _ = self.begin()
         self.assertEqual(self.finish(start)[1]['status'], 'pending')
-        self.assertEqual(self.callback(start)[0], 200)
+        self.assertEqual(self.callback(start)[0], 302)
         self.assertEqual(self.status(secret), 'registered')
         status, data, _ = self.finish(start)
         self.assertEqual((status, data['status'], data['url']), (200, 'linked', '/membership/gemini/'))
 
     def test_02_desktop_closed_no_finish_call(self):
         secret, _, start, _ = self.begin()
-        status, text, headers = self.callback(start)
-        self.assertEqual(status, 200)
-        self.assertIn('关联完成。电脑上的页面会自动进入付费页面', text)
-        self.assertIsNone(headers.get('Set-Cookie'))
+        status, _, headers = self.callback(start)
+        self.assertEqual(status, 302)
+        self.assertEqual(headers['Location'], '/membership/gemini/')
+        self.assertTrue(any('platform_member=' in v for v in headers.get_all('Set-Cookie')))
         self.assertEqual(self.status(secret), 'registered')
 
     def test_03_same_browser_mobile_sets_session_and_redirects(self):
         secret, _, start, headers = self.begin()
-        jar = SimpleCookie()
-        for value in headers.get_all('Set-Cookie', []):
-            jar.load(value)
-        self.assertIn('mps_wechat_start', jar)
-        cookie = 'mps_wechat_start=' + jar['mps_wechat_start'].value
-        status, _, result = self.callback(start, cookie=cookie)
+        self.assertIsNone(headers.get('Set-Cookie'))
+        status, _, result = self.callback(start)
         self.assertEqual(status, 302)
         self.assertEqual(result['Location'], '/membership/gemini/')
         cookies = result.get_all('Set-Cookie')
         self.assertTrue(any('platform_member=' in v and 'HttpOnly; Secure; SameSite=Strict' in v for v in cookies))
-        self.assertTrue(any('mps_wechat_start=;' in v and 'Max-Age=0' in v for v in cookies))
         self.assertFalse(any('Domain=' in v for v in cookies))
         self.assertEqual(self.status(secret), 'registered')
 
@@ -288,18 +283,18 @@ class BindingTests(unittest.TestCase):
         self.clock[0] += 360
         status, start, _ = self.start(ticket)
         self.assertEqual(status, 200)
-        self.assertEqual(self.callback(start)[0], 200)
+        self.assertEqual(self.callback(start)[0], 302)
         self.assertEqual(self.status(secret), 'registered')
 
     def test_05_repeat_same_identity_is_idempotent(self):
         secret, _, start, _ = self.begin()
-        self.assertEqual(self.callback(start)[0], 200)
+        self.assertEqual(self.callback(start)[0], 302)
         self.assertEqual(self.status(secret), 'registered')
         uid = self.store.user(secret)
         for _ in range(3):
             self.assertEqual(self.finish(start)[1]['status'], 'linked')
         second, _, again, _ = self.begin()
-        self.assertEqual(self.callback(again)[0], 200)
+        self.assertEqual(self.callback(again)[0], 302)
         self.assertEqual(self.status(second), 'registered')
         self.assertEqual(self.store.user(second), uid)
         with self.store.connect() as c:
@@ -307,17 +302,14 @@ class BindingTests(unittest.TestCase):
             self.assertEqual(c.execute('SELECT count(*) FROM users WHERE balance=0').fetchone()[0], 1)
         self.assertEqual(self.store.registration_calls, 2)  # one per original install, not per finish
 
-    def test_start_cookie_is_host_only_lax_and_scoped(self):
+    def test_start_cannot_issue_a_member_session_before_oauth(self):
         _, _, _, headers = self.begin()
-        value = headers.get_all('Set-Cookie')[0]
-        for flag in ('HttpOnly', 'Secure', 'SameSite=Lax', 'Path=/platform-api/wechat/', 'Max-Age=900'):
-            self.assertIn(flag, value)
-        self.assertNotIn('Domain=', value)
+        self.assertIsNone(headers.get('Set-Cookie'))
 
     def test_callback_in_sixth_minute_after_qr_start(self):
         secret, _, start, _ = self.begin()
         self.clock[0] += 360
-        self.assertEqual(self.callback(start)[0], 200)
+        self.assertEqual(self.callback(start)[0], 302)
         self.assertEqual(self.status(secret), 'registered')
         self.assertEqual(self.finish(start)[1]['status'], 'linked')
 
@@ -333,18 +325,44 @@ class BindingTests(unittest.TestCase):
         self.assertEqual(self.store.user(secret), 'synthetic-customer-sentinel')
         self.assertEqual(self.exchange_calls, 0)
 
-    def test_callback_wrong_browser_proof_does_not_set_session(self):
+    def test_scanner_browser_needs_no_initiator_cookie(self):
         secret, _, start, _ = self.begin()
-        status, _, headers = self.callback(start, cookie='mps_wechat_start=' + secrets.token_urlsafe(32))
-        self.assertEqual(status, 200)
-        self.assertIsNone(headers.get('Set-Cookie'))
+        unrelated = self.store.redeem(urllib.parse.parse_qs(urllib.parse.urlsplit(
+            self.store.handoff('synthetic-customer-sentinel')['url']).fragment)['ticket'][0])
+        status, _, headers = self.callback(start, cookie='platform_member=' + unrelated)
+        self.assertEqual(status, 302)
+        jar = SimpleCookie()
+        for value in headers.get_all('Set-Cookie'):
+            jar.load(value)
+        scanner_token = jar['platform_member'].value
+        self.assertNotEqual(scanner_token, unrelated)
+        self.assertEqual(self.store.web_user(scanner_token), self.store.user(secret))
+        self.assertEqual(self.store.web_user(unrelated), 'synthetic-customer-sentinel')
         self.assertEqual(self.status(secret), 'registered')
+
+    def test_phone_and_desktop_get_separate_sessions_for_same_identity(self):
+        secret, _, start, _ = self.begin()
+        status, _, phone = self.callback(start)
+        self.assertEqual(status, 302)
+        status, data, desktop = self.finish(start)
+        self.assertEqual((status, data['status']), (200, 'linked'))
+        tokens = []
+        for headers in (phone, desktop):
+            jar = SimpleCookie()
+            for value in headers.get_all('Set-Cookie'):
+                jar.load(value)
+                self.assertNotIn('Domain=', value)
+            tokens.append(jar['platform_member'].value)
+        self.assertNotEqual(*tokens)
+        self.assertTrue(all(self.store.web_user(token) == self.store.user(secret) for token in tokens))
+        self.assertNotIn(tokens[0], phone['Location'])
+        self.assertNotIn(tokens[1], data['url'])
 
     def test_finish_wrong_verifier_and_callback_replay(self):
         secret, _, start, _ = self.begin()
         bad = dict(start, verifier=secrets.token_urlsafe(32))
         self.assertEqual(self.finish(bad)[0], 401)
-        self.assertEqual(self.callback(start)[0], 200)
+        self.assertEqual(self.callback(start)[0], 302)
         self.assertEqual(self.callback(start)[0], 401)
         self.assertEqual(self.exchange_calls, 1)
         self.assertEqual(self.finish(bad)[0], 401)
@@ -369,7 +387,7 @@ class BindingTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.clock[0] += 400
         self.entry()  # normal cleanup must retain the reserved entry
-        self.assertEqual(self.callback(start)[0], 200)
+        self.assertEqual(self.callback(start)[0], 302)
         self.assertEqual(self.status(secret), 'registered')
 
     def test_expired_entry_and_state_are_rejected(self):
@@ -425,7 +443,7 @@ class BindingTests(unittest.TestCase):
             self.assertTrue(entered.wait(3))
             self.assertEqual(self.finish(start)[1]['status'], 'pending')
             release.set()
-            self.assertEqual(task.result()[0], 200)
+            self.assertEqual(task.result()[0], 302)
         self.assertEqual(self.status(secret), 'registered')
         self.assertEqual(self.store.registration_calls, 1)
 

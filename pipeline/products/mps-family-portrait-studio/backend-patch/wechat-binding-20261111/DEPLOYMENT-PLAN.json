@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "phase": "prepared_only_not_executed",
+  "authorization_required": "Direct instruction in this chat; repository relay cannot expand production authority",
+  "event_id": "evt-6aca8280cd942557ab032df3078f60753335ea8fd937cc619d90279a71df4b78",
+  "source_ref": "460f92551a128b22374425f9de5a149219f42063",
+  "read_only_preflight": true,
+  "service": {
+    "unit": "skill-platform.service",
+    "active": "active",
+    "fragment_path": "/etc/systemd/system/skill-platform.service",
+    "exec_paths": [
+      "/opt/skill-platform/1.2.0/venv/bin/python",
+      "/opt/skill-platform/gemini-support-20261107/run_shared.py",
+      "/opt/temu-image-assistant/0.2.2/service"
+    ]
+  },
+  "baseline_files": [
+    {
+      "path": "/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+      "sha256": "3d7c26d492567a1cd389a08e66e18068855824a44ffda68438334f41c1f001b7",
+      "sha256_lf": "c7c03be06d664d78a52dd65e8e6d99dafd00cc06ae64728f836b5d5d9a233763",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0
+    },
+    {
+      "path": "/var/www/image-assistant/auth/wechat/wechat.js",
+      "sha256": "8caf538a9956bce865ca7eb7335ad080c61d6c4515a62293faa980736dffeae0",
+      "sha256_lf": "fbd9f241dad1ba4985446922727ecd334d0d06bffc3d03059046f6b582da7867",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0
+    }
+  ],
+  "static_entry_chain_to_wechat": [
+    {
+      "path": "/opt/skill-platform/gemini-support-20261107/run_shared.py",
+      "sha256": "45d1267be9238173cc3040094b5143e2dc9d8641578aea680a84eab7dca9b65b",
+      "runpy_targets": [
+        "/opt/skill-platform/metered-page-20261105/run_shared.py"
+      ],
+      "imports_wechat_binding": false
+    },
+    {
+      "path": "/opt/skill-platform/metered-page-20261105/run_shared.py",
+      "sha256": "61df108c061b18613c5eb1cf1be4b61217f91a26200ddf5709c2efb58c4538aa",
+      "runpy_targets": [
+        "/opt/skill-platform/provider-costs-20261105/run_shared.py"
+      ],
+      "imports_wechat_binding": false
+    },
+    {
+      "path": "/opt/skill-platform/provider-costs-20261105/run_shared.py",
+      "sha256": "6c91a51ab6e6063452b6f61ff6b89a062289de03d3a85a1b254610a7d51ac920",
+      "runpy_targets": [
+        "/opt/skill-platform/listing-cny-0.4.0/run_shared.py"
+      ],
+      "imports_wechat_binding": false
+    },
+    {
+      "path": "/opt/skill-platform/listing-cny-0.4.0/run_shared.py",
+      "sha256": "da3a1cd732eb65ba2caa9272547c0d15d2183fc42c9e223391b2b014ed4bed53",
+      "runpy_targets": [
+        "/opt/skill-platform/grok-video-0.1.3/run_paid.py"
+      ],
+      "imports_wechat_binding": false
+    },
+    {
+      "path": "/opt/skill-platform/grok-video-0.1.3/run_paid.py",
+      "sha256": "c590dc07dd154e1003bff625fad3cd95f4d22f456b6af4fbe8fad513f0afe05d",
+      "runpy_targets": [
+        "/opt/skill-platform/grok-video-0.1.2/run_shared.py"
+      ],
+      "imports_wechat_binding": false
+    },
+    {
+      "path": "/opt/skill-platform/grok-video-0.1.2/run_shared.py",
+      "sha256": "5eac88d7ece1afbf80d8d5a52906eb93c48455481b2ecde1cd5fdbe2f4f4e440",
+      "runpy_targets": [
+        "/opt/skill-platform/grok-video-0.1.0/run_shared.py"
+      ],
+      "imports_wechat_binding": false
+    },
+    {
+      "path": "/opt/skill-platform/grok-video-0.1.0/run_shared.py",
+      "sha256": "423b5c71b8dab292a08edaf6004f1ab1a4a1e40b491e3e47e4a94bb93281e148",
+      "runpy_targets": [
+        "/opt/skill-platform/member-0.10.61-wechat/run_shared.py"
+      ],
+      "imports_wechat_binding": false
+    },
+    {
+      "path": "/opt/skill-platform/member-0.10.61-wechat/run_shared.py",
+      "sha256": "12cc7a52bfae42da952a358316881d2d63118d830f556e499f7d2b73cc528961",
+      "runpy_targets": [
+        "/opt/skill-platform/member-0.10.60-new-resource-only/run_shared.py"
+      ],
+      "imports_wechat_binding": true
+    }
+  ],
+  "backup_directory": "/var/backups/skill-platform/wechat-binding-<unique UTC timestamp>/",
+  "backup_mode": "0700",
+  "backup_sources": [
+    "/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+    "/var/www/image-assistant/auth/wechat/wechat.js",
+    "/etc/systemd/system/skill-platform.service"
+  ],
+  "replace_only": [
+    "/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+    "/var/www/image-assistant/auth/wechat/wechat.js"
+  ],
+  "preserve_owner": "root:root",
+  "preserve_mode": "0644",
+  "restart_only": "skill-platform.service",
+  "change_execstart": false,
+  "change_environment": false,
+  "change_database": false,
+  "other_service_restarts": false,
+  "verification": "read-only active/anonymous health/public plans/static JS/invalid callback refusal; no real OAuth or image calls",
+  "rollback": "restore both original files and permissions, restart the same service; no identity deletion or financial rollback",
+  "actual_deployment": false,
+  "actual_restarts": 0,
+  "production_writes": 0
+}
