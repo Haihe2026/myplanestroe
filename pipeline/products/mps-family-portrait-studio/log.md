@@ -1,1 +1,2 @@
 2026-11-11T08:27:30+08:00 | muse | — → brief_ready | B.0 第五轮调研选定全家福写真照相馆，投 brief_ready，等 Codex 写规格。
+2026-11-11T08:42:24+08:00 | codex | brief_ready → spec_in_progress | 核验原事件认领和固定来源后接手全家福规格、十张示例及一张主题 logo；不重复认领事件。
