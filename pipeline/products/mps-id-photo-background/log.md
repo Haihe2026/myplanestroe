@@ -81,3 +81,4 @@
 2026-11-11T07:44:16+08:00 | codex | package_ready → test_in_progress | 接续 1.0.8 固定 ZIP 的付费转化 A3。
 2026-11-11T07:45:45+08:00 | codex | test_in_progress → test_passed | 1.0.8 付费转化 A3 复查通过，PAY-01/02/03/04 关闭，交负责人手动上传。
 2026-11-11T08:21:53+08:00 | muse | test_passed → submitted | 负责人报已手动上传，置 submitted，等平台审核。
+2026-11-11T10:17:27+08:00 | muse | submitted → submitted | LI 定：三款已上传产品不重新处理；1.0.9 换 logo 重打包取消（事件 evt-eb44b6fe 未认领，已发 relay 撤回请求 req-muse-to-claude-cancel-repack-idphoto-109-20261111），1.0.8 已上传待审维持原样。
