@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-394512f1b9528136a733a2d27d1793fb629f4a0b18ba31768ea41e609bca4f09",
+  "claim_id": "96814274-bbaf-4ff9-88f2-07c857420c1d",
+  "role": "codex",
+  "skill_id": "mps-travel-portrait-studio",
+  "at": "2026-11-11T23:00:24+08:00",
+  "source_ref": "847b19d5b87d57d3bce6d0f3aa61ac9130de9748",
+  "result": "test_passed",
+  "version": "1.0.2",
+  "evidence_ref": "02c394415c9e955a955737ecd934e0d3efb55bcd:pipeline/products/mps-travel-portrait-studio/03-test-report.md",
+  "result_commit": "02c394415c9e955a955737ecd934e0d3efb55bcd",
+  "original_receipt_preserved": {
+    "event_id": "evt-394512f1b9528136a733a2d27d1793fb629f4a0b18ba31768ea41e609bca4f09",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T22:51:11+08:00",
+    "evidence_ref": "568b98ef00c35c4c872f925ef62ca43bae1aaec0:pipeline/products/mps-travel-portrait-studio/status.json",
+    "claim_id": "96814274-bbaf-4ff9-88f2-07c857420c1d"
+  },
+  "duplicate_event_claim": false,
+  "open_findings": [],
+  "closures": [
+    {
+      "id": "A3-TRV-01-R1",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        550,
+        557,
+        561,
+        627,
+        629
+      ],
+      "basis": "绑定401仅清失效Key和bound标记，保留原身份和草稿；退出4/task_kept，下一次原身份领新Key再bound。未知任务优先原键GET，原锁不变。"
+    },
+    {
+      "id": "A3-TRV-02-R1-PNG",
+      "result": "closed",
+      "file": "scripts/png_local.py",
+      "lines": [
+        199,
+        241,
+        246,
+        248,
+        253,
+        258,
+        261,
+        262
+      ],
+      "basis": "每次解压max_length≤64KiB且≤剩余扫描行+1，立即消费丢弃；有界取unconsumed_tail，无flush；EOF/尾随/行长完整检查；输入和交付verify共用。"
+    },
+    {
+      "id": "A3-TRV-02-R1-JPEG",
+      "result": "closed",
+      "file": "scripts/jpeg_local.py",
+      "lines": [
+        16,
+        17,
+        33,
+        44,
+        47,
+        222,
+        237,
+        265,
+        270
+      ],
+      "basis": "DHT仅线性检查定义，SOS实际引用才建表；相同定义缓存复用；第33个不同表和第65扫描在工作开始前拒绝；旧截断/EOI校验保留。"
+    },
+    {
+      "id": "A3-TRV-01",
+      "result": "closed",
+      "basis": "仍仅bound is True可新生成，绑定失败不提前POST。"
+    },
+    {
+      "id": "A3-TRV-02",
+      "result": "closed",
+      "basis": "原PNG/JPEG仅验头的问题已补完整性验证，R1资源边界同时补齐。"
+    },
+    {
+      "id": "A3-TRV-03",
+      "result": "closed",
+      "basis": "attempted发送前持久化、失败不重发，相关函数AST相对1.0.1未改。"
+    },
+    {
+      "id": "A3-TRV-04",
+      "result": "closed",
+      "basis": "目的地→特异服饰→泛化三层路由未改，逆序问题未回退。"
+    },
+    {
+      "id": "A3-TRV-05",
+      "result": "closed",
+      "basis": "本次照片/图片服务及算力供应商的独立传输告知及本人/监护路径未改。"
+    }
+  ],
+  "zip": {
+    "ref": "847b19d5b87d57d3bce6d0f3aa61ac9130de9748",
+    "path": "pipeline/products/mps-travel-portrait-studio/02-package/dist/mps-travel-portrait-studio-1.0.2.zip",
+    "sha256": "bef83fffa5fddad2fa409a048f0cf819e7e939618d531bccdab7113786ce0e91",
+    "bytes": 2417544
+  },
+  "logo": {
+    "ref": "847b19d5b87d57d3bce6d0f3aa61ac9130de9748",
+    "path": "pipeline/products/mps-travel-portrait-studio/02-package/dist/logo.png",
+    "sha256": "d8177d72fbc14acc0e2371fd5af976ced0302c2cab395c1937a4dfa9d66acee9",
+    "external": true
+  },
+  "inspection_scope": "A3独立静态检查；仅求值已审纯路径函数，不执行客户端业务、完整A2或资源耗尽样本。",
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "client_modified_by_codex": false,
+  "development_documents_modified": false,
+  "appendix_d": "not performed; pending fixed Muse task per D.2",
+  "delivery_gate": "A3 passed; local host/import evidence not claimed passed",
+  "next_role": "muse",
+  "next_action": "核对固定1.0.2 ZIP/外置logo/A3报告；按现行D.2发给Codex本机导入msg+relay，给出版本、固定提交、ZIP/logo，后续正式上传仍负责人手动。",
+  "authority": "本事件不扩展生产/财务/部署/上架/跨聊天权限；日志或Muse→Claude新令转述不被当作已完成宿主测验，不新建worker或AI心跳。"
+}
