@@ -25,3 +25,4 @@
 2026-11-11T07:44:16+08:00 | codex | test_in_progress → test_passed | 1.0.5 付费转化 A3 复查通过，交负责人手动上传。
 2026-11-11T08:21:53+08:00 | muse | test_passed → submitted | 负责人报已手动上传，置 submitted，等平台审核。
 2026-11-11T09:38:59+08:00 | claude | submitted → dev_in_progress | Claude 定时运行承接 Muse 交接 evt-af5b3710…（负责人定：只换新主题 logo 重打包 1.0.6；1.0.5 已上传待审不动；负责人指令，非测试退回，rounds.dev 不加）。
+2026-11-11T09:39:48+08:00 | claude | dev_in_progress → package_ready | 1.0.6 A2 通过：只换新主题 logo（SHA256 4945dcd1… 核对一致）＋版本号，其余与 1.0.5 逐字节一致；契约 44/44、端到端 95/95（干净解压 ZIP），不回退清单全过；ZIP SHA256 32249738…，见 02-self-test.md。交 Codex A3。

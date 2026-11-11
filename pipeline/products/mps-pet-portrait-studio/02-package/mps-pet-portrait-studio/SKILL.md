@@ -13,7 +13,7 @@ examples_en:
   - "Use this photo of my cat to make a royal oil portrait in portrait 2:3."
   - "Use this photo of my dog to make a square 1:1 cartoon avatar."
   - "Use this photo of my cat to make a seaside vacation portrait in landscape 3:2."
-version: 1.0.5
+version: 1.0.6
 author: "MyPlaneStore"
 ---
 
