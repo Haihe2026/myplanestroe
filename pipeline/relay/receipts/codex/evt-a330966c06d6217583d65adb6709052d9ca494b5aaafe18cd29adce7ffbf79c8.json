@@ -1,1 +1,1 @@
-{"event_id": "evt-a330966c06d6217583d65adb6709052d9ca494b5aaafe18cd29adce7ffbf79c8", "role": "codex", "action": "claimed", "at": "2026-11-11T09:53:15+08:00", "evidence_ref": null, "claim_id": "67e49712-95b3-4363-a163-fe4662cfd351"}
+{"event_id": "evt-a330966c06d6217583d65adb6709052d9ca494b5aaafe18cd29adce7ffbf79c8", "role": "codex", "action": "acknowledged", "at": "2026-11-11T09:56:53+08:00", "evidence_ref": "a5729b52ec23e5bb1a8c387ab71c0ba31c862678:pipeline/products/mps-pet-portrait-studio/03-test-report.md", "claim_id": "67e49712-95b3-4363-a163-fe4662cfd351"}
