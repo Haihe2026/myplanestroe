@@ -1,0 +1,55 @@
+{
+  "authorized_limit": 1,
+  "post_attempt_intents": 1,
+  "adapter_tasks": 1,
+  "unique_remote_tasks": 1,
+  "succeeded": 1,
+  "duplicate_generation_posts": 0,
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "customer_financial_database_used": false,
+  "scope": "one theme logo",
+  "event_id": "evt-308db5a75a02b368e150a84264c42cdfeff68540a27bb3dba42473bf7ec79fdb",
+  "skill_id": "mps-id-photo-background",
+  "authorized_in_chat": "2026-11-11; standing approval of one logo per skill",
+  "provenance": {
+    "key": "logo",
+    "series": "theme-logo",
+    "title": "证件照换底助手主题 logo",
+    "prompt": "Create a premium finished 3D application icon for an ID portrait photo background replacement assistant. Make the purpose immediately clear: a central upright ID-photo portrait card with a clean sculpted ivory head-and-shoulders silhouette on a rich official-looking blue photographic background. Behind the main card, two subtly offset rounded photo background panels in clean white and a restrained red accent suggest switching the background color. The silhouette is an original generic human bust, no recognizable real person, elegant simple natural head-and-shoulder proportions. Polished white ceramic photo frame with a delicate cobalt edge, tactile satin surfaces, subtle glass layers, realistic depth and soft contact shadows. Clean blue-white square backdrop, professional trustworthy calm atmosphere, sophisticated studio lighting, crisp spacious silhouette, finished high-end app-icon quality. Centered composition, large readable subject, ample safe margins, clear at small sizes. No words, letters, numbers, signatures, symbols of government authority, official seals, brand names, watermarks, provider names or copied trademark shapes. Avoid flat vector pictograms, flat clipart, clutter, tiny interface details, a sheet of variants or a collage.",
+    "asset_id": "aisplice",
+    "model": "gpt-image-2.5-ext",
+    "requested_size": [
+      1024,
+      1024
+    ],
+    "generation_date": "2026-11-11T08:34:42+08:00",
+    "fictional_adult": true,
+    "rights": "自家通过登记资源生成的通用人像主题 logo，供本技能开发、打包与展示使用。",
+    "method": "real_registered_resource_text_to_image_not_reference_edit",
+    "status": "succeeded",
+    "raw_sha256": "c88b290cfd8a6a9574743c2b1ca09591eb248ae9ae9a4096739f4d25d1095d53",
+    "raw_bytes": 1421387,
+    "file": "logo.png",
+    "actual_generated_size": [
+      1254,
+      1254
+    ],
+    "local_resize": true,
+    "local_processing": "resize; true-color PNG; no added markings",
+    "output_size": [
+      512,
+      512
+    ],
+    "output_bytes": 247319,
+    "output_sha256": "52486366805789b0880ccbf51651bbb50f8ea87f1f2ecf52028651a18a77aa6e"
+  },
+  "visual_review": {
+    "size_checked": 512,
+    "small_size_checked": 64,
+    "text_or_branding_seen": false
+  }
+}
