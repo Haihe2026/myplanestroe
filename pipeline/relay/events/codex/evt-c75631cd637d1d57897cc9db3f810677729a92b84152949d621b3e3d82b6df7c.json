@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-resume-travel-20261111",
+  "skill_id": "mps-travel-portrait-studio",
+  "source_path": "pipeline/products/mps-travel-portrait-studio/msg-from-muse-20261111-resume-travel-101.md",
+  "source_ref": "95fa4248f7791b32687d998d495d686ab71e3d7c",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-c75631cd637d1d57897cc9db3f810677729a92b84152949d621b3e3d82b6df7c",
+  "request_kind": "handoff"
+}
