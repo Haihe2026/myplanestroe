@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-3d131877e8ea70018a4c517601854dafd5da8b8b0464d41fcf474e16804ac90c",
+  "claim_id": "3157220e-d721-4c43-8708-97dee05b16fd",
+  "role": "codex",
+  "at": "2026-11-11T11:54:33+08:00",
+  "skill_id": "mps-family-portrait-studio",
+  "version": "1.0.1",
+  "source_ref": "4669fdb7622e8562c6ce09a9ea7c3d9f4494638d",
+  "result": "test_passed",
+  "evidence_ref": "fb3b0d20e7af964084fb1aab1d9512dc14eca6f9:pipeline/products/mps-family-portrait-studio/03-test-report.md",
+  "original_receipt_preserved": {
+    "event_id": "evt-3d131877e8ea70018a4c517601854dafd5da8b8b0464d41fcf474e16804ac90c",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T11:46:19+08:00",
+    "evidence_ref": "62272f87a49a0e0d4d824f6af376fef1e2561ce0:pipeline/products/mps-family-portrait-studio/status.json",
+    "claim_id": "3157220e-d721-4c43-8708-97dee05b16fd"
+  },
+  "duplicate_event_claim": false,
+  "closed_findings": [
+    "A3-FAM-01",
+    "A3-FAM-02",
+    "A3-FAM-03"
+  ],
+  "delivery": {
+    "display_name": "全家福写真照相馆",
+    "slug": "mps-family-portrait-studio",
+    "zip": "pipeline/products/mps-family-portrait-studio/02-package/dist/mps-family-portrait-studio-1.0.1.zip",
+    "zip_sha256": "1138fe6925145fc8c7a0013f661d32af48a521dd707ad9980fd3411b39194756",
+    "logo": "pipeline/products/mps-family-portrait-studio/02-package/dist/logo.png",
+    "logo_sha256": "29f6d8428ef741af4554083b1149ef4d5c026032ae03086a457e881de2a119b2",
+    "logo_external_to_zip": true
+  },
+  "verification": "固定ZIP独立静态复查：三项修复关闭；SHA/CRC、目录/元数据/双语、十图来源、logo和Markdown路径均通过。未重跑完整A2或客户端业务。",
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "host_acceptance": "按长期规则跳过，未宣称通过",
+  "next": "最终ZIP及外置logo交负责人手动上传；前三款已提交产品保持原样。",
+  "authority": "不扩大生产/财务/部署/发布/跨聊天权限。"
+}
