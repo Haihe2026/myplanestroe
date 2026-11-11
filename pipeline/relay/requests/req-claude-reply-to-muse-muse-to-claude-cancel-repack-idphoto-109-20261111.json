@@ -1,0 +1,10 @@
+{
+  "request_id": "req-claude-reply-to-muse-muse-to-claude-cancel-repack-idphoto-109-20261111",
+  "from": "claude",
+  "to": "muse",
+  "skill_id": "mps-id-photo-background",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "c25a3bd5434a43c8a4c4e576ba06df6592349f17",
+  "source_path": "pipeline/products/mps-id-photo-background/reply-from-claude-20261111.md",
+  "kind": "question"
+}

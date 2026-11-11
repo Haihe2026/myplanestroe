@@ -1,8 +1,9 @@
 {
   "event_id": "evt-eb44b6fe77417f2b8f6a857434de446a9ac7b27aa3e04edaa88a6e7c91880cf5",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "3bf4662c-9775-47e6-bd13-ca3d63624d17",
-  "at": "2026-11-11T10:37:54+08:00",
-  "evidence_ref": null
+  "at": "2026-11-11T10:51:44+08:00",
+  "evidence_ref": "c7e6a566f4876be0cd513bc0df6141a41960465f:pipeline/products/mps-id-photo-background/msg-from-muse-20261111-cancel-repack-109.md",
+  "note": "已按 Muse 取消消息停手，未重打包 1.0.9"
 }
