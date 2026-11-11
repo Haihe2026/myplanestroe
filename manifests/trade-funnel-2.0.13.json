@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-12",
+  "status": "production_deployed",
+  "contract": "trade-funnel-v1",
+  "scope": "trade-leads; only WorkBuddy expert client updated to 2.0.13",
+  "expert_package_sha256": "d2f635a3734c0ae2498feaef66ff6d7f111a8aaf1dab1cf80c29514b585ae2db",
+  "identity_method": "wechat",
+  "phone_schema_migrated": false,
+  "stages": {
+    "L0": "first observed random device",
+    "L1": "actual anonymous activation page visit",
+    "L2": "first WeChat authorization submission",
+    "L3": "actual new account created by original Trade.approve",
+    "L4": "actual recharge page entry by a new-cohort verified account",
+    "L5": "original authoritative first credited order or unlinked recharge ledger"
+  },
+  "trigger_endpoint": "/api/v1/telemetry/skill-trigger",
+  "trigger_exact_fields": [
+    "skill_code",
+    "instance_id",
+    "machine_id"
+  ],
+  "trigger_success_status": 204,
+  "legacy_first_dialogue_receipt_protocol_preserved": true,
+  "active_shared_entry": "/opt/skill-platform/trade-funnel-2.0.13-20261111/run_shared.py",
+  "active_admin_entry": "/opt/skill-platform/trade-funnel-2.0.13-20261111/run_ops.py",
+  "private_sidecar_only": true,
+  "sidecar_permissions": "original service owner;0600",
+  "business_balance_or_payment_rules_changed": false,
+  "business_database_restored": false,
+  "runtime_source_sha256": {
+    "run_shared.py": "cf5e413d5a30fe3f829c7a6f302277e2090a44331e1f57635a7795ad5dfa3ce8",
+    "run_ops.py": "dd34aa8ded69abb4e1e8102a52bf67ea4917cc46d101c0e8fb571c1e72875fbe",
+    "trade_funnel.py": "8fc294b549db98cfce72a35e186c9e28a4f25db6abdc57298f0567ced8179dbc",
+    "trade_funnel_gateway.py": "5f75359178cf64c80c37edb257cc1ec7537657eefbf5a188f80d7636f1d2d645",
+    "trade_funnel_ops.py": "fb1ba9dd3e9e7069af19efb94c2ff40b67244b8f7e57d0d27b9ab6a9041eb175",
+    "trade-funnel.js": "e0874ebbf3697a0b670175463df72147a7c1b049388ed35a9bdb63c519506724",
+    "trade-funnel.css": "cb9498c597a576786d3244eb33b93dc3edb824eada503c7d8669f8f396e5b5ad",
+    "trade-page-view.js": "7be2a0f6cb12805945ef9b1d98ee0cf9e1609069c74f2ba4ecb59dbee53ce4af",
+    "user-journey.js": "fd17119dded36e342289b0cf7c295ada875fe458a1da3e900a45eac064ab0e50"
+  },
+  "verification": {
+    "frozen_expert_cases": 86,
+    "backend_cases_windows": 45,
+    "backend_cases_linux": 45,
+    "wrapper_smoke_cases": 2,
+    "synthetic_chrome_cases": 10,
+    "isolated_live_trigger_statuses": [
+      204,
+      204
+    ],
+    "one_installation_one_legacy_journey": true,
+    "test_events_excluded_from_default_reports": true,
+    "real_user_host_message_tested": false,
+    "real_wechat_scan_performed": false,
+    "real_payment_performed": false,
+    "paid_data_calls": 0
+  },
+  "publication_boundary": "Reviewed source-only reading mirror. No credentials, OAuth data, databases, logs, customer records, contact identifiers or production access. Full private integration fixtures are omitted."
+}

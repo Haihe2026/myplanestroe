@@ -1,10 +1,15 @@
 {
-  "updated": "2026-11-11",
+  "updated": "2026-11-12",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "trade_link_and_wechat_callback_fix_deployed",
+  "last_change": "trade_expert_2_0_13_wechat_funnel_deployed",
   "production_access_included": false,
   "live_sync": false,
   "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
   "trade_auth_source_mirror": "source_only_no_oauth_or_customer_records",
-  "trade_real_wechat_rescan_verified": false
+  "trade_real_wechat_rescan_verified": false,
+  "trade_funnel_contract": "trade-funnel-v1",
+  "trade_funnel_identity": "wechat",
+  "phone_identity_schema_migrated": false,
+  "trade_host_first_touch_verified": false,
+  "trade_isolated_live_beacon_verified": true
 }
