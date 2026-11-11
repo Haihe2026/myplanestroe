@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-72f2034201e453ab196a33517be3e0eab673f9a04513d0a778e1d58bcde78933",
+  "claim_id": "6e9e1a80-0b88-4d77-ab9a-d17a04db2589",
+  "source_ref": "108761fb56bc6712d22b387386d4105841bcb69b",
+  "claim_commit": "3a81cd6226762fb02c2d782de9d282a422fcca24",
+  "checked_at": "2026-11-12T02:00:02+08:00",
+  "result": "test_passed",
+  "closures": [
+    {
+      "id": "MAT-A3-01",
+      "result": "closed",
+      "file": "SKILL.md",
+      "lines": [
+        6,
+        7,
+        8
+      ],
+      "basis": "三项长描述合法双引号标量；标准PyYAML直接解析最终ZIP原始frontmatter成功，重复键检查通过，无内存投影。随包测试补严格子集和可用时真实YAML解析，A2记录最终ZIP正反例。"
+    },
+    {
+      "id": "MAT-A3-02",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        644,
+        648,
+        651,
+        652,
+        898,
+        900,
+        906,
+        914
+      ],
+      "basis": "未提交run先完整验图/源SHA，再账户HTTP；needs_credits无job_id的resume也先预检。未知/已提交仍优先只查原键/ID，不因本地图坏掉重建任务或解锁。"
+    },
+    {
+      "id": "MAT-A3-03",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        451,
+        453,
+        455,
+        457,
+        459
+      ],
+      "related_sources": [
+        "SKILL.md:99–100",
+        "scripts/welcome_copy.py:66–88"
+      ],
+      "basis": "合并提问明确问成年人；本人/成年/在孕期未知→needsEligibility一次合并补问，只有明确other/no按真实原因拒绝；未成年不再要求换图，不索证明或看图估年龄。"
+    }
+  ],
+  "open_findings": [],
+  "inspection": {
+    "result": "structural_checks_passed_maternity_contract_reviewed_separately",
+    "findings": [],
+    "original_yaml_accepted": true,
+    "metadata_projection_for_remaining_diagnostics_only": false,
+    "zip": {
+      "sha256": "f958c1cc8eb4351e1fc7fc66adbaa5b62be03600ac15d08f8194bfc6447be8a6",
+      "bytes": 2353236,
+      "files": 25,
+      "wrapper": "mps-maternity-portrait-studio",
+      "logical_max_depth": 2
+    },
+    "checks": [
+      {
+        "item": "固定ZIP完整性",
+        "result": "pass",
+        "evidence": "SHA256与A2一致；Git blob已验证见固定下载清单逐字节Git对象核对。"
+      },
+      {
+        "item": "目录与干净解包",
+        "result": "pass",
+        "evidence": "单一slug外包装；技能根内最多两级，25文件，无重复/大小写冲突/链接/越界或缓存；逐文件与ZIP原字节一致。"
+      },
+      {
+        "item": "平台元数据",
+        "result": "pass",
+        "evidence": "八必填字段齐全，无YAML重复键或隐藏HTML指令；SKILL.md 15327字节，≤15KiB。"
+      },
+      {
+        "item": "双语示例逐项语义",
+        "result": "pass",
+        "evidence": "棚拍中期/草坪早期/旗袍晚期三对与固定规格逐字一致，本人单人、视觉档、2:3、1024×1536一致。"
+      },
+      {
+        "item": "触发词与接管",
+        "result": "pass",
+        "evidence": "23触发词、完整中文名充值词、唯一倾向句；执行规范首节接管。"
+      },
+      {
+        "item": "版本与固定欢迎",
+        "result": "pass",
+        "evidence": "slug/版本/渠道跨SKILL、_meta、studio和telemetry一致；欢迎句逐字符合。"
+      },
+      {
+        "item": "尺寸与字段常量",
+        "result": "pass",
+        "evidence": "仅三尺寸、六请求字段、八遥测字段；无machine_id；关闭开关为孕妈slug。遥测失败行为另按TRV-03闭环复核。"
+      },
+      {
+        "item": "场景清单与超时",
+        "result": "pass",
+        "evidence": "十场景默认竖版；90/15/120/30/0/240预算一致。路由优先逻辑另按TRV-04闭环复核。"
+      },
+      {
+        "item": "十示例来源与展示标注",
+        "result": "pass",
+        "evidence": "10PNG完整解码，512×768；key/标题一致，SHA与Codex源/provenance/derivation/规格一致；每项note含非实拍标注。"
+      },
+      {
+        "item": "三档示例分布",
+        "result": "pass",
+        "evidence": "每图stage与固定规格/provenance/派生清单一致，3/4/3仅创作选项，不冒充医学或30组合验收。"
+      },
+      {
+        "item": "外置logo",
+        "result": "pass",
+        "evidence": "512×512PNG，≤500KB，与Codex原字节一致；ZIP外置，不新增生成。"
+      },
+      {
+        "item": "Markdown安全路径",
+        "result": "pass",
+        "evidence": "仅求值已审纯路径格式化函数；空格/#/%三条真实临时PNG路径经CommonMark解析/解码均可定位，无意外query/fragment。"
+      },
+      {
+        "item": "对客禁用词/秘密/语法",
+        "result": "pass",
+        "evidence": "对客SKILL/README及固定话术AST字面量扫描无供应商/模型/秘密，全部脚本Python3.7语法可解析。只做静态，不运行A2/客户端。"
+      }
+    ],
+    "assets": [
+      {
+        "key": "studio",
+        "file": "studio.png",
+        "bytes": 231084,
+        "sha256": "05730be75a2db76aa82dffd07059fd352cef811d9d7700133a6e263a7d7eb105",
+        "source_identical": true
+      },
+      {
+        "key": "lawn",
+        "file": "lawn.png",
+        "bytes": 225221,
+        "sha256": "080869ac2b4834961b52b3ee858816f9b5721e1a01adf7b68b7e922782d0fb8a",
+        "source_identical": true
+      },
+      {
+        "key": "flowers",
+        "file": "flowers.png",
+        "bytes": 251388,
+        "sha256": "b3376ed396fd3b57fd04b7002b74741c70cca46de1a7dafef4443d1c7e53805f",
+        "source_identical": true
+      },
+      {
+        "key": "oil",
+        "file": "oil.png",
+        "bytes": 256462,
+        "sha256": "60dd1e664b87785002bb888809708d604c746be2a541d0cae7071018a7173b51",
+        "source_identical": true
+      },
+      {
+        "key": "home",
+        "file": "home.png",
+        "bytes": 243953,
+        "sha256": "d62f33b492ee5847c553d1df082b4448040317871874383e6157d64c271364d1",
+        "source_identical": true
+      },
+      {
+        "key": "beach",
+        "file": "beach.png",
+        "bytes": 179264,
+        "sha256": "41b87bac7691289721524620e9a5797874a07cd6f3c00167a96ed8ce4da74276",
+        "source_identical": true
+      },
+      {
+        "key": "qipao",
+        "file": "qipao.png",
+        "bytes": 215149,
+        "sha256": "21b8d6d599426c983cc16b486d08960fd26e4fa4fa6984c5f558fd45ebd36cca",
+        "source_identical": true
+      },
+      {
+        "key": "korean",
+        "file": "korean.png",
+        "bytes": 216543,
+        "sha256": "1e18cd87f5a167c5f99df05a75e28c121cc0aef6fa72041dd6e1c87d1d08a595",
+        "source_identical": true
+      },
+      {
+        "key": "forest",
+        "file": "forest.png",
+        "bytes": 242388,
+        "sha256": "44270b233e2a503d4363e2494c19275bfedf020486a5c5699faa95c73db5451f",
+        "source_identical": true
+      },
+      {
+        "key": "night",
+        "file": "night.png",
+        "bytes": 217753,
+        "sha256": "a2b6753ca9986b56c1121de290dcfb76eb61d0b1be196ecd700fe1111ee6d0da",
+        "source_identical": true
+      }
+    ],
+    "logo": {
+      "bytes": 359488,
+      "sha256": "940b00c1a771779945a666de96a73dcbc7346c6435b5fdc7fded7028902ac333",
+      "size": [
+        512,
+        512
+      ]
+    },
+    "markdown_fixtures": [
+      {
+        "case": "Maternity Demo Assets",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Maternity#Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Maternity%Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      }
+    ],
+    "official_read": {
+      "at": "2026-11-12T01:55:23+08:00",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "fresh online read successful; skill metadata/examples/structure read",
+      "status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+    },
+    "full_a2_executed": false,
+    "business_commands_executed": false,
+    "pure_path_formatter_evaluated": true,
+    "upstream_calls": 0,
+    "production_calls": 0
+  },
+  "package_diff": {
+    "previous_zip_sha256": "1997c54f29a1080e0d639832c19872630ddbca5da6e3670585a0292b08bcd475",
+    "current_zip_sha256": "f958c1cc8eb4351e1fc7fc66adbaa5b62be03600ac15d08f8194bfc6447be8a6",
+    "same": [
+      "README.md",
+      "assets/beach.png",
+      "assets/demos.json",
+      "assets/flowers.png",
+      "assets/forest.png",
+      "assets/home.png",
+      "assets/korean.png",
+      "assets/lawn.png",
+      "assets/night.png",
+      "assets/oil.png",
+      "assets/qipao.png",
+      "assets/studio.png",
+      "references/platform-rules.md",
+      "references/prompts.md",
+      "references/scenes.md",
+      "scripts/audit_images.py",
+      "scripts/jpeg_local.py",
+      "scripts/png_local.py"
+    ],
+    "changed": [
+      {
+        "path": "SKILL.md",
+        "old_sha256": "970747fe5f59e6ab50194575382ca654b416277c829c8e0229e968f6c61b4c9e",
+        "new_sha256": "7b90bab4582ddd5056bac58448d21538f483d23343c79437854e0dcee53f1a1a",
+        "old_bytes": 15354,
+        "new_bytes": 15327,
+        "changed_lines": 28
+      },
+      {
+        "path": "_meta.json",
+        "old_sha256": "a7bf8776f0d133321f4b7fe595259636416b0b85d031a3889337bf4c6f345143",
+        "new_sha256": "e0c6e45e438f79f65376afefd71fb2be76bcfccf9512568a4153d600e6497143",
+        "old_bytes": 244,
+        "new_bytes": 244,
+        "changed_lines": 2
+      },
+      {
+        "path": "scripts/studio.py",
+        "old_sha256": "3e5940594f4a82d61ec6037e022f2ae10cad96afdd3058cad6bb756dad81a691",
+        "new_sha256": "97c5df6dfb6e511ebda3dfb18af076ca3b881aee8fec860cd623f9b9ba2a5d41",
+        "old_bytes": 59104,
+        "new_bytes": 60281,
+        "changed_lines": 35
+      },
+      {
+        "path": "scripts/telemetry.py",
+        "old_sha256": "85ac8657a6f31577123bbc48fb0d55658838164f54e2455f21ccd8d2a33c4ed9",
+        "new_sha256": "7564272391b51e34d4a64f00fd5ca419bcc44bd9db64d4a663f7ab5c0e2cf70e",
+        "old_bytes": 5972,
+        "new_bytes": 5972,
+        "changed_lines": 2
+      },
+      {
+        "path": "scripts/welcome_copy.py",
+        "old_sha256": "6443f7bbc24eaa6105a48d1442413da5cb0640cf104871de88a6d97d9f9ece4e",
+        "new_sha256": "849d459789c35994ce8069ae7a2e2931c8a0ce43e1cf6e4f96af447f460c4cba",
+        "old_bytes": 18843,
+        "new_bytes": 19931,
+        "changed_lines": 26
+      },
+      {
+        "path": "tests/first-turn-preview.md",
+        "old_sha256": "e1312b193e7a3cbddf75c61106438a5d36f1a8fc70bfabe7709cc3063a6303ed",
+        "new_sha256": "b6d1eec7b9eacbd10fbe090565c036d7675548145ec4bab84181350a648aabfa",
+        "old_bytes": 4653,
+        "new_bytes": 4653,
+        "changed_lines": 2
+      },
+      {
+        "path": "tests/test_skill_contract.py",
+        "old_sha256": "4610f5dc1a9403f0603f64afdbd182124815a72f8411f086763c5bd1e2238a6a",
+        "new_sha256": "dcd4237f245c90c5fcae1c34aed799f4390106c1e3d64a8b56463b6491168e02",
+        "old_bytes": 73959,
+        "new_bytes": 77868,
+        "changed_lines": 67
+      }
+    ],
+    "added": [],
+    "removed": [],
+    "demo_assets_and_manifest_unchanged": true
+  },
+  "source_file_blobs": {
+    "README.md": "5d0cd82d0359cecb982533b156f803c73b4fdc29",
+    "SKILL.md": "2768f150b7dcd21fee399c5c2ade4a77195e4e37",
+    "_meta.json": "f8d273ecfcf9b40835faa94a85dc134c2b0a1d60",
+    "assets/beach.png": "fd1f1d0466a5f5a8e85ecd84e52ed304d474225a",
+    "assets/demos.json": "69f73fad9714616c3ca0841724cf6cde64aefb59",
+    "assets/flowers.png": "bbc1f71db190df8588b7a3b64d88d6f1c04a5541",
+    "assets/forest.png": "1140d740cda25b8991316bd65d567ce1995f99bb",
+    "assets/home.png": "656f50dbb6bd3371bd306b175405ecb30ed6c451",
+    "assets/korean.png": "21825d5e36ac9f5006a65989edd438586409effb",
+    "assets/lawn.png": "fb040ab2c07c318d9661e62a57751ec0e9ce1229",
+    "assets/night.png": "4a0089d82b2c598a0a3d41365e75c18632a52258",
+    "assets/oil.png": "921e582ca2a7b832e2e5d5b3c1cc7c4c369e3035",
+    "assets/qipao.png": "55d538756ace8a6026aceaf03039719ebdda3170",
+    "assets/studio.png": "c22039616257fe6b6caed5db43bb6063bee24b71",
+    "references/platform-rules.md": "7aebd412adefb50ffd27f8ab495a56c390989e92",
+    "references/prompts.md": "58b4a0b3177f29caf5626a3baff32dc704c66554",
+    "references/scenes.md": "68dae37a4c2fc3bdc47eaec452af7fc06d1d1893",
+    "scripts/audit_images.py": "c927b242902d611f38747e6cc492b6a671b78710",
+    "scripts/jpeg_local.py": "b405e4cad8744119bad2abe180aa50603ca6021f",
+    "scripts/png_local.py": "7527dafe4de30d16444955587b5a69fc71aea123",
+    "scripts/studio.py": "45d1353b7e281460979f3de0c45d2ddff1f28b1c",
+    "scripts/telemetry.py": "4ac4058cd96003a530a4d83ff15d02939dc17f53",
+    "scripts/welcome_copy.py": "c5ceeb39702d29e82684c59f2e71826ffb68d747",
+    "tests/first-turn-preview.md": "1976ad09b7506ec44179cf8e1df48409bb242d7b",
+    "tests/test_skill_contract.py": "b052f70dda21232ba265620bbf2adee45ff1c557"
+  },
+  "fixed_input_objects": {
+    "pipeline/products/mps-maternity-portrait-studio/00-brief.md": "5dfd752277f8b65abbdb351bb304382c3b502baf",
+    "pipeline/products/mps-maternity-portrait-studio/01-dev-spec.json": "1bf3ee19683749ab023acc43afc3110aef787566",
+    "pipeline/products/mps-maternity-portrait-studio/01-dev-spec.md": "6ad5d3fb1743d7b10417b930c74190de00a1531e",
+    "pipeline/products/mps-maternity-portrait-studio/02-package/dist/logo.png": "d1876ea2ec0ed97180e4f218aa5d572c2d0495ed",
+    "pipeline/products/mps-maternity-portrait-studio/02-package/dist/mps-maternity-portrait-studio-1.0.0.zip": "e64ce0f85ef40c754e3cdea60730914a4c029e9f",
+    "pipeline/products/mps-maternity-portrait-studio/02-package/dist/mps-maternity-portrait-studio-1.0.1.zip": "bfe956aff9a3a4184afe61bb9f4e61fd181804e7",
+    "pipeline/products/mps-maternity-portrait-studio/02-self-test.md": "64d313450fcf6f3a1f627a1950b4f37c7f3e70e8"
+  },
+  "sop_blob": "99ef71e0a2d84535193031ca8f5c6c269ec68799",
+  "original_receipt_preserved": {
+    "event_id": "evt-72f2034201e453ab196a33517be3e0eab673f9a04513d0a778e1d58bcde78933",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T01:55:39+08:00",
+    "evidence_ref": "3a81cd6226762fb02c2d782de9d282a422fcca24:pipeline/products/mps-maternity-portrait-studio/status.json",
+    "claim_id": "6e9e1a80-0b88-4d77-ab9a-d17a04db2589"
+  },
+  "client_source_modified_by_codex": false,
+  "development_documents_modified": false,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "full_a2_executed": false,
+  "appendix_d": "not performed; pending fixed Muse task under D.2; D.6 applies",
+  "delivery_gate": "pending Appendix D; not claimed passed",
+  "next_role": "muse",
+  "next_action": "issue fixed local WorkBuddy import task for A3-passed1.0.1; owner manual publishing"
+}
