@@ -1,52 +1,50 @@
-# 全家福写真照相馆 1.0.0 A3 独立检查
+# 全家福写真照相馆 1.0.1 A3 独立复查
 
-**独立检查不通过。** 发现 3 项包实现缺陷（A3-FAM-01/02/03），置 `test_failed`，`rounds.test=1`，退回 Claude 修复。不要将本 ZIP 交负责人上传。
+**独立检查通过。** 上轮 A3-FAM-01/02/03 已关闭，产品置 `test_passed`；固定 ZIP 与外置 logo 交负责人手动上传。
 
-- 时间：2026-11-11T11:03:27+08:00；Windows 干净目录解压。
-- 事件 `evt-51567af51e37d88109f3159bc4509049ccdd9794a2ae6ea437c02947f07f5f65`、原 claim `4d4a0c85-7671-416e-aa43-89a316db8f2b` 与本机/远端一致；固定输入指纹复算通过，没有重复认领通知。产品认领提交 `3570f6d965b45e2274c15a745575a5791ef6c321`。
-- 固定源 `c25a3bd5434a43c8a4c4e576ba06df6592349f17`；ZIP `02-package/dist/mps-family-portrait-studio-1.0.0.zip`，2,738,784 字节、24 文件，SHA256 `2862739ff1ed1355bb8cceb09166b88229570090f6a35acffc2e5593c3656632`，与 A2 一致。
-- 本轮按现行 SOP 做独立静态检查，另仅求值当前包的纯路径编码函数用于 Markdown 夹具；未执行客户端业务命令、完整 A2、真实后端/上游或付款。
-- 2026-11-11 本次重新在线读到 https://open.workbuddy.cn/docs/skill 与 https://open.workbuddy.cn/docs/expert；核对团队技能字段与专家独立结构。另读 2026-11-08 内嵌快照技能/专家章节。未改开发规格。
+- 时间：2026-11-11T11:51:39+08:00；Windows 全新目录解压，固定 ZIP 独立检查。
+- 事件 `evt-3d131877e8ea70018a4c517601854dafd5da8b8b0464d41fcf474e16804ac90c`；原 claim `3157220e-d721-4c43-8708-97dee05b16fd` 与本机/远端一致，固定输入指纹复算通过，未重复认领通知。产品认领提交 `62272f87a49a0e0d4d824f6af376fef1e2561ce0`。
+- 固定源 `4669fdb7622e8562c6ce09a9ea7c3d9f4494638d`。现行 SOP/config、当前 status/log/brief、MD/JSON规格、A2及上轮A3均已读。修复轮按SOP无需重读官方页面，沿用本日1.0.0 A3已在线核对skill/expert及2026-11-08快照记录；未修改规格。
 
-## 检查通过的项目
+## 交付
 
-| 项目 | 结果与证据 |
+| 项 | 内容 |
 |---|---|
-| ZIP | SHA256/CRC 正确；24 文件、最多两级，无重复/大小写冲突、越界、符号链接、点开头目录或反斜杠路径。 |
-| 元数据与双语 | 八个必填字段，name/中英文显示名/version一致；3组示例逐项匹配规格的场景、3/4人数和3:2画幅；23触发词与账户调用倾向句；SKILL.md 15,357字节，固定欢迎句和首节接管规则存在。 |
-| 功能常量 | 场景10个、默认横版；人数常量3/4；六字段生成请求；八字段遥测、2秒预算、当前渠道版本；外层240秒。这里只确认定义及静态结构，不将其等同于全部行为通过。 |
-| 十张示例 | 十个key/标题匹配规格、README与SKILL；原字节复制，包PNG SHA同时匹配source/provenance与derivation，均可解码为768×512。 |
-| logo | 固定Codex原图不变；SHA256 `29f6d8428ef741af4554083b1149ef4d5c026032ae03086a457e881de2a119b2`；512×512 PNG、427,328字节，与provenance一致。 |
-| 路径与文案 | 含空格、#的实际合成路径，经纯md_safe_path及CommonMark解析后均指向现存图，无意外fragment/query；对客说明、README、固定话术AST字符串扫描通过；未发现实际密钥或私密凭据。 |
+| 中文名 | 全家福写真照相馆 |
+| slug | `mps-family-portrait-studio` |
+| 英文名与版本 | Family Portrait Studio，1.0.1 |
+| ZIP | [mps-family-portrait-studio-1.0.1.zip](https://github.com/Haihe2026/myplanestroe/blob/4669fdb7622e8562c6ce09a9ea7c3d9f4494638d/pipeline/products/mps-family-portrait-studio/02-package/dist/mps-family-portrait-studio-1.0.1.zip)，2,740,120字节，24文件 |
+| ZIP SHA256 | `1138fe6925145fc8c7a0013f661d32af48a521dd707ad9980fd3411b39194756`，与[A2](https://github.com/Haihe2026/myplanestroe/blob/4669fdb7622e8562c6ce09a9ea7c3d9f4494638d/pipeline/products/mps-family-portrait-studio/02-self-test.md)一致 |
+| 外置 logo | [logo.png](https://github.com/Haihe2026/myplanestroe/blob/4669fdb7622e8562c6ce09a9ea7c3d9f4494638d/pipeline/products/mps-family-portrait-studio/02-package/dist/logo.png)，512×512 PNG，427,328字节；SHA256 `29f6d8428ef741af4554083b1149ef4d5c026032ae03086a457e881de2a119b2` |
 
-## 缺陷与静态复现路径
+上传 ZIP 时同时使用外置 logo。旧1.0.0为未通过包，仅保留历史，不交付上传；本次不处理前三款已提交产品。
 
-以下是固定 ZIP 中可直接推导的控制流，**不是声称已执行端到端测试**。所列 Mock 用例由 Claude 在修复后的 A2 实际运行并给出结果。
+## 三项修复复查
 
-### A3-FAM-01（P1）：提交401后，把404当作重提许可
+| 编号 | 当前实际代码与结论 |
+|---|---|
+| A3-FAM-01 | [studio.py:625](https://github.com/Haihe2026/myplanestroe/blob/4669fdb7622e8562c6ce09a9ea7c3d9f4494638d/pipeline/products/mps-family-portrait-studio/02-package/mps-family-portrait-studio/scripts/studio.py#L625) `_submit_unauthorized(d,a)` 只恢复一次凭证并GET原键；函数唯一网络方法为GET，无_submit调用、POST或重试参数。404/500/断网/非法ID返回进度未知，查到原任务才续原任务；再次401只重置凭证并保留任务。**关闭。** |
+| A3-FAM-02 | 401恢复失败/查询异常不再写confirmed、清原键或摘要；`_keep_reset` 带task_kept=true。进入恢复前已由_submit原子保存submit_unknown，plan/confirm/regenerate的状态锁未变；后续run/resume按原键只读查询。**关闭。** |
+| A3-FAM-03 | [studio.py:310–367](https://github.com/Haihe2026/myplanestroe/blob/4669fdb7622e8562c6ce09a9ea7c3d9f4494638d/pipeline/products/mps-family-portrait-studio/02-package/mps-family-portrait-studio/scripts/studio.py#L310) 新增十键清单校验、完整集合missing预检查；缺任一所需文件在输出/复制前退出3，无continue跳过分支。默认恰十项、单项仍检查选中资源。**关闭。** |
 
-- 位置：[studio.py:595–608](https://github.com/Haihe2026/myplanestroe/blob/c25a3bd5434a43c8a4c4e576ba06df6592349f17/pipeline/products/mps-family-portrait-studio/02-package/mps-family-portrait-studio/scripts/studio.py#L595)。首发提交在 `_submit` 先持久化 `submit_unknown`。若首发 `POST /skill-jobs` 返回401，进入 `_submit_unauthorized`；恢复凭证后按原键GET，捕获404时第608行再次调用 `_submit(...,auth_retried=True)`，产生第二次生成POST。
-- 与[固定规格 §7.1/T14](https://github.com/Haihe2026/myplanestroe/blob/0da1ba29c3796d922c774dfeff713747bc936fb5/pipeline/products/mps-family-portrait-studio/01-dev-spec.md#L123)相反：401恢复后只查原任务；404也不能证明未受理，不能重发POST或换键。固定业务源码 `2d32cc074e7d054068708a82578119bd8ad2993f:snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py:442–451` 的404消息明确要求保留任务、不要重新生成。A2“偏离4”的自行补交解释不构成规格变更。
-- Claude复现：Mock首发POST→401，恢复成功，原键GET→404。当前代码路径生成POST计数为2；期望整个过程计数保持1，保存原idem/body摘要与未知状态，并提示进度未能确认/继续查询。
-- 修复验收：删除该生成重提分支，恢复后只读查原键/原任务；覆盖404、查询401/500/断网和非法ID响应，断言无第二次POST、无新键。不要只测原来已处于submit_unknown时的resume/404分支，必须覆盖首发401的分支。
+以上结论来自实际固定ZIP的静态控制流、AST与前后逐行差异检查。包内新增两项契约回归可见；Claude A2另报告对应Mock故障序列、重启恢复、缺图/清单异常正反例通过，并对旧代码反证检出。本轮Codex没有重跑完整A2或执行客户端业务命令，不将Claude的49/99项记为Codex独立运行。
 
-### A3-FAM-02（P1）：401恢复失败后解除原任务保护，允许清掉原键
+## 其他独立检查
 
-- 位置：[studio.py:611–615](https://github.com/Haihe2026/myplanestroe/blob/c25a3bd5434a43c8a4c4e576ba06df6592349f17/pipeline/products/mps-family-portrait-studio/02-package/mps-family-portrait-studio/scripts/studio.py#L611) 与[cmd_plan:345–380](https://github.com/Haihe2026/myplanestroe/blob/c25a3bd5434a43c8a4c4e576ba06df6592349f17/pipeline/products/mps-family-portrait-studio/02-package/mps-family-portrait-studio/scripts/studio.py#L345)。`_submit_unauthorized` 的恢复失败/查询异常等尾部分支把state写成 `confirmed`。`cmd_plan`只阻止 `submit_unknown/submitted/download_pending`，因此随后可重规划；第373–375行将idem/job_id/body_sha256清空。旧任务已经发过生成POST，却被降为可编辑，违背T14的原任务续接约束。
-- Claude复现：Mock首发POST→401，凭证恢复失败（或恢复后查询500/断网）；先检查落盘state，再对同draft调用plan。当前静态路径允许清除原任务；期望始终保留原键/摘要/未知状态，plan/confirm/regenerate均不能覆盖；持续401可退出4且task_kept=true，恢复后仍只查询原任务。
-- 修复验收：未知生成结果与凭证状态分开保存。凭证重置不能把已发出任务改回confirmed。重启加载私有状态后重复上述断言，并核对旧任务仍可按原键续查。
+| 项目 | 结果 |
+|---|---|
+| 完整性和目录 | ZIP SHA/CRC正确；24文件、最多两级，无重复/大小写冲突、越界、符号链接、点开头目录或反斜杠路径。 |
+| 逐文件差异 | 相比固定1.0.0，18文件字节相同；SKILL.md、_meta.json、telemetry.py、first-turn-preview.md各仅一行版本变化；实际逻辑改动限studio.py及契约测试，符合三项修复范围。 |
+| 元数据和语义 | 八必填字段，名称/slug/版本/渠道一致；三组双语示例逐项同场景、同人数、同3:2画幅；23触发词、账户调用倾向句、固定欢迎及首节接管均保留。SKILL.md为15,357字节。 |
+| 十张示例 | key/标题/清单与规格、README、SKILL相同；十PNG原字节SHA匹配provenance/derivation，768×512可完整解码；demos.json仅裸文件名。 |
+| logo | PNG可读、512×512、≤500KB，原字节SHA与Codex来源一致；无重新生成。 |
+| Markdown路径 | 从本包提取纯md_safe_path，在含空格和#的两个真实合成路径上经CommonMark解析、解码后指向现存PNG，无意外fragment/query；只求值此纯函数，不运行客户端业务。 |
+| 契约及文案 | 三/四人、十场景默认横版；六字段生成、八字段遥测/2秒、外层240秒定义一致。对客说明、README及固定话术AST字符串扫描通过；无实际私密凭据。 |
 
-### A3-FAM-03（P2）：缺一张示例仍返回成功
+结构化证据及逐文件差异：`03-a3-1.0.1-evidence.json`。旧退回报告见[固定历史A3](https://github.com/Haihe2026/myplanestroe/blob/4669fdb7622e8562c6ce09a9ea7c3d9f4494638d/pipeline/products/mps-family-portrait-studio/03-test-report.md)。
 
-- 位置：[cmd_demo:325–335](https://github.com/Haihe2026/myplanestroe/blob/c25a3bd5434a43c8a4c4e576ba06df6592349f17/pipeline/products/mps-family-portrait-studio/02-package/mps-family-portrait-studio/scripts/studio.py#L325)。当源PNG不存在时第328行直接continue；循环后只判断items是否为空。默认十图中少一图会产生9个items，依然以 `demos/EXIT_OK` 成功返回。
-- [规格 §5/T03](https://github.com/Haihe2026/myplanestroe/blob/0da1ba29c3796d922c774dfeff713747bc936fb5/pipeline/products/mps-family-portrait-studio/01-dev-spec.md#L68)要求缺资源退出3，十图集合与SKILL.md/README完全一致；不能静默部分成功。
-- Claude复现：在隔离包副本中去掉一个示例PNG，保持demos.json仍为十项，运行默认demo；当前静态路径返回9项/0。期望明确资源不可用、退出3；补齐后返回恰十项。单项指定缺失图也须退出3。
-- 修复验收：复制/输出前校验本次要求的完整集合与文件；新增默认缺一项、单项缺图、清单异常和完整十图正例，均保持零网络、零凭证访问。不要改掉示例数量来使检查通过。
+## 验收范围与结论
 
-## Claude 修复交接
+本轮真实上游调用0、后端业务调用0、真实付款0、生产写入0、部署0、上传0。真机验收及上架前浏览器验证已跳过（负责人长期规则），未宣称通过。真人合照保真、生产签名素材路由、实际支付、宿主实际行为及平台接受约2.7MB包/审核结果仍未验证；负责人手动上传前自行宿主测试。
 
-根因均在包实现，**不退回/放宽开发规格**。保留现有十图和logo原字节，修正以上三项，更新相关说明及契约/端到端回归。自测报告逐项给出A3-FAM-01/02/03关闭证据，固定新ZIP与SHA256，再置package_ready交Codex复查。本轮版本如何处理按现行SOP及明确交接，不改已提交的前三款。
-
-Claude所报47项契约与92项端到端只属于其A2记录，本次没有将它们算作Codex独立重跑。偏离1的拒绝开通固定句和偏离2的description模板按SOP可接受；示例按来源原字节保留符合规格；偏离4的401/404补交不接受。未开放的inline_delivery/Range等仍按规格不实现。
-
-结构化证据：`03-a3-1.0.0-evidence.json`。真机验收与上架前浏览器验证按负责人长期规则跳过；未标通过。真实客户照片、实际支付、生产签名参考路由及平台接受2.7MB包未验证。本次真实上游调用0、后端业务调用0、生产写入0、部署0、上传0。
+`test_passed` 表示本次A3独立检查合格。交付1.0.1 ZIP、原外置logo及名称/slug，由负责人手动上传；不自动发布。
