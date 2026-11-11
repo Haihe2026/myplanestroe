@@ -193,6 +193,80 @@ class FirstTurn(Base):
         self.assertEqual((code, s['signal']), (3, 'demoUnavailable'))
         self.assertIn('这次暂时没能展示示例图', t)
 
+    # ---- A3-FAM-03（1.0.1）：示例集合必须完整，缺一张不得部分成功 ----
+
+    def _pkg_copy(self):
+        dst = os.path.join(self.tmp, 'pkg copy')
+        shutil.copytree(os.path.join(PKG, 'assets'), os.path.join(dst, 'assets'))
+        return dst
+
+    def _demo_in(self, pkg, *argv):
+        def boom(*a, **k):
+            raise AssertionError('network in demo')
+        real_here, real_t, real_tt = studio.HERE, studio.TRANSPORT, telemetry.TRANSPORT
+        studio.HERE, studio.TRANSPORT, telemetry.TRANSPORT = os.path.join(pkg, 'scripts'), boom, boom
+        acc = os.path.join(self.home, 'mps-family-portrait-studio', 'account.json')
+        try:
+            return self.run_cmd('demo', *argv)
+        finally:
+            studio.HERE, studio.TRANSPORT, telemetry.TRANSPORT = real_here, real_t, real_tt
+            self.assertFalse(os.path.exists(acc))  # 零凭证访问
+
+    def _out(self):
+        d = os.path.join(self.home, 'mps-family-portrait-studio', 'demos')
+        return sorted(os.listdir(d)) if os.path.isdir(d) else []
+
+    def test_fam03_default_missing_one_exit3(self):
+        pkg = self._pkg_copy()
+        os.remove(os.path.join(pkg, 'assets', 'oil.png'))
+        self.assertEqual(len(json.load(open(os.path.join(pkg, 'assets', 'demos.json'), encoding='utf-8'))['demos']), 10)
+        code, s, t, _ = self._demo_in(pkg)
+        self.assertEqual((code, s['signal']), (3, 'demoUnavailable'))
+        self.assertNotIn('items', s)
+        self.assertEqual(s.get('missing'), ['oil'])
+        self.assertIn('这次暂时没能展示示例图', t)
+        self.assertEqual(self._out(), [])  # 输出前校验：一张都不复制
+        code, s, _, _ = self._demo_in(pkg, 'oil')  # 单项指定缺失图
+        self.assertEqual((code, s['signal']), (3, 'demoUnavailable'))
+        code, s, _, _ = self._demo_in(pkg, 'lawn')  # 单项指定存在图
+        self.assertEqual((code, len(s['items'])), (0, 1))
+        shutil.copyfile(os.path.join(PKG, 'assets', 'oil.png'), os.path.join(pkg, 'assets', 'oil.png'))  # 补齐
+        code, s, _, _ = self._demo_in(pkg)
+        self.assertEqual((code, s['signal'], len(s['items'])), (0, 'demos', 10))
+        self.assertEqual([i['key'] for i in s['items']], list(studio.SCENES))
+        self.assertEqual(len(self._out()), 10)
+
+    def test_fam03_manifest_anomalies_exit3(self):
+        good = json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))
+        import copy
+        cases = []
+        c = copy.deepcopy(good); c['demos'].pop(); cases.append(('nine', c))
+        c = copy.deepcopy(good); c['demos'][1]['key'] = c['demos'][0]['key']; cases.append(('dup', c))
+        c = copy.deepcopy(good); c['demos'][2]['key'] = 'unknown'; cases.append(('unknown', c))
+        c = copy.deepcopy(good); c['demos'][3]['file'] = '../studio.png'; cases.append(('path', c))
+        c = copy.deepcopy(good); c['demos'][3]['file'] = 'demos/studio.png'; cases.append(('subdir', c))
+        c = copy.deepcopy(good); del c['demos'][4]['title']; cases.append(('field', c))
+        c = copy.deepcopy(good); c['demos'].append(dict(c['demos'][0])); cases.append(('eleven', c))
+        cases.append(('notlist', {'demos': {}}))
+        for name, data in cases:
+            pkg = self._pkg_copy()
+            with open(os.path.join(pkg, 'assets', 'demos.json'), 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False)
+            code, s, _, _ = self._demo_in(pkg)
+            self.assertEqual((code, s['signal']), (3, 'demoUnavailable'), name)
+            code, s, _, _ = self._demo_in(pkg, 'lawn')
+            self.assertEqual((code, s['signal']), (3, 'demoUnavailable'), name)
+            shutil.rmtree(pkg)
+        pkg = self._pkg_copy()
+        with open(os.path.join(pkg, 'assets', 'demos.json'), 'w', encoding='utf-8') as f:
+            f.write('{broken')
+        self.assertEqual(self._demo_in(pkg)[0], 3)
+
+    def test_fam03_complete_set_ok(self):
+        code, s, _, _ = self._demo_in(self._pkg_copy())
+        self.assertEqual((code, len(s['items'])), (0, 10))
+        self.assertEqual(sorted(i['key'] for i in s['items']), sorted(studio.SCENES))
+
 
 class Confirmation(Base):
     def test_no_consent_no_task(self):
@@ -401,13 +475,16 @@ class AccountBilling(Base):
         self.mock.keys.clear()
         did2 = self.confirmed_draft()
         code, s, t, _ = self.run_cmd('run', '--draft', did2)
-        self.assertEqual((code, s['signal']), (4, 'credentialsReset'))
+        self.assertEqual((code, s['signal'], s.get('task_kept')), (4, 'credentialsReset', True))
         self.assertNotIn('skill_key', json.load(open(acc)))
         self.assertEqual(json.load(open(acc))['install_secret'], self.secret())  # 原安装身份保留
+        charges = self.mock.charges
         for u in self.mock.users.values():
             u['key'] = None
+        # 1.0.1（A3-FAM-01/02）：首发生成请求已发出，结果未知；之后只按原键查询，查不到也不重发
         code, s, t, _ = self.run_cmd('run', '--draft', did2)
-        self.assertEqual(s['signal'], 'delivered')
+        self.assertEqual((code, s['signal'], s.get('progress')), (2, 'jobPending', 'unconfirmed'))
+        self.assertEqual(self.mock.charges, charges)
 
     def test_client_rejects_unregistered_field(self):
         with self.assertRaises(ValueError):
@@ -1305,24 +1382,118 @@ class FamilySpec(Base):
         self.assertEqual(len(self.posts), 1)
         self.assertEqual(self.mock.charges, 0)
 
-    def test_submit_401_recovers_then_same_key_same_body(self):
+    # ---- A3-FAM-01/02（1.0.1）：首发提交 401 后只查原任务，凭证状态与任务状态分开 ----
+
+    def _keyed_draft(self):
+        """先交付一张取得技能凭证，再给第二张确认好的草稿；首发 POST 用的是已有凭证。"""
         did = self.ready()
-        self.run_cmd('run', '--draft', did)  # 取得技能凭证并交付一张
-        did2 = self.confirmed_draft()
-        n = {'401': 0}
+        self.run_cmd('run', '--draft', did)
+        return self.confirmed_draft()
+
+    def _assert_kept(self, did, idem, digest):
+        d = self.draft(did)  # 每次从磁盘重新加载私有状态（等同重启）
+        self.assertEqual((d['state'], d['idem'], d['body_sha256']), ('submit_unknown', idem, digest))
+        self.assertTrue(d['photo_consent'] and d['people_consent'] and d['pay_consent'])
+        self.assertEqual(self.run_cmd('plan', '--draft', did, '--scene', 'oil')[1]['signal'], 'taskLocked')
+        self.assertEqual(self.run_cmd('confirm', '--draft', did, '--photo-consent', 'yes', '--pay-consent', 'yes')[1]['signal'], 'needsPlan')
+        self.assertEqual(self.run_cmd('regenerate', '--draft', did, '--pay-consent', 'yes')[1]['signal'], 'taskLocked')
+        d = self.draft(did)
+        self.assertEqual((d['state'], d['idem'], d['body_sha256']), ('submit_unknown', idem, digest))
+
+    def _first_post_401(self, query_fault=None, recover_fault=None, server_accepts=False):
+        """首发 POST→401；可选：凭证恢复失败（recover_fault）、恢复后按原键查询失败（query_fault）。"""
+        did = self._keyed_draft()
+        base_posts = self.mock.charges
+        st = {'post': 0}
 
         def hook(real, method, url, body, headers, timeout, binary):
-            if method == 'POST' and url.endswith('/skill-jobs') and not n['401']:
-                n['401'] += 1
+            if method == 'POST' and url.endswith('/skill-jobs'):
+                st['post'] += 1
+                if server_accepts:
+                    real(method, url, body, headers, timeout, binary)
                 raise studio.GatewayError(401)
+            if recover_fault is not None and method == 'POST' and url.endswith('/skill-key'):
+                raise studio.GatewayError(recover_fault)
+            if method == 'GET' and '/jobs/by-key/' in url and query_fault is not None:
+                if query_fault == 'bad_id':
+                    return 200, json.dumps({'id': 'not-a-uuid', 'status': 'pending'}).encode()
+                raise studio.GatewayError(query_fault)
             return real(method, url, body, headers, timeout, binary)
         self.wrap(hook)
-        code, s, t, _ = self.run_cmd('run', '--draft', did2)
-        self.assertEqual(s['signal'], 'delivered')
-        self.assertEqual(len(self.posts), 2)
-        self.assertEqual(self.posts[0], self.posts[1])  # 同键同体
+        code, s, t, _ = self.run_cmd('run', '--draft', did)
+        return did, code, s, t, st, base_posts
+
+    def test_fam01_first_post_401_then_404_never_resubmits(self):
+        did, code, s, t, st, base = self._first_post_401()  # 恢复成功；Mock 未建单，原键 GET→404
+        self.assertEqual((code, s['signal'], s.get('progress')), (2, 'jobPending', 'unconfirmed'))
+        self.assertIn('当前进度未能确认', t)
+        self.assertEqual((len(self.posts), st['post']), (1, 1))
         self.assertTrue(any(c[1].startswith('/jobs/by-key/') for c in self.mock.calls))
-        self.assertEqual(self.mock.charges, 2)
+        d = self.draft(did)
+        idem, digest = d['idem'], d['body_sha256']
+        self.assertEqual(self.posts[0][1], idem)
+        self._assert_kept(did, idem, digest)
+        for cmd in ('run', 'resume', 'run'):  # 之后继续只查原键
+            code, s, _, _ = self.run_cmd(cmd, '--draft', did)
+            self.assertEqual((code, s['signal']), (2, 'jobPending'))
+        self.assertEqual(len(self.posts), 1)
+        self.assertEqual(self.mock.charges, base)
+        self._assert_kept(did, idem, digest)
+
+    def test_fam01_first_post_401_query_faults_never_resubmit(self):
+        for fault, want in ((500, (2, 'jobPending')), (502, (2, 'jobPending')), (0, (2, 'jobPending')),
+                            ('bad_id', (2, 'jobPending')), (401, (4, 'credentialsReset'))):
+            shutil.rmtree(os.path.join(self.home, 'mps-family-portrait-studio'), ignore_errors=True)
+            self.mock = mock_backend.Mock()
+            studio.TRANSPORT = self.mock.transport
+            telemetry.TRANSPORT = self.mock.telemetry_transport
+            did, code, s, t, st, base = self._first_post_401(query_fault=fault)
+            self.assertEqual((code, s['signal']), want, fault)
+            if code == 4:
+                self.assertTrue(s.get('task_kept'), fault)
+            self.assertEqual((len(self.posts), st['post']), (1, 1), fault)
+            d = self.draft(did)
+            self._assert_kept(did, d['idem'], d['body_sha256'])
+            self.assertEqual(len(self.posts), 1, fault)
+
+    def test_fam01_first_post_401_but_accepted_continues_original(self):
+        did, code, s, t, st, base = self._first_post_401(server_accepts=True)
+        self.assertEqual(s['signal'], 'delivered')
+        self.assertEqual(len(self.posts), 1)
+        self.assertEqual(self.mock.charges, base + 1)
+
+    def test_fam02_recovery_fails_keeps_task_locked(self):
+        for fault in (0, 401, 502):
+            shutil.rmtree(os.path.join(self.home, 'mps-family-portrait-studio'), ignore_errors=True)
+            self.mock = mock_backend.Mock()
+            studio.TRANSPORT = self.mock.transport
+            telemetry.TRANSPORT = self.mock.telemetry_transport
+            did, code, s, t, st, base = self._first_post_401(recover_fault=fault, server_accepts=True)
+            self.assertEqual((code, s['signal'], s.get('task_kept')), (4, 'credentialsReset', True), fault)
+            d = self.draft(did)
+            idem, digest = d['idem'], d['body_sha256']
+            self.assertEqual(self.posts[0][1], idem)
+            self._assert_kept(did, idem, digest)
+            # 恢复正常后：按原键查到原任务并交付，全程一次生成请求、一次扣费
+            self.wrap(lambda real, *a: real(*a))
+            code, s, _, _ = self.run_cmd('resume', '--draft', did)
+            self.assertEqual(s['signal'], 'delivered', fault)
+            self.assertEqual(len(self.posts), 0, fault)  # 新包装计数：恢复后没有任何生成请求
+            self.assertEqual(self.mock.charges, base + 1, fault)
+            self.assertEqual(self.draft(did)['idem'], idem)
+
+    def test_fam02_recovery_fails_not_accepted_still_query_only(self):
+        did, code, s, t, st, base = self._first_post_401(recover_fault=0)
+        self.assertEqual((code, s.get('task_kept')), (4, True))
+        d = self.draft(did)
+        self._assert_kept(did, d['idem'], d['body_sha256'])
+        self.wrap(lambda real, *a: real(*a))
+        for _ in range(2):
+            code, s, _, _ = self.run_cmd('resume', '--draft', did)
+            self.assertEqual((code, s['signal'], s.get('progress')), (2, 'jobPending', 'unconfirmed'))
+        self.assertEqual(len(self.posts), 0)
+        self.assertEqual(self.mock.charges, base)
+        self._assert_kept(did, d['idem'], d['body_sha256'])
 
     def test_poll_401_recovers_once_then_persistent_keeps_task(self):
         did = self.ready()

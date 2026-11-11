@@ -13,7 +13,7 @@ examples_en:
   - "Turn this photo of four people into a red New Year family portrait in landscape 3:2."
   - "Turn this photo of three people into a Chinese gongbi family portrait in landscape 3:2."
   - "Turn this photo of four people into an outdoor lawn family portrait in landscape 3:2."
-version: 1.0.0
+version: 1.0.1
 author: "MyPlaneStore"
 ---
 

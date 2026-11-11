@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-family-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -307,30 +307,60 @@ def cmd_first_turn(args):
                 welcome=W.WELCOME, demo_intro=W.DEMO_INTRO)
 
 
-def cmd_demo(args):
-    # 只释放包内示例图：不联网、不读凭证。首次对话上报由同轮的 first-turn 负责。
-    base = os.path.join(os.path.dirname(HERE), 'assets')
+DEMO_FILE_RE = re.compile(r'[a-z0-9][a-z0-9-]{0,40}\.png')
+
+
+def _demo_manifest(base):
+    """读并校验示例清单：必须恰好是十个场景各一项（键集合与 SCENES 一致、不重复），字段齐全，文件名为裸文件名。
+    任何异常返回 None，由调用方按资源不可用退出 3，不做部分展示。"""
     try:
         with open(os.path.join(base, 'demos.json'), encoding='utf-8') as f:
             demos = json.load(f)['demos']
-    except (OSError, ValueError, KeyError):
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    if not isinstance(demos, list) or len(demos) != len(SCENES):
+        return None
+    keys = []
+    for d in demos:
+        if not isinstance(d, dict):
+            return None
+        if not all(isinstance(d.get(k), str) and d.get(k) for k in ('key', 'title', 'note', 'file')):
+            return None
+        if not DEMO_FILE_RE.fullmatch(d['file']):
+            return None
+        keys.append(d['key'])
+    if len(set(keys)) != len(keys) or set(keys) != set(SCENES):
+        return None
+    return demos
+
+
+def cmd_demo(args):
+    # 只释放包内示例图：不联网、不读凭证。首次对话上报由同轮的 first-turn 负责。
+    base = os.path.join(os.path.dirname(HERE), 'assets')
+    demos = _demo_manifest(base)
+    if demos is None:
         return emit('demoUnavailable', W.DEMO_UNAVAILABLE, EXIT_ERROR)
     if args.key:
         demos = [d for d in demos if d['key'] == args.key]
         if not demos:
             return emit('demoNotFound', '', EXIT_ERROR, key=args.key)
+    # 先校验本次要求的完整集合全部在位，缺任何一张都不输出、不复制（不做部分成功）
+    missing = [d['key'] for d in demos if not os.path.isfile(os.path.join(base, d['file']))]
+    if missing:
+        return emit('demoUnavailable', W.DEMO_UNAVAILABLE, EXIT_ERROR, missing=missing)
     out_dir = os.path.join(state_dir(), 'demos')
     os.makedirs(out_dir, mode=0o700, exist_ok=True)
     items = []
     for d in demos:
         src = os.path.join(base, d['file'])
-        if not os.path.isfile(src):
-            continue
         dst = os.path.join(out_dir, d['file'])
-        if not os.path.isfile(dst):
-            shutil.copyfile(src, dst)
+        try:
+            if not os.path.isfile(dst) or os.path.getsize(dst) != os.path.getsize(src):
+                shutil.copyfile(src, dst)
+        except OSError:
+            return emit('demoUnavailable', W.DEMO_UNAVAILABLE, EXIT_ERROR)
         items.append(dict(key=d['key'], title=d['title'], note=d['note'], path=md_safe_path(dst)))
-    if not items:
+    if len(items) != len(demos):
         return emit('demoUnavailable', W.DEMO_UNAVAILABLE, EXIT_ERROR)
     return emit('demos', W.DEMO_INTRO, EXIT_OK, items=items)
 
@@ -545,7 +575,7 @@ def cmd_run(args):
     return _submit(d, a, body)
 
 
-def _submit(d, a, body, auth_retried=False):
+def _submit(d, a, body):
     """先原子保存「提交结果未知」和冻结的请求体摘要，再发 POST；任何模糊结果只查原任务，不重发、不换键。"""
     digest = _body_digest(body)
     if d.get('body_sha256') and d['body_sha256'] != digest:
@@ -556,7 +586,7 @@ def _submit(d, a, body, auth_retried=False):
         r = call('POST', '/skill-jobs', body, auth=a['skill_key'], idem=d['idem'], timeout=REQUEST_TIMEOUT_S)
     except GatewayError as e:
         if e.status == 401:
-            return _submit_unauthorized(d, a, body, auth_retried)
+            return _submit_unauthorized(d, a)
         if e.status == 402:
             d['state'] = 'needs_credits'
             save_draft(d)
@@ -592,27 +622,27 @@ def _recover_skill_key(a):
     return _ensure_skill_key(a) == 'ok'
 
 
-def _submit_unauthorized(d, a, body, auth_retried):
-    """提交时凭证被拒：服务端在受理前就拒绝了。用原安装身份恢复一次凭证，先按原任务键只读查询：
-    查到就沿原任务续接；明确查无此任务时，用同一个键、同一份内容再提交一次（仅此一次）；其余情况保留原键和原内容，
-    状态回到已确认，退出码 4。"""
-    if not auth_retried and _recover_skill_key(a):
-        try:
-            r = call('GET', '/jobs/by-key/' + quote(d['idem'], safe=''), auth=a['skill_key'])
-            uuid.UUID(r.get('id'))
-            d.update(job_id=r['id'], state='submitted')
-            save_draft(d)
-            return _poll(d, a)
-        except GatewayError as e:
-            if e.status == 404:
-                return _submit(d, a, body, auth_retried=True)
-        except (ValueError, TypeError, AttributeError):
-            pass
-    a.pop('skill_key', None)
-    save_account(a)
-    d['state'] = 'confirmed'
+def _submit_unauthorized(d, a):
+    """提交时凭证被拒：生成请求已经发出，不能证明服务端未受理。任务状态保持 submit_unknown，原键、原请求体摘要不动；
+    凭证状态单独处理（只改本机账户文件，不回写任务状态）。恢复凭证一次后只按原任务键只读查询：
+    查到就沿原任务续接；查不到（含 404）、查询失败、断网或响应异常，一律保留原任务、提示进度未能确认，稍后继续只查原任务；
+    恢复失败或查询仍被拒，退出 4 且 task_kept=true。任何分支都不再发生成请求、不换键、不让 plan/confirm/regenerate 覆盖。"""
+    if not _recover_skill_key(a):
+        return _keep_reset(d)
+    try:
+        r = call('GET', '/jobs/by-key/' + quote(d['idem'], safe=''), auth=a['skill_key'])
+        uuid.UUID(r.get('id'))
+    except GatewayError as e:
+        if e.status == 401:
+            a.pop('skill_key', None)  # 只清本机失效凭证；任务仍是 submit_unknown
+            save_account(a)
+            return _keep_reset(d)
+        return emit('jobPending', W.progress_unknown(), EXIT_WAIT, draft_id=d['draft_id'], progress='unconfirmed')
+    except (ValueError, TypeError, AttributeError):
+        return emit('jobPending', W.progress_unknown(), EXIT_WAIT, draft_id=d['draft_id'], progress='unconfirmed')
+    d.update(job_id=r['id'], state='submitted')
     save_draft(d)
-    return emit('credentialsReset', W.credentials_reset(), EXIT_RESET, draft_id=d['draft_id'])
+    return _poll(d, a)
 
 
 def _shape_of(size):

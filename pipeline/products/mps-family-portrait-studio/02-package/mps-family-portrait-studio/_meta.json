@@ -2,7 +2,7 @@
   "name": "mps-family-portrait-studio",
   "display_name": "全家福写真照相馆",
   "display_name_en": "Family Portrait Studio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "channel": "workbuddy_skill",
   "author": "MyPlaneStore",
   "entry": "SKILL.md"

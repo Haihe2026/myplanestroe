@@ -687,6 +687,44 @@ class Contract(unittest.TestCase):
         href = _re.search(r'href="([^"]*)"', MarkdownIt().render('**[简约棚拍全家福](%s)**' % good)).group(1)
         self.assertEqual(uri_file_part(href)[0], 'C:/Synthetic#User/mps-family-portrait-studio/demos/studio.png')
 
+    def test_fam_01_02_unauthorized_submit_never_resubmits_or_unlocks(self):
+        """1.0.1（A3-FAM-01/02）：首发提交 401 后不再发生成请求，任何分支都不把任务改回可编辑。"""
+        tree = ast.parse(read('scripts', 'studio.py'))
+        fn = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+        f = fn['_submit_unauthorized']
+        called = {n.func.id for n in ast.walk(f) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name)}
+        self.assertNotIn('_submit', called)
+        consts = {n.value for n in ast.walk(f) if isinstance(n, ast.Constant) and isinstance(n.value, str)}
+        for bad in ('POST', 'confirmed', 'planned', 'failed', 'rejected'):
+            self.assertNotIn(bad, consts)
+        self.assertNotIn('idem', {t.slice.value for n in ast.walk(f) if isinstance(n, ast.Assign) for t in n.targets
+                                  if isinstance(t, ast.Subscript) and isinstance(t.slice, ast.Constant)})
+        self.assertIn('submit_unknown', studio.LOCKED_STATES)
+        self.assertEqual(len(f.args.args), 2)  # 不再有「已重试」参数，也就没有重提分支
+
+    def test_fam_03_demo_missing_one_exit3(self):
+        """1.0.1（A3-FAM-03）：示例清单十项与场景一致；缺一张图（默认或单项）退出 3，不部分成功。"""
+        home = tempfile.mkdtemp()
+        pkg = os.path.join(home, 'pkg')
+        shutil.copytree(os.path.join(ROOT, 'assets'), os.path.join(pkg, 'assets'))
+        os.remove(os.path.join(pkg, 'assets', 'seaside.png'))
+        studio.STATE_HOME = os.path.join(home, 'state')
+        try:
+            with mock.patch.object(studio, 'TRANSPORT', lambda *a, **k: (_ for _ in ()).throw(AssertionError('net'))), \
+                    mock.patch.object(studio, 'HERE', os.path.join(pkg, 'scripts')):
+                run = self._runner()
+                self.assertEqual(run('demo')[0], 3)
+                self.assertEqual(run('demo', 'seaside')[0], 3)
+                self.assertEqual(run('demo', 'lawn')[0], 0)
+                shutil.copyfile(os.path.join(ROOT, 'assets', 'seaside.png'), os.path.join(pkg, 'assets', 'seaside.png'))
+                code, sig = run('demo')
+                self.assertEqual((code, len(sig['items'])), (0, 10))
+        finally:
+            studio.STATE_HOME = None
+            shutil.rmtree(home, ignore_errors=True)
+        body = read('scripts', 'studio.py').split('def cmd_demo')[1].split('\ndef ')[0]
+        self.assertNotIn('continue', body)
+
     def test_wed_a3_01_demo_has_no_network(self):
         """1.0.1：离线示例命令本身零网络（不上报、不发请求）；首次对话上报留在 first-turn。"""
         tree = ast.parse(read('scripts', 'studio.py'))
