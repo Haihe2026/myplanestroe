@@ -1,0 +1,130 @@
+{
+  "skill_id": "mps-travel-portrait-studio",
+  "checked_at": "2026-11-11T19:37:41+08:00",
+  "result": "pass",
+  "checklist_count": 16,
+  "checks": [
+    {
+      "item": 1,
+      "label": "立项字段和命名",
+      "result": "pass",
+      "evidence": "MD §1；完整立项、词表、原话、同slug队列检查及市场全量查重未验证边界。"
+    },
+    {
+      "item": 2,
+      "label": "官方本次在线读取",
+      "result": "pass",
+      "evidence": "本次HTTP200技能页；日期/URL/内容SHA；仅Skill，专家结构不适用。"
+    },
+    {
+      "item": 3,
+      "label": "场景路由",
+      "result": "pass",
+      "evidence": "MD §3–4 十场景、三尺寸，目的地优先及京都/现代樱花和西安/古城消歧。"
+    },
+    {
+      "item": 4,
+      "label": "提示词与单人身份基线",
+      "result": "pass",
+      "evidence": "MD §4：真实性第一段、文字、安全，单人本人/监护许可、源文件传输及当次付费三项独立确认。"
+    },
+    {
+      "item": 5,
+      "label": "十示例真实来源及审阅",
+      "result": "pass",
+      "evidence": "10示例真实生成，9次固定合成单人参考编辑；总11次无追加/重POST；PNG解码、SHA、来源和逐图目检。"
+    },
+    {
+      "item": 6,
+      "label": "主题立体logo",
+      "result": "pass",
+      "evidence": "512×512 PNG，350096字节；相机/地球/飞机主题已目检，无品牌字；Claude原字节保留。"
+    },
+    {
+      "item": 7,
+      "label": "计费与支付后端",
+      "result": "pass",
+      "evidence": "MD §7具体鉴权/原账户/动态套餐/钱包/核款去重/回调与短链分层；e22代码、c198部署事实分开。"
+    },
+    {
+      "item": 8,
+      "label": "资源适配与成本毛利",
+      "result": "pass",
+      "evidence": "固定登记→.60→.59→.57；三尺寸、1K/auto/n1、签名参考及server密钥；估算毛利76.47%。"
+    },
+    {
+      "item": 9,
+      "label": "车道与实现/验证状态",
+      "result": "pass",
+      "evidence": "MD §9清楚列已实现、待Claude实现、无部署及真人/儿童/生产签名/微信/付款/宿主未验。"
+    },
+    {
+      "item": 10,
+      "label": "已存在接口与幂等恢复",
+      "result": "pass",
+      "evidence": "14共享/售后与4微信接口固定源；六字段；先持久化；401恢复及404均只读原任务；不重POST。"
+    },
+    {
+      "item": 11,
+      "label": "首次对话与漏斗",
+      "result": "pass",
+      "evidence": "MD §10 8字段/200/2秒/4096B/关闭开关及5步骤；机器及缺访问证据项不可得。"
+    },
+    {
+      "item": 12,
+      "label": "相邻技能与分界",
+      "result": "pass",
+      "evidence": "婚纱/全家福/证件/宠物范围区分；不把多人旅行自动转成婚纱。"
+    },
+    {
+      "item": 13,
+      "label": "不承接与首轮接管",
+      "result": "pass",
+      "evidence": "MD §5/11/12；单人边界、文字跳过、已实际展示去重/单项、账户不刷首轮、禁止宿主代生图。"
+    },
+    {
+      "item": 14,
+      "label": "验收清单与职责",
+      "result": "pass",
+      "evidence": "17组职责＋现行阶段6逐条对照；不适用字段有源码边界；A2 Mock、A3静态、A3后附录D，未执行不标通过。"
+    },
+    {
+      "item": 15,
+      "label": "决策记录",
+      "result": "pass",
+      "evidence": "MD §15逐项事项/采用/依据，含固定欢迎、fast、支付、8字段、素材及检查交付。"
+    },
+    {
+      "item": 16,
+      "label": "MD/JSON一致和秘密扫描",
+      "result": "pass",
+      "evidence": "16节与JSON核心字段交叉核对、三对双语目的地/单人/比例/尺寸一致，PNG/SHA/源引用核验，秘密扫描通过。"
+    }
+  ],
+  "stage6_cases": 57,
+  "asset_files": 11,
+  "real_calls": {
+    "demos": 10,
+    "logo": 1,
+    "total": 11,
+    "extra_tests": 0
+  },
+  "document_sha256": {
+    "01-dev-spec.md": "6ff1dcaca3db1004406d64166cbca1576febc1d26999691105992afe455c94f5",
+    "01-dev-spec.json": "6e81b6ebc90963089210bc4793e41f7faf9d0795d5ce1a47d011642471ecdeb7"
+  },
+  "secret_scan": "pass",
+  "independent_review": "Two read-only agents reviewed fixed source contracts and SOP; three SOP gaps and full source citations corrected before final recheck.",
+  "limitations": [
+    "All portraits are fictional adult development examples; no customer image used.",
+    "Nine reference edits show broadly consistent visible adult features; this is subjective visual review, not biometric identity verification or a fidelity guarantee.",
+    "Small 512x768 previews show compressed texture and slight face/light variations; they are illustrative, not print-quality promises.",
+    "No child sample, production signed-reference route, real WeChat, real customer checkout or WorkBuddy behavior acceptance was tested by these assets.",
+    "The required AI/non-location disclosure is in visible template/demo/delivery text; no watermark text is burned into image pixels."
+  ],
+  "claude_a2": "pending",
+  "codex_a3": "pending",
+  "appendix_d": "pending after A3 and fixed Muse task",
+  "production_deployments_this_product": 0,
+  "publishing": "owner manual"
+}

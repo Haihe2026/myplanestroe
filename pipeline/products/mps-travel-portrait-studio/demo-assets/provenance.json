@@ -1,0 +1,401 @@
+{
+  "authorized_limit": 10,
+  "generation_attempts": 10,
+  "upstream_generation_calls": 10,
+  "succeeded": 10,
+  "items": [
+    {
+      "key": "harbin",
+      "series": "旅行打卡主题写真",
+      "title": "哈尔滨冰雪主题",
+      "prompt": "Use case: photorealistic-natural. Asset type: Skill offline travel portrait example. Create a photorealistic original synthetic adult travel portrait. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. An imaginative Harbin-inspired winter ice sculpture park at blue hour, crystalline cyan ice towers, soft snow, warm pale winter coat and scarf; elegant joyful travel portrait. No claim of an exact real landmark. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:00:38+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_text_to_image",
+      "reference": null,
+      "status": "succeeded",
+      "raw_sha256": "a082169123ca9ead76cad5e8d6835debd02fcc04126e232afde3f747f2cf32c7",
+      "raw_bytes": 1965761,
+      "file": "harbin.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 205740,
+      "output_sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919"
+    },
+    {
+      "key": "yabuli",
+      "series": "旅行打卡主题写真",
+      "title": "亚布力滑雪主题",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Yabuli-inspired alpine ski resort, snowy slopes and fir trees, stylish modest coral ski jacket and ski pants, goggles resting on head leaving eyes visible, standing safely holding unbranded skis; no dangerous stunt. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:33+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "8ee816f7adc634ad17b90899ee9290a6036f5dfe04373cd37eb4e7ed272f0a98",
+      "raw_bytes": 2183998,
+      "file": "yabuli.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 253696,
+      "output_sha256": "b660372f9722bd748e2cb8c7dd33d44b87587c77ebf86b41b9a6d056a8f15f53"
+    },
+    {
+      "key": "sanya",
+      "series": "旅行打卡主题写真",
+      "title": "三亚海岛暖冬",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Sanya-inspired tropical beach with turquoise sea, soft white sand and palm trees, breezy modest pale-yellow summer dress, warm sunset, natural coastal wind, no bridal styling. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:36+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "d5ea2462a10db16ebb4a004cc8ec7f2f3c0629664b2be257aef0ddb8621de8a0",
+      "raw_bytes": 2296801,
+      "file": "sanya.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 217533,
+      "output_sha256": "0d5a11124dd9cd1ddb6075d8a04833954612031b2af4d26ee85cc6a0bf7dec96"
+    },
+    {
+      "key": "santorini",
+      "series": "旅行打卡主题写真",
+      "title": "圣托里尼蓝白",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Santorini-inspired Greek island terrace, whitewashed walls, blue domed roofs and distant Aegean sea, tasteful flowing sky-blue casual dress, luminous Mediterranean daylight, no wedding clothing. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:38+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "597f362e7181c07e001c248e22fa50fcb9cde8e56b5f616e5401833e02cd6d90",
+      "raw_bytes": 2067709,
+      "file": "santorini.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 210014,
+      "output_sha256": "73af3887483bf21308040416612327ec73196a40d2e670d48796b63e9ebd3a63"
+    },
+    {
+      "key": "kyoto",
+      "series": "旅行打卡主题写真",
+      "title": "京都古风樱花",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Kyoto-inspired traditional wooden street and subtle temple garden during cherry blossom season; tasteful fully clothed pastel kimono with correct overlapping collar and obi, gentle spring light, no religious insignia. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:40+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "91b3fca92bff491df35bfd0635f62c76c8efd047738df1353fd19b058e2b4b6a",
+      "raw_bytes": 2556919,
+      "file": "kyoto.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 280105,
+      "output_sha256": "91de8b75701745b7746dd4e324a17702e394eeaf462cb5f676d92d30fedb5d34"
+    },
+    {
+      "key": "xian",
+      "series": "旅行打卡主题写真",
+      "title": "西安汉服古城",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Xian-inspired old city wall and Chinese traditional pavilion at golden hour; elegant fully clothed Tang-inspired hanfu in soft red and cream, natural traditional styling, no royal or religious insignia. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:42+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "fa8112626016e73d9bb0324afa0339e4aac288b20e158b0cb7e3df65be90bfcb",
+      "raw_bytes": 2163013,
+      "file": "xian.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 224777,
+      "output_sha256": "b3107a0c4dd6e6c5b49104e2a2f8f1dc2dca2ff3d8053f64faf113566045fda7"
+    },
+    {
+      "key": "desert",
+      "series": "旅行打卡主题写真",
+      "title": "沙漠星空",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. Western desert dunes under a rich starry twilight sky, subtle distant camel caravan silhouettes without riders, modest terracotta travel outfit and simple scarf, plausible soft warm face lighting and cool sky, no fantasy planet. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:44+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "4ce97cce97d233ac5e75d4399082e7a379dca98977a72bdfde26a108281653fd",
+      "raw_bytes": 2180672,
+      "file": "desert.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 223732,
+      "output_sha256": "f5cffc6092f9c2399c0071c9a2c4293be62e76448b6f9e5e719bdd1af1531e8b"
+    },
+    {
+      "key": "sakura",
+      "series": "旅行打卡主题写真",
+      "title": "樱花季写真",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Wuhan/Wuxi-inspired lakeside cherry blossom avenue with abundant pale-pink flowers, soft pastel green casual spring dress, gentle spring daylight, no temple or kimono, spacious natural travel composition. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:46+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "fe839efb651f58c2470cafd3d463f5ec7b8dfb6754ed625576e50580edd766e1",
+      "raw_bytes": 2643319,
+      "file": "sakura.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 265909,
+      "output_sha256": "9aa7607772d872e7e8062e906bafb501a4ee9eb99644700e91698e5b14e0bf3e"
+    },
+    {
+      "key": "grassland",
+      "series": "旅行打卡主题写真",
+      "title": "草原蒙古包",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. Open green summer grassland, distant white Mongolian-style yurts under a blue sky; tasteful modest contemporary Mongolian-inspired deel travel costume with simple belt, no sacred or tribal insignia, warm natural sunlight. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:48+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "876fe9c48eefc4ee5d555914fe356c13c48ab01fec931756dd50f0c0e76e5682",
+      "raw_bytes": 2400751,
+      "file": "grassland.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 238031,
+      "output_sha256": "2718f17c3651b25cfe80a534b6b6949cd6638fdaf555bf9cde9c5c352143578d"
+    },
+    {
+      "key": "oldtown",
+      "series": "旅行打卡主题写真",
+      "title": "古城灯火夜景",
+      "prompt": "Use case: identity-preserve. Asset type: Skill offline travel portrait example. Edit the supplied synthetic portrait; keep the exact same single woman, facial structure, eye shape, nose, hairline and apparent adult age. Do not replace her face. Exactly one fictional 28-year-old East Asian adult woman, oval face, dark almond-shaped eyes, natural skin texture, long straight black hair with a left side part. Clear fully visible face, natural proportions. Medium portrait from head to knees with the destination setting clearly visible. No other people. A Lijiang/Fenghuang-inspired old town riverside at blue hour, wooden houses and soft warm lantern reflections, modest teal casual linen outfit, realistically balanced face light, no readable shop signs, no wedding styling. Travel-themed AI artwork, not documentary evidence of a real trip. No text, letters, numbers, signs, logos, brands or watermark. No extra limbs, fused hands or distorted face.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-11T19:04:51+08:00",
+      "fictional_adults": true,
+      "rights": "通过登记资源生成的虚构成年人旅行写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "fictional_adults": true,
+        "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+        "people": 1
+      },
+      "status": "succeeded",
+      "raw_sha256": "8d04ebe1bfa66722909e61f436ef047e4a9e1496937036a1323331f6fac52876",
+      "raw_bytes": 1404410,
+      "file": "oldtown.png",
+      "actual_generated_size": [
+        832,
+        1248
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 223016,
+      "output_sha256": "95710d515155fd44a895c3ad04d7d3c821eaf6b01c66b519c44e6345e9d7eb58"
+    }
+  ],
+  "checked_at": "2026-11-11T19:08:06+08:00",
+  "auth_ref": "f3307dd3890af558b1ab21cfd3f1342c888a7b13",
+  "auth_source": "01-asset-plan-20261111.json",
+  "scope": "10 fictional adult travel examples: one original harbin generation and nine reference edits; fixed public synthetic reference URL; no production signed input route.",
+  "cost": {
+    "unit_usd_estimate": 0.0065,
+    "total_demo_usd_estimate": 0.065,
+    "actual_invoice_verified": false
+  }
+}

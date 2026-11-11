@@ -1,0 +1,33 @@
+{
+  "authorized_limit": 11,
+  "post_attempt_intents": 11,
+  "adapter_tasks": 11,
+  "unique_remote_tasks": 11,
+  "succeeded": 11,
+  "duplicate_generation_posts": 0,
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "customer_financial_database_used": false,
+  "scope": "isolated adapter task database, no customer wallet writes",
+  "upstream_generation_calls": 11,
+  "demo_generation_calls": 10,
+  "logo_generation_calls": 1,
+  "source_ref": "1d62248ea8cd9ab4f0b9d03bfe5289247c6cfd94",
+  "authorization_commit": "f3307dd3890af558b1ab21cfd3f1342c888a7b13",
+  "harness_sha256": "658854497114ff373130b1ad899b6ac2e0ec4ff7fc9031d27d66c759ec9d763c",
+  "public_synthetic_reference": {
+    "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e/pipeline/products/mps-travel-portrait-studio/demo-assets/harbin.png",
+    "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+    "fictional_adults": true,
+    "source_commit": "8b758a82bfb7fa56afb8fa6fc85b30f03fd6aa1e",
+    "people": 1
+  },
+  "production_signed_input_route_exercised": false,
+  "customer_photo_used": false,
+  "real_payment_tested": false,
+  "estimated_total_usd": 0.0715,
+  "actual_invoice_verified": false
+}

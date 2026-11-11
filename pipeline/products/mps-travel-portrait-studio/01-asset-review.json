@@ -1,0 +1,104 @@
+{
+  "at": "2026-11-11T19:24:15+08:00",
+  "reviewed_assets": 11,
+  "demo_count": 10,
+  "logo_count": 1,
+  "result": "pass",
+  "items": [
+    {
+      "key": "harbin",
+      "file": "demo-assets/harbin.png",
+      "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、米色保暖衣与围巾、蓝色冰雕；面部可见，无字无品牌。"
+    },
+    {
+      "key": "yabuli",
+      "file": "demo-assets/yabuli.png",
+      "sha256": "b660372f9722bd748e2cb8c7dd33d44b87587c77ebf86b41b9a6d056a8f15f53",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、橙色滑雪服和手持雪板，雪道松林；护目镜未遮眼，站立姿态；无明显文字。"
+    },
+    {
+      "key": "sanya",
+      "file": "demo-assets/sanya.png",
+      "sha256": "0d5a11124dd9cd1ddb6075d8a04833954612031b2af4d26ee85cc6a0bf7dec96",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、黄色休闲裙、椰树沙滩与日落；非婚纱，无文字品牌。"
+    },
+    {
+      "key": "santorini",
+      "file": "demo-assets/santorini.png",
+      "sha256": "73af3887483bf21308040416612327ec73196a40d2e670d48796b63e9ebd3a63",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、蓝色休闲裙、蓝白建筑及海景；不当精确地标证据，无文字品牌。"
+    },
+    {
+      "key": "kyoto",
+      "file": "demo-assets/kyoto.png",
+      "sha256": "91de8b75701745b7746dd4e324a17702e394eeaf462cb5f676d92d30fedb5d34",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、粉色和服、木屋街巷与樱花；面部及衣领腰带可辨，无文字品牌。"
+    },
+    {
+      "key": "xian",
+      "file": "demo-assets/xian.png",
+      "sha256": "b3107a0c4dd6e6c5b49104e2a2f8f1dc2dca2ff3d8053f64faf113566045fda7",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、红色汉服、城墙和古建意象；面部及衣褶可辨，无文字品牌。"
+    },
+    {
+      "key": "desert",
+      "file": "demo-assets/desert.png",
+      "sha256": "f5cffc6092f9c2399c0071c9a2c4293be62e76448b6f9e5e719bdd1af1531e8b",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、暖色外套围巾、沙丘星空及远处驼队；无文字品牌。"
+    },
+    {
+      "key": "sakura",
+      "file": "demo-assets/sakura.png",
+      "sha256": "9aa7607772d872e7e8062e906bafb501a4ee9eb99644700e91698e5b14e0bf3e",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、绿色现代连衣裙、樱花湖畔；与京都和服场景区分，无文字品牌。"
+    },
+    {
+      "key": "grassland",
+      "file": "demo-assets/grassland.png",
+      "sha256": "2718f17c3651b25cfe80a534b6b6949cd6638fdaf555bf9cde9c5c352143578d",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、蓝色蒙古风长衣、草原及蒙古包；不据服饰推断民族，无文字品牌。"
+    },
+    {
+      "key": "oldtown",
+      "file": "demo-assets/oldtown.png",
+      "sha256": "95710d515155fd44a895c3ad04d7d3c821eaf6b01c66b519c44e6345e9d7eb58",
+      "result": "accepted_for_development_example",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "单一合成成年人物、蓝灰色休闲外套、河道古城灯火夜景；不冒充西安汉服，无文字品牌。"
+    },
+    {
+      "key": "logo",
+      "file": "02-package/dist/logo.png",
+      "sha256": "d8177d72fbc14acc0e2371fd5af976ced0302c2cab395c1937a4dfa9d66acee9",
+      "result": "accepted_logo",
+      "review_method": "Codex actual image view; demos also reviewed in contact sheet",
+      "observations": "立体相机、地球镜头、飞机轨迹及冰雪/海岛意象，无可读文字或品牌；非平面ico。"
+    }
+  ],
+  "limitations": [
+    "All portraits are fictional adult development examples; no customer image used.",
+    "Nine reference edits show broadly consistent visible adult features; this is subjective visual review, not biometric identity verification or a fidelity guarantee.",
+    "Small 512x768 previews show compressed texture and slight face/light variations; they are illustrative, not print-quality promises.",
+    "No child sample, production signed-reference route, real WeChat, real customer checkout or WorkBuddy behavior acceptance was tested by these assets.",
+    "The required AI/non-location disclosure is in visible template/demo/delivery text; no watermark text is burned into image pixels."
+  ]
+}
