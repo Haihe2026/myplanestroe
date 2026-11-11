@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-server-fix-wechat-binding-20261111",
+  "skill_id": "mps-family-portrait-studio",
+  "source_path": "pipeline/products/mps-family-portrait-studio/msg-from-muse-20261111-server-fix-wechat-binding.md",
+  "source_ref": "edd66fbdf3e92ee1d0a4f8c252dc2d1c1d7500b5",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-0a5de23b4de93ff0eb52dd62b2b81b3f2b854739eab106221c33857835946da9",
+  "request_kind": "handoff"
+}
