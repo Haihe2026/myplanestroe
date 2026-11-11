@@ -18,7 +18,7 @@ for(const [id,p] of Object.entries(cfg.plans)){
  benefit.className='plan-benefit';benefit.textContent=id==='pet_monthly'&&!cfg.photo_analysis_ready?'':p.display?.benefit||'';
  button.textContent=cfg.payment_ready?'选择套餐':'联系客服开通';button.disabled=!cfg.payment_ready;
  button.onclick=()=>openCheckout(id,p);
- a.append(name,price,duration,suitable,features);if(benefit.textContent)a.append(benefit);a.append(button);$('plans').append(a);
+ const details=document.createElement('details'),summary=document.createElement('summary');details.className='plan-details';summary.textContent='查看套餐权益';details.append(summary,suitable,features);if(benefit.textContent)details.append(benefit);a.append(name,price,duration,button,details);$('plans').append(a);
 }
 try{await account();}catch(e){$('status').textContent=[401,403,404].includes(e.status)?'':'账户信息暂未读取，请稍后刷新。';}
 try{const pending=JSON.parse(localStorage.getItem('mps-pet-checkout')||'null');if(pending&&Date.now()-pending.at>=0&&Date.now()-pending.at<15*60*1000&&Object.hasOwn(cfg.plans,pending.plan)&&cfg.payment_ready)await openCheckout(pending.plan,cfg.plans[pending.plan]);}catch(e){} }
@@ -43,6 +43,7 @@ async function preparePayment(){
   try{await account();}catch(e){if(![401,403].includes(e.status))throw e;if(generation!==checkoutGeneration||!$('payment').open)return;await api('activate',{accepted:true});if(generation!==checkoutGeneration||!$('payment').open)return;await account();}
   if(generation!==checkoutGeneration||!$('payment').open)return;
   const created=await api('orders',{plan:selectedPlan});if(generation!==checkoutGeneration||!$('payment').open)return;order=created;
+  window.mpsAmountQr(order.amount_fen,$('qr'),document.querySelector('#payment-content a[download]'));
   $('order-info').textContent='订单 '+order.id+' · 应付 ¥'+(order.amount_fen/100).toFixed(2);
   $('payment-identity').hidden=true;$('payment-content').hidden=false;$('payment-retry').hidden=true;
   try{localStorage.removeItem('mps-pet-checkout');}catch(e){}
@@ -52,7 +53,7 @@ async function preparePayment(){
  }catch(e){
   if(generation!==checkoutGeneration||!$('payment').open)return;
   $('payment-content').hidden=true;
-  if(e.status===401){accountLinked=false;$('payment-identity').hidden=false;$('payment-retry').hidden=true;feedback('微信扫码登录后，即可在这里付款。');}
+  if(e.status===401){accountLinked=false;location.assign('/auth/wechat/#product=pet');return;}
   else{feedback(e.name==='AbortError'?'付款准备超时，请点击付款重试。':'暂时未能准备付款，请点击付款重试。');$('payment-identity').hidden=true;$('payment-retry').hidden=false;}
  }finally{paymentBusy=false;$('payment-retry').disabled=false;$('payment-retry').textContent='付款';}
 
