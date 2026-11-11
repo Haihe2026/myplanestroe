@@ -11,3 +11,4 @@
 2026-11-11T13:22:57+08:00 | codex | test_passed → test_passed | 附录D本机测验受阻（COMPUTER_USE_CAPTURE_TIMEOUT）：WorkBuddy窗口可识别，但重新选择后两次截图均超时；未导入/未发测试内容/零付费调用。报告04-computer-use-test-report.md记blocked，仅拦交付，A3结论和stage保持不变。
 2026-11-11T14:11:53+08:00 | codex | test_passed → test_passed | 附录D鼠标重跑：已改用内置统一Computer Use通道，确认提供鼠标/键盘接口并绑定WorkBuddy；两次原生截图仍超时，未盲点/未导入/未发测试内容。测验仍blocked，A3与stage不变；见04-computer-use-test-report.md及本次去敏证据。
 2026-11-11T15:17:37+08:00 | codex | test_passed → test_passed | 附录D第3次：内置Computer Use绑定WorkBuddy并尝试Raise置前；首次和唯一恢复截图仍超时，本轮2次、累计6次，无截图/未点击/未导入。测验仍blocked，A3和stage不变；第三轮证据单列。
+2026-11-11T18:16:47+08:00 | codex | submitted → submitted | 当前聊天直接授权后部署微信关联第二版e22eeb4，仅一次服务重启；中途systemd动态ExecStart误判已纠正，原文件备份保留、无追加重启；实际部署字节合成22/22与五场景、JS10/10通过，客户财务/Skill包未动，见01-wechat-binding-deployment-20261111.md。

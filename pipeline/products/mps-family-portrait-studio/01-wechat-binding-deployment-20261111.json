@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-family-portrait-studio",
+  "patch_commit": "e22eeb40348468d2ba942669c0ed5fbbfb9a141c",
+  "result": "deployed_and_post_deployment_synthetic_acceptance_passed",
+  "reported_at": "2026-11-11T18:16:47+08:00",
+  "authorization": {
+    "at": "2026-11-11T17:56:28+08:00",
+    "source": "direct human message in this chat",
+    "patch_commit": "e22eeb40348468d2ba942669c0ed5fbbfb9a141c",
+    "scope": "备份两个目标文件、原子替换，只重启skill-platform.service一次；部署后五种合成场景验证。仅本次微信认证改动，不扩大其他生产或财务权限。",
+    "financial_writes": false,
+    "real_image_calls": false,
+    "real_wechat_calls": false
+  },
+  "completed_at": "2026-11-11T18:10:48+08:00",
+  "service_restart_at": "Wed 2026-11-11 17:59:26 CST",
+  "service": {
+    "unit": "skill-platform.service",
+    "active": "active",
+    "substate": "running",
+    "pid": 959435,
+    "manual_restart_calls": 1,
+    "automatic_restarts": 0
+  },
+  "replaced_only": [
+    {
+      "path": "/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+      "sha256": "8fb426f481015acccea592ef40ce3c338a8178d2baee9fc22ca6f483b6a76121",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0
+    },
+    {
+      "path": "/var/www/image-assistant/auth/wechat/wechat.js",
+      "sha256": "0728dee07670ad487ec47543023e20a70d58aa3b83f5580b125f26296df2aaf2",
+      "mode": "0o644",
+      "uid": 0,
+      "gid": 0
+    }
+  ],
+  "backups": {
+    "directory": "/var/backups/skill-platform/wechat-binding-20261111T095922Z-152c45b8",
+    "directory_mode": "0700",
+    "file_mode": "0600",
+    "files_verified": 48,
+    "contents_not_published": true
+  },
+  "configuration": {
+    "unchanged": true,
+    "verified_files": 46,
+    "aggregate_sha256": "d2c05cd6672d6ba51c7a2e4184abdda1ce008408c1db8058c853d5f6280540b3",
+    "static_execstart_sha256": "01c07e3da8e43bf6318edb108fbed02700f1ba72cf781789813b412597f82dda",
+    "interpreter": "/opt/skill-platform/1.2.0/venv/bin/python",
+    "entry": "/opt/skill-platform/gemini-support-20261107/run_shared.py",
+    "arguments_and_environment_not_modified": true
+  },
+  "post_deployment": {
+    "platform": "Linux",
+    "python": "3.11.6",
+    "source": "actual deployed bytes, not uploaded local patch",
+    "server_returncode": 0,
+    "server_output": "test_01_desktop_kept_open (__main__.BindingTests.test_01_desktop_kept_open) ... ok\ntest_02_desktop_closed_no_finish_call (__main__.BindingTests.test_02_desktop_closed_no_finish_call) ... ok\ntest_03_same_browser_mobile_sets_session_and_redirects (__main__.BindingTests.test_03_same_browser_mobile_sets_session_and_redirects) ... ok\ntest_04_scan_in_sixth_minute_after_link_issue (__main__.BindingTests.test_04_scan_in_sixth_minute_after_link_issue) ... ok\ntest_05_repeat_same_identity_is_idempotent (__main__.BindingTests.test_05_repeat_same_identity_is_idempotent) ... ok\ntest_account_already_bound_to_different_wechat (__main__.BindingTests.test_account_already_bound_to_different_wechat) ... ok\ntest_callback_in_sixth_minute_after_qr_start (__main__.BindingTests.test_callback_in_sixth_minute_after_qr_start) ... ok\ntest_conflicting_identity_does_not_merge_accounts (__main__.BindingTests.test_conflicting_identity_does_not_merge_accounts) ... ok\ntest_exchange_error_is_generic_and_no_registration (__main__.BindingTests.test_exchange_error_is_generic_and_no_registration) ... ok\ntest_existing_bound_browser_reuses_original_account_without_scan (__main__.BindingTests.test_existing_bound_browser_reuses_original_account_without_scan) ... ok\ntest_expired_entry_and_state_are_rejected (__main__.BindingTests.test_expired_entry_and_state_are_rejected) ... ok\ntest_finish_used_state_needs_no_pending_entry_and_audits_once (__main__.BindingTests.test_finish_used_state_needs_no_pending_entry_and_audits_once) ... ok\ntest_finish_wrong_verifier_and_callback_replay (__main__.BindingTests.test_finish_wrong_verifier_and_callback_replay) ... ok\ntest_missing_entry_fails_closed (__main__.BindingTests.test_missing_entry_fails_closed) ... ok\ntest_origin_consent_and_state_checks_remain (__main__.BindingTests.test_origin_consent_and_state_checks_remain) ... ok\ntest_phone_and_desktop_get_separate_sessions_for_same_identity (__main__.BindingTests.test_phone_and_desktop_get_separate_sessions_for_same_identity) ... ok\ntest_poll_while_exchange_in_progress_then_callback_completes (__main__.BindingTests.test_poll_while_exchange_in_progress_then_callback_completes) ... ok\ntest_scanner_browser_needs_no_initiator_cookie (__main__.BindingTests.test_scanner_browser_needs_no_initiator_cookie) ... ok\ntest_start_cannot_issue_a_member_session_before_oauth (__main__.BindingTests.test_start_cannot_issue_a_member_session_before_oauth) ... ok\ntest_start_reserves_entry_until_oauth_deadline (__main__.BindingTests.test_start_reserves_entry_until_oauth_deadline) ... ok\ntest_trade_still_requires_original_browser_code_at_finish (__main__.BindingTests.test_trade_still_requires_original_browser_code_at_finish) ... ok\ntest_unrelated_route_still_delegates (__main__.BindingTests.test_unrelated_route_still_delegates) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 13.838s\n\nOK\n",
+    "external_network_guard": true,
+    "files": {
+      "wechat_binding.py": {
+        "sha256": "8fb426f481015acccea592ef40ce3c338a8178d2baee9fc22ca6f483b6a76121",
+        "bytes": 19235
+      },
+      "wechat.js": {
+        "sha256": "0728dee07670ad487ec47543023e20a70d58aa3b83f5580b125f26296df2aaf2",
+        "bytes": 5394
+      }
+    },
+    "service_pid_before": 959435,
+    "production_account_database_used": false,
+    "real_wechat_calls": 0,
+    "real_image_calls": 0,
+    "temporary_test_directory_removed": true,
+    "service_pid_after": 959435,
+    "windows_node": "v24.19.0",
+    "js_returncode": 0,
+    "js_output": "✔ pending then linked navigates to the first-party payment page (6.2956ms)\n✔ finish HTTP 401 shows the actual error and an explicit recovery action (1.857ms)\n✔ finish HTTP 409 shows the actual error and an explicit recovery action (1.0742ms)\n✔ one transient network failure is visible and the same state is queried again (1.1554ms)\n✔ three consecutive transient errors stop visibly with recovery guidance (2.8513ms)\n✔ expired QR stops before another request and explains how to recover (1.7459ms)\n✔ a malicious cross-origin payment URL is rejected (2.9084ms)\n✔ pagehide stops polling (1.0174ms)\n✔ an already-linked start goes straight to the validated payment page (1.495ms)\n✔ explicit consent remains necessary before starting OAuth (2.0517ms)\nℹ tests 10\nℹ suites 0\nℹ pass 10\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 165.0282\n",
+    "js_syntax_returncode": 0,
+    "js_source": "actual production JS read back to independent local tree",
+    "server_tests": 22,
+    "mandatory_scenarios": 5,
+    "js_tests": 10
+  },
+  "final_read_only_verification": {
+    "at": "2026-11-11T18:14:38+08:00",
+    "result": "pass",
+    "service_pid": 959435,
+    "manual_restart_calls": 1,
+    "automatic_restarts": 0,
+    "config_files_verified": 46,
+    "config_hashes_sha256": "d2c05cd6672d6ba51c7a2e4184abdda1ce008408c1db8058c853d5f6280540b3",
+    "execstart_static_sha256": "01c07e3da8e43bf6318edb108fbed02700f1ba72cf781789813b412597f82dda",
+    "backup_directory": "/var/backups/skill-platform/wechat-binding-20261111T095922Z-152c45b8",
+    "backup_mode": "0700",
+    "backup_file_mode": "0600",
+    "backup_files_verified": 48,
+    "production_file_sha_match": true,
+    "owner_mode_preserved": true,
+    "surfaces": {
+      "health": {
+        "status": "ok",
+        "provider_configured": true,
+        "reference_editing": true,
+        "shared_wallet": true,
+        "image_resource_contract": "all-new-resource-v1"
+      },
+      "plans_sha256": "bce0ea49eacd8369998a80b26e26beb7d8eb01c22acf26f86cfbbe26c374244c",
+      "public_js_sha256": "0728dee07670ad487ec47543023e20a70d58aa3b83f5580b125f26296df2aaf2",
+      "invalid_callback_http": 400,
+      "invalid_callback_set_cookie": false
+    }
+  },
+  "mandatory_scenarios": [
+    {
+      "id": "01",
+      "scenario": "电脑页保持打开",
+      "result": "pass",
+      "observed": "registered；callback 302；finish linked及固定支付路径"
+    },
+    {
+      "id": "02",
+      "scenario": "扫码后关闭电脑页",
+      "result": "pass",
+      "observed": "完全不调用finish；callback已关联、独立会话、302；registered"
+    },
+    {
+      "id": "03",
+      "scenario": "手机直接打开/异浏览器扫码",
+      "result": "pass",
+      "observed": "无需电脑cookie；独立新会话、固定支付页302；registered"
+    },
+    {
+      "id": "04",
+      "scenario": "第6分钟扫码",
+      "result": "pass",
+      "observed": "入口签发6分钟后start及QR start后6分钟callback均registered并302"
+    },
+    {
+      "id": "05",
+      "scenario": "同一身份重复扫码",
+      "result": "pass",
+      "observed": "重复finish及新安装同微信复用账户，不重复创建或领取；registered"
+    }
+  ],
+  "production_auth_probe": {
+    "service_pid": 959435,
+    "loopback_port": 8791,
+    "bound_to_pid_listener": true,
+    "http_status": 200,
+    "expires_in": 900,
+    "sets_cookie": false,
+    "state_fields_present": true,
+    "request_contains_account_or_entry": false,
+    "real_wechat_exchange": false,
+    "unlinked_temporary_state_created": true,
+    "side_effect": "one pending unlinked OAuth state; normal cleanup of expired auth states may run"
+  },
+  "incident": {
+    "type": "deployment_verifier_false_positive",
+    "cause": "Full systemctl ExecStart rendering includes dynamic PID/start/stop fields; hashing the entire rendering falsely treated a restart as command configuration drift.",
+    "effect": "Initially restored both old files after the sole successful restart; the new process stayed healthy.",
+    "correction": "Compare static path/argv/ignore_errors and all unchanged unit/drop-in hashes; bind a one-off anonymous start probe to the new PID listener to distinguish v2; atomically resync the same approved files without another restart.",
+    "resolved": true,
+    "additional_restarts": 0,
+    "journal": "/var/backups/skill-platform/wechat-binding-20261111T095922Z-152c45b8/deployment.json",
+    "recovery_journal": "/var/backups/skill-platform/wechat-binding-20261111T095922Z-152c45b8/resync-without-restart.json",
+    "bytecode_proof_available": false
+  },
+  "boundaries": {
+    "real_wechat_exchange_calls": 0,
+    "real_image_calls": 0,
+    "production_customer_or_synthetic_registration": false,
+    "production_orders_wallet_balance_operations": 0,
+    "production_auth_pending_probe_count": 1,
+    "other_service_control_calls": 0,
+    "database_schema_changes": 0,
+    "platform_submissions": 0
+  },
+  "preserved": {
+    "product_stage": "submitted",
+    "skill_package": "1.0.1 unchanged",
+    "package_blob": "81de7aa1e8d7affedf46f6405ccce6466901271c",
+    "travel": "blocked / PAUSED_BY_OWNER, not resumed"
+  },
+  "limitations": [
+    "Five-scenario acceptance used exact deployed bytes in isolated loopback HTTP and temporary SQLite, not production fake OAuth injection",
+    "JS tests used production JS read back into an independent Windows Node VM tree; Linux has no Node",
+    "No real WeChat identity exchange, real phone/browser acceptance or live customer checkout was performed",
+    "One anonymous OAuth start probe created a pending unlinked state (TTL900); no state/verifier/URL stored; state expires and normal future start handles cleanup, not a claimed scheduled deletion"
+  ],
+  "resolves_requests": [
+    "req-codex-to-muse-wechat-redirect-ready-20261111"
+  ],
+  "official_read": {
+    "at": "2026-11-11T18:14:42+08:00",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "status": 200,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c",
+    "result": "fresh online read before deployment audit documentation; no Skill spec modified"
+  }
+}
