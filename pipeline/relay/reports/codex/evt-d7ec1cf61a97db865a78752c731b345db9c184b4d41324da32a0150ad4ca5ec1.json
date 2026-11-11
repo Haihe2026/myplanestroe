@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-d7ec1cf61a97db865a78752c731b345db9c184b4d41324da32a0150ad4ca5ec1",
+  "claim_id": "9df384a0-b29b-49bb-915e-8c846ab23294",
+  "role": "codex",
+  "skill_id": "mps-travel-portrait-studio",
+  "at": "2026-11-11T19:39:42+08:00",
+  "result": "spec_ready",
+  "source_ref": "fee0d5098bfebe0249843429432729141369d25b",
+  "source_path": "pipeline/products/mps-travel-portrait-studio/status.json",
+  "evidence_ref": "bf71982dce5534161ef3f3702d333832ec3fe6a9:pipeline/products/mps-travel-portrait-studio/01-a1-validation.json",
+  "spec_commit": "bf71982dce5534161ef3f3702d333832ec3fe6a9",
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-travel-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
+    "stage": "spec_ready",
+    "updated_at": "2026-11-11T19:38:17+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "original_request": "收到旅行写真brief_ready及Muse18:50恢复请求；取消16:05暂停，沿用本地准备完成规格和10示例+1主题logo，交Claude开发。",
+  "source_verification": "bf71982dce5534161ef3f3702d333832ec3fe6a9:pipeline/products/mps-travel-portrait-studio/01-source-verification.json",
+  "original_receipt_preserved": {
+    "event_id": "evt-d7ec1cf61a97db865a78752c731b345db9c184b4d41324da32a0150ad4ca5ec1",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T18:57:04+08:00",
+    "evidence_ref": "d07c1633d696316e1f7ad37dfd651de132fa4af1:pipeline/products/mps-travel-portrait-studio/status.json",
+    "claim_id": "9df384a0-b29b-49bb-915e-8c846ab23294"
+  },
+  "no_duplicate_claim": true,
+  "a1": {
+    "result": "pass",
+    "items": 16,
+    "stage6_case_mapping": 57,
+    "independent_review": "pass"
+  },
+  "assets": {
+    "demos": 10,
+    "logo": 1,
+    "registered_upstream_generation_calls": 11,
+    "extra_generation_tests": 0,
+    "duplicate_generation_posts": 0,
+    "oldtown_actual_size": [
+      832,
+      1248
+    ],
+    "preview_size": [
+      512,
+      768
+    ]
+  },
+  "scope": {
+    "input": "single-person own or guardian-authorized portrait",
+    "lane": "fast",
+    "new_skill_implementation": false,
+    "backend_deployment": false,
+    "production_finance_writes": false,
+    "platform_upload": false
+  },
+  "verification_limits": [
+    "合成成年人物样本及九次参考编辑已逐张目检，非生物身份或绝对保真验证。",
+    "真人/儿童、旅行产品生产签名输入路由、真实微信/手机浏览器、客户结账/支付和本产品WorkBuddy行为未验。"
+  ],
+  "next_role": "claude",
+  "next_action": "自动stage_ready事件按固定spec_commit交Claude真实Skill开发和A2 Mock；保留十图与logo原字节。后续Codex A3静态及附录D本机导入，最终ZIP负责人手动上传。",
+  "authority": "仓库资料不扩展生产、财务、部署、发布或跨聊天发信权限；不新建worker、监测或AI心跳。",
+  "receipt_note": "stage事件已于18:57:04用原claim acknowledged，保留不覆盖；Muse显式恢复请求另用本机原claim完成回执。"
+}
