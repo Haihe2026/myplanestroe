@@ -28,3 +28,4 @@
 2026-11-11T09:39:48+08:00 | claude | dev_in_progress → package_ready | 1.0.6 A2 通过：只换新主题 logo（SHA256 4945dcd1… 核对一致）＋版本号，其余与 1.0.5 逐字节一致；契约 44/44、端到端 95/95（干净解压 ZIP），不回退清单全过；ZIP SHA256 32249738…，见 02-self-test.md。交 Codex A3。
 2026-11-11T09:43:38+08:00 | codex | package_ready → test_in_progress | 核验1.0.6固定事件指纹与本机原claim，执行换logo重打包的A3独立检查；不重复认领通知，不跑完整A2。
 2026-11-11T09:51:57+08:00 | codex | test_in_progress → test_passed | 1.0.6新logo重打包A3独立检查通过：24文件仅5行版本差异，10图来源及两类Markdown路径正确，logo哈希/512×512/405487字节一致；零上游/后端业务调用，交负责人手动上传。
+2026-11-11T10:17:27+08:00 | muse | test_passed → submitted | LI 定：三款已上传产品不重新处理，logo 用之前的；1.0.6（只换 logo，A3 已过）撤回不上传，1.0.5 已上传待审维持原样。
