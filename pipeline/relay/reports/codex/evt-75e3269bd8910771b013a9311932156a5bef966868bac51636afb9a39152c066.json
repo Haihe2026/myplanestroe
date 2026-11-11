@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-75e3269bd8910771b013a9311932156a5bef966868bac51636afb9a39152c066",
+  "claim_id": "251a0223-577c-4a65-8e67-1ee6237030cc",
+  "role": "codex",
+  "at": "2026-11-11T09:53:27+08:00",
+  "skill_id": "mps-pet-portrait-studio",
+  "version": "1.0.6",
+  "source_ref": "79fc8a58c7912780cb8baa3245d27d0f3e9ffe8c",
+  "result": "test_passed",
+  "evidence_ref": "a5729b52ec23e5bb1a8c387ab71c0ba31c862678:pipeline/products/mps-pet-portrait-studio/03-test-report.md",
+  "original_receipt_preserved": {
+    "event_id": "evt-75e3269bd8910771b013a9311932156a5bef966868bac51636afb9a39152c066",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T09:44:15+08:00",
+    "evidence_ref": "55779ac835db31e7b61d3628c1d83285229f423e:pipeline/products/mps-pet-portrait-studio/status.json",
+    "claim_id": "251a0223-577c-4a65-8e67-1ee6237030cc"
+  },
+  "duplicate_event_claim": false,
+  "receipt_note": "接收器已按原claim在产品认领后回执通知；本报告补充最终A3结果，不重复认领或覆盖已有回执。",
+  "delivery": {
+    "display_name": "宠物主题照相馆",
+    "slug": "mps-pet-portrait-studio",
+    "zip": "pipeline/products/mps-pet-portrait-studio/02-package/dist/mps-pet-portrait-studio-1.0.6.zip",
+    "zip_sha256": "3224973893da8623ae7e6bfc8e9bca578d1099c303fa7277f283d448572798c2",
+    "logo": "pipeline/products/mps-pet-portrait-studio/02-package/dist/logo.png",
+    "logo_sha256": "4945dcd1edaa03964e5837180c01fccc32415c84be997e8db56ea7ff8e538e9a",
+    "logo_external_to_zip": true
+  },
+  "checks": [
+    "ZIP完整性、24文件、最多两级",
+    "相较1.0.5仅五行版本差异，19文件字节一致",
+    "双语例子逐项同场景同画幅、固定欢迎、21触发词",
+    "10张PNG来源/派生SHA与清单一致",
+    "空格和井号真实路径经CommonMark解析后指向现存文件",
+    "新logo哈希、512×512、405487字节正确"
+  ],
+  "new_upstream_generation_calls": 0,
+  "backend_business_calls": 0,
+  "full_a2_rerun": false,
+  "host_acceptance": "按长期规则跳过，未宣称通过",
+  "publishing": "负责人手动上传ZIP及外置logo；未上传/发布",
+  "authority": "不扩大生产、财务、部署、发布或跨聊天发信权限。"
+}
