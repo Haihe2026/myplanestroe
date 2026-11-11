@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-server-fix-redirect-deploy-20261111",
+  "skill_id": "mps-family-portrait-studio",
+  "source_path": "pipeline/products/mps-family-portrait-studio/msg-from-muse-20261111-server-fix-redirect-deploy.md",
+  "source_ref": "460f92551a128b22374425f9de5a149219f42063",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-6aca8280cd942557ab032df3078f60753335ea8fd937cc619d90279a71df4b78",
+  "request_kind": "handoff"
+}
