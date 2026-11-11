@@ -11,6 +11,8 @@ from trade_data import real_provider
 
 PREFIX='/api/trade-leads/v1'
 WEB='/platform-api/trade-leads/web'
+ORIGINS=('https://myplanestore.com','https://aistore.zhaopintong.com')
+PUBLIC_ORIGIN=ORIGINS[1]
 
 def install(store,parent):
     config()
@@ -56,14 +58,16 @@ def install(store,parent):
                 if route=='/pricing' and self.command=='GET':return self.send(200,dict(currency='CNY',price_fen=config()['price_list'],daily_free_trial=config()['daily_free_trial'],tiers_yuan=[x/100 for x in config()['tiers']],tiers_fen=config()['tiers'],tier_details=config().get('tier_details',[])))
                 if route=='/auth/start' and self.command=='POST':
                     if body.get('device_id')!=device or body.get('skill')!='trade-leads':raise Error(400,'INVALID_PARAMS','设备或技能标识不符')
-                    trade.rate('start:'+ip,30,600);return self.send(200,trade.start(device))
+                    trade.rate('start:'+ip,30,600)
+                    entry=trade.start(device);entry['login_url']=PUBLIC_ORIGIN+'/link?code='+entry['link_code']+'&skill=trade-leads'
+                    return self.send(200,entry)
                 if route=='/auth/poll' and self.command=='POST':
                     if body.get('device_id')!=device or not re.fullmatch('[A-Z2-9]{8}',body.get('link_code','')):raise Error(400,'INVALID_PARAMS','关联参数无效')
                     return self.send(200,trade.poll(body['link_code'],device))
                 if route=='/me' and self.command=='GET':
                     if not uid:raise Error(401,'AUTH_REQUIRED','请先关联账户')
                     with store.connect() as c:free=trade.free_available(c,trade.free_keys(uid,device,ip))
-                    return self.send(200,dict(account=dict(display='账户 · '+uid[:8]),balance_fen=trade.balance(uid),trial_remaining_today=int(free),recharge_url='https://myplanestore.com/pay?skill=trade-leads'))
+                    return self.send(200,dict(account=dict(display='账户 · '+uid[:8]),balance_fen=trade.balance(uid),trial_remaining_today=int(free),recharge_url=PUBLIC_ORIGIN+'/pay?skill=trade-leads'))
                 if route not in ('/search','/company','/contacts') or self.command!='POST':raise Error(404,'INVALID_PARAMS','接口不存在')
                 if route!='/search' and not uid:raise Error(401,'AUTH_REQUIRED','请先关联账户')
                 if route=='/search':
@@ -84,7 +88,9 @@ def install(store,parent):
                 return self.send(status,payload)
             except Error as e:
                 if e.status==429:self.trade_retry=True
-                return self.send(e.status,e.body())
+                payload=e.body()
+                if 'recharge_url' in payload:payload['recharge_url']=PUBLIC_ORIGIN+'/pay?skill=trade-leads'
+                return self.send(e.status,payload)
             except (ValueError,TypeError,UnicodeError):return self.send(400,Error(400,'INVALID_PARAMS','参数格式无效').body())
             except Exception:return self.send(503,Error(503,'UPSTREAM_ERROR','服务暂不可用，本次未扣费').body())
         def trade_web(self,route,body,ip):
@@ -97,7 +103,7 @@ def install(store,parent):
                 try:uid=store.membership.web_user(cookie('platform_member'))
                 except Exception:pass
             trade.rate('browser:'+ip,120)
-            if self.command=='POST' and (self.headers.get('Origin')!='https://myplanestore.com' or self.headers.get('X-Membership-Request')!='1'):raise Error(403,'INVALID_PARAMS','请从本站操作')
+            if self.command=='POST' and (self.headers.get('Origin') not in ORIGINS or self.headers.get('X-Membership-Request')!='1'):raise Error(403,'INVALID_PARAMS','请从本站操作')
             if route=='/account' and self.command=='GET':return self.send(200,dict(remembered=bool(uid),account_label='账户 · '+uid[:8] if uid else '',balance_fen=trade.balance(uid) if uid else 0,**config()))
             if route=='/approve' and self.command=='POST':
                 if body.get('accepted') is not True or not re.fullmatch('[A-Z2-9]{8}',body.get('code','')):raise Error(400,'INVALID_PARAMS','请确认关联并同意账户条款')
