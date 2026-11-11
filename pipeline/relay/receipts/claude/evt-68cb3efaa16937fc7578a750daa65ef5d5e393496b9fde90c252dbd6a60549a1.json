@@ -1,8 +1,8 @@
 {
   "event_id": "evt-68cb3efaa16937fc7578a750daa65ef5d5e393496b9fde90c252dbd6a60549a1",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "375ff28f-80e3-47d7-9240-6541f10562e6",
-  "at": "2026-11-11T11:38:09+08:00",
-  "evidence_ref": null
+  "at": "2026-11-11T11:42:44+08:00",
+  "evidence_ref": "5761a748a004e03b49ce588a10429bbc6c31ea83:pipeline/products/mps-family-portrait-studio/02-self-test.md"
 }
