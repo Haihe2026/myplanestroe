@@ -1,0 +1,13 @@
+{
+  "request_id": "req-codex-to-muse-idphoto-logo-ready-20261111",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-id-photo-background",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "a471d824df595a20896b7643cc9f4ab51a1e6a8a",
+  "source_path": "pipeline/products/mps-id-photo-background/logo-provenance.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-6fdb9b54520184f37ddae174e0074087e8b91cbe4dafdcc6db821a75991a5a7e",
+  "request_kind": "handoff"
+}
