@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-a509a78a3874d566d00e98af4fd95bd751f114b776c96c912ea4159ecd99c48e",
+  "claim_id": "50a74112-e551-4388-97f2-95a7eb084a35",
+  "role": "codex",
+  "skill_id": "mps-travel-portrait-studio",
+  "at": "2026-11-11T21:13:54+08:00",
+  "source_ref": "d4a1d5cec49d064dd5bfce9eedc86febc75d5d25",
+  "result": "test_failed",
+  "version": "1.0.0",
+  "evidence_ref": "a0d1f3f17d8904d379bba706dd591602021266cf:pipeline/products/mps-travel-portrait-studio/03-test-report.md",
+  "result_commit": "a0d1f3f17d8904d379bba706dd591602021266cf",
+  "original_receipt_preserved": {
+    "event_id": "evt-a509a78a3874d566d00e98af4fd95bd751f114b776c96c912ea4159ecd99c48e",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T20:56:08+08:00",
+    "evidence_ref": "aa6ff59e56ab7d98847a15de0fdad251ed314919:pipeline/products/mps-travel-portrait-studio/status.json",
+    "claim_id": "50a74112-e551-4388-97f2-95a7eb084a35"
+  },
+  "duplicate_event_claim": false,
+  "findings": [
+    {
+      "id": "A3-TRV-01",
+      "priority": "P2",
+      "title": "未确认bound=true仍允许使用新Key生成"
+    },
+    {
+      "id": "A3-TRV-02",
+      "priority": "P2",
+      "title": "损坏或截断参考图仅凭头部和尺寸被放行"
+    },
+    {
+      "id": "A3-TRV-03",
+      "priority": "P2",
+      "title": "首次对话上报失败后被后续命令自动重试"
+    },
+    {
+      "id": "A3-TRV-04",
+      "priority": "P2",
+      "title": "泛化词在前时压过和服或汉服特异场景"
+    },
+    {
+      "id": "A3-TRV-05",
+      "priority": "P2",
+      "title": "传图同意文案未告知接收方类别"
+    }
+  ],
+  "passed_checks": [
+    "固定ZIP SHA/CRC、24文件与两级逻辑目录",
+    "八必填字段/三对双语/版本欢迎句",
+    "十示例与logo原字节/源SHA及可见非实拍标注",
+    "空格/#/% Markdown真实路径夹具、对客禁用词与秘密扫描",
+    "原任务401/404只读与锁、六字段/八字段常量"
+  ],
+  "inspection_scope": "静态独立检查；只求值已审纯路径格式化函数，不执行客户端业务或重跑完整A2。缺陷给出固定代码路径及Claude Mock回归要求。",
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "client_modified_by_codex": false,
+  "development_documents_modified": false,
+  "appendix_d": "A3 failed; not entered",
+  "next_role": "claude",
+  "next_action": "按03-test-report修复TRV-01–05并补A2正反回归，保留10示例和logo原字节，固定修订ZIP/SHA后置package_ready交Codex复查。",
+  "authority": "现行SOP内退回，不扩展生产/财务/部署/上架或跨聊天权限；不新建worker/AI心跳/周期监测。"
+}
