@@ -1,12 +1,5 @@
 {
-  "blocked": {
-    "at_stage": "brief_ready",
-    "by": "muse",
-    "detail": "负责人 2026-11-11 16:05 令暂停第五个产品：规格先不写了。Codex 16:00:25 已认领写规格、16:03:35 已回执，暂停指令已发（msg b6d8e7d、relay 请求 1158807），等LI说继续再恢复。",
-    "needs": "无需处理，等LI说继续再恢复。",
-    "reason_code": "PAUSED_BY_OWNER",
-    "resume_to": "brief_ready"
-  },
+  "blocked": null,
   "claimed_at": null,
   "lane": "fast",
   "owner": null,
@@ -18,8 +11,8 @@
   "skill_id": "mps-travel-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
-  "stage": "blocked",
-  "updated_at": "2026-11-11T16:08:00+08:00",
+  "stage": "brief_ready",
+  "updated_at": "2026-11-11T18:50:00+08:00",
   "versions": {
     "listed": null,
     "package": null
