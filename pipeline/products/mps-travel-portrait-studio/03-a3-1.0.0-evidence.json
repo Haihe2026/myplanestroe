@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-a509a78a3874d566d00e98af4fd95bd751f114b776c96c912ea4159ecd99c48e",
+  "claim_id": "50a74112-e551-4388-97f2-95a7eb084a35",
+  "source_ref": "d4a1d5cec49d064dd5bfce9eedc86febc75d5d25",
+  "claim_commit": "aa6ff59e56ab7d98847a15de0fdad251ed314919",
+  "checked_at": "2026-11-11T21:11:53+08:00",
+  "result": "test_failed",
+  "rounds_test": 1,
+  "findings": [
+    {
+      "id": "A3-TRV-01",
+      "priority": "P2",
+      "test_ids": [
+        "T04",
+        "T14"
+      ],
+      "title": "未确认bound=true仍允许使用新Key生成",
+      "file": "scripts/studio.py",
+      "line": 519,
+      "end_line": 538,
+      "actual": "绑定响应被丢弃，GatewayError被吞，返回ok；缓存Key后直接ok，不再确认绑定。592→605→616可继续生成；401恢复亦调用相同函数。",
+      "expected": "Key私存与绑定确认分开；仅明确bound=true后允许新生成；失败保留原任务。",
+      "regressions": [
+        "bound=false/缺字段/500/超时/401均不得新增生成POST",
+        "持久化后重启仍须沿原Key补绑定确认",
+        "401恢复保持原键原体与未知状态，不因绑定失败解锁",
+        "bound=true正例通过"
+      ]
+    },
+    {
+      "id": "A3-TRV-02",
+      "priority": "P2",
+      "test_ids": [
+        "T02"
+      ],
+      "title": "损坏或截断参考图仅凭头部和尺寸被放行",
+      "file": "scripts/audit_images.py",
+      "line": 25,
+      "end_line": 96,
+      "actual": "PNG遇IDAT即停止，JPEG遇SOF即返回尺寸；尺寸合格即ok，不完整校验像素数据。studio430/474→481–483→616可将坏原字节送出。",
+      "expected": "PNG/JPEG完整可解码；损坏输入在本地指出具体文件并拒绝，业务HTTP为0。",
+      "regressions": [
+        "PNG有效IHDR/尺寸但CRC错误、IDAT/zlib截断、缺IEND",
+        "JPEG有效SOF/尺寸但扫描数据截断或缺结束数据",
+        "有效静态PNG/JPEG正例",
+        "损坏输入退出3、点名文件、生成POST与业务HTTP为0"
+      ]
+    },
+    {
+      "id": "A3-TRV-03",
+      "priority": "P2",
+      "test_ids": [
+        "T09"
+      ],
+      "title": "首次对话上报失败后被后续命令自动重试",
+      "file": "scripts/telemetry.py",
+      "line": 86,
+      "end_line": 119,
+      "actual": "只有sent=True才去重；网络/超时/非200/坏响应均未持久化已尝试。studio332/409/443/573等会重发，resume822→834/838→573可在同次调用内再次上报。",
+      "expected": "同安装只尝试一次、失败即弃、无自动重试；成功回执用于既有link，不影响主流程。",
+      "regressions": [
+        "首次异常/超时/非200/坏响应后，后续多命令与重启的上报总调用仍为1",
+        "resume→run嵌套路径不得同次重试",
+        "请求前已持久化尝试标记，写入失败不发送",
+        "关闭/只读/损坏及有效HTTP200回执和link原回归保留"
+      ]
+    },
+    {
+      "id": "A3-TRV-04",
+      "priority": "P2",
+      "test_ids": [
+        "T01"
+      ],
+      "title": "泛化词在前时压过和服或汉服特异场景",
+      "file": "scripts/studio.py",
+      "line": 100,
+      "end_line": 105,
+      "extra_lines": [
+        298,
+        305
+      ],
+      "actual": "和服/汉服与樱花/古城/夜景在同一ROUTE_STYLES层，route_scene取原话最早命中词。樱花下穿和服→sakura，古城夜景穿汉服→oldtown。",
+      "expected": "明确目的地最高优先；无明确目的地时和服→kyoto，汉服/唐风→xian；裸樱花→sakura、裸古城夜景→oldtown。",
+      "regressions": [
+        "和服/樱花两种词序均kyoto",
+        "汉服或唐风/古城夜景两种词序均xian",
+        "裸樱花仍sakura、裸古城夜景仍oldtown",
+        "明确三亚/西安/京都等目的地优先规则保留"
+      ]
+    },
+    {
+      "id": "A3-TRV-05",
+      "priority": "P2",
+      "test_ids": [
+        "T02",
+        "T12"
+      ],
+      "title": "传图同意文案未告知接收方类别",
+      "file": "scripts/welcome_copy.py",
+      "line": 49,
+      "end_line": 53,
+      "extra_file": "SKILL.md",
+      "extra_lines": [
+        103
+      ],
+      "actual": "第二项仅说同意把这张照片发送去处理，只用于本次制作；SKILL也只说发送照片去处理。没有告知图片服务及算力供应商接收。",
+      "expected": "对本次具体文件的独立传输同意清楚告知图片服务及算力供应商类别；不披露厂商品牌/密钥/实现细节。",
+      "regressions": [
+        "本人和监护人两条确认文案均告知接收方类别",
+        "三项同意仍独立、缺一不可设置reference_consent或生成",
+        "换照片/主题/服装/尺寸需重新确认，已提交任务不解锁"
+      ]
+    }
+  ],
+  "inspection": {
+    "result": "structural_checks_passed_contract_findings_reviewed_separately",
+    "zip": {
+      "sha256": "fcecdcefd5f158212da556115618fd2467de757022f8e1c13e0978482999e1cd",
+      "bytes": 2404375,
+      "files": 24,
+      "wrapper": "mps-travel-portrait-studio",
+      "logical_max_depth": 2
+    },
+    "checks": [
+      {
+        "item": "固定ZIP完整性",
+        "result": "pass",
+        "evidence": "SHA256与A2一致；Git blob已验证ab911cd6c16db194d99fce6f9a96be7b1e32c8b2。"
+      },
+      {
+        "item": "目录与干净解包",
+        "result": "pass",
+        "evidence": "单一slug外包装；技能根内最多两级，24文件，无重复/大小写冲突/链接/越界或缓存；逐文件与ZIP原字节一致。"
+      },
+      {
+        "item": "平台元数据",
+        "result": "pass",
+        "evidence": "八必填字段齐全，无YAML重复键或隐藏HTML指令；SKILL.md 15355字节。"
+      },
+      {
+        "item": "双语示例逐项语义",
+        "result": "pass",
+        "evidence": "哈尔滨/三亚/西安三对与固定规格逐字一致，单人、2:3、1024×1536一致。"
+      },
+      {
+        "item": "触发词与接管",
+        "result": "pass",
+        "evidence": "23触发词、完整中文名充值词、唯一倾向句；执行规范首节接管。"
+      },
+      {
+        "item": "版本与固定欢迎",
+        "result": "pass",
+        "evidence": "slug/版本/渠道跨SKILL、_meta、studio和telemetry一致；欢迎句逐字符合。"
+      },
+      {
+        "item": "尺寸与字段常量",
+        "result": "pass",
+        "evidence": "仅三尺寸、六请求字段、八遥测字段；无machine_id；关闭开关为旅行slug。遥测失败行为另列缺陷。"
+      },
+      {
+        "item": "场景清单与超时",
+        "result": "pass",
+        "evidence": "十场景默认竖版；90/15/120/30/0/240预算一致。路由优先逻辑另列缺陷。"
+      },
+      {
+        "item": "十示例来源与展示标注",
+        "result": "pass",
+        "evidence": "10PNG完整解码，512×768；key/标题一致，SHA与Codex源/provenance/derivation/规格一致；每项note含非实拍标注。"
+      },
+      {
+        "item": "外置logo",
+        "result": "pass",
+        "evidence": "512×512PNG，≤500KB，与Codex原字节一致；ZIP外置，不新增生成。"
+      },
+      {
+        "item": "Markdown安全路径",
+        "result": "pass",
+        "evidence": "仅求值已审纯路径格式化函数；空格/#/%三条真实临时PNG路径经CommonMark解析/解码均可定位，无意外query/fragment。"
+      },
+      {
+        "item": "对客禁用词/秘密/语法",
+        "result": "pass",
+        "evidence": "对客SKILL/README及固定话术AST字面量扫描无供应商/模型/秘密，全部脚本Python3.7语法可解析。只做静态，不运行A2/客户端。"
+      }
+    ],
+    "assets": [
+      {
+        "key": "harbin",
+        "file": "harbin.png",
+        "bytes": 205740,
+        "sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+        "source_identical": true
+      },
+      {
+        "key": "yabuli",
+        "file": "yabuli.png",
+        "bytes": 253696,
+        "sha256": "b660372f9722bd748e2cb8c7dd33d44b87587c77ebf86b41b9a6d056a8f15f53",
+        "source_identical": true
+      },
+      {
+        "key": "sanya",
+        "file": "sanya.png",
+        "bytes": 217533,
+        "sha256": "0d5a11124dd9cd1ddb6075d8a04833954612031b2af4d26ee85cc6a0bf7dec96",
+        "source_identical": true
+      },
+      {
+        "key": "santorini",
+        "file": "santorini.png",
+        "bytes": 210014,
+        "sha256": "73af3887483bf21308040416612327ec73196a40d2e670d48796b63e9ebd3a63",
+        "source_identical": true
+      },
+      {
+        "key": "kyoto",
+        "file": "kyoto.png",
+        "bytes": 280105,
+        "sha256": "91de8b75701745b7746dd4e324a17702e394eeaf462cb5f676d92d30fedb5d34",
+        "source_identical": true
+      },
+      {
+        "key": "xian",
+        "file": "xian.png",
+        "bytes": 224777,
+        "sha256": "b3107a0c4dd6e6c5b49104e2a2f8f1dc2dca2ff3d8053f64faf113566045fda7",
+        "source_identical": true
+      },
+      {
+        "key": "desert",
+        "file": "desert.png",
+        "bytes": 223732,
+        "sha256": "f5cffc6092f9c2399c0071c9a2c4293be62e76448b6f9e5e719bdd1af1531e8b",
+        "source_identical": true
+      },
+      {
+        "key": "sakura",
+        "file": "sakura.png",
+        "bytes": 265909,
+        "sha256": "9aa7607772d872e7e8062e906bafb501a4ee9eb99644700e91698e5b14e0bf3e",
+        "source_identical": true
+      },
+      {
+        "key": "grassland",
+        "file": "grassland.png",
+        "bytes": 238031,
+        "sha256": "2718f17c3651b25cfe80a534b6b6949cd6638fdaf555bf9cde9c5c352143578d",
+        "source_identical": true
+      },
+      {
+        "key": "oldtown",
+        "file": "oldtown.png",
+        "bytes": 223016,
+        "sha256": "95710d515155fd44a895c3ad04d7d3c821eaf6b01c66b519c44e6345e9d7eb58",
+        "source_identical": true
+      }
+    ],
+    "logo": {
+      "bytes": 350096,
+      "sha256": "d8177d72fbc14acc0e2371fd5af976ced0302c2cab395c1937a4dfa9d66acee9",
+      "size": [
+        512,
+        512
+      ]
+    },
+    "markdown_fixtures": [
+      {
+        "case": "Travel Demo Assets",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Travel#Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Travel%Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      }
+    ],
+    "official_read": {
+      "at": "2026-11-11T21:00:00+08:00",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "fresh online read successful; skill metadata/examples/structure read",
+      "status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+    },
+    "full_a2_executed": false,
+    "business_commands_executed": false,
+    "pure_path_formatter_evaluated": true,
+    "upstream_calls": 0,
+    "production_calls": 0
+  },
+  "source_file_blobs": {
+    "README.md": "4bbadfa1e18107b894eec054775f91556b730a6f",
+    "SKILL.md": "ad9dad3b83882861414453f5f9a15c724151453e",
+    "_meta.json": "2ac1f6c5cb0ad80ee7eeb8c5c623eeeaa93d6616",
+    "assets/demos.json": "e5d1845ac38a1d77420b95ad6fe8a572a22a332c",
+    "assets/desert.png": "c39643c3cdc97a99fe56b1e40033f60dd86619f6",
+    "assets/grassland.png": "8002a21a96b170fdbdbd28e01375c1c98526947a",
+    "assets/harbin.png": "cd4c1643deb15818f624e1838449bb2fc340e2ac",
+    "assets/kyoto.png": "1a1c518d91838f46be3fd0e1b8d6eb94fdd92368",
+    "assets/oldtown.png": "827bffbbec93d0215e056c014b9fd1304371d1ee",
+    "assets/sakura.png": "d4218b4c4ac91671f1039ae1a05e17b0361d0831",
+    "assets/santorini.png": "23d1cd63d6650a91746a4533ffa847b7f88ef4fc",
+    "assets/sanya.png": "efbc2965e8d10b39b5ac1b344dc830f8964f609b",
+    "assets/xian.png": "e135388f45104e63002397c709ac02588503d528",
+    "assets/yabuli.png": "bd0f662b688f75acd471570c40d5440d55466db7",
+    "references/platform-rules.md": "6cee5dac55c112b11e69d1ede51739e2eca732ba",
+    "references/prompts.md": "b4358594b488838eb76dedb3d5eb5b74a3342a3c",
+    "references/scenes.md": "923dabd8c6a20c466291419c7158a188a60dbf4b",
+    "scripts/audit_images.py": "c39e1850eb0a61b938da12aaca7af329b422acee",
+    "scripts/png_local.py": "f6bc03ff0390e82c6a78dd0b53426a68f6b4c84b",
+    "scripts/studio.py": "c3d97f5d227efefdc0d8ff4b9d60d7f21820c6c4",
+    "scripts/telemetry.py": "3dc55613b1ac788407f9bf44babbf97c4d01dd06",
+    "scripts/welcome_copy.py": "41bcffb73967cfe95bc586a288620a4b30e69704",
+    "tests/first-turn-preview.md": "e9204513c50fd22462ddb8dc4424edc799c42964",
+    "tests/test_skill_contract.py": "13f14178cbf8b9a88b4a1bea1a046aa927586385"
+  },
+  "fixed_input_objects": {
+    "pipeline/products/mps-travel-portrait-studio/00-brief.md": "72555f15bac77b03c1c9f73a94949cbe890e7c9e",
+    "pipeline/products/mps-travel-portrait-studio/01-dev-spec.json": "a5a902ab878477ca7533802c31c0b16ed3f6e95f",
+    "pipeline/products/mps-travel-portrait-studio/01-dev-spec.md": "2e551e0214d394e49c1631a94a775377b1d1b8e1",
+    "pipeline/products/mps-travel-portrait-studio/02-package/dist/logo.png": "1440eeab083506b4dceccc0ac8c443c82b9a8edb",
+    "pipeline/products/mps-travel-portrait-studio/02-package/dist/mps-travel-portrait-studio-1.0.0.zip": "ab911cd6c16db194d99fce6f9a96be7b1e32c8b2",
+    "pipeline/products/mps-travel-portrait-studio/02-self-test.md": "7e5610471354b866ae406399518f514d87a25131"
+  },
+  "sop_blob": "99ef71e0a2d84535193031ca8f5c6c269ec68799",
+  "original_receipt_preserved": {
+    "event_id": "evt-a509a78a3874d566d00e98af4fd95bd751f114b776c96c912ea4159ecd99c48e",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T20:56:08+08:00",
+    "evidence_ref": "aa6ff59e56ab7d98847a15de0fdad251ed314919:pipeline/products/mps-travel-portrait-studio/status.json",
+    "claim_id": "50a74112-e551-4388-97f2-95a7eb084a35"
+  },
+  "client_source_modified_by_codex": false,
+  "development_documents_modified": false,
+  "upstream_calls": 0,
+  "business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "appendix_d": "not entered: A3 failed",
+  "next_role": "claude"
+}
