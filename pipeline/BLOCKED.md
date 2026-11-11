@@ -45,3 +45,5 @@
 | 2026-11-11T13:22:57+08:00 | mps-family-portrait-studio | 附录D本机测验（stage保留test_passed） | COMPUTER_USE_CAPTURE_TIMEOUT | WorkBuddy正在运行且窗口可枚举，首次及重新选择窗口后的截图均超时，未导入/未发测试内容；见04-computer-use-test-report.md。仅附录D交付条件受阻，A3通过不变。 | 恢复受支持的WorkBuddy窗口截图能力后，用同SHA256的1.0.1重跑附录D；暂无包缺陷证据。 | test_passed（stage不变，同包重测附录D） |
 
 - 2026-11-11T14:11:53+08:00：mps-family-portrait-studio 的附录D COMPUTER_USE_CAPTURE_TIMEOUT仍未解除。鼠标重跑已改试内置统一Computer Use：接口提供鼠标/键盘，WorkBuddy可绑定，但两次原生截图仍超时；未盲操作。stage保留test_passed，详见产品04-computer-use-test-report.md与04-computer-use-mouse-retry-evidence-20261111.json。
+
+- 2026-11-11T15:17:37+08:00：mps-family-portrait-studio 附录D第三次重试仍为COMPUTER_USE_CAPTURE_TIMEOUT。窗口Raise置前调用后，两次原生截图仍失败；三轮累计6次无截图。保持test_passed，仅附录D交付条件未放行；见04-computer-use-test-report.md及04-computer-use-third-attempt-evidence-20261111.json。

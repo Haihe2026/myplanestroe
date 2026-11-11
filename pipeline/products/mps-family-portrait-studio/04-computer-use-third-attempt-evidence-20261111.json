@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-755638cdddca95db1d08b92537ed1163c566ac0b6bf79b713fb459084d13f05e",
+  "claim_id": "f5c1f71f-1cb7-474d-9729-74627ee16c12",
+  "source_ref": "cb702119736ee7fc57033483223d3b8c33ead69e",
+  "request_fingerprint_verified": true,
+  "recorded_at": "2026-11-11T15:17:37+08:00",
+  "attempt_number": 3,
+  "skill_id": "mps-family-portrait-studio",
+  "version": "1.0.1",
+  "zip": {
+    "sha256": "1138fe6925145fc8c7a0013f661d32af48a521dd707ad9980fd3411b39194756",
+    "bytes": 2740120,
+    "fixed_ref": "4669fdb7622e8562c6ce09a9ea7c3d9f4494638d",
+    "matches_a3": true
+  },
+  "driver": "mcp__cua_repl unified Computer Use",
+  "direct_node_repl_sky_calls": 0,
+  "steps": [
+    {
+      "step": "listWindows + getApp",
+      "result": "unique WorkBuddy window bound"
+    },
+    {
+      "step": "performSecondaryAction Raise",
+      "result": "tool returned successfully; no visual foreground proof because capture failed"
+    },
+    {
+      "step": "mandatory auxiliary state refresh",
+      "result": "returned without being used as visual acceptance evidence"
+    },
+    {
+      "step": "native getScreenshot attempt 1",
+      "result": "error",
+      "error": "window capture timed out: timed out waiting on channel"
+    },
+    {
+      "step": "re-enumerate and confirm same unique WorkBuddy target",
+      "result": "matched"
+    },
+    {
+      "step": "native getScreenshot recovery attempt 2",
+      "result": "error",
+      "error": "window capture timed out: timed out waiting on channel"
+    }
+  ],
+  "capture_attempts_this_run": 2,
+  "capture_attempts_all_three_runs": 6,
+  "screenshots_received": 0,
+  "window_raise_actions": 1,
+  "mouse_clicks": 0,
+  "keyboard_inputs": 0,
+  "zip_import_attempted": false,
+  "test_image_sent": false,
+  "ui_checks_completed": false,
+  "not_tested": [
+    "ZIP import",
+    "host parsing/loading",
+    "welcome sentence",
+    "10 demo display",
+    "first-turn workflow"
+  ],
+  "result": "blocked",
+  "reason_code": "COMPUTER_USE_CAPTURE_TIMEOUT",
+  "a3_result": "pass",
+  "product_stage": "test_passed",
+  "new_upstream_calls": 0,
+  "real_financial_actions": 0,
+  "production_changes": 0,
+  "platform_submissions": 0,
+  "raw_private_ui_state_published": false,
+  "diagnosis": "Capture still times out after a window-raise attempt. Mouse/keyboard APIs exist; deeper cause is not established. No host or package pass claimed."
+}
