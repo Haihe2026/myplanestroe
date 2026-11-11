@@ -1,0 +1,146 @@
+{
+  "note": "原字节复制，未缩放、未重编码、未新增生图调用；源图见 demo-assets/provenance.json",
+  "total_bytes": 2342553,
+  "items": [
+    {
+      "key": "harbin",
+      "title": "哈尔滨冰雪主题",
+      "source": "harbin.png",
+      "source_sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+      "package_file": "harbin.png",
+      "package_sha256": "26de705e77ed75b47eb20c37af47e3ba6f8b32190536f098b3aa64efe21d8919",
+      "package_bytes": 205740,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "yabuli",
+      "title": "亚布力滑雪主题",
+      "source": "yabuli.png",
+      "source_sha256": "b660372f9722bd748e2cb8c7dd33d44b87587c77ebf86b41b9a6d056a8f15f53",
+      "package_file": "yabuli.png",
+      "package_sha256": "b660372f9722bd748e2cb8c7dd33d44b87587c77ebf86b41b9a6d056a8f15f53",
+      "package_bytes": 253696,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "sanya",
+      "title": "三亚海岛暖冬",
+      "source": "sanya.png",
+      "source_sha256": "0d5a11124dd9cd1ddb6075d8a04833954612031b2af4d26ee85cc6a0bf7dec96",
+      "package_file": "sanya.png",
+      "package_sha256": "0d5a11124dd9cd1ddb6075d8a04833954612031b2af4d26ee85cc6a0bf7dec96",
+      "package_bytes": 217533,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "santorini",
+      "title": "圣托里尼蓝白",
+      "source": "santorini.png",
+      "source_sha256": "73af3887483bf21308040416612327ec73196a40d2e670d48796b63e9ebd3a63",
+      "package_file": "santorini.png",
+      "package_sha256": "73af3887483bf21308040416612327ec73196a40d2e670d48796b63e9ebd3a63",
+      "package_bytes": 210014,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "kyoto",
+      "title": "京都古风樱花",
+      "source": "kyoto.png",
+      "source_sha256": "91de8b75701745b7746dd4e324a17702e394eeaf462cb5f676d92d30fedb5d34",
+      "package_file": "kyoto.png",
+      "package_sha256": "91de8b75701745b7746dd4e324a17702e394eeaf462cb5f676d92d30fedb5d34",
+      "package_bytes": 280105,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "xian",
+      "title": "西安汉服古城",
+      "source": "xian.png",
+      "source_sha256": "b3107a0c4dd6e6c5b49104e2a2f8f1dc2dca2ff3d8053f64faf113566045fda7",
+      "package_file": "xian.png",
+      "package_sha256": "b3107a0c4dd6e6c5b49104e2a2f8f1dc2dca2ff3d8053f64faf113566045fda7",
+      "package_bytes": 224777,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "desert",
+      "title": "沙漠星空",
+      "source": "desert.png",
+      "source_sha256": "f5cffc6092f9c2399c0071c9a2c4293be62e76448b6f9e5e719bdd1af1531e8b",
+      "package_file": "desert.png",
+      "package_sha256": "f5cffc6092f9c2399c0071c9a2c4293be62e76448b6f9e5e719bdd1af1531e8b",
+      "package_bytes": 223732,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "sakura",
+      "title": "樱花季写真",
+      "source": "sakura.png",
+      "source_sha256": "9aa7607772d872e7e8062e906bafb501a4ee9eb99644700e91698e5b14e0bf3e",
+      "package_file": "sakura.png",
+      "package_sha256": "9aa7607772d872e7e8062e906bafb501a4ee9eb99644700e91698e5b14e0bf3e",
+      "package_bytes": 265909,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "grassland",
+      "title": "草原蒙古包",
+      "source": "grassland.png",
+      "source_sha256": "2718f17c3651b25cfe80a534b6b6949cd6638fdaf555bf9cde9c5c352143578d",
+      "package_file": "grassland.png",
+      "package_sha256": "2718f17c3651b25cfe80a534b6b6949cd6638fdaf555bf9cde9c5c352143578d",
+      "package_bytes": 238031,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "oldtown",
+      "title": "古城灯火夜景",
+      "source": "oldtown.png",
+      "source_sha256": "95710d515155fd44a895c3ad04d7d3c821eaf6b01c66b519c44e6345e9d7eb58",
+      "package_file": "oldtown.png",
+      "package_sha256": "95710d515155fd44a895c3ad04d7d3c821eaf6b01c66b519c44e6345e9d7eb58",
+      "package_bytes": 223016,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    }
+  ]
+}

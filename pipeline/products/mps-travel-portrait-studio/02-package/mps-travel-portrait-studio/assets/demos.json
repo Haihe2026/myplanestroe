@@ -1,0 +1,65 @@
+{
+  "notice": "示例人物均为虚构的成年人，用于展示效果方向，不是你的真实结果；AI 生成旅行主题写真，非实地拍摄。",
+  "demos": [
+    {
+      "key": "harbin",
+      "title": "哈尔滨冰雪主题",
+      "note": "冰雕雪景，冰蓝夜色；AI 生成旅行主题写真，非实地拍摄",
+      "file": "harbin.png"
+    },
+    {
+      "key": "yabuli",
+      "title": "亚布力滑雪主题",
+      "note": "雪道松林，滑雪装扮；AI 生成旅行主题写真，非实地拍摄",
+      "file": "yabuli.png"
+    },
+    {
+      "key": "sanya",
+      "title": "三亚海岛暖冬",
+      "note": "椰林海滩，暖冬日光；AI 生成旅行主题写真，非实地拍摄",
+      "file": "sanya.png"
+    },
+    {
+      "key": "santorini",
+      "title": "圣托里尼蓝白",
+      "note": "蓝白建筑，远眺大海；AI 生成旅行主题写真，非实地拍摄",
+      "file": "santorini.png"
+    },
+    {
+      "key": "kyoto",
+      "title": "京都古风樱花",
+      "note": "古寺街巷，和服樱花；AI 生成旅行主题写真，非实地拍摄",
+      "file": "kyoto.png"
+    },
+    {
+      "key": "xian",
+      "title": "西安汉服古城",
+      "note": "城墙唐风，汉服金光；AI 生成旅行主题写真，非实地拍摄",
+      "file": "xian.png"
+    },
+    {
+      "key": "desert",
+      "title": "沙漠星空",
+      "note": "沙丘星河，远景驼队；AI 生成旅行主题写真，非实地拍摄",
+      "file": "desert.png"
+    },
+    {
+      "key": "sakura",
+      "title": "樱花季写真",
+      "note": "湖畔樱花，春日穿搭；AI 生成旅行主题写真，非实地拍摄",
+      "file": "sakura.png"
+    },
+    {
+      "key": "grassland",
+      "title": "草原蒙古包",
+      "note": "蓝天草原，蒙古包；AI 生成旅行主题写真，非实地拍摄",
+      "file": "grassland.png"
+    },
+    {
+      "key": "oldtown",
+      "title": "古城灯火夜景",
+      "note": "河道木屋，灯火夜色；AI 生成旅行主题写真，非实地拍摄",
+      "file": "oldtown.png"
+    }
+  ]
+}
