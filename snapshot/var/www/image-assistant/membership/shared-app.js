@@ -78,7 +78,12 @@ el('renewal').addEventListener('change',()=>choose(selected));
 
 function updateBuy(){el('buy').disabled=!ready;el('buy').textContent=ready?(signedIn?'充值通用额度':'关联账户并充值'):'收款暂未开放';}
 
-function showAccountDialog(){el('account-plan').textContent=el('summary').textContent+' · '+el('total').textContent;el('account-feedback').textContent='';el('account-dialog').showModal();document.body.classList.add('payment-open');}
+function showAccountDialog(){
+ const product='gemini';
+ try{sessionStorage.setItem('mps-auth-checkout-'+product,JSON.stringify({plan:selected,at:Date.now()}));}catch(_){}
+ const args=new URLSearchParams({product,return_to:location.pathname});
+ location.assign('/auth/wechat/#'+args.toString());
+}
 
 document.addEventListener('image-account-ready',()=>{updateBuy();if(signedIn&&el('account-dialog').open)el('account-dialog').close();});
 
@@ -116,3 +121,15 @@ window.addEventListener('hashchange',async()=>{
 
 document.getElementById('nav-account').addEventListener('click',()=>window.showMemberAccount());
 
+
+document.addEventListener('image-account-ready',event=>{
+ if(!event.detail.signedIn||!ready)return;
+ const key='mps-auth-checkout-gemini';
+ try{
+  const pending=JSON.parse(sessionStorage.getItem(key)||'null');
+  if(!pending||Date.now()-pending.at<0||Date.now()-pending.at>15*60*1000)return;
+  if(!catalog.some(plan=>plan.id===pending.plan))return;
+  sessionStorage.removeItem(key);choose(pending.plan);
+  queueMicrotask(()=>{if(signedIn&&ready)el('buy').click();});
+ }catch(_){}
+});
