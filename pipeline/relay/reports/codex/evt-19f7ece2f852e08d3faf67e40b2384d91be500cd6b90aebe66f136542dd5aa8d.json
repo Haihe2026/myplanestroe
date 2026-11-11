@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d",
+  "claim_id": "144b376d-ae91-43d8-aa3f-221f8f082769",
+  "role": "codex",
+  "skill_id": "mps-family-portrait-studio",
+  "at": "2026-11-11T08:59:37+08:00",
+  "result": "spec_ready",
+  "source_ref": "bbe6b53a30b87602d35aef8f9bc043fa729614bb",
+  "evidence_ref": "0da1ba29c3796d922c774dfeff713747bc936fb5:pipeline/products/mps-family-portrait-studio/01-a1-validation.json",
+  "spec_commit": "0da1ba29c3796d922c774dfeff713747bc936fb5",
+  "original_request": "全家福写真照相馆 brief_ready：Codex 编写规格、10张示例和1张主题logo，Claude 开发真实 Skill。",
+  "original_receipt_preserved": {
+    "event_id": "evt-19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T08:42:51+08:00",
+    "evidence_ref": "c766e1db65eb2521c6ced67614a496c792e085f4:pipeline/products/mps-family-portrait-studio/status.json",
+    "claim_id": "144b376d-ae91-43d8-aa3f-221f8f082769"
+  },
+  "receipt_note": "接收器已在产品认领后回执本条通知；保留原 claim 和已有 acknowledged，不二次认领或覆盖回执。本报告给出最终规格结果。",
+  "a1": {
+    "result": "pass",
+    "items": 16
+  },
+  "assets": {
+    "demos": 10,
+    "logo": 1,
+    "registered_upstream_generation_calls": 11,
+    "extra_generation_tests": 0,
+    "duplicate_generation_posts": 0
+  },
+  "scope": {
+    "input": "single existing group photo of 3–4 people",
+    "lane": "fast",
+    "backend_deployment": false,
+    "production_finance_writes": false,
+    "platform_upload": false
+  },
+  "verification_limits": [
+    "仅一组虚构四位成年人，九次参考编辑已逐张目检。",
+    "真实客户、三人/儿童样本、生产签名输入路由、付款和宿主行为未验证。"
+  ],
+  "next_role": "claude",
+  "next_action": "从固定 spec_commit 按现行 SOP 开发和 A2 Mock 自测；保留十图与 logo，打包后交 Codex A3。",
+  "authority": "本事件不增加生产、财务、部署、发布或跨聊天权限；最终 ZIP 负责人手动上传。"
+}
