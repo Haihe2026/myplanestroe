@@ -1,3 +1,7 @@
+# Verified 2026-11-11: trade same-browser WeChat callback fix
+skill-platform ExecStart=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/trade-link-fix-20261111/run_shared.py --db /var/lib/skill-platform/shared.db --gemini-db /var/lib/image-assistant/pilot.db --temu-db /var/lib/temu-image-assistant/trial.db --temu-source /opt/temu-image-assistant/0.2.2/service
+# Wraps trade-leads-2.0.11/run_shared.py; overrides only wechat_binding. Historical entries below are not the current service head. Runtime credentials and state not published.
+
 # Verified 2026-11-11: skill-platform trade overlay
 skill-platform ExecStart=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/trade-leads-2.0.11/run_shared.py --db /var/lib/skill-platform/shared.db --gemini-db /var/lib/image-assistant/pilot.db --temu-db /var/lib/temu-image-assistant/trial.db --temu-source /opt/temu-image-assistant/0.2.2/service
 # Wraps gemini-support-20261107/run_shared.py; original ledger/config import chain retained. Runtime credentials not published.

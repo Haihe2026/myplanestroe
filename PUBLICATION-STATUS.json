@@ -1,8 +1,10 @@
 {
   "updated": "2026-11-11",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "trade_leads_2_0_11_adapter_deployed",
+  "last_change": "trade_link_and_wechat_callback_fix_deployed",
   "production_access_included": false,
   "live_sync": false,
-  "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized"
+  "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
+  "trade_auth_source_mirror": "source_only_no_oauth_or_customer_records",
+  "trade_real_wechat_rescan_verified": false
 }

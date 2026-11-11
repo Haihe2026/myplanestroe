@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-11",
+  "status": "production_deployed_source_snapshot",
+  "product": "trade-leads",
+  "scope": [
+    "restore missing /link static entry",
+    "same-browser proof closes original trade approval before same-origin payment redirect"
+  ],
+  "active_entry": "/opt/skill-platform/trade-link-fix-20261111/run_shared.py",
+  "previous_entry": "/opt/skill-platform/trade-leads-2.0.11/run_shared.py",
+  "overridden_module_only": "wechat_binding",
+  "original_auth_and_trade_ownership_checks_retained": true,
+  "original_source_preserved": true,
+  "nginx_config_changed": false,
+  "production_database_restored": false,
+  "files": {
+    "snapshot/opt/skill-platform/trade-link-fix-20261111/run_shared.py": "e2c5354dd7f920180dc3ca8a130d3bec06e264d5a1895fb5e47e660d9b9dbc5d",
+    "snapshot/opt/skill-platform/trade-link-fix-20261111/wechat_binding.py": "1a168f1e0f5c6952b026b7458ffb186e95cdb14d2ddf029121923bc423839f9a",
+    "snapshot/var/www/image-assistant/auth/wechat/redirect.html": "fdc89d4d0914b9512edd43a069c13ea1bd43bd0dc69b2940e3a21c14d6e24f49"
+  },
+  "verification": {
+    "offline_cases_windows": 28,
+    "offline_cases_linux": 28,
+    "independent_negative_cases": 6,
+    "public_link_status": 200,
+    "oauth_start_status": 200,
+    "proof_cookie_flags_validated": true,
+    "invalid_link_status": 401,
+    "health_pricing_unchanged": true,
+    "real_wechat_scan_performed": false,
+    "real_payment_performed": false,
+    "paid_data_calls_for_this_fix": 0
+  },
+  "boundaries": [
+    "Same-browser and same-host callback can auto-complete with the short-lived proof.",
+    "Cross-browser or cross-host callback keeps the original page finish flow.",
+    "Retest using a newly generated Skill link; never replay an old OAuth callback.",
+    "This reading snapshot includes no production credentials, account records, OAuth proofs or session data."
+  ]
+}
