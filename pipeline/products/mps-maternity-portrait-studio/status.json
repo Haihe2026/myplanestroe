@@ -1,18 +1,18 @@
 {
   "blocked": null,
-  "claimed_at": null,
+  "claimed_at": "2026-11-12T01:44:11+08:00",
   "lane": "fast",
-  "owner": null,
+  "owner": "claude",
   "rounds": {
-    "dev": 1,
+    "dev": 2,
     "spec": 0,
     "test": 1
   },
   "skill_id": "mps-maternity-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
-  "stage": "test_failed",
-  "updated_at": "2026-11-12T01:04:45+08:00",
+  "stage": "dev_in_progress",
+  "updated_at": "2026-11-12T01:44:11+08:00",
   "versions": {
     "listed": null,
     "package": "1.0.0"

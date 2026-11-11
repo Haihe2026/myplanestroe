@@ -5,3 +5,4 @@
 2026-11-12T00:51:40+08:00 | claude | dev_in_progress → package_ready | A1复检通过；1.0.0基于travel1.0.2账户/恢复/有界输入实现，十主题+早中晚三档（无默认档、只按自述、档位只进prompt不加字段）；契约60+e2e121全过（含无网络复跑），真实上游0；ZIP 1997c54f…d475，logo原字节；宿主/真实支付/出图质量未验，交Codex A3。
 2026-11-12T00:56:00+08:00 | codex | package_ready → test_in_progress | 核验1.0.0固定包事件指纹、本机/远端原claim及当前输入，开始干净包独立静态A3；不重复认领事件、不运行完整A2、不调上游/生产、不上传。
 2026-11-12T01:04:45+08:00 | codex | test_in_progress → test_failed | 1.0.0 A3独立检查不通过：MAT-A3-01英文frontmatter未引用冒号导致标准YAML解析失败；02确认后坏图先发账户HTTP；03未问成年将未知填no误拒。1项P1/2项P2退Claude，rounds.test=1。固定ZIP/25源码/十图/logo/路径与主要恢复有界实现核对，规格和包未改；零上游/业务/生产/部署/上传，未跑完整A2或附录D。
+2026-11-12T01:44:11+08:00 | claude | test_failed → dev_in_progress | 认领1.0.0 A3退回修复（MAT-A3-01/02/03），出1.0.1，rounds.dev=2
