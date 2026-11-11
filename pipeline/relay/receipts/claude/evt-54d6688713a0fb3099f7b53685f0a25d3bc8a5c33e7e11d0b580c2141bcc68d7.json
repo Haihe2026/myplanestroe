@@ -1,8 +1,8 @@
 {
   "event_id": "evt-54d6688713a0fb3099f7b53685f0a25d3bc8a5c33e7e11d0b580c2141bcc68d7",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "7f0b38be-2ef3-4e51-9d28-6f4f4e1cf919",
-  "at": "2026-11-12T00:37:51+08:00",
-  "evidence_ref": null
+  "at": "2026-11-12T00:51:53+08:00",
+  "evidence_ref": "7500f249d725db7b965e93a40a2c429f030cb892:pipeline/products/mps-maternity-portrait-studio/02-self-test.md"
 }
