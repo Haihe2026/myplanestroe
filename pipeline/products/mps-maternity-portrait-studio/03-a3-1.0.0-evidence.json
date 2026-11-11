@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-01358eef615ca32dc5cb9bce75a08cd8f563871e08c65d5fb14ce7930a8a86e5",
+  "claim_id": "f19ae463-3d0b-4e07-bb5a-a3a07fdab532",
+  "source_ref": "7500f249d725db7b965e93a40a2c429f030cb892",
+  "claim_commit": "57f1ae10be1200edeb39b23458c92ee93e515ccc",
+  "checked_at": "2026-11-12T01:04:45+08:00",
+  "result": "test_failed",
+  "rounds_test": 1,
+  "findings": [
+    {
+      "id": "MAT-A3-01",
+      "priority": "P1",
+      "title": "英文description_en未引用冒号空格，原始YAML解析失败",
+      "file": "SKILL.md",
+      "lines": [
+        8
+      ],
+      "test": "T10/S6元数据",
+      "actual": "description_en是未引用的plain scalar，含portrait: 10 themes；yaml.safe_load原始frontmatter报ScannerError mapping values are not allowed here。包内自定义split解析器未识别这个语法错误。",
+      "expected": "用合法YAML引用或块标量保存完整英文描述；A2使用真正YAML解析器验证最终ZIP中的原始frontmatter及字段类型/重复键，不用字符串拆分代替。",
+      "evidence": "Original frontmatter parser rejection retained in inspection.findings; in-memory quote projection used solely to finish other diagnostic comparisons, never written to package and never counted as platform parse pass."
+    },
+    {
+      "id": "MAT-A3-02",
+      "priority": "P2",
+      "title": "确认后源图缺失/损坏时，账号业务HTTP发生在本地预检前",
+      "file": "scripts/studio.py",
+      "lines": [
+        631,
+        636,
+        638,
+        639,
+        651,
+        662,
+        507,
+        509
+      ],
+      "test": "T02/T14及runtime_contract.input_validation",
+      "trigger": "有效图完成plan+confirm、尚无生成POST；删除/截断原路径后run。",
+      "actual": "cmd_run638–661先_account_ready/quick-entry及可能skill-key/bound；662才_job_body509验图。新账户可先得到onboardingPreview，余额不足先给充值引导，无法满足坏图本地退出3、业务HTTP0。",
+      "expected": "仅未提交分支先完成完整有界验图和源SHA校验，再进行账户/Key业务HTTP；原任务未知/已提交优先只读原键，不因换图重建任务。",
+      "limits": "静态控制流可确定；未运行客户端。没有坏图上传或扣款证据，不能将影响夸大为重复计费。"
+    },
+    {
+      "id": "MAT-A3-03",
+      "priority": "P2",
+      "title": "合并提问漏问成年自述，却把未确认直接映射为不符合资格",
+      "file": "SKILL.md",
+      "lines": [
+        99,
+        100,
+        103
+      ],
+      "related_source": "scripts/studio.py:449–451; scripts/welcome_copy.py:66–68",
+      "test": "T01/T02本人孕期与成年门槛",
+      "trigger": "本人自述怀孕五个月、清晰单人照、选白纱/中期，未主动提年龄/是否成年；按99行收齐所列事实后按100行执行。",
+      "actual": "99行没要求问是否成年、又禁止推断年龄，100行将未确认成年填no，studio450–451即notEligible。固定拒绝话术建议换照片，不能补齐成年自述；尚未确认与明确不符合被混淆。",
+      "expected": "把是否成年人自述纳入一次合并询问；未知先补问，不把缺信息直接当不符合，不索要年龄证明/医学材料、不看图估年龄。明确不符合时才拒绝，拒绝建议须针对真实原因。",
+      "limits": "执行指令与脚本静态交叉核对；未声称真实宿主已重现。"
+    }
+  ],
+  "inspection": {
+    "result": "static_defects_found",
+    "findings": [
+      {
+        "id": "MAT-A3-01",
+        "file": "SKILL.md",
+        "line": 8,
+        "reason": "Unquoted description_en contains colon-space; genuine YAML parser rejects the original frontmatter.",
+        "parser_error": "mapping values are not allowed here\n  in \"<unicode string>\", line 7, column 95:\n     ... to a maternity keepsake portrait: 10 themes such as white-tulle  ... \n                                         ^"
+      }
+    ],
+    "original_yaml_accepted": false,
+    "metadata_projection_for_remaining_diagnostics_only": true,
+    "zip": {
+      "sha256": "1997c54f29a1080e0d639832c19872630ddbca5da6e3670585a0292b08bcd475",
+      "bytes": 2351147,
+      "files": 25,
+      "wrapper": "mps-maternity-portrait-studio",
+      "logical_max_depth": 2
+    },
+    "checks": [
+      {
+        "item": "固定ZIP完整性",
+        "result": "pass",
+        "evidence": "SHA256与A2一致；Git blob已验证见固定下载清单逐字节Git对象核对。"
+      },
+      {
+        "item": "目录与干净解包",
+        "result": "pass",
+        "evidence": "单一slug外包装；技能根内最多两级，25文件，无重复/大小写冲突/链接/越界或缓存；逐文件与ZIP原字节一致。"
+      },
+      {
+        "item": "平台元数据",
+        "result": "fail",
+        "evidence": "FAIL: 原始frontmatter被标准YAML拒绝；其余键仅在内存诊断投影中核对。SKILL.md 15354字节，≤15KiB。"
+      },
+      {
+        "item": "双语示例逐项语义",
+        "result": "pass",
+        "evidence": "棚拍中期/草坪早期/旗袍晚期三对与固定规格逐字一致，本人单人、视觉档、2:3、1024×1536一致。"
+      },
+      {
+        "item": "触发词与接管",
+        "result": "pass",
+        "evidence": "23触发词、完整中文名充值词、唯一倾向句；执行规范首节接管。"
+      },
+      {
+        "item": "版本与固定欢迎",
+        "result": "pass",
+        "evidence": "slug/版本/渠道跨SKILL、_meta、studio和telemetry一致；欢迎句逐字符合。"
+      },
+      {
+        "item": "尺寸与字段常量",
+        "result": "pass",
+        "evidence": "仅三尺寸、六请求字段、八遥测字段；无machine_id；关闭开关为孕妈slug。遥测失败行为另按TRV-03闭环复核。"
+      },
+      {
+        "item": "场景清单与超时",
+        "result": "pass",
+        "evidence": "十场景默认竖版；90/15/120/30/0/240预算一致。路由优先逻辑另按TRV-04闭环复核。"
+      },
+      {
+        "item": "十示例来源与展示标注",
+        "result": "pass",
+        "evidence": "10PNG完整解码，512×768；key/标题一致，SHA与Codex源/provenance/derivation/规格一致；每项note含非实拍标注。"
+      },
+      {
+        "item": "三档示例分布",
+        "result": "pass",
+        "evidence": "每图stage与固定规格/provenance/派生清单一致，3/4/3仅创作选项，不冒充医学或30组合验收。"
+      },
+      {
+        "item": "外置logo",
+        "result": "pass",
+        "evidence": "512×512PNG，≤500KB，与Codex原字节一致；ZIP外置，不新增生成。"
+      },
+      {
+        "item": "Markdown安全路径",
+        "result": "pass",
+        "evidence": "仅求值已审纯路径格式化函数；空格/#/%三条真实临时PNG路径经CommonMark解析/解码均可定位，无意外query/fragment。"
+      },
+      {
+        "item": "对客禁用词/秘密/语法",
+        "result": "pass",
+        "evidence": "对客SKILL/README及固定话术AST字面量扫描无供应商/模型/秘密，全部脚本Python3.7语法可解析。只做静态，不运行A2/客户端。"
+      }
+    ],
+    "assets": [
+      {
+        "key": "studio",
+        "file": "studio.png",
+        "bytes": 231084,
+        "sha256": "05730be75a2db76aa82dffd07059fd352cef811d9d7700133a6e263a7d7eb105",
+        "source_identical": true
+      },
+      {
+        "key": "lawn",
+        "file": "lawn.png",
+        "bytes": 225221,
+        "sha256": "080869ac2b4834961b52b3ee858816f9b5721e1a01adf7b68b7e922782d0fb8a",
+        "source_identical": true
+      },
+      {
+        "key": "flowers",
+        "file": "flowers.png",
+        "bytes": 251388,
+        "sha256": "b3376ed396fd3b57fd04b7002b74741c70cca46de1a7dafef4443d1c7e53805f",
+        "source_identical": true
+      },
+      {
+        "key": "oil",
+        "file": "oil.png",
+        "bytes": 256462,
+        "sha256": "60dd1e664b87785002bb888809708d604c746be2a541d0cae7071018a7173b51",
+        "source_identical": true
+      },
+      {
+        "key": "home",
+        "file": "home.png",
+        "bytes": 243953,
+        "sha256": "d62f33b492ee5847c553d1df082b4448040317871874383e6157d64c271364d1",
+        "source_identical": true
+      },
+      {
+        "key": "beach",
+        "file": "beach.png",
+        "bytes": 179264,
+        "sha256": "41b87bac7691289721524620e9a5797874a07cd6f3c00167a96ed8ce4da74276",
+        "source_identical": true
+      },
+      {
+        "key": "qipao",
+        "file": "qipao.png",
+        "bytes": 215149,
+        "sha256": "21b8d6d599426c983cc16b486d08960fd26e4fa4fa6984c5f558fd45ebd36cca",
+        "source_identical": true
+      },
+      {
+        "key": "korean",
+        "file": "korean.png",
+        "bytes": 216543,
+        "sha256": "1e18cd87f5a167c5f99df05a75e28c121cc0aef6fa72041dd6e1c87d1d08a595",
+        "source_identical": true
+      },
+      {
+        "key": "forest",
+        "file": "forest.png",
+        "bytes": 242388,
+        "sha256": "44270b233e2a503d4363e2494c19275bfedf020486a5c5699faa95c73db5451f",
+        "source_identical": true
+      },
+      {
+        "key": "night",
+        "file": "night.png",
+        "bytes": 217753,
+        "sha256": "a2b6753ca9986b56c1121de290dcfb76eb61d0b1be196ecd700fe1111ee6d0da",
+        "source_identical": true
+      }
+    ],
+    "logo": {
+      "bytes": 359488,
+      "sha256": "940b00c1a771779945a666de96a73dcbc7346c6435b5fdc7fded7028902ac333",
+      "size": [
+        512,
+        512
+      ]
+    },
+    "markdown_fixtures": [
+      {
+        "case": "Maternity Demo Assets",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Maternity#Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Maternity%Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      }
+    ],
+    "official_read": {
+      "at": "2026-11-12T00:56:22+08:00",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "fresh online read successful; skill metadata/examples/structure read",
+      "status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+    },
+    "full_a2_executed": false,
+    "business_commands_executed": false,
+    "pure_path_formatter_evaluated": true,
+    "upstream_calls": 0,
+    "production_calls": 0
+  },
+  "source_file_blobs": {
+    "README.md": "5d0cd82d0359cecb982533b156f803c73b4fdc29",
+    "SKILL.md": "ffc42b653bce01d9cd9aacaabf88548efbe3afe9",
+    "_meta.json": "1659b5e706890401e9c13ad43d66c609ff2542e3",
+    "assets/beach.png": "fd1f1d0466a5f5a8e85ecd84e52ed304d474225a",
+    "assets/demos.json": "69f73fad9714616c3ca0841724cf6cde64aefb59",
+    "assets/flowers.png": "bbc1f71db190df8588b7a3b64d88d6f1c04a5541",
+    "assets/forest.png": "1140d740cda25b8991316bd65d567ce1995f99bb",
+    "assets/home.png": "656f50dbb6bd3371bd306b175405ecb30ed6c451",
+    "assets/korean.png": "21825d5e36ac9f5006a65989edd438586409effb",
+    "assets/lawn.png": "fb040ab2c07c318d9661e62a57751ec0e9ce1229",
+    "assets/night.png": "4a0089d82b2c598a0a3d41365e75c18632a52258",
+    "assets/oil.png": "921e582ca2a7b832e2e5d5b3c1cc7c4c369e3035",
+    "assets/qipao.png": "55d538756ace8a6026aceaf03039719ebdda3170",
+    "assets/studio.png": "c22039616257fe6b6caed5db43bb6063bee24b71",
+    "references/platform-rules.md": "7aebd412adefb50ffd27f8ab495a56c390989e92",
+    "references/prompts.md": "58b4a0b3177f29caf5626a3baff32dc704c66554",
+    "references/scenes.md": "68dae37a4c2fc3bdc47eaec452af7fc06d1d1893",
+    "scripts/audit_images.py": "c927b242902d611f38747e6cc492b6a671b78710",
+    "scripts/jpeg_local.py": "b405e4cad8744119bad2abe180aa50603ca6021f",
+    "scripts/png_local.py": "7527dafe4de30d16444955587b5a69fc71aea123",
+    "scripts/studio.py": "0d8317454486fd5c32c779bd0b5d3aa524ab3695",
+    "scripts/telemetry.py": "1af0516ec93201f9702799a0b6e1a7d76cbc1d90",
+    "scripts/welcome_copy.py": "d11bd907f074cc6922d9630ac647c26f6981ed7a",
+    "tests/first-turn-preview.md": "ed7a59052d9fc3949c2981ad65f1e896dfd16c17",
+    "tests/test_skill_contract.py": "568b8962f11888a015079d74ac0c91746d601c76"
+  },
+  "fixed_input_objects": {
+    "pipeline/products/mps-maternity-portrait-studio/00-brief.md": "5dfd752277f8b65abbdb351bb304382c3b502baf",
+    "pipeline/products/mps-maternity-portrait-studio/01-dev-spec.json": "1bf3ee19683749ab023acc43afc3110aef787566",
+    "pipeline/products/mps-maternity-portrait-studio/01-dev-spec.md": "6ad5d3fb1743d7b10417b930c74190de00a1531e",
+    "pipeline/products/mps-maternity-portrait-studio/02-package/dist/logo.png": "d1876ea2ec0ed97180e4f218aa5d572c2d0495ed",
+    "pipeline/products/mps-maternity-portrait-studio/02-package/dist/mps-maternity-portrait-studio-1.0.0.zip": "e64ce0f85ef40c754e3cdea60730914a4c029e9f",
+    "pipeline/products/mps-maternity-portrait-studio/02-self-test.md": "175b2a7af567d24d4feeb7b4151f81a88d00bf34"
+  },
+  "sop_blob": "99ef71e0a2d84535193031ca8f5c6c269ec68799",
+  "original_receipt_preserved": {
+    "event_id": "evt-01358eef615ca32dc5cb9bce75a08cd8f563871e08c65d5fb14ce7930a8a86e5",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T00:56:15+08:00",
+    "evidence_ref": "57f1ae10be1200edeb39b23458c92ee93e515ccc:pipeline/products/mps-maternity-portrait-studio/status.json",
+    "claim_id": "f19ae463-3d0b-4e07-bb5a-a3a07fdab532"
+  },
+  "inheritance": {
+    "reference": "847b19d5b87d57d3bce6d0f3aa61ac9130de9748",
+    "helper_files_byte_identical": {
+      "audit_images.py": true,
+      "png_local.py": true,
+      "jpeg_local.py": true
+    },
+    "studio_functions_ast_identical": [
+      "_account_entry",
+      "_account_ready",
+      "_body_digest",
+      "_clean_text",
+      "_confirm_bound",
+      "_continue_job",
+      "_default_transport",
+      "_deliver",
+      "_demo_manifest",
+      "_due_text",
+      "_ensure_skill_key",
+      "_fail_kind",
+      "_history",
+      "_keep_reset",
+      "_local_time",
+      "_membership_link",
+      "_now",
+      "_path",
+      "_photo_changed",
+      "_photo_digest",
+      "_plain",
+      "_poll",
+      "_query",
+      "_query_auth",
+      "_recover_skill_key",
+      "_save_support",
+      "_shape_of",
+      "_submit",
+      "_submit_pending",
+      "_submit_unauthorized",
+      "_support_state",
+      "_unique",
+      "call",
+      "cmd_auth",
+      "cmd_balance",
+      "cmd_decline",
+      "cmd_demo",
+      "cmd_feedback",
+      "cmd_history",
+      "cmd_paid",
+      "cmd_refuse",
+      "cmd_resume",
+      "cmd_status",
+      "cmd_ticket",
+      "cmd_topup",
+      "device",
+      "draft_name",
+      "emit",
+      "ensure_install_secret",
+      "link_fresh",
+      "load_account",
+      "load_draft",
+      "main",
+      "md_safe_path",
+      "progress",
+      "read_json",
+      "save_account",
+      "save_draft",
+      "state_dir",
+      "trusted_link",
+      "wait_text",
+      "write_json"
+    ]
+  },
+  "independent_reviews": [
+    "账户/支付/恢复/六字段/遥测专项，只读静态",
+    "资格/三档/路由/确认/有界图像及执行指令专项，只读静态"
+  ],
+  "client_source_modified_by_codex": false,
+  "development_documents_modified": false,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "full_a2_executed": false,
+  "appendix_d": "not entered: A3 failed",
+  "next_role": "claude"
+}
