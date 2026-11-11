@@ -52,6 +52,19 @@ def jpeg_bytes(w=600, h=800, note=b''):
             + seg(0xDA, b'\x01\x01\x00\x00\x3f\x00') + scan + b'\xff\xd9')
 
 
+def _bomb_png(virtual_mb):
+    import struct
+    import zlib
+
+    def chunk(kind, body):
+        return struct.pack('>I', len(body)) + kind + body + struct.pack('>I', zlib.crc32(kind + body) & 0xffffffff)
+    c = zlib.compressobj(9)
+    zero = bytes(1 << 20)
+    idat = b''.join(c.compress(zero) for _ in range(virtual_mb)) + c.flush()
+    return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', 128, 128, 8, 0, 0, 0, 0))
+            + chunk(b'IDAT', idat) + chunk(b'IEND', b''))
+
+
 class Base(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.mkdtemp(dir=os.environ.get('MPS_E2E_TMP'))  # 可指定可写目录
@@ -1713,9 +1726,11 @@ class RepairTravel101(Base):
     # ---- A3-TRV-01：绑定必须明确 bound=true，未确认不得新生成 ----
 
     BAD_BOUND = ('false', 'missing', 'timeout', 500, 401, 'garbage', 'truthy')
+    # 1.0.2（A3-TRV-01-R1）：401 是凭证失效信号，单独作废本机凭证；其余未确认情形保留凭证、下次再确认
+    UNCONFIRMED_BOUND = ('false', 'missing', 'timeout', 500, 'garbage', 'truthy')
 
     def test_trv01_bound_not_confirmed_never_generates(self):
-        for mode in self.BAD_BOUND:
+        for mode in self.UNCONFIRMED_BOUND:
             self.fresh()
             did = self.ready()
             self.mock.scenario['bound'] = mode
@@ -1806,6 +1821,119 @@ class RepairTravel101(Base):
                 d = self.draft(did2)
                 self.assertEqual((d['state'], d['idem'], d['body_sha256']), ('submit_unknown', idem, digest), (mode, fix))
 
+    # ---- A3-TRV-01-R1（1.0.2）：绑定 401 必须作废失效凭证，沿原安装身份换新凭证，不永久循环 ----
+
+    def _rotated_setup(self, legacy):
+        """先正常交付一张拿到已确认凭证；网页轮换凭证；再把本机缓存改成 legacy（None=旧版缺标记，False=已领未确认）。"""
+        self.fresh()
+        did = self.ready()
+        self.run_cmd('run', '--draft', did)
+        a = self.account()
+        old = a['skill_key']
+        self.assertEqual(self.mock.rotate_key(a['install_secret']), old)
+        if legacy is None:
+            a.pop('skill_key_bound', None)
+        else:
+            a['skill_key_bound'] = legacy
+        with open(os.path.join(self.home, 'mps-travel-portrait-studio', 'account.json'), 'w') as f:
+            json.dump(a, f)
+        return a, old
+
+    def test_trv01_r1_bound_401_clears_stale_key_then_recovers(self):
+        for legacy in (None, False):
+            a0, old = self._rotated_setup(legacy)
+            did2 = self.confirmed_draft()
+            idem = self.draft(did2)['idem']
+            jobs0, keys0 = len(self.job_posts()), len([c for c in self.mock.calls if c[1] == '/skill-key'])
+            code, s, t, _ = self.run_cmd('run', '--draft', did2)
+            self.assertEqual((code, s['signal'], s.get('task_kept')), (4, 'credentialsReset', True), legacy)
+            self.assertIn('授权本身不扣费', t)
+            a = self.account()
+            self.assertNotIn('skill_key', a, legacy)          # 失效凭证作废
+            self.assertNotIn('skill_key_bound', a, legacy)    # 绑定标记作废
+            self.assertEqual(a['install_secret'], a0['install_secret'], legacy)  # 原安装身份不变、不新建账户
+            d = self.draft(did2)
+            self.assertEqual((d['state'], d['idem']), ('confirmed', idem), legacy)  # 原确认单与任务键保留
+            self.assertIsNone(d.get('body_sha256'), legacy)  # 未冻结请求体：确实没有提交
+            self.assertEqual(len(self.job_posts()), jobs0, legacy)  # 0 次新生成
+            # 下一次（重启后从磁盘加载）：沿原 install_secret 重新领新凭证，确认 bound=true，只生成一次
+            code, s, _, _ = self.run_cmd('run', '--draft', did2)
+            self.assertEqual(s['signal'], 'delivered', legacy)
+            a = self.account()
+            self.assertNotEqual(a['skill_key'], old, legacy)
+            self.assertIs(a['skill_key_bound'], True, legacy)
+            self.assertEqual(a['install_secret'], a0['install_secret'], legacy)
+            self.assertEqual(len([c for c in self.mock.calls if c[1] == '/skill-key']), keys0 + 1, legacy)
+            self.assertEqual(self.bound_calls()[-1][2], {'key': a['skill_key']}, legacy)
+            posts = self.job_posts()
+            self.assertEqual(len(posts), jobs0 + 1, legacy)
+            self.assertEqual(posts[-1][3].get('Idempotency-Key'), idem, legacy)
+            # 再跑不会重复生成、不会再次确认
+            nb = len(self.bound_calls())
+            self.run_cmd('run', '--draft', self.confirmed_draft())
+            self.assertEqual(len(self.bound_calls()), nb)
+
+    def test_trv01_r1_no_infinite_rebind_of_same_key(self):
+        """1.0.1 的根因：401 后下次仍绑定同一旧凭证。现在旧凭证最多被确认一次。"""
+        _, old = self._rotated_setup(False)
+        before = len([c for c in self.bound_calls() if c[2] == {'key': old}])  # 轮换前那次正常确认
+        did2 = self.confirmed_draft()
+        for _ in range(3):
+            self.run_cmd('run', '--draft', did2)
+        stale = [c for c in self.bound_calls() if c[2] == {'key': old}]
+        self.assertEqual(len(stale) - before, 1)  # 轮换后旧凭证只被确认一次（得 401 即作废），不再循环
+        self.assertEqual(len([p for p in self.job_posts() if p[3].get('Idempotency-Key') == self.draft(did2)['idem']]), 1)
+
+    def test_trv01_r1_unknown_task_only_queries_original_key(self):
+        """已发出、结果未知的任务：凭证被轮换后恢复只 GET 原键，不再 POST 生成；新凭证须 bound=true 才使用。"""
+        self.fresh()
+        did = self.ready()
+        self.run_cmd('run', '--draft', did)
+        did2 = self.confirmed_draft()
+
+        def hook(real, method, url, body, headers, timeout, binary):
+            if method == 'POST' and url.endswith('/skill-jobs'):
+                real(method, url, body, headers, timeout, binary)  # 服务端已受理，但客户端没收到响应
+                raise studio.GatewayError(0)
+            return real(method, url, body, headers, timeout, binary)
+        self.wrap(hook)
+        code, s, _, _ = self.run_cmd('run', '--draft', did2)
+        studio.TRANSPORT = self.mock.transport
+        d = self.draft(did2)
+        idem, digest = d['idem'], d['body_sha256']
+        a = self.account()
+        self.mock.rotate_key(a['install_secret'])
+        a['skill_key_bound'] = False
+        with open(os.path.join(self.home, 'mps-travel-portrait-studio', 'account.json'), 'w') as f:
+            json.dump(a, f)
+        jobs = len(self.job_posts())
+        code, s, _, _ = self.run_cmd('resume', '--draft', did2)
+        self.assertEqual(s['signal'], 'delivered', s)
+        self.assertEqual(len(self.job_posts()), jobs)  # 0 次新生成
+        d = self.draft(did2)
+        self.assertEqual((d['idem'], d['body_sha256']), (idem, digest))
+        gets = [c for c in self.mock.calls if c[0] == 'GET' and '/jobs/by-key/' in c[1]]
+        self.assertTrue(gets and all(idem in c[1] or studio.quote(idem, safe='') in c[1] for c in gets))
+        self.assertIs(self.account()['skill_key_bound'], True)
+
+    def test_trv01_r1_non401_bound_failure_keeps_key_no_generation(self):
+        """false/缺字段/网络错误等非 401：凭证保留但不得新生成（原 TRV-01 反例不回退）。"""
+        for mode in ('false', 'missing', 'timeout', 500):
+            a0, old = self._rotated_setup(False)
+            # 换回一把有效但未确认的凭证，单独测非 401 情形
+            a = self.account()
+            self.mock.users[a['install_secret']]['key'] = old
+            self.mock.keys[old] = a['install_secret']
+            self.mock.scenario['bound'] = mode
+            did2 = self.confirmed_draft()
+            jobs = len(self.job_posts())
+            code, s, _, _ = self.run_cmd('run', '--draft', did2)
+            self.assertEqual((code, s['signal']), (3, 'serviceUnavailable'), mode)
+            self.assertEqual(self.account().get('skill_key'), old, mode)
+            self.assertIs(self.account().get('skill_key_bound'), False, mode)
+            self.assertEqual(len(self.job_posts()), jobs, mode)
+            self.mock.scenario.pop('bound')
+
     # ---- A3-TRV-02：损坏参考图本地拒绝、点名文件、零业务请求 ----
 
     def _bad_inputs(self):
@@ -1833,6 +1961,8 @@ class RepairTravel101(Base):
             'jpg-scan-cut.jpg': jpg[:sos + 14 + (len(jpg) - sos - 16) // 2],
             'jpg-scan-cut-eoi.jpg': jpg[:sos + 14 + (len(jpg) - sos - 16) // 2] + b'\xff\xd9',
             'jpg-no-dht.jpg': jpg.replace(b'\xff\xc4', b'\xff\xfe', 1),
+            # 1.0.2（A3-TRV-02-R1）：小 IHDR + 可展开 32MiB 的高压缩流，须有界拒绝
+            'png-inflate-bomb.png': _bomb_png(32),
         }
 
     def test_trv02_damaged_inputs_rejected_before_any_request(self):

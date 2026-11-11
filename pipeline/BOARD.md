@@ -8,4 +8,4 @@
 | mps-id-photo-background | 证件照换底助手 | submitted | — | 1/2/6 | 1.0.8 已上传，等平台审核；平台在架 1.0.6 | 2026-11-11T08:21:53+08:00 |
 | mps-cross-border-white-background | 跨境产品图换白底助手 | blocked（已放弃） | — | 0/0/0 | 负责人2026-11-08定放弃：选品太窄，直接换掉，按B.0重选 | 2026-11-08T09:17:38+08:00 |
 | mps-family-portrait-studio | 全家福写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过；附录D第3轮置前后仍截图超时，交付受阻 | 2026-11-11T15:17:37+08:00 |
-| mps-travel-portrait-studio | 旅行打卡写真照相馆 | test_failed | — | 0/2/2 | 1.0.1复查：TRV-03/04/05关闭，绑定401恢复/输入资源边界退Claude | 2026-11-11T22:10:48+08:00 |
+| mps-travel-portrait-studio | 旅行打卡写真照相馆 | package_ready | — | 0/3/2 | 1.0.2 修复TRV-01-R1/TRV-02-R1，A2通过，待Codex A3复查 | 2026-11-11T22:46:31+08:00 |

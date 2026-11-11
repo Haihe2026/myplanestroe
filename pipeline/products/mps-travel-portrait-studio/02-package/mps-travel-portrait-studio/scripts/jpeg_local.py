@@ -9,6 +9,43 @@ import struct
 ZIGZAG_LEN = 64
 _SOF_SUPPORTED = (0xC0, 0xC1, 0xC2)
 _SOF_OTHER = (0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF)
+# 资源边界（1.0.2）：DHT 段只做 O(16+符号数) 的结构检查并记下定义，不立即建 65536 槽查表；
+# 只有扫描真正引用某表时才建表，同一定义（码长计数+符号完全相同）复用缓存。
+# 累计「不同查表的构建次数」与「扫描次数」都有上限，超过即判为过于复杂、本地有界拒绝。
+# 常见基线图 2–4 张表、渐进图通常不超过 10 次扫描 / 十几张表，远低于上限。
+MAX_TABLE_BUILDS = 32
+MAX_SCANS = 64
+
+
+def _check_table(counts, symbols):
+    """只检查 DHT 定义是否构成合法前缀码（不分配查表），O(16+符号数)。"""
+    code, k = 0, 0
+    for length in range(1, 17):
+        c = counts[length - 1]
+        if k + c > len(symbols) or code + c > (1 << length):
+            raise ValueError('dht')
+        code = (code + c) << 1
+        k += c
+    if k != len(symbols):
+        raise ValueError('dht')
+
+
+class _TableCache(object):
+    """按定义字节缓存已建查表；不同定义的累计构建次数受 MAX_TABLE_BUILDS 约束（含注入预算，供回归计数）。"""
+    __slots__ = ('built', 'builds', 'limit')
+
+    def __init__(self, limit=None):
+        self.built, self.builds = {}, 0
+        self.limit = MAX_TABLE_BUILDS if limit is None else limit
+
+    def get(self, key):
+        t = self.built.get(key)
+        if t is None:
+            if self.builds >= self.limit:
+                raise ValueError('unsupported')
+            self.builds += 1
+            t = self.built[key] = _build_table(key[:16], key[16:])
+        return t
 
 
 def _build_table(counts, symbols):
@@ -118,8 +155,10 @@ def _extend(v, t):
     return v - (1 << t) + 1 if t and v < (1 << (t - 1)) else v
 
 
-def verify(data, max_side=None, max_pixels=None):
-    """max_side/max_pixels：尺寸超限时在解熵数据前抛 ValueError('too_big')，不为超大图分配内存。"""
+def verify(data, max_side=None, max_pixels=None, cache=None):
+    """max_side/max_pixels：尺寸超限时在解熵数据前抛 ValueError('too_big')，不为超大图分配内存。
+    cache：可注入 _TableCache（回归用小预算/读取构建次数）；默认按 MAX_TABLE_BUILDS。"""
+    cache = _TableCache() if cache is None else cache
     if not data.startswith(b'\xff\xd8'):
         raise ValueError('not jpeg')
     n = len(data)
@@ -192,8 +231,9 @@ def verify(data, max_side=None, max_pixels=None):
                 total = sum(counts)
                 if not total or i + 17 + total > len(seg):
                     raise ValueError('dht')
-                table = _build_table(counts, seg[i + 17:i + 17 + total])
-                (ac_tables if tc else dc_tables)[th] = table
+                symbols = seg[i + 17:i + 17 + total]
+                _check_table(counts, symbols)
+                (ac_tables if tc else dc_tables)[th] = bytes(counts) + bytes(symbols)  # 仅记定义，扫描引用时才建表
                 i += 17 + total
         elif m == 0xDB:
             i = 0
@@ -222,9 +262,13 @@ def verify(data, max_side=None, max_pixels=None):
                     raise ValueError('sos')
                 sc.append((ids[cid], t >> 4, t & 15))
             ss, se, ah, al = seg[1 + 2 * ns], seg[2 + 2 * ns], seg[3 + 2 * ns] >> 4, seg[3 + 2 * ns] & 15
-            segs, rsts, pos = _split_entropy(data, pos)
-            _decode_scan(frame, sc, ss, se, ah, al, dc_tables, ac_tables, restart, segs, rsts, coef_state)
             scans += 1
+            if scans > MAX_SCANS:
+                raise ValueError('unsupported')
+            segs, rsts, pos = _split_entropy(data, pos)
+            dc_used = {td: cache.get(dc_tables[td]) for _, td, _ in sc if ss == 0 and not ah and td in dc_tables}
+            ac_used = {ta: cache.get(ac_tables[ta]) for _, _, ta in sc if se > 0 and ta in ac_tables}
+            _decode_scan(frame, sc, ss, se, ah, al, dc_used, ac_used, restart, segs, rsts, coef_state)
         elif 0xE0 <= m <= 0xEF or m == 0xFE or m == 0xDC or m == 0xDE or m == 0xDF:
             pass  # APPn / COM / DNL 等元数据段
         else:

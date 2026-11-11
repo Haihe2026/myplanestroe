@@ -60,6 +60,14 @@ class Mock:
     def authorize(self, secret, balance=0):
         self.users.setdefault(secret, dict(balance=0, key=None))['balance'] = balance
 
+    def rotate_key(self, secret):
+        """A3-TRV-01-R1：模拟用户在网页轮换/撤销技能凭证——旧凭证立即失效（任何认证均 401），下次 /skill-key 发新凭证。"""
+        u = self.users[secret]
+        old = u['key']
+        self.keys.pop(old, None)
+        u['key'], u['bound'] = None, False
+        return old
+
     def secret_of(self, auth):
         tok = (auth or '').replace('Bearer ', '')
         if tok in self.users:
@@ -137,6 +145,8 @@ class Mock:
                 return 200, b'not json'
             if mode == 'truthy':
                 return ok(dict(bound='true'))
+            if self.keys.get(body.get('key')) != s:
+                err(401)  # 已轮换/撤销或不属于本账户的凭证：服务端认证即拒绝（对应 skill_access.acknowledge → authenticate）
             if body.get('key') != self.users[s]['key']:
                 return ok(dict(bound=False))
             self.users[s]['bound'] = True

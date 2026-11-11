@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-travel-portrait-studio'
-SKILL_VERSION = '1.0.1'
+SKILL_VERSION = '1.0.2'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -524,8 +524,10 @@ def _account_ready(a):
 def _ensure_skill_key(a):
     """返回 'ok' 只表示：本机有合法技能凭证，且服务端已明确确认绑定（bound=true）。
     凭证保存与绑定成功是两个独立状态：合法凭证先私存（skill_key_bound=False），再单独确认绑定；
-    确认失败（bound 不是 true、缺字段、超时、断网、5xx、401）时凭证保留但不得用于新生成，下次命令再确认一次；
-    已缓存但未确认的凭证（含进程重启后）同样先确认。只影响新生成，不改动已提交任务的原键和原请求体。"""
+    确认失败（bound 不是 true、缺字段、超时、断网、5xx）时凭证保留但不得用于新生成，下次命令再确认一次；
+    确认返回 401（凭证已被轮换/撤销，A3-TRV-01-R1）时返回 'key_reset'：本机作废该凭证及绑定标记，
+    保留原安装身份与所有任务；下次沿原安装身份重新领取新凭证并再次确认 bound=true。
+    已缓存但未确认的凭证（含进程重启后、旧版本迁移来的无标记凭证）同样先确认。只影响新生成，不改动已提交任务的原键和原请求体。"""
     if not a.get('skill_key'):
         try:
             r = call('POST', '/skill-key', {}, auth=a['install_secret'])
@@ -546,12 +548,17 @@ def _ensure_skill_key(a):
 
 
 def _confirm_bound(a):
-    """POST /skill-key/bound，只有 HTTP 200 且 bound 恰为 true 才记为已绑定；其余一律未确认。"""
+    """POST /skill-key/bound，只有 HTTP 200 且 bound 恰为 true 才记为已绑定；其余一律未确认。
+    401 是「这把凭证已失效」的确定信号，不是繁忙：立即作废本机凭证与绑定标记（不动 install_secret、不动任务），
+    否则下次运行会见缓存凭证跳过领取、反复绑定同一把旧凭证而永久循环。"""
     try:
         r = call('POST', '/skill-key/bound', {'key': a['skill_key']}, auth=a['install_secret'])
     except GatewayError as e:
         if e.status == 401:
-            return 'needs_auth'
+            a.pop('skill_key', None)
+            a.pop('skill_key_bound', None)
+            save_account(a)
+            return 'key_reset'
         return 'network' if e.status == 0 else 'error'
     if not isinstance(r, dict) or r.get('bound') is not True:
         return 'error'
@@ -617,6 +624,9 @@ def cmd_run(args):
         if not url:
             return emit('serviceUnavailable', W.failure(_fail_kind(status), 'not_started'), EXIT_ERROR)
         return emit('needsCredits', W.final_step(url), EXIT_WAIT, draft_id=d['draft_id'], link_included=True)
+    if k == 'key_reset':
+        # 旧凭证已失效并已清除；确认单与原安装身份都保留，尚未提交生成。下次「继续」沿原身份领新凭证再确认绑定。
+        return emit('credentialsReset', W.credentials_reset(), EXIT_RESET, draft_id=d['draft_id'], task_kept=True)
     if k != 'ok':
         return emit('serviceUnavailable', W.failure('network' if k == 'network' else 'busy', 'not_started'), EXIT_ERROR)
     body, err = _job_body(d)

@@ -8,7 +8,8 @@ import zlib
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import jpeg_local  # noqa: E402
-from png_local import _ADAM7, _BITS  # noqa: E402
+import png_local  # noqa: E402
+from png_local import _BITS  # noqa: E402
 
 MAX_BYTES = 5 * 1024 * 1024
 MIN_SIDE = 128
@@ -28,8 +29,8 @@ PROBLEMS = {
 }
 
 
-def _png_info(data):
-    """完整校验参考 PNG（流式，不整张展开）：签名、IHDR 在首、每块 CRC、索引色须有 PLTE、IDAT 连续、IEND 收尾且无尾随数据、
+def _png_info(data, chunk=None, meter=None):
+    """完整校验参考 PNG（有界流式：每次解压输出 ≤ 64KiB 且不超过剩余应有字节+1，逐块核对后丢弃，不整张展开）：签名、IHDR 在首、每块 CRC、索引色须有 PLTE、IDAT 连续、IEND 收尾且无尾随数据、
     zlib 数据完整、每条扫描行的过滤类型合法且总长度与尺寸一致（含 Adam7 隔行）；有 acTL 判为动图。"""
     if len(data) < 33 or data[12:16] != b'IHDR':
         raise ValueError('damaged')
@@ -65,7 +66,7 @@ def _png_info(data):
             if ihdr is None or idat_done or (ihdr[3] == 3 and not plte):
                 raise ValueError('damaged')
             idat_seen = True
-            need = _feed(z, body, rows, need)
+            need = png_local.inflate_rows(z, body, rows, need, chunk, meter)
         elif idat_seen:
             idat_done = True
         pos = end
@@ -74,64 +75,12 @@ def _png_info(data):
             break
     if ihdr is None or not idat_seen or not iend or pos != n:
         raise ValueError('damaged')
-    try:
-        tail = z.flush()
-    except zlib.error:
-        raise ValueError('damaged')
-    need = _feed_raw(tail, rows, need)
-    if not z.eof or z.unused_data or rows or need:
-        raise ValueError('damaged')
+    png_local.finish_rows(z, rows, need)  # 不再调用无界 flush()：积压输出已在 inflate_rows 内按上限取尽
     return ihdr[0], ihdr[1]
 
 
-def _row_plan(w, h, bpp, interlace):
-    """返回扫描行字节数列表（倒序，便于 pop）：每项为 1 个过滤字节 + 行数据。"""
-    if interlace:
-        passes = [((w - x0 + dx - 1) // dx if w > x0 else 0, (h - y0 + dy - 1) // dy if h > y0 else 0)
-                  for x0, y0, dx, dy in _ADAM7]
-    else:
-        passes = [(w, h)]
-    plan = []
-    for pw, ph in passes:
-        if pw and ph:
-            plan.append([ph, 1 + (pw * bpp + 7) // 8])
-    plan.reverse()
-    return plan
-
-
-def _feed(z, chunk, rows, need):
-    try:
-        out = z.decompress(chunk)
-    except zlib.error:
-        raise ValueError('damaged')
-    if z.unused_data:
-        raise ValueError('damaged')
-    return _feed_raw(out, rows, need)
-
-
-def _feed_raw(out, rows, need):
-    """need：当前行还差的字节数（None 表示下一字节是过滤类型）。逐行核对过滤字节 0–4，超出总长度即损坏。"""
-    i, n = 0, len(out)
-    while i < n:
-        if need is None:
-            if not rows:
-                raise ValueError('damaged')
-            if out[i] > 4:
-                raise ValueError('damaged')
-            need = rows[-1][1] - 1
-            rows[-1][0] -= 1
-            if not rows[-1][0]:
-                rows.pop()
-            i += 1
-            if not need:
-                need = None
-            continue
-        take = min(need, n - i)
-        i += take
-        need -= take
-        if not need:
-            need = None
-    return need
+_row_plan = png_local.row_plan
+_feed_raw = png_local.feed_raw
 
 
 def _jpeg_info(data):

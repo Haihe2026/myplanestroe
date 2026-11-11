@@ -13,7 +13,7 @@ examples_en:
   - "Turn my single-person photo into a Harbin ice-and-snow portrait, portrait 2:3, 1024×1536."
   - "Turn my single-person photo into a Sanya warm-winter island portrait, portrait 2:3, 1024×1536."
   - "Turn my single-person photo into a Hanfu portrait in a Xian-inspired old city, portrait 2:3, 1024×1536."
-version: 1.0.1
+version: 1.0.2
 author: "MyPlaneStore"
 ---
 

@@ -179,25 +179,85 @@ def verify(data):
     w, h, depth, ctype, comp, filt, interlace = ihdr
     if ctype not in _BITS or depth not in _BITS[ctype][1] or comp or filt or interlace not in (0, 1) or not w or not h:
         raise ValueError('unsupported png')
-    ch = _BITS[ctype][0]
-    z = zlib.decompressobj()
-    raw = z.decompress(b''.join(idat))
-    if not z.eof or z.unused_data:
-        raise ValueError('zlib')
+    rows = row_plan(w, h, _BITS[ctype][0] * depth, interlace)
+    z, need = zlib.decompressobj(), None
+    try:
+        for part in idat:
+            need = inflate_rows(z, part, rows, need)
+        finish_rows(z, rows, need)
+    except ValueError:
+        raise ValueError('length')
+    return w, h
+
+
+# ---- 有界流式解压（1.0.2，A3-TRV-02-R1）----
+# 每次 decompress 都带 max_length：单次输出 ≤ OUT_CHUNK，且不超过「剩余应有扫描行字节 + 1」；
+# 每块输出立即逐行核对后丢弃，超出应有总长 1 字节即判损坏。不存在「先整段展开、事后再判大小」。
+OUT_CHUNK = 65536
+
+
+def row_plan(w, h, bpp, interlace):
+    """返回扫描行字节数计划（倒序，便于 pop）：每项 [行数, 1 个过滤字节 + 行数据]。"""
     if interlace:
         passes = [((w - x0 + dx - 1) // dx if w > x0 else 0, (h - y0 + dy - 1) // dy if h > y0 else 0)
                   for x0, y0, dx, dy in _ADAM7]
     else:
         passes = [(w, h)]
-    i = 0
+    plan = []
     for pw, ph in passes:
-        if not pw or not ph:
+        if pw and ph:
+            plan.append([ph, 1 + (pw * bpp + 7) // 8])
+    plan.reverse()
+    return plan
+
+
+def remaining(rows, need):
+    return (need or 0) + sum(c * ln for c, ln in rows)
+
+
+def feed_raw(out, rows, need):
+    """need：当前行还差的字节数（None 表示下一字节是过滤类型）。逐行核对过滤字节 0–4，超出总长度即损坏。"""
+    i, n = 0, len(out)
+    while i < n:
+        if need is None:
+            if not rows or out[i] > 4:
+                raise ValueError('damaged')
+            need = rows[-1][1] - 1
+            rows[-1][0] -= 1
+            if not rows[-1][0]:
+                rows.pop()
+            i += 1
+            if not need:
+                need = None
             continue
-        stride = (pw * ch * depth + 7) // 8
-        for _ in range(ph):
-            if i >= len(raw) or raw[i] > 4:
-                raise ValueError('bad filter')
-            i += 1 + stride
-    if i != len(raw):
-        raise ValueError('length')
-    return w, h
+        take = min(need, n - i)
+        i += take
+        need -= take
+        if not need:
+            need = None
+    return need
+
+
+def inflate_rows(z, data, rows, need, chunk=None, meter=None):
+    """把一段 IDAT 数据有界地送入解压器 z；返回新的 need。
+    chunk：单次最大输出（可注入小值做回归）；meter：可注入 list，记录每次实际输出字节数（回归断言上限）。"""
+    chunk = chunk or OUT_CHUNK
+    while True:
+        limit = max(1, min(chunk, remaining(rows, need) + 1))
+        try:
+            out = z.decompress(data, limit)
+        except zlib.error:
+            raise ValueError('damaged')
+        if meter is not None:
+            meter.append(len(out))
+        need = feed_raw(out, rows, need)
+        if z.unused_data:
+            raise ValueError('damaged')
+        data = z.unconsumed_tail
+        if z.eof or (not data and len(out) < limit):
+            return need  # 输入用尽且无积压输出；或流已结束
+
+
+def finish_rows(z, rows, need):
+    if not z.eof or z.unused_data or rows or need:
+        raise ValueError('damaged')

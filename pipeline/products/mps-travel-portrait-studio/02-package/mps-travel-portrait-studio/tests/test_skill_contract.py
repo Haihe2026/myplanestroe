@@ -963,7 +963,7 @@ class TravelRepair101(unittest.TestCase):
     def test_trv01_key_needs_explicit_bound_true(self):
         key = 'mpskill_' + 'a' * 32 + '_' + 'b' * 43
         self.assertTrue(studio.SKILL_KEY_RE.fullmatch(key))
-        for resp in ({'bound': False}, {}, {'bound': 'true'}, {'bound': 1}, GatewayErr(0), GatewayErr(500), GatewayErr(401)):
+        for resp in ({'bound': False}, {}, {'bound': 'true'}, {'bound': 1}, GatewayErr(0), GatewayErr(500)):
             home = tempfile.mkdtemp()
             studio.STATE_HOME = home
             seen = []
@@ -1036,6 +1036,136 @@ class TravelRepair101(unittest.TestCase):
             self.assertEqual(len(calls), 1)
         finally:
             shutil.rmtree(home)
+
+
+def png_chunk(kind, body):
+    import struct
+    import zlib
+    return struct.pack('>I', len(body)) + kind + body + struct.pack('>I', zlib.crc32(kind + body) & 0xffffffff)
+
+
+def inflate_bomb_png(virtual_mb=64):
+    """128x128 灰度 IHDR（应有 16512 字节扫描行），IDAT 是一条可展开到 virtual_mb MiB 的高压缩合法 deflate 流。
+    构造时也只按 1MiB 分块压缩，从不在内存里放整段展开数据。"""
+    import struct
+    import zlib
+    c = zlib.compressobj(9)
+    zero = bytes(1 << 20)
+    idat = b''.join(c.compress(zero) for _ in range(virtual_mb)) + c.flush()
+    ihdr = struct.pack('>IIBBBBB', 128, 128, 8, 0, 0, 0, 0)
+    return b'\x89PNG\r\n\x1a\n' + png_chunk(b'IHDR', ihdr) + png_chunk(b'IDAT', idat) + png_chunk(b'IEND', b'')
+
+
+class TravelRepair102(unittest.TestCase):
+    """1.0.2：A3-TRV-01-R1（绑定 401 作废失效凭证）与 A3-TRV-02-R1（输入校验资源有界）的随包回归。"""
+
+    def test_trv01_r1_bound_401_clears_key_keeps_identity(self):
+        old_key = 'mpskill_' + 'a' * 32 + '_' + 'b' * 43
+        new_key = 'mpskill_' + 'c' * 32 + '_' + 'd' * 43
+        for legacy in (None, False):
+            home = tempfile.mkdtemp()
+            studio.STATE_HOME = home
+            seen = []
+
+            def call(method, path, body=None, auth=None, **k):
+                seen.append((path, (body or {}).get('key')))
+                if path == '/skill-key':
+                    return {'state': 'ready', 'key': new_key}
+                if path == '/skill-key/bound':
+                    if body['key'] == old_key:
+                        raise studio.GatewayError(401)  # 已在网页轮换/撤销
+                    return {'bound': True}
+                raise AssertionError(path)
+            try:
+                a = {'install_secret': 's' * 43, 'skill_key': old_key}
+                if legacy is not None:
+                    a['skill_key_bound'] = legacy
+                studio.save_account(a)
+                with mock.patch.object(studio, 'call', call):
+                    self.assertEqual(studio._ensure_skill_key(studio.load_account()), 'key_reset', legacy)
+                    saved = studio.load_account()
+                    self.assertEqual(saved, {'install_secret': 's' * 43}, legacy)  # 只作废凭证与标记，原身份保留
+                    self.assertEqual(studio._ensure_skill_key(saved), 'ok', legacy)  # 下一次：沿原身份领新凭证并确认
+                    self.assertEqual(seen, [('/skill-key/bound', old_key), ('/skill-key', None), ('/skill-key/bound', new_key)], legacy)
+                    self.assertEqual(studio.load_account(), {'install_secret': 's' * 43, 'skill_key': new_key, 'skill_key_bound': True})
+            finally:
+                studio.STATE_HOME = None
+                shutil.rmtree(home)
+
+    def test_trv01_r1_run_maps_key_reset_to_exit4(self):
+        src = open(os.path.join(os.path.dirname(os.path.abspath(studio.__file__)), 'studio.py'), encoding='utf-8').read()
+        i = src.index("if k == 'key_reset':")
+        self.assertIn("EXIT_RESET", src[i:i + 400])
+        self.assertIn("task_kept=True", src[i:i + 400])
+        self.assertLess(i, src.index("body, err = _job_body(d)"))
+
+    def test_trv02_r1_png_inflate_bounded(self):
+        import audit_images
+        import png_local
+        bomb = inflate_bomb_png(64)
+        self.assertLess(len(bomb), audit_images.MAX_BYTES)
+        meter = []
+        with self.assertRaises(ValueError):
+            audit_images._png_info(bomb, chunk=4096, meter=meter)
+        expected = 128 * 129
+        self.assertTrue(meter and max(meter) <= 4096)
+        self.assertLessEqual(sum(meter), expected + 1)  # 超出应有长度 1 字节即拒绝，不展开 64MiB
+        with self.assertRaises(ValueError):  # 交付图校验同样有界
+            png_local.verify(bomb)
+        home = tempfile.mkdtemp()
+        try:
+            pth = os.path.join(home, 'bomb.png')
+            with open(pth, 'wb') as f:
+                f.write(bomb)
+            self.assertEqual(audit_images.check(pth)['problem'], 'damaged')
+        finally:
+            shutil.rmtree(home)
+
+    def test_trv02_r1_png_positive_cases_still_pass(self):
+        import struct
+        import audit_images
+        import png_local
+        png = synth_png(300, 200)
+        i = png.index(b'IDAT')
+        n = struct.unpack('>I', png[i - 4:i])[0]
+        body = png[i + 4:i + 4 + n]
+        split = png[:i - 4] + b''.join(png_chunk(b'IDAT', body[k:k + 7]) for k in range(0, len(body), 7)) + png[i + 8 + n:]
+        for data in (png, split):
+            meter = []
+            self.assertEqual(audit_images._png_info(data, chunk=97, meter=meter), (300, 200))
+            self.assertTrue(max(meter) <= 97)
+            self.assertEqual(png_local.verify(data), (300, 200))
+        self.assertEqual(audit_images._png_info(png), (300, 200))
+        bad_tail = png[:i - 4] + png_chunk(b'IDAT', body + b'\x00') + png[i + 8 + n:]  # EOF 后尾随数据
+        for data in (bad_tail, png[:i + 6] + bytes([png[i + 6] ^ 1]) + png[i + 7:]):
+            with self.assertRaises(ValueError):
+                audit_images._png_info(data)
+
+    def test_trv02_r1_jpeg_repeated_dht_bounded(self):
+        import jpeg_local
+        jpg = synth_jpeg(200, 200)
+        d = jpg.index(b'\xff\xc4')
+        ln = int.from_bytes(jpg[d + 2:d + 4], 'big')
+        dht = jpg[d:d + 2 + ln]
+        mini = b'\xff\xc4\x00\x14\x03' + bytes([1] + [0] * 15) + b'\x00'  # 22 字节单符号表（表 3，未被引用）
+        self.assertEqual(len(mini), 22)
+        heavy = jpg[:d] + dht * 300 + mini * 3000 + jpg[d:]
+        builds = []
+        real = jpeg_local._build_table
+        with mock.patch.object(jpeg_local, '_build_table', lambda c, s_: builds.append(1) or real(c, s_)):
+            self.assertEqual(jpeg_local.verify(heavy), (200, 200))
+            n_heavy = len(builds)
+            del builds[:]
+            self.assertEqual(jpeg_local.verify(jpg), (200, 200))
+        self.assertEqual(n_heavy, len(builds))  # 重复/无用定义不额外建表
+        self.assertTrue(1 <= n_heavy <= 4)
+        with self.assertRaises(ValueError) as e:
+            jpeg_local.verify(jpg, cache=jpeg_local._TableCache(limit=n_heavy - 1))  # 构建预算不足即有界拒绝
+        self.assertEqual(str(e.exception), 'unsupported')
+        with mock.patch.object(jpeg_local, 'MAX_SCANS', 0), self.assertRaises(ValueError):
+            jpeg_local.verify(jpg)
+        with self.assertRaises(ValueError):  # 非法前缀码仍在定义时拒绝
+            jpeg_local.verify(jpg[:d] + b'\xff\xc4\x00\x15\x00' + bytes([3] + [0] * 15) + b'\x00\x01\x02' + jpg[d:])
 
 
 class GatewayErr(object):
