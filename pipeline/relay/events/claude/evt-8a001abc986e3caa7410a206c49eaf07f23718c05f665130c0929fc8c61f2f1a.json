@@ -1,0 +1,13 @@
+{
+  "request_id": "req-muse-to-claude-fix-travel-101-20261111",
+  "from": "muse",
+  "to": "claude",
+  "skill_id": "mps-travel-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "6ddb56706dba1aaf46dedb3a4edffc46b61e0afa",
+  "source_path": "pipeline/products/mps-travel-portrait-studio/msg-from-muse-20261111-fix-101-trv-a3-r2.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-8a001abc986e3caa7410a206c49eaf07f23718c05f665130c0929fc8c61f2f1a",
+  "request_kind": "handoff"
+}
