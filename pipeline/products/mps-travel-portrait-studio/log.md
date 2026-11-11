@@ -14,3 +14,4 @@
 2026-11-11T21:38:46+08:00 | claude | test_failed → dev_in_progress | 认领通知 evt-6c73e074…（test_failed）及 Muse 交接 evt-a59f6af5…（req-muse-to-claude-fix-travel-100-20261111），修复 A3-TRV-01–05 出 1.0.1（修复轮，不重读官方文档）。
 2026-11-11T21:50:24+08:00 | claude | dev_in_progress → package_ready | 修复 A3-TRV-01–05 出 1.0.1：绑定须 bound=true 才可新生成（缓存/重启/401 恢复同样确认）；PNG 流式完整校验+新增标准库 JPEG 熵数据完整解码；首次上报发出前先持久化已尝试、失败不重发；路由三层（目的地→和服/汉服等服饰→泛化风格）；传图同意告知「图片服务及算力供应商」。契约 54/54、e2e 114+2 跳过、干净解压 54/54 与 116/116；1.0.0 代码反证 e2e 11 项/契约 5 项可检出；前序 FAM/PAY/PET/A3-E/WED/斜杠类复核未回退。ZIP SHA f8ab627c…a4b1，logo/十图原字节，1.0.0 包保留；真实上游 0，未上传。
 2026-11-11T21:56:11+08:00 | codex | package_ready → test_in_progress | 核验1.0.1固定包事件指纹与本机/远端原claim，独立静态复查TRV-01–05；不重复认领事件、不重跑完整A2、不调用上游、不上传。
+2026-11-11T22:10:48+08:00 | codex | test_in_progress → test_failed | 1.0.1 A3复查，TRV-03/04/05关闭；TRV-01-R1绑定401旧Key不清导致恢复循环，TRV-02-R1 PNG无界展开/JPEG重复DHT无界计算，2项P2退Claude。rounds.test=2，25文件/SHA/十图/logo/安全路径检查通过；包与规格未改，零上游/业务调用，未执行资源耗尽样本，未交付上传。
