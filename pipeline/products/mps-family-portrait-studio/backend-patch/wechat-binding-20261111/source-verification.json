@@ -1,0 +1,53 @@
+{
+  "source_ref": "edd66fbdf3e92ee1d0a4f8c252dc2d1c1d7500b5",
+  "at": "2026-11-11T16:33:02+08:00",
+  "repository_sources": [
+    {
+      "file": "wechat_binding.py",
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+      "sha256": "c7c03be06d664d78a52dd65e8e6d99dafd00cc06ae64728f836b5d5d9a233763",
+      "bytes": 16469
+    },
+    {
+      "file": "wechat.js",
+      "path": "snapshot/var/www/image-assistant/auth/wechat/wechat.js",
+      "sha256": "fbd9f241dad1ba4985446922727ecd334d0d06bffc3d03059046f6b582da7867",
+      "bytes": 3489
+    },
+    {
+      "file": "source-web-wechat.js",
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/web/wechat.js",
+      "sha256": "60a35ad84caa64ebaac87a57f67c09442cfa55af25c2c547efa4664937697c8a",
+      "bytes": 3246
+    },
+    {
+      "file": "registration_entries.py",
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/registration_entries.py",
+      "sha256": "71e3666f871d77dd5db6fc30fd942316f0061baa74765ecf89eb468e93ea3ba4",
+      "bytes": 3793
+    },
+    {
+      "file": "account_link.py",
+      "path": "snapshot/opt/skill-platform/member-0.10.31/account_link.py",
+      "sha256": "9120107f9b4c179a5e72129baca1b6bfc3066879c7b1546e475a36d6b3632761",
+      "bytes": 14075
+    }
+  ],
+  "runtime_read_only": [
+    {
+      "path": "/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+      "sha256": "3d7c26d492567a1cd389a08e66e18068855824a44ffda68438334f41c1f001b7",
+      "matches_fixed_snapshot": false,
+      "normalized_lf_matches_fixed_snapshot": true,
+      "difference": "CRLF in runtime, LF in repository; no code difference"
+    },
+    {
+      "path": "/var/www/image-assistant/auth/wechat/wechat.js",
+      "sha256": "8caf538a9956bce865ca7eb7335ad080c61d6c4515a62293faa980736dffeae0",
+      "matches_fixed_snapshot": false,
+      "normalized_lf_matches_fixed_snapshot": true,
+      "difference": "CRLF in runtime, LF in repository; no code difference"
+    }
+  ],
+  "production_writes": 0
+}

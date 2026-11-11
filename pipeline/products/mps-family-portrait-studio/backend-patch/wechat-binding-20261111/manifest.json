@@ -1,0 +1,69 @@
+{
+  "files": [
+    {
+      "path": "changes.patch",
+      "bytes": 26246,
+      "sha256": "6cef04ed922e4aa8e65c2cd353a31ecae20e19333371269ebf7db56b0ad8a2e4"
+    },
+    {
+      "path": "official-read.json",
+      "bytes": 339,
+      "sha256": "4e22d9a8fbdef002954cab51f1230bd00e58014e790445889ca0a0aca5b7334e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7743,
+      "sha256": "1023b132f427c4387dc129f1e56a50c3d2f14f6108a6b395189b45b3f7bd161b"
+    },
+    {
+      "path": "source-verification.json",
+      "bytes": 2074,
+      "sha256": "55cd8c08c8b3460ac8df0519ac7a9d664849a47b8734be5c8fa1164d158e7d23"
+    },
+    {
+      "path": "TEST-RESULTS.json",
+      "bytes": 8203,
+      "sha256": "a427f8628fa18ddc60a3f1965e5c6883d497f7723e7d5ebac32977d22e16176a"
+    },
+    {
+      "path": "tests/check_baseline.py",
+      "bytes": 1113,
+      "sha256": "49fa5601d600e32060491e60ef2e8edca07b6cca2c0daaf6f20857e682ea1557"
+    },
+    {
+      "path": "tests/fixtures/account_link.py",
+      "bytes": 14075,
+      "sha256": "9120107f9b4c179a5e72129baca1b6bfc3066879c7b1546e475a36d6b3632761"
+    },
+    {
+      "path": "tests/fixtures/original_wechat_binding.py",
+      "bytes": 16469,
+      "sha256": "c7c03be06d664d78a52dd65e8e6d99dafd00cc06ae64728f836b5d5d9a233763"
+    },
+    {
+      "path": "tests/fixtures/registration_entries.py",
+      "bytes": 3793,
+      "sha256": "71e3666f871d77dd5db6fc30fd942316f0061baa74765ecf89eb468e93ea3ba4"
+    },
+    {
+      "path": "tests/test_wechat_binding.py",
+      "bytes": 22386,
+      "sha256": "c61789a64ea597550a6b23e1da83fc4b773e360de1406f452615bb85e9912ee0"
+    },
+    {
+      "path": "tests/test_wechat_page.js",
+      "bytes": 5988,
+      "sha256": "040c71bbd4bc7e2938ebdccb69ed1c1e2dd11fde08099bce24e86c32c2e9231d"
+    },
+    {
+      "path": "wechat.js",
+      "bytes": 5394,
+      "sha256": "0728dee07670ad487ec47543023e20a70d58aa3b83f5580b125f26296df2aaf2"
+    },
+    {
+      "path": "wechat_binding.py",
+      "bytes": 19590,
+      "sha256": "0a60654a7d72e45f168556c8e32a36542dbb7496e45fe653c3d0c7605559e7ed"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "patch_status": "tested_not_deployed",
+  "windows": {
+    "platform": "Windows",
+    "python": "3.12.10",
+    "server_tests": 21,
+    "server_passed": 21,
+    "node": "v24.19.0",
+    "js_tests": 10,
+    "js_passed": 10,
+    "js_syntax": "pass",
+    "output": "test_01_desktop_kept_open (__main__.BindingTests.test_01_desktop_kept_open) ... ok\r\ntest_02_desktop_closed_no_finish_call (__main__.BindingTests.test_02_desktop_closed_no_finish_call) ... ok\r\ntest_03_same_browser_mobile_sets_session_and_redirects (__main__.BindingTests.test_03_same_browser_mobile_sets_session_and_redirects) ... ok\r\ntest_04_scan_in_sixth_minute_after_link_issue (__main__.BindingTests.test_04_scan_in_sixth_minute_after_link_issue) ... ok\r\ntest_05_repeat_same_identity_is_idempotent (__main__.BindingTests.test_05_repeat_same_identity_is_idempotent) ... ok\r\ntest_account_already_bound_to_different_wechat (__main__.BindingTests.test_account_already_bound_to_different_wechat) ... ok\r\ntest_callback_in_sixth_minute_after_qr_start (__main__.BindingTests.test_callback_in_sixth_minute_after_qr_start) ... ok\r\ntest_callback_wrong_browser_proof_does_not_set_session (__main__.BindingTests.test_callback_wrong_browser_proof_does_not_set_session) ... ok\r\ntest_conflicting_identity_does_not_merge_accounts (__main__.BindingTests.test_conflicting_identity_does_not_merge_accounts) ... ok\r\ntest_exchange_error_is_generic_and_no_registration (__main__.BindingTests.test_exchange_error_is_generic_and_no_registration) ... ok\r\ntest_existing_bound_browser_reuses_original_account_without_scan (__main__.BindingTests.test_existing_bound_browser_reuses_original_account_without_scan) ... ok\r\ntest_expired_entry_and_state_are_rejected (__main__.BindingTests.test_expired_entry_and_state_are_rejected) ... ok\r\ntest_finish_used_state_needs_no_pending_entry_and_audits_once (__main__.BindingTests.test_finish_used_state_needs_no_pending_entry_and_audits_once) ... ok\r\ntest_finish_wrong_verifier_and_callback_replay (__main__.BindingTests.test_finish_wrong_verifier_and_callback_replay) ... ok\r\ntest_missing_entry_fails_closed (__main__.BindingTests.test_missing_entry_fails_closed) ... ok\r\ntest_origin_consent_and_state_checks_remain (__main__.BindingTests.test_origin_consent_and_state_checks_remain) ... ok\r\ntest_poll_while_exchange_in_progress_then_callback_completes (__main__.BindingTests.test_poll_while_exchange_in_progress_then_callback_completes) ... ok\r\ntest_start_cookie_is_host_only_lax_and_scoped (__main__.BindingTests.test_start_cookie_is_host_only_lax_and_scoped) ... ok\r\ntest_start_reserves_entry_until_oauth_deadline (__main__.BindingTests.test_start_reserves_entry_until_oauth_deadline) ... ok\r\ntest_trade_still_requires_original_browser_code_at_finish (__main__.BindingTests.test_trade_still_requires_original_browser_code_at_finish) ... ok\r\ntest_unrelated_route_still_delegates (__main__.BindingTests.test_unrelated_route_still_delegates) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 21 tests in 14.219s\r\n\r\nOK\r\n✔ pending then linked navigates to the first-party payment page (4.4599ms)\n✔ finish HTTP 401 shows the actual error and an explicit recovery action (1.1245ms)\n✔ finish HTTP 409 shows the actual error and an explicit recovery action (0.9303ms)\n✔ one transient network failure is visible and the same state is queried again (1.3208ms)\n✔ three consecutive transient errors stop visibly with recovery guidance (1.2709ms)\n✔ expired QR stops before another request and explains how to recover (0.8572ms)\n✔ a malicious cross-origin payment URL is rejected (1.7754ms)\n✔ pagehide stops polling (0.9428ms)\n✔ an already-linked start goes straight to the validated payment page (0.8032ms)\n✔ explicit consent remains necessary before starting OAuth (0.8209ms)\nℹ tests 10\nℹ suites 0\nℹ pass 10\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 122.6416\n"
+  },
+  "linux": {
+    "platform": "Linux",
+    "python": "3.11.6",
+    "server_tests": 21,
+    "server_passed": 21,
+    "js_tests": "not run: no Node executable",
+    "output": "test_01_desktop_kept_open (__main__.BindingTests.test_01_desktop_kept_open) ... ok\ntest_02_desktop_closed_no_finish_call (__main__.BindingTests.test_02_desktop_closed_no_finish_call) ... ok\ntest_03_same_browser_mobile_sets_session_and_redirects (__main__.BindingTests.test_03_same_browser_mobile_sets_session_and_redirects) ... ok\ntest_04_scan_in_sixth_minute_after_link_issue (__main__.BindingTests.test_04_scan_in_sixth_minute_after_link_issue) ... ok\ntest_05_repeat_same_identity_is_idempotent (__main__.BindingTests.test_05_repeat_same_identity_is_idempotent) ... ok\ntest_account_already_bound_to_different_wechat (__main__.BindingTests.test_account_already_bound_to_different_wechat) ... ok\ntest_callback_in_sixth_minute_after_qr_start (__main__.BindingTests.test_callback_in_sixth_minute_after_qr_start) ... ok\ntest_callback_wrong_browser_proof_does_not_set_session (__main__.BindingTests.test_callback_wrong_browser_proof_does_not_set_session) ... ok\ntest_conflicting_identity_does_not_merge_accounts (__main__.BindingTests.test_conflicting_identity_does_not_merge_accounts) ... ok\ntest_exchange_error_is_generic_and_no_registration (__main__.BindingTests.test_exchange_error_is_generic_and_no_registration) ... ok\ntest_existing_bound_browser_reuses_original_account_without_scan (__main__.BindingTests.test_existing_bound_browser_reuses_original_account_without_scan) ... ok\ntest_expired_entry_and_state_are_rejected (__main__.BindingTests.test_expired_entry_and_state_are_rejected) ... ok\ntest_finish_used_state_needs_no_pending_entry_and_audits_once (__main__.BindingTests.test_finish_used_state_needs_no_pending_entry_and_audits_once) ... ok\ntest_finish_wrong_verifier_and_callback_replay (__main__.BindingTests.test_finish_wrong_verifier_and_callback_replay) ... ok\ntest_missing_entry_fails_closed (__main__.BindingTests.test_missing_entry_fails_closed) ... ok\ntest_origin_consent_and_state_checks_remain (__main__.BindingTests.test_origin_consent_and_state_checks_remain) ... ok\ntest_poll_while_exchange_in_progress_then_callback_completes (__main__.BindingTests.test_poll_while_exchange_in_progress_then_callback_completes) ... ok\ntest_start_cookie_is_host_only_lax_and_scoped (__main__.BindingTests.test_start_cookie_is_host_only_lax_and_scoped) ... ok\ntest_start_reserves_entry_until_oauth_deadline (__main__.BindingTests.test_start_reserves_entry_until_oauth_deadline) ... ok\ntest_trade_still_requires_original_browser_code_at_finish (__main__.BindingTests.test_trade_still_requires_original_browser_code_at_finish) ... ok\ntest_unrelated_route_still_delegates (__main__.BindingTests.test_unrelated_route_still_delegates) ... ok\n\n----------------------------------------------------------------------\nRan 21 tests in 13.168s\n\nOK\n",
+    "temporary_test_directory_removed": true,
+    "input_archive_sha256": "175de438cf38bfbd9bf542a28b27a40eff3f0072c3ef4a5d94c6da0db5b7ddd3"
+  },
+  "baseline": {
+    "original_fixed_source": true,
+    "regressions_detected": 5,
+    "failures": 5,
+    "errors": 0,
+    "checker": "tests/check_baseline.py"
+  },
+  "mandatory_cases": [
+    "desktop open: registered",
+    "desktop closed, no finish: registered",
+    "same initiating browser: registered plus session and 302",
+    "sixth minute after issue and after start: registered",
+    "same identity repeated: registered, original account reused"
+  ],
+  "diff_apply_check": "pass on clean fixed-source copy",
+  "source_content_matches_runtime": true,
+  "real_wechat_calls": 0,
+  "real_upstream_calls": 0,
+  "production_writes": 0,
+  "service_restarts": 0,
+  "real_customer_tests": 0,
+  "limitations": [
+    "Synthetic account/session store; actual fixed RegistrationEntries and DeviceLinks fixtures",
+    "Node VM DOM test, not a real browser",
+    "No production module-chain integration run",
+    "Real WeChat and WorkBuddy behavior not verified",
+    "Current deployment and platform live status not independently verified"
+  ]
+}
