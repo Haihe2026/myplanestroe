@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-claude-fix-102-auth-bug-20261111",
+  "skill_id": "mps-family-portrait-studio",
+  "source_path": "pipeline/products/mps-family-portrait-studio/msg-from-muse-20261111-fix-102-auth-bug.md",
+  "source_ref": "4464d411204f922acf9d341007a6d8fc388a77c8",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "claude",
+  "schema_version": 1,
+  "event_id": "evt-016a0a63e50d0d49d685c859e255472d94ed97f2df187faadb387087b88991f4",
+  "request_kind": "handoff"
+}
