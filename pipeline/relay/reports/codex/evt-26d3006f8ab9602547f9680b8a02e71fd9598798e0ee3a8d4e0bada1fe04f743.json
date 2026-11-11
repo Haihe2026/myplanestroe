@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-26d3006f8ab9602547f9680b8a02e71fd9598798e0ee3a8d4e0bada1fe04f743",
+  "claim_id": "ce84c3dc-13b3-4592-85d2-a9ac40f2c8d1",
+  "role": "codex",
+  "skill_id": "mps-maternity-portrait-studio",
+  "at": "2026-11-12T00:20:04+08:00",
+  "result": "spec_ready",
+  "source_ref": "815868881762e1578aa24a1f30fad993d3435e3d",
+  "source_path": "pipeline/products/mps-maternity-portrait-studio/status.json",
+  "evidence_ref": "98ff2a5471031ff380a30bbd68c4ee69c2067ee1:pipeline/products/mps-maternity-portrait-studio/01-a1-validation.json",
+  "spec_commit": "98ff2a5471031ff380a30bbd68c4ee69c2067ee1",
+  "original_request": "本人单人孕妈写真，十主题、三档自述视觉选项；Codex完成规格和十示例/一logo，Claude真实开发。",
+  "source_verification": "98ff2a5471031ff380a30bbd68c4ee69c2067ee1:pipeline/products/mps-maternity-portrait-studio/01-source-verification.json",
+  "original_receipt_preserved": {
+    "event_id": "evt-26d3006f8ab9602547f9680b8a02e71fd9598798e0ee3a8d4e0bada1fe04f743",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T23:30:34+08:00",
+    "evidence_ref": "d7c2fdeea44ff0bceca0f34d3df4dff41b61b541:pipeline/products/mps-maternity-portrait-studio/status.json",
+    "claim_id": "ce84c3dc-13b3-4592-85d2-a9ac40f2c8d1"
+  },
+  "no_duplicate_claim": true,
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-maternity-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
+    "stage": "spec_ready",
+    "updated_at": "2026-11-12T00:14:11+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "a1": {
+    "result": "pass",
+    "items": 16,
+    "acceptance_groups": 17,
+    "stage6_mapping": 57,
+    "independent_final_reviews": "pass"
+  },
+  "assets": {
+    "demos": 10,
+    "logo": 1,
+    "registered_generation_calls": 11,
+    "extra_generation_tests": 0,
+    "duplicate_generation_posts": 0,
+    "stage_distribution": {
+      "early": 3,
+      "middle": 4,
+      "late": 3
+    },
+    "fake_adult_only": true
+  },
+  "published_files_blob_verified": 20,
+  "other_product_files_and_board_rows_untouched": true,
+  "scope": {
+    "lane": "fast",
+    "new_skill_implementation": false,
+    "backend_deployment": false,
+    "production_finance_writes": false,
+    "platform_upload": false
+  },
+  "verification_limits": [
+    "三档是本人自述/确认的艺术视觉选项，非医学孕周/肚形标准、专门模型参数或30组合验收。",
+    "全部资产为同一虚构成年人，仅逐图主观审阅，不是真实孕妇照片/生物身份保真或生产签名URL验收。",
+    "本产品真实微信/支付/手机、WorkBuddy行为、平台接受/审核未验证。"
+  ],
+  "next_role": "claude",
+  "next_action": "按自动spec_ready事件从固定spec_commit开发真实Skill/A2/打包；保留10图/logo原字节，带入travel1.0.2恢复/有界输入/attempted一次经验。后续Codex A3及现行附录D/D.6；正式上传负责人手动。",
+  "authority": "仓库资料不扩展生产/财务/部署/发布/跨聊天权限；不新建worker或AI心跳。"
+}
