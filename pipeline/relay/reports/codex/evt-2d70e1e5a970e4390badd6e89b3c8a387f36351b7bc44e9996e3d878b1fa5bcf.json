@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-2d70e1e5a970e4390badd6e89b3c8a387f36351b7bc44e9996e3d878b1fa5bcf",
+  "claim_id": "3851236d-0a5d-49d0-9f92-848a2e9d3018",
+  "role": "codex",
+  "skill_id": "mps-family-portrait-studio",
+  "version": "1.0.1",
+  "at": "2026-11-11T13:25:19+08:00",
+  "source_ref": "500856b1c504c83b8dc40cf919104db58bbecf0c",
+  "result": "computer_use_test_blocked",
+  "reason_code": "COMPUTER_USE_CAPTURE_TIMEOUT",
+  "evidence_ref": "89f140204880d12992e107b4db34d556100ddcb3:pipeline/products/mps-family-portrait-studio/04-computer-use-test-report.md",
+  "a3_result": "pass",
+  "product_stage": "test_passed",
+  "delivery_gate": "blocked pending Appendix D; no passed computer-use test",
+  "original_receipt_preserved": {
+    "event_id": "evt-2d70e1e5a970e4390badd6e89b3c8a387f36351b7bc44e9996e3d878b1fa5bcf",
+    "role": "codex",
+    "action": "claimed",
+    "at": "2026-11-11T13:12:57+08:00",
+    "evidence_ref": null,
+    "claim_id": "3851236d-0a5d-49d0-9f92-848a2e9d3018"
+  },
+  "duplicate_claim": false,
+  "actual_observations": [
+    "@oai/sky初始化成功；WorkBuddy在运行，返回唯一目标窗口。",
+    "首次窗口截图及重新选择窗口后的唯一重试均返回 window capture timed out: timed out waiting on channel。",
+    "未获得截图，未点击、输入、导入ZIP或发送测试图。"
+  ],
+  "not_tested": [
+    "宿主导入/解析",
+    "欢迎句",
+    "十张示例展示",
+    "首轮流程"
+  ],
+  "paid_generation_calls": 0,
+  "production_changes": 0,
+  "platform_submissions": 0,
+  "next": "恢复受支持的WorkBuddy窗口捕获能力后，以同SHA256的1.0.1重测；当前无证据需Claude改包。",
+  "muse_followup_request": "req-codex-to-muse-family-101-cu-timeout-20261111",
+  "authority": "保持现有生产/财务/发布边界，未创建监测或跨聊天发送。"
+}
