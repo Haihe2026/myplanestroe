@@ -1,0 +1,192 @@
+{
+  "skill_id": "mps-maternity-portrait-studio",
+  "at": "2026-11-11T23:32:36+08:00",
+  "source_ref": "95f2cfb3e2ca47bfc4f054a4e1ef218e725468be",
+  "demos": 10,
+  "logo": 1,
+  "paid_generation_limit": 11,
+  "authorization": "本聊天长期授权：规格所需示例图及每技能1张logo，使用登记上游并记来源审计，无需重复授权。",
+  "example_scope": "Same completely fictional adult; studio original text generation plus nine reference edits. Early/middle/late examples 3/4/3 across ten themes, not 30 generated combinations; artistic presets, not real pregnancy verification or medical month/shape standard.",
+  "transport": "Isolated registered new_only.Adapter task DB and signer; synthetic fixed public reference URL override only; no production input DB, customer wallet/config/service writes. Production signed-reference route not verified.",
+  "retries": "Each key at most one generation POST; ambiguous results only query original task; never blindly retry or add calls.",
+  "scenes": [
+    {
+      "key": "studio",
+      "title": "白纱轻盈棚拍",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "白纱",
+        "纱裙",
+        "棚拍",
+        "影棚",
+        "柔光"
+      ],
+      "maternity_stage": "middle",
+      "direction": "Refined warm ivory photography studio, soft window-like light, a tasteful high-neck lined white tulle maternity dress with opaque fabric completely covering chest and abdomen; one hand gently framing the natural bump. No bridal veil, bridal bouquet, wedding ritual or bridal accessories.",
+      "prompt": "Use case: photorealistic-natural. Asset type: offline maternity Skill development example. Create an original photorealistic synthetic adult maternity portrait. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative middle-pregnancy visual preset, chosen only for this synthetic development example: a moderately rounded natural maternity silhouette under clothing, graceful and anatomically plausible, not an oversized late-pregnancy bump. It is not a medical depiction of an exact month or week. Refined warm ivory photography studio, soft window-like light, a tasteful high-neck lined white tulle maternity dress with opaque fabric completely covering chest and abdomen; one hand gently framing the natural bump. No bridal veil, bridal bouquet, wedding ritual or bridal accessories. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪阳光",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "草坪",
+        "草地",
+        "户外",
+        "阳光"
+      ],
+      "maternity_stage": "early",
+      "direction": "A peaceful sunlit green lawn, airy natural daylight, tasteful opaque pale sage maternity day dress, gentle breeze, simple natural posture. Not a medical or fitness photograph.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative early-pregnancy visual preset, chosen only for this synthetic development example: a subtle, small, naturally rounded abdominal contour under clothing, not a prominent late-pregnancy bump. It is not a medical depiction of an exact month or week. A peaceful sunlit green lawn, airy natural daylight, tasteful opaque pale sage maternity day dress, gentle breeze, simple natural posture. Not a medical or fitness photograph. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "flowers",
+      "title": "花海仙气",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "花海",
+        "花丛",
+        "花园",
+        "浪漫"
+      ],
+      "maternity_stage": "middle",
+      "direction": "A lush pastel flower garden, soft peach and lavender blooms, an opaque lined dusty-pink maternity chiffon dress with flowing sleeves, romantic yet modest studio-quality composition, no wedding accessories.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative middle-pregnancy visual preset, chosen only for this synthetic development example: a moderately rounded natural maternity silhouette under clothing, graceful and anatomically plausible, not an oversized late-pregnancy bump. It is not a medical depiction of an exact month or week. A lush pastel flower garden, soft peach and lavender blooms, an opaque lined dusty-pink maternity chiffon dress with flowing sleeves, romantic yet modest studio-quality composition, no wedding accessories. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "oil",
+      "title": "复古油画",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "油画",
+        "复古",
+        "古典",
+        "艺术"
+      ],
+      "maternity_stage": "late",
+      "direction": "A rich warm brown and muted olive painted studio backdrop, classic side lighting, elegant opaque burgundy long-sleeve maternity gown, dignified vintage fine-art painted photographic texture, no historical royal symbols.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative late-pregnancy visual preset, chosen only for this synthetic development example: a clearly fuller rounded maternity silhouette under clothing, natural proportional anatomy, not exaggerated or grotesque. It is not a medical depiction of an exact month or week. A rich warm brown and muted olive painted studio backdrop, classic side lighting, elegant opaque burgundy long-sleeve maternity gown, dignified vintage fine-art painted photographic texture, no historical royal symbols. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "home",
+      "title": "简约家居温馨",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "家居",
+        "居家",
+        "家里",
+        "沙发",
+        "温馨"
+      ],
+      "maternity_stage": "early",
+      "direction": "A calm bright home beside a beige sofa and linen curtains, warm morning light, fully clothed cream knit top and comfortable loose trousers, natural lived-in maternity portrait, no infant or baby objects that imply a real child is present.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative early-pregnancy visual preset, chosen only for this synthetic development example: a subtle, small, naturally rounded abdominal contour under clothing, not a prominent late-pregnancy bump. It is not a medical depiction of an exact month or week. A calm bright home beside a beige sofa and linen curtains, warm morning light, fully clothed cream knit top and comfortable loose trousers, natural lived-in maternity portrait, no infant or baby objects that imply a real child is present. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "beach",
+      "title": "海边度假暖阳",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "海边",
+        "海滩",
+        "暖阳",
+        "度假"
+      ],
+      "maternity_stage": "middle",
+      "direction": "A tranquil generic beach with soft warm sunlight and gentle waves, opaque pale-yellow relaxed maternity maxi dress, calm professional maternity portrait with a natural moderately rounded silhouette. No destination landmark, travel-check-in narrative or wedding styling.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative middle-pregnancy visual preset, chosen only for this synthetic development example: a moderately rounded natural maternity silhouette under clothing, graceful and anatomically plausible, not an oversized late-pregnancy bump. It is not a medical depiction of an exact month or week. A tranquil generic beach with soft warm sunlight and gentle waves, opaque pale-yellow relaxed maternity maxi dress, calm professional maternity portrait with a natural moderately rounded silhouette. No destination landmark, travel-check-in narrative or wedding styling. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "qipao",
+      "title": "旗袍雅致",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "旗袍",
+        "雅致",
+        "东方"
+      ],
+      "maternity_stage": "late",
+      "direction": "An understated warm gray studio with subtle wooden screen, elegant opaque muted teal maternity qipao with room for the natural fuller bump, high collar and modest sleeves, natural fabric folds. No bridal red-and-gold embroidery, no wedding ceremony, no rank or religious insignia.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative late-pregnancy visual preset, chosen only for this synthetic development example: a clearly fuller rounded maternity silhouette under clothing, natural proportional anatomy, not exaggerated or grotesque. It is not a medical depiction of an exact month or week. An understated warm gray studio with subtle wooden screen, elegant opaque muted teal maternity qipao with room for the natural fuller bump, high collar and modest sleeves, natural fabric folds. No bridal red-and-gold embroidery, no wedding ceremony, no rank or religious insignia. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "korean",
+      "title": "韩式清新",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "韩式",
+        "清新",
+        "淡雅",
+        "简约"
+      ],
+      "maternity_stage": "early",
+      "direction": "A minimal soft cream Korean-inspired portrait studio, pale blue opaque maternity blouse and gentle neutral skirt, clean bright window light and a subtle early-stage contour, understated calm styling, no heavy retouching or bridal elements.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative early-pregnancy visual preset, chosen only for this synthetic development example: a subtle, small, naturally rounded abdominal contour under clothing, not a prominent late-pregnancy bump. It is not a medical depiction of an exact month or week. A minimal soft cream Korean-inspired portrait studio, pale blue opaque maternity blouse and gentle neutral skirt, clean bright window light and a subtle early-stage contour, understated calm styling, no heavy retouching or bridal elements. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "forest",
+      "title": "森系清新",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "森系",
+        "森林",
+        "树林",
+        "绿意"
+      ],
+      "maternity_stage": "middle",
+      "direction": "A quiet green woodland with soft dappled daylight, tasteful opaque sage-green maternity dress with modest sleeves, natural moderately rounded maternity silhouette, peaceful refined portrait, no fantasy creature or ritual symbols.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative middle-pregnancy visual preset, chosen only for this synthetic development example: a moderately rounded natural maternity silhouette under clothing, graceful and anatomically plausible, not an oversized late-pregnancy bump. It is not a medical depiction of an exact month or week. A quiet green woodland with soft dappled daylight, tasteful opaque sage-green maternity dress with modest sleeves, natural moderately rounded maternity silhouette, peaceful refined portrait, no fantasy creature or ritual symbols. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "night",
+      "title": "夜景灯火温馨",
+      "series": "孕期主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "夜景",
+        "灯火",
+        "夜色",
+        "暖调"
+      ],
+      "maternity_stage": "late",
+      "direction": "A calm softly lit terrace at blue hour, warm out-of-focus string lights behind the subject, opaque elegant cocoa maternity dress with a light cardigan, balanced warm face light and a clearly fuller but natural maternity silhouette, no readable signs, no travel landmark or wedding styling.",
+      "prompt": "Use case: identity-preserve. Asset type: offline maternity Skill development example. Edit the supplied completely synthetic adult reference. Preserve the same fictional adult face, hairline and visible facial features; change only the explicitly requested maternity visual preset, clothing, scene and lighting. Do not copy the seed bump size when a different preset is requested. Exactly one completely fictional 29-year-old adult pregnant woman with a natural oval face, dark almond-shaped eyes, shoulder-length softly wavy black hair, warm natural skin texture. Keep this same fictional adult identity across the series; no real person is depicted. Fully clothed, modest professional maternity photography, natural relaxed standing or seated pose, face unobstructed, hands resting naturally without distorted fingers. No partner, child, infant or other person. Illustrative late-pregnancy visual preset, chosen only for this synthetic development example: a clearly fuller rounded maternity silhouette under clothing, natural proportional anatomy, not exaggerated or grotesque. It is not a medical depiction of an exact month or week. A calm softly lit terrace at blue hour, warm out-of-focus string lights behind the subject, opaque elegant cocoa maternity dress with a light cardigan, balanced warm face light and a clearly fuller but natural maternity silhouette, no readable signs, no travel landmark or wedding styling. An AI-created artistic maternity example, not a medical standard, pregnancy verification or documentary photograph. No text, letters, numbers, readable signs, logos, brands or watermark. No bare abdomen, lingerie, nudity or sexualized posing. No extra limbs, fused hands or distorted face."
+    },
+    {
+      "key": "logo",
+      "title": "孕妈写真主题logo",
+      "series": "主题logo",
+      "size": "1024x1024",
+      "prompt": "Use case: stylized-concept. Asset type: premium original 3D maternity portrait studio app icon. One simple sculptural adult mother-to-be silhouette gently framing a softly rounded abdomen, formed from ivory ceramic and dusty-rose satin inside a subtle camera-lens-shaped circular frame. Fully clothed abstract figure, no detailed real face, no baby or fetus, no medical symbols. Warm peach and ivory rounded-square background, pearl-like material, soft studio contact shadows, clear depth and dimensional sculpted texture, elegant and immediately recognizable at small size. One focal subject. No text, letters, numbers, brand, trademark, watermark, flat vector line icon or generic flat ico."
+    }
+  ]
+}
