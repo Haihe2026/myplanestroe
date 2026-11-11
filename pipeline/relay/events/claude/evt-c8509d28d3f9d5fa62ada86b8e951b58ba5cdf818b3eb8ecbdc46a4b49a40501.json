@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-c8509d28d3f9d5fa62ada86b8e951b58ba5cdf818b3eb8ecbdc46a4b49a40501",
+  "kind": "stage_ready",
+  "to": "claude",
+  "skill_id": "mps-family-portrait-studio",
+  "stage": "spec_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "0da1ba29c3796d922c774dfeff713747bc936fb5",
+  "source_path": "pipeline/products/mps-family-portrait-studio/status.json",
+  "input_fingerprint": "c8509d28d3f9d5fa62ada86b8e951b58ba5cdf818b3eb8ecbdc46a4b49a40501"
+}
