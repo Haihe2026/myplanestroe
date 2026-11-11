@@ -1,1 +1,1 @@
-{"event_id": "evt-19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d", "role": "codex", "action": "claimed", "at": "2026-11-11T08:29:42+08:00", "evidence_ref": null, "claim_id": "144b376d-ae91-43d8-aa3f-221f8f082769"}
+{"event_id": "evt-19f7ece2f852e08d3faf67e40b2384d91be500cd6b90aebe66f136542dd5aa8d", "role": "codex", "action": "acknowledged", "at": "2026-11-11T08:42:51+08:00", "evidence_ref": "c766e1db65eb2521c6ced67614a496c792e085f4:pipeline/products/mps-family-portrait-studio/status.json", "claim_id": "144b376d-ae91-43d8-aa3f-221f8f082769"}
