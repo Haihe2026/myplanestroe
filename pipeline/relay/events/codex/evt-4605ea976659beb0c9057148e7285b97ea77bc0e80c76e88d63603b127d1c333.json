@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-cu-mouse-retry-family-101-20261111",
+  "skill_id": "mps-family-portrait-studio",
+  "source_path": "pipeline/products/mps-family-portrait-studio/msg-from-muse-20261111-cu-mouse-retry-family-101.md",
+  "source_ref": "72647f0105e0b03c3e22fafee4288367588c3de0",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-4605ea976659beb0c9057148e7285b97ea77bc0e80c76e88d63603b127d1c333",
+  "request_kind": "handoff"
+}
