@@ -1,7 +1,8 @@
 {
   "updated": "2026-11-11",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "wechat_automatic_qr_and_all_payment_checkout_deployed",
+  "last_change": "trade_leads_2_0_11_adapter_deployed",
   "production_access_included": false,
-  "live_sync": false
+  "live_sync": false,
+  "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized"
 }

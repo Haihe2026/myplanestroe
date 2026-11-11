@@ -1,0 +1,33 @@
+{
+  "version": "2.0.11",
+  "date": "2026-11-11",
+  "production_deployed": true,
+  "source_mirror": "sanitized_reading_copy",
+  "supplier_identity_and_connection_configuration": "server_only_not_published",
+  "adapter_symbols_and_table_names_anonymized": true,
+  "existing_cny_prices_and_wallets_preserved": true,
+  "source_sha256": {
+    "snapshot/opt/skill-platform/trade-leads-2.0.11/run_shared.py": "2067667bea8165330c2c50006e79389f27b19e083c8e259c704d60b5cd754545",
+    "snapshot/opt/skill-platform/trade-leads-2.0.11/trade_gateway.py": "cbf396c3c49746e82b07614c68e273e916326b6f80031d0b937e00888b0e0a60",
+    "snapshot/opt/skill-platform/trade-leads-2.0.11/trade_data.py": "4873dd40e455939e1c04b89a79301f46b3ee7dbdf690881eb12f875e4bdb318f"
+  },
+  "validation": {
+    "server_offline_cases": 34,
+    "server_windows": "passed",
+    "server_linux": "passed",
+    "client_frozen_executions": 220,
+    "real_search_company_candidates": 25,
+    "real_contact_results": 1,
+    "real_provider_calls": 5,
+    "recorded_cost_usd": 0.308,
+    "host_installation": "not_tested"
+  },
+  "excluded": [
+    "credentials",
+    "databases",
+    "provider_target_url",
+    "professional_records",
+    "raw_responses",
+    "logs"
+  ]
+}
