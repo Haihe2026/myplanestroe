@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-51567af51e37d88109f3159bc4509049ccdd9794a2ae6ea437c02947f07f5f65",
+  "claim_id": "4d4a0c85-7671-416e-aa43-89a316db8f2b",
+  "role": "codex",
+  "skill_id": "mps-family-portrait-studio",
+  "at": "2026-11-11T11:06:51+08:00",
+  "source_ref": "c25a3bd5434a43c8a4c4e576ba06df6592349f17",
+  "result": "test_failed",
+  "version": "1.0.0",
+  "evidence_ref": "4169e8864cf3135532b000e410e8009479448efa:pipeline/products/mps-family-portrait-studio/03-test-report.md",
+  "original_receipt_preserved": {
+    "event_id": "evt-51567af51e37d88109f3159bc4509049ccdd9794a2ae6ea437c02947f07f5f65",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-11T10:55:52+08:00",
+    "evidence_ref": "3570f6d965b45e2274c15a745575a5791ef6c321:pipeline/products/mps-family-portrait-studio/status.json",
+    "claim_id": "4d4a0c85-7671-416e-aa43-89a316db8f2b"
+  },
+  "duplicate_event_claim": false,
+  "findings": [
+    "A3-FAM-01：401恢复后原键查询404触发生成重提，违反固定契约。",
+    "A3-FAM-02：401恢复失败将state降为confirmed，允许plan清除已发出任务的原键。",
+    "A3-FAM-03：示例缺一图仍返回9图/成功，须缺资源退出3。"
+  ],
+  "passed_checks": [
+    "固定ZIP SHA/CRC和两级目录",
+    "八必填字段及三组双语示例",
+    "十张示例原字节和source SHA",
+    "主题logo原字节/512×512/427328B",
+    "空格/井号Markdown链接夹具、对客文案及秘密扫描"
+  ],
+  "inspection_scope": "独立静态检查；只求值纯路径函数，不执行客户端业务或重跑完整A2。缺陷给出固定代码路径和Claude的Mock回归要求。",
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "client_modified_by_codex": false,
+  "next_role": "claude",
+  "next_action": "按03-test-report.md修三项并补A2回归，保持十图和logo不变；固定修订ZIP后置package_ready，交Codex复查。",
+  "authority": "现行SOP内退回，不扩大部署/财务/生产/发布/跨聊天权限。"
+}
