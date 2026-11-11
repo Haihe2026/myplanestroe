@@ -69,6 +69,29 @@ USER_PART = BODY.split('## 执行规范')[0]
 EXEC_PART = BODY.split('## 执行规范')[1]
 
 
+_PLAIN_BAD = re.compile(r'(: |\s#|:$)')
+
+
+def frontmatter_scalar_problems(text):
+    """标准 YAML 语法检查（标准库实现的严格子集，随包可跑）：未引用的普通标量不得含「冒号+空格」「空格+#」、
+    不得以 YAML 指示符开头；双引号标量必须闭合且内部引号已转义。返回问题列表，空表示通过。"""
+    probs = []
+    for n, ln in enumerate(text.split('---', 2)[1].strip('\n').split('\n'), 1):
+        m = re.match(r'^(?:[A-Za-z_][\w-]*:\s+|\s+-\s+)(.*)$', ln)
+        if not m or not m.group(1):
+            continue
+        v = m.group(1)
+        if v.startswith('"'):
+            if len(v) < 2 or not v.endswith('"') or re.search(r'(?<!\\)"', v[1:-1]):
+                probs.append((n, 'bad double-quoted scalar'))
+        elif v.startswith("'"):
+            if len(v) < 2 or not v.endswith("'") or re.search(r"'(?!')", v[1:-1].replace("''", '')):
+                probs.append((n, 'bad single-quoted scalar'))
+        elif v[0] in '&*!|>%@`{[,?:-#' or _PLAIN_BAD.search(v):
+            probs.append((n, 'plain scalar needs quoting'))
+    return probs
+
+
 def parse_frontmatter(text):
     """最小 YAML 子集解析：顶层 `key: value` 与 `  - "item"` 列表；重复键直接报错。"""
     lines = text.split('---', 2)[1].strip('\n').split('\n')
@@ -194,6 +217,35 @@ class Contract(unittest.TestCase):
         self.assertTrue(all(x.strip() for x in zh + en))
         self.assertEqual(len(set(zh)), len(zh))
         self.assertEqual(len(set(en)), len(en))
+
+    def test_frontmatter_is_valid_yaml(self):
+        """MAT-A3-01：原始 frontmatter 必须是合法 YAML（含冒号空格的字段要引用）；有 PyYAML 时再用标准解析器核对类型与重复键。"""
+        self.assertEqual(frontmatter_scalar_problems(SKILL), [])
+        self.assertIn(': ', parse_frontmatter(SKILL)['description_en'])  # 正常例：引用后的值本身可以含冒号空格
+        bad = SKILL.replace('description_en: "' + parse_frontmatter(SKILL)['description_en'] + '"',
+                            'description_en: ' + parse_frontmatter(SKILL)['description_en'], 1)
+        self.assertNotEqual(bad, SKILL)
+        self.assertTrue(frontmatter_scalar_problems(bad))  # 反例：未引用的冒号空格必须被拦下
+        for snippet in ('---\nk: a: b\n---', '---\nk: "a"b"\n---', '---\nk: x #y\n---', '---\n  - a: b\n---'):
+            self.assertTrue(frontmatter_scalar_problems(snippet), snippet)
+        try:
+            import yaml
+        except ImportError:
+            self.skipTest('PyYAML 不可用：标准 YAML 解析在 dev/e2e_check.py 的 FrontmatterYaml 用例对最终 ZIP 执行')
+
+        class NoDup(yaml.SafeLoader):
+            pass
+
+        def mapping(loader, node, deep=False):
+            keys = [loader.construct_object(k, deep=deep) for k, _ in node.value]
+            if len(keys) != len(set(keys)):
+                raise ValueError('duplicate key')
+            return yaml.SafeLoader.construct_mapping(loader, node, deep)
+        NoDup.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, mapping)
+        fm = yaml.load(SKILL.split('---', 2)[1], Loader=NoDup)
+        self.assertEqual(fm, parse_frontmatter(SKILL))
+        with self.assertRaises(yaml.YAMLError):
+            yaml.safe_load(bad.split('---', 2)[1])
 
     def test_examples_zh_en_same_scene(self):
         # 第 k 条中文与第 k 条英文必须是同一场景（底色、寸数、像素、简历、考试、报名一一对应）。
@@ -578,8 +630,14 @@ class Contract(unittest.TestCase):
                             ['--subject', 'self', '--adult', 'yes', '--pregnant', 'no']):
                     code, sig = run(*(base + bad + ['--stage', 'middle', '--single', 'yes', '--face-clear', 'yes']))
                     self.assertEqual((code, sig['signal']), (3, 'notEligible'))
-                for must in ('本人', '确实在孕期', '假装怀孕', '没有产生任何扣费'):
-                    self.assertIn(must, W.not_eligible())
+                for reason, must in (('other', '本人'), ('minor', '成年'), ('not_pregnant', '假装怀孕')):
+                    self.assertIn(must, W.not_eligible(reason))
+                    self.assertIn('没有产生任何扣费', W.not_eligible(reason))
+                self.assertNotIn('照片', W.not_eligible('minor'))  # 明确未成年：不引导换图去补
+                # MAT-A3-03：还没问到的本人/成年/在孕期不当成不符合，只返回可续接的一次合并补问
+                code, sig = run(*(base + ['--subject', 'self', '--adult', 'unknown', '--pregnant', 'yes',
+                                          '--stage', 'middle', '--single', 'yes', '--face-clear', 'yes']))
+                self.assertEqual((code, sig['signal'], sig['missing']), (2, 'needsEligibility', ['adult']))
                 code, sig = run(*(base + ok + ['--stage', 'middle', '--single', 'no', '--face-clear', 'yes']))
                 self.assertEqual((code, sig['signal']), (3, 'peopleUnsupported'))
                 for must in ('全家福写真照相馆', '两人或夫妻合影', '暂时做不了', '没有产生任何扣费'):
@@ -1184,7 +1242,10 @@ class InheritedRepairTrv102(unittest.TestCase):
         i = src.index("if k == 'key_reset':")
         self.assertIn("EXIT_RESET", src[i:i + 400])
         self.assertIn("task_kept=True", src[i:i + 400])
-        self.assertLess(i, src.index("body, err = _job_body(d)"))
+        # 凭证失效在提交生成之前处理；MAT-A3-02 起本地验图又在一切账户请求之前
+        run_src = src[src.index('def cmd_run('):src.index('def _submit(')]
+        self.assertLess(run_src.index("body, err = _job_body(d)"), run_src.index("load_account()"))
+        self.assertLess(run_src.index("if k == 'key_reset':"), run_src.index("_submit(d, a, body)"))
 
     def test_trv02_r1_png_inflate_bounded(self):
         import audit_images

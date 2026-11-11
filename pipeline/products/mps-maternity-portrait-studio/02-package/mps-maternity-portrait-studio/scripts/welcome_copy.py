@@ -63,9 +63,29 @@ def needs_stage():
             '我只按你说的来做艺术呈现，不看照片估计，也不代表医学孕周。这次没有产生任何扣费。')
 
 
-def not_eligible():
-    return ('孕妈写真只做你本人、确实在孕期的成年人单人写真，不做他人或名人的照片、儿童照片，也不做「假装怀孕」的效果。'
-            '这次没有产生任何扣费。如果是你本人的孕期单人照，换一张发我就行。')
+def not_eligible(reason='other'):
+    """用户明确说了不符合时才用；按实际原因反馈，不让用户换图去补自述。"""
+    if reason == 'minor':
+        return ('孕妈写真只为成年人制作，这次没法帮你做。这次没有产生任何扣费。')
+    if reason == 'not_pregnant':
+        return ('孕妈写真只做确实在孕期的本人写真，不做「假装怀孕」的效果。这次没有产生任何扣费。'
+                '如果之后想做其他写真，告诉我想要的方向就行。')
+    return ('孕妈写真只做你本人的孕期单人写真，不做他人或名人的照片。这次没有产生任何扣费。'
+            '如果想做你自己的孕期写真，发一张你本人的单人照就行。')
+
+
+ELIGIBILITY_ASK = {
+    'subject': '照片里是你本人吗？',
+    'adult': '你是成年人吗？',
+    'pregnant': '你现在确实在孕期吗？',
+}
+
+
+def needs_eligibility(missing):
+    """本人、成年、在孕期还没确认：一次合并补问，只按本人说法，不看照片估计、不需要任何证明。"""
+    asks = [ELIGIBILITY_ASK[k] for k in ('subject', 'adult', 'pregnant') if k in missing]
+    return ('开始前还需要你确认一下：' + ''.join(asks) +
+            '按你自己的说法回答就行，不需要任何证明，我也不会看照片估计。这次没有产生任何扣费。')
 
 
 def people_unsupported():

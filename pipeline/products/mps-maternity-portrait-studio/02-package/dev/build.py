@@ -3,7 +3,7 @@ import hashlib, os, sys, zipfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'mps-maternity-portrait-studio')
 DIST = os.path.join(HERE, '..', 'dist')
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 os.makedirs(DIST, exist_ok=True)
 out = os.path.join(DIST, 'mps-maternity-portrait-studio-%s.zip' % VERSION)
 if os.path.exists(out):
@@ -15,6 +15,16 @@ for base, dirs, names in os.walk(SRC):
         if n.endswith(('.pyc', '.tmp')) or n.startswith('.'):
             continue
         files.append(os.path.join(base, n))
+sys.path.insert(0, os.path.join(SRC, 'tests'))
+from test_skill_contract import frontmatter_scalar_problems  # noqa: E402  标准库 YAML 严格子集检查
+_skill = open(os.path.join(SRC, 'SKILL.md'), encoding='utf-8').read()
+if frontmatter_scalar_problems(_skill):
+    sys.exit('frontmatter is not valid YAML: %r' % frontmatter_scalar_problems(_skill))
+try:
+    import yaml
+    yaml.safe_load(_skill.split('---', 2)[1])
+except ImportError:
+    pass
 deep = [f for f in files if os.path.relpath(f, SRC).replace(os.sep, '/').count('/') > 1]
 if deep:
     sys.exit('directory depth > 2 (platform limit): ' + ', '.join(os.path.relpath(f, SRC) for f in deep))

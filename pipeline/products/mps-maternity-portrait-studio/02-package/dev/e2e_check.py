@@ -1608,10 +1608,11 @@ class OriginalTaskSpec(Base):
         """规格 T02：只做本人、成年、自述在孕期的单人照；资格自述不替代三项同意；不合格不联网。"""
         _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', self.photo)
         did = s['draft_id']
-        for flag in (['--subject', 'other'], ['--adult', 'no'], ['--pregnant', 'no']):
+        for flag, reason, must in ((['--subject', 'other'], 'other', '本人'), (['--adult', 'no'], 'minor', '成年'),
+                                   (['--pregnant', 'no'], 'not_pregnant', '假装怀孕')):
             code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'qipao', *flag)
-            self.assertEqual((code, s['signal']), (3, 'notEligible'), flag)
-            self.assertIn('假装怀孕', t)
+            self.assertEqual((code, s['signal'], s['reason']), (3, 'notEligible', reason), flag)
+            self.assertIn(must, t)
         code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'qipao')
         self.assertEqual(s['signal'], 'planReady')
         self.assertIn('这张照片是你本人的单人照', t)
@@ -1619,6 +1620,227 @@ class OriginalTaskSpec(Base):
             code, s, _, _ = self.run_cmd('confirm', '--draft', did, '--owner-consent', owner, '--upload-consent', upload, '--pay-consent', pay)
             self.assertEqual(s['signal'], 'needsConfirmation')
         self.assertEqual(self.mock.calls, [])
+
+
+class RepairMat101(Base):
+    """1.0.1 修复轮回归：MAT-A3-02（确认后坏图/换图先本地拦下）与 MAT-A3-03（成年未问到先补问）。"""
+
+    def draft(self, did):
+        with open(os.path.join(self.home, 'mps-maternity-portrait-studio', 'drafts', did + '.json')) as f:
+            return json.load(f)
+
+    def _break(self, mode):
+        if mode == 'delete':
+            os.remove(self.photo)
+        elif mode == 'truncate':
+            with open(self.photo, 'wb') as f:
+                f.write(self.photo_bytes[:len(self.photo_bytes) // 2])
+        else:  # 另一张有效图
+            with open(self.photo, 'wb') as f:
+                f.write(jpeg_bytes(640, 960))
+
+    def _fresh(self):
+        shutil.rmtree(os.path.join(self.home, 'mps-maternity-portrait-studio'), ignore_errors=True)
+        with open(self.photo, 'wb') as f:
+            f.write(self.photo_bytes)
+        self.mock = mock_backend.Mock()
+        studio.TRANSPORT = self.mock.transport
+        telemetry.TRANSPORT = self.mock.telemetry_transport
+
+    def test_mat_a3_02_bad_photo_after_confirm_zero_business_http(self):
+        # 三种账户处境：本机无账户（原先先给关联链接）、已关联但余额为零（原先先给充值引导）、有余额
+        for account in ('none', 'zero', 'funded'):
+            for mode in ('delete', 'truncate'):
+                self._fresh()
+                did = self.confirmed_draft()
+                if account != 'none':
+                    self.paid_account(did, 0 if account == 'zero' else 3)
+                self._break(mode)
+                self.mock.calls[:] = []
+                code, s, t, _ = self.run_cmd('run', '--draft', did)
+                self.assertEqual((code, s['signal']), (3, 'photoInvalid'), (account, mode))
+                self.assertIn('me.jpg', t, (account, mode))
+                self.assertEqual(self.mock.calls, [], (account, mode))  # 业务请求 0（首次匿名上报另计）
+                self.assertEqual(self.mock.charges, 0)
+                d = self.draft(did)
+                self.assertTrue(d['idem'] and d['pay_consent'], (account, mode))  # 坏图不新建任务、不换键
+
+    def test_mat_a3_02_changed_valid_photo_voids_confirmation_offline(self):
+        for account in ('none', 'funded'):
+            self._fresh()
+            did = self.confirmed_draft()
+            if account == 'funded':
+                self.paid_account(did, 3)
+            self._break('replace')
+            self.mock.calls[:] = []
+            code, s, t, _ = self.run_cmd('run', '--draft', did)
+            self.assertEqual((code, s['signal']), (2, 'photoChanged'), account)
+            self.assertEqual(self.mock.calls, [], account)
+            d = self.draft(did)
+            self.assertEqual((d['idem'], d['owner_consent'], d['upload_consent'], d['pay_consent']), (None, False, False, False))
+            self.assertEqual(self.run_cmd('run', '--draft', did)[1]['signal'], 'needsConfirmation')
+            self.assertEqual(self.mock.calls, [], account)
+
+    def test_mat_a3_02_unchanged_photo_still_delivers(self):
+        did = self.confirmed_draft()
+        self.paid_account(did, 3)
+        code, s, _, _ = self.run_cmd('run', '--draft', did)
+        self.assertEqual((code, s['signal']), (0, 'delivered'))
+        self.assertEqual(self.mock.charges, 1)
+
+    def test_mat_a3_02_needs_credits_resume_checks_photo_first(self):
+        did = self.confirmed_draft()
+        self.paid_account(did, 3)
+        real = self.mock.transport
+
+        def t402(method, url, body, headers, timeout, binary):
+            if method == 'POST' and url.endswith('/skill-jobs'):
+                raise studio.GatewayError(402)
+            return real(method, url, body, headers, timeout, binary)
+        studio.TRANSPORT = t402
+        self.assertEqual(self.run_cmd('run', '--draft', did)[1]['signal'], 'needsCredits')
+        studio.TRANSPORT = real
+        self._break('truncate')
+        self.mock.calls[:] = []
+        code, s, _, _ = self.run_cmd('resume', '--draft', did)
+        self.assertEqual((code, s['signal']), (3, 'photoInvalid'))
+        self.assertEqual(self.mock.calls, [])
+
+    def test_mat_a3_02_unknown_or_submitted_ignores_bad_local_photo(self):
+        """已提交或结果未知的任务：本地图坏了也只查原任务，不发第二次生成请求、不解锁。"""
+        for kind in ('unknown', 'submitted'):
+            self._fresh()
+            did = self.confirmed_draft()
+            self.paid_account(did, 3)
+            real = self.mock.transport
+            posts = []
+            pending = {'n': 0}
+
+            def hook(method, url, body, headers, timeout, binary, kind=kind):
+                if method == 'POST' and url.endswith('/skill-jobs'):
+                    posts.append(headers.get('Idempotency-Key'))
+                    r = real(method, url, body, headers, timeout, binary)
+                    if kind == 'unknown':
+                        raise studio.GatewayError(0)
+                    return r
+                if method == 'GET' and '/jobs/' in url and pending['n'] < 50:
+                    pending['n'] += 1
+                    raise studio.GatewayError(0)  # 首次运行期间一直查不到进度，任务保持已提交
+                return real(method, url, body, headers, timeout, binary)
+            studio.TRANSPORT = hook
+            code, s, _, _ = self.run_cmd('run', '--draft', did)
+            self.assertIn(s['signal'], ('jobPending', 'downloadPending'), kind)
+            d = self.draft(did)
+            self.assertTrue(d.get('job_id') or d.get('state') == 'submit_unknown', kind)
+            self._break('truncate')
+            # 结果未知期间换图/换档/改方案都不能解锁
+            self.assertEqual(self.run_cmd('plan', '--draft', did, '--scene', 'korean')[1]['signal'], 'taskLocked', kind)
+            pending['n'] = 99
+            for cmd in ('run', 'resume'):
+                code, s, _, _ = self.run_cmd(cmd, '--draft', did)
+                if s['signal'] == 'delivered':
+                    break
+                self.assertIn(s['signal'], ('jobPending', 'downloadPending'), (kind, cmd))
+            self.assertEqual(s['signal'], 'delivered', kind)
+            self.assertEqual(len(posts), 1, kind)
+            self.assertEqual(self.mock.charges, 1, kind)
+
+    def test_mat_a3_03_adult_unknown_asks_once_then_continues(self):
+        _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '我本人怀孕五个月，用清晰单人照做白纱孕妈写真', '--image', self.photo)
+        did = s['draft_id']
+        code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'studio', '--adult', 'unknown')
+        self.assertEqual((code, s['signal'], s['missing']), (2, 'needsEligibility', ['adult']))
+        self.assertIn('你是成年人吗', t)
+        for bad in ('换一张', '证明材料', '身份证', '年龄证明'):
+            self.assertNotIn(bad, t)
+        self.assertIn('不需要任何证明', t)
+        code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'studio', '--subject', 'unknown', '--adult', 'unknown',
+                                     '--pregnant', 'unknown')
+        self.assertEqual(s['missing'], ['subject', 'adult', 'pregnant'])
+        for q in ('照片里是你本人吗', '你是成年人吗', '你现在确实在孕期吗'):
+            self.assertIn(q, t)
+        self.assertEqual(t.count('？'), 3)  # 一次合并补问
+        code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'studio', '--adult', 'yes')
+        self.assertEqual((code, s['signal']), (0, 'planReady'))
+        # 明确不符合仍拒绝；明确的否定优先于其他未知项
+        code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'studio', '--adult', 'no', '--pregnant', 'unknown')
+        self.assertEqual((code, s['signal'], s['reason']), (3, 'notEligible', 'minor'))
+        self.assertNotIn('照片', t)
+        code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'studio', '--subject', 'other', '--adult', 'unknown')
+        self.assertEqual(s['reason'], 'other')
+        code, s, t, _ = self.run_cmd('plan', '--draft', did, '--scene', 'studio', '--pregnant', 'no')
+        self.assertEqual(s['reason'], 'not_pregnant')
+        self.assertEqual(self.mock.calls, [])
+
+
+class FrontmatterYaml(unittest.TestCase):
+    """MAT-A3-01：用标准 YAML 解析器检查源码 SKILL.md 及最终 ZIP 里的原始 frontmatter（重复键、字段类型、冒号空格反例）。"""
+
+    def loader(self):
+        import yaml
+
+        class NoDup(yaml.SafeLoader):
+            pass
+
+        def mapping(loader, node, deep=False):
+            keys = [loader.construct_object(k, deep=deep) for k, _ in node.value]
+            if len(keys) != len(set(keys)):
+                raise ValueError('duplicate key')
+            return yaml.SafeLoader.construct_mapping(loader, node, deep)
+        NoDup.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, mapping)
+        return yaml, NoDup
+
+    def check(self, raw, where):
+        yaml, NoDup = self.loader()
+        text = raw.decode('utf-8')
+        self.assertTrue(text.startswith('---\n'), where)
+        fm = yaml.load(text.split('---', 2)[1], Loader=NoDup)
+        for k in ('name', 'display_name', 'display_name_en', 'description', 'description_zh', 'description_en', 'version', 'author'):
+            self.assertIsInstance(fm.get(k), str, (where, k))
+            self.assertTrue(fm[k].strip(), (where, k))
+        self.assertEqual(set(fm) - {'name', 'display_name', 'display_name_en', 'description', 'description_zh', 'description_en',
+                                    'version', 'author', 'allowed-tools', 'examples_zh', 'examples_en'}, set(), where)
+        for k in ('examples_zh', 'examples_en'):
+            self.assertIsInstance(fm[k], list, where)
+            self.assertTrue(all(isinstance(x, str) and x.strip() for x in fm[k]), where)
+        self.assertEqual(len(fm['examples_zh']), len(fm['examples_en']))
+        self.assertLessEqual(len(fm['examples_zh']), 3)
+        self.assertEqual(fm['version'], studio.SKILL_VERSION)
+        self.assertIn('portrait: 10 themes', fm['description_en'])  # 含冒号空格的完整英文描述原样保留
+        self.assertLess(len(raw), 15 * 1024, where)
+        return fm
+
+    def test_source_and_zip_frontmatter_parse(self):
+        try:
+            import yaml  # noqa: F401
+        except ImportError:
+            self.skipTest('PyYAML 不可用')
+        with open(os.path.join(PKG, 'SKILL.md'), 'rb') as f:
+            src = self.check(f.read(), 'source')
+        import zipfile
+        for z in ZIPS:
+            with zipfile.ZipFile(z) as zf:
+                names = [n for n in zf.namelist() if n.endswith('/SKILL.md')]
+                self.assertEqual(len(names), 1, z)
+                self.assertEqual(self.check(zf.read(names[0]), z), src)
+
+    def test_duplicate_key_and_unquoted_colon_rejected(self):
+        try:
+            import yaml
+        except ImportError:
+            self.skipTest('PyYAML 不可用')
+        _, NoDup = self.loader()
+        with open(os.path.join(PKG, 'SKILL.md'), encoding='utf-8') as f:
+            text = f.read()
+        fm = text.split('---', 2)[1]
+        en = yaml.safe_load(fm)['description_en']
+        unquoted = fm.replace('description_en: "%s"' % en, 'description_en: %s' % en, 1)
+        self.assertNotEqual(unquoted, fm)
+        with self.assertRaises(yaml.YAMLError):
+            yaml.safe_load(unquoted)
+        with self.assertRaises((ValueError, yaml.YAMLError)):
+            yaml.load(fm + 'name: dup\n', Loader=NoDup)
+        self.assertEqual(yaml.safe_load('k: "a: b"')['k'], 'a: b')  # 正常例：引用后冒号空格合法
 
 
 class MaternitySpec(Base):

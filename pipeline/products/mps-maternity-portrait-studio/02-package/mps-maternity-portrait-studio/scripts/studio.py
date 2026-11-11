@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-maternity-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -446,9 +446,17 @@ def cmd_plan(args):
     shape = args.shape or default_shape
     if shape not in SIZES:
         return emit('shapeInvalid', '', EXIT_ERROR)
-    # 资格只按用户本人自述：本人、成年、确实怀孕；不看图判断、不索要证明。任何一项不是 yes 都不承接。
-    if args.subject != 'self' or args.adult != 'yes' or args.pregnant != 'yes':
-        return emit('notEligible', W.not_eligible(), EXIT_ERROR)
+    # 资格只按用户本人自述：本人、成年、确实怀孕；不看图判断年龄或孕期、不索要证明。
+    # 只有用户明确说了不符合才拒绝，并按实际原因反馈；还没问到的（unknown）先一次合并补问，不当成不符合。
+    if args.subject == 'other':
+        return emit('notEligible', W.not_eligible('other'), EXIT_ERROR, reason='other')
+    if args.adult == 'no':
+        return emit('notEligible', W.not_eligible('minor'), EXIT_ERROR, reason='minor')
+    if args.pregnant == 'no':
+        return emit('notEligible', W.not_eligible('not_pregnant'), EXIT_ERROR, reason='not_pregnant')
+    missing = [k for k, v in (('subject', args.subject), ('adult', args.adult), ('pregnant', args.pregnant)) if v == 'unknown']
+    if missing:
+        return emit('needsEligibility', W.needs_eligibility(missing), EXIT_WAIT, draft_id=d['draft_id'], missing=missing)
     if args.single != 'yes':
         return emit('peopleUnsupported', W.people_unsupported(), EXIT_ERROR)
     if args.stage not in STAGES:
@@ -635,6 +643,11 @@ def cmd_run(args):
         return emit('needsConfirmation', '', EXIT_ERROR)
     if d.get('job_id') or d.get('state') == 'submit_unknown':
         return _continue_job(d)
+    # 未提交分支：先在本地完整校验源图并核对确认时的源 SHA，再碰账户、凭证等任何业务请求。
+    # 坏图本地退出 3 并点名；换了图作废未提交确认与键。已提交或结果未知的任务在上面已只续查原任务。
+    body, err = _job_body(d)
+    if err is not None:
+        return err
     a = load_account()
     st, extra = _account_ready(a)
     if st == 'registration':
@@ -659,9 +672,6 @@ def cmd_run(args):
         return emit('credentialsReset', W.credentials_reset(), EXIT_RESET, draft_id=d['draft_id'], task_kept=True)
     if k != 'ok':
         return emit('serviceUnavailable', W.failure('network' if k == 'network' else 'busy', 'not_started'), EXIT_ERROR)
-    body, err = _job_body(d)
-    if err is not None:
-        return err
     title = SCENES[d['scene']][1]
     progress(W.start_recap(title, STAGES[d['stage']][0], W.SHAPE_NAMES[_shape_of(d['size'])]))
     return _submit(d, a, body)
@@ -885,6 +895,11 @@ def _deliver(d, a):
 def cmd_resume(args):
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
+    if d.get('state') == 'needs_credits' and not d.get('job_id'):
+        # 尚未生成的任务续接前同样先本地验图，坏图或换图不发任何业务请求
+        _, err = _job_body(d)
+        if err is not None:
+            return err
     if d.get('state') == 'needs_credits':
         a = load_account()
         try:
@@ -1240,9 +1255,9 @@ def parser():
     pl.add_argument('--draft', required=True)
     pl.add_argument('--scene', required=True)
     pl.add_argument('--shape', choices=sorted(SIZES))
-    pl.add_argument('--subject', required=True, choices=('self', 'other'))
-    pl.add_argument('--adult', required=True, choices=('yes', 'no'))
-    pl.add_argument('--pregnant', required=True, choices=('yes', 'no'))
+    pl.add_argument('--subject', required=True, choices=('self', 'other', 'unknown'))
+    pl.add_argument('--adult', required=True, choices=('yes', 'no', 'unknown'))
+    pl.add_argument('--pregnant', required=True, choices=('yes', 'no', 'unknown'))
     pl.add_argument('--stage', default=None)
     pl.add_argument('--single', required=True, choices=('yes', 'no'))
     pl.add_argument('--face-clear', required=True, choices=('yes', 'no'))
