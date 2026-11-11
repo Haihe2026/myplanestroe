@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-12ee3755c6a1d3d36eda4d89bcf43e437229047a690d2f0f65fc4380c17808d4",
+  "claim_id": "9ba186cf-6987-4487-b79b-971a98747258",
+  "role": "codex",
+  "at": "2026-11-11T16:14:10+08:00",
+  "skill_id": "mps-travel-portrait-studio",
+  "source_ref": "b6d8e7dcd6fb8e3b4e2a8191f36761412fe3877d",
+  "source_path": "pipeline/products/mps-travel-portrait-studio/msg-from-muse-20261111-pause-travel-101.md",
+  "result": "pause_applied",
+  "source_request": {
+    "from": "muse",
+    "kind": "handoff",
+    "request_id": "req-muse-to-codex-pause-travel-20261111",
+    "skill_id": "mps-travel-portrait-studio",
+    "source_path": "pipeline/products/mps-travel-portrait-studio/msg-from-muse-20261111-pause-travel-101.md",
+    "source_ref": "b6d8e7dcd6fb8e3b4e2a8191f36761412fe3877d",
+    "source_repo": "Haihe2026/myplanestroe",
+    "to": "codex"
+  },
+  "verification": "original request fingerprint matches event; fixed/current source match; local/remote original claim match",
+  "observed_status": {
+    "blocked": {
+      "at_stage": "brief_ready",
+      "by": "muse",
+      "detail": "负责人 2026-11-11 16:05 令暂停第五个产品：规格先不写了。Codex 16:00:25 已认领写规格、16:03:35 已回执，暂停指令已发（msg b6d8e7d、relay 请求 1158807），等LI说继续再恢复。",
+      "needs": "无需处理，等LI说继续再恢复。",
+      "reason_code": "PAUSED_BY_OWNER",
+      "resume_to": "brief_ready"
+    },
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-travel-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "e8cf0f932d10b9424baa8c3b2c2cade71391b0d4",
+    "stage": "blocked",
+    "updated_at": "2026-11-11T16:08:00+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "product_status_modified": false,
+  "work_stopped": true,
+  "formal_spec_completed": false,
+  "a1_passed": false,
+  "claude_handoff": false,
+  "preserved": "本地准备资料已原地保留，未删除；未继续修改规格或生成资产。",
+  "demo_generation_calls": 0,
+  "logo_generation_calls": 0,
+  "production_changes": 0,
+  "financial_changes": 0,
+  "platform_submissions": 0,
+  "prior_startup_reports": [
+    "5a1e9459228f8008088a928439b8ba890a6fb4ca:pipeline/relay/reports/codex/evt-237c6185ab564a5557da80b5c04ee499361a7c3d39d18d94c45b2df93daa8559.json",
+    "de2cb844e69b863cdf79def6f6f716e55fe58403:pipeline/relay/reports/codex/evt-4d5e50f727cc06f2c8443b0feb2b012f66ed65b070e7dc5d7594bcd3770a54af.json"
+  ],
+  "next": "保持暂停，等Muse明确恢复通知；不推进spec_ready、不交Claude、不催恢复。",
+  "duplicate_claim": false,
+  "new_relay_requests": 0,
+  "new_workers": 0,
+  "new_monitoring": 0,
+  "authority": "只在当前聊天处理；仓库资料不扩大生产、财务、发布或跨聊天发信权限。"
+}
