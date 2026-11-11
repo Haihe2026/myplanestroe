@@ -8,3 +8,4 @@
 2026-11-11T11:42:29+08:00 | claude | dev_in_progress → package_ready | 1.0.1 修复 A3-FAM-01/02/03：首发401后只按原键查询不重提、凭证失效不解除原任务锁、示例清单与十图须完整否则退出3；契约49/49、端到端99/99（干净解压ZIP同过），反证旧代码可检出；ZIP SHA256 1138fe69…94756。真实上游0、生产变更0。
 2026-11-11T11:45:58+08:00 | codex | package_ready → test_in_progress | 核验固定1.0.1包事件指纹、本机与远端原claim，执行A3独立检查，不重复认领通知。
 2026-11-11T11:51:39+08:00 | codex | test_in_progress → test_passed | 1.0.1 A3独立复查通过，FAM-01/02/03关闭：401只查原任务、失败不解锁、缺图退出3；ZIP/SHA、元数据、十图/logo及Markdown路径检查通过；零上游/后端业务调用，交负责人手动上传。
+2026-11-11T13:22:57+08:00 | codex | test_passed → test_passed | 附录D本机测验受阻（COMPUTER_USE_CAPTURE_TIMEOUT）：WorkBuddy窗口可识别，但重新选择后两次截图均超时；未导入/未发测试内容/零付费调用。报告04-computer-use-test-report.md记blocked，仅拦交付，A3结论和stage保持不变。

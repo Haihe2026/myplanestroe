@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-family-portrait-studio",
+  "version": "1.0.1",
+  "event_id": "evt-2d70e1e5a970e4390badd6e89b3c8a387f36351b7bc44e9996e3d878b1fa5bcf",
+  "claim_id": "3851236d-0a5d-49d0-9f92-848a2e9d3018",
+  "recorded_at": "2026-11-11T13:22:57+08:00",
+  "source_ref": "500856b1c504c83b8dc40cf919104db58bbecf0c",
+  "source_path": "pipeline/products/mps-family-portrait-studio/msg-from-muse-20261111-computer-use-test-family-101.md",
+  "request_fingerprint_verified": true,
+  "zip": {
+    "source_ref": "4669fdb7622e8562c6ce09a9ea7c3d9f4494638d",
+    "file": "pipeline/products/mps-family-portrait-studio/02-package/dist/mps-family-portrait-studio-1.0.1.zip",
+    "sha256": "1138fe6925145fc8c7a0013f661d32af48a521dd707ad9980fd3411b39194756",
+    "bytes": 2740120,
+    "sha_matches_a3": true
+  },
+  "computer_use": {
+    "skill": "computer-use:computer-use",
+    "runtime": "node_repl + @oai/sky",
+    "initialization": "succeeded",
+    "target_app": "WorkBuddy",
+    "running": true,
+    "unique_target_windows": 1,
+    "selection": "returned app/window object, not guessed",
+    "capture_attempts": [
+      {
+        "attempt": 1,
+        "api": "sky.get_window_state",
+        "include_screenshot": true,
+        "include_text": true,
+        "result": "error",
+        "error": "window capture timed out: timed out waiting on channel"
+      },
+      {
+        "attempt": 2,
+        "recovery": "sky.list_windows + sky.get_window using the newly returned unique WorkBuddy window",
+        "api": "sky.get_window_state",
+        "include_screenshot": true,
+        "include_text": false,
+        "result": "error",
+        "error": "window capture timed out: timed out waiting on channel"
+      }
+    ],
+    "captured_screenshots": 0,
+    "clicks": 0,
+    "text_inputs": 0,
+    "zip_import_attempted": false,
+    "test_photo_sent": false,
+    "stop_basis": "After state-capture failure, refresh selection and retry once; report exact error if recovery fails."
+  },
+  "result": "blocked",
+  "reason_code": "COMPUTER_USE_CAPTURE_TIMEOUT",
+  "a3_result": "pass",
+  "product_stage_preserved": "test_passed",
+  "delivery_gate": "blocked under SOP Appendix D; not a passed host test",
+  "requirements": [
+    {
+      "item": "包SHA256",
+      "result": "pass"
+    },
+    {
+      "item": "运行窗口可识别",
+      "result": "pass",
+      "limit": "Only app/window metadata observed; contents unreadable"
+    },
+    {
+      "item": "UI本地导入安装",
+      "result": "not_done",
+      "reason": "window capture timed out: timed out waiting on channel"
+    },
+    {
+      "item": "宿主加载无解析错误",
+      "result": "not_verified"
+    },
+    {
+      "item": "欢迎句逐字显示",
+      "result": "not_done"
+    },
+    {
+      "item": "十张示例正常展示",
+      "result": "not_done"
+    },
+    {
+      "item": "测试图与首轮流程",
+      "result": "not_done"
+    },
+    {
+      "item": "关键截图",
+      "result": "unavailable",
+      "reason": "window capture timed out: timed out waiting on channel"
+    }
+  ],
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_changes": 0,
+  "real_financial_actions": 0,
+  "platform_submissions": 0,
+  "sensitive_screenshots_published": 0,
+  "next": "Restore the supported WorkBuddy window capture path and rerun Appendix D on exactly this ZIP. No package defect established by this attempt."
+}

@@ -41,3 +41,5 @@
 - 2026-11-09T08:39:55+08:00：mps-wedding-portrait-studio 的示例图 HARD_STOP（2026-11-08T22:57）已解除：Codex 交付 10 张示例图，Claude 完成 A2 并打包，置 package_ready。
 
 | 2026-11-10T23:20:34+08:00 | mps-id-photo-background | test_in_progress | TOO_MANY_ROUNDS | 1.0.7 本轮 A3 仍有付费转化和独立示例缺陷，累计测试退回 6 次，超过 max_rounds=3。 证据 pipeline/products/mps-id-photo-background/03-test-report.md | 负责人确认继续修订后，Claude 修复并提交新版。 | package_ready |
+
+| 2026-11-11T13:22:57+08:00 | mps-family-portrait-studio | 附录D本机测验（stage保留test_passed） | COMPUTER_USE_CAPTURE_TIMEOUT | WorkBuddy正在运行且窗口可枚举，首次及重新选择窗口后的截图均超时，未导入/未发测试内容；见04-computer-use-test-report.md。仅附录D交付条件受阻，A3通过不变。 | 恢复受支持的WorkBuddy窗口截图能力后，用同SHA256的1.0.1重跑附录D；暂无包缺陷证据。 | test_passed（stage不变，同包重测附录D） |
