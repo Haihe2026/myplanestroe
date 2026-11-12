@@ -1,0 +1,149 @@
+{
+  "skill_id": "mps-silver-portrait-studio",
+  "checked_at": "2026-11-12T08:39:50+08:00",
+  "result": "pass",
+  "checklist_count": 16,
+  "checks": [
+    {
+      "item": 1,
+      "label": "立项/词表/串行前置",
+      "result": "pass",
+      "evidence": "固定brief/原事件指纹/原claim与46来源已核，前六submitted；市场未核事实不作为宣传。"
+    },
+    {
+      "item": 2,
+      "label": "本次在线官方读取",
+      "result": "pass",
+      "evidence": "08:36:10最终render前重新在线读取成功，URL/结果/日期/SHA完整；仅团队Skill。"
+    },
+    {
+      "item": 3,
+      "label": "十主题及路由",
+      "result": "pass",
+      "evidence": "十主题保留，实际中文方向不混开发合成人物；特异主题优先泛化词，礼物动机不误分流。"
+    },
+    {
+      "item": 4,
+      "label": "被摄本人/代购/基线",
+      "result": "pass",
+      "evidence": "订购人钱包和被摄人照片/传输许可分开；unknown补询，老兵资格属被摄人；秃发/自然年龄保护。"
+    },
+    {
+      "item": 5,
+      "label": "真实十示例及审计",
+      "result": "pass",
+      "evidence": "10示例+1logo均成功，无重复；逐图实际查看且SHA/尺寸匹配，虚构身份/非真人验证边界明确。"
+    },
+    {
+      "item": 6,
+      "label": "立体主题logo",
+      "result": "pass",
+      "evidence": "512²PNG、456079字节、立体银发侧脸及镜头圆框已目检，原字节交Claude。"
+    },
+    {
+      "item": 7,
+      "label": "支付/钱包/订单核验",
+      "result": "pass",
+      "evidence": "固定14接口/4OAuth根路由/网页订单及核款同事务幂等齐，reported不当到账，不增加财务权限。"
+    },
+    {
+      "item": 8,
+      "label": "资源/模型/成本",
+      "result": "pass",
+      "evidence": "登记新源.60/.59/.57与三尺寸/1K/n1固定，当前匿名plans对照估算76.47%，非供应商实账。"
+    },
+    {
+      "item": 9,
+      "label": "fast及真实状态",
+      "result": "pass",
+      "evidence": "已实现、待Claude、无部署、未验证分列；合成资产不冒充银发专项/真人/服役或宿主验证。"
+    },
+    {
+      "item": 10,
+      "label": "六字段及恢复",
+      "result": "pass",
+      "evidence": "MAT预检/YAML/未知资格、绑定401与原任务GET经验明确；未新增年龄/服役/家属/孕期HTTP字段。"
+    },
+    {
+      "item": 11,
+      "label": "一次上报与漏斗",
+      "result": "pass",
+      "evidence": "attempted原子持久化/失败即弃，八字段与2秒/4096B/200，年龄服役不进遥测；缺证漏斗不可得。"
+    },
+    {
+      "item": 12,
+      "label": "相邻技能与分界",
+      "result": "pass",
+      "evidence": "≥3家庭、双人不谎称支持，单人送礼承接，各拍拆独立确认计费；老兵/婚礼/旅行/孕妈等边界明确。"
+    },
+    {
+      "item": 13,
+      "label": "接管/首轮/三同意/交付",
+      "result": "pass",
+      "evidence": "先价值示例/文字跳过、实际显示去重，许可与计费独立，损坏GET补取和尺寸偏差交原图已分开。"
+    },
+    {
+      "item": 14,
+      "label": "17组与57逐项验收",
+      "result": "pass",
+      "evidence": "A2隔离Mock、Codex A3静态、负责人上传；无Range/inline/重放/sibling等4不适用项如实标注，不派暂停D。"
+    },
+    {
+      "item": 15,
+      "label": "决策记录",
+      "result": "pass",
+      "evidence": "14项采用/依据，包含代购、老兵、毛发、计费、原任务和附录D暂停，不回人工逐单审批。"
+    },
+    {
+      "item": 16,
+      "label": "MD/JSON/独立复检/秘密",
+      "result": "pass",
+      "evidence": "16节与JSON一致，两份最终只读A1复检通过，docSHA固定；秘密扫描通过。"
+    }
+  ],
+  "stage6_cases": 57,
+  "asset_files": 11,
+  "real_calls": {
+    "demos": 10,
+    "logo": 1,
+    "total": 11,
+    "extra_tests": 0
+  },
+  "document_sha256": {
+    "01-dev-spec.md": "afd9506c6697f3d32404444254aff99152a03747691455ff82b44f375adcc6df",
+    "01-dev-spec.json": "9f9304d231884042f2844f7e492d72532ddbbd0fafe740212f7dde6b3fefe587"
+  },
+  "independent_reviews": [
+    {
+      "reviewer": "review_wechat_deploy",
+      "result": "pass",
+      "scope": "本人及代购许可、老兵条件、自然年龄毛发、初审三处修复、双语、17组/57项、资产尺寸与SHA、SOP暂停D口径；只读，未改文件或新增调用。",
+      "document_sha256": {
+        "01-dev-spec.md": "afd9506c6697f3d32404444254aff99152a03747691455ff82b44f375adcc6df",
+        "01-dev-spec.json": "9f9304d231884042f2844f7e492d72532ddbbd0fafe740212f7dde6b3fefe587"
+      }
+    },
+    {
+      "reviewer": "verify_wechat_strategy",
+      "result": "pass",
+      "scope": "固定支付/微信/核款/原身份恢复/上游六字段及8遥测、成本现价快照、MD/JSON一致、17组/57项、资产SHA及D暂停；实际回报以上文档SHA，只读未改文件。",
+      "document_sha256": {
+        "01-dev-spec.md": "afd9506c6697f3d32404444254aff99152a03747691455ff82b44f375adcc6df",
+        "01-dev-spec.json": "9f9304d231884042f2844f7e492d72532ddbbd0fafe740212f7dde6b3fefe587"
+      }
+    }
+  ],
+  "secret_scan": "pass",
+  "limitations": [
+    "All ten portraits use the same completely fictional older adult woman; exact age is a prompt setting, not medical/biometric verification or a requirement for users.",
+    "Broad visible identity/gray-hair/wrinkle continuity was subjectively checked; no biometric guarantee, all-gender/age/hair-type coverage or real-customer likeness test.",
+    "Indexed 512x768 PNG previews have some texture/gradient quantization; not print-quality delivery promises.",
+    "Veteran sample is fictional and unmarked; no real service history was verified.",
+    "No real customer photo, payment/OAuth test, production signed-reference transport or WorkBuddy host/platform acceptance was validated."
+  ],
+  "claude_a2": "pending",
+  "codex_a3": "pending",
+  "appendix_d": "suspended by current SOP; D.6 suspended",
+  "production_deployments_this_product": 0,
+  "publishing": "owner manual"
+}

@@ -1,0 +1,92 @@
+{
+  "health": {
+    "status": "ok",
+    "version": "0.10.14",
+    "shared_wallet": true,
+    "automatic_skill_keys": true,
+    "new_user_uses": 0,
+    "provider_configured": true,
+    "reference_editing": true,
+    "sms_required": false,
+    "image_engines": {
+      "photo-retouch-sunburst": {
+        "configured": true,
+        "reference_editing": true,
+        "text_to_image": false
+      },
+      "gemini-personal-sunburst": {
+        "configured": true,
+        "reference_editing": true,
+        "text_to_image": true
+      }
+    },
+    "image_resource_contract": "all-new-resource-v1"
+  },
+  "plans": {
+    "payment_ready": true,
+    "purchase_type": "membership",
+    "auto_renew_ready": false,
+    "rules_confirmed": true,
+    "plans": [
+      {
+        "name": "体验版",
+        "price_fen": 500,
+        "images": 25,
+        "id": "shared_permanent_5",
+        "points": 25000,
+        "period": "permanent",
+        "valid_days": null,
+        "renewal_price_fen": null
+      },
+      {
+        "name": "Plus",
+        "price_fen": 2900,
+        "images": 150,
+        "id": "shared_permanent_29",
+        "points": 150000,
+        "period": "permanent",
+        "valid_days": null,
+        "renewal_price_fen": null
+      },
+      {
+        "name": "Pro",
+        "price_fen": 3900,
+        "images": 200,
+        "id": "shared_permanent_39",
+        "points": 200000,
+        "period": "permanent",
+        "valid_days": null,
+        "renewal_price_fen": null
+      },
+      {
+        "name": "Ultra",
+        "price_fen": 4900,
+        "images": 250,
+        "id": "shared_permanent_49",
+        "points": 250000,
+        "period": "permanent",
+        "valid_days": null,
+        "renewal_price_fen": null
+      }
+    ],
+    "payment_mode": "manual_qr",
+    "qr_url": "/membership/payment-qr.png",
+    "monthly_valid_days": null,
+    "audience": "shared",
+    "shared": true
+  },
+  "at": "2026-11-12T08:23:43+08:00",
+  "scope": "anonymous read-only health/plans; no customer identity, account or payment operation",
+  "sources": [
+    {
+      "url": "https://aistore.zhaopintong.com/platform-api/gemini/health",
+      "http_status": 200,
+      "sha256": "3968ed2e88a0dd04480243eb800bd5601ac6b5dc8eba11810f54e83bdff46cea"
+    },
+    {
+      "url": "https://aistore.zhaopintong.com/platform-api/gemini/membership-api/plans",
+      "http_status": 200,
+      "sha256": "a889e49fce51480a948eed367388d463535476cd74b5fa8aee3d9deaa328f144"
+    }
+  ]
+}

@@ -1,2 +1,3 @@
 2026-11-12T08:12:56+08:00 | muse | init → brief_ready | 第八轮调研选定银发写真照相馆（mps-silver-portrait-studio），P1、fast 车道；调研记录 2026-11-12-round8.md，选品单 00-brief.md 已投，派 Codex 写规格。
 2026-11-12T08:20:44+08:00 | codex | brief_ready → spec_in_progress | 核对原事件指纹及本机/远端原claim；前六产品实际均submitted，串行前置满足；本次在线重读WorkBuddy技能页成功，接手银发规格、十示例及一主题logo，不重复认领事件。当前SOP附录D/D.6暂停，A3通过直接交负责人手动上传。
+2026-11-12T08:40:18+08:00 | codex | spec_in_progress → spec_ready | A1 16项及独立复检通过，17组/阶段6 57项对照齐；本人及家人代购许可/自然年龄发量/被摄人退役主题边界明确；支付核款/Origin/当前微信及六字段完整。10虚构长辈示例+1立体logo，共11次登记上游调用，无重复/追加；逐图目检及SHA审计齐。fast无部署，真人/服役/支付/宿主未验；交Claude真实Skill/A2及Codex A3，现行附录D/D.6暂停，通过后交负责人手动上传。

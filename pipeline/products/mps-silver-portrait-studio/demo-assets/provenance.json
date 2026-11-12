@@ -1,0 +1,429 @@
+{
+  "authorized_limit": 10,
+  "generation_attempts": 10,
+  "upstream_generation_calls": 10,
+  "succeeded": 10,
+  "items": [
+    {
+      "key": "studio",
+      "series": "银发主题写真",
+      "title": "优雅银发棚拍",
+      "prompt": "Use case: photorealistic-natural. Asset type: offline silver-age portrait Skill development example. Create an original photorealistic completely synthetic older adult portrait. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. Warm ivory portrait studio, soft window-like lighting, a dignified cream blouse and tailored taupe jacket, refined shoulders-up to three-quarter framing, gentle depth and authentic facial detail. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:23:05+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_text_to_image",
+      "reference": null,
+      "status": "succeeded",
+      "raw_sha256": "11ce8acd2d4df78e02bad10eef681a712dd8853e9c454c88c132269386047adb",
+      "raw_bytes": 2247702,
+      "file": "studio.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 239789,
+      "output_sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f"
+    },
+    {
+      "key": "tang",
+      "series": "银发主题写真",
+      "title": "唐装中式",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. A quiet warm wood studio backdrop, tasteful muted burgundy Chinese-style tang jacket with simple frog closures, no bridal design, no readable symbols, comfortable dignified stance. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:44+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "2888aa16d59a67f9a47bc497c90217a52eb710e87ceb19ba1c3e7dd2cc98762d",
+      "raw_bytes": 2344372,
+      "file": "tang.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 243830,
+      "output_sha256": "50edc59670f7f61852ff7397b76400d4d4b9585bc90950a5ba8967b1d74a20e2"
+    },
+    {
+      "key": "lawn",
+      "series": "银发主题写真",
+      "title": "户外草坪阳光",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. A peaceful sunlit green lawn, airy natural daylight, pale sage cardigan and simple linen trousers, gentle seated or standing portrait, no sports challenge or implied health claim. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:46+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "283b94714406eedd2606eeebcb54bf88901368bba2041bb96c967befe1c5562d",
+      "raw_bytes": 2741354,
+      "file": "lawn.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 244031,
+      "output_sha256": "44cadbb82d25dae00dc081da03c6c774f3f56cc63a2b2ccfc748d0747c539cf1"
+    },
+    {
+      "key": "oil",
+      "series": "银发主题写真",
+      "title": "复古油画",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. Rich warm brown and muted olive painted studio backdrop, restrained fine-art oil-painting texture, elegant navy long-sleeve outfit, keep facial fine wrinkles and silver hair visible rather than smoothing them away. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:48+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "1147da220e4776dc995cfae6f05e1959626abe965466e6a7647d53bae721c55a",
+      "raw_bytes": 2380762,
+      "file": "oil.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 249312,
+      "output_sha256": "cf99c0a0f315c91fa2b5c8a8a777dd1b028cd48eddf9eb23d157ad8f296731c0"
+    },
+    {
+      "key": "beach",
+      "series": "银发主题写真",
+      "title": "海边度假暖阳",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. A generic tranquil beach in soft warm sunlight, relaxed opaque pale-blue linen outfit and light jacket, calm commemorative portrait. No destination landmark, travel check-in claim or wedding styling. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:50+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "dddb2d568688ea1c95c79914c84b64a073ed5ab833010cffb372b268aed5f3a4",
+      "raw_bytes": 2406873,
+      "file": "beach.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 230983,
+      "output_sha256": "5181c67d2226687bdce351771b73a238cff3d6f068cbacc4287b129377c24483"
+    },
+    {
+      "key": "qipao",
+      "series": "银发主题写真",
+      "title": "旗袍雅致",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. An understated neutral studio and subtle wooden screen, elegant opaque muted teal qipao with comfortable tailoring, modest collar and sleeves, natural fabric folds, no bridal red-gold embroidery or wedding accessories. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:52+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "ec1dc60effb9483007d46048f4827f9bc3c7362095fff233c11c157e3c3caddc",
+      "raw_bytes": 2072068,
+      "file": "qipao.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 223629,
+      "output_sha256": "a189f9c7031cccd17609365e9f51eca4e4163c70f1b6d7be3932247a40032e11"
+    },
+    {
+      "key": "garden",
+      "series": "银发主题写真",
+      "title": "园林雅致",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. A generic quiet classical garden with soft green foliage and simple wooden pavilion shapes, cream-gray elegant everyday jacket, natural balanced daylight. No historical person, royal or religious identity, no readable signs. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:54+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "23140cdb1fdd1237fddde59221be55339ff0c6a62d3f34f732b81268ea0703e8",
+      "raw_bytes": 2767973,
+      "file": "garden.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 267092,
+      "output_sha256": "9a4941450f752dc514e4c747e97a0a092c84cd4cd4970ede9b2e7a5203aaf248"
+    },
+    {
+      "key": "veteran",
+      "series": "银发主题写真",
+      "title": "军装老兵纪念",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. An artistic retired-veteran keepsake portrait for this completely fictional older adult, neutral studio, plain olive-green historical-style service jacket with an open collar. No active-duty roleplay, no official/current uniform reproduction, rank, medals, ribbons, unit patches, national emblems, badges, weapon, military base or document. The jacket is unmarked and commemorative only; do not imply verified service history. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:56+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "2e8a5d2dd554bff74eba9887798de7886628fbfa9033b5ef0651fb2596da05d0",
+      "raw_bytes": 2252055,
+      "file": "veteran.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 271903,
+      "output_sha256": "c5fa7e707ebeb3eeba8e3a48a39394e4be3fdbffc678e670fa11005c291ee982"
+    },
+    {
+      "key": "rural",
+      "series": "银发主题写真",
+      "title": "田园乡村",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. A peaceful generic countryside garden beside a simple wooden fence, soft late-afternoon daylight, comfortable oatmeal knit cardigan and plain trousers. No poverty stereotype, no farm labor challenge or health claim. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:30:58+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "f2c2adce07c6c0657aab0607381487184366970885a4e2185e80a6ab279f363f",
+      "raw_bytes": 2635312,
+      "file": "rural.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 263860,
+      "output_sha256": "03cac5e9e8a0d31e9c3e5c04e20c987c8b033d0107959ee999ea60c73d8f205e"
+    },
+    {
+      "key": "winter",
+      "series": "银发主题写真",
+      "title": "冬日暖阳室内",
+      "prompt": "Use case: identity-preserve. Asset type: offline silver-age portrait Skill development example. Edit the supplied completely synthetic older-adult reference. Preserve the exact same fictional face, visible age, hairstyle, gray-hair distribution, natural wrinkles and body proportions; change only the explicitly requested outfit, background and lighting. Exactly one completely fictional 70-year-old adult woman, with a natural softly lined face, visible fine wrinkles, short softly waved silver-gray hair with realistic sparse strands, warm natural skin texture and a calm dignified expression. Preserve this same fictional older adult identity across the series. No real person is depicted. Preserve visible age, gray hair, authentic skin texture, body proportions and face; no youth filter, no porcelain skin, no added or erased wrinkles, no thick invented hair. Fully clothed, face unobstructed, natural relaxed pose, anatomically plausible hands. No partner, child or other person. A cozy uncluttered room beside a window in winter sunlight, warm beige wool cardigan and soft scarf, dignified relaxed seated pose, balanced face illumination, no holiday party or birthday-banquet crowd. AI-created artistic keepsake portrait, not a documentary photograph, medical statement or identity/service certificate. No text, letters, numbers, readable signs, brands, logos, watermark, wedding veil, extra limbs, distorted fingers or face. No forced rejuvenation, beauty filter, excessive smoothing or caricature of age.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-12T08:31:00+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 70,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/4646f50f0c553882aaa0c28813a511047e76a313/pipeline/products/mps-silver-portrait-studio/demo-assets/studio.png",
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "fictional_adults": true,
+        "source_commit": "4646f50f0c553882aaa0c28813a511047e76a313",
+        "people": 1,
+        "source_subject": "wholly fictional older adult; age and service are not verified or user defaults"
+      },
+      "status": "succeeded",
+      "raw_sha256": "55471d0f90d1f6245d337778eed8b84fabef0c1e42f9b0677a6616d615d849e5",
+      "raw_bytes": 2576565,
+      "file": "winter.png",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "resize; 256-color indexed PNG; no added markings",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 285378,
+      "output_sha256": "6f0e1fcc3915f15e012df072f2a647d85d19bfa855dff8e4c3b3ea9ac5b2f552"
+    }
+  ],
+  "checked_at": "2026-11-12T08:32:09+08:00",
+  "auth_ref": "78cbaa1efcb27d2e52392172360db82260c4f3c0",
+  "scope": "10 completely fictional adult silver-age examples, one studio original plus nine reference edits; one synthetic 70-year-old woman, not user age/gender default or real service/medical proof.",
+  "cost": {
+    "unit_usd_estimate": 0.0065,
+    "total_demo_usd_estimate": 0.065,
+    "actual_invoice_verified": false
+  }
+}

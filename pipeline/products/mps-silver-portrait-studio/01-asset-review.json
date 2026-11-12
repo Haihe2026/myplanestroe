@@ -1,0 +1,93 @@
+{
+  "skill_id": "mps-silver-portrait-studio",
+  "at": "2026-11-12T08:36:07+08:00",
+  "result": "pass",
+  "reviewed_assets": 11,
+  "method": "Root actually viewed studio/logo bootstrap and each remaining nine PNG separately via view_image; subjective human-facing image inspection, not an automated claim of real identity/age/service verification.",
+  "items": [
+    {
+      "key": "studio",
+      "result": "pass",
+      "file": "demo-assets/studio.png",
+      "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+      "observation": "已逐图查看：暖白棚拍、米灰外套、自然银灰短发和面部细纹，单人，无字无品牌。"
+    },
+    {
+      "key": "tang",
+      "result": "pass",
+      "file": "demo-assets/tang.png",
+      "sha256": "50edc59670f7f61852ff7397b76400d4d4b9585bc90950a5ba8967b1d74a20e2",
+      "observation": "已逐图查看：暗红盘扣唐装、木质背景，原合成人物五官/银发轮廓大致一致，无婚礼装饰。"
+    },
+    {
+      "key": "lawn",
+      "result": "pass",
+      "file": "demo-assets/lawn.png",
+      "sha256": "44cadbb82d25dae00dc081da03c6c774f3f56cc63a2b2ccfc748d0747c539cf1",
+      "observation": "已逐图查看：草坪、藤椅、浅绿针织外套、自然坐姿与可见双手，未见明显多肢或其他人。"
+    },
+    {
+      "key": "oil",
+      "result": "pass",
+      "file": "demo-assets/oil.png",
+      "sha256": "cf99c0a0f315c91fa2b5c8a8a777dd1b028cd48eddf9eb23d157ad8f296731c0",
+      "observation": "已逐图查看：暖棕油画质感、深蓝服装，仍见发丝与细纹，没有明显返老还童。"
+    },
+    {
+      "key": "beach",
+      "result": "pass",
+      "file": "demo-assets/beach.png",
+      "sha256": "5181c67d2226687bdce351771b73a238cff3d6f068cbacc4287b129377c24483",
+      "observation": "已逐图查看：泛化海边与浅蓝亚麻外套，单人，无目的地标识/可读文字或婚礼物。"
+    },
+    {
+      "key": "qipao",
+      "result": "pass",
+      "file": "demo-assets/qipao.png",
+      "sha256": "a189f9c7031cccd17609365e9f51eca4e4163c70f1b6d7be3932247a40032e11",
+      "observation": "已逐图查看：素雅青绿旗袍、木屏风、自然坐姿，无秀禾/婚纱/新娘红金造型。"
+    },
+    {
+      "key": "garden",
+      "result": "pass",
+      "file": "demo-assets/garden.png",
+      "sha256": "9a4941450f752dc514e4c747e97a0a092c84cd4cd4970ede9b2e7a5203aaf248",
+      "observation": "已逐图查看：园林亭廊绿意、浅灰外套，非指定景区，单人且无可读标牌。"
+    },
+    {
+      "key": "veteran",
+      "result": "pass",
+      "file": "demo-assets/veteran.png",
+      "sha256": "c5fa7e707ebeb3eeba8e3a48a39394e4be3fdbffc678e670fa11005c291ee982",
+      "observation": "已逐图查看：朴素橄榄绿无标识外套，原银发长辈纪念肖像，无可见军衔/勋章/番号/军徽/武器/姓名牌，不声称真实服役。"
+    },
+    {
+      "key": "rural",
+      "result": "pass",
+      "file": "demo-assets/rural.png",
+      "sha256": "03cac5e9e8a0d31e9c3e5c04e20c987c8b033d0107959ee999ea60c73d8f205e",
+      "observation": "已逐图查看：田园花园木凳、米色针织、自然坐姿，双手大致自然，无劳作挑战/其他人物。"
+    },
+    {
+      "key": "winter",
+      "result": "pass",
+      "file": "demo-assets/winter.png",
+      "sha256": "6f0e1fcc3915f15e012df072f2a647d85d19bfa855dff8e4c3b3ea9ac5b2f552",
+      "observation": "已逐图查看：冬日窗边暖阳、针织围巾、单人坐姿，手部未见明显多肢，无寿宴人群。"
+    },
+    {
+      "key": "logo",
+      "result": "pass",
+      "file": "02-package/dist/logo.png",
+      "sha256": "9909cf071a9e64cb18707ec846b6cf5c921754979151075bfcf77756420acf1e",
+      "observation": "已逐图查看：立体陶瓷银发侧脸、银色镜头圆框、青绿暖白底，深浅阴影和纹理明确，无字无品牌或医疗/军徽图案。"
+    }
+  ],
+  "limitations": [
+    "All ten portraits use the same completely fictional older adult woman; exact age is a prompt setting, not medical/biometric verification or a requirement for users.",
+    "Broad visible identity/gray-hair/wrinkle continuity was subjectively checked; no biometric guarantee, all-gender/age/hair-type coverage or real-customer likeness test.",
+    "Indexed 512x768 PNG previews have some texture/gradient quantization; not print-quality delivery promises.",
+    "Veteran sample is fictional and unmarked; no real service history was verified.",
+    "No real customer photo, payment/OAuth test, production signed-reference transport or WorkBuddy host/platform acceptance was validated."
+  ]
+}
