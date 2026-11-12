@@ -1,0 +1,849 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-25e3ba4a6938bf19148090f5caa6b23a270d96c92f36898c52ef4829da50f1c6",
+  "claim_id": "8277ec63-e146-41ce-b4a1-0b8f21adebd3",
+  "source_ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+  "claim_commit": "53bef15dc3ea1686530254a7ca1468599f489d56",
+  "checked_at": "2026-11-12T20:09:48+08:00",
+  "result": "test_passed",
+  "closures": [
+    {
+      "id": "HNF-A3-01",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        437,
+        452,
+        460,
+        462,
+        473,
+        475,
+        479,
+        584,
+        610,
+        628,
+        843
+      ],
+      "basis": "形制始终先决定整套结构；outfit仅颜色细节叠加，选定form换无默认宋风visual及配套妆发；摘要/开工共用outfit_text；冲突早退先持久作废旧确认。"
+    },
+    {
+      "id": "HNF-A3-02",
+      "result": "closed",
+      "files": [
+        "scripts/studio.py",
+        "SKILL.md",
+        "references/scenes.md"
+      ],
+      "lines": [
+        356,
+        362,
+        377,
+        393,
+        404,
+        88,
+        21
+      ],
+      "basis": "路由先剥离被否定词；原复现句按主需求走，只排除越界无主需求则clarify_main_need；宿主规范明确上下文消歧，不把提示机械当拒绝。规则有界不等全部自然语言语义已验证。"
+    },
+    {
+      "id": "HNF-A3-03",
+      "result": "closed",
+      "files": [
+        "SKILL.md",
+        "scripts/studio.py"
+      ],
+      "lines": [
+        53,
+        119,
+        1361,
+        1365,
+        1369,
+        1370
+      ],
+      "basis": "全局重跑明确feedback例外，无编号等用户显式提交后同键同体--retry，有编号仅ticket GET；相关信号auto_retry=false，原售后幂等与生图GET恢复未改。"
+    },
+    {
+      "id": "HNF-A3-04",
+      "result": "closed",
+      "file": "assets/demos.json",
+      "lines": [
+        43
+      ],
+      "basis": "只把swordsman note竹林改木质影棚，保留非实拍说明；十图原PNG/SHA和外置logo未动。"
+    }
+  ],
+  "open_findings": [],
+  "inspection": {
+    "result": "structural_checks_passed_hanfu_contract_reviewed_separately",
+    "findings": [],
+    "original_yaml_accepted": true,
+    "metadata_projection_for_remaining_diagnostics_only": false,
+    "zip": {
+      "sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea",
+      "bytes": 4815365,
+      "files": 25,
+      "wrapper": "mps-hanfu-portrait-studio",
+      "logical_max_depth": 2
+    },
+    "checks": [
+      {
+        "item": "固定ZIP完整性",
+        "result": "pass",
+        "evidence": "SHA256与A2一致；Git blob已验证见固定下载清单逐字节Git对象核对。"
+      },
+      {
+        "item": "目录与干净解包",
+        "result": "pass",
+        "evidence": "单一slug外包装；技能根内最多两级，25文件，无重复/大小写冲突/链接/越界或缓存；逐文件与ZIP原字节一致。"
+      },
+      {
+        "item": "平台元数据",
+        "result": "pass",
+        "evidence": "八必填字段齐全，无YAML重复键或隐藏HTML指令；SKILL.md 15352字节，≤15KiB。"
+      },
+      {
+        "item": "双语示例逐项语义",
+        "result": "pass",
+        "evidence": "本人齐胸襦裙/宋褙子/明马面三对与固定规格逐字一致，同意条件、单人、2:3、1024×1536一致。"
+      },
+      {
+        "item": "触发词与接管",
+        "result": "pass",
+        "evidence": "25触发词、完整中文名充值词、唯一倾向句；执行规范首节接管。"
+      },
+      {
+        "item": "版本与固定欢迎",
+        "result": "pass",
+        "evidence": "slug/版本/渠道跨SKILL、_meta、studio和telemetry一致；欢迎句逐字符合。"
+      },
+      {
+        "item": "尺寸与字段常量",
+        "result": "pass",
+        "evidence": "仅三尺寸、六请求字段、八遥测字段；无machine_id；关闭开关为汉服slug。遥测失败行为另按TRV-03闭环复核。"
+      },
+      {
+        "item": "场景清单与超时",
+        "result": "pass",
+        "evidence": "十场景默认竖版；90/15/120/30/0/240预算一致。路由优先逻辑另按TRV-04闭环复核。"
+      },
+      {
+        "item": "十示例来源与展示标注",
+        "result": "pass",
+        "evidence": "10PNG完整解码，512×768；key/标题一致，SHA与Codex源/provenance/derivation/规格一致；每项note含非实拍标注。"
+      },
+      {
+        "item": "外置logo",
+        "result": "pass",
+        "evidence": "512×512PNG，≤500KB，与Codex原字节一致；ZIP外置，不新增生成。"
+      },
+      {
+        "item": "Markdown安全路径",
+        "result": "pass",
+        "evidence": "静态核对包函数编码规则；独立构造空格/#/%真实临时PNG链接经CommonMark解析可定位，无意外query/fragment。没有执行包函数或业务脚本。"
+      },
+      {
+        "item": "对客禁用词/秘密/语法",
+        "result": "pass",
+        "evidence": "对客SKILL/README及固定话术AST字面量扫描无供应商/模型/秘密，全部脚本Python3.7语法可解析。只做静态，不运行A2/客户端。"
+      }
+    ],
+    "assets": [
+      {
+        "key": "tang_ruqun",
+        "file": "tang_ruqun.png",
+        "bytes": 456086,
+        "sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
+        "source_identical": true
+      },
+      {
+        "key": "song_beizi",
+        "file": "song_beizi.png",
+        "bytes": 443289,
+        "sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
+        "source_identical": true
+      },
+      {
+        "key": "ming_mamian",
+        "file": "ming_mamian.png",
+        "bytes": 449225,
+        "sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
+        "source_identical": true
+      },
+      {
+        "key": "weijin",
+        "file": "weijin.png",
+        "bytes": 443935,
+        "sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
+        "source_identical": true
+      },
+      {
+        "key": "daily",
+        "file": "daily.png",
+        "bytes": 458931,
+        "sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
+        "source_identical": true
+      },
+      {
+        "key": "flowing",
+        "file": "flowing.png",
+        "bytes": 476673,
+        "sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
+        "source_identical": true
+      },
+      {
+        "key": "swordsman",
+        "file": "swordsman.png",
+        "bytes": 441924,
+        "sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
+        "source_identical": true
+      },
+      {
+        "key": "tang_banbi",
+        "file": "tang_banbi.png",
+        "bytes": 468577,
+        "sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
+        "source_identical": true
+      },
+      {
+        "key": "quju",
+        "file": "quju.png",
+        "bytes": 434273,
+        "sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
+        "source_identical": true
+      },
+      {
+        "key": "garden",
+        "file": "garden.png",
+        "bytes": 645766,
+        "sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
+        "source_identical": true
+      }
+    ],
+    "logo": {
+      "bytes": 418271,
+      "sha256": "d6cda4a802770817435324b898d5e0f1705adf95cd2a7c665baba27727c2978b",
+      "size": [
+        512,
+        512
+      ]
+    },
+    "markdown_fixtures": [
+      {
+        "case": "Hanfu Demo Assets",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Hanfu#Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Hanfu%Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      }
+    ],
+    "official_read": {
+      "at": "2026-11-12T19:52:36+08:00",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "fresh online read successful; skill metadata/examples/structure read",
+      "status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+    },
+    "full_a2_executed": false,
+    "business_commands_executed": false,
+    "pure_path_formatter_evaluated": false,
+    "upstream_calls": 0,
+    "production_calls": 0
+  },
+  "package_diff": {
+    "previous_zip_sha256": "624ee30dbd94d09f9b2a44d7b4c4c239cb9dd09e0d4f7c1ae11af23a1f9d30ba",
+    "current_zip_sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea",
+    "same": [
+      "README.md",
+      "assets/daily.png",
+      "assets/flowing.png",
+      "assets/garden.png",
+      "assets/ming_mamian.png",
+      "assets/quju.png",
+      "assets/song_beizi.png",
+      "assets/swordsman.png",
+      "assets/tang_banbi.png",
+      "assets/tang_ruqun.png",
+      "assets/weijin.png",
+      "references/platform-rules.md",
+      "references/prompts.md",
+      "scripts/audit_images.py",
+      "scripts/jpeg_local.py",
+      "scripts/png_local.py"
+    ],
+    "changed": [
+      {
+        "path": "SKILL.md",
+        "old_sha256": "35413d39bff8078191bcc08427e694edd58c35c105f3dbf2276932d076b9ebe9",
+        "new_sha256": "5824c2deb322559d73e6029d2a958bd9949607373c0e8a72da341a646e703552",
+        "old_bytes": 15057,
+        "new_bytes": 15352
+      },
+      {
+        "path": "_meta.json",
+        "old_sha256": "d71326e7ece2bba586a86e969155b76a6a0a3c4ff6dec724ca54f0d26f11312b",
+        "new_sha256": "6dd6ab9ad2cc55fdd3929b3c385e524b934d158a865ae303944a26a92766a08f",
+        "old_bytes": 235,
+        "new_bytes": 235
+      },
+      {
+        "path": "assets/demos.json",
+        "old_sha256": "15c5ad636d9874535f58c6005f38a85da86d8f1d2c10a3f2758d306ea190a35d",
+        "new_sha256": "ddbc7bc178918644ea205b9e2941a3f77471bc4aa366dd86fee5a8e7b5b9d99e",
+        "old_bytes": 2287,
+        "new_bytes": 2293
+      },
+      {
+        "path": "references/scenes.md",
+        "old_sha256": "4cdb81840b0bde0a1639de90bfaa2afbdab548c7d893bc788a45d5d708ab3d95",
+        "new_sha256": "e032672517b19182d12c39aef8d9585829b490d1b63218714267404d0cd773b3",
+        "old_bytes": 5977,
+        "new_bytes": 6775
+      },
+      {
+        "path": "scripts/studio.py",
+        "old_sha256": "a31adb01b733107ee72c567649b9b687e61ad5163ce728084e1bb59a50cb2bab",
+        "new_sha256": "fbf7333b0d21a31bdf0ab3d8d16f29a7808c1d86b2091c0a5f7087eeaac4ddab",
+        "old_bytes": 66444,
+        "new_bytes": 71761
+      },
+      {
+        "path": "scripts/telemetry.py",
+        "old_sha256": "aab80d1d9368873e2dcba906fa547d419a2dd2fa005be7e0c8f44fa03b42be0a",
+        "new_sha256": "5736a6e9af7f0818de3064b336da8a861fef0f05b67a20934ffd4d525d122db8",
+        "old_bytes": 5956,
+        "new_bytes": 5956
+      },
+      {
+        "path": "scripts/welcome_copy.py",
+        "old_sha256": "f06e37ad02d88e8374f00f57a5c7d7cccb7de2c43b52cbd4e49f5184e09fdb9b",
+        "new_sha256": "da20e3d11d96837999c1c5603c97dda52e0cf1641e1f97355399bd2b47bf78aa",
+        "old_bytes": 20197,
+        "new_bytes": 20583
+      },
+      {
+        "path": "tests/first-turn-preview.md",
+        "old_sha256": "5e4130063c664dd494c72e3aea23ad2790bd477b365b8c42143829d2c7fb3eda",
+        "new_sha256": "a97be2cf853e1f8847a82d948fe8e93dbab54e17047494d9f0553c6ea2293dd8",
+        "old_bytes": 4465,
+        "new_bytes": 4465
+      },
+      {
+        "path": "tests/test_skill_contract.py",
+        "old_sha256": "8f94c807d02a2c3cb1f87fc1197686feed5577ffce3513424c3ec540511802f7",
+        "new_sha256": "ea74dcc71453c8b19bf0dd70395d86406feb6f9686f9f93a8457b66119f0cbac",
+        "old_bytes": 91625,
+        "new_bytes": 93200
+      }
+    ],
+    "added": [],
+    "removed": [],
+    "demo_png_unchanged": true,
+    "manifest_changes": [
+      {
+        "key": "swordsman",
+        "old_note": "交领袍装束腰，竹林侠客风，艺术风格；AI 生成汉服写真，非实拍",
+        "new_note": "交领袍装束腰，木质影棚侠客风，艺术风格；AI 生成汉服写真，非实拍"
+      }
+    ],
+    "package_imported_or_executed": false,
+    "full_a2_executed": false
+  },
+  "independent_reviews": [
+    {
+      "schema_version": 1,
+      "skill_id": "mps-hanfu-portrait-studio",
+      "package_version": "1.0.1",
+      "source_ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+      "zip_sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea",
+      "result": "pass",
+      "open_findings": [],
+      "closed_findings": [
+        {
+          "id": "HNF-A3-01",
+          "prior_product_id": "HNF-A3-P01",
+          "status": "closed",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": "106-119,430-479",
+              "detail": "All seven valid daily(song/tang/ming) and garden(song/tang/ming/quju) combinations retain outfit_of form structure; chosen_form replaces default visual with FORM_VISUAL and adds matching FORM_MAKEUP. Nonempty outfit now overlays only color/detail and cannot remove the form."
+            },
+            {
+              "file": "scripts/studio.py",
+              "lines": "437-455,578-643,843",
+              "detail": "outfit_text is shared by saved-plan summary and start recap; conflicting form words return outfitFormConflict before planned state. Original-task locks precede _void_unsubmitted; conflict/unknown/bad-photo early returns remain persistently replanning."
+            },
+            {
+              "file": "references/scenes.md",
+              "lines": "25",
+              "detail": "Host is told to keep full form, use outfit for details and resolve conflict by selecting one set and replanning; SKILL99-100 and welcome_copy90-92 agree."
+            }
+          ]
+        },
+        {
+          "id": "HNF-A3-02",
+          "prior_product_id": "HNF-A3-P02",
+          "status": "closed",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": "352-427",
+              "detail": "Scene and intent routing both remove locally negated route words; the prior '不要婚服，我要新年宋制汉服' no longer forces wedding refusal. Only exclusions without a selected main scene yield clarify_main_need. Positive out-of-scope requests retain their boundary branches."
+            },
+            {
+              "file": "SKILL.md",
+              "lines": "88",
+              "detail": "Host must not refuse from negated keywords and must use contextual main intent."
+            },
+            {
+              "file": "references/scenes.md",
+              "lines": "20-25",
+              "detail": "Negation and clarify_main_need are explicitly handled; host context fallback covers wording outside the bounded rule window."
+            }
+          ]
+        }
+      ],
+      "scope": "Static closure of product findings01/02 in the actual clean package, including seven form+outfit combinations, conflict handling, negated main intent, host-instruction agreement and nearby self/consent/replanning safeguards. Public copy/example pairs showed no new regression.",
+      "a2_reference": {
+        "ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+        "file": "pipeline/products/mps-hanfu-portrait-studio/02-self-test.md",
+        "blob": "1cbbd2dad19a9d90059f310e2397b0e09b28be99",
+        "usage": "Read as context; actual fixed-package control flow and instructions independently inspected."
+      },
+      "limits": [
+        "No Skill import/execution, A2 run, HTTP/business/upstream/image call, package mutation or remote/state change.",
+        "Rule-based negation is bounded; contextual host behavior, Windows runtime, real-person fidelity and production behavior remain unverified. This product-specific static pass is not a complete A3 or runtime acceptance."
+      ]
+    },
+    {
+      "schema_version": 1,
+      "skill_id": "mps-hanfu-portrait-studio",
+      "package_version": "1.0.1",
+      "fixed_source_ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+      "package_sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea",
+      "package_bytes": 4815365,
+      "spec_ref": "1a7d115d281ca3b25ce86609cfb9b29adfe7a895",
+      "compared_to": {
+        "version": "1.0.0",
+        "fixed_source_ref": "683008528ac153fdb35209e14937aa6ad56656cf",
+        "package_sha256": "624ee30dbd94d09f9b2a44d7b4c4c239cb9dd09e0d4f7c1ae11af23a1f9d30ba"
+      },
+      "result": "pass_for_assigned_static_feedback_and_recovery_scope",
+      "closures": [
+        {
+          "id": "HNF-A3-03",
+          "previous_local_id": "HNF-REC-C01",
+          "result": "closed",
+          "basis": "执行规范两处消除自动重跑歧义，脚本反馈信号显式auto_retry=false，原售后持久键/体与tid只读查询保持。",
+          "evidence": [
+            {
+              "file": "SKILL.md",
+              "lines": [
+                53
+              ],
+              "observation": "全局重跑句明确feedback除外，不自动重跑，并指向第5节；不再用生图只读原任务的概括涵盖售后POST。"
+            },
+            {
+              "file": "SKILL.md",
+              "lines": [
+                119,
+                120
+              ],
+              "observation": "无反馈编号时等用户明确说提交反馈才feedback --retry，不自动补交；有编号只ticket查。"
+            },
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                1339,
+                1370
+              ],
+              "observation": "无账户feedbackSaved、reason且无done的feedbackSaved及ticketCreated（包括部分done/部分pending）均返回auto_retry=False；代码不自行再循环调用反馈命令。"
+            },
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                1306,
+                1336
+              ],
+              "observation": "_submit_pending与1.0.0 AST一致，POST使用pending item原body/key；0/5xx/未知保留原项，合法tid后才从pending移入tickets。404关联job属于确定拒绝分支，不与未知提交换键混淆。"
+            },
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                1373,
+                1402
+              ],
+              "observation": "cmd_ticket与1.0.0 AST一致，已有tid只GET本人support-tickets/{id}，未新增by-key或自动POST。"
+            }
+          ],
+          "limits": "这是静态执行规范与源码闭环，不是宿主实际按auto_retry执行、真实售后或真实幂等数据库验收。无重复工单、扣费或上游业务结果声明。"
+        }
+      ],
+      "regression_review": [
+        {
+          "topic": "原任务锁及先持久失效再校验",
+          "result": "pass",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                578,
+                630,
+                633,
+                643
+              ]
+            }
+          ],
+          "observation": "cmd_plan581先挡LOCKED/存在未完成job，584执行_void_unsubmitted；新增outfit_conflict在610才校验/早退，故不能绕过先清三同意/idem/job/body摘要/replanning的save_draft。新图B绝对路径及源SHA失效继承；已提交/unknown/download_pending不被新资格/形制信息解锁。"
+        },
+        {
+          "topic": "三许可和确认源快照",
+          "result": "pass",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                650,
+                662
+              ]
+            },
+            {
+              "file": "scripts/welcome_copy.py",
+              "lines": [
+                47,
+                60
+              ]
+            }
+          ],
+          "observation": "cmd_confirm与1.0.0 AST相同，planned+本人状态、三独立yes、源SHA核验后才新hfu键。照片使用、文件发图片服务及算力供应商、当次计费三许可未合并；welcome旧函数保留。"
+        },
+        {
+          "topic": "业务HTTP前本地预检",
+          "result": "pass",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                680,
+                692,
+                804,
+                844,
+                1062,
+                1085
+              ]
+            }
+          ],
+          "observation": "_job_body/cmd_resume AST不变。run仅开工复述改用outfit_text，控制顺序仍原job/unknown优先GET，无原job时先_job_body再账户HTTP；needs_credits且无job_id resume仍先完整预检。"
+        },
+        {
+          "topic": "账户与绑定401恢复",
+          "result": "pass",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                699,
+                770,
+                885,
+                938
+              ]
+            }
+          ],
+          "observation": "_account_ready/_ensure_skill_key/_confirm_bound/_recover_skill_key/_submit_unauthorized/_query均AST不变。401清Key/bound保原secret/任务，合法Key落盘与bound===True分开，恢复有界，不能靠换钱包/新身份掩盖原任务。"
+        },
+        {
+          "topic": "未知生图不重POST，下载只取原图",
+          "result": "pass",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                847,
+                882,
+                895,
+                986,
+                1012,
+                1100
+              ]
+            }
+          ],
+          "observation": "_submit/_continue_job/_poll/_deliver/cmd_resume/cmd_regenerate均AST不变；POST前submit_unknown持久化，超时/409/5xx/未知404只原键GET，known id只原任务原图。download_pending保锁；重新生成必须终态+明确当次计费同意。"
+        },
+        {
+          "topic": "八字段一次遥测与有界图像校验",
+          "result": "pass",
+          "evidence": [
+            {
+              "file": "scripts/telemetry.py",
+              "lines": [
+                14,
+                23,
+                86,
+                158
+              ]
+            }
+          ],
+          "observation": "telemetry9个顶层函数/类全部AST一致，仅版本常量更新。发送前attempted持久化/回读、失败不重报、link原账户/合法回执保留；machine_id未加。audit_images/png_local/jpeg_local三文件与1.0.0原字节一致。"
+        },
+        {
+          "topic": "售后不会被余额/原图恢复顺带补交",
+          "result": "pass_static",
+          "evidence": [
+            {
+              "file": "scripts/studio.py",
+              "lines": [
+                1306,
+                1370
+              ]
+            }
+          ],
+          "observation": "静态调用图中_submit_pending仍只由cmd_feedback调用；余额/paid/status/auth/resume/run路径无新增反馈调用。显式feedback --retry不重建body/key；合规tid查询走GET。未运行A2来证明请求次数。"
+        }
+      ],
+      "ast_comparison": {
+        "studio_current_definitions": 86,
+        "studio_identical_definitions": 74,
+        "studio_changed_or_added": 12,
+        "removed_definitions": [],
+        "changed_or_added": [
+          "_route_words",
+          "_negated",
+          "strip_negated",
+          "route_scene",
+          "route_intent",
+          "outfit_conflict",
+          "form_name",
+          "outfit_text",
+          "build_prompt",
+          "cmd_plan",
+          "cmd_run",
+          "cmd_feedback"
+        ],
+        "telemetry_current_definitions": 9,
+        "telemetry_identical_definitions": 9,
+        "telemetry_only_constant_change": "SKILL_VERSION1.0.0→1.0.1",
+        "welcome_identical_definitions": 53,
+        "welcome_added": "outfit_form_conflict",
+        "image_helper_files_identical": 3
+      },
+      "file_sha256": {
+        "scripts/studio.py": "fbf7333b0d21a31bdf0ab3d8d16f29a7808c1d86b2091c0a5f7087eeaac4ddab",
+        "scripts/telemetry.py": "5736a6e9af7f0818de3064b336da8a861fef0f05b67a20934ffd4d525d122db8",
+        "scripts/welcome_copy.py": "da20e3d11d96837999c1c5603c97dda52e0cf1641e1f97355399bd2b47bf78aa",
+        "scripts/audit_images.py": "ed7dc98ccc67395bcebd5d47f13a9ceee8de2c0cf4f56a50a5fbbbe276e2d33c",
+        "scripts/png_local.py": "ef6e94645528b41943b70a36af22dd4ebdaf18fe3c1b8690427437a03ca80648",
+        "scripts/jpeg_local.py": "c233bb9c88dd934513d0f685107f2219592f78fef6d29a20b1745becd175ec62"
+      },
+      "a2_evidence_read_only": {
+        "file": "02-self-test.md",
+        "line": 26,
+        "claimed_tests": [
+          "test_hnf03_feedback_unknown_waits_for_explicit_user",
+          "test_hnf03_skill_rerun_rule_excludes_feedback"
+        ],
+        "claim": "应答丢失返回pending/auto_retry=false，balance/resume不补交，显式retry同键同体只建1单，tid GET不再POST；原Support组保留。",
+        "independently_executed": false,
+        "note": "只阅读自测报告，不把报告等同本次重新跑过。"
+      },
+      "open_findings": [],
+      "scope_limits": [
+        "本专项不替代另两项路由/形制修复专审及整个A3。",
+        "未运行客户脚本或导入包模块，未重跑A2，没有任何HTTP/生产/上游调用。",
+        "未验证宿主实操、真实账户/支付/工单或生产数据库幂等。",
+        "未改远端、包源码、产品状态或其他产品；仅写本地审阅JSON。"
+      ],
+      "scope": {
+        "package_execution": 0,
+        "package_imports": 0,
+        "a2_runs": 0,
+        "http_calls": 0,
+        "upstream_calls": 0,
+        "production_writes": 0,
+        "remote_writes": 0,
+        "local_review_only": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "source_ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+      "skill_id": "mps-hanfu-portrait-studio",
+      "version": "1.0.1",
+      "reviewed_at": "2026-11-12T20:00:10+08:00",
+      "result": "pass",
+      "scope": "Read-only static metadata/assets/instruction-side A3 subreview; not the overall A3 decision.",
+      "closed_findings": [
+        {
+          "id": "HNF-A3-04",
+          "result": "closed",
+          "file": "assets/demos.json",
+          "lines": [
+            43
+          ],
+          "evidence": "note matches the unchanged approved dark-wood studio image; ten PNG SHA and external logo preserved."
+        },
+        {
+          "id": "HNF-A3-03_instruction_side",
+          "result": "closed_static",
+          "file": "SKILL.md",
+          "lines": [
+            53,
+            76,
+            119
+          ],
+          "evidence": "Global rerun explicitly excludes feedback; no-ID unknown awaits explicit user continuation; known ID only ticket GET. Runtime implementation reviewed separately."
+        },
+        {
+          "id": "HNF-A3-02_instruction_side",
+          "result": "closed_static",
+          "file": "SKILL.md",
+          "lines": [
+            88
+          ],
+          "evidence": "Denied boundary words are not refusal evidence; scenes.md includes contextual clarification and clarify_main_need. Runtime negation algorithm reviewed separately."
+        },
+        {
+          "id": "A2_Windows_evidence_disclosure",
+          "result": "closed_documentation_gap",
+          "file": "02-self-test.md",
+          "lines": [
+            46
+          ],
+          "evidence": "Repair report explicitly says Windows isolated runtime unverified and Linux-only environment; does not count it as passed."
+        }
+      ],
+      "open_findings": [],
+      "checks": {
+        "zip": {
+          "bytes": 4815365,
+          "sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea",
+          "files": 25,
+          "original_bytes_verified": true
+        },
+        "frontmatter": {
+          "result": "pass",
+          "file": "SKILL.md",
+          "lines": [
+            1,
+            18
+          ],
+          "bytes": 15352,
+          "max_bytes": 15360,
+          "examples_pairs": 3,
+          "spec_identical_except_patch_version": true
+        },
+        "eight_field_telemetry": {
+          "result": "pass_static",
+          "file": "scripts/telemetry.py",
+          "lines": [
+            21
+          ],
+          "machine_id_sent": false,
+          "version_channel_consistent": true
+        },
+        "approved_assets": {
+          "count": 10,
+          "sha_all_unchanged": true,
+          "total_bytes": 4718679,
+          "preview_dimensions": [
+            512,
+            768
+          ],
+          "external_logo_bytes": 418271,
+          "external_logo_sha256": "d6cda4a802770817435324b898d5e0f1705adf95cd2a7c665baba27727c2978b"
+        },
+        "markdown": {
+          "result": "unchanged_static_contract",
+          "file": "scripts/studio.py",
+          "evidence": "md_safe_path AST and unsafe-character mapping exactly unchanged from reviewed1.0.0; bare PNG names unchanged; no package formatter execution."
+        },
+        "customer_copy": "No provider/model/internal-development leakage in public sections; fixed welcome/consent/owner upload limits retained."
+      },
+      "limits": [
+        "No package import/CLI/A2 or HTTP in this subreview; root separately records current official online read. Claude repair report explicitly did not reread official docs; no online claim is invented.",
+        "A2 reports Linux unshare Python3.13 plus AST3.7 syntax. Windows and actual Python3.7 runtime remain unverified, despite disclosure being corrected.",
+        "Static instruction-side closures do not certify HNF-A3-01/02/03 runtime fixes; root/other reviewers assess source paths separately."
+      ],
+      "execution_scope": {
+        "package_executed": false,
+        "package_modified": false,
+        "a2_executed": false,
+        "http_calls": 0,
+        "upstream_calls": 0,
+        "remote_writes": 0
+      }
+    }
+  ],
+  "source_file_blobs": {
+    "README.md": "38828e256823721595cffcd2ddcf03cca830813d",
+    "SKILL.md": "04f4ecbbc4343a893336e76e9d8516787d1a23cd",
+    "_meta.json": "72a991a61c63c820a455eee65271c0303c9854c8",
+    "assets/daily.png": "ca4efd753fd0bd76bd2d0bb07c909fd5d45b8ac3",
+    "assets/demos.json": "0001929fb6f3b0d1a6ab98bb14a9fc1215c3eeab",
+    "assets/flowing.png": "593620cf23487071840bef53cf2d9712ddb85a58",
+    "assets/garden.png": "70bb028c5d47efbc491447df5209bbfac84bb64c",
+    "assets/ming_mamian.png": "4f3697fada81667f09710b9ef21ff33c94ca0ad1",
+    "assets/quju.png": "365a3512b492a1b8e0f3d3bd15819e88ecdec49a",
+    "assets/song_beizi.png": "c394bfb04213c1d642840d38381ba89d00f99873",
+    "assets/swordsman.png": "43f2ee4acb91be5f7ae0b4a10719c85bf627ac55",
+    "assets/tang_banbi.png": "d3c78f7492efd59e988be7aa044bdd035823b44b",
+    "assets/tang_ruqun.png": "cc7c83988b0542ae38e7af409844ad69e3d117bd",
+    "assets/weijin.png": "03a669b3983a63fbcf5c49ad6e8f5d44cb94fce0",
+    "references/platform-rules.md": "5de7fb45c42907693419b2cc30ef52545ec0861a",
+    "references/prompts.md": "ddbbaa457db6e78aed4c38dbe51643d444bd618a",
+    "references/scenes.md": "f29fe552d7400ac20c55ada1e55031b734747e0b",
+    "scripts/audit_images.py": "c927b242902d611f38747e6cc492b6a671b78710",
+    "scripts/jpeg_local.py": "b405e4cad8744119bad2abe180aa50603ca6021f",
+    "scripts/png_local.py": "7527dafe4de30d16444955587b5a69fc71aea123",
+    "scripts/studio.py": "01001500c3ba53bd7a79dc25abbd0e47216df2be",
+    "scripts/telemetry.py": "80d074803fd0576e2b75e3c0858f92d2e7d3b194",
+    "scripts/welcome_copy.py": "ce35bcf939ee26e587ad45d7cb58121c9d8073be",
+    "tests/first-turn-preview.md": "f5d84d4c0c1752508f0364ba1cf4c5771277c4fd",
+    "tests/test_skill_contract.py": "582dfd77925aefe04298762a3231f2ce741798f6"
+  },
+  "fixed_input_objects": {
+    "pipeline/products/mps-hanfu-portrait-studio/00-brief.md": "4a46baccf88955f110edf3d4fefae42eee1692f2",
+    "pipeline/products/mps-hanfu-portrait-studio/01-dev-spec.json": "6e0228f526779c9aa4ba1cadc30874a82e76e564",
+    "pipeline/products/mps-hanfu-portrait-studio/01-dev-spec.md": "23bc6e990f58327f34cae6c1ffed7866c11826e1",
+    "pipeline/products/mps-hanfu-portrait-studio/02-package/dist/logo.png": "7c761e3513ee0e983451a118b7c459f37f02aff9",
+    "pipeline/products/mps-hanfu-portrait-studio/02-package/dist/mps-hanfu-portrait-studio-1.0.0.zip": "1393d0a888023f0d2688228bc78749e48d0e1d36",
+    "pipeline/products/mps-hanfu-portrait-studio/02-package/dist/mps-hanfu-portrait-studio-1.0.1.zip": "86d886ae093d0428bd4ee3bc312c552afcbd3847",
+    "pipeline/products/mps-hanfu-portrait-studio/02-self-test.md": "1cbbd2dad19a9d90059f310e2397b0e09b28be99"
+  },
+  "official_read": {
+    "at": "2026-11-12T20:09:48+08:00",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "status": 200,
+    "bytes": 277042,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c",
+    "result": "fresh online read before final A3 report; skill metadata/examples/layout read; expert not applicable"
+  },
+  "sop_blob": "509b9732f85b7f7ccccac6f077d5078953d57013",
+  "original_receipt_preserved": {
+    "event_id": "evt-25e3ba4a6938bf19148090f5caa6b23a270d96c92f36898c52ef4829da50f1c6",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T19:52:40+08:00",
+    "evidence_ref": "53bef15dc3ea1686530254a7ca1468599f489d56:pipeline/products/mps-hanfu-portrait-studio/status.json",
+    "claim_id": "8277ec63-e146-41ce-b4a1-0b8f21adebd3"
+  },
+  "client_source_modified_by_codex": false,
+  "development_documents_modified": false,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "full_a2_executed": false,
+  "package_imported_or_executed": false,
+  "appendix_d": "suspended; D.6 suspended",
+  "next_role": "muse",
+  "next_action": "deliver fixed1.0.1 ZIP/external logo/SHA to owner for manual upload; no Appendix D task or automatic publish"
+}
