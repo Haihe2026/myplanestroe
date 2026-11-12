@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-ecccfbcd2f41de73cde2d6721f08464f808b4713962b0f578fc720f1a7bcfdd9",
+  "claim_id": "14235096-b7df-41e6-ab4a-9dd0e024b75b",
+  "role": "codex",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "at": "2026-11-12T18:30:42+08:00",
+  "result": "spec_ready",
+  "source_ref": "36d43b9d9d38b58c3b79fbd8e6f5bb8c4c9d1753",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-retry-serial.md",
+  "request_kind": "retry",
+  "original_request": {
+    "request_id": "req-muse-to-codex-retry-hanfu-serial-20261112",
+    "from": "muse",
+    "to": "codex",
+    "skill_id": "mps-hanfu-portrait-studio",
+    "source_repo": "Haihe2026/myplanestroe",
+    "source_ref": "36d43b9d9d38b58c3b79fbd8e6f5bb8c4c9d1753",
+    "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-retry-serial.md",
+    "kind": "retry"
+  },
+  "request_digest_verified": true,
+  "evidence_ref": "1a7d115d281ca3b25ce86609cfb9b29adfe7a895:pipeline/products/mps-hanfu-portrait-studio/01-a1-validation.json",
+  "spec_commit": "1a7d115d281ca3b25ce86609cfb9b29adfe7a895",
+  "source_verification": "1a7d115d281ca3b25ce86609cfb9b29adfe7a895:pipeline/products/mps-hanfu-portrait-studio/01-source-verification.json",
+  "original_receipt_preserved": {
+    "event_id": "evt-ecccfbcd2f41de73cde2d6721f08464f808b4713962b0f578fc720f1a7bcfdd9",
+    "role": "codex",
+    "action": "claimed",
+    "at": "2026-11-12T17:08:15+08:00",
+    "evidence_ref": null,
+    "claim_id": "14235096-b7df-41e6-ab4a-9dd0e024b75b"
+  },
+  "no_duplicate_claim": true,
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-hanfu-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "02999649750726bd6f476dfb44424e4ded4fc19c",
+    "stage": "spec_ready",
+    "updated_at": "2026-11-12T18:28:39+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "serial_prerequisite": "previous silver1.0.1 submitted; all previous seven submitted; G7 not used",
+  "a1": {
+    "result": "pass",
+    "items": 16,
+    "acceptance_groups": 17,
+    "stage6_mapping": 57,
+    "independent_final_reviews": "two fixed-document SHA read-only reviews passed"
+  },
+  "assets": {
+    "delivered_demos": 10,
+    "logo": 1,
+    "identity_reference_only": 1,
+    "registered_generation_requests": 12,
+    "extra_generation_tests": 0,
+    "duplicate_generation_posts": 0,
+    "logo_calls": 1,
+    "synthetic_adults_only": true,
+    "initial_tang_seed": "rejected as qixiong due low skirt waist, identity reference only; corrected image supplied",
+    "preview": "local true-color RGB PNG re-export from original images, no extra generation",
+    "garden": "same original n=1 task returned 3 images; selected candidate1 by visual review for offline demo, actual832x1248; existing singleton adapter unchanged and this is not a production contract pass; actual invoice unverified"
+  },
+  "published_files_blob_verified": 21,
+  "other_product_files_and_board_rows_untouched": true,
+  "scope": {
+    "lane": "fast",
+    "new_skill_implementation": false,
+    "backend_deployment": false,
+    "production_auth_or_finance_writes": false,
+    "platform_upload": false
+  },
+  "next_role": "claude",
+  "next_action": "按spec_ready自动通知，从固定spec_commit真实开发本人成人单人汉服Skill/A2/打包；十图和外置logo原字节保留，不打包身份参考初稿。继承银发1.0.1早退前失效/有界预检/原任务/401/attempted状态机。Codex A3独立静态，当前D/D.6暂停，A3通过交负责人手动上传。",
+  "verification_limits": [
+    "合成同一25岁女性不是用户默认，也不是各性别/年龄/真人生物保真验证。",
+    "馆藏结构和艺术主题有明确局限；单视角不能证明背部裁剪/考古复原。",
+    "园林多结果为本轮已观测异常，生产严格恰一合同未因离线选图放宽。",
+    "本品真实微信/付款/手机、生产签名参考链路、宿主行为和平台接受审核未验证。"
+  ],
+  "authority": "通知不扩生产/财务/发布/跨聊天权限，不新建worker、AI心跳、自检或周期监测。"
+}
