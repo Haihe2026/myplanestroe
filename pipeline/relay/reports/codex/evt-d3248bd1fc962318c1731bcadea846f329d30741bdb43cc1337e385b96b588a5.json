@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-d3248bd1fc962318c1731bcadea846f329d30741bdb43cc1337e385b96b588a5",
+  "claim_id": "b2e85c42-2876-4f28-8b55-3d1ccc7fde72",
+  "role": "codex",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "at": "2026-11-12T18:39:08+08:00",
+  "request_kind": "handoff",
+  "source_ref": "8f657fe541033fe77b192f954f1fa465b69014ec",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-sop-g7.md",
+  "original_request": {
+    "request_id": "req-muse-to-codex-sop-g7-20261112",
+    "from": "muse",
+    "to": "codex",
+    "skill_id": "mps-hanfu-portrait-studio",
+    "source_repo": "Haihe2026/myplanestroe",
+    "source_ref": "8f657fe541033fe77b192f954f1fa465b69014ec",
+    "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-sop-g7.md",
+    "kind": "handoff"
+  },
+  "request_digest_verified": true,
+  "fixed_source_message_blob": "07fc40eaed2fe43c50d2e83244dda55d43a143f0",
+  "result": "g7_sop_sync_verified_already_in_completed_spec",
+  "observed_head": "1af78d95bf9511021058417ea1ff5077c2844f0b",
+  "current_sop_blob": "509b9732f85b7f7ccccac6f077d5078953d57013",
+  "fixed_and_current_sop_same_blob": true,
+  "spec_commit": "1a7d115d281ca3b25ce86609cfb9b29adfe7a895",
+  "evidence_ref": "1a7d115d281ca3b25ce86609cfb9b29adfe7a895:pipeline/products/mps-hanfu-portrait-studio/01-dev-spec.json",
+  "spec_sop_current": {
+    "ref": "02999649750726bd6f476dfb44424e4ded4fc19c",
+    "blob": "509b9732f85b7f7ccccac6f077d5078953d57013",
+    "previously_read_blob": "53e9b9862e62dadd2bd5a20d6e5e5697e3beab46",
+    "delta": "Only added fixed rule14/G7: after A3 handoff and no owner reply continue next package, overriding rule13 in that case; paused installation sentence does not apply.",
+    "this_product": "Resumed on actual silver submitted under original retry; G7 not required for this product.",
+    "future": "Read latest SOP for each task; apply rule14 when its conditions hold, do not mechanically require submitted in that case. Manual owner upload and existing authority boundaries unchanged."
+  },
+  "spec_document_sha256": {
+    "01-dev-spec.md": "5e1dbb520624f47e3208fcba04350bdf8cf118bc4de0331ff26c87c80122a3a8",
+    "01-dev-spec.json": "785d1125a03ef7fab36988df10ef82bc759db9cf20feee1af56c3f356f3ddd0e"
+  },
+  "a1": "passed at fixed spec commit",
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": "2026-11-12T18:38:29+08:00",
+    "lane": "fast",
+    "owner": "claude",
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-hanfu-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "02999649750726bd6f476dfb44424e4ded4fc19c",
+    "stage": "dev_in_progress",
+    "updated_at": "2026-11-12T18:38:29+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "original_claim_preserved": true,
+  "duplicate_event_claim": false,
+  "development_documents_rewritten": false,
+  "assets_regenerated": false,
+  "new_upstream_generation_calls": 0,
+  "product_state_modified": false,
+  "existing_claude_stage_event": "evt-8025373ddf0898526aed685b9926e81e8cb36e5e544b9a69f066b15b060b4c24",
+  "existing_claude_receipt": {
+    "event_id": "evt-8025373ddf0898526aed685b9926e81e8cb36e5e544b9a69f066b15b060b4c24",
+    "role": "claude",
+    "action": "claimed",
+    "claim_id": "1f5b61e6-0e2b-455f-bc45-b25e12aceab2",
+    "at": "2026-11-12T18:38:11+08:00",
+    "evidence_ref": null
+  },
+  "claude_handoff_repeated": false,
+  "future_rule": "A3通过且交付负责人后未回复的情形，按现行SOP第14条继续下一包，优先第13条；不等待回复形成机械串行阻断。暂停的安装检测句不适用。",
+  "this_product": "原retry已按银发1.0.1真实submitted恢复；汉服规格/素材已A1通过并spec_ready，本同步无需重写或再生图。",
+  "publishing": "仍负责人手动上传；第14条只调整继续开发的工作流，不增加发布/生产/财务权限。",
+  "authority": "保留现有原认领和Claude交接；不新增worker、AI心跳、自检、周期监测或跨聊天发信。"
+}
