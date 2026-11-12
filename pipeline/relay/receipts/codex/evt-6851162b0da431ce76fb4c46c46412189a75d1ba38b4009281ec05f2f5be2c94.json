@@ -1,1 +1,1 @@
-{"event_id": "evt-6851162b0da431ce76fb4c46c46412189a75d1ba38b4009281ec05f2f5be2c94", "role": "codex", "action": "claimed", "at": "2026-11-12T09:52:30+08:00", "evidence_ref": null, "claim_id": "504de69a-6590-496a-a420-5c2de423c1c6"}
+{"event_id": "evt-6851162b0da431ce76fb4c46c46412189a75d1ba38b4009281ec05f2f5be2c94", "role": "codex", "action": "acknowledged", "at": "2026-11-12T09:56:39+08:00", "evidence_ref": "941049712599a0dc8c7b5bdbdfdec221a5c4f9dc:pipeline/products/mps-silver-portrait-studio/status.json", "claim_id": "504de69a-6590-496a-a420-5c2de423c1c6"}
