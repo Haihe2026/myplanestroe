@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-47bb3153ae661e3b2b485f79e4d0934fc263063249ebd9f8015d3d4ee9057b75",
+  "claim_id": "42c24199-a259-4e9a-8b70-a62e7e1e7cd2",
+  "role": "codex",
+  "skill_id": "mps-silver-portrait-studio",
+  "at": "2026-11-12T08:41:39+08:00",
+  "result": "spec_ready",
+  "source_ref": "bd27e5ee11774d7ca3d6671bdbc29121a6c11caa",
+  "source_path": "pipeline/products/mps-silver-portrait-studio/status.json",
+  "evidence_ref": "3eb43035ef3c80363b0c9527cb82ec63aa758bb8:pipeline/products/mps-silver-portrait-studio/01-a1-validation.json",
+  "spec_commit": "3eb43035ef3c80363b0c9527cb82ec63aa758bb8",
+  "original_request": "银发单人写真十主题；本人或被摄本人知情同意的家人代购，自然银发/皱纹保留，老兵纪念只限被摄本人已退役并同意；Codex规格及十示例/一logo，Claude真实开发。",
+  "source_verification": "3eb43035ef3c80363b0c9527cb82ec63aa758bb8:pipeline/products/mps-silver-portrait-studio/01-source-verification.json",
+  "original_receipt_preserved": {
+    "event_id": "evt-47bb3153ae661e3b2b485f79e4d0934fc263063249ebd9f8015d3d4ee9057b75",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T08:20:56+08:00",
+    "evidence_ref": "4521a68c8e8169bc79f0b700b63b4b374f5efbb1:pipeline/products/mps-silver-portrait-studio/status.json",
+    "claim_id": "42c24199-a259-4e9a-8b70-a62e7e1e7cd2"
+  },
+  "no_duplicate_claim": true,
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-silver-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "22796800f70465017764213fb4601c11d1fc2b36",
+    "stage": "spec_ready",
+    "updated_at": "2026-11-12T08:40:18+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "a1": {
+    "result": "pass",
+    "items": 16,
+    "acceptance_groups": 17,
+    "stage6_mapping": 57,
+    "independent_final_reviews": "two read-only final A1 reviews passed"
+  },
+  "assets": {
+    "demos": 10,
+    "logo": 1,
+    "registered_generation_calls": 11,
+    "extra_generation_tests": 0,
+    "duplicate_generation_posts": 0,
+    "synthetic_adult_only": true,
+    "reference": "one fictional older adult, one studio original plus nine reference edits"
+  },
+  "published_files_blob_verified": 20,
+  "other_product_files_and_board_rows_untouched": true,
+  "scope": {
+    "lane": "fast",
+    "new_skill_implementation": false,
+    "backend_deployment": false,
+    "production_finance_writes": false,
+    "platform_upload": false
+  },
+  "verification_limits": [
+    "全部资产为同一虚构成年长辈女性，70岁只是合成设定，不是用户门槛或真人年龄/服役史认证。",
+    "逐图主观审阅不等于生物身份保真、男性/不同发量年龄真实效果或生产签名参考链路验收。",
+    "本产品真实微信/付款/手机、WorkBuddy宿主行为及平台审核未验证。"
+  ],
+  "next_role": "claude",
+  "next_action": "按自动spec_ready事件，从固定spec_commit真实开发Skill/A2/打包；保持十图及logo原字节，继承孕妈1.0.1 YAML/业务HTTP前预检/unknown补询、原任务GET/401和有界/attempted一次经验。当前SOP附录D及D.6暂停，Codex A3通过后直接交负责人手动上传。",
+  "authority": "仓库资料不扩展生产/财务/部署/发布/跨聊天权限，不新建worker、AI心跳或自检监测。"
+}
