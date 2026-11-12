@@ -1,8 +1,8 @@
 {
   "blocked": null,
-  "claimed_at": null,
+  "claimed_at": "2026-11-12T09:38:23+08:00",
   "lane": "fast",
-  "owner": null,
+  "owner": "claude",
   "rounds": {
     "dev": 0,
     "spec": 0,
@@ -11,8 +11,8 @@
   "skill_id": "mps-silver-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "22796800f70465017764213fb4601c11d1fc2b36",
-  "stage": "spec_ready",
-  "updated_at": "2026-11-12T08:40:18+08:00",
+  "stage": "dev_in_progress",
+  "updated_at": "2026-11-12T09:38:23+08:00",
   "versions": {
     "listed": null,
     "package": null
