@@ -1,0 +1,38 @@
+{
+  "key": "logo",
+  "series": "主题logo",
+  "title": "汉服写真立体主题logo",
+  "prompt": "Use case: stylized-concept. Asset type: premium original three-dimensional Hanfu portrait studio app icon. A sculpted elegant folded cross-collar hanfu garment motif formed from jade-green ceramic and warm ivory satin-like material, placed within a subtle camera-lens circular frame. Warm ivory rounded-square background with restrained muted coral accents. Clear dimensional folded fabric, shallow sculptural relief, soft contact shadows, tactile premium materials, one simple focal motif readable at small size. Non-bridal, no crown, no human face, no text, letters, numbers, watermark, brand, national emblem, military badge, flat vector outline or generic flat ico.",
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "requested_size": [
+    1024,
+    1024
+  ],
+  "generation_date": "2026-11-12T17:15:51+08:00",
+  "fictional_adults": true,
+  "synthetic_example_age": 25,
+  "identity_age_is_not_user_default": true,
+  "rights": "通过登记资源生成的虚构成年人汉服写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+  "method": "registered_adapter_text_to_image",
+  "reference": null,
+  "status": "succeeded",
+  "raw_sha256": "2e5314d0c9dc82d38fb7725ddea2c29ff63beaa6ebac6fb0c9e5f9e596cb1328",
+  "raw_bytes": 2451749,
+  "file": "logo.png",
+  "actual_generated_size": [
+    1254,
+    1254
+  ],
+  "local_resize": true,
+  "local_processing": "resize; true-color PNG; no added markings",
+  "output_size": [
+    512,
+    512
+  ],
+  "output_bytes": 418271,
+  "output_sha256": "d6cda4a802770817435324b898d5e0f1705adf95cd2a7c665baba27727c2978b",
+  "authorization_ref": "100fdbdf0caae8b0c9d0b4f8b02c87bd4a5dca99",
+  "paid_generation_calls": 1,
+  "visual_review": "已实际目检：玉色陶瓷交领折叠衣襟、镜头圆框、暖白珊瑚底，立体层次与投影明确，无字无品牌，非平面ico。"
+}
