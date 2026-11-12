@@ -1,106 +1,53 @@
-# 自测报告：mps-hanfu-portrait-studio 1.0.0
+# 自测报告：mps-hanfu-portrait-studio 1.0.1
 
-已读 WorkBuddy 官方文档快照（docs/sop/workbuddy-official-docs.md，快照日期 2026-11-08；读了「一、开放平台概述」「二、技能」全部：目录结构、8 个必填 frontmatter、examples_zh/examples_en、references/scripts/templates）。本单只打 `config.yaml` channels 中的 `workbuddy-skill`，未读专家章节、未打专家包。
+修复轮（`rounds.dev` 1 → 2），按 SOP〇章第 4 条不重读官方文档、不写读取行。时间：2026-11-12T19:45+08:00，Claude 定时运行（无人值守）。
 
-- 首次开发（`rounds.dev` 0 → 1）。时间：2026-11-12T18:51:48+08:00，Claude 定时运行（无人值守）。
-- 依据：开发文档固定提交 `1a7d115d281ca3b25ce86609cfb9b29adfe7a895`（`01-dev-spec.md` / `01-dev-spec.json` / `01-a1-validation.json`）；产品通知 `evt-8025373d…`（source_ref 同上）。开发文档、选品单、logo、demo-assets 均未改。
-- **A1 复检：通过。** 16 项齐（立项与词表、官方读取记录、场景路由表、十主题动作/视觉参照/锁定与四基线、10 张示例与审计、立体 logo、计费默认值、模型与成本毛利 76.47% ≥ 60%、fast 车道、14 接口带源码位置、漏斗对应表、相邻技能分界、不承接清单、T01–T17 与阶段 6 逐项对照 57 项、决策记录、MD/JSON 一致）；串行前置：银发 1.0.1 已 submitted（规格决策记录）。无退回意见。
+- 依据：Codex A3 报告 `03-test-report.md`（提交 `bde7655`，HNF-A3-01..04）；Muse 交接 `msg-from-muse-20261112-fix-100.md`（提交 `7a40280`）；通知 `evt-a698f14b…`（test_failed）、`evt-0e3deb1c…`（handoff）。开发文档、选品单、logo、示例原图均未改。
+- **A1 复检**：修复轮，开发文档未变（固定 `1a7d115`），沿用 1.0.0 复检结论，无需退回。
 - **A2 结论：通过，置 package_ready。** 真实上游调用 0；后端业务调用 0（进程内 Mock、合成账户）；真实支付 0；生产变更 0；未上传、未发布。
+- 1.0.0 自测报告见提交 `e0d725f` 的本文件；1.0.0 ZIP 原样保留在 `02-package/dist/`。
 
 ## 交付
 
 | 项 | 值 |
 |---|---|
-| 技能包 | `02-package/dist/mps-hanfu-portrait-studio-1.0.0.zip`，4812372 字节，25 个文件，逻辑根最多两级，SHA256 `624ee30dbd94d09f9b2a44d7b4c4c239cb9dd09e0d4f7c1ae11af23a1f9d30ba` |
-| 版本 | 1.0.0（SKILL.md `version`、`_meta.json`、`studio.SKILL_VERSION`、遥测 `SKILL_VERSION`、`build.py`、first-turn-preview 一致） |
-| logo | `02-package/dist/logo.png` Codex 原文件未动，SHA256 `d6cda4a802770817435324b898d5e0f1705adf95cd2a7c665baba27727c2978b`，418271 字节（外置，不进 ZIP） |
-| 十张示例 | `dev/sync_demos.py` 按 `demo-assets/provenance.json` 逐张核对后原字节复制到 `assets/`（SHA 与规格第 5 节表一致，派生记录 `dev/demos-derivation.json`）；身份参考 `01-reference-seed.png` 未入包 |
-| SKILL.md | 15057 字节（≤ 15360）；frontmatter 8 必填字段与 examples 中英各 3 条逐字取自规格 JSON `frontmatter`；欢迎句「欢迎使用WorkBuddy官方认证技能 汉服写真照相馆。」 |
+| 技能包 | `02-package/dist/mps-hanfu-portrait-studio-1.0.1.zip`，4815365 字节，25 个文件，逻辑根最多两级，SHA256 `c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea` |
+| 旧包 | `mps-hanfu-portrait-studio-1.0.0.zip` 未动（SHA256 `624ee30d…`），`build.py` 拒绝覆盖已存在的 ZIP |
+| 版本 | 1.0.1（SKILL.md `version`、`_meta.json`、`studio.SKILL_VERSION`、遥测 `SKILL_VERSION`、`build.py`、first-turn-preview 一致） |
+| SKILL.md | 15352 字节（≤ 15360）；欢迎句、description、examples、接管规则其余条目未改 |
+| logo / 示例图 | `dist/logo.png` 与 10 张 PNG 原字节未动；未追加任何生图或 logo 调用 |
 
-## 实现要点（对应规格）
+## 四项修复与回归
 
-- 基座：继承银发 1.0.1（`59aca1d…`）的 `studio.py` 状态机（账户/原安装身份、绑定 401、原任务锁、SLV-A3-01 先作废再校验、PNG/JPEG 有界完整解码、8 字段遥测、售后），去掉银发的家人代购、老兵条件与年龄外观业务。
-- 只为本人：`plan` 改为 `--self yes/no/unknown --adult yes/no/unknown`；未知一次合并补问（`needsEligibility`），明确不是本人/未成年 `notEligible`；不开放代购（`--orderer` 不再接受）。三项独立同意不变（本人照片许可 / 发送给图片服务及算力供应商 / 按张计费）。
-- 十主题：`SCENES` 的视觉参照与妆发逐字取自规格 JSON `scenes[].direction / hair_makeup`；`build_prompt` 七段：真实性基线（第一段）→ 人物身份基线 → 动作+视觉参照+妆发（整套同一形制）→ 构图 → 文字基线 → 安全基线 → 锁定句；艺术主题（魏晋/日常/流仙/侠客/园林）注明不按考古精确复原。
-- 形制整套切换：`--form song/tang/ming`（日常、园林）与 `quju`（仅园林），其他组合 `formInvalid`；默认 daily=宋风上襦两片裙、garden=宋褙子套系（规格决策记录）。
-- 路由：具体形制词 → 风格词 → 泛朝代词 → 环境词；`first-turn` 另返回 `intent` 提示（婚服/旗袍和服军装/儿童/多人越界、闺蜜各拍 `separate_self_tasks`、地名 `clarify_destination`、跨朝代 `form_conflict`、`needs_form_choice`、`accessory_with_profile`）；规格第 1 节 16 条用户原话逐条测试。
-- 相邻技能：均未核实「已上架且入口可用」，包内不点名转介，越界需求如实说明（规格第 11 节）。
-- 开工复述含本人这张照片、主题与服饰妆造、画幅与像素、1 张、AI 非实拍、细节差异、发送给图片服务及算力供应商、「按张计费，以实际账单为准」。
+| 缺陷 | 修法 | 回归（全部通过） |
+|---|---|---|
+| HNF-A3-01 自定义服饰抹掉形制 | `build_prompt` 改为：本次服饰固定为 `outfit_of(scene, form)` 的整套结构，`--outfit` 只作「颜色与细节」叠加其上（写明不改衣型、领式、裙式）；选了形制时视觉参照换成不带默认宋风的 `FORM_VISUAL`，妆发追加与形制配套的 `FORM_MAKEUP`。新增 `outfit_conflict`：补充里出现与选定形制（未选时为主题自带形制）不同的形制词时，`plan` 返回 `outfitFormConflict`（退出码 2、零联网、不进入方案），话术请用户二选一，不静默丢掉形制；被否定的形制词不算冲突。方案摘要、开工复述、prompt 共用 `outfit_text`，三处一致。 | e2e `RepairHnf100.test_hnf01_form_kept_with_custom_outfit_all_combos`：daily×唐/明/宋、garden×唐/明/曲裾/宋 与非空 outfit 七组合全流程 Mock 出图，摘要、开工复述、prompt 均含形制结构＋颜色细节＋配套妆发，非宋形制 prompt 不含「宋」、不含默认说明，请求体恰六字段；`test_hnf01_conflicting_outfit_disambiguates_not_dropped` 五组冲突（含主题自带形制、艺术主题）零联网不出图，三组否定/同形制放行；契约 `test_hnf_a3_negation_and_form_overlay`。原 `Confirmation.test_plan_copy` 期望按新口径更新（主题结构＋颜色细节）。 |
+| HNF-A3-02 否定越界词误拒 | 新增 `strip_negated`：同一分句内词前 4 字内有「不要/不是/不想/不穿/不拍/别穿……」或词后紧跟「不要/算了/除外」的路由词视为被排除，不参与路由与越界判断（「特别」「非常」不算否定）。`route_intent` 只看剩余主需求；只排除了越界内容、没有主需求时返回新提示 `clarify_main_need`（先问想拍哪种），不拒绝。明确要婚服/和服/儿童入镜仍返回原越界提示，范围限制不变。scenes.md 增写否定处理与 `clarify_main_need`；SKILL.md 首轮第 3 步写明否定词不作拒绝依据、结合上下文。 | e2e `test_hnf02_negated_boundary_words_not_refused` 14 句：「不要婚服，我要新年宋制汉服」→ daily 放行、「不要和服，想拍明制马面裙」「不是给孩子拍，是我自己想拍唐制齐胸」「婚服就不要了，园林里拍一张」「不要旗袍也不要和服，拍个宋制褙子」「别拍成和服那样，要曲裾」放行；「不要婚服」→ clarify_main_need；「想拍婚服」「我要凤冠霞帔的婚服写真」「想穿和服拍，不要宋制」「特别想拍婚服」「非常想穿和服」「带孩子一起拍汉服」「我和女儿一起拍」仍越界；零联网。原 T13 边界与规格 16 条原话路由用例不变且通过。 |
+| HNF-A3-03 反馈未知与全局重跑冲突 | SKILL.md 接管规则的重跑句加例外：「任务只查原任务；`feedback` 除外，不自动重跑，见第 5 节」；第 5 节改为「没拿到反馈编号时原话已保留，等用户明确说「提交反馈」才 `feedback --retry`，不自动补交；有编号只用 `ticket` 查」。脚本 `feedbackSaved` / `ticketCreated` 信号增加 `auto_retry=false`；未新增接口、不换键、不碰生图。 | e2e `test_hnf03_feedback_unknown_waits_for_explicit_user`：应答丢失 → 退出码 2、pending 1、`auto_retry=false`；随后 `balance`、`resume` 不顺带补交；用户 `--retry` 同键同体只建 1 单；有编号后 `ticket` 仅 GET、不再 POST；全程生图请求数不变。`test_hnf03_skill_rerun_rule_excludes_feedback` 静态契约（旧句已去除、例外与第 5 节规则存在、SKILL ≤ 15KiB）。原 Support 组用例不变、全部通过。 |
+| HNF-A3-04 侠客示例说明不实 | `assets/demos.json` swordsman note 改为「交领袍装束腰，木质影棚侠客风，艺术风格；AI 生成汉服写真，非实拍」；只改 note。 | e2e `test_hnf04_swordsman_note_matches_image`（无「竹林」、含「木质影棚」与非实拍说明、PNG SHA 与 provenance 记录一致）。 |
 
 ## 自测结果
 
 | 命令 | 结果 |
 |---|---|
-| `cd mps-hanfu-portrait-studio && python3 -m unittest discover -s tests`（仓库内，含规格 JSON 对照） | Ran 63, OK |
-| `python3 dev/e2e_check.py --zip dist/mps-hanfu-portrait-studio-1.0.0.zip`（仓库源码） | Ran 136, OK |
-| 干净解压 1.0.0 ZIP（testzip 无损坏、最深 2 级、25 文件）后 `unshare -rn python3 -I -m unittest discover -s tests` | OK（63） |
-| `unshare -rn python3 -I dev/e2e_check.py --package <解压目录> --zip dist/…-1.0.0.zip` | Ran 136, OK，0 跳过（含 ZipLayout、FrontmatterYaml：PyYAML 6.0.3 解析 ZIP 原始 SKILL.md，拒重复键、未引用冒号空格反例） |
+| `cd mps-hanfu-portrait-studio && python3 -m unittest discover -s tests`（仓库内） | Ran 64, OK |
+| `python3 dev/e2e_check.py --zip dist/mps-hanfu-portrait-studio-1.0.1.zip`（仓库源码） | Ran 142, OK |
+| 干净解压 1.0.1 ZIP（testzip 无损坏、最深 2 级、25 文件）后 `unshare -rn python3 -I -m unittest discover -s tests` | Ran 64, OK |
+| `unshare -rn python3 -I dev/e2e_check.py --package <解压目录> --zip dist/…-1.0.1.zip`（断网） | Ran 142, OK |
+| ZIP 内 SKILL.md 与仓库源码逐字节比对 | 一致 |
 | scripts/、tests/ 按 `ast.parse(feature_version=(3,7))` | 通过（运行环境 Python 3.13，未在 3.7 解释器实跑） |
-| 包与 dev 目录密钥形态扫描（mpskill_/sk-/Bearer/私钥/供应商域名与模型名） | 无（仅测试里的反向断言字符串） |
+| frontmatter PyYAML 解析 | version 1.0.1，examples_zh/en 各 3 条（未改） |
+| 包与 dev 目录密钥形态扫描 | 无（仅格式正则与 Mock 生成的合成键） |
 
-## 阶段 6 逐项（规格第 13 节 S6-01…S6-57）
+前序产品缺陷清单（证件照、婚纱、宠物、全家福、旅行、孕妈、银发、PAY-01–04、校验通则）沿用 1.0.0 已有的继承回归用例（RepairPay103、RepairMat101、RepairSlv101、InheritedRepairTrv101、ZipLayout、FrontmatterYaml 等）全部重跑通过，未回退。
 
-| 编号 | 覆盖用例（e2e 类.用例 / 契约用例） | 结果 |
-|---|---|---|
-| S6-01 关联→浏览器确认→继续 | AccountBilling.full_flow_auth_topup_deliver；HanfuSpec.t13_callback_links_account_while_client_closed | 通过（Mock） |
-| S6-02 正常出图扣费余额正确 | AccountBilling.full_flow_auth_topup_deliver（扣 1，剩余取服务端） | 通过 |
-| S6-03 第二张 402 → 充值同编号续接、第一张不重扣 | AccountBilling.mid_task_insufficient_asks_first；RepairSlv101.needs_credits_topped_up_still_not_old_photo | 通过 |
-| S6-04 策略拒绝不扣费 | AccountBilling.policy_reject_not_charged | 通过 |
-| S6-05 5xx 不扣费，原键查询恢复 | AccountBilling.5xx_not_retried；OriginalTaskSpec.409_and_5xx_query_original_only | 通过 |
-| S6-06 同编号重放不重扣 | AccountBilling.replay_same_key_charged_once | 通过 |
-| S6-07 凭证失效清除并重关联 | AccountBilling.skill_key_expired_reset_exit4；InheritedRepairTrv101.trv01_r1_* | 通过 |
-| S6-08 首轮无 http/套餐/充值/价格，欢迎句逐字 | 契约 first_turn_copy_clean、welcome_exact；FirstTurn.close_question | 通过 |
-| S6-09 首轮零业务 HTTP | FirstTurn.first_turn_zero_business_http | 通过 |
-| S6-10 示例离线、key 与 SKILL/README 一致、缺图退 3 | FirstTurn.demo_*、fam03_*；契约 demos_consistent、fam_03_demo_missing_one_exit3 | 通过 |
-| S6-11 SKILL 必含语句、不含「三个方案」 | 契约 skill_required_rules | 通过 |
-| S6-12 不算同意付费的情形 | 契约 skill_required_rules、consent_copy | 通过 |
-| S6-13 授权本身不扣费 | 契约 handoff_copy | 通过 |
-| S6-14 两句定心话 | 契约 handoff_copy | 通过 |
-| S6-15「### 现在需要你做的」+「打不开」 | 契约 handoff_copy | 通过 |
-| S6-16 无未开放授权路径 | 契约 handoff_copy、customer_copy_no_site_or_key；AccountBilling.untrusted_link_rejected | 通过 |
-| S6-17 已有账户有次数直做 | AccountBilling.existing_account_skips_auth_and_topup | 通过 |
-| S6-18 拒绝开通固定一句 | AccountBilling.balance_menu_and_decline | 通过 |
-| S6-19 无慢到账口径；自述不算到账 | 契约 no_slow_payment_wording、instant_arrival_wording；RepairPay103.pay_01_* | 通过 |
-| S6-20 外层超时 240 = 90+120+0+30，全包一致 | 契约 timeouts_consistent | 通过 |
-| S6-21 开工复述齐全；未同意先补确认 | 契约 consent_copy（start_recap 十项）；Confirmation.no_consent_no_task | 通过 |
-| S6-22 中途余额不足先问 | AccountBilling.mid_task_insufficient_asks_first | 通过 |
-| S6-23 账户说法走菜单 | AccountBilling.balance_menu_and_decline；契约 takeover_rules_first | 通过 |
-| S6-24 全新环境 topup 有路 | PayConversion.fresh_topup_* | 通过 |
-| S6-25 无账户 topup/balance/status 调 quick-entry | PayConversion.fresh_status_and_balance_have_way_out、fresh_history_gives_link | 通过 |
-| S6-26 断网 ≠ 服务忙 | PayConversion.topup_membership_link_network_not_busy、fresh_topup_offline_honest、run_needs_credits_link_failure_kind | 通过 |
-| S6-27 上报白名单 8 字段、一次、开关 | Telemetry.fields_once_and_flag、off_switch；契约 telemetry_contract | 通过 |
-| S6-28 提前返回分支已上报 | Telemetry.every_early_branch_reports | 通过 |
-| S6-29…S6-34 六种等待时序 | Waiting.once / two_rounds / still_pending_after_window / glitch_then_recover / never_reachable / explicit_failure | 通过 |
-| S6-35 先交图、首次调整引导一次 | AccountBilling.full_flow_auth_topup_deliver | 通过 |
-| S6-36 失败四拍、服务忙口径、费用以服务记录为准 | 契约 failure_copy；Waiting.never_reachable、explicit_failure | 通过 |
-| S6-37 转述本次扣费与剩余、低余额提醒 | AccountBilling.full_flow_auth_topup_deliver | 通过 |
-| S6-38 原图未改、重新生成先说明计费 | AccountBilling.full_flow_auth_topup_deliver | 通过 |
-| S6-39 / S6-40 / S6-41 / S6-42 | 规格判定 not_applicable_current_contract（无 Range / inline_delivery / 计费前重试字段，sibling_reuse=false）；以 OriginalTaskSpec.corrupt_png_kept_pending_then_get_only、Waiting.download_fail_keeps_task、契约 body_whitelist（无 inline_delivery）证明只读原任务、不重 POST | 不适用（按规格） |
-| S6-43 未登记字段被拒（客户端/服务端） | AccountBilling.client_rejects_unregistered_field、server_rejects_unregistered_field；HanfuSpec.t15_request_body_has_only_six_fields | 通过 |
-| S6-44 凭证失效退出 4 | AccountBilling.skill_key_expired_reset_exit4 | 通过 |
-| S6-45 对客禁用词（AST 取进度文案） | 契约 forbidden_words、customer_copy_no_site_or_key | 通过 |
-| S6-46 余额/消费记录/工单 | Support.* 10 项 | 通过 |
-| S6-47 尺寸偏差提示裁切 | Waiting.size_mismatch_reported | 通过 |
-| S6-48 index.html 画廊 | AccountBilling.full_flow_auth_topup_deliver | 通过 |
-| S6-49 参考图格式点名文件 | Confirmation.bad_photo_named_no_network | 通过 |
-| S6-50 离线检查不调后端 | FirstTurn.demo_paths_and_single；契约 png_verify | 通过 |
-| S6-51 输出不覆盖 | AccountBilling.full_flow_auth_topup_deliver（`_unique`）；RepairA3.wed_a3_03_* | 通过 |
-| S6-52…S6-57 技能收藏 | 契约 favorite_section（只在首次交付成功后、收藏/暂不、两层写入一句偏好、取消、不假装成功） | 声明检查通过；真实宿主记忆与不 @ 触发未验 |
+## 偏离与未验证项
 
-规格 T 组补充：T01/T13 `route_precedence`、`route_intent_boundaries`、HanfuSpec.t01/t13；T02/T14 `plan_people_rules`、`consent_and_lock_rules`、`slv_a3_01_*`（契约 2 项 + e2e RepairSlv101 5 项，早退变体含本人/成年 unknown/no、形制非法、坏图/截断图（路径含空格与 #）、脸不清、文字超长、多人、主题无效）；T03 Markdown 安全路径（空格/#）；T07 TRV-02 有界解码；T10 `frontmatter_*`、`examples_*`（中英逐条同主题，齐胸 chest-high）；T12 `prompt_baselines`、`scenes_match_spec`、HanfuSpec.t12_*。
-
-## 偏离与决策
-
-- **示例图体积**：规格要求按原 SHA 原字节复制，10 张共 4718679 字节（单张 434–646KB），ZIP 4.8MB，比此前各包（≤2.7MB）大；官方快照未写包大小上限。契约里的体积上限相应调为单张 < 700KB、合计 < 5MB（银发包是单张 < 320KB、合计 < 3MB）。若平台拒收体积，需按规格修订后压缩重出，不在本包自行压缩。
-- `intent` 信号与 `--form` 参数是规格第 1、3 节路由与「整套切换」的实现细化，不改计费、账户或请求体字段。
-- 开发文档无需退回。
-
-## 未验证项
-
-- 真实 WorkBuddy 宿主导入/解析与对话行为（首轮、intent 处理、收藏、不 @ 触发），frontmatter 平台解析结论仅来自 PyYAML 与标准库检查；包体积是否被平台接受。
-- 真人出图效果、形制与妆造准确率、不同性别和输入质量效果；真实付款、微信关联、核款（真实上游与支付调用 0）。
+- **Windows 隔离 Mock 实跑：未验证。** 本次运行环境只有 Linux 云容器，无 Windows 解释器或虚拟机，无法实跑；1.0.0 报告同样没有 Windows 实跑证据，A3 指出后本轮如实列为未验证，不算通过。Linux 下的 POSIX 权限断言照常执行、未为凑通过改测试。
+- 否定识别是规则式的保守实现（同分句、词前 4 字窗口）；「不想要那种婚服」这类较远的否定仍返回越界提示，由 SKILL/scenes.md 要求宿主结合上下文判断，不硬拒。
+- 真实 WorkBuddy 宿主导入/解析与对话行为（首轮、intent、outfitFormConflict 转述、收藏、不 @ 触发）、真人出图效果与形制准确率、真实付款与微信关联均未验证（真实上游与支付调用 0）。附录 D 暂停，未派。
 
 ## 部署与回滚
 
 - fast 车道，无后端改动，无部署。上传由负责人手动；本流水线不上传。
-- 回滚：本 slug 无已上传版本，回滚即不上传 1.0.0；ZIP 与源码保留在仓库。
+- 回滚：本 slug 无已上传版本，回滚即不上传 1.0.1；1.0.0 ZIP 与源码历史保留在仓库。

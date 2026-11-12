@@ -2,7 +2,7 @@
   "name": "mps-hanfu-portrait-studio",
   "display_name": "汉服写真照相馆",
   "display_name_en": "Hanfu Portrait Studio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "channel": "workbuddy_skill",
   "author": "MyPlaneStore",
   "entry": "SKILL.md"

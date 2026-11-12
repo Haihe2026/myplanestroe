@@ -597,6 +597,26 @@ class Contract(unittest.TestCase):
             studio.STATE_HOME = None
             shutil.rmtree(home, ignore_errors=True)
 
+    def test_hnf_a3_negation_and_form_overlay(self):
+        """HNF-A3-01/02：否定的越界词不作拒绝依据；形制与非空服饰补充同时生效，冲突先消歧。"""
+        i = studio.route_intent
+        for text, want in (('不要婚服，我要新年宋制汉服', None), ('不要和服，想拍明制马面裙', None), ('不要婚服', 'clarify_main_need'),
+                           ('想拍婚服', 'out_of_scope_wedding'), ('特别想拍婚服', 'out_of_scope_wedding'),
+                           ('想穿和服拍，不要宋制', 'out_of_scope_outfit')):
+            self.assertEqual(i(text), want, text)
+        self.assertEqual(studio.route_scene('不要婚服，我要新年宋制汉服'), 'daily')
+        for scene, forms in (('daily', ('tang', 'ming', 'song')), ('garden', ('tang', 'ming', 'quju', 'song'))):
+            for form in forms:
+                p = studio.build_prompt(scene, '', '素蓝色', form)
+                for must in (studio.FORMS[form][1][scene], '素蓝色', studio.FORM_MAKEUP[form]):
+                    self.assertIn(must, p, (scene, form))
+                if form != 'song':
+                    self.assertNotIn('宋', p, (scene, form))
+                self.assertEqual(studio.outfit_conflict(scene, form, '素蓝色'), [])
+        self.assertEqual(studio.outfit_conflict('daily', 'ming', '唐风齐胸'), ['tang'])
+        self.assertEqual(studio.outfit_conflict('daily', 'ming', '不要齐胸'), [])
+        self.assertIn('不同朝代的衣服不混在一起穿', W.outfit_form_conflict('明风', ['唐风']))
+
     def test_prompt_baselines(self):
         """规格 4 节 / T12：四条基线全带、真实性基线第一段；动作 + 视觉参照 + 锁定；形制整套不混搭；艺术主题注明非考古复原。"""
         for k in studio.SCENES:

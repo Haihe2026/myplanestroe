@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-hanfu-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -112,6 +112,16 @@ FORMS = {
                       'garden': '明风交领右衽上衣配马面裙，前中裙门平整、两侧褶裥'}),
     'quju': ('曲裾', {'garden': '曲裾深衣，长襟绕身经背后回到身前，内外层得体不透体'}),
 }
+# HNF-A3-01：用户选了形制时，视觉参照不再带默认宋风说明，妆发随形制配套；自定义颜色/细节只叠加在形制结构之上。
+FORM_VISUAL = {'daily': '日常简洁汉服写真，整套采用所选形制，装饰从简，背景简洁',
+               'garden': '泛化园林、亭廊与绿意中，保留所选整套形制，只换泛化园林背景'}
+FORM_MAKEUP = {'song': '宋风清雅发髻与淡妆', 'tang': '唐风配套发髻与妆面，可点克制花钿',
+               'ming': '明风配套发髻与端庄淡妆', 'quju': '汉风配套束发与素雅妆面'}
+# 服饰补充里出现的形制词：与选定形制（或主题自带形制）不一致时先消歧，不静默丢掉形制。
+FORM_WORDS = {'tang': ('唐制', '唐风', '唐代', '齐胸', '半臂'), 'song': ('宋制', '宋风', '宋代', '褙子'),
+              'ming': ('明制', '明风', '明代', '马面', '袄裙'), 'quju': ('曲裾', '深衣', '汉制', '汉代')}
+SCENE_FORM = {'tang_ruqun': 'tang', 'tang_banbi': 'tang', 'song_beizi': 'song', 'ming_mamian': 'ming', 'quju': 'quju',
+              'daily': 'song', 'garden': 'song'}
 # 口语关键词路由，四层：具体形制词 → 风格主题词 → 泛朝代词 → 泛化环境词；只在同一层内看词序，不同层不看词序。
 # 「唐制半臂」命中半臂，不会被泛词「唐制」抢到齐胸襦裙；「园林 + 宋制褙子」按褙子套系做。
 ROUTE_SPECIFIC = (
@@ -339,10 +349,51 @@ def _first_hit(text, table):
     return min(hits)[1] if hits else None
 
 
+NEG_BEFORE = ('不要', '不穿', '不拍', '不想', '不是', '不用', '不需要', '不做', '不选', '无需', '没有', '别穿', '别拍', '别要', '别弄')
+NEG_AFTER = ('不要', '不用', '不拍', '不穿', '就算了', '算了', '免了', '除外')
+CLAUSE_END = '，。,.;；!！?？、\n'
+NEG_WINDOW = 4
+
+
+def _route_words():
+    tables = ROUTE_SPECIFIC + ROUTE_STYLES + ROUTE_DYNASTY + ROUTE_ENV + ROUTE_BOUNDARY
+    words = {w for _, ws in tables for w in ws}
+    words.update(ROUTE_PEOPLE + ROUTE_DESTINATION + ROUTE_ACCESSORY)
+    for ws in FORM_WORDS.values():
+        words.update(ws)
+    return sorted(words, key=len, reverse=True)
+
+
+def _negated(text, start, end):
+    """HNF-A3-02：同一分句里，词前不远处有否定（不要/不是/别……），或紧跟「不要/算了」等，视为被排除的内容。"""
+    head = start
+    while head > 0 and text[head - 1] not in CLAUSE_END:
+        head -= 1
+    tail = end
+    while tail < len(text) and text[tail] not in CLAUSE_END:
+        tail += 1
+    before, after = text[max(head, start - NEG_WINDOW):start], text[end:tail]
+    return any(n in before for n in NEG_BEFORE) or any(after.lstrip('的那种类').startswith(n) for n in NEG_AFTER) or \
+        any(after.startswith(n) for n in ('就不要', '也不要', '就不用', '先不要'))
+
+
+def strip_negated(text):
+    """把被用户否定/排除的路由词换成空格（长度不变），剩下的才是主需求；不改原话本身。"""
+    text = text or ''
+    out = list(text)
+    for w in _route_words():
+        i = text.find(w)
+        while i >= 0:
+            if _negated(text, i, i + len(w)):
+                out[i:i + len(w)] = ' ' * len(w)
+            i = text.find(w, i + 1)
+    return ''.join(out)
+
+
 def route_scene(text):
     """按口语关键词给一个主推主题：具体形制词 → 风格主题词 → 泛朝代词 → 泛化环境词；同一层内取原话里最先出现的，
-    不同层不看词序。没有命中返回 None，由宿主按 scenes.md 现场判断并先确认。"""
-    text = text or ''
+    不同层不看词序。被否定的词（「不要唐风」）不参与。没有命中返回 None，由宿主按 scenes.md 现场判断并先确认。"""
+    text = strip_negated(text)
     for table in (ROUTE_SPECIFIC, ROUTE_STYLES, ROUTE_DYNASTY, ROUTE_ENV):
         key = _first_hit(text, table)
         if key:
@@ -351,11 +402,16 @@ def route_scene(text):
 
 
 def route_intent(text):
-    """先于主题的提示：超出范围、需要先问清主需求或形制冲突时给出；没有则 None。只是提示，不替用户下结论。"""
-    text = text or ''
+    """先于主题的提示：超出范围、需要先问清主需求或形制冲突时给出；没有则 None。只是提示，不替用户下结论。
+    被否定/排除的词（「不要婚服，我要新年宋制汉服」）不作越界依据：有清晰主需求就按主需求走；
+    只排除了越界内容、没说想拍什么时返回 clarify_main_need，先问主需求，不拒绝。"""
+    raw = text or ''
+    text = strip_negated(raw)
     for intent, words in ROUTE_BOUNDARY:
         if any(w in text for w in words):
             return intent
+    if any(w in raw for _, words in ROUTE_BOUNDARY for w in words) and not route_scene(text):
+        return 'clarify_main_need'
     if any(w in text for w in ROUTE_PEOPLE):
         return 'separate_self_tasks' if any(w in text for w in ROUTE_SEPARATE) else 'out_of_scope_people'
     if any(w in text for w in ROUTE_DESTINATION):
@@ -378,10 +434,35 @@ def outfit_of(scene, form=None):
     return SCENES[scene][5]
 
 
+def outfit_conflict(scene, form, outfit):
+    """HNF-A3-01：服饰补充里提到的形制与选定形制（未选时为主题自带形制）不一致，返回冲突的形制 key 列表；
+    被否定的词不算。艺术主题没有朝代形制，补充里出现任何形制词都先消歧。"""
+    base = form or SCENE_FORM.get(scene)
+    text = strip_negated(outfit or '')
+    return [k for k, words in FORM_WORDS.items() if k != base and any(w in text for w in words)]
+
+
+def form_name(scene, form):
+    if form in FORMS:
+        return FORMS[form][0]
+    base = SCENE_FORM.get(scene)
+    return FORMS[base][0] if base in FORMS else SCENES[scene][1]
+
+
+def outfit_text(scene, form=None, outfit=''):
+    """方案摘要、开工复述和提示词共用：先由形制（或主题）决定整套服装结构，用户的颜色/细节叠加其上。"""
+    base = outfit_of(scene, form)
+    return base + ('；颜色与细节：' + outfit if outfit else '')
+
+
 def build_prompt(scene, features='', outfit='', form=None):
     """四条基线 + 动作/视觉参照/锁定：真实性基线永远第一段 → 人物身份基线 → 主题动作与视觉参照、妆发 → 构图 → 文字基线 → 安全基线 → 锁定句。
     人物描述只来自用户确认的可见特征，不推断年龄、性别、民族或健康；不套用示例人物的样貌。"""
     series, title, _, visual, makeup, default_outfit, kind = SCENES[scene]
+    chosen_form = scene in FORM_SCENES and form in FORMS and scene in FORMS[form][1]
+    if chosen_form:
+        visual = FORM_VISUAL[scene] + '（' + FORMS[form][0] + '）'
+        makeup = makeup.rstrip('。 ') + '；与' + FORMS[form][0] + '配套：' + FORM_MAKEUP[form]
     visual, makeup = visual.rstrip('。 '), makeup.rstrip('。 ')
     truth = ('真实性基线：只用这一张经本人同意的单人原照作为唯一人物依据，画面里恰好 1 位成年人物；'
              '只按已确认的一套服饰形制、妆发和场景做明确改动，未经确认的身体、身份和事实一律不改、不凭空设计。')
@@ -389,10 +470,12 @@ def build_prompt(scene, features='', outfit='', form=None):
            '可以按所选套系更换髻式和妆造，但不改脸、不改变性别特征，不套用任何示例人物或文物陶俑的脸型、体型和肤色。')
     if features:
         who += '用户确认的可见特征：' + features + '。'
-    chosen = outfit or outfit_of(scene, form)
     theme = ('动作：编辑本人原照，只改变服装、妆造、背景与光影，主题「' + title + '」。视觉参照：' + visual +
-             '。本次服饰：' + chosen + '，整套保持同一形制，不混搭其他朝代或其他主题的部件。妆发：' + makeup + '。')
-    if scene in FORM_SCENES and form in FORMS and not outfit:
+             '。本次服饰：' + outfit_of(scene, form) + '，整套保持同一形制，不混搭其他朝代或其他主题的部件。')
+    if outfit:
+        theme += '用户补充的颜色与细节：' + outfit + '，只叠加在上述形制结构上，不改变衣型、领式和裙式。'
+    theme += '妆发：' + makeup + '。'
+    if chosen_form:
         theme += '服饰整套采用' + FORMS[form][0] + '，背景与氛围不变。'
     if kind == 'art':
         theme += '这是艺术风格写真，不按考古精确复原处理。'
@@ -524,6 +607,11 @@ def cmd_plan(args):
     features, outfit = _clean_text(args.features), _clean_text(args.outfit)
     if features is None or outfit is None:
         return emit('textInvalid', W.text_invalid(), EXIT_ERROR)
+    clash = outfit_conflict(args.scene, form, outfit)
+    if clash:
+        # HNF-A3-01：冲突先消歧，不静默丢掉形制，也不让服饰补充改掉形制结构
+        return emit('outfitFormConflict', W.outfit_form_conflict(form_name(args.scene, form), [FORMS[k][0] for k in clash]),
+                    EXIT_WAIT, draft_id=d['draft_id'], conflict=clash)
     if args.image:
         d['images'] = [os.path.abspath(args.image)]
     if len(d.get('images') or []) != 1:
@@ -536,7 +624,7 @@ def cmd_plan(args):
              photo_sha256=_photo_digest(d['images'][0]), owner_consent=False, upload_consent=False, pay_consent=False,
              idem=None, job_id=None, body_sha256=None, state='planned')
     save_draft(d)
-    shown_outfit = outfit or outfit_of(args.scene, form)
+    shown_outfit = outfit_text(args.scene, form, outfit)
     summary = W.plan_summary(title, W.SHAPE_NAMES[shape], SIZES[shape], shown_outfit)
     return emit('planReady', W.confirm_paid(summary, wait_text(), features, SCENES[args.scene][6]), EXIT_OK,
                 draft_id=d['draft_id'])
@@ -752,7 +840,7 @@ def cmd_run(args):
     if k != 'ok':
         return emit('serviceUnavailable', W.failure('network' if k == 'network' else 'busy', 'not_started'), EXIT_ERROR)
     title = SCENES[d['scene']][1]
-    progress(W.start_recap(title, d.get('outfit') or outfit_of(d['scene'], d.get('form')), W.SHAPE_NAMES[_shape_of(d['size'])], d['size']))
+    progress(W.start_recap(title, outfit_text(d['scene'], d.get('form'), d.get('outfit') or ''), W.SHAPE_NAMES[_shape_of(d['size'])], d['size']))
     return _submit(d, a, body)
 
 
@@ -1270,14 +1358,16 @@ def cmd_feedback(args):
         return emit('feedbackNone', W.feedback_nothing_pending(), EXIT_OK)
     a = load_account()
     if not a.get('install_secret'):
-        return emit('feedbackSaved', W.feedback_saved('no_account'), EXIT_WAIT, pending=len(st['pending']))
+        return emit('feedbackSaved', W.feedback_saved('no_account'), EXIT_WAIT, pending=len(st['pending']), auto_retry=False)
     done, reason = _submit_pending(a, st)
     if reason and not done:
-        return emit('feedbackSaved', W.feedback_saved(reason), EXIT_WAIT, pending=len(st['pending']))
+        # HNF-A3-03：没拿到反馈编号时原请求编号和原内容已保留；只有用户明确说「提交反馈」才 --retry，宿主不自动重跑
+        return emit('feedbackSaved', W.feedback_saved(reason), EXIT_WAIT, pending=len(st['pending']), auto_retry=False)
     text = '\n\n'.join(W.ticket_created(t['id'], t.get('category'), _due_text(t)) for t in done)
     if reason:
         text += '\n\n' + W.feedback_saved(reason)
-    return emit('ticketCreated', text, EXIT_OK, ticket_ids=[t['id'] for t in done], pending=len(st['pending']))
+    return emit('ticketCreated', text, EXIT_OK, ticket_ids=[t['id'] for t in done], pending=len(st['pending']),
+                auto_retry=False)
 
 
 def cmd_ticket(args):

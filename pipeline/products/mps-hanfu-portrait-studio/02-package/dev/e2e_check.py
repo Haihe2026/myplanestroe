@@ -3,6 +3,7 @@
 运行：python3 dev/e2e_check.py   （可加 --package <解压后的技能目录> 对干净解压的 ZIP 重跑）
 """
 import contextlib
+import hashlib
 import io
 import json
 import os
@@ -312,7 +313,7 @@ class Confirmation(Base):
     def test_plan_copy(self):
         _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', 'x', '--image', self.photo)
         code, s, t, _ = self.run_cmd('plan', '--draft', s['draft_id'], '--scene', 'flowing',
-                                     '--features', '短发戴眼镜', '--outfit', '浅蓝色休闲装')
+                                     '--features', '短发戴眼镜', '--outfit', '浅蓝色')
         self.assertIn('确认开始', t)
         self.assertIn('按张计费', t)
         self.assertIn('同意把这张照片发送给图片服务及算力供应商处理，只用于本次制作', t)
@@ -321,7 +322,8 @@ class Confirmation(Base):
         self.assertIn('AI 生成汉服写真，非实拍', t)
         self.assertIn('艺术风格写真，不是考古精确复原', t)
         self.assertIn('我会按确认过的样子保留人物：短发戴眼镜', t)
-        self.assertIn('「汉服广袖流仙」汉服写真，你本人这张单人照，服饰与妆造：浅蓝色休闲装（整套同一形制），竖版 2:3（1024×1536），1 张', t)
+        self.assertIn('「汉服广袖流仙」汉服写真，你本人这张单人照，服饰与妆造：' + studio.SCENES['flowing'][5] +
+                      '；颜色与细节：浅蓝色（整套同一形制），竖版 2:3（1024×1536），1 张', t)  # HNF-A3-01：主题结构 + 颜色细节
         for bad in ('¥', '元', '提示词', '模板'):
             self.assertNotIn(bad, t)
 
@@ -2592,6 +2594,159 @@ class InheritedRepairTrv101(Base):
         self.run_cmd('run', '--draft', did)
         self.assertEqual(len(self.mock.telemetry_calls), 1)
         self.assertTrue(self.mock.link_calls)
+
+class RepairHnf100(Base):
+    """汉服 1.0.0 A3 退回四项（HNF-A3-01..04）的回归：形制 + 自定义服饰叠加、否定越界词放行、反馈未知不自动重跑、侠客示例说明。"""
+
+    SIX = {'prompt', 'size', 'confirmed', 'image_engine', 'references', 'reference_consent'}
+
+    def _plan(self, scene, form, outfit, did=None):
+        if did is None:
+            _, s, _, _ = self.run_cmd('first-turn', '--defer-entry', '--text', '想拍汉服写真', '--image', self.photo, '--has-need')
+            did = s['draft_id']
+        args = ['plan', '--draft', did, '--scene', scene, '--outfit', outfit]
+        if form:
+            args += ['--form', form]
+        return did, self.run_cmd(*args)
+
+    def test_hnf01_form_kept_with_custom_outfit_all_combos(self):
+        """HNF-A3-01：daily 唐/明（及宋）、garden 唐/明/曲裾（及宋）与非空 outfit 组合：形制结构、配套妆发和颜色细节
+        同时进入方案摘要、开工复述和 prompt；非宋形制不再带默认宋风说明；请求体仍恰六字段。"""
+        combos = [('daily', 'tang'), ('daily', 'ming'), ('daily', 'song'),
+                  ('garden', 'tang'), ('garden', 'ming'), ('garden', 'quju'), ('garden', 'song')]
+        first = True
+        for scene, form in combos:
+            outfit = '素蓝色' if scene == 'daily' else '深青色'
+            did, (code, s, t, _) = self._plan(scene, form, outfit)
+            self.assertEqual((code, s['signal']), (0, 'planReady'), (scene, form, t))
+            structure = studio.FORMS[form][1][scene]
+            self.assertIn('服饰与妆造：' + structure + '；颜色与细节：' + outfit, t, (scene, form))
+            self.run_cmd('confirm', '--draft', did, '--pay-consent', 'yes')
+            if first:
+                self.paid_account(did, 20)
+                first = False
+            code, s, t, err = self.run_cmd('run', '--draft', did)
+            self.assertEqual(s['signal'], 'delivered', (scene, form, t))
+            self.assertIn('服饰与妆造：' + structure + '；颜色与细节：' + outfit, err, (scene, form))
+            job = [c for c in self.mock.calls if c[1].endswith('/skill-jobs')][-1][2]
+            self.assertEqual(set(job), self.SIX)
+            p = job['prompt']
+            for must in (structure, outfit, '只叠加在上述形制结构上', studio.FORM_MAKEUP[form],
+                         '服饰整套采用' + studio.FORMS[form][0], '不混搭其他朝代'):
+                self.assertIn(must, p, (scene, form, must))
+            if form != 'song':
+                self.assertNotIn('宋', p, (scene, form))
+            self.assertNotIn('默认推荐', p)
+
+    def test_hnf01_conflicting_outfit_disambiguates_not_dropped(self):
+        """HNF-A3-01：补充服饰与选定形制（或主题自带形制）冲突 → outfitFormConflict 先消歧，不进入方案、不联网、不丢形制。"""
+        for scene, form, outfit, clash in (('daily', 'ming', '唐风齐胸', ['tang']), ('garden', 'quju', '明制马面裙', ['ming']),
+                                           ('daily', None, '明制马面', ['ming']), ('tang_ruqun', None, '宋制褙子', ['song']),
+                                           ('swordsman', None, '明制', ['ming'])):
+            before = len(self.mock.calls)
+            did, (code, s, t, _) = self._plan(scene, form, outfit)
+            self.assertEqual((code, s['signal'], s['conflict']), (2, 'outfitFormConflict', clash), (scene, form, outfit))
+            self.assertIn('不同朝代的衣服不混在一起穿', t)
+            self.assertIn('没有产生任何扣费', t)
+            self.assertEqual(len(self.mock.calls), before)
+            d = studio.load_draft(did)
+            self.assertNotEqual(d.get('state'), 'planned')
+            code, s, _, _ = self.run_cmd('run', '--draft', did)
+            self.assertNotEqual(s['signal'], 'delivered')
+            self.assertFalse([c for c in self.mock.calls[before:] if c[1].endswith('/skill-jobs')])
+        # 被否定的形制词不算冲突；同形制的补充词也不算
+        for scene, form, outfit in (('daily', 'ming', '不要齐胸，素蓝色'), ('garden', 'tang', '齐胸，杏色'), ('daily', None, '宋风浅绿')):
+            self.assertEqual(self._plan(scene, form, outfit)[1][1]['signal'], 'planReady', (scene, form, outfit))
+
+    def test_hnf02_negated_boundary_words_not_refused(self):
+        """HNF-A3-02：否定/排除的婚服、和服、儿童等词 + 合法汉服 → 放行按主需求；明确要婚服等仍提示越界。"""
+        cases = (('不要婚服，我要新年宋制汉服', 'daily', None),
+                 ('不要和服，想拍明制马面裙', 'ming_mamian', None),
+                 ('不是给孩子拍，是我自己想拍唐制齐胸', 'tang_ruqun', None),
+                 ('婚服就不要了，园林里拍一张', 'garden', None),
+                 ('不要旗袍也不要和服，拍个宋制褙子', 'song_beizi', None),
+                 ('别拍成和服那样，要曲裾', 'quju', None),
+                 ('不要婚服', None, 'clarify_main_need'),
+                 ('想拍婚服', None, 'out_of_scope_wedding'),
+                 ('我要凤冠霞帔的婚服写真', None, 'out_of_scope_wedding'),
+                 ('想穿和服拍，不要宋制', None, 'out_of_scope_outfit'),
+                 ('特别想拍婚服', None, 'out_of_scope_wedding'),
+                 ('非常想穿和服', None, 'out_of_scope_outfit'),
+                 ('带孩子一起拍汉服', None, 'out_of_scope_child'),
+                 ('我和女儿一起拍', None, 'out_of_scope_child'))
+        studio.TRANSPORT = lambda *a, **k: (_ for _ in ()).throw(AssertionError('net'))
+        for text, scene, intent in cases:
+            code, s, t, _ = self.run_cmd('first-turn', '--defer-entry', '--text', text)
+            self.assertEqual((code, s['suggested_scene'], s['intent']), (0, scene, intent), text)
+        self.assertEqual(self.mock.calls, [])
+        doc = open(os.path.join(PKG, 'references', 'scenes.md'), encoding='utf-8').read()
+        for must in ('clarify_main_need', '被否定或排除的词不作拒绝依据', '不按单个词硬拒'):
+            self.assertIn(must, doc)
+        skill = open(os.path.join(PKG, 'SKILL.md'), encoding='utf-8').read()
+        self.assertIn('用户否定的词（「不要婚服」）不作拒绝依据', skill)
+
+    def test_hnf03_feedback_unknown_waits_for_explicit_user(self):
+        """HNF-A3-03：反馈应答丢失（无编号）→ 原键原体保留、auto_retry=false、退出码 2；脚本自己不补交；
+        只有用户明确「提交反馈」（--retry）才同键同体再交一次；有编号后只 ticket GET，不再 POST。"""
+        did = self.confirmed_draft()
+        self.paid_account(did, 3)
+        self.assertEqual(self.run_cmd('run', '--draft', did)[1]['signal'], 'delivered')
+        jobs_before = len([c for c in self.mock.calls if c[1].endswith('/skill-jobs')])
+        self.mock.scenario['ticket_lost_once'] = True
+        code, s, t, _ = self.run_cmd('feedback', '--category', 'image_quality', '--text', '袖口颜色有点偏', '--draft', did)
+        self.assertEqual((code, s['signal'], s['pending'], s['auto_retry']), (2, 'feedbackSaved', 1, False))
+        self.assertIn('说「提交反馈」', t)
+        posts = [c for c in self.mock.calls if c[1] == '/support-tickets']
+        self.assertEqual(len(posts), 1)
+        st = json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'support', 'state.json'), encoding='utf-8'))
+        key, body = st['pending'][0]['key'], st['pending'][0]['body']
+        # 其他命令（查余额、续查原任务）不会顺带补交反馈
+        self.run_cmd('balance')
+        self.run_cmd('resume', '--draft', did)
+        self.assertEqual(len([c for c in self.mock.calls if c[1] == '/support-tickets']), 1)
+        # 用户明确「提交反馈」：同键同体
+        code, s, t, _ = self.run_cmd('feedback', '--retry')
+        self.assertEqual((s['signal'], s['auto_retry']), ('ticketCreated', False))
+        posts = [c for c in self.mock.calls if c[1] == '/support-tickets']
+        self.assertEqual(len(posts), 2)
+        self.assertEqual({p[3]['Idempotency-Key'] for p in posts}, {key})
+        self.assertEqual(posts[1][2], body)
+        self.assertEqual(len(self.mock.tickets), 1)
+        tid = s['ticket_ids'][0]
+        code, s, t, _ = self.run_cmd('ticket', '--id', tid)
+        self.assertEqual(len([c for c in self.mock.calls if c[1] == '/support-tickets']), 2)
+        self.assertTrue([c for c in self.mock.calls if c[0] == 'GET' and c[1] == '/support-tickets/' + tid])
+        self.assertEqual(self.run_cmd('feedback', '--retry')[1]['signal'], 'feedbackNone')
+        # 售后全程不重新提交生图
+        self.assertEqual(len([c for c in self.mock.calls if c[1].endswith('/skill-jobs')]), jobs_before)
+
+    def test_hnf03_skill_rerun_rule_excludes_feedback(self):
+        """HNF-A3-03 静态执行规范：接管规则的泛化重跑明确排除 feedback（任务只查原任务）；反馈未知等用户明确说才 --retry；SKILL ≤ 15KiB。"""
+        raw = open(os.path.join(PKG, 'SKILL.md'), 'rb').read()
+        self.assertLessEqual(len(raw), 15 * 1024)
+        skill = raw.decode('utf-8')
+        self.assertNotIn('把同一条命令重跑一次（未确认的任务只会查询原任务）', skill)
+        rule = next(l for l in skill.splitlines() if '没拿到结果时如实说' in l)
+        self.assertIn('`feedback` 除外，不自动重跑', rule)
+        self.assertIn('任务只查原任务', rule)
+        fb = next(l for l in skill.splitlines() if l.startswith('- 反馈：'))
+        for must in ('等用户明确说「提交反馈」才 `feedback --retry`', '不自动补交', '有编号只用 `ticket` 查'):
+            self.assertIn(must, fb)
+        self.assertNotIn('「提交反馈」→ `feedback --retry`', skill)
+
+    def test_hnf04_swordsman_note_matches_image(self):
+        """HNF-A3-04：侠客示例说明写实际可见的木质影棚，不写不存在的竹林；只改说明，图片原字节不变。"""
+        demos = {d['key']: d for d in json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))['demos']}
+        note = demos['swordsman']['note']
+        self.assertNotIn('竹林', note)
+        self.assertIn('木质影棚', note)
+        self.assertIn('AI 生成汉服写真，非实拍', note)
+        prov = json.load(open(os.path.join(PKG, '..', '..', 'demo-assets', 'provenance.json'), encoding='utf-8')) \
+            if os.path.exists(os.path.join(PKG, '..', '..', 'demo-assets', 'provenance.json')) else None
+        digest = hashlib.sha256(open(os.path.join(PKG, 'assets', 'swordsman.png'), 'rb').read()).hexdigest()
+        if prov is not None:
+            self.assertIn(digest, json.dumps(prov))
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=1)

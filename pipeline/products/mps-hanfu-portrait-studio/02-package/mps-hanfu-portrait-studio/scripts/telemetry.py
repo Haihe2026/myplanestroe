@@ -13,7 +13,7 @@ import uuid
 
 SKILL_ID = 'mps-hanfu-portrait-studio'
 SKILL_NAME = '汉服写真照相馆'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 TELEMETRY_ORIGIN = 'https://aistore.zhaopintong.com'
 TELEMETRY_PATH = '/platform-api/telemetry/v1/first-dialogue'
