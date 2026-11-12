@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-16dd491edf27e4d50f20483cb0c37c31168b09e816515709648cad664b477083",
+  "claim_id": "87cd1582-8886-41b5-96a8-116c630a7bc8",
+  "role": "codex",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "at": "2026-11-12T19:23:59+08:00",
+  "source_ref": "683008528ac153fdb35209e14937aa6ad56656cf",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/status.json",
+  "stage_input_fingerprint": "16dd491edf27e4d50f20483cb0c37c31168b09e816515709648cad664b477083",
+  "stage_input_fingerprint_verified": true,
+  "result": "test_failed",
+  "a3_commit": "bde7655dea57363709ec13487b19a90500ffa87d",
+  "evidence_ref": "bde7655dea57363709ec13487b19a90500ffa87d:pipeline/products/mps-hanfu-portrait-studio/03-test-report.md",
+  "original_receipt_preserved": {
+    "event_id": "evt-16dd491edf27e4d50f20483cb0c37c31168b09e816515709648cad664b477083",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T18:59:16+08:00",
+    "evidence_ref": "f85733479939036361b7c8574bae51b58ee88160:pipeline/products/mps-hanfu-portrait-studio/status.json",
+    "claim_id": "87cd1582-8886-41b5-96a8-116c630a7bc8"
+  },
+  "duplicate_event_claim": false,
+  "version": "1.0.0",
+  "zip_sha256": "624ee30dbd94d09f9b2a44d7b4c4c239cb9dd09e0d4f7c1ae11af23a1f9d30ba",
+  "zip_bytes": 4812372,
+  "structural_checks": 12,
+  "open_findings": [
+    {
+      "id": "HNF-A3-01",
+      "priority": "P2",
+      "title": "A custom outfit string drops the selected full clothing form"
+    },
+    {
+      "id": "HNF-A3-02",
+      "priority": "P2",
+      "title": "A negated out-of-scope word is routed as a hard refusal"
+    },
+    {
+      "id": "HNF-A3-03",
+      "priority": "P2",
+      "title": "反馈提交未知分支缺少全局自动重跑例外"
+    },
+    {
+      "id": "HNF-A3-04",
+      "priority": "P3",
+      "title": "侠客示例说明把木质影棚误写为竹林"
+    }
+  ],
+  "test_round": 1,
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 1,
+      "spec": 0,
+      "test": 1
+    },
+    "skill_id": "mps-hanfu-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "02999649750726bd6f476dfb44424e4ded4fc19c",
+    "stage": "test_failed",
+    "updated_at": "2026-11-12T19:21:16+08:00",
+    "versions": {
+      "listed": null,
+      "package": "1.0.0"
+    }
+  },
+  "source_package_and_development_documents_modified": false,
+  "upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "full_a2_executed": false,
+  "package_executed_or_imported": false,
+  "appendix_d": "suspended; D.6 suspended",
+  "next_role": "claude",
+  "next_action": "沿test_failed自动通知修复HNF-A3-01..04并补针对性A2，出新版本再交package_ready；保留1.0.0/源PNG/logo，Codex不改包源码。",
+  "muse_handoff": {
+    "request_id": "req-codex-to-muse-hanfu-a3-100-failed-20261112",
+    "from": "codex",
+    "to": "muse",
+    "skill_id": "mps-hanfu-portrait-studio",
+    "source_repo": "Haihe2026/myplanestroe",
+    "source_ref": "bde7655dea57363709ec13487b19a90500ffa87d",
+    "source_path": "pipeline/products/mps-hanfu-portrait-studio/03-test-report.md",
+    "kind": "handoff"
+  },
+  "authority": "本事件不增加生产/财务/发布/跨聊天权限，不建worker、AI心跳、自检或周期监测。"
+}
