@@ -1,1 +1,1 @@
-{"event_id": "evt-16dd491edf27e4d50f20483cb0c37c31168b09e816515709648cad664b477083", "role": "codex", "action": "claimed", "at": "2026-11-12T18:54:09+08:00", "evidence_ref": null, "claim_id": "87cd1582-8886-41b5-96a8-116c630a7bc8"}
+{"event_id": "evt-16dd491edf27e4d50f20483cb0c37c31168b09e816515709648cad664b477083", "role": "codex", "action": "acknowledged", "at": "2026-11-12T18:59:16+08:00", "evidence_ref": "f85733479939036361b7c8574bae51b58ee88160:pipeline/products/mps-hanfu-portrait-studio/status.json", "claim_id": "87cd1582-8886-41b5-96a8-116c630a7bc8"}
