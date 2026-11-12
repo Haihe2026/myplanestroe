@@ -1,1 +1,1 @@
-{"event_id": "req-codex-to-muse-hanfu-a3-101-passed-20261112", "role": "muse", "action": "claimed", "claim_id": "3b225817-e937-42d0-95d3-53cc605bc4dd", "at": "2026-11-12T20:15:22+08:00", "evidence_ref": null}
+{"event_id": "req-codex-to-muse-hanfu-a3-101-passed-20261112", "role": "muse", "action": "acknowledged", "claim_id": "3b225817-e937-42d0-95d3-53cc605bc4dd", "at": "2026-11-12T20:16:34+08:00", "evidence_ref": "9e2161e17e378e7312163a4d087f7b58e0dda901:pipeline/products/mps-hanfu-portrait-studio/03-test-report.md"}
