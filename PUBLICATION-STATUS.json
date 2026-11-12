@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "trade_temporary_origin_and_payment_links_fixed",
+  "last_change": "primary_domain_restored_icp_footers_deployed",
   "production_access_included": false,
   "live_sync": false,
   "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
@@ -12,5 +12,12 @@
   "phone_identity_schema_migrated": false,
   "trade_host_first_touch_verified": false,
   "trade_isolated_live_beacon_verified": true,
-  "trade_real_provider_calls_this_audit": 0
+  "trade_real_provider_calls_this_audit": 0,
+  "primary_origin": "https://myplanestore.com",
+  "temporary_origin_compatible": true,
+  "icp_footer": "粤ICP备2026179719号-1",
+  "mainland_frontend_ip": "43.136.47.247",
+  "real_provider_calls_this_deployment": 0,
+  "real_oauth_verified_this_deployment": false,
+  "real_payment_verified_this_deployment": false
 }
