@@ -1,8 +1,8 @@
 {
   "event_id": "evt-0e3deb1cb385f3097f088c849e9a318ad2dbed7b0fe59c7226b928ce23f6d9bb",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "65345acd-181d-4bc8-917a-c3d6e2d9220e",
-  "at": "2026-11-12T19:38:36+08:00",
-  "evidence_ref": null
+  "at": "2026-11-12T19:46:20+08:00",
+  "evidence_ref": "8b57228783f712f001b5e107ddf5cf343d09bbd4:pipeline/products/mps-hanfu-portrait-studio/02-self-test.md"
 }
