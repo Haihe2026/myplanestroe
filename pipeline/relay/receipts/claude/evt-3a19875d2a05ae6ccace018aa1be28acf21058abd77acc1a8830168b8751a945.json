@@ -1,8 +1,8 @@
 {
   "event_id": "evt-3a19875d2a05ae6ccace018aa1be28acf21058abd77acc1a8830168b8751a945",
   "role": "claude",
-  "action": "claimed",
+  "action": "acknowledged",
   "claim_id": "401ecfa3-520d-403c-adac-fcdb203612fc",
-  "at": "2026-11-12T10:38:11+08:00",
-  "evidence_ref": null
+  "at": "2026-11-12T10:44:02+08:00",
+  "evidence_ref": "bd2f2e856cdd1df7cd11fed540cdef74f55c63f8:pipeline/products/mps-silver-portrait-studio/02-self-test.md"
 }
