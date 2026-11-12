@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-16dd491edf27e4d50f20483cb0c37c31168b09e816515709648cad664b477083",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "stage": "package_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "683008528ac153fdb35209e14937aa6ad56656cf",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/status.json",
+  "input_fingerprint": "16dd491edf27e4d50f20483cb0c37c31168b09e816515709648cad664b477083"
+}
