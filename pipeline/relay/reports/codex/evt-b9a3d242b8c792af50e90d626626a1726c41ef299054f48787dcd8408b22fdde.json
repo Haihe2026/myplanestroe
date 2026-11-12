@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-b9a3d242b8c792af50e90d626626a1726c41ef299054f48787dcd8408b22fdde",
+  "claim_id": "d8513f8b-1707-4677-ac28-246c6d3e0bf1",
+  "role": "codex",
+  "skill_id": "mps-silver-portrait-studio",
+  "at": "2026-11-12T10:56:06+08:00",
+  "source_ref": "59aca1d34ab45d82ccd10c187c11208b3b2c556c",
+  "result": "test_passed",
+  "version": "1.0.1",
+  "evidence_ref": "da030c9c4c5702d41b126b8ac823c486b06bf885:pipeline/products/mps-silver-portrait-studio/03-test-report.md",
+  "result_commit": "da030c9c4c5702d41b126b8ac823c486b06bf885",
+  "original_receipt_preserved": {
+    "event_id": "evt-b9a3d242b8c792af50e90d626626a1726c41ef299054f48787dcd8408b22fdde",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T10:49:13+08:00",
+    "evidence_ref": "0598c7bc724066b30a23a5c31548adbb09948057:pipeline/products/mps-silver-portrait-studio/status.json",
+    "claim_id": "d8513f8b-1707-4677-ac28-246c6d3e0bf1"
+  },
+  "duplicate_event_claim": false,
+  "closures": [
+    {
+      "id": "SLV-A3-01",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        423,
+        426,
+        479,
+        484,
+        486,
+        489,
+        496,
+        499,
+        505,
+        650,
+        653,
+        908,
+        911,
+        934,
+        938
+      ],
+      "related_sources": [
+        "SKILL.md:97",
+        "scripts/welcome_copy.py:254–256"
+      ],
+      "basis": "先保留LOCKED/有未完成job的原键原体；未提交replan在所有可早退校验之前原子落盘清三同意/idem/job/body摘要及replanning，新图B同步落盘并清旧SHA。run/resume/regenerate优先needsReplan，confirm仅planned；成功plan+重新三同意才新键，旧图旧角色无法借旧确认继续。"
+    }
+  ],
+  "open_findings": [],
+  "zip": {
+    "ref": "59aca1d34ab45d82ccd10c187c11208b3b2c556c",
+    "path": "pipeline/products/mps-silver-portrait-studio/02-package/dist/mps-silver-portrait-studio-1.0.1.zip",
+    "sha256": "15c1313a522c85ddc876a7d6e11aa57ee58d720c7cca78eb4dff004a424d4458",
+    "bytes": 2605315
+  },
+  "logo": {
+    "ref": "59aca1d34ab45d82ccd10c187c11208b3b2c556c",
+    "path": "pipeline/products/mps-silver-portrait-studio/02-package/dist/logo.png",
+    "sha256": "9909cf071a9e64cb18707ec846b6cf5c921754979151075bfcf77756420acf1e",
+    "bytes": 456079,
+    "external": true
+  },
+  "inspection_scope": "独立静态修复复查：最终ZIP原始YAML标准解析、12类结构及素材核验，只求值已审纯路径函数；未执行客户端业务或完整A2。",
+  "published_report_and_evidence_bytes_verified": true,
+  "other_product_files_and_board_rows_untouched": true,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "client_modified_by_codex": false,
+  "development_documents_modified": false,
+  "appendix_d": "suspended; D.6 suspended",
+  "delivery_gate": "A3 passed; fixed1.0.1 ZIP/logo ready for owner manual upload, host/platform acceptance not claimed",
+  "next_role": "muse",
+  "next_action": "核对固定1.0.1 ZIP/外置logo/SHA/A3报告，直接交负责人手动上传；1.0.0未通过仅追溯，不派附录D或自动发布。",
+  "authority": "本事件不扩展生产/财务/部署/发布/跨聊天权限，不新建worker、AI心跳或周期监测。"
+}
