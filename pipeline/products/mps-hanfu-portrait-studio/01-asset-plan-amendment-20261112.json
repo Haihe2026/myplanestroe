@@ -1,0 +1,203 @@
+{
+  "skill_id": "mps-hanfu-portrait-studio",
+  "at": "2026-11-12T17:23:55+08:00",
+  "revision": 2,
+  "original_plan_commit": "79e983037eb110a349be8c8e83346e74456c78eb",
+  "reason": "独立逐图目检确认初始tang_ruqun裙腰位于自然腰附近，不能作为齐胸襦裙示例；原图仅保留作虚构身份参考，不入最终十示例。新增一次有明确结构修正的参考编辑，logo不追加。",
+  "authorization": "本聊天长期授权开发Skill所需示例图；本次为同一十张交付的必要质量修订，非新增客户/测试生图或额外logo。",
+  "final_demo_count": 10,
+  "logo_count": 1,
+  "rejected_reference_only": 1,
+  "total_generation_limit": 12,
+  "original_budget_hash": "8c52be2da85008e7c06ddc48d01dd57254a3c22b9a1acf12d05edbfab527bc4c",
+  "new_budget_hash": "00e82500c87775d2437d2545ed55983688d31a39981f38566f6e4c82a3426ba5",
+  "no_blind_post_retries": true,
+  "no_new_logo_call": true,
+  "official_read": {
+    "at": "2026-11-12T17:23:55+08:00",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "http_status": 200,
+    "bytes": 277042,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+  },
+  "scenes": [
+    {
+      "key": "tang_ruqun",
+      "title": "唐制齐胸襦裙",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "齐胸襦裙",
+        "唐制",
+        "唐风"
+      ],
+      "direction": "Tang-inspired single-person portrait: one coherent outfit of a narrow-sleeved short upper blouse and long full skirt with a high waistband, muted coral and soft cream, a light matching drape, a simple Tang-inspired double bun with a restrained small hairpin. Quiet neutral portrait-studio background, soft natural light. Show the high skirt waist and whole skirt clearly. Do not add Ming mamian skirt panels, Song beizi coat, bridal crown or wedding accessories. This is a conservatively Tang-inspired artistic portrait, not a claim of exact archaeological reconstruction.",
+      "prompt": "Use case: photorealistic-natural. Asset type: offline Hanfu portrait Skill development example. Create a completely original photorealistic synthetic adult portrait. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Tang-inspired single-person portrait: one coherent outfit of a narrow-sleeved short upper blouse and long full skirt with a high waistband, muted coral and soft cream, a light matching drape, a simple Tang-inspired double bun with a restrained small hairpin. Quiet neutral portrait-studio background, soft natural light. Show the high skirt waist and whole skirt clearly. Do not add Ming mamian skirt panels, Song beizi coat, bridal crown or wedding accessories. This is a conservatively Tang-inspired artistic portrait, not a claim of exact archaeological reconstruction. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "song_beizi",
+      "title": "宋制褙子",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "宋制",
+        "宋风",
+        "褙子"
+      ],
+      "direction": "Song-inspired coherent clothing based on an open straight-collared front-opening beizi outer coat with side slits and modest edging, over a simple top and wrapped two-panel skirt. Muted sage and cream, simple restrained tied hair with one small hairpin, quiet plain studio. Show the straight front coat structure and layering clearly; no high Tang skirt waistband, no Ming mamian panels, no extravagant bridal crown. Artistic theme, not a universal claim about all Song garments.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Song-inspired coherent clothing based on an open straight-collared front-opening beizi outer coat with side slits and modest edging, over a simple top and wrapped two-panel skirt. Muted sage and cream, simple restrained tied hair with one small hairpin, quiet plain studio. Show the straight front coat structure and layering clearly; no high Tang skirt waistband, no Ming mamian panels, no extravagant bridal crown. Artistic theme, not a universal claim about all Song garments. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "ming_mamian",
+      "title": "明制马面裙",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "明制",
+        "明风",
+        "马面裙"
+      ],
+      "direction": "Ming-inspired coherent outfit: a modest opaque right-closing cross-collar upper garment with a clearly visible mamian skirt, flat overlapping central skirt panels at the front and pleats concentrated at the sides. Muted deep teal and warm ivory, restrained hair bun and small hairpin. Full-body neutral studio, front to slight three-quarter view so the smooth central panel and side pleats are plainly visible. Not a uniformly pleated circle skirt; no high Tang waistband or Song beizi outer coat.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Ming-inspired coherent outfit: a modest opaque right-closing cross-collar upper garment with a clearly visible mamian skirt, flat overlapping central skirt panels at the front and pleats concentrated at the sides. Muted deep teal and warm ivory, restrained hair bun and small hairpin. Full-body neutral studio, front to slight three-quarter view so the smooth central panel and side pleats are plainly visible. Not a uniformly pleated circle skirt; no high Tang waistband or Song beizi outer coat. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "weijin",
+      "title": "魏晋宽袍大袖",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "魏晋",
+        "宽袍大袖"
+      ],
+      "direction": "Wei-Jin-inspired artistic portrait, not exact archaeological reconstruction: one coherent flowing broad-sleeved cross-collar robe, a simple tie belt, restrained pale gray-blue and cream layered fabric, loosely gathered black hair with a plain pin, quiet neutral studio. Broad sleeves and simple robe shape are the focus. No high Tang skirt waistband, Ming mamian panels, bridal crown, armour, exaggerated flying fabric or supernatural effects.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Wei-Jin-inspired artistic portrait, not exact archaeological reconstruction: one coherent flowing broad-sleeved cross-collar robe, a simple tie belt, restrained pale gray-blue and cream layered fabric, loosely gathered black hair with a plain pin, quiet neutral studio. Broad sleeves and simple robe shape are the focus. No high Tang skirt waistband, Ming mamian panels, bridal crown, armour, exaggerated flying fabric or supernatural effects. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "daily",
+      "title": "汉服日常襦裙",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "日常汉服",
+        "日常襦裙",
+        "襦裙"
+      ],
+      "direction": "Daily-wear artistic hanfu portrait using one selected Song-inspired base outfit: a simple modest upper blouse and a wrapped two-panel long skirt, comfortable restrained silhouette, pale apricot and sage linen-like fabric, neatly tied hair with a small plain pin. A generic uncluttered indoor corner with soft daylight. Daily is a styling choice, not an invented dynasty; do not mix in Tang high waistband or Ming mamian panels.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Daily-wear artistic hanfu portrait using one selected Song-inspired base outfit: a simple modest upper blouse and a wrapped two-panel long skirt, comfortable restrained silhouette, pale apricot and sage linen-like fabric, neatly tied hair with a small plain pin. A generic uncluttered indoor corner with soft daylight. Daily is a styling choice, not an invented dynasty; do not mix in Tang high waistband or Ming mamian panels. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "flowing",
+      "title": "汉服广袖流仙",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "广袖流仙",
+        "流仙",
+        "广袖"
+      ],
+      "direction": "Clearly an artistic flowing-sleeve hanfu portrait rather than a documented historical costume: one coherent opaque broad-sleeved long skirt outfit in pearl white and pale lavender, a restrained matching drape and simple elegant tied hair. Light fabric movement, dignified standing pose, generic soft painted studio background. Human photographic portrait, no wings, fantasy armour, transparency, supernatural glow, costume mixture or bridal crown.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Clearly an artistic flowing-sleeve hanfu portrait rather than a documented historical costume: one coherent opaque broad-sleeved long skirt outfit in pearl white and pale lavender, a restrained matching drape and simple elegant tied hair. Light fabric movement, dignified standing pose, generic soft painted studio background. Human photographic portrait, no wings, fantasy armour, transparency, supernatural glow, costume mixture or bridal crown. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "swordsman",
+      "title": "汉服侠客男装",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "侠客",
+        "男装",
+        "侠客风"
+      ],
+      "direction": "Artistic unisex wearer in a menswear-inspired xia-ke outfit: preserve the exact same fictional woman face, feminine identity and natural body proportions from the reference, change only clothing, hair arrangement, pose and background. Plain dark slate and muted brown belted robe, practical sleeves, simple black tied hair, restrained opaque layers. Calm dignified standing pose in a generic dark wood studio. No sword, weapon, armour, military uniform, rank, insignia or invented male face. Menswear denotes the chosen outfit, not a change to the person.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Artistic unisex wearer in a menswear-inspired xia-ke outfit: preserve the exact same fictional woman face, feminine identity and natural body proportions from the reference, change only clothing, hair arrangement, pose and background. Plain dark slate and muted brown belted robe, practical sleeves, simple black tied hair, restrained opaque layers. Calm dignified standing pose in a generic dark wood studio. No sword, weapon, armour, military uniform, rank, insignia or invented male face. Menswear denotes the chosen outfit, not a change to the person. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "tang_banbi",
+      "title": "唐制半臂",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "唐制半臂",
+        "半臂"
+      ],
+      "direction": "A Tang-inspired outfit following one selected figurine reference: narrow-sleeved inner blouse, clearly separate elbow-length short-sleeved banbi outer layer, and a long skirt. Warm muted ochre, cream and moss-green, modest double bun and one simple hairpin. Full-body studio portrait with both sleeves and the layered short outer jacket plainly visible. No claim that this is the only historical banbi form. No Ming mamian panels, Song beizi coat, wedding crown or bridal styling.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. A Tang-inspired outfit following one selected figurine reference: narrow-sleeved inner blouse, clearly separate elbow-length short-sleeved banbi outer layer, and a long skirt. Warm muted ochre, cream and moss-green, modest double bun and one simple hairpin. Full-body studio portrait with both sleeves and the layered short outer jacket plainly visible. No claim that this is the only historical banbi form. No Ming mamian panels, Song beizi coat, wedding crown or bridal styling. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "quju",
+      "title": "汉服曲裾深衣",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "曲裾深衣",
+        "曲裾",
+        "深衣"
+      ],
+      "direction": "A conservatively quju-inspired long cross-collar robe with the long diagonal front extension visibly wrapping around the body via the back and returning to the front, simple tied belt and opaque dignified layered fabric, muted warm rust and cream. Plain restrained tied hair and small pin, quiet studio, full-body slight three-quarter pose that shows the wrapping structure. Do not force three full coils, a fixed trumpet skirt or a train; no translucent museum-gauze effect, Tang high skirt waist or Ming pleated panels.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. A conservatively quju-inspired long cross-collar robe with the long diagonal front extension visibly wrapping around the body via the back and returning to the front, simple tied belt and opaque dignified layered fabric, muted warm rust and cream. Plain restrained tied hair and small pin, quiet studio, full-body slight three-quarter pose that shows the wrapping structure. Do not force three full coils, a fixed trumpet skirt or a train; no translucent museum-gauze effect, Tang high skirt waist or Ming pleated panels. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "garden",
+      "title": "汉服园林雅致",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "园林汉服",
+        "园林雅致",
+        "汉服庭院"
+      ],
+      "direction": "Generic classical garden portrait in one coherent Song-inspired outfit: straight-collared front-opening beizi with side slits over a simple upper garment and wrapped two-panel skirt, muted sage and cream, restrained tied hair and one small pin. A quiet generic garden with soft foliage and simple wooden pavilion shapes, balanced natural light, full-body dignified pose. The garden changes only setting, not clothing form. No named landmark, Xi’an or Luoyang destination, wedding styling or dynasty mixture.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Hanfu portrait Skill development example. Edit the supplied wholly synthetic adult reference. Preserve the exact same face, apparent adult age, skin texture, hairline and body proportions; replace only clothing, hair arrangement, pose, background and lighting as requested. The reference Tang outfit and hairstyle are not to be inherited into other themes. Exactly one wholly fictional 25-year-old adult woman, with a natural oval face, dark brown eyes, realistic skin texture, black hair and a calm relaxed expression. No real person is depicted. This is the same fictional adult identity across all ten pictures. Preserve this face, apparent adult age, body proportions and skin texture; do not masculinize, feminize, rejuvenate or change ethnicity across edits. Hair arrangement may change only to suit the chosen clothing theme, without changing the face or hairline. Fully opaque dignified clothing, face clearly visible, full standing figure from head to feet, anatomically plausible hands and feet, relaxed pose. Generic classical garden portrait in one coherent Song-inspired outfit: straight-collared front-opening beizi with side slits over a simple upper garment and wrapped two-panel skirt, muted sage and cream, restrained tied hair and one small pin. A quiet generic garden with soft foliage and simple wooden pavilion shapes, balanced natural light, full-body dignified pose. The garden changes only setting, not clothing form. No named landmark, Xi’an or Luoyang destination, wedding styling or dynasty mixture. AI-created artistic portrait, not a documentary photograph, historical costume certification or identity document. Exactly one person; no child, partner or crowd, no readable text, letters, numbers, signs, logos, brands or watermark. No bridal fengguan/xiapei, xiuhe wedding outfit, qipao, kimono, military uniform or armour, no malformed face, extra limbs or distorted fingers. No exaggerated beauty filter or porcelain skin."
+    },
+    {
+      "key": "logo",
+      "title": "汉服写真立体主题logo",
+      "series": "主题logo",
+      "size": "1024x1024",
+      "prompt": "Use case: stylized-concept. Asset type: premium original three-dimensional Hanfu portrait studio app icon. A sculpted elegant folded cross-collar hanfu garment motif formed from jade-green ceramic and warm ivory satin-like material, placed within a subtle camera-lens circular frame. Warm ivory rounded-square background with restrained muted coral accents. Clear dimensional folded fabric, shallow sculptural relief, soft contact shadows, tactile premium materials, one simple focal motif readable at small size. Non-bridal, no crown, no human face, no text, letters, numbers, watermark, brand, national emblem, military badge, flat vector outline or generic flat ico."
+    },
+    {
+      "key": "tang_ruqun_corrected",
+      "logical_key": "tang_ruqun",
+      "asset_role": "replacement_demo",
+      "title": "唐制齐胸襦裙",
+      "series": "汉服主题写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "齐胸襦裙",
+        "唐制",
+        "唐风"
+      ],
+      "direction": "唐风齐胸高系长裙，裙腰上沿清晰位于上胸/腋下附近，窄袖上襦领袖可见，长裙从胸高连续垂落；不继承参考图腰部宽带或低裙腰。",
+      "prompt": "Use case: identity-preserve. Asset type: corrected offline Hanfu development example, Tang-inspired qixiong high-bust ruqun. Edit the supplied wholly synthetic adult woman reference and preserve her exact face, apparent adult age, natural skin texture, hairline and body proportions. Replace the entire clothing construction; do NOT copy the reference waist belt, low waistband or separate red bodice. Required visible garment structure: an opaque long coral-pink skirt begins HIGH ACROSS THE UPPER CHEST, its upper rim and tied skirt band crossing ABOVE THE BUST, just below the armpits; the skirt falls continuously from that high chest line all the way to the feet. A modest cream narrow-sleeved short ru blouse is worn underneath; only its upper neckline/shoulders and long narrow sleeves remain visible above and beside the high skirt. No separate waist belt, waist sash, corset panel or independent red bodice between bust and waist. A restrained matching light drape and simple Tang-inspired double bun with one small hairpin. Full standing figure from head to feet, relaxed natural pose, hands beside the body so the upper chest skirt band is not obscured. Quiet neutral studio and soft photographic light. Exactly one wholly fictional adult, no real person, no child, no other person, no wedding styling, bridal crown, Ming mamian panels, Song beizi outer coat, qipao, kimono, armour or military uniform. No text, letters, numbers, readable signs, brands, watermark, extra limbs or distorted face/fingers. Conservatively Tang-inspired artistic portrait, not exact archaeological reconstruction."
+    }
+  ],
+  "logical_mapping": {
+    "tang_ruqun": "tang_ruqun_corrected"
+  },
+  "excluded_generation_keys": [
+    "tang_ruqun"
+  ]
+}
