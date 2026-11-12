@@ -1,0 +1,146 @@
+{
+  "note": "原字节复制，未缩放、未重编码、未新增生图调用；源图见 demo-assets/provenance.json",
+  "total_bytes": 4718679,
+  "items": [
+    {
+      "key": "tang_ruqun",
+      "title": "唐制齐胸襦裙",
+      "source": "tang_ruqun.png",
+      "source_sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
+      "package_file": "tang_ruqun.png",
+      "package_sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
+      "package_bytes": 456086,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "song_beizi",
+      "title": "宋制褙子",
+      "source": "song_beizi.png",
+      "source_sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
+      "package_file": "song_beizi.png",
+      "package_sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
+      "package_bytes": 443289,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "ming_mamian",
+      "title": "明制马面裙",
+      "source": "ming_mamian.png",
+      "source_sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
+      "package_file": "ming_mamian.png",
+      "package_sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
+      "package_bytes": 449225,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "weijin",
+      "title": "魏晋宽袍大袖",
+      "source": "weijin.png",
+      "source_sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
+      "package_file": "weijin.png",
+      "package_sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
+      "package_bytes": 443935,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "daily",
+      "title": "汉服日常襦裙",
+      "source": "daily.png",
+      "source_sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
+      "package_file": "daily.png",
+      "package_sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
+      "package_bytes": 458931,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "flowing",
+      "title": "汉服广袖流仙",
+      "source": "flowing.png",
+      "source_sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
+      "package_file": "flowing.png",
+      "package_sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
+      "package_bytes": 476673,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "swordsman",
+      "title": "汉服侠客男装",
+      "source": "swordsman.png",
+      "source_sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
+      "package_file": "swordsman.png",
+      "package_sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
+      "package_bytes": 441924,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "tang_banbi",
+      "title": "唐制半臂",
+      "source": "tang_banbi.png",
+      "source_sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
+      "package_file": "tang_banbi.png",
+      "package_sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
+      "package_bytes": 468577,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "quju",
+      "title": "汉服曲裾深衣",
+      "source": "quju.png",
+      "source_sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
+      "package_file": "quju.png",
+      "package_sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
+      "package_bytes": 434273,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "garden",
+      "title": "汉服园林雅致",
+      "source": "garden.png",
+      "source_sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
+      "package_file": "garden.png",
+      "package_sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
+      "package_bytes": 645766,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    }
+  ]
+}

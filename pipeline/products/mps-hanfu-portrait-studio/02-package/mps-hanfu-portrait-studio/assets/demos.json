@@ -1,0 +1,65 @@
+{
+  "notice": "示例人物均为同一位虚构的成年人，只展示效果方向，不是你的真实结果，也不代表性别、年龄、脸型或发式的默认设定；服饰为参考风格，不代表考古精确复原；AI 生成汉服写真，非实拍。",
+  "demos": [
+    {
+      "key": "tang_ruqun",
+      "title": "唐制齐胸襦裙",
+      "note": "裙上沿在胸高处，上襦窄袖，简洁唐风髻；AI 生成汉服写真，非实拍",
+      "file": "tang_ruqun.png"
+    },
+    {
+      "key": "song_beizi",
+      "title": "宋制褙子",
+      "note": "直领对襟褙子配同套两片裙，清雅束髻；AI 生成汉服写真，非实拍",
+      "file": "song_beizi.png"
+    },
+    {
+      "key": "ming_mamian",
+      "title": "明制马面裙",
+      "note": "交领上衣配平整裙门的马面裙；AI 生成汉服写真，非实拍",
+      "file": "ming_mamian.png"
+    },
+    {
+      "key": "weijin",
+      "title": "魏晋宽袍大袖",
+      "note": "宽袍大袖，林下意境，艺术风格；AI 生成汉服写真，非实拍",
+      "file": "weijin.png"
+    },
+    {
+      "key": "daily",
+      "title": "汉服日常襦裙",
+      "note": "上衣下裙的日常款，轻便素雅；AI 生成汉服写真，非实拍",
+      "file": "daily.png"
+    },
+    {
+      "key": "flowing",
+      "title": "汉服广袖流仙",
+      "note": "广袖长裙配轻盈飘带，艺术风格；AI 生成汉服写真，非实拍",
+      "file": "flowing.png"
+    },
+    {
+      "key": "swordsman",
+      "title": "汉服侠客男装",
+      "note": "交领袍装束腰，竹林侠客风，艺术风格；AI 生成汉服写真，非实拍",
+      "file": "swordsman.png"
+    },
+    {
+      "key": "tang_banbi",
+      "title": "唐制半臂",
+      "note": "窄袖内搭外罩短袖半臂，配长裙；AI 生成汉服写真，非实拍",
+      "file": "tang_banbi.png"
+    },
+    {
+      "key": "quju",
+      "title": "汉服曲裾深衣",
+      "note": "长襟绕身的曲裾深衣，素雅背景；AI 生成汉服写真，非实拍",
+      "file": "quju.png"
+    },
+    {
+      "key": "garden",
+      "title": "汉服园林雅致",
+      "note": "宋风褙子置于泛化园林亭廊；AI 生成汉服写真，非实拍",
+      "file": "garden.png"
+    }
+  ]
+}
