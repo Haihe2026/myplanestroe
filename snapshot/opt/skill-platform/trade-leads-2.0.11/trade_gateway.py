@@ -12,7 +12,7 @@ from trade_data import real_provider
 PREFIX='/api/trade-leads/v1'
 WEB='/platform-api/trade-leads/web'
 ORIGINS=('https://myplanestore.com','https://aistore.zhaopintong.com')
-PUBLIC_ORIGIN=ORIGINS[1]
+PUBLIC_ORIGIN=ORIGINS[0]
 
 def install(store,parent):
     config()
