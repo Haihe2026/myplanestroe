@@ -1,0 +1,369 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-b9a3d242b8c792af50e90d626626a1726c41ef299054f48787dcd8408b22fdde",
+  "claim_id": "d8513f8b-1707-4677-ac28-246c6d3e0bf1",
+  "source_ref": "59aca1d34ab45d82ccd10c187c11208b3b2c556c",
+  "claim_commit": "0598c7bc724066b30a23a5c31548adbb09948057",
+  "checked_at": "2026-11-12T10:54:03+08:00",
+  "result": "test_passed",
+  "closures": [
+    {
+      "id": "SLV-A3-01",
+      "result": "closed",
+      "file": "scripts/studio.py",
+      "lines": [
+        423,
+        426,
+        479,
+        484,
+        486,
+        489,
+        496,
+        499,
+        505,
+        650,
+        653,
+        908,
+        911,
+        934,
+        938
+      ],
+      "related_sources": [
+        "SKILL.md:97",
+        "scripts/welcome_copy.py:254–256"
+      ],
+      "basis": "先保留LOCKED/有未完成job的原键原体；未提交replan在所有可早退校验之前原子落盘清三同意/idem/job/body摘要及replanning，新图B同步落盘并清旧SHA。run/resume/regenerate优先needsReplan，confirm仅planned；成功plan+重新三同意才新键，旧图旧角色无法借旧确认继续。"
+    }
+  ],
+  "open_findings": [],
+  "inspection": {
+    "result": "structural_checks_passed_silver_contract_reviewed_separately",
+    "findings": [],
+    "original_yaml_accepted": true,
+    "metadata_projection_for_remaining_diagnostics_only": false,
+    "zip": {
+      "sha256": "15c1313a522c85ddc876a7d6e11aa57ee58d720c7cca78eb4dff004a424d4458",
+      "bytes": 2605315,
+      "files": 25,
+      "wrapper": "mps-silver-portrait-studio",
+      "logical_max_depth": 2
+    },
+    "checks": [
+      {
+        "item": "固定ZIP完整性",
+        "result": "pass",
+        "evidence": "SHA256与A2一致；Git blob已验证见固定下载清单逐字节Git对象核对。"
+      },
+      {
+        "item": "目录与干净解包",
+        "result": "pass",
+        "evidence": "单一slug外包装；技能根内最多两级，25文件，无重复/大小写冲突/链接/越界或缓存；逐文件与ZIP原字节一致。"
+      },
+      {
+        "item": "平台元数据",
+        "result": "pass",
+        "evidence": "八必填字段齐全，无YAML重复键或隐藏HTML指令；SKILL.md 15358字节，≤15KiB。"
+      },
+      {
+        "item": "双语示例逐项语义",
+        "result": "pass",
+        "evidence": "本人银发棚拍/妈妈唐装代购/本人退役老兵纪念三对与固定规格逐字一致，同意条件、单人、2:3、1024×1536一致。"
+      },
+      {
+        "item": "触发词与接管",
+        "result": "pass",
+        "evidence": "23触发词、完整中文名充值词、唯一倾向句；执行规范首节接管。"
+      },
+      {
+        "item": "版本与固定欢迎",
+        "result": "pass",
+        "evidence": "slug/版本/渠道跨SKILL、_meta、studio和telemetry一致；欢迎句逐字符合。"
+      },
+      {
+        "item": "尺寸与字段常量",
+        "result": "pass",
+        "evidence": "仅三尺寸、六请求字段、八遥测字段；无machine_id；关闭开关为银发slug。遥测失败行为另按TRV-03闭环复核。"
+      },
+      {
+        "item": "场景清单与超时",
+        "result": "pass",
+        "evidence": "十场景默认竖版；90/15/120/30/0/240预算一致。路由优先逻辑另按TRV-04闭环复核。"
+      },
+      {
+        "item": "十示例来源与展示标注",
+        "result": "pass",
+        "evidence": "10PNG完整解码，512×768；key/标题一致，SHA与Codex源/provenance/derivation/规格一致；每项note含非实拍标注。"
+      },
+      {
+        "item": "外置logo",
+        "result": "pass",
+        "evidence": "512×512PNG，≤500KB，与Codex原字节一致；ZIP外置，不新增生成。"
+      },
+      {
+        "item": "Markdown安全路径",
+        "result": "pass",
+        "evidence": "仅求值已审纯路径格式化函数；空格/#/%三条真实临时PNG路径经CommonMark解析/解码均可定位，无意外query/fragment。"
+      },
+      {
+        "item": "对客禁用词/秘密/语法",
+        "result": "pass",
+        "evidence": "对客SKILL/README及固定话术AST字面量扫描无供应商/模型/秘密，全部脚本Python3.7语法可解析。只做静态，不运行A2/客户端。"
+      }
+    ],
+    "assets": [
+      {
+        "key": "studio",
+        "file": "studio.png",
+        "bytes": 239789,
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "source_identical": true
+      },
+      {
+        "key": "tang",
+        "file": "tang.png",
+        "bytes": 243830,
+        "sha256": "50edc59670f7f61852ff7397b76400d4d4b9585bc90950a5ba8967b1d74a20e2",
+        "source_identical": true
+      },
+      {
+        "key": "lawn",
+        "file": "lawn.png",
+        "bytes": 244031,
+        "sha256": "44cadbb82d25dae00dc081da03c6c774f3f56cc63a2b2ccfc748d0747c539cf1",
+        "source_identical": true
+      },
+      {
+        "key": "oil",
+        "file": "oil.png",
+        "bytes": 249312,
+        "sha256": "cf99c0a0f315c91fa2b5c8a8a777dd1b028cd48eddf9eb23d157ad8f296731c0",
+        "source_identical": true
+      },
+      {
+        "key": "beach",
+        "file": "beach.png",
+        "bytes": 230983,
+        "sha256": "5181c67d2226687bdce351771b73a238cff3d6f068cbacc4287b129377c24483",
+        "source_identical": true
+      },
+      {
+        "key": "qipao",
+        "file": "qipao.png",
+        "bytes": 223629,
+        "sha256": "a189f9c7031cccd17609365e9f51eca4e4163c70f1b6d7be3932247a40032e11",
+        "source_identical": true
+      },
+      {
+        "key": "garden",
+        "file": "garden.png",
+        "bytes": 267092,
+        "sha256": "9a4941450f752dc514e4c747e97a0a092c84cd4cd4970ede9b2e7a5203aaf248",
+        "source_identical": true
+      },
+      {
+        "key": "veteran",
+        "file": "veteran.png",
+        "bytes": 271903,
+        "sha256": "c5fa7e707ebeb3eeba8e3a48a39394e4be3fdbffc678e670fa11005c291ee982",
+        "source_identical": true
+      },
+      {
+        "key": "rural",
+        "file": "rural.png",
+        "bytes": 263860,
+        "sha256": "03cac5e9e8a0d31e9c3e5c04e20c987c8b033d0107959ee999ea60c73d8f205e",
+        "source_identical": true
+      },
+      {
+        "key": "winter",
+        "file": "winter.png",
+        "bytes": 285378,
+        "sha256": "6f0e1fcc3915f15e012df072f2a647d85d19bfa855dff8e4c3b3ea9ac5b2f552",
+        "source_identical": true
+      }
+    ],
+    "logo": {
+      "bytes": 456079,
+      "sha256": "9909cf071a9e64cb18707ec846b6cf5c921754979151075bfcf77756420acf1e",
+      "size": [
+        512,
+        512
+      ]
+    },
+    "markdown_fixtures": [
+      {
+        "case": "Silver Demo Assets",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Silver#Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Silver%Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      }
+    ],
+    "official_read": {
+      "at": "2026-11-12T10:48:37+08:00",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "fresh online read successful; skill metadata/examples/structure read",
+      "status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+    },
+    "full_a2_executed": false,
+    "business_commands_executed": false,
+    "pure_path_formatter_evaluated": true,
+    "upstream_calls": 0,
+    "production_calls": 0
+  },
+  "package_diff": {
+    "previous_zip_sha256": "b06ce740ca094ee56dd9483c368599dc4ecbe2e4ff0f858f6fa7b258f3deb44c",
+    "current_zip_sha256": "15c1313a522c85ddc876a7d6e11aa57ee58d720c7cca78eb4dff004a424d4458",
+    "same": [
+      "README.md",
+      "assets/beach.png",
+      "assets/demos.json",
+      "assets/garden.png",
+      "assets/lawn.png",
+      "assets/oil.png",
+      "assets/qipao.png",
+      "assets/rural.png",
+      "assets/studio.png",
+      "assets/tang.png",
+      "assets/veteran.png",
+      "assets/winter.png",
+      "references/platform-rules.md",
+      "references/prompts.md",
+      "references/scenes.md",
+      "scripts/audit_images.py",
+      "scripts/jpeg_local.py",
+      "scripts/png_local.py"
+    ],
+    "changed": [
+      {
+        "path": "SKILL.md",
+        "old_sha256": "20ea9b34ff9528a611f482db7630d520c8d827ae48b1173393476c7eef4b3906",
+        "new_sha256": "d96f30e55a78389e56e2bb5b468ed16dd78cf06ca5b43673267f333395ef67f5",
+        "old_bytes": 15334,
+        "new_bytes": 15358,
+        "changed_lines": 4
+      },
+      {
+        "path": "_meta.json",
+        "old_sha256": "747f79d028a1eb9145ddaab4514bf390b0c189d6a6a6d66c3b4b015f5ed7ff56",
+        "new_sha256": "ff572ca0d58ec3459f619355554362db7c6f5e5b064e7a32548000108c5ff49e",
+        "old_bytes": 237,
+        "new_bytes": 237,
+        "changed_lines": 2
+      },
+      {
+        "path": "scripts/studio.py",
+        "old_sha256": "522bb66f8ae49f4d53fca7ea748c5bf236b137dbaa888198999d4f5489fa8513",
+        "new_sha256": "b759a96497ab68e921828ce6d8b1113dc29825e329e456f97a789b7b49ddd548",
+        "old_bytes": 60163,
+        "new_bytes": 61785,
+        "changed_lines": 33
+      },
+      {
+        "path": "scripts/telemetry.py",
+        "old_sha256": "043242c50917d914418bbd7407ecf38f9a5f0f1c97fc057eb4dc077444db8138",
+        "new_sha256": "960c4d359e11a41fc8cdb4db57cbea5a3356a676b31d6c3a83349375091e140c",
+        "old_bytes": 5960,
+        "new_bytes": 5960,
+        "changed_lines": 2
+      },
+      {
+        "path": "scripts/welcome_copy.py",
+        "old_sha256": "4177dacd33042c337a7bf56b1c250c6a545a42d69cae97ea5f9628963428b3af",
+        "new_sha256": "1b1bb3e6e855f2a3f95d89e15319f012a7bb14b10403982be29e753aa26837b0",
+        "old_bytes": 21528,
+        "new_bytes": 21826,
+        "changed_lines": 5
+      },
+      {
+        "path": "tests/first-turn-preview.md",
+        "old_sha256": "603151e17d19e9b4cd483fcef4700c9c57debe814eb854324286dc92e9c55f4c",
+        "new_sha256": "19928a4149c98824643e07d2fa0619f612bf0ee055164678ed80f7d5839df87f",
+        "old_bytes": 4693,
+        "new_bytes": 4693,
+        "changed_lines": 2
+      },
+      {
+        "path": "tests/test_skill_contract.py",
+        "old_sha256": "c13e4d60214ba121bd13018be6d3601ccbf5dfa6f46a1319f0c1acacd5309f5a",
+        "new_sha256": "c10c3161bab659be4f83e1718698ae65fd90bf000f3aa0b1f853ef520d2448f5",
+        "old_bytes": 79949,
+        "new_bytes": 88551,
+        "changed_lines": 106
+      }
+    ],
+    "added": [],
+    "removed": [],
+    "demo_assets_and_manifest_unchanged": true
+  },
+  "source_file_blobs": {
+    "README.md": "2095a6ae4cf0dc5a18150463e5e805fa9c6720cb",
+    "SKILL.md": "a395f0cfe8685040b9c5d2683c433fc20d88126f",
+    "_meta.json": "ea385c18fd6d065f2c4f64cc57880a8a94e5d003",
+    "assets/beach.png": "364618d06e6ff12718fcab9e7ce1a5427275f066",
+    "assets/demos.json": "198eaaa73d36b622252f54b0926cb993a0fa2c6a",
+    "assets/garden.png": "a47977ce48ba856141e5ccc818ffccfd16a4cf98",
+    "assets/lawn.png": "031ad336deb2ec231f66a57387278cc53f968126",
+    "assets/oil.png": "cc47f7700ed251e4272e1793802c177ca7ad0a90",
+    "assets/qipao.png": "bbc800687013fe5e7762289af451014b4fc4cabb",
+    "assets/rural.png": "8ac33d68620536f9bdd1411a9753546bccd2c9f9",
+    "assets/studio.png": "010d67a197c64de96956c1f290115dd427b27124",
+    "assets/tang.png": "733d177041f34fbe41738710c056895d8c834d12",
+    "assets/veteran.png": "1427b5e84a2abd844fe4503589c9f5d09e0c9291",
+    "assets/winter.png": "17d3527b577c19ed73e4a351884e62ee7256af63",
+    "references/platform-rules.md": "1515408a120d1b0f7208c8368a92518bed9fb6da",
+    "references/prompts.md": "7873e7ee30d35f26d7c2075a938c8e16065d294f",
+    "references/scenes.md": "42c55e9fcbf41e935f1e5f45a2b85f38193cfe2c",
+    "scripts/audit_images.py": "c927b242902d611f38747e6cc492b6a671b78710",
+    "scripts/jpeg_local.py": "b405e4cad8744119bad2abe180aa50603ca6021f",
+    "scripts/png_local.py": "7527dafe4de30d16444955587b5a69fc71aea123",
+    "scripts/studio.py": "6a180836a3c98145ad28063d6081f1480a9c8785",
+    "scripts/telemetry.py": "9e2cd38f512cca5f68b1dd6abdee125f1cadfe68",
+    "scripts/welcome_copy.py": "5e24d21480d69e091410302dc15229eb62417ded",
+    "tests/first-turn-preview.md": "a776321054b1466d955cc1ebe077dfda6688f0e4",
+    "tests/test_skill_contract.py": "e4140983fa902c7de1c2827875febe9afe64a0ba"
+  },
+  "fixed_input_objects": {
+    "pipeline/products/mps-silver-portrait-studio/00-brief.md": "5740ce164d7277ae9a575337f75db6b38b24620f",
+    "pipeline/products/mps-silver-portrait-studio/01-dev-spec.json": "a7584d2b1900cb426427c85883278d1f9307ce22",
+    "pipeline/products/mps-silver-portrait-studio/01-dev-spec.md": "6dea5cc0fb0d64580463997199e8c68521685de1",
+    "pipeline/products/mps-silver-portrait-studio/02-package/dist/logo.png": "659b870b481d4f6b62c3c3613cb0d656e7973825",
+    "pipeline/products/mps-silver-portrait-studio/02-package/dist/mps-silver-portrait-studio-1.0.0.zip": "54a2e62b436a74b7871362719b37ab65865ade55",
+    "pipeline/products/mps-silver-portrait-studio/02-package/dist/mps-silver-portrait-studio-1.0.1.zip": "eec4ba0a6034834ac879db82ed547d4c8c0f4586",
+    "pipeline/products/mps-silver-portrait-studio/02-self-test.md": "d48eea296df0a27fbd68d10604766e6d3e547c32"
+  },
+  "sop_blob": "53e9b9862e62dadd2bd5a20d6e5e5697e3beab46",
+  "original_receipt_preserved": {
+    "event_id": "evt-b9a3d242b8c792af50e90d626626a1726c41ef299054f48787dcd8408b22fdde",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T10:49:13+08:00",
+    "evidence_ref": "0598c7bc724066b30a23a5c31548adbb09948057:pipeline/products/mps-silver-portrait-studio/status.json",
+    "claim_id": "d8513f8b-1707-4677-ac28-246c6d3e0bf1"
+  },
+  "independent_reviews": [
+    "旧确认失效/原任务/账户恢复专项：只读PASS",
+    "资格/代购/老兵/宿主needsReplan指令专项：只读PASS"
+  ],
+  "client_source_modified_by_codex": false,
+  "development_documents_modified": false,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "full_a2_executed": false,
+  "appendix_d": "suspended; D.6 suspended",
+  "delivery_gate": "A3 passed; fixed1.0.1 ZIP/logo ready for owner manual upload, host acceptance not claimed",
+  "next_role": "muse",
+  "next_action": "deliver fixed1.0.1 ZIP and external logo/SHA to owner for manual upload; no Appendix D task"
+}
