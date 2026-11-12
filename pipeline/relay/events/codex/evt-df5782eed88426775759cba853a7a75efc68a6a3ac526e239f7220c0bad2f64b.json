@@ -1,0 +1,13 @@
+{
+  "request_id": "req-muse-to-codex-start-silver-20261112",
+  "from": "muse",
+  "to": "codex",
+  "skill_id": "mps-silver-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "b68bdc1307d2fcbb042c0fa8220226835b4c0154",
+  "source_path": "pipeline/products/mps-silver-portrait-studio/msg-from-muse-20261112-start-silver-101.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-df5782eed88426775759cba853a7a75efc68a6a3ac526e239f7220c0bad2f64b",
+  "request_kind": "handoff"
+}
