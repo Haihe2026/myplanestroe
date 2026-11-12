@@ -1,0 +1,9 @@
+/* Common registration footer; intentionally isolated from checkout styling. */
+.mps-icp-footer{box-sizing:border-box;display:block;position:relative;inset:auto;width:auto;max-width:none;min-width:0;margin:0;padding:20px 16px;background:#f8faf9;border-top:1px solid #dce7e2;color:#486057;text-align:center;font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;font-size:12px;line-height:1.8;overflow-wrap:anywhere;}
+.mps-icp-footer p{display:block;max-width:100%;margin:0;padding:0;color:inherit;font-size:inherit;line-height:inherit;text-align:center;}
+.mps-icp-footer .mps-icp-site{font-weight:600;color:#243f33;}
+.mps-icp-footer .mps-icp-owner{margin:2px 0;}
+.mps-icp-footer a{display:inline;color:#486057;text-decoration:none;white-space:normal;overflow-wrap:anywhere;}
+.mps-icp-footer a:hover{text-decoration:underline;}
+.mps-icp-footer a:focus-visible{outline:2px solid #00845b;outline-offset:3px;border-radius:2px;}
+@media(max-width:480px){.mps-icp-footer{padding:18px 14px;font-size:11px;line-height:1.9;}.mps-icp-footer .mps-icp-owner{max-width:27em;margin:3px auto;}}
