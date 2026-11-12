@@ -1,8 +1,8 @@
 {
   "blocked": null,
-  "claimed_at": "2026-11-12T17:12:31+08:00",
+  "claimed_at": null,
   "lane": "fast",
-  "owner": "codex",
+  "owner": null,
   "rounds": {
     "dev": 0,
     "spec": 0,
@@ -10,9 +10,9 @@
   },
   "skill_id": "mps-hanfu-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
-  "sop_version": "22796800f70465017764213fb4601c11d1fc2b36",
-  "stage": "spec_in_progress",
-  "updated_at": "2026-11-12T17:12:31+08:00",
+  "sop_version": "02999649750726bd6f476dfb44424e4ded4fc19c",
+  "stage": "spec_ready",
+  "updated_at": "2026-11-12T18:28:39+08:00",
   "versions": {
     "listed": null,
     "package": null

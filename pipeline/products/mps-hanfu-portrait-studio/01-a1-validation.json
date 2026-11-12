@@ -1,0 +1,277 @@
+{
+  "skill_id": "mps-hanfu-portrait-studio",
+  "checked_at": "2026-11-12T18:26:41+08:00",
+  "result": "pass",
+  "checklist_count": 16,
+  "checks": [
+    {
+      "item": 1,
+      "label": "立项/词表/串行前置",
+      "result": "pass",
+      "evidence": "固定brief/retry哈希/原claim与48来源核对，前七submitted，不依赖G7；未核市场数字不作宣传。"
+    },
+    {
+      "item": 2,
+      "label": "本次在线官方读取",
+      "result": "pass",
+      "evidence": "最终render新在线读取团队Skill页；URL/日期/结果/字节SHA齐，expert不适用。"
+    },
+    {
+      "item": 3,
+      "label": "十主题/路由/16原话",
+      "result": "pass",
+      "evidence": "胸高/褙子/马面/半臂/曲裾具体词优先、宋daily默认、地名/红衣按主需求，逐主题参考与局限完整。"
+    },
+    {
+      "item": 4,
+      "label": "三基线加人物身份/本人资格",
+      "result": "pass",
+      "evidence": "本人成人单人，unknown合并补问；照片/文件传输/计费三许可独立，男装不换脸，不套示例人口属性。"
+    },
+    {
+      "item": 5,
+      "label": "十真实示例/来源/异常审计",
+      "result": "pass",
+      "evidence": "12请求=1参考初稿+10最终示例+1logo；seed不入包。Garden同任务n1返3仅离线选1、832x1248真实披露，生产singleton未放宽；真彩预览复检闭环。"
+    },
+    {
+      "item": 6,
+      "label": "单次立体logo",
+      "result": "pass",
+      "evidence": "512²PNG、原字节保留，交领折襟/镜头圆框立体图已目检，无字品牌，不重画/追加。"
+    },
+    {
+      "item": 7,
+      "label": "计费/接口/钱包/订单",
+      "result": "pass",
+      "evidence": "14业务/4OAuth/3网页订单、动态钱包、受控核款幂等完整；订单仅会员页查看入口，reported不当paid，不增财务权限。"
+    },
+    {
+      "item": 8,
+      "label": "模型/成本/阈值",
+      "result": "pass",
+      "evidence": "固定目录和当前匿名plans估算76.47%，非实账；n1返多结果实际计费数未核，不能保证本轮实付。"
+    },
+    {
+      "item": 9,
+      "label": "fast/实现/部署/未验证",
+      "result": "pass",
+      "evidence": "已实现源码、既有部署记录、待Claude、无本单部署、未来能力及未验证分开；不把离线提取当生产单结果通过。"
+    },
+    {
+      "item": 10,
+      "label": "六字段/新源/身份恢复",
+      "result": "pass",
+      "evidence": "新源.60/.59/.57、无旧回退/密钥，银发1.0.1早退前失效/新B保存/有界预检/401/原任务GET；无代购老兵孕期业务字段。"
+    },
+    {
+      "item": 11,
+      "label": "首次上报与标准漏斗",
+      "result": "pass",
+      "evidence": "8字段200/2秒/4096B/attempted原子一次，machine_id待支持；L0–L4按新用户/窗口内新账户及首笔入账定义，未得数据不造事件。"
+    },
+    {
+      "item": 12,
+      "label": "相邻与不承接",
+      "result": "pass",
+      "evidence": "本人成人单人、婚服/地点/旗袍/和服/军装/儿童边界清楚；其他技能仅listed及入口可用才正向转介。"
+    },
+    {
+      "item": 13,
+      "label": "首轮/许可/交付/售后",
+      "result": "pass",
+      "evidence": "首轮问候/主动问价例外及固定拒绝句，三确认、原图交付和工单有tid GET/无tid显式幂等补交齐；生图不重POST。"
+    },
+    {
+      "item": 14,
+      "label": "17组与57逐项验收",
+      "result": "pass",
+      "evidence": "A2隔离Mock、Codex A3独立静态、负责人手动上传；4不适用项不杜撰API，S6-03不引自动套装。"
+    },
+    {
+      "item": 15,
+      "label": "决策记录",
+      "result": "pass",
+      "evidence": "16项采用/依据：串行、齐胸返工、12请求、八遥测、订单入口、已实现/未验和人工上传等齐。"
+    },
+    {
+      "item": 16,
+      "label": "MD/JSON/元数据/独立复核/秘密",
+      "result": "pass",
+      "evidence": "16节/机器摘要一致，八官方字段/3对语义，最终SHA两份独立只读复核通过；秘密扫描通过。"
+    }
+  ],
+  "acceptance_groups": 17,
+  "stage6_cases": 57,
+  "asset_files": 11,
+  "real_calls": {
+    "delivered_demos": 10,
+    "reference_seed": 1,
+    "logo": 1,
+    "total_generation_requests": 12,
+    "extra_generation_tests": 0
+  },
+  "document_sha256": {
+    "01-dev-spec.md": "5e1dbb520624f47e3208fcba04350bdf8cf118bc4de0331ff26c87c80122a3a8",
+    "01-dev-spec.json": "785d1125a03ef7fab36988df10ef82bc759db9cf20feee1af56c3f356f3ddd0e"
+  },
+  "independent_reviews": [
+    {
+      "schema_version": 1,
+      "skill_id": "mps-hanfu-portrait-studio",
+      "reviewed_at": "2026-11-12T18:25:57+08:00",
+      "result": "pass",
+      "document_sha256": {
+        "01-dev-spec.md": "5e1dbb520624f47e3208fcba04350bdf8cf118bc4de0331ff26c87c80122a3a8",
+        "01-dev-spec.json": "785d1125a03ef7fab36988df10ef82bc759db9cf20feee1af56c3f356f3ddd0e"
+      },
+      "findings": [],
+      "open_findings": [],
+      "closed_findings": [
+        "HNF-A1-FUNNEL",
+        "HNF-A1-DECLINE",
+        "HNF-A1-SUPPORT-UNKNOWN",
+        "HNF-A1-FIRST-TURN",
+        "HNF-A1-S6-03",
+        "HNF-A1-QIXIONG-BILINGUAL",
+        "HNF-VIS-01",
+        "HNF-VIS-SEED-01"
+      ],
+      "scope": "Independent read-only A1 review: final MD/JSON, ten themes/four baselines/three consents/SLV1.0.1, backend/upstream/eight-field telemetry, 57 cases, public copy, actual asset SHA and latest SOP delta.",
+      "limits": [
+        "A1 readiness only; no Skill runtime/A2, production/payment/host/listing or exact-history/real-person-fidelity acceptance.",
+        "Garden n1 returned3: offline one-candidate selection only; production singleton rejection unchanged. Actual832x1248, preview512x768, invoice unverified.",
+        "No additional upstream/account calls, production writes, remote writes or final document mutations."
+      ],
+      "current_sop": {
+        "ref": "02999649750726bd6f476dfb44424e4ded4fc19c",
+        "blob": "509b9732f85b7f7ccccac6f077d5078953d57013",
+        "fixed_github_raw_blob_verified": true
+      },
+      "visual_review_sha256": "3b03d89ad5e519547a1aeda417b019225c16d11bd9c5ff63114fe9cdc696c877",
+      "official_online_read_at": "2026-11-12T18:25:57+08:00"
+    },
+    {
+      "schema_version": 1,
+      "skill_id": "mps-hanfu-portrait-studio",
+      "result": "pass",
+      "document_sha256": {
+        "01-dev-spec.md": "5e1dbb520624f47e3208fcba04350bdf8cf118bc4de0331ff26c87c80122a3a8",
+        "01-dev-spec.json": "785d1125a03ef7fab36988df10ef82bc759db9cf20feee1af56c3f356f3ddd0e"
+      },
+      "open_findings": [],
+      "closed_findings": [
+        "orders_membership_page_only",
+        "first_turn_greeting_and_price",
+        "16_response_rules_and_theme_alignment",
+        "support_same_key_retry_vs_generation_GET_only",
+        "exact_L0_L4_window_and_new_user_cohorts"
+      ],
+      "scope": "Independent SHA-bound A1 product review: MD/JSON consistency, self/adult/consent, clothing/artistic boundaries, public copy, recovery/original tasks, packaging and final funnel delta; no new defect.",
+      "limits": [
+        "Document review only, not Skill/A2/A3/production/host/listing verification.",
+        "Garden n=1/3-results anomaly remains an offline exception, not a production singleton-contract pass."
+      ]
+    }
+  ],
+  "secret_scan": "pass",
+  "limitations": [
+    "全部为同一虚构25岁女性，非客户真实照片、并非用户年龄/性别/发式/肤色默认，不是生物身份或全输入质量验证。",
+    "四个历史结构方向及艺术主题只核可见轮廓；曲裾单视角不能核背面裁剪，不能保证考古精确复原。",
+    "妆造/五官细节可能有差异，不能作真人相似度或历史形制准确率保证。",
+    "garden请求n=1但同原任务返回3，开发离线目检选1，实际832x1248，生产适配器未改且仍严格恰一，不视为生产协议通过。",
+    "12是生成POST请求数，上游计费图数及账单未核，不保证实际成本；无客户财务/生产认证修改。",
+    "真实微信/手机/付款、生产签名参考URL、WorkBuddy宿主与平台接受审核未验证。"
+  ],
+  "upstream_anomaly": {
+    "original_task_alias": "garden",
+    "read_at": "2026-11-12T17:38:06+08:00",
+    "registered_model": "gpt-image-2.5-ext",
+    "fixed_adapter_requested_n": 1,
+    "content_data_count": 3,
+    "distinct_result_url_count": 3,
+    "exact_adapter_error": "Invalid result count",
+    "new_generation_posts": 0,
+    "remote_database_writes": 0,
+    "production_or_financial_writes": 0,
+    "selection_made": true,
+    "candidates": [
+      {
+        "index": 1,
+        "file": "candidate-1.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1617463,
+        "raw_sha256": "8beca3a01952c194b11b28578e87f81be3833e2e57009da13ea6c3a7371961da",
+        "clean_bytes": 1524513,
+        "clean_sha256": "1e88e0634ef3c3cfb9cc15fe9d5e6343b2f23f636b9d7aaa95f3d1f8b7a095b8",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      },
+      {
+        "index": 2,
+        "file": "candidate-2.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1857874,
+        "raw_sha256": "88d5e9b750a4107c0f5d9c5844a5246648a58f18923125f8c947b90a14c8d77b",
+        "clean_bytes": 883488,
+        "clean_sha256": "67d2afa6a4440ebdb77d122374ee1fe29ed099a3c8032ec46a0fe0ddeca2d4e3",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      },
+      {
+        "index": 3,
+        "file": "candidate-3.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1518209,
+        "raw_sha256": "02df42da0200f761c66ff126908ae65d879e22c807acc89afaf5781f8c33500a",
+        "clean_bytes": 1431752,
+        "clean_sha256": "3eda21dcf50679da8c4458a80013c830948ee73ad494ae96e7e95cd3da50d352",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      }
+    ],
+    "selected_candidate": 1,
+    "selected_clean_sha256": "1e88e0634ef3c3cfb9cc15fe9d5e6343b2f23f636b9d7aaa95f3d1f8b7a095b8",
+    "selected_raw_sha256": "8beca3a01952c194b11b28578e87f81be3833e2e57009da13ea6c3a7371961da",
+    "selection_reason": "root实际查看三张：1为完整站姿、泛化园林、青绿前开长外衫及裙装，最贴garden指定宋风套系；2仍红衣棚景不适用，3短上衣/高领感较强。只交付候选1作为离线开发效果示例。",
+    "source": "same original garden task, GET only; no new generation, no substitution from another task",
+    "requested_size": [
+      1024,
+      1536
+    ],
+    "actual_generated_size": [
+      832,
+      1248
+    ],
+    "preview_size": [
+      512,
+      768
+    ],
+    "shared_adapter_singleton_contract_passed": false,
+    "shared_adapter_modified": false,
+    "offline_exception_only": true,
+    "production_behavior": "Keep existing adapter exact-one validation. Non-singleton/unknown output must preserve original task; never auto-select or rePOST in production based on this offline extraction.",
+    "billing": "Requested n=1 but provider returned 3. Generation POST count is 12 for whole batch; actual provider charged image count/invoice unverified, no assurance of actual charge based solely on output count."
+  },
+  "claude_a2": "pending",
+  "codex_a3": "pending",
+  "appendix_d": "suspended; D.6 suspended",
+  "production_deployments_this_product": 0,
+  "publishing": "owner manual",
+  "validation_write_official_read": {
+    "at": "2026-11-12T18:26:41+08:00",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "http_status": 200,
+    "bytes": 277042,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+  }
+}

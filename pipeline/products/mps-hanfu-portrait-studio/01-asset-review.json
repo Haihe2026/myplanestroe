@@ -1,0 +1,299 @@
+{
+  "skill_id": "mps-hanfu-portrait-studio",
+  "at": "2026-11-12T18:10:05+08:00",
+  "result": "pass",
+  "reviewed_assets": 12,
+  "accepted_final_demos": 10,
+  "accepted_logo": 1,
+  "rejected_reference_only": 1,
+  "method": "root contact sheet/detail review plus independent actual view_image of each of ten final PNGs and logo; previous rejected seed also viewed; final current SHA locked",
+  "official_read": {
+    "at": "2026-11-12T18:10:05+08:00",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "http_status": 200,
+    "bytes": 277042,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+  },
+  "final_visual_review": {
+    "schema_version": 1,
+    "reviewed_at": "2026-11-12T18:07:08+08:00",
+    "review_role": "independent visual reviewer",
+    "skill_id": "mps-hanfu-portrait-studio",
+    "reviewed_assets": 11,
+    "result": "pass",
+    "review_result": "Final true-color previews and logo passed independent visual review for offline artistic development examples; prior findings closed",
+    "a1_conclusion": null,
+    "official_read": {
+      "read_at": "2026-11-12T18:07:08+08:00",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c",
+      "result": "fresh online read succeeded; parsed visible skill documentation; workbuddy-skill only"
+    },
+    "items": [
+      {
+        "key": "tang_ruqun",
+        "path": "deliverables/demo-assets/tang_ruqun.png",
+        "sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
+        "bytes": 456086,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "修订图裙腰及系带清楚处于胸高/腋下附近，长裙从胸高连续下垂；上襦领袖可见，无自然腰独立宽带。先前低腰种子不可替代此修订图。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "song_beizi",
+        "path": "deliverables/demo-assets/song_beizi.png",
+        "sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
+        "bytes": 443289,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "浅绿直领对襟长外衫、内上衣及长裙层次可见；外衣边缘/侧缝开口与直长轮廓连贯，未混齐胸裙或马面裙门。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "ming_mamian",
+        "path": "deliverables/demo-assets/ming_mamian.png",
+        "sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
+        "bytes": 449225,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "前中奶油色平整裙门与两侧深青褶裥清楚区别，非整周均匀百褶裙；交领右衽上衣一致，无婚冠。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "weijin",
+        "path": "deliverables/demo-assets/weijin.png",
+        "sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
+        "bytes": 443935,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "宽袍大袖、简洁衣带和一套浅灰蓝轮廓可见；作为魏晋风艺术主题可用，不是完整史制复原证据。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "daily",
+        "path": "deliverables/demo-assets/daily.png",
+        "sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
+        "bytes": 458931,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "简单上襦与围裹式长裙、克制束发及普通室内环境，日常和褙子外搭有可见区别。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "flowing",
+        "path": "deliverables/demo-assets/flowing.png",
+        "sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
+        "bytes": 476673,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "广袖、长裙和轻柔披帛层次可见，身体内层不透体，无婚冠/甲胄；艺术主题，不称出土形制。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "swordsman",
+        "path": "deliverables/demo-assets/swordsman.png",
+        "sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
+        "bytes": 441924,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "深色束腰袍装、实用袖形、简洁束发，保留同一女性脸部，未被改为男性面容，无武器/军阶/甲胄。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "tang_banbi",
+        "path": "deliverables/demo-assets/tang_banbi.png",
+        "sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
+        "bytes": 468577,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "窄袖内襦与肘上短袖半臂外罩分层清楚，长裙相配；非现代T恤或甲胄。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "quju",
+        "path": "deliverables/demo-assets/quju.png",
+        "sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
+        "bytes": 434273,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "交领与斜向包裹衣缘/长襟轮廓连续可见、得体不透体；正面图不足证明背部真实裁剪或完整绕身穿法，仅作曲裾参考艺术示例。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "garden",
+        "path": "deliverables/demo-assets/garden.png",
+        "sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
+        "bytes": 645766,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          768
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "泛化园林、绿意和亭廊，青绿前开长外衫与长裙同套，无额外人物/牌匾/具体地标；符合garden，实际生成832x1248须如实记尺寸。",
+        "identity": "same fictional adult identity broadly recognizable across ten examples; not biometric or real-person fidelity verification",
+        "visible_text_brand_extra_person": false
+      },
+      {
+        "key": "logo",
+        "path": "deliverables/02-package/dist/logo.png",
+        "sha256": "d6cda4a802770817435324b898d5e0f1705adf95cd2a7c665baba27727c2978b",
+        "bytes": 418271,
+        "format": "PNG",
+        "dimensions": [
+          512,
+          512
+        ],
+        "color_mode": "RGB",
+        "actual_view_image_performed": true,
+        "structure_result": "passed_as_artistic_development_example",
+        "observations": "玉色折襟及镜头圆框，暖白珊瑚配色，材质/阴影与纵深清楚，无文字品牌或认证章，小尺寸主题可辨。",
+        "identity": "not applicable",
+        "visible_text_brand_extra_person": false
+      }
+    ],
+    "findings": [
+      {
+        "id": "HNF-VIS-01",
+        "severity": "preview_quality",
+        "affected_keys": [
+          "song_beizi",
+          "ming_mamian",
+          "weijin",
+          "flowing",
+          "swordsman",
+          "garden"
+        ],
+        "finding": "旧调色板预览曾出现可见面颈色阶/斑块，尤其flowing和swordsman。",
+        "status": "closed",
+        "resolution": "root仅用已取回原图本地重导RGB真彩PNG；已重新实际查看整套contact sheet及全部十张PNG，脸和颈部渐变恢复自然，旧量化斑块问题不再可见。主题结构、身份与无字约束仍保持；无新生成。",
+        "prior_affected_sha256": {
+          "song_beizi": "c3f84e0dbf872423c61c153e1343dc3c6630c742131f10e3c14c679ba6403011",
+          "ming_mamian": "0df6de27c2bbf728df5ba6fbbdcad35fa9038b2c769006f777129a5d4a517e62",
+          "weijin": "5cad7657a5a6ddb231ae8f5105e4ad61a21e5d43eea501b638334b7f31efb01a",
+          "flowing": "5b7dc75f7061d1855628212c67fcd0c9c04645bd4deb9525f8d437df7ae2b4cc",
+          "swordsman": "cb350176180166ac579785ce2ccbd265673d6e4a92f0826a26c2c11cac2c183b",
+          "garden": "b9c8a96348fe4f2db21c4f8a6a5468cb6e05b6b041c1479cd745bc156eb372b0"
+        }
+      },
+      {
+        "id": "HNF-VIS-SEED-01",
+        "severity": "theme_structure",
+        "affected_keys": [
+          "initial_tang_ruqun_seed"
+        ],
+        "finding": "初始身份种子的裙腰位于自然腰，不能标为齐胸襦裙。",
+        "status": "closed",
+        "resolution": "低腰初稿仅保留身份参考、不入十图演示集合；本次最终tang_ruqun为修订图，胸高上沿/系带及连续长裙清楚可见，已实际逐图复核。",
+        "final_tang_ruqun_sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45"
+      }
+    ],
+    "open_findings": [],
+    "demo_total_bytes": 4718679,
+    "limits": [
+      "全部仅虚构单人开发示例，不代表真人相似度/不同性别质量或历史考古精确复原验证。",
+      "曲裾从正面只见绕襟轮廓，背部裁剪/实际穿法不可据本图证明。",
+      "园林n=1实际返回3；此审阅仅接受root已离线选择的一张例图，不能据此声称登记适配器exact-one契约通过或生产自动选取已获准。",
+      "园林原始832x1248、预览512x768，其他原始尺寸以provenance核验；不得把请求尺寸当实际尺寸。"
+    ],
+    "upstream_anomaly": {
+      "original_task_alias": "garden",
+      "content_data_count": 3,
+      "selected_candidate": 1,
+      "shared_adapter_singleton_contract_passed": false,
+      "offline_exception_only": true,
+      "shared_adapter_modified": false
+    },
+    "execution_scope": {
+      "upstream_calls": 0,
+      "production_writes": 0,
+      "asset_modifications": 0,
+      "full_a2_executed": false
+    }
+  },
+  "findings_closed": [
+    "initial natural-waist Tang seed excluded; corrected chest-high ruqun visibly verified",
+    "HNF-VIS-01 palette banding removed by local true-color RGB export, no extra generation"
+  ],
+  "open_findings": [],
+  "generation_requests": 12,
+  "extra_generation_tests": 0,
+  "logo_calls": 1,
+  "local_reexport_generation_calls": 0,
+  "limitations": [
+    "全部为同一虚构25岁女性，非客户真实照片、并非用户年龄/性别/发式/肤色默认，不是生物身份或全输入质量验证。",
+    "四个历史结构方向及艺术主题只核可见轮廓；曲裾单视角不能核背面裁剪，不能保证考古精确复原。",
+    "妆造/五官细节可能有差异，不能作真人相似度或历史形制准确率保证。",
+    "garden请求n=1但同原任务返回3，开发离线目检选1，实际832x1248，生产适配器未改且仍严格恰一，不视为生产协议通过。",
+    "12是生成POST请求数，上游计费图数及账单未核，不保证实际成本；无客户财务/生产认证修改。",
+    "真实微信/手机/付款、生产签名参考URL、WorkBuddy宿主与平台接受审核未验证。"
+  ]
+}

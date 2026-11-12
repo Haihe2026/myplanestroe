@@ -1,0 +1,592 @@
+{
+  "skill_id": "mps-hanfu-portrait-studio",
+  "checked_at": "2026-11-12T18:21:13+08:00",
+  "observed_head": "46ce3f4953bfc7b824efa7aa888c481510b1c935",
+  "source_ref": "229f5e96ad349d32c076bff87766c5f27f93f93d",
+  "event_id": "evt-ecccfbcd2f41de73cde2d6721f08464f808b4713962b0f578fc720f1a7bcfdd9",
+  "original_claim_id": "14235096-b7df-41e6-ab4a-9dd0e024b75b",
+  "event_kind": "request",
+  "request_kind": "retry",
+  "original_request": {
+    "request_id": "req-muse-to-codex-retry-hanfu-serial-20261112",
+    "from": "muse",
+    "to": "codex",
+    "skill_id": "mps-hanfu-portrait-studio",
+    "source_repo": "Haihe2026/myplanestroe",
+    "source_ref": "36d43b9d9d38b58c3b79fbd8e6f5bb8c4c9d1753",
+    "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-retry-serial.md",
+    "kind": "retry"
+  },
+  "request_digest_verified": true,
+  "event_fixed_source": "36d43b9d9d38b58c3b79fbd8e6f5bb8c4c9d1753",
+  "event_source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-retry-serial.md",
+  "local_and_remote_claim_match": true,
+  "receipt_action": "claimed",
+  "original_receipt_preserved": {
+    "event_id": "evt-ecccfbcd2f41de73cde2d6721f08464f808b4713962b0f578fc720f1a7bcfdd9",
+    "role": "codex",
+    "action": "claimed",
+    "at": "2026-11-12T17:08:15+08:00",
+    "evidence_ref": null,
+    "claim_id": "14235096-b7df-41e6-ab4a-9dd0e024b75b"
+  },
+  "product_claim_commit": "e93743a5105fec3a951c3231673727e6cfeac167",
+  "serial_gate": {
+    "all_previous_submitted": true,
+    "g7_used": false,
+    "checked_ref": "229f5e96ad349d32c076bff87766c5f27f93f93d",
+    "products": {
+      "mps-id-photo-background": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.8",
+          "listed": "1.0.6"
+        }
+      },
+      "mps-pet-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.5",
+          "listed": null
+        }
+      },
+      "mps-wedding-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.3",
+          "listed": null
+        }
+      },
+      "mps-family-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "package": "1.0.1",
+          "listed": null
+        }
+      },
+      "mps-travel-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "listed": null,
+          "package": "1.0.2"
+        }
+      },
+      "mps-maternity-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "listed": null,
+          "package": "1.0.1"
+        }
+      },
+      "mps-silver-portrait-studio": {
+        "stage": "submitted",
+        "versions": {
+          "listed": null,
+          "package": "1.0.1"
+        }
+      }
+    },
+    "silver_observed": {
+      "blocked": null,
+      "claimed_at": null,
+      "lane": "fast",
+      "owner": null,
+      "rounds": {
+        "dev": 2,
+        "spec": 0,
+        "test": 1
+      },
+      "skill_id": "mps-silver-portrait-studio",
+      "sop": "sop-image-gen-skill-auto",
+      "sop_version": "22796800f70465017764213fb4601c11d1fc2b36",
+      "stage": "submitted",
+      "updated_at": "2026-11-12T17:06:01+08:00",
+      "versions": {
+        "listed": null,
+        "package": "1.0.1"
+      }
+    }
+  },
+  "observed_status": {
+    "blocked": null,
+    "claimed_at": "2026-11-12T17:12:31+08:00",
+    "lane": "fast",
+    "owner": "codex",
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-hanfu-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "22796800f70465017764213fb4601c11d1fc2b36",
+    "stage": "spec_in_progress",
+    "updated_at": "2026-11-12T17:12:31+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "critical_blobs": {
+    "pipeline/products/mps-hanfu-portrait-studio/00-brief.md": "4a46baccf88955f110edf3d4fefae42eee1692f2",
+    "docs/sop/sop-image-gen-skill-auto.md": "509b9732f85b7f7ccccac6f077d5078953d57013",
+    "pipeline/config.yaml": "966a0d8fdd9d680d4652fa2cba8aacca174aa74e"
+  },
+  "source_files": [
+    {
+      "path": "pipeline/products/mps-hanfu-portrait-studio/status.json",
+      "blob": "95896be95d72fa94aa83ec6946740189e43c67d7",
+      "sha256": "848d09a5e6478d460cdf252b1ab6256204d8ecd043775309e3d0bdf3a6226153",
+      "bytes": 414,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-hanfu-portrait-studio/log.md",
+      "blob": "40f6158b4d8a4e6672cb4507eb9f58b66db83fe6",
+      "sha256": "b8677e94060577065e7afd60ba086a87f992dbdd11b5d1b522fe8b2686c98e43",
+      "bytes": 243,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-hanfu-portrait-studio/00-brief.md",
+      "blob": "4a46baccf88955f110edf3d4fefae42eee1692f2",
+      "sha256": "105c08fb6f133d64a58500392fe4da91d615568827a1ce056ae7f49f2934d641",
+      "bytes": 3392,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-start-hanfu-101.md",
+      "blob": "1259026de8ecce203aae71d82de3990ec8edc72d",
+      "sha256": "5f526f110cdaed84f0eee12dcf567847f990c1099f6db1cdf4e5103d34903d14",
+      "bytes": 2572,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-retry-serial.md",
+      "blob": "3a2dc456a3a68e02e8aabd016b83ed3b7f1b1d6c",
+      "sha256": "191d5208754b92c7c103b8376c1f6e946f197276a6997b6be87d16576fd75813",
+      "bytes": 1060,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/research/2026-11-12-round9.md",
+      "blob": "7e8107f018881a8d07e5c7de1718cf8faedb5005",
+      "sha256": "8f19f390cf6c0eb843beb6977fe0565ed867795dfd260d0f0c2e2e3e109faf4a",
+      "bytes": 8736,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "docs/sop/sop-image-gen-skill-auto.md",
+      "blob": "53e9b9862e62dadd2bd5a20d6e5e5697e3beab46",
+      "sha256": "6dfc9bca3586835b798460e3a6fbeca1d7ac44f96c70e14fd8d4db021be39c2b",
+      "bytes": 137247,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "docs/sop/workbuddy-official-docs.md",
+      "blob": "8314aca21d2c9acf042f20f81659639965c038f3",
+      "sha256": "33a29b76acfc689905662e4af257eb6ce277b33df22477052351e7822b5314c2",
+      "bytes": 21327,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/config.yaml",
+      "blob": "966a0d8fdd9d680d4652fa2cba8aacca174aa74e",
+      "sha256": "dec70c4404c8c948733e8f3c9ada432442aae28d562ec4548f030f66627d4077",
+      "bytes": 627,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "resources/upstreams/catalog.json",
+      "blob": "78c630cecb11e24893449ae60a5012890b93e123",
+      "sha256": "75114b568ea17433ead900bfe27419ec9d349f19328fa89755cddcfe0c2b19c7",
+      "bytes": 18353,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "resources/upstreams/code-map.json",
+      "blob": "bf9f18b58e772643743a99667a5d3926bf45251a",
+      "sha256": "683ac2918a7c3cdb277064d176947c01d5b57c51f6a11418dabea8b711014580",
+      "bytes": 684,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "resources/upstreams/assets.public.json",
+      "blob": "f54048b056d841b2175e2626fd994fe59a5d1a04",
+      "sha256": "d17755109c49b74625de319d05bf2d9b4dc1fdb104758e1384fe74d0458fa5a4",
+      "bytes": 774,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "resources/shared-image-temporary/client.py",
+      "blob": "bea554745f369b74ba9be71a8f5493822e84a338",
+      "sha256": "8f22241a86f4b6aabe83938bf28b44816c92f41eae48de3be0d7f5cbdc244ded",
+      "bytes": 7037,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/image_inputs.py",
+      "blob": "749b820fccb6f04797488932d48401a01fea6396",
+      "sha256": "6359236f2e5415f30c84fa2f07a46e59f99b141fdc370959b2b9a9ba233a2b43",
+      "bytes": 3478,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py",
+      "blob": "7b1030c0c27a5a5478b34a6b1b2fb0d1067e806b",
+      "sha256": "360d5ab5d06c9e5dd34e1ad0976bd1a9d4d0dfdb7f51d204b1a5f5f9874be25e",
+      "bytes": 7418,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/membership.py",
+      "blob": "acdae154db7c8711d02e70bc81e4b2c1502e4bc0",
+      "sha256": "8a094b164c9dc0be8178d315c2d916f9aeea5d55aaefd231b0ee87498d59d509",
+      "bytes": 7826,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/skill_access.py",
+      "blob": "8578245333199aa82a9b4de9265625d7bd35672a",
+      "sha256": "75e02c73869f60b92256703c26ed19033c20bf3dba1dc327d5ddc1a43f79dfc3",
+      "bytes": 5203,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/registration_entries.py",
+      "blob": "950191ee007d7ee4b7a6ec3ef937c32449011e67",
+      "sha256": "71e3666f871d77dd5db6fc30fd942316f0061baa74765ecf89eb468e93ea3ba4",
+      "bytes": 3793,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py",
+      "blob": "3adf3ab108565cbd45f65aca37e79a3cd11e798c",
+      "sha256": "733f56c643b1324fa48ef600ed3f6f7d4838a184f9ee0d658211c8e6603f16b5",
+      "bytes": 31663,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.24/sunburst.py",
+      "blob": "648703366d49d4a14b3cece881402f075a0ad5d2",
+      "sha256": "e81ddb973ecaa68815d5bb380e58938e0727c63bfb9ccb730e7b70f6dec81eb4",
+      "bytes": 10601,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.52/asset_registry.py",
+      "blob": "279e7699bc1f449e36ea23e36272c9c3e876864d",
+      "sha256": "28fd277ca7d3f90351cbcff47d8bc149f1d76a18175363d4ac6e864881915982",
+      "bytes": 7476,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py",
+      "blob": "019291627ed9ed940f0d4962498b6e372a634a5a",
+      "sha256": "ededb46f576c820c6f976b69a8a3b69af72e6020a1da26688eddfe9620bc16e3",
+      "bytes": 9406,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.57/safe_http.py",
+      "blob": "f72c50a332c97c2abb024f8769ad8ed9732718bf",
+      "sha256": "3e2733bc189ae76a880b3ec6e145f18842d04cbe3d0ce89b613b61e2f56767e0",
+      "bytes": 2378,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.58/dialogue_store.py",
+      "blob": "d64f757ce218d9d639de391fcfe69625c2a47cfc",
+      "sha256": "cf853d6d82a1d55c735c015d1dd2bbb2785df994c591e9a305426d005d3f5801",
+      "bytes": 7413,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.58/dialogue_gateway.py",
+      "blob": "aba439df33c4659f412e09edc3cf2f78a49c199f",
+      "sha256": "7b07d6c625cf404b5d6daf51dc791e73b4545cd0fcfbe4472bcd8526d7ac85b6",
+      "bytes": 3245,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/child_resource.py",
+      "blob": "fff13531e9e02491c20cf5ac45dce755b576d59c",
+      "sha256": "1eaa1e6b7f5470978ce45ca3408fba0fce33810a804d26e89db3aa439dedceca",
+      "bytes": 6659,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+      "blob": "280a7cbdd3aec75d2a3572661d7e8cf45ea1813f",
+      "sha256": "192bdfc286edab9b4b7fcba82c859f81c6d2bf75d25dd87fa7288052f5ead0c5",
+      "bytes": 10645,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new-only-policy.json",
+      "blob": "ad380cf34bdd2801a49686fa2be08e2a77d0f40f",
+      "sha256": "f4d6db6e49ed8803fc26b2e3b7e10364f135cbe08eb7af84127e7655b29291fe",
+      "bytes": 139,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_binding.py",
+      "blob": "870e6627f0cc1baa0a1e9e7f99c4da682168b3d9",
+      "sha256": "9a0c92acfe4b64fb54535369fc99f35937bd50efbd89a1d06737f470cf875fb2",
+      "bytes": 21574,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_entries.py",
+      "blob": "756a5a68d7fe938fb121117551099e0300d921b6",
+      "sha256": "2c67a09222de252d55c79894708581af9b57d50c8e39ed81bdc11f6ceefc3200",
+      "bytes": 2939,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-family-portrait-studio/backend-patch/wechat-binding-20261111/wechat_binding.py",
+      "blob": "55eb0cf32d0df820d3553831c00c4ccd2116b75d",
+      "sha256": "8fb426f481015acccea592ef40ce3c338a8178d2baee9fc22ca6f483b6a76121",
+      "bytes": 19235,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-family-portrait-studio/backend-patch/wechat-binding-20261111/wechat.js",
+      "blob": "01d436cb85a79e0dd233700b66083d56dd2a80a9",
+      "sha256": "0728dee07670ad487ec47543023e20a70d58aa3b83f5580b125f26296df2aaf2",
+      "bytes": 5394,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-family-portrait-studio/01-wechat-binding-deployment-20261111.json",
+      "blob": "31c27f43264da50ce40af75d2079cec40b9b81c1",
+      "sha256": "3b788036b364c942868f9c237318be6d274a67a6af9adf53d4f8d3afe418fc93",
+      "bytes": 12120,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py",
+      "blob": "6b160791acec7c3e0cf87f8ada2cf5ac849a4c0b",
+      "sha256": "26c60bcde88ef7f90e31b2ddea09ba8bad888a1db4f0c248f2a9d1b6a7eaa81c",
+      "bytes": 14146,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-id-photo-background/01-deployment-verification-20261107.json",
+      "blob": "b8d11901e02c6097464f6a575e42720c5f688b48",
+      "sha256": "5ef0c67b16fd79eb3b4c9d80de8485b04d1f5f0349ba284464c52d37f9ff5152",
+      "bytes": 3081,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "infrastructure/wechat-checkout-20261111.public.json",
+      "blob": "f4064677e2d3af95f4fab4a69cceff6848d43f05",
+      "sha256": "a15968ce7dfcceebc965768177448af5941ce9e33aca5685f35ab5ce0537f88b",
+      "bytes": 1044,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/var/www/image-assistant/auth/wechat/automatic-qr-20261111.js",
+      "blob": "4ef7564e6d8b0ede7dc6e2a47a8c519fb145e22c",
+      "sha256": "b44ad412fe9a598a6148d7162d1c3f03da765984177f234668450410e58d50e8",
+      "bytes": 8022,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/run_shared.py",
+      "blob": "725387865696e31978cdc52c0b0f807c6d2fc2ec",
+      "sha256": "a4d20450bbb73764cd6d0726be303153a574423dfcd16f02eabb16604136f44f",
+      "bytes": 781,
+      "method": "identical previously read source; latest fixed Git blob reverified"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/status.json",
+      "blob": "f01e70a9e5b0f8310c03378999cb16bd1ce7c68c",
+      "sha256": "90cc7dea16dee467fedf7c0967cd387004e104fa60567220e5b8a01a4919538b",
+      "bytes": 416,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/log.md",
+      "blob": "e9fd3414847e0856353b00eb4632683a0a52b416",
+      "sha256": "f1c261bb907369a86be860134ca5fd85d553c3046583982d80250bd8e1e6c6f0",
+      "bytes": 3966,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/01-dev-spec.md",
+      "blob": "6dea5cc0fb0d64580463997199e8c68521685de1",
+      "sha256": "afd9506c6697f3d32404444254aff99152a03747691455ff82b44f375adcc6df",
+      "bytes": 59716,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/01-dev-spec.json",
+      "blob": "a7584d2b1900cb426427c85883278d1f9307ce22",
+      "sha256": "9f9304d231884042f2844f7e492d72532ddbbd0fafe740212f7dde6b3fefe587",
+      "bytes": 69334,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/03-test-report.md",
+      "blob": "c5d3216ef2329ef20fcfd53a76a71d1b193cf1d6",
+      "sha256": "f1a6bef31b107cd31bc06f74064cabe8a370cc4821d6db9ae55fea9b288ed22d",
+      "bytes": 9465,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/03-a3-1.0.1-evidence.json",
+      "blob": "8cc0c31a8625915947ad6587f204d1eed606b59a",
+      "sha256": "3731f2d2d98a88bfd14a8184bd7eff8a09445b4b41750fb56e6de981ce6a14ac",
+      "bytes": 14485,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/02-package/mps-silver-portrait-studio/scripts/studio.py",
+      "blob": "6a180836a3c98145ad28063d6081f1480a9c8785",
+      "sha256": "b759a96497ab68e921828ce6d8b1113dc29825e329e456f97a789b7b49ddd548",
+      "bytes": 61785,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/02-package/mps-silver-portrait-studio/scripts/welcome_copy.py",
+      "blob": "5e24d21480d69e091410302dc15229eb62417ded",
+      "sha256": "1b1bb3e6e855f2a3f95d89e15319f012a7bb14b10403982be29e753aa26837b0",
+      "bytes": 21826,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/02-package/mps-silver-portrait-studio/scripts/telemetry.py",
+      "blob": "9e2cd38f512cca5f68b1dd6abdee125f1cadfe68",
+      "sha256": "960c4d359e11a41fc8cdb4db57cbea5a3356a676b31d6c3a83349375091e140c",
+      "bytes": 5960,
+      "method": "fresh fixed GitHub API"
+    },
+    {
+      "path": "pipeline/products/mps-silver-portrait-studio/02-package/mps-silver-portrait-studio/SKILL.md",
+      "blob": "a395f0cfe8685040b9c5d2683c433fc20d88126f",
+      "sha256": "d96f30e55a78389e56e2bb5b468ed16dd78cf06ca5b43673267f333395ef67f5",
+      "bytes": 15358,
+      "method": "fresh fixed GitHub API"
+    }
+  ],
+  "official_read": {
+    "at": "2026-11-12T18:18:54+08:00",
+    "date": "2026-11-12",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "http_status": 200,
+    "bytes": 277042,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c",
+    "result": "fresh online read before this actual development-document render: eight frontmatter fields, bilingual examples, SKILL.md and references/scripts/templates; workbuddy-skill only, expert not applicable"
+  },
+  "source_record_write_official_read": {
+    "at": "2026-11-12T18:21:13+08:00",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "http_status": 200,
+    "bytes": 277042,
+    "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+  },
+  "authorization_plan": {
+    "commit_sha": "100fdbdf0caae8b0c9d0b4f8b02c87bd4a5dca99",
+    "original_commit": "79e983037eb110a349be8c8e83346e74456c78eb",
+    "path": "pipeline/products/mps-hanfu-portrait-studio/01-asset-plan-amendment-20261112.json",
+    "paid_generation_limit": 12
+  },
+  "synthetic_reference": {
+    "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+    "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+    "fictional_adults": true,
+    "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+    "people": 1,
+    "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+    "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction"
+  },
+  "upstream_result_anomaly": {
+    "original_task_alias": "garden",
+    "read_at": "2026-11-12T17:38:06+08:00",
+    "registered_model": "gpt-image-2.5-ext",
+    "fixed_adapter_requested_n": 1,
+    "content_data_count": 3,
+    "distinct_result_url_count": 3,
+    "exact_adapter_error": "Invalid result count",
+    "new_generation_posts": 0,
+    "remote_database_writes": 0,
+    "production_or_financial_writes": 0,
+    "selection_made": true,
+    "candidates": [
+      {
+        "index": 1,
+        "file": "candidate-1.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1617463,
+        "raw_sha256": "8beca3a01952c194b11b28578e87f81be3833e2e57009da13ea6c3a7371961da",
+        "clean_bytes": 1524513,
+        "clean_sha256": "1e88e0634ef3c3cfb9cc15fe9d5e6343b2f23f636b9d7aaa95f3d1f8b7a095b8",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      },
+      {
+        "index": 2,
+        "file": "candidate-2.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1857874,
+        "raw_sha256": "88d5e9b750a4107c0f5d9c5844a5246648a58f18923125f8c947b90a14c8d77b",
+        "clean_bytes": 883488,
+        "clean_sha256": "67d2afa6a4440ebdb77d122374ee1fe29ed099a3c8032ec46a0fe0ddeca2d4e3",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      },
+      {
+        "index": 3,
+        "file": "candidate-3.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1518209,
+        "raw_sha256": "02df42da0200f761c66ff126908ae65d879e22c807acc89afaf5781f8c33500a",
+        "clean_bytes": 1431752,
+        "clean_sha256": "3eda21dcf50679da8c4458a80013c830948ee73ad494ae96e7e95cd3da50d352",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      }
+    ],
+    "selected_candidate": 1,
+    "selected_clean_sha256": "1e88e0634ef3c3cfb9cc15fe9d5e6343b2f23f636b9d7aaa95f3d1f8b7a095b8",
+    "selected_raw_sha256": "8beca3a01952c194b11b28578e87f81be3833e2e57009da13ea6c3a7371961da",
+    "selection_reason": "root实际查看三张：1为完整站姿、泛化园林、青绿前开长外衫及裙装，最贴garden指定宋风套系；2仍红衣棚景不适用，3短上衣/高领感较强。只交付候选1作为离线开发效果示例。",
+    "source": "same original garden task, GET only; no new generation, no substitution from another task",
+    "requested_size": [
+      1024,
+      1536
+    ],
+    "actual_generated_size": [
+      832,
+      1248
+    ],
+    "preview_size": [
+      512,
+      768
+    ],
+    "shared_adapter_singleton_contract_passed": false,
+    "shared_adapter_modified": false,
+    "offline_exception_only": true,
+    "production_behavior": "Keep existing adapter exact-one validation. Non-singleton/unknown output must preserve original task; never auto-select or rePOST in production based on this offline extraction.",
+    "billing": "Requested n=1 but provider returned 3. Generation POST count is 12 for whole batch; actual provider charged image count/invoice unverified, no assurance of actual charge based solely on output count."
+  },
+  "no_duplicate_event_claim": true,
+  "no_worker_or_heartbeat": true,
+  "authorization": "本聊天长期授权开发Skill所需示例和每技能1logo；12次=1不合格但留身份参考初稿+10最终demo+1logo。仓库资料不扩生产/财务/部署/发布/跨聊天权限。",
+  "scope": "本产品规格与素材；Claude实现待做，fast无生产/认证/财务改动，A3后负责人手动上传。",
+  "current_sop": {
+    "ref": "02999649750726bd6f476dfb44424e4ded4fc19c",
+    "blob": "509b9732f85b7f7ccccac6f077d5078953d57013",
+    "delta": "Only added fixed rule14/G7; this product resumed from actual silver submitted, G7 not required. Future tasks apply current rule14 as written."
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "authorized_limit": 12,
+  "post_attempt_intents": 12,
+  "adapter_tasks": 12,
+  "unique_remote_tasks": 12,
+  "succeeded": 12,
+  "duplicate_generation_posts": 0,
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "customer_financial_database_used": false,
+  "scope": "isolated adapter task database, no customer wallet writes",
+  "upstream_generation_calls": 12,
+  "demo_generation_calls": 10,
+  "identity_reference_seed_calls": 1,
+  "rejected_demo_seed_calls": 1,
+  "logo_generation_calls": 1,
+  "final_demo_count": 10,
+  "final_asset_count": 11,
+  "source_ref": "229f5e96ad349d32c076bff87766c5f27f93f93d",
+  "authorization_commit": "100fdbdf0caae8b0c9d0b4f8b02c87bd4a5dca99",
+  "budget_amendment": "100fdbdf0caae8b0c9d0b4f8b02c87bd4a5dca99",
+  "harness_sha256": "359a77fac4cc559ffa69a6c8d5632750f31cb019f8f00921608600568e1f321a",
+  "public_synthetic_reference": {
+    "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+    "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+    "fictional_adults": true,
+    "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+    "people": 1,
+    "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+    "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction"
+  },
+  "production_signed_input_route_exercised": false,
+  "real_customer_photo_used": false,
+  "historical_reconstruction_or_real_identity_verified": false,
+  "real_payment_tested": false,
+  "estimated_total_usd": 0.078,
+  "actual_invoice_verified": false,
+  "upstream_result_anomaly": {
+    "original_task_alias": "garden",
+    "read_at": "2026-11-12T17:38:06+08:00",
+    "registered_model": "gpt-image-2.5-ext",
+    "fixed_adapter_requested_n": 1,
+    "content_data_count": 3,
+    "distinct_result_url_count": 3,
+    "exact_adapter_error": "Invalid result count",
+    "new_generation_posts": 0,
+    "remote_database_writes": 0,
+    "production_or_financial_writes": 0,
+    "selection_made": true,
+    "candidates": [
+      {
+        "index": 1,
+        "file": "candidate-1.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1617463,
+        "raw_sha256": "8beca3a01952c194b11b28578e87f81be3833e2e57009da13ea6c3a7371961da",
+        "clean_bytes": 1524513,
+        "clean_sha256": "1e88e0634ef3c3cfb9cc15fe9d5e6343b2f23f636b9d7aaa95f3d1f8b7a095b8",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      },
+      {
+        "index": 2,
+        "file": "candidate-2.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1857874,
+        "raw_sha256": "88d5e9b750a4107c0f5d9c5844a5246648a58f18923125f8c947b90a14c8d77b",
+        "clean_bytes": 883488,
+        "clean_sha256": "67d2afa6a4440ebdb77d122374ee1fe29ed099a3c8032ec46a0fe0ddeca2d4e3",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      },
+      {
+        "index": 3,
+        "file": "candidate-3.png",
+        "format": "PNG",
+        "dimensions": [
+          832,
+          1248
+        ],
+        "raw_bytes": 1518209,
+        "raw_sha256": "02df42da0200f761c66ff126908ae65d879e22c807acc89afaf5781f8c33500a",
+        "clean_bytes": 1431752,
+        "clean_sha256": "3eda21dcf50679da8c4458a80013c830948ee73ad494ae96e7e95cd3da50d352",
+        "cleaning": "registered Adapter.clean; no source metadata; complete bounded PNG decode succeeded"
+      }
+    ],
+    "selected_candidate": 1,
+    "selected_clean_sha256": "1e88e0634ef3c3cfb9cc15fe9d5e6343b2f23f636b9d7aaa95f3d1f8b7a095b8",
+    "selected_raw_sha256": "8beca3a01952c194b11b28578e87f81be3833e2e57009da13ea6c3a7371961da",
+    "selection_reason": "root实际查看三张：1为完整站姿、泛化园林、青绿前开长外衫及裙装，最贴garden指定宋风套系；2仍红衣棚景不适用，3短上衣/高领感较强。只交付候选1作为离线开发效果示例。",
+    "source": "same original garden task, GET only; no new generation, no substitution from another task",
+    "requested_size": [
+      1024,
+      1536
+    ],
+    "actual_generated_size": [
+      832,
+      1248
+    ],
+    "preview_size": [
+      512,
+      768
+    ],
+    "shared_adapter_singleton_contract_passed": false,
+    "shared_adapter_modified": false,
+    "offline_exception_only": true,
+    "production_behavior": "Keep existing adapter exact-one validation. Non-singleton/unknown output must preserve original task; never auto-select or rePOST in production based on this offline extraction.",
+    "billing": "Requested n=1 but provider returned 3. Generation POST count is 12 for whole batch; actual provider charged image count/invoice unverified, no assurance of actual charge based solely on output count."
+  }
+}
