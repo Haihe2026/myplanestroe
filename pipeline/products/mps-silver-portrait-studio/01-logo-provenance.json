@@ -1,0 +1,38 @@
+{
+  "key": "logo",
+  "series": "主题logo",
+  "title": "银发写真立体主题logo",
+  "prompt": "Use case: stylized-concept. Asset type: premium original three-dimensional silver-age portrait studio app icon. A dignified abstract older adult side-profile silhouette with sculpted silver-gray hair, formed from pearl ceramic and brushed silver inside a subtle camera-lens circular frame. Warm ivory and muted teal rounded-square background, tasteful shallow relief, soft contact shadows and clearly dimensional sculptural texture. One simple focal subject, readable at small size, dignified rather than frail or caricatured. No medical symbol, military badge, child, text, letters, numbers, brand, watermark, flat vector outline or generic flat ico.",
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "requested_size": [
+    1024,
+    1024
+  ],
+  "generation_date": "2026-11-12T08:23:07+08:00",
+  "fictional_adults": true,
+  "synthetic_example_age": 70,
+  "identity_age_is_not_user_default": true,
+  "rights": "通过登记资源生成的虚构成年长辈银发写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+  "method": "registered_adapter_text_to_image",
+  "reference": null,
+  "status": "succeeded",
+  "raw_sha256": "6e75208f0e04fc83a260e78c8eae1d8b01fdd76ac4041e4e497acc4e6abaee57",
+  "raw_bytes": 2736489,
+  "file": "logo.png",
+  "actual_generated_size": [
+    1254,
+    1254
+  ],
+  "local_resize": true,
+  "local_processing": "resize; true-color PNG; no added markings",
+  "output_size": [
+    512,
+    512
+  ],
+  "output_bytes": 456079,
+  "output_sha256": "9909cf071a9e64cb18707ec846b6cf5c921754979151075bfcf77756420acf1e",
+  "authorization_ref": "78cbaa1efcb27d2e52392172360db82260c4f3c0",
+  "paid_generation_calls": 1,
+  "visual_review": "已实际目检：象牙陶瓷银发长辈侧脸、银色镜头圆框、青绿暖白底，立体纹理明确，无字无品牌，非平面ico。"
+}
