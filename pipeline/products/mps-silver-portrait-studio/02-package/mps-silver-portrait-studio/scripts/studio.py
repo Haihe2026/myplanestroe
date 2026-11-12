@@ -29,7 +29,7 @@ import telemetry  # noqa: E402
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-silver-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://aistore.zhaopintong.com'
 API_PREFIX = '/platform-api/gemini'
@@ -106,6 +106,8 @@ ROUTE_STYLES = (
 ROUTE_MOODS = (('studio', ('优雅', '银发')), ('lawn', ('阳光',)), ('beach', ('暖阳',)))
 TEXT_MAX_CHARS = 40
 LOCKED_STATES = ('submit_unknown', 'submitted', 'download_pending')
+FINISHED_STATES = ('delivered', 'failed', 'rejected')
+REPLAN_STATE = 'replanning'  # 改方案已开始、新方案尚未成功保存：旧确认与待提交键已作废，不能 run/resume/regenerate
 
 
 # ---------------------------------------------------------------- 输出
@@ -418,8 +420,10 @@ def _clean_text(text):
 def cmd_plan(args):
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
-    if d.get('state') in LOCKED_STATES:
+    if d.get('state') in LOCKED_STATES or (d.get('job_id') and d.get('state') not in FINISHED_STATES):
+        # 已提交、结果未知、待取回或仍有进行中的原任务：只续查原任务，不清原键、原请求体或锁。
         return emit('taskLocked', W.task_locked(), EXIT_WAIT, draft_id=d['draft_id'])
+    _void_unsubmitted(d, args)
     if args.scene not in SCENES:
         return emit('sceneInvalid', '', EXIT_ERROR)
     series, title, default_shape, _, _ = SCENES[args.scene]
@@ -470,6 +474,23 @@ def cmd_plan(args):
     summary = W.plan_summary(title, args.orderer, W.SHAPE_NAMES[shape], outfit or SCENES[args.scene][4])
     return emit('planReady', W.confirm_paid(summary, wait_text(), features, args.orderer, veteran is not None), EXIT_OK,
                 draft_id=d['draft_id'])
+
+
+def _void_unsubmitted(d, args):
+    """SLV-A3-01：未提交的改方案，先持久作废旧的三项同意、待提交键和冻结请求体摘要，再做任何可能早退的
+    资格、本人许可、老兵条件、新图或文字校验。新信息未齐、被拒绝或校验失败时，磁盘上只留待完善的新方案
+    （REPLAN_STATE，新图路径一并记下、旧图摘要清空），run/resume/regenerate 都不能借旧确认提交旧图旧角色；
+    只有成功 plan 并重新取得三项明确同意后才生成新键。"""
+    d.update(owner_consent=False, upload_consent=False, pay_consent=False, idem=None, job_id=None,
+             body_sha256=None, state=REPLAN_STATE, replan_scene=args.scene, replan_orderer=args.orderer)
+    if args.image:
+        d['images'] = [os.path.abspath(args.image)]
+        d['photo_sha256'] = None
+    save_draft(d)
+
+
+def _replan_pending(d):
+    return emit('needsReplan', W.replan_pending(), EXIT_WAIT, draft_id=d['draft_id'])
 
 
 def cmd_confirm(args):
@@ -629,6 +650,8 @@ def _account_entry(a, retry_word):
 def cmd_run(args):
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
+    if d.get('state') == REPLAN_STATE:
+        return _replan_pending(d)
     if not (d.get('owner_consent') and d.get('upload_consent') and d.get('pay_consent') and d.get('idem')):
         return emit('needsConfirmation', '', EXIT_ERROR)
     if d.get('job_id') or d.get('state') == 'submit_unknown':
@@ -885,6 +908,8 @@ def _deliver(d, a):
 def cmd_resume(args):
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
+    if d.get('state') == REPLAN_STATE:
+        return _replan_pending(d)
     if d.get('state') == 'needs_credits' and not d.get('job_id'):
         # 尚未生成的任务续接前同样先本地验图，坏图或换图不发任何业务请求
         _, err = _job_body(d)
@@ -910,7 +935,9 @@ def cmd_regenerate(args):
     """仅在用户明确说「重新生成」且再次同意计费时使用：新任务键。进行中或结果未知的任务不得换键。"""
     telemetry.report_once(state_dir())
     d = load_draft(args.draft)
-    if d.get('state') not in ('delivered', 'failed', 'rejected'):
+    if d.get('state') == REPLAN_STATE:
+        return _replan_pending(d)
+    if d.get('state') not in FINISHED_STATES:
         return emit('taskLocked', W.task_locked(), EXIT_WAIT, draft_id=d['draft_id'])
     if args.pay_consent != 'yes' or not (d.get('owner_consent') and d.get('upload_consent')):
         return emit('needsConfirmation', '', EXIT_ERROR)

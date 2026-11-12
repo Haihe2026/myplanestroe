@@ -251,6 +251,11 @@ def photo_changed():
             '请把要用的照片再发我一次，我按原来的方向重新跟你确认后再开始。')
 
 
+def replan_pending():
+    return ('方案有了改动，原来的确认已经作废，这次还没有开始制作，没有产生任何扣费。'
+            '等这次改动需要的信息补齐、你再确认一次新方案后我才开始；想按原来的方案做，也请再确认一次。')
+
+
 def size_mismatch(actual, requested):
     return '这次实际出图尺寸是 ' + actual + '，不是 ' + requested + '。画面比例以实际文件为准，需要固定尺寸时可以再裁切。'
 

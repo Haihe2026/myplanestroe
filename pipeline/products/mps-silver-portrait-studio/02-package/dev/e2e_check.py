@@ -1772,6 +1772,190 @@ class RepairMat101(Base):
         self.assertEqual(s['reason'], 'not_informed')
         self.assertEqual(self.mock.calls, [])
 
+class RepairSlv101(Base):
+    """1.0.1 修复 SLV-A3-01：未提交草稿改方案早退时，旧三项同意与待提交键必须已持久作废；
+    之后 run / resume / regenerate 都不能借旧确认提交旧图旧角色。用例在 1.0.0 上会失败（会发出旧图的生成请求）。"""
+
+    EARLY = (
+        (['--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'yes', '--informed', 'unknown'], 'needsEligibility'),
+        (['--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'yes', '--informed', 'no'], 'notEligible'),
+        (['--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'unknown', '--informed', 'yes'], 'needsEligibility'),
+        (['--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'no', '--informed', 'yes'], 'notEligible'),
+        (['--scene', 'veteran', '--veteran', 'unknown', '--veteran-consent', 'unknown'], 'needsVeteranInfo'),
+        (['--scene', 'veteran', '--veteran', 'active', '--veteran-consent', 'yes'], 'veteranNotApplicable'),
+        (['--scene', 'veteran', '--veteran', 'not_veteran', '--veteran-consent', 'yes'], 'veteranNotApplicable'),
+        (['--scene', 'veteran', '--veteran', 'retired_confirmed', '--veteran-consent', 'no'], 'veteranNotApplicable'),
+        (['--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'yes', '--informed', 'yes', '--image', '@missing'], 'photoInvalid'),
+        (['--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'yes', '--informed', 'yes', '--image', '@truncated'], 'photoInvalid'),
+        (['--scene', 'tang', '--face-clear', 'no'], 'needsClearerPhoto'),
+        (['--scene', 'tang', '--outfit', '长' * 41], 'textInvalid'),
+    )
+
+    def draft(self, did):
+        with open(os.path.join(self.home, 'mps-silver-portrait-studio', 'drafts', did + '.json')) as f:
+            return json.load(f)
+
+    def _fresh(self):
+        shutil.rmtree(os.path.join(self.home, 'mps-silver-portrait-studio'), ignore_errors=True)
+        self.mock = mock_backend.Mock()
+        studio.TRANSPORT = self.mock.transport
+        telemetry.TRANSPORT = self.mock.telemetry_transport
+
+    def _argv(self, extra):
+        argv = list(extra)
+        if '--image' in argv:
+            i = argv.index('--image') + 1
+            if argv[i].startswith('@'):
+                b = os.path.join(self.photos, 'mom %s#b.jpg' % argv[i][1:])  # 带空格和 # 的合成路径
+                if argv[i] == '@truncated':
+                    with open(b, 'wb') as f:
+                        f.write(jpeg_bytes(640, 960)[:200])
+                argv[i] = b
+        return argv
+
+    def _posts(self):
+        return [c for c in self.mock.calls if c[0] == 'POST' and c[1] == '/skill-jobs']
+
+    def _start(self, start):
+        """照片 A、本人、棚拍：plan + 三项确认，账户有次数。start=needs_credits 时先遇到一次 402（无任务号）。"""
+        did = self.confirmed_draft()
+        self.paid_account(did, 3)
+        if start == 'needs_credits':
+            real = self.mock.transport
+
+            def t402(method, url, body, headers, timeout, binary):
+                if method == 'POST' and url.endswith('/skill-jobs'):
+                    raise studio.GatewayError(402)
+                return real(method, url, body, headers, timeout, binary)
+            studio.TRANSPORT = t402
+            self.assertEqual(self.run_cmd('run', '--draft', did)[1]['signal'], 'needsCredits')
+            studio.TRANSPORT = real
+            d = self.draft(did)
+            self.assertEqual((d['state'], d.get('job_id')), ('needs_credits', None))
+        return did
+
+    def test_slv_a3_01_early_exit_then_continue_sends_nothing(self):
+        for start in ('confirmed', 'needs_credits'):
+            for extra, want in self.EARLY:
+                self._fresh()
+                did = self._start(start)
+                old_idem = self.draft(did)['idem']
+                self.assertTrue(old_idem)
+                self.mock.calls[:] = []
+                code, s, t, _ = self.run_cmd('plan', '--draft', did, *self._argv(extra))
+                self.assertEqual(s['signal'], want, (start, extra))
+                self.assertEqual(self.mock.calls, [], (start, extra))  # 改方案本身零业务请求
+                d = self.draft(did)
+                self.assertEqual((d['owner_consent'], d['upload_consent'], d['pay_consent'], d['idem'], d['state']),
+                                 (False, False, False, None, 'replanning'), (start, extra))
+                # 「继续」/ 重启后再 run / 重新生成：只提示补齐，生成请求 0、扣次 0，旧图 A 不发
+                for cmd in (('resume', '--draft', did), ('run', '--draft', did), ('resume', '--draft', did),
+                            ('regenerate', '--draft', did, '--pay-consent', 'yes')):
+                    code, s, t, _ = self.run_cmd(*cmd)
+                    self.assertEqual((code, s['signal']), (2, 'needsReplan'), (start, extra, cmd[0]))
+                    self.assertIn('原来的确认已经作废', t)
+                    self.assertIn('没有产生任何扣费', t)
+                self.assertEqual(self.mock.calls, [], (start, extra))
+                self.assertEqual(self.mock.charges, 0, (start, extra))
+                self.assertEqual(self.draft(did)['idem'], None)
+
+    def test_slv_a3_01_needs_credits_topped_up_still_not_old_photo(self):
+        """1.0.0：无任务号的待充值草稿改方案早退后，补充次数再「继续」会恢复旧确认并发旧图。现在不会。"""
+        did = self._start('needs_credits')
+        self.run_cmd('plan', '--draft', did, '--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'yes', '--informed', 'unknown')
+        self.mock.authorize(self.secret(), 5)  # 补充了次数
+        self.mock.calls[:] = []
+        for _ in range(2):
+            self.assertEqual(self.run_cmd('resume', '--draft', did)[1]['signal'], 'needsReplan')
+        self.assertEqual(self._posts(), [])
+        self.assertEqual(self.mock.charges, 0)
+
+    def test_slv_a3_01_new_plan_b_needs_fresh_three_consents(self):
+        """新方案（妈妈、照片 B、唐装、家人代购）信息补齐并重新三项明确同意后，才用新键提交新图。"""
+        for start in ('confirmed', 'needs_credits'):
+            self._fresh()
+            did = self._start(start)
+            old = self.draft(did)
+            photo_b = os.path.join(self.photos, 'mom b.jpg')
+            with open(photo_b, 'wb') as f:
+                f.write(jpeg_bytes(640, 960))
+            plan_b = ['plan', '--draft', did, '--scene', 'tang', '--orderer', 'family_proxy', '--adult', 'yes', '--image', photo_b]
+            self.assertEqual(self.run_cmd(*plan_b, '--informed', 'unknown')[1]['signal'], 'needsEligibility')
+            self.assertEqual(self.draft(did)['images'], [photo_b])
+            # 新信息补齐、方案保存成功：仍需重新确认，不能直接 run
+            self.assertEqual(self.run_cmd(*plan_b, '--informed', 'yes')[1]['signal'], 'planReady')
+            self.assertEqual(self.run_cmd('run', '--draft', did)[1]['signal'], 'needsConfirmation')
+            for pc, uc, pay in (('no', 'yes', 'yes'), ('yes', 'no', 'yes'), ('yes', 'yes', 'no')):
+                self.assertEqual(self.run_cmd('confirm', '--draft', did, '--owner-consent', pc, '--upload-consent', uc,
+                                              '--pay-consent', pay)[1]['signal'], 'needsConfirmation')
+            before = len(self._posts())
+            self.assertEqual(self.run_cmd('confirm', '--draft', did, '--pay-consent', 'yes')[1]['signal'], 'confirmed')
+            new = self.draft(did)
+            self.assertNotEqual(new['idem'], old['idem'])
+            self.assertEqual((new['orderer'], new['scene'], new['images']), ('family_proxy', 'tang', [photo_b]))
+            code, s, _, _ = self.run_cmd('run', '--draft', did)
+            self.assertEqual((code, s['signal']), (0, 'delivered'), start)
+            posts = self._posts()[before:]
+            self.assertEqual(len(posts), 1, start)
+            self.assertEqual(posts[0][3].get('Idempotency-Key'), new['idem'])
+            self.assertEqual(self.mock.charges, 1, start)
+            with open(photo_b, 'rb') as f:
+                import hashlib
+                self.assertEqual(self.draft(did)['photo_sha256'], hashlib.sha256(f.read()).hexdigest())
+
+    def test_slv_a3_01_same_plan_reconfirm_still_works(self):
+        """早退后用户决定按原方案（照片 A、本人）做：重新 plan 并重新确认后照常交付，只扣一次。"""
+        did = self._start('confirmed')
+        self.run_cmd('plan', '--draft', did, '--scene', 'veteran', '--veteran', 'unknown')
+        self.assertEqual(self.run_cmd('plan', '--draft', did, '--scene', 'studio')[1]['signal'], 'planReady')
+        self.assertEqual(self.run_cmd('confirm', '--draft', did, '--pay-consent', 'yes')[1]['signal'], 'confirmed')
+        self.assertEqual(self.run_cmd('run', '--draft', did)[1]['signal'], 'delivered')
+        self.assertEqual((len(self._posts()), self.mock.charges), (1, 1))
+
+    def test_slv_a3_01_submitted_unknown_pending_replan_keeps_original(self):
+        """红线：结果未知 / 已提交 / 待取回时改方案仍拒绝，不清原键、原请求体或锁；本地图坏了也只查原任务，无第二次生成请求。"""
+        for kind in ('unknown', 'submitted', 'download_pending'):
+            self._fresh()
+            with open(self.photo, 'wb') as f:
+                f.write(self.photo_bytes)
+            did = self.confirmed_draft()
+            self.paid_account(did, 3)
+            real = self.mock.transport
+            gate = {'open': False}
+
+            def hook(method, url, body, headers, timeout, binary, kind=kind):
+                if method == 'POST' and url.endswith('/skill-jobs'):
+                    r = real(method, url, body, headers, timeout, binary)
+                    if kind == 'unknown':
+                        raise studio.GatewayError(0)
+                    return r
+                if not gate['open'] and method == 'GET' and '/jobs/' in url:
+                    if kind == 'download_pending' and not url.endswith('/image'):
+                        return real(method, url, body, headers, timeout, binary)
+                    raise studio.GatewayError(0)
+                return real(method, url, body, headers, timeout, binary)
+            studio.TRANSPORT = hook
+            self.run_cmd('run', '--draft', did)
+            before = self.draft(did)
+            self.assertTrue(before['state'] in studio.LOCKED_STATES, (kind, before['state']))
+            with open(self.photo, 'wb') as f:
+                f.write(self.photo_bytes[:100])
+            for extra, _ in self.EARLY:
+                s = self.run_cmd('plan', '--draft', did, *self._argv(extra))[1]
+                self.assertEqual(s['signal'], 'taskLocked', (kind, extra))
+                after = self.draft(did)
+                for k in ('state', 'idem', 'job_id', 'body_sha256', 'pay_consent', 'images', 'scene', 'orderer'):
+                    self.assertEqual(after.get(k), before.get(k), (kind, extra, k))
+            gate['open'] = True
+            for _ in range(3):
+                s = self.run_cmd('resume', '--draft', did)[1]
+                if s['signal'] == 'delivered':
+                    break
+            self.assertEqual(s['signal'], 'delivered', kind)
+            self.assertEqual(len(self._posts()), 1, kind)
+            self.assertEqual(self.mock.charges, 1, kind)
+
+
 class FrontmatterYaml(unittest.TestCase):
     """MAT-A3-01：用标准 YAML 解析器检查源码 SKILL.md 及最终 ZIP 里的原始 frontmatter（重复键、字段类型、冒号空格反例）。"""
 

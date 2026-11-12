@@ -6,3 +6,4 @@
 2026-11-12T09:55:29+08:00 | codex | package_ready → test_in_progress | 核验1.0.0固定包事件指纹、本机/远端原claim及当前输入，开始干净包独立静态A3；不重复认领事件、不运行完整A2、不调上游/生产、不上传。
 2026-11-12T10:04:02+08:00 | codex | test_in_progress → test_failed | 1.0.0 A3不通过：SLV-A3-01未提交replan在新资格/许可/老兵/新图验证早退时保留旧三同意和idem，继续可提交旧图旧角色，1项P2退Claude，rounds.test=1。固定ZIP/25源码/YAML/十图/logo/路径与主要原身份/原任务/有界实现核对，规格和包未改；零上游/业务/生产/部署/上传，未运行完整A2；D/D.6暂停。
 2026-11-12T10:38:29+08:00 | claude | test_failed → dev_in_progress | 认领 SLV-A3-01 修复，目标 1.0.1
+2026-11-12T10:43:52+08:00 | claude | dev_in_progress → package_ready | 1.0.1 修复 SLV-A3-01：未提交改方案先落盘作废旧三同意/键（replanning），早退后 run/resume/regenerate 返回 needsReplan、零 POST；锁定态红线不变。包 2605315B、25 文件、SHA256 15c1313a…d4458；契约 62/e2e 136 干净解压无网通过，新增 7 项回归可反证 1.0.0；真实上游 0。

@@ -13,7 +13,7 @@ examples_en:
   - "Use my own single-person photo for an elegant silver-hair studio portrait; preserve natural gray hair and wrinkles without rejuvenation, portrait 2:3, 1024×1536."
   - "My mother has given informed consent. Use her single-person photo for a senior portrait in a tang-style jacket, preserving her appearance, portrait 2:3, 1024×1536."
   - "I am a retired veteran. Use my own single-person photo for an unmarked veteran keepsake portrait without ranks or medals, preserving my appearance, portrait 2:3, 1024×1536."
-version: 1.0.0
+version: 1.0.1
 author: "MyPlaneStore"
 ---
 
@@ -94,7 +94,7 @@ author: "MyPlaneStore"
 1. 缺的事实合并成一次提问：哪张单人照、本人还是替家人下单、照片里的人是否成年、家人本人是否知道并同意、主题、服装、画幅（默认竖版 2:3）、脸是否清楚，请用户一句话说可见特征。老兵纪念再问：长辈本人是否已退役、是否同意这个造型；「退休」「当过兵」含义不清就问清楚。不看图推断年龄、性别、民族或健康，不索要证明。
 2. 运行 `plan`：只按用户说法填，明确不是才填 `no` / `active` / `not_veteran`，没问到填 `unknown`（不算不符合，转述 `needsEligibility` / `needsVeteranInfo` 补问）；多人填 `--single no`，看不清或看不到图填 `--face-clear no`。「爸妈各拍一张」拆成两份单人方案分别确认和计费，不从合影里裁人。
 3. 只有用户明确答复「确认开始」「按这个做」，才运行 `confirm` 再 `run`。三项同意（被摄本人对这张照片的许可、被摄本人同意这张照片发给图片服务及算力供应商、下单的人同意按张计费）不能互相代替，付过款、亲属关系或资格自述都不能代替任何一项。**以下都不算同意付费执行**：沉默、无异议、疑问句、认可示例、认可推荐、同意授权、授权完成、「已充值」（之前已明确确认过同一任务的除外）。
-4. 换照片、主题、服装、画幅，或下单人、同意情况变了：重新 `plan` 和确认。`taskLocked` 时只能 `resume` 续查，换图或改方案都不能解除。
+4. 换照片、主题、服装、画幅，或下单人、同意情况变了：重新 `plan` 和确认，`needsReplan` 时补齐再 `plan`。`taskLocked` 时只能 `resume` 续查，改方案不能解除。
 5. 「什么时候不用我」里的需求 → `refuse`；`notEligible` / `peopleUnsupported` / `veteranNotApplicable` 原样转述。
 
 ### 3. 授权、最后一步与开工

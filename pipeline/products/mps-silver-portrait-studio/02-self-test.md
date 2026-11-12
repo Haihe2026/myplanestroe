@@ -1,83 +1,69 @@
-# 自测报告：mps-silver-portrait-studio 1.0.0
+# 自测报告：mps-silver-portrait-studio 1.0.1
 
-- 已读 WorkBuddy 官方文档快照（快照日期 2026-11-08，读「二、技能」章：目录结构、frontmatter 八个必填字段、examples、references/scripts/templates 用法）。本次为首次开发新包；规格另记 2026-11-12T08:36:10+08:00 在线读取记录，Claude 本次未在线重读。
-- 依据：`01-dev-spec.md` / `01-dev-spec.json` @ `3eb43035ef3c80363b0c9527cb82ec63aa758bb8`（通知 `evt-275458e4…` 的 source_ref）；SOP `docs/sop/sop-image-gen-skill-auto.md` 当前版。
-- 时间：2026-11-12 上午 Claude 定时运行，第一轮开发（`rounds.dev` 0 → 1）。渠道只做 `config.yaml` 的 `workbuddy-skill`。
-- **A1 复检：通过**（16 项逐条对照 `01-a1-validation.json` 与规格正文：立项/词表 23 个、官方文档读取记录、十主题路由、被摄人/代购/老兵条件与三基线、10 示例 + provenance、立体 logo、计费默认值、模型/成本/毛利 76.47%、fast 车道、接口源码位置、漏斗、相邻技能、不承接清单、T01–T17 与 S6-01…57、决策记录、MD/JSON 一致）。串行规则：前序六个包均为 `submitted`，满足。
-- **A2 结论：通过，置 package_ready。** 真实上游调用 0；后端业务调用 0（进程内 Mock、合成账户）；生产变更 0；未上传、未发布。契约测试与端到端检查在 `unshare -rn`（无网络命名空间）里对干净解压包再跑一次，仍全部通过。
+- 修复轮（`rounds.dev` 1 → 2），按 SOP 〇章第 4 条不重读官方文档；渠道只做 `config.yaml` 的 `workbuddy-skill`。
+- 依据：`03-test-report.md`（Codex 1.0.0 A3，2026-11-12T10:04:02+08:00，SLV-A3-01）与 `msg-from-muse-20261112-fix-100-silver-a3.md`（Muse 交接，通知 `evt-3a19875d…`，source_ref `32776f10…`）；产品通知 `evt-380bf3ee…`（source_ref `97992247…`）。开发文档未改。
+- 时间：2026-11-12T10:43:52+08:00，Claude 定时运行。
+- **A2 结论：通过，置 package_ready。** 真实上游调用 0；后端业务调用 0（进程内 Mock、合成账户）；生产变更 0；未上传、未发布。1.0.0 不是可上传版，ZIP 保留在 dist/ 仅供追溯。
 
 ## 交付
 
 | 项 | 值 |
 |---|---|
-| 技能包 | `02-package/dist/mps-silver-portrait-studio-1.0.0.zip`，2603008 字节，25 个文件，逻辑根最多两级，SHA256 `b06ce740ca094ee56dd9483c368599dc4ecbe2e4ff0f858f6fa7b258f3deb44c` |
-| 版本 | 1.0.0（SKILL.md `version`、`_meta.json`、`studio.SKILL_VERSION`、遥测 `SKILL_VERSION`、`build.py`、first-turn-preview 一致）；本 slug 无已上传版本 |
-| logo | `02-package/dist/logo.png`（Codex 生成，外置不进 ZIP），原字节未动：SHA256 `9909cf071a9e64cb18707ec846b6cf5c921754979151075bfcf77756420acf1e`，与 `01-logo-provenance.json` output_sha256 一致 |
-| 十张示例 | `demo-assets/*.png` 按 `provenance.json` 逐张核 SHA 后原字节复制到 `assets/`（`dev/sync_demos.py`，派生记录 `dev/demos-derivation.json`）；每张 512×768，合计 2519807 字节；未缩放、未重编码、未新增生图 |
-| 平台字段 | name `mps-silver-portrait-studio`、display_name `银发写真照相馆`、display_name_en `Silver Portrait Studio`、author `MyPlaneStore`；description / description_zh / description_en 双引号标量；examples_zh / examples_en 各 3 条，与规格 14 节逐字一致 |
-| 欢迎句 | 「欢迎使用WorkBuddy官方认证技能 银发写真照相馆。」逐字 |
-| 付费口径 | MyPlaneStore 通用套餐，不单独定价，0 次免费试用，不写死单价；代购时扣下单人账户 |
-| SKILL.md | 15334 字节（< 15360）；触发词 23 个，与 `01-dev-spec.json.description_terms` 逐项一致；description 末尾唯一调用倾向句与规格一致 |
-| 开发目录（不进 ZIP） | `02-package/dev/`：`mock_backend.py`、`e2e_check.py`、`build.py`、`sync_demos.py`、`demos-derivation.json` |
+| 技能包 | `02-package/dist/mps-silver-portrait-studio-1.0.1.zip`，2605315 字节，25 个文件，逻辑根最多两级，SHA256 `15c1313a522c85ddc876a7d6e11aa57ee58d720c7cca78eb4dff004a424d4458` |
+| 版本 | 1.0.1（SKILL.md `version`、`_meta.json`、`studio.SKILL_VERSION`、遥测 `SKILL_VERSION`、`build.py`、first-turn-preview 一致） |
+| logo | `02-package/dist/logo.png` 原字节未动，SHA256 `9909cf071a9e64cb18707ec846b6cf5c921754979151075bfcf77756420acf1e`（外置，不进 ZIP） |
+| 十张示例 | `assets/` 10 张 PNG 与 `demos.json` 未改动（git 无差异），原字节 |
+| SKILL.md | 15358 字节（≤ 15360）；欢迎句「欢迎使用WorkBuddy官方认证技能 银发写真照相馆。」逐字未动；examples 中英各 3 条未改；付费仍为通用套餐、0 次免费试用 |
 
-完整 ZIP 目录：`README.md`、`SKILL.md`、`_meta.json`、`assets/`（demos.json + 10 PNG）、`references/`（platform-rules.md、prompts.md、scenes.md）、`scripts/`（audit_images.py、jpeg_local.py、png_local.py、studio.py、telemetry.py、welcome_copy.py）、`tests/`（first-turn-preview.md、test_skill_contract.py）。
+## 修复：SLV-A3-01（P2）改方案早退后仍可执行旧确认
 
-## 实现要点
+改动（`scripts/studio.py`、`scripts/welcome_copy.py`、`SKILL.md` 第 2 节第 4 条）：
 
-- 基座：固定孕妈 1.0.1（`108761fb…`，规格 1 节指定）的账户 / 原安装恢复 / 绑定 401 只清技能凭证 / 原任务只读 / 有界 PNG·JPEG / HTTP 前本地验图（MAT-A3-02）/ 资格未知先补问（MAT-A3-03）/ 合法 YAML 检查（MAT-A3-01）/ 一次上报等实现原样继承，并保留其随包回归；去掉孕期视觉档，不复制孕期主题或示例人口属性。
-- 十主题 `SCENES`（studio、tang、lawn、oil、beach、qipao、garden、veteran、rural、winter，全部默认竖版 2:3 / 1024×1536）；三层路由：特异主题/服饰（老兵、唐装、旗袍、油画、园林、田园、海边、草坪、冬日/室内、棚拍）→ 一般风格词 → 泛化词（优雅、银发、阳光、暖阳）；生日、金婚、父母节等送礼动机不参与路由，「退休」不路由到老兵。
-- 下单人与被摄人分开：`plan --orderer self/family_proxy/unknown --adult yes/no/unknown [--informed yes/no/unknown]`。本人下单视为本人知情；代购必须 `--informed yes`。明确未成年 → `notEligible/minor`；家人本人明确不同意 → `notEligible/not_informed`；任一未知 → `needsEligibility`（退出 2，一次合并补问，不联网，不索证明）。账户、钱包、售后属于下单人，不转移、不读取其他技能凭证。
-- 老兵条件绑定被摄本人：仅 `veteran` 主题需要 `--veteran retired_confirmed --veteran-consent yes`；未知 → `needsVeteranInfo`（一次补问，提示「退休」和「退役」不一样）；`active` / `not_veteran` / 不同意 → `veteranNotApplicable`，可改选其他主题；prompt 额外写无军衔、勋章、番号、姓名牌、国徽军徽、武器，不表现现役或服役证明。
-- 三项同意：被摄本人照片许可、被摄本人同意这张文件发给图片服务及算力供应商、下单人计费同意；代购时确认话术写明前两项由下单人转述本人意思、从下单人账户扣次数，并写明「付过款不能代替前两项同意」。
-- prompt 五段：身份与原照 → 自然年龄外观（发际线、发量、银/灰/黑发实际分布、自然皱纹；不磨皮扮嫩、不返老还童、不强行染白/补发/加皱纹/老化；不从外貌推断年龄或健康）→ 主题服装（不推断性别、民族或身份）→ 构图 → 文字与安全。合成 70 岁女性示例设定不进入任何 prompt。
-- 请求体仍恰六字段，不发 age / orderer / veteran / people_count 等字段；私有草稿另存 `orderer`、`subject_adult`、`subject_informed`、`subject_veteran_status`。
-- 「爸妈各拍一张」拆成两份单人方案，各自确认、各自任务键、各自扣一次；两人合照返回 `peopleUnsupported`（三人及以上或寿宴转全家福写真照相馆）。
-- 可见标注「AI 生成银发写真，非实拍」：SKILL.md 用户部分、README、platform-rules、demos notice 与每条 note、确认话术、交付话术、结果一览页。示例 notice 说明同一位虚构成年人、不代表年龄/性别/发量默认、老兵示例不代表真实服役。
-- 首次对话上报仍为 8 字段，开关 `MPS_SILVER_PORTRAIT_JOURNEY=off`；不含年龄、家人或服役信息。
+1. `plan` 先判锁：`LOCKED_STATES`（submit_unknown / submitted / download_pending）或「有任务号但不在完成态（delivered / failed / rejected）」→ `taskLocked`，原键、原请求体摘要、任务号、锁一律不动（红线不变，且把「已有 job_id 的原任务」也纳入锁定）。
+2. 未锁定时，在任何可早退的校验（主题/画幅、资格、被摄本人许可、老兵条件、人数、脸部、文字、新图）之前，新增 `_void_unsubmitted` **先落盘**：三项同意置 false、`idem` / `job_id` / `body_sha256` 清空、`state='replanning'`，记下本次要改的主题与下单人；带 `--image` 时新图路径一并记下、旧图摘要清空（之后不带 `--image` 再 plan 也不会回落到旧图 A）。
+3. `run` / `resume` / `regenerate` 遇到 `replanning` 一律返回新信号 `needsReplan`（退出码 2，零网络），固定话术 `W.replan_pending()`：说明原确认已作废、还没开始制作、没有产生任何扣费，补齐并再确认一次新方案后才开始。`confirm` 在 `replanning` 下仍返回 `needsPlan`。
+4. 只有 `plan` 成功（`planReady`，state=planned）后再取得三项明确同意，`confirm` 才生成新键；正常新方案路径不变。
+5. 收费、鉴权、账户、后端、遥测均未改。
 
 ## 自测结果
 
-命令（开发目录 `02-package/`）：
-
 | 命令 | 结果 |
 |---|---|
-| `cd mps-silver-portrait-studio && python3 -m unittest discover -s tests`（仓库内，含规格 JSON 对照） | Ran 60, OK |
-| 干净解压 ZIP 后 `unshare -rn python3 -I -m unittest discover -s tests` | Ran 60, OK |
-| `unshare -rn python3 -I dev/e2e_check.py --package <解压目录> --zip dist/mps-silver-portrait-studio-1.0.0.zip` | Ran 131, OK，0 跳过（含 ZipLayout 两项与 FrontmatterYaml 对 ZIP 原始字节用 PyYAML 6.0.3 解析） |
-| `python3 dev/e2e_check.py`（仓库源码） | Ran 131, OK（2 项 ZIP 用例因未给 --zip 跳过） |
+| `cd mps-silver-portrait-studio && python3 -m unittest discover -s tests`（仓库内） | Ran 62, OK |
+| `python3 dev/e2e_check.py`（仓库源码） | Ran 136, OK（2 项 ZIP 用例因未给 --zip 跳过） |
+| 干净解压 1.0.1 ZIP（testzip 无损坏）后 `unshare -rn python3 -I -m unittest discover -s tests` | Ran 62, OK |
+| `unshare -rn python3 -I dev/e2e_check.py --package <解压目录> --zip dist/mps-silver-portrait-studio-1.0.1.zip` | Ran 136, OK，0 跳过（含 ZipLayout 与 FrontmatterYaml：PyYAML 6.0.3 直接解析 ZIP 原始 SKILL.md，version 1.0.1、examples 3/3） |
 | scripts/、tests/ 按 `ast.parse(feature_version=(3,7))` | 通过（运行环境 Python 3.13，未在 3.7 解释器实跑） |
 | 包与 dev 目录密钥形态扫描 | 无 |
 
-| 编号 | 内容 | 结果 | 证据（测试） |
-|---|---|---|---|
-| T01 | 首轮与十主题路由 | 通过 | 契约 `test_route_precedence`（特异词优先、逆词序、送礼动机与「退休」不当主题、规格关键词逐个命中）、`test_first_turn_copy_clean`；e2e `FirstTurn.*`、`SilverSpec.test_t01_suggested_scene_in_first_turn`；首轮业务 HTTP 0 |
-| T02 | 本人/家人代购及资格、三项同意 | 通过 | 契约 `test_plan_people_rules`、`test_consent_copy`、`test_consent_and_lock_rules`；e2e `OriginalTaskSpec.test_self_or_proxy_eligibility_and_three_consents`、`RepairMat101.test_mat_a3_03_*`、`Confirmation.*` |
-| T03 | 十示例与安全路径 | 通过 | 契约 `test_demos_consistent`、`test_fam_03_demo_missing_one_exit3`、`test_demo_link_*`（真实创建 `Silver Demo Assets/`、`Silver#Demo/`、`Silver%Demo/` 并按 CommonMark 定位）；e2e `FirstTurn.test_demo_*`、`DemoAssets.test_package_demos_trace_to_provenance` |
-| T04 | 原身份及绑定恢复 | 通过 | e2e `PayConversion.*`、`InheritedRepairTrv101.test_trv01_*`；契约 `InheritedRepairTrv102.test_trv01_r1_*` |
-| T05 | 零试用和真实计费 | 通过 | e2e `AccountBilling.*`、`RepairPay103.*`、`SilverSpec.test_t13_reported_payment_not_credited`；契约 `test_skill_required_rules`、`test_instant_arrival_wording`、`test_no_slow_payment_wording` |
-| T06 | 失败等待与未知 | 通过 | e2e `Waiting.*`、`OriginalTaskSpec.*`；契约 `test_timeouts_consistent`（90/15/120/30/0/240 逐处一致） |
-| T07 | 完整有界输入/交付 | 通过 | 契约 `test_png_verify`、`InheritedRepairTrv102.test_trv02_r1_*`；e2e `RepairMat101.*`（确认后删/截断图 → photoInvalid 业务 HTTP 0；换图 → photoChanged）、`Waiting.test_size_mismatch_reported`、`OriginalTaskSpec.test_corrupt_png_kept_pending_then_get_only` |
-| T08 | 消费记录及售后 | 通过（Mock） | e2e `Support.*`；契约 `test_support_*` |
-| T09 | 首次上报一次 | 通过 | e2e `Telemetry.*`、`InheritedRepairTrv101.test_trv03_*`、`SilverSpec.test_t12_age_info_never_sent_as_field`（上报与 link 不含年龄/家人/服役） |
-| T10 | 真实 YAML 及元数据 | 通过 | 契约 `test_frontmatter_*`、`test_examples_*`（三对逐字等于规格；主题/下单人/老兵/年龄/人数/画幅/像素逐维对齐，错配可测出）、`test_package_dir_depth_at_most_two`；e2e `FrontmatterYaml.*`、`ZipLayout.*` |
-| T11 | 接管与收藏 | 通过（声明检查） | 契约 `test_takeover_rules_first`、`test_favorite_section`、`test_welcome_rule_and_copy`、`test_no_hidden_html_comment` |
-| T12 | 自然年龄与发量、AI 标注 | 通过 | 契约 `test_prompt_baselines`（每主题五段、发量/染白/补发/老化/扮嫩约束、不含示例 70 岁女性设定）、`test_disclosure_everywhere` |
-| T13 | 被摄人老兵条件 | 通过 | 契约 `test_plan_people_rules`（未知补问、active/not_veteran/不同意不做、非老兵主题不受影响）；e2e `SilverSpec.test_t13_veteran_condition_belongs_to_subject`（不联网、prompt 无标识约束、请求体无服役字段） |
-| T14 | 冻结和多人分界 | 通过 | 契约 `test_consent_and_lock_rules`（改代购关系作废确认与键；锁定态 taskLocked）、`test_fam_01_02_*`；e2e `SilverSpec.test_t14_parents_each_split_into_independent_tasks`（两份独立键、各扣一次；合照不支持）、`RepairA3.*` |
-| T15 | 资源与支付 Mock | 通过（只 Mock） | e2e `SilverSpec.test_t15_request_body_has_only_six_fields`、`test_t13_*`、`AccountBilling.test_client/server_rejects_unregistered_field`；契约 `test_body_whitelist`、`test_no_secrets_in_package` |
+### SLV-A3-01 新增回归（能反证 1.0.0）
 
-阶段 6 逐项（S6-01…S6-57）：applicable_mock 的 53 项由上表 T01–T15 覆盖并通过；S6-39/40/41/42 按规格为 `not_applicable_current_contract`（无 Range / inline_delivery / 计费前重试字段，sibling_reuse=false），未实现，以 T06/T07/T14「原任务只读」测试代替。S6-52/53/55/57（收藏写入宿主记忆、不 @ 触发）只做了 SKILL.md 声明检查，真实宿主未验。
+| 测试 | 覆盖 | 对 1.0.0 代码 |
+|---|---|---|
+| 契约 `test_slv_a3_01_replan_early_exit_voids_old_confirmation`（随包） | 从 confirmed 与无任务号 needs_credits 两种起点 × 15 种早退：代购知情 unknown/no、成年 unknown/no、老兵 unknown/active/not_veteran、老兵同意 no/unknown、新图 B 缺失/截断、脸不清、文字超长、多人、主题无效；早退后重读磁盘，三同意 false、idem 空、state=replanning；新图路径已记、旧摘要清空；run/resume/regenerate 均 `needsReplan`，confirm 为 `needsPlan`，全程零网络；另验有任务号且未完成的 needs_credits 改方案仍锁定、原键/任务号/摘要不动 | **失败** |
+| 契约 `test_slv_a3_01_locked_replan_keeps_original_task`（随包） | submit_unknown / submitted / download_pending × 15 种改方案：均 `taskLocked`，state/idem/body_sha256/job_id/同意/图片不变 | 通过（红线原本即在） |
+| e2e `RepairSlv101.test_slv_a3_01_early_exit_then_continue_sends_nothing` | 有余额账户，两种起点 × 12 种早退（新图路径含空格与 #）；改方案零业务请求；之后 resume/run/resume/regenerate：生成 POST 0、扣次 0 | **失败**（旧三同意与旧 idem 仍在） |
+| e2e `test_slv_a3_01_needs_credits_topped_up_still_not_old_photo` | 402 待充值 → 改代购未问清 → 补充次数后「继续」两次：仍 `needsReplan`，POST 0 | **失败**（1.0.0 实际交付了旧图 A） |
+| e2e `test_slv_a3_01_new_plan_b_needs_fresh_three_consents` | 新方案（妈妈、照片 B、唐装、代购）：先 unknown 早退并记下 B；补齐后 planReady，未确认 run 为 needsConfirmation，三项缺一不可；确认后新键 ≠ 旧键，POST 1 次且用新键，扣 1 次，照片摘要为 B | **失败** |
+| e2e `test_slv_a3_01_same_plan_reconfirm_still_works` | 早退后按原方案重新 plan + 确认，照常交付，POST 1、扣 1 | — |
+| e2e `test_slv_a3_01_submitted_unknown_pending_replan_keeps_original` | 结果未知 / 已提交 / 待取回 × 12 种改方案，且本地图已截断：均 `taskLocked`，原键/任务号/摘要/方案字段不变；之后只续查原任务交付，POST 共 1 次、扣 1 次 | 通过（红线原本即在） |
+
+反证方法：把 1.0.0 的 `studio.py` / `welcome_copy.py`（`origin/main` 原文件，仅追加测试引用的常量与空话术函数）放进包副本，跑上述新增用例，结果如上表「失败」各项；1.0.1 全部通过。遥测：契约用例里首次上报被替换为空函数，e2e 中 Mock 的业务调用记录不含匿名首次上报，断言的是业务请求与生成 POST。
+
+### 前序缺陷复核（F1，未回退）
+
+本轮只改 `cmd_plan` 入口、`cmd_run` / `cmd_resume` / `cmd_regenerate` 首行判断与一条新话术；FAM-01/02/03、TRV-01(-R1)/02(-R1)/03/04/05、PAY-01/02/03/04、A3-E01/E02/E03、MAT-A3-01/02/03、WED 前科、斜杠案对应的原有契约与 e2e 回归（60 + 131 项）全部原样保留并通过；`audit_images.py`、`png_local.py`、`jpeg_local.py`、`demos.json` 与示例图未改动。
 
 ## 未验证项
 
-- 真实 WorkBuddy 宿主导入/解析与对话行为、收藏写入与不 @ 触发（真机验收按负责人长期规则跳过）；frontmatter 的平台解析结论仅来自 PyYAML 与标准库检查。
-- 真人银发皱纹保真、不同性别/发量效果、老兵纪念造型的实际出图、真实付款与微信关联，均未做（真实上游 0）。
+- 真实 WorkBuddy 宿主导入/解析与对话行为（宿主是否按 `needsReplan` 补问并重新 plan），真机验收按负责人长期规则跳过；frontmatter 平台解析结论仅来自 PyYAML 与标准库检查。
+- 真人出图效果、真实付款与微信关联均未做（真实上游 0）。
 
 ## 部署与回滚
 
-- 无后端改动（fast 车道），无部署。上传由负责人手动。
-- 回滚：本 slug 无已上传版本，回滚即不上传本包。
+- 无后端改动（fast 车道），无部署。上传由负责人手动；1.0.0 不上传。
+- 回滚：本 slug 无已上传版本，回滚即不上传 1.0.1；1.0.0 ZIP 保留在 dist/ 未删除。
 
 ## 偏离开发文档
 
-无。`plan` 的 `--orderer/--informed/--veteran/--veteran-consent` 取值与 `needsVeteranInfo`、`veteranNotApplicable` 信号是对规格 4 节私有 plan 状态与 T13 的实现细化；下单人未知时一并补问家人知情同意（三问合一），属于「一次合并补问」的实现。
+无。`needsReplan` 信号与 `replanning` 私有状态是规格 §4、§12、T02/T14「变化使未提交确认及键失效」的实现细化。

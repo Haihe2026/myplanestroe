@@ -736,6 +736,112 @@ class Contract(unittest.TestCase):
             studio.STATE_HOME = None
             shutil.rmtree(home, ignore_errors=True)
 
+    # SLV-A3-01 早退变体：(plan 追加参数, 期望信号)。都是「改方案」时新信息未齐、被拒绝或校验失败。
+    SLV_EARLY_EXITS = (
+        (['--scene', 'qipao', '--orderer', 'family_proxy', '--adult', 'yes', '--informed', 'unknown'], 'needsEligibility'),
+        (['--scene', 'qipao', '--orderer', 'family_proxy', '--adult', 'yes', '--informed', 'no'], 'notEligible'),
+        (['--scene', 'qipao', '--orderer', 'self', '--adult', 'unknown'], 'needsEligibility'),
+        (['--scene', 'qipao', '--orderer', 'self', '--adult', 'no'], 'notEligible'),
+        (['--scene', 'veteran', '--orderer', 'self', '--adult', 'yes', '--veteran', 'unknown'], 'needsVeteranInfo'),
+        (['--scene', 'veteran', '--orderer', 'self', '--adult', 'yes', '--veteran', 'active', '--veteran-consent', 'yes'], 'veteranNotApplicable'),
+        (['--scene', 'veteran', '--orderer', 'self', '--adult', 'yes', '--veteran', 'not_veteran', '--veteran-consent', 'yes'], 'veteranNotApplicable'),
+        (['--scene', 'veteran', '--orderer', 'self', '--adult', 'yes', '--veteran', 'retired_confirmed', '--veteran-consent', 'no'], 'veteranNotApplicable'),
+        (['--scene', 'veteran', '--orderer', 'self', '--adult', 'yes', '--veteran', 'retired_confirmed', '--veteran-consent', 'unknown'], 'needsVeteranInfo'),
+        (['--scene', 'qipao', '--orderer', 'self', '--adult', 'yes', '--image', '@missing'], 'photoInvalid'),
+        (['--scene', 'qipao', '--orderer', 'self', '--adult', 'yes', '--image', '@truncated'], 'photoInvalid'),
+        (['--scene', 'qipao', '--orderer', 'self', '--adult', 'yes', '--face-clear', 'no'], 'needsClearerPhoto'),
+        (['--scene', 'qipao', '--orderer', 'self', '--adult', 'yes', '--features', '长' * 41], 'textInvalid'),
+        (['--scene', 'qipao', '--orderer', 'self', '--adult', 'yes', '--single', 'no'], 'peopleUnsupported'),
+        (['--scene', 'no-such-scene', '--orderer', 'self', '--adult', 'yes'], 'sceneInvalid'),
+    )
+
+    def test_slv_a3_01_replan_early_exit_voids_old_confirmation(self):
+        """SLV-A3-01：已确认（或无任务号的待充值）草稿改方案时，任何早退都已持久作废旧三项同意和待提交键；
+        之后 run / resume / regenerate 只提示补齐方案，不联网，不能借旧确认提交旧图旧角色。1.0.0 在此失败。"""
+        home = tempfile.mkdtemp()
+        studio.STATE_HOME = home
+        try:
+            img = self._img(home)
+            with mock.patch.object(studio, 'TRANSPORT', lambda *a, **k: (_ for _ in ()).throw(AssertionError('net'))), \
+                    mock.patch.object(studio.telemetry, 'report_once', lambda *a, **k: None):
+                run = self._runner()
+                for start in ('confirmed', 'needs_credits'):
+                    for extra, want in self.SLV_EARLY_EXITS:
+                        did = run('first-turn', '--defer-entry', '--text', 'x', '--image', img)[1]['draft_id']
+                        self.assertEqual(run('plan', '--draft', did, '--scene', 'studio', '--orderer', 'self', '--adult', 'yes',
+                                             '--single', 'yes', '--face-clear', 'yes')[1]['signal'], 'planReady')
+                        self.assertEqual(run('confirm', '--draft', did, '--owner-consent', 'yes', '--upload-consent', 'yes',
+                                             '--pay-consent', 'yes')[1]['signal'], 'confirmed')
+                        old = studio.load_draft(did)
+                        if start == 'needs_credits':
+                            old['state'] = 'needs_credits'
+                            studio.save_draft(old)
+                        argv = list(extra)
+                        if '@missing' in argv or '@truncated' in argv:
+                            i = argv.index('--image') + 1
+                            b = os.path.join(home, 'b-%s.png' % argv[i][1:])
+                            if argv[i] == '@truncated':
+                                with open(b, 'wb') as f:
+                                    f.write(synth_png(256, 256)[:300])
+                            argv[i] = b
+                        for flag, val in (('--single', 'yes'), ('--face-clear', 'yes')):
+                            if flag not in argv:
+                                argv += [flag, val]
+                        sig = run('plan', '--draft', did, *argv)[1]
+                        self.assertEqual(sig['signal'], want, (start, extra))
+                        d = studio.load_draft(did)  # 重新从磁盘读：作废必须已落盘
+                        self.assertEqual((d['owner_consent'], d['upload_consent'], d['pay_consent'], d['idem'], d['state']),
+                                         (False, False, False, None, studio.REPLAN_STATE), (start, extra))
+                        if '--image' in argv:  # 新图记为待完善方案，旧图摘要作废，不回落到旧图
+                            self.assertEqual((d['images'], d['photo_sha256']), ([argv[argv.index('--image') + 1]], None))
+                        for cmd in (('run', '--draft', did), ('resume', '--draft', did),
+                                    ('regenerate', '--draft', did, '--pay-consent', 'yes')):
+                            self.assertEqual(run(*cmd)[1]['signal'], 'needsReplan', (start, extra, cmd[0]))
+                        self.assertEqual(run('confirm', '--draft', did, '--owner-consent', 'yes', '--upload-consent', 'yes',
+                                             '--pay-consent', 'yes')[1]['signal'], 'needsPlan')
+                        self.assertIsNone(studio.load_draft(did)['idem'])
+                # 有任务号但不在完成态（例如待充值时已有原任务）：改方案仍锁定，原键、任务号、请求体摘要都不动
+                d = studio.load_draft(did)
+                d.update(state='needs_credits', job_id='11111111-1111-4111-8111-111111111111', idem='slv-' + 'b' * 32,
+                         body_sha256='c' * 64, pay_consent=True, owner_consent=True, upload_consent=True)
+                studio.save_draft(d)
+                self.assertEqual(run('plan', '--draft', did, '--scene', 'tang', '--orderer', 'self', '--adult', 'yes',
+                                     '--single', 'yes', '--face-clear', 'yes')[1]['signal'], 'taskLocked')
+                d2 = studio.load_draft(did)
+                self.assertEqual((d2['job_id'], d2['idem'], d2['body_sha256'], d2['state'], d2['pay_consent']),
+                                 (d['job_id'], d['idem'], d['body_sha256'], 'needs_credits', True))
+        finally:
+            studio.STATE_HOME = None
+            shutil.rmtree(home, ignore_errors=True)
+
+    def test_slv_a3_01_locked_replan_keeps_original_task(self):
+        """SLV-A3-01 红线：提交结果未知、已提交、待取回时改方案仍拒绝，原键、任务号、请求体摘要和锁都不变。"""
+        home = tempfile.mkdtemp()
+        studio.STATE_HOME = home
+        try:
+            img = self._img(home)
+            with mock.patch.object(studio, 'TRANSPORT', lambda *a, **k: (_ for _ in ()).throw(AssertionError('net'))), \
+                    mock.patch.object(studio.telemetry, 'report_once', lambda *a, **k: None):
+                run = self._runner()
+                did = run('first-turn', '--defer-entry', '--text', 'x', '--image', img)[1]['draft_id']
+                for st in studio.LOCKED_STATES:
+                    d = studio.load_draft(did)
+                    d.update(state=st, idem='slv-' + 'a' * 32, body_sha256='d' * 64, owner_consent=True, upload_consent=True,
+                             pay_consent=True, job_id=None if st == 'submit_unknown' else '22222222-2222-4222-8222-222222222222')
+                    studio.save_draft(d)
+                    for extra, _ in self.SLV_EARLY_EXITS:
+                        argv = [a if not a.startswith('@') else os.path.join(home, 'nope.png') for a in extra]
+                        for flag, val in (('--single', 'yes'), ('--face-clear', 'yes')):
+                            if flag not in argv:
+                                argv += [flag, val]
+                        self.assertEqual(run('plan', '--draft', did, *argv)[1]['signal'], 'taskLocked', (st, extra))
+                        d2 = studio.load_draft(did)
+                        self.assertEqual((d2['state'], d2['idem'], d2['body_sha256'], d2['job_id'], d2['pay_consent'], d2['images']),
+                                         (st, d['idem'], d['body_sha256'], d['job_id'], True, d['images']), (st, extra))
+        finally:
+            studio.STATE_HOME = None
+            shutil.rmtree(home, ignore_errors=True)
+
     def test_png_verify(self):
         """规格 T14：完整校验（CRC、zlib、扫描行长度、Adam7）不过不算交付。"""
         import struct
