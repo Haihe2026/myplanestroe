@@ -11,4 +11,4 @@
 | mps-travel-portrait-studio | 旅行打卡写真照相馆 | test_passed | — | 0/3/2 | 1.0.2 A3通过，TRV全部关闭；待Muse固定附录D任务，负责人手动上传 | 2026-11-11T22:58:52+08:00 |
 | mps-maternity-portrait-studio | 孕妈写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过，MAT01/02/03关闭；待Muse固定附录D任务，负责人手动上传 | 2026-11-12T02:00:02+08:00 |
 | mps-silver-portrait-studio | 银发写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过，SLV-A3-01关闭；D暂停，交负责人手动上传 | 2026-11-12T10:54:03+08:00 |
-| mps-hanfu-portrait-studio | 汉服写真照相馆 | test_in_progress | codex | 0/1/0 | 1.0.0汉服独立静态A3检查中 | 2026-11-12T18:58:28+08:00 |
+| mps-hanfu-portrait-studio | 汉服写真照相馆 | test_failed | — | 0/1/1 | A3四项退Claude：形制覆盖、否定误拒、反馈未知重跑、示例说明 | 2026-11-12T19:21:16+08:00 |
