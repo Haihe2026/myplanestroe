@@ -1,0 +1,65 @@
+{
+  "notice": "示例人物均为同一位虚构的成年人，只展示效果方向，不是你的真实结果，也不代表年龄、性别或发量的默认设定；老兵纪念示例只是虚构设定，不代表真实服役；AI 生成银发写真，非实拍。",
+  "demos": [
+    {
+      "key": "studio",
+      "title": "优雅银发棚拍",
+      "note": "暖白影棚柔光，素色正装；AI 生成银发写真，非实拍",
+      "file": "studio.png"
+    },
+    {
+      "key": "tang",
+      "title": "唐装中式",
+      "note": "素雅木质背景，低饱和唐装；AI 生成银发写真，非实拍",
+      "file": "tang.png"
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪阳光",
+      "note": "草坪自然阳光，日常服装；AI 生成银发写真，非实拍",
+      "file": "lawn.png"
+    },
+    {
+      "key": "oil",
+      "title": "复古油画",
+      "note": "复古油画质感，暖棕侧光；AI 生成银发写真，非实拍",
+      "file": "oil.png"
+    },
+    {
+      "key": "beach",
+      "title": "海边度假暖阳",
+      "note": "泛化海边暖阳，浅色休闲装；AI 生成银发写真，非实拍",
+      "file": "beach.png"
+    },
+    {
+      "key": "qipao",
+      "title": "旗袍雅致",
+      "note": "素雅影棚，舒适旗袍；AI 生成银发写真，非实拍",
+      "file": "qipao.png"
+    },
+    {
+      "key": "garden",
+      "title": "园林雅致",
+      "note": "园林绿意亭廊，素雅服装；AI 生成银发写真，非实拍",
+      "file": "garden.png"
+    },
+    {
+      "key": "veteran",
+      "title": "军装老兵纪念",
+      "note": "无标识朴素纪念外套，无军衔勋章；AI 生成银发写真，非实拍",
+      "file": "veteran.png"
+    },
+    {
+      "key": "rural",
+      "title": "田园乡村",
+      "note": "田园暖光，舒适日常服饰；AI 生成银发写真，非实拍",
+      "file": "rural.png"
+    },
+    {
+      "key": "winter",
+      "title": "冬日暖阳室内",
+      "note": "冬日窗边暖阳，针织外套围巾；AI 生成银发写真，非实拍",
+      "file": "winter.png"
+    }
+  ]
+}

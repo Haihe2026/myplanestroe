@@ -1,0 +1,146 @@
+{
+  "note": "原字节复制，未缩放、未重编码、未新增生图调用；源图见 demo-assets/provenance.json",
+  "total_bytes": 2519807,
+  "items": [
+    {
+      "key": "studio",
+      "title": "优雅银发棚拍",
+      "source": "studio.png",
+      "source_sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+      "package_file": "studio.png",
+      "package_sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+      "package_bytes": 239789,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "tang",
+      "title": "唐装中式",
+      "source": "tang.png",
+      "source_sha256": "50edc59670f7f61852ff7397b76400d4d4b9585bc90950a5ba8967b1d74a20e2",
+      "package_file": "tang.png",
+      "package_sha256": "50edc59670f7f61852ff7397b76400d4d4b9585bc90950a5ba8967b1d74a20e2",
+      "package_bytes": 243830,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "lawn",
+      "title": "户外草坪阳光",
+      "source": "lawn.png",
+      "source_sha256": "44cadbb82d25dae00dc081da03c6c774f3f56cc63a2b2ccfc748d0747c539cf1",
+      "package_file": "lawn.png",
+      "package_sha256": "44cadbb82d25dae00dc081da03c6c774f3f56cc63a2b2ccfc748d0747c539cf1",
+      "package_bytes": 244031,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "oil",
+      "title": "复古油画",
+      "source": "oil.png",
+      "source_sha256": "cf99c0a0f315c91fa2b5c8a8a777dd1b028cd48eddf9eb23d157ad8f296731c0",
+      "package_file": "oil.png",
+      "package_sha256": "cf99c0a0f315c91fa2b5c8a8a777dd1b028cd48eddf9eb23d157ad8f296731c0",
+      "package_bytes": 249312,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "beach",
+      "title": "海边度假暖阳",
+      "source": "beach.png",
+      "source_sha256": "5181c67d2226687bdce351771b73a238cff3d6f068cbacc4287b129377c24483",
+      "package_file": "beach.png",
+      "package_sha256": "5181c67d2226687bdce351771b73a238cff3d6f068cbacc4287b129377c24483",
+      "package_bytes": 230983,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "qipao",
+      "title": "旗袍雅致",
+      "source": "qipao.png",
+      "source_sha256": "a189f9c7031cccd17609365e9f51eca4e4163c70f1b6d7be3932247a40032e11",
+      "package_file": "qipao.png",
+      "package_sha256": "a189f9c7031cccd17609365e9f51eca4e4163c70f1b6d7be3932247a40032e11",
+      "package_bytes": 223629,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "garden",
+      "title": "园林雅致",
+      "source": "garden.png",
+      "source_sha256": "9a4941450f752dc514e4c747e97a0a092c84cd4cd4970ede9b2e7a5203aaf248",
+      "package_file": "garden.png",
+      "package_sha256": "9a4941450f752dc514e4c747e97a0a092c84cd4cd4970ede9b2e7a5203aaf248",
+      "package_bytes": 267092,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "veteran",
+      "title": "军装老兵纪念",
+      "source": "veteran.png",
+      "source_sha256": "c5fa7e707ebeb3eeba8e3a48a39394e4be3fdbffc678e670fa11005c291ee982",
+      "package_file": "veteran.png",
+      "package_sha256": "c5fa7e707ebeb3eeba8e3a48a39394e4be3fdbffc678e670fa11005c291ee982",
+      "package_bytes": 271903,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "rural",
+      "title": "田园乡村",
+      "source": "rural.png",
+      "source_sha256": "03cac5e9e8a0d31e9c3e5c04e20c987c8b033d0107959ee999ea60c73d8f205e",
+      "package_file": "rural.png",
+      "package_sha256": "03cac5e9e8a0d31e9c3e5c04e20c987c8b033d0107959ee999ea60c73d8f205e",
+      "package_bytes": 263860,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "winter",
+      "title": "冬日暖阳室内",
+      "source": "winter.png",
+      "source_sha256": "6f0e1fcc3915f15e012df072f2a647d85d19bfa855dff8e4c3b3ea9ac5b2f552",
+      "package_file": "winter.png",
+      "package_sha256": "6f0e1fcc3915f15e012df072f2a647d85d19bfa855dff8e4c3b3ea9ac5b2f552",
+      "package_bytes": 285378,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    }
+  ]
+}

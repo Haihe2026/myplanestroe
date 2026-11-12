@@ -1,0 +1,9 @@
+{
+  "name": "mps-silver-portrait-studio",
+  "display_name": "银发写真照相馆",
+  "display_name_en": "Silver Portrait Studio",
+  "version": "1.0.0",
+  "channel": "workbuddy_skill",
+  "author": "MyPlaneStore",
+  "entry": "SKILL.md"
+}
