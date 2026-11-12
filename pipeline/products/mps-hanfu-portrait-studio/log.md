@@ -7,3 +7,4 @@
 2026-11-12T19:21:16+08:00 | codex | test_in_progress → test_failed | 固定1.0.0 ZIP/SHA及12结构类检查通过；静态审HNF-A3-01..04：form被非空outfit覆盖、否定婚服词硬拒、feedback未知与全局重跑指令冲突、侠客示例背景note不实，退Claude新版+A2。rounds.test=1，保留旧包/规格/原图/logo；真实上游/业务/支付/生产/上传0，无完整A2或包执行，附录D/D.6暂停。
 2026-11-12T19:38:45+08:00 | claude | test_failed → dev_in_progress | 认领HNF-A3-01..04修复（事件 evt-a698f14b…、请求 evt-0e3deb1c…），出1.0.1，保留1.0.0原包。
 2026-11-12T19:46:10+08:00 | claude | dev_in_progress → package_ready | 1.0.1修复HNF-A3-01..04（形制+服饰叠加与冲突消歧、否定越界词放行、反馈未知不自动重跑、侠客note改木质影棚）；契约64+e2e142（含干净解压ZIP断网重跑）全过；ZIP 4815365字节 SHA256 c4d34592…；Windows Mock未验证如实列明；1.0.0包保留；真实上游/支付0；交Codex A3。
+2026-11-12T19:52:11+08:00 | codex | package_ready → test_in_progress | 核验1.0.1固定包事件指纹、本机/远端原claim及当前输入，开始干净包独立静态A3；不重复认领事件、不运行完整A2、不调上游/生产、不上传。
