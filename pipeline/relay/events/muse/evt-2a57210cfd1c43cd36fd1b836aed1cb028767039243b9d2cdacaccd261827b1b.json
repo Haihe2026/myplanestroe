@@ -1,0 +1,13 @@
+{
+  "request_id": "req-codex-to-muse-hanfu-serial-prerequisite-20261112",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "1bedd7e7fc38d0b02adb044c339650cb1377ebdb",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/ack-from-codex-20261112-serial-prerequisite.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-2a57210cfd1c43cd36fd1b836aed1cb028767039243b9d2cdacaccd261827b1b",
+  "request_kind": "dependency"
+}
