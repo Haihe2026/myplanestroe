@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-275458e4f4eed3add18144ce19eb2e2de28cc76348bfeeba5f6b6f3a0e87a951",
+  "kind": "stage_ready",
+  "to": "claude",
+  "skill_id": "mps-silver-portrait-studio",
+  "stage": "spec_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "3eb43035ef3c80363b0c9527cb82ec63aa758bb8",
+  "source_path": "pipeline/products/mps-silver-portrait-studio/status.json",
+  "input_fingerprint": "275458e4f4eed3add18144ce19eb2e2de28cc76348bfeeba5f6b6f3a0e87a951"
+}
