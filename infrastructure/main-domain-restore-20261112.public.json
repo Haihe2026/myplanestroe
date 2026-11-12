@@ -1,0 +1,37 @@
+{
+  "updated": "2026-11-13",
+  "scope": "main_domain_restore_and_icp_footers",
+  "primary_origin": "https://myplanestore.com",
+  "www": "HTTPS canonical redirect; API paths reverse proxied without redirects",
+  "legacy_temporary_origin": "https://aistore.zhaopintong.com",
+  "frontend_ip": "43.136.47.247",
+  "topology": "Mainland HTTPS frontend reverse proxies existing origin; databases and service entries retained",
+  "icp": "粤ICP备2026179719号-1",
+  "footer_owner": "珠海市香洲区拱北理想家电子商贸行",
+  "header_logo": "unchanged",
+  "nginx_test": "passed on frontend and origin before reload",
+  "tests": {
+    "synthetic_checkout_flows": 44,
+    "static_desktop_mobile_cases": 18,
+    "extra_footer_desktop_mobile_cases": 8,
+    "public_pages": "HTTP 200, footer verified",
+    "health": [
+      "pet:200",
+      "gemini:200",
+      "temu:200",
+      "trade:200"
+    ],
+    "unauthenticated_balances": "401"
+  },
+  "real_provider_calls": 0,
+  "real_oauth_exchanges": 0,
+  "real_payment_tests": 0,
+  "not_verified": [
+    "real user WeChat authorization and actual bank payment after this deployment",
+    "all installed Skill hosts",
+    "future automatic certificate renewal execution"
+  ],
+  "callback_note": "Existing authorized WeChat callback host retained; payment URLs use primary origin",
+  "source_mirror": "sanitized reading snapshot; no credentials, databases, logs, QR images or production access",
+  "payment_api_boundary": "/api/pay/wechat/ is not an implemented payment callback in the current origin; this deployment does not install a new payment integration"
+}
