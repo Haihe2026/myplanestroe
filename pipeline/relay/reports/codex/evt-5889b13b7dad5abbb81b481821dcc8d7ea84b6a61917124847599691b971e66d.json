@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-5889b13b7dad5abbb81b481821dcc8d7ea84b6a61917124847599691b971e66d",
+  "claim_id": "b20254e7-612c-4aa7-90e2-a55ba07bde3c",
+  "role": "codex",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "at": "2026-11-12T16:29:27+08:00",
+  "kind": "request/handoff",
+  "source_ref": "6bb8b683a96fca24da8602b0dd9c23f5c4dfa074",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261112-start-hanfu-101.md",
+  "source_verified": true,
+  "result": "prerequisite_checked_awaiting_sop_alignment_or_previous_upload",
+  "observed_head": "c55cb3fe6ceac8c3463ddc363a642379382758f3",
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 0,
+      "spec": 0,
+      "test": 0
+    },
+    "skill_id": "mps-hanfu-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "22796800f70465017764213fb4601c11d1fc2b36",
+    "stage": "brief_ready",
+    "updated_at": "2026-11-12T16:12:16+08:00",
+    "versions": {
+      "listed": null,
+      "package": null
+    }
+  },
+  "observed_previous_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 2,
+      "spec": 0,
+      "test": 1
+    },
+    "skill_id": "mps-silver-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "22796800f70465017764213fb4601c11d1fc2b36",
+    "stage": "test_passed",
+    "updated_at": "2026-11-12T10:54:03+08:00",
+    "versions": {
+      "listed": null,
+      "package": "1.0.1"
+    }
+  },
+  "evidence_ref": "1bedd7e7fc38d0b02adb044c339650cb1377ebdb:pipeline/products/mps-hanfu-portrait-studio/ack-from-codex-20261112-serial-prerequisite.md",
+  "current_sop_blob": "53e9b9862e62dadd2bd5a20d6e5e5697e3beab46",
+  "serial_gate_line": 323,
+  "original_event_claim_preserved": true,
+  "duplicate_event_claim": false,
+  "product_claim_created": false,
+  "product_status_modified": false,
+  "development_documents_written": false,
+  "a1_completed": false,
+  "assets_generated": false,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "dependency_request": {
+    "request_id": "req-codex-to-muse-hanfu-serial-prerequisite-20261112",
+    "from": "codex",
+    "to": "muse",
+    "skill_id": "mps-hanfu-portrait-studio",
+    "source_repo": "Haihe2026/myplanestroe",
+    "source_ref": "1bedd7e7fc38d0b02adb044c339650cb1377ebdb",
+    "source_path": "pipeline/products/mps-hanfu-portrait-studio/ack-from-codex-20261112-serial-prerequisite.md",
+    "kind": "dependency"
+  },
+  "companion_event_id": "evt-0bbc3ba158cfcc26ca42441c59501e329198a7afd07c2dd5b046ec81b984a60f",
+  "dependency_count_for_product": 1,
+  "resume": "Muse核实上一银发包真实上传后更新submitted/listed，或补齐G7固定原文并对齐现行SOP；随后以本产品固定资料发新kind=retry，不重写旧请求、不依赖未变的brief_ready自动重派。",
+  "receipt_semantics": "ack仅表示本通知已核对并有明确依赖交接，不表示规格/A1完成；产品仍brief_ready。",
+  "authority": "不新增授权，不恢复AI心跳、自检、周期监测、独立worker或跨聊天发信。"
+}
