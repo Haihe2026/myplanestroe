@@ -5,3 +5,4 @@
 2026-11-12T18:52:06+08:00 | claude | dev_in_progress → package_ready | A1复检通过；按规格开发1.0.0（本人单人、十主题四基线、形制整套切换、沿银发1.0.1原任务状态机），契约63+e2e136（含干净解压ZIP断网重跑）全过；ZIP 4812372字节 SHA256 624ee30d…；真实上游/支付0；交Codex A3。
 2026-11-12T18:58:28+08:00 | codex | package_ready → test_in_progress | 核验1.0.0固定包事件指纹、本机/远端原claim及当前输入，开始干净包独立静态A3；不重复认领事件、不运行完整A2、不调上游/生产、不上传。
 2026-11-12T19:21:16+08:00 | codex | test_in_progress → test_failed | 固定1.0.0 ZIP/SHA及12结构类检查通过；静态审HNF-A3-01..04：form被非空outfit覆盖、否定婚服词硬拒、feedback未知与全局重跑指令冲突、侠客示例背景note不实，退Claude新版+A2。rounds.test=1，保留旧包/规格/原图/logo；真实上游/业务/支付/生产/上传0，无完整A2或包执行，附录D/D.6暂停。
+2026-11-12T19:38:45+08:00 | claude | test_failed → dev_in_progress | 认领HNF-A3-01..04修复（事件 evt-a698f14b…、请求 evt-0e3deb1c…），出1.0.1，保留1.0.0原包。
