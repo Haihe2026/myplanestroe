@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-25e3ba4a6938bf19148090f5caa6b23a270d96c92f36898c52ef4829da50f1c6",
+  "claim_id": "8277ec63-e146-41ce-b4a1-0b8f21adebd3",
+  "role": "codex",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "at": "2026-11-12T20:12:28+08:00",
+  "source_ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/status.json",
+  "stage_input_fingerprint": "25e3ba4a6938bf19148090f5caa6b23a270d96c92f36898c52ef4829da50f1c6",
+  "stage_input_fingerprint_verified": true,
+  "result": "test_passed",
+  "a3_commit": "9e2161e17e378e7312163a4d087f7b58e0dda901",
+  "evidence_ref": "9e2161e17e378e7312163a4d087f7b58e0dda901:pipeline/products/mps-hanfu-portrait-studio/03-test-report.md",
+  "version": "1.0.1",
+  "closures": [
+    "HNF-A3-01",
+    "HNF-A3-02",
+    "HNF-A3-03",
+    "HNF-A3-04"
+  ],
+  "open_findings": [],
+  "structural_checks": 12,
+  "independent_static_reviews": 3,
+  "package_diff": {
+    "same": 16,
+    "changed": 9,
+    "ten_demo_png_unchanged": true,
+    "manifest_note_only": "swordsman bamboo→wood studio"
+  },
+  "delivery": {
+    "skill_id": "mps-hanfu-portrait-studio",
+    "version": "1.0.1",
+    "a3_commit": "9e2161e17e378e7312163a4d087f7b58e0dda901",
+    "package_source_ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+    "zip": {
+      "file": "mps-hanfu-portrait-studio-1.0.1.zip",
+      "bytes": 4815365,
+      "sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea"
+    },
+    "logo": {
+      "bytes": 418271,
+      "sha256": "d6cda4a802770817435324b898d5e0f1705adf95cd2a7c665baba27727c2978b",
+      "size": [
+        512,
+        512
+      ]
+    },
+    "publishing": "owner manual",
+    "platform_uploaded": false
+  },
+  "original_receipt_preserved": {
+    "event_id": "evt-25e3ba4a6938bf19148090f5caa6b23a270d96c92f36898c52ef4829da50f1c6",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T19:52:40+08:00",
+    "evidence_ref": "53bef15dc3ea1686530254a7ca1468599f489d56:pipeline/products/mps-hanfu-portrait-studio/status.json",
+    "claim_id": "8277ec63-e146-41ce-b4a1-0b8f21adebd3"
+  },
+  "duplicate_event_claim": false,
+  "observed_product_status": {
+    "blocked": null,
+    "claimed_at": null,
+    "lane": "fast",
+    "owner": null,
+    "rounds": {
+      "dev": 2,
+      "spec": 0,
+      "test": 1
+    },
+    "skill_id": "mps-hanfu-portrait-studio",
+    "sop": "sop-image-gen-skill-auto",
+    "sop_version": "02999649750726bd6f476dfb44424e4ded4fc19c",
+    "stage": "test_passed",
+    "updated_at": "2026-11-12T20:09:48+08:00",
+    "versions": {
+      "listed": null,
+      "package": "1.0.1"
+    }
+  },
+  "source_package_and_development_documents_modified": false,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "full_a2_executed": false,
+  "package_executed_or_imported": false,
+  "appendix_d": "suspended; D.6 suspended",
+  "next_role": "muse",
+  "next_action": "将固定1.0.1 ZIP、外置logo及SHA交负责人手动上传；不派安装检测/自动发布。G7按已交付且负责人未回复条件继续后续，不扩生产/财务/发布授权。",
+  "verification_limits": [
+    "A3仅静态，Claude自报64契约/142e2e未由Codex重跑。",
+    "Windows隔离Mock和Python3.7解释器、宿主行为未验，Linux/Python3.13及AST3.7不冒充双端通过。",
+    "真实微信/付款/真人及形制准确率、生产签名参考、平台解析/包体积/审核未验。"
+  ],
+  "muse_handoff": {
+    "request_id": "req-codex-to-muse-hanfu-a3-101-passed-20261112",
+    "from": "codex",
+    "to": "muse",
+    "skill_id": "mps-hanfu-portrait-studio",
+    "source_repo": "Haihe2026/myplanestroe",
+    "source_ref": "9e2161e17e378e7312163a4d087f7b58e0dda901",
+    "source_path": "pipeline/products/mps-hanfu-portrait-studio/03-test-report.md",
+    "kind": "handoff"
+  },
+  "authority": "不新增worker、AI心跳、自检、周期监测或跨聊天发信。"
+}
