@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-6851162b0da431ce76fb4c46c46412189a75d1ba38b4009281ec05f2f5be2c94",
+  "claim_id": "504de69a-6590-496a-a420-5c2de423c1c6",
+  "source_ref": "31ee7abf6512e3d15bb7911e5dd30b1b0102a250",
+  "claim_commit": "941049712599a0dc8c7b5bdbdfdec221a5c4f9dc",
+  "checked_at": "2026-11-12T10:04:02+08:00",
+  "result": "test_failed",
+  "rounds_test": 1,
+  "findings": [
+    {
+      "id": "SLV-A3-01",
+      "priority": "P2",
+      "title": "未提交草稿改方案后早退，旧收费确认及键仍可继续旧方案",
+      "file": "scripts/studio.py",
+      "lines": [
+        418,
+        420,
+        421,
+        432,
+        436,
+        444,
+        448,
+        453,
+        462,
+        465,
+        468,
+        629,
+        632,
+        638,
+        667,
+        885,
+        906
+      ],
+      "test": "T02/T14、规格§4及§12",
+      "trigger": "旧单人方案A已plan+confirm、尚无生成POST（可停在关联/充值），重新plan改照片/主题/代购关系但新资格、本人许可或老兵条件未知/拒绝，或新图B坏/缺失。",
+      "actual": "432–464多条早退均未持久作废旧三同意/idem；只有465–469成功plan才清除。旧confirmed/needs_credits A仍留在磁盘，resume可到run，后者仅查旧三同意+idem，通过旧A本地预检后可_submit旧图旧角色。",
+      "expected": "保持LOCKED/原job优先保护；仅对未提交草稿，在更改照片/主题/服装/画幅/订购关系/本人许可/老兵条件等需重新确认的replan时，先持久作废旧三同意与未提交键，再处理新信息并返回等待/拒绝/坏图。任何新方案未确认时run/resume/regenerate不能借旧确认生成。",
+      "limits": "纯静态可达路径；未执行客户端业务、未发真实生成POST、未验证真实扣费。没有发现已提交或unknown任务可被此路径重新提交，不能夸大为已发生重复扣费。",
+      "regressions": [
+        "旧confirmed及needs_credits分别覆盖family_proxy+informed unknown/no、adult unknown/no、veteran状态/同意 unknown/active/no",
+        "改新图B缺失/截断、face_clear no、超长特征等验证失败早退仍不得留下旧可执行确认",
+        "失败replan后落盘重读/重启，再run及resume须等待重规划/重确认、生成POST0/扣次0，不能提交旧A；regenerate也不能绕过",
+        "新方案事实齐全→重新明确三同意后才新键提交新图/主题/关系，正常路径仍可达",
+        "submit_unknown/submitted/download_pending及已有job_id保留原键/原体/锁；replan拒绝，不清已发任务；本地图坏仍只GET原任务，不发第二次生成POST"
+      ]
+    }
+  ],
+  "inspection": {
+    "result": "structural_checks_passed_silver_contract_reviewed_separately",
+    "findings": [],
+    "original_yaml_accepted": true,
+    "metadata_projection_for_remaining_diagnostics_only": false,
+    "zip": {
+      "sha256": "b06ce740ca094ee56dd9483c368599dc4ecbe2e4ff0f858f6fa7b258f3deb44c",
+      "bytes": 2603008,
+      "files": 25,
+      "wrapper": "mps-silver-portrait-studio",
+      "logical_max_depth": 2
+    },
+    "checks": [
+      {
+        "item": "固定ZIP完整性",
+        "result": "pass",
+        "evidence": "SHA256与A2一致；Git blob已验证见固定下载清单逐字节Git对象核对。"
+      },
+      {
+        "item": "目录与干净解包",
+        "result": "pass",
+        "evidence": "单一slug外包装；技能根内最多两级，25文件，无重复/大小写冲突/链接/越界或缓存；逐文件与ZIP原字节一致。"
+      },
+      {
+        "item": "平台元数据",
+        "result": "pass",
+        "evidence": "八必填字段齐全，无YAML重复键或隐藏HTML指令；SKILL.md 15334字节，≤15KiB。"
+      },
+      {
+        "item": "双语示例逐项语义",
+        "result": "pass",
+        "evidence": "本人银发棚拍/妈妈唐装代购/本人退役老兵纪念三对与固定规格逐字一致，同意条件、单人、2:3、1024×1536一致。"
+      },
+      {
+        "item": "触发词与接管",
+        "result": "pass",
+        "evidence": "23触发词、完整中文名充值词、唯一倾向句；执行规范首节接管。"
+      },
+      {
+        "item": "版本与固定欢迎",
+        "result": "pass",
+        "evidence": "slug/版本/渠道跨SKILL、_meta、studio和telemetry一致；欢迎句逐字符合。"
+      },
+      {
+        "item": "尺寸与字段常量",
+        "result": "pass",
+        "evidence": "仅三尺寸、六请求字段、八遥测字段；无machine_id；关闭开关为银发slug。遥测失败行为另按TRV-03闭环复核。"
+      },
+      {
+        "item": "场景清单与超时",
+        "result": "pass",
+        "evidence": "十场景默认竖版；90/15/120/30/0/240预算一致。路由优先逻辑另按TRV-04闭环复核。"
+      },
+      {
+        "item": "十示例来源与展示标注",
+        "result": "pass",
+        "evidence": "10PNG完整解码，512×768；key/标题一致，SHA与Codex源/provenance/derivation/规格一致；每项note含非实拍标注。"
+      },
+      {
+        "item": "外置logo",
+        "result": "pass",
+        "evidence": "512×512PNG，≤500KB，与Codex原字节一致；ZIP外置，不新增生成。"
+      },
+      {
+        "item": "Markdown安全路径",
+        "result": "pass",
+        "evidence": "仅求值已审纯路径格式化函数；空格/#/%三条真实临时PNG路径经CommonMark解析/解码均可定位，无意外query/fragment。"
+      },
+      {
+        "item": "对客禁用词/秘密/语法",
+        "result": "pass",
+        "evidence": "对客SKILL/README及固定话术AST字面量扫描无供应商/模型/秘密，全部脚本Python3.7语法可解析。只做静态，不运行A2/客户端。"
+      }
+    ],
+    "assets": [
+      {
+        "key": "studio",
+        "file": "studio.png",
+        "bytes": 239789,
+        "sha256": "f77bbfada1f309b1a1a318be06469a7b7c559184cfe96d1752847a3c8240db5f",
+        "source_identical": true
+      },
+      {
+        "key": "tang",
+        "file": "tang.png",
+        "bytes": 243830,
+        "sha256": "50edc59670f7f61852ff7397b76400d4d4b9585bc90950a5ba8967b1d74a20e2",
+        "source_identical": true
+      },
+      {
+        "key": "lawn",
+        "file": "lawn.png",
+        "bytes": 244031,
+        "sha256": "44cadbb82d25dae00dc081da03c6c774f3f56cc63a2b2ccfc748d0747c539cf1",
+        "source_identical": true
+      },
+      {
+        "key": "oil",
+        "file": "oil.png",
+        "bytes": 249312,
+        "sha256": "cf99c0a0f315c91fa2b5c8a8a777dd1b028cd48eddf9eb23d157ad8f296731c0",
+        "source_identical": true
+      },
+      {
+        "key": "beach",
+        "file": "beach.png",
+        "bytes": 230983,
+        "sha256": "5181c67d2226687bdce351771b73a238cff3d6f068cbacc4287b129377c24483",
+        "source_identical": true
+      },
+      {
+        "key": "qipao",
+        "file": "qipao.png",
+        "bytes": 223629,
+        "sha256": "a189f9c7031cccd17609365e9f51eca4e4163c70f1b6d7be3932247a40032e11",
+        "source_identical": true
+      },
+      {
+        "key": "garden",
+        "file": "garden.png",
+        "bytes": 267092,
+        "sha256": "9a4941450f752dc514e4c747e97a0a092c84cd4cd4970ede9b2e7a5203aaf248",
+        "source_identical": true
+      },
+      {
+        "key": "veteran",
+        "file": "veteran.png",
+        "bytes": 271903,
+        "sha256": "c5fa7e707ebeb3eeba8e3a48a39394e4be3fdbffc678e670fa11005c291ee982",
+        "source_identical": true
+      },
+      {
+        "key": "rural",
+        "file": "rural.png",
+        "bytes": 263860,
+        "sha256": "03cac5e9e8a0d31e9c3e5c04e20c987c8b033d0107959ee999ea60c73d8f205e",
+        "source_identical": true
+      },
+      {
+        "key": "winter",
+        "file": "winter.png",
+        "bytes": 285378,
+        "sha256": "6f0e1fcc3915f15e012df072f2a647d85d19bfa855dff8e4c3b3ea9ac5b2f552",
+        "source_identical": true
+      }
+    ],
+    "logo": {
+      "bytes": 456079,
+      "sha256": "9909cf071a9e64cb18707ec846b6cf5c921754979151075bfcf77756420acf1e",
+      "size": [
+        512,
+        512
+      ]
+    },
+    "markdown_fixtures": [
+      {
+        "case": "Silver Demo Assets",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Silver#Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      },
+      {
+        "case": "Silver%Demo",
+        "parsed_target_exists": true,
+        "unintended_fragment_or_query": false
+      }
+    ],
+    "official_read": {
+      "at": "2026-11-12T09:55:42+08:00",
+      "url": "https://open.workbuddy.cn/docs/skill",
+      "result": "fresh online read successful; skill metadata/examples/structure read",
+      "status": 200,
+      "bytes": 277042,
+      "sha256": "6ac24dbdbe0d7f8bf907e30b9c71909c0f87499561ee87de011a0a818041c68c"
+    },
+    "full_a2_executed": false,
+    "business_commands_executed": false,
+    "pure_path_formatter_evaluated": true,
+    "upstream_calls": 0,
+    "production_calls": 0
+  },
+  "source_file_blobs": {
+    "README.md": "2095a6ae4cf0dc5a18150463e5e805fa9c6720cb",
+    "SKILL.md": "efe00cdc22ca8d6407471e97cb98d0a95ebb036d",
+    "_meta.json": "9a957bba371b5627269f1ba825201b2afb4f96cc",
+    "assets/beach.png": "364618d06e6ff12718fcab9e7ce1a5427275f066",
+    "assets/demos.json": "198eaaa73d36b622252f54b0926cb993a0fa2c6a",
+    "assets/garden.png": "a47977ce48ba856141e5ccc818ffccfd16a4cf98",
+    "assets/lawn.png": "031ad336deb2ec231f66a57387278cc53f968126",
+    "assets/oil.png": "cc47f7700ed251e4272e1793802c177ca7ad0a90",
+    "assets/qipao.png": "bbc800687013fe5e7762289af451014b4fc4cabb",
+    "assets/rural.png": "8ac33d68620536f9bdd1411a9753546bccd2c9f9",
+    "assets/studio.png": "010d67a197c64de96956c1f290115dd427b27124",
+    "assets/tang.png": "733d177041f34fbe41738710c056895d8c834d12",
+    "assets/veteran.png": "1427b5e84a2abd844fe4503589c9f5d09e0c9291",
+    "assets/winter.png": "17d3527b577c19ed73e4a351884e62ee7256af63",
+    "references/platform-rules.md": "1515408a120d1b0f7208c8368a92518bed9fb6da",
+    "references/prompts.md": "7873e7ee30d35f26d7c2075a938c8e16065d294f",
+    "references/scenes.md": "42c55e9fcbf41e935f1e5f45a2b85f38193cfe2c",
+    "scripts/audit_images.py": "c927b242902d611f38747e6cc492b6a671b78710",
+    "scripts/jpeg_local.py": "b405e4cad8744119bad2abe180aa50603ca6021f",
+    "scripts/png_local.py": "7527dafe4de30d16444955587b5a69fc71aea123",
+    "scripts/studio.py": "cfce05c4a0d7d0a0c0e72c36e14431c3e7bf3b05",
+    "scripts/telemetry.py": "c6e75415f4656122f8f9bfe5bf3035ed8ebf747f",
+    "scripts/welcome_copy.py": "89428b3520fc55ea78369f46da8812c080c23277",
+    "tests/first-turn-preview.md": "aba452e68f1cfcc6258d0177fb1f1948d23fbe95",
+    "tests/test_skill_contract.py": "c0250f01394d708f894f0c51b6d27c105b22c18f"
+  },
+  "fixed_input_objects": {
+    "pipeline/products/mps-silver-portrait-studio/00-brief.md": "5740ce164d7277ae9a575337f75db6b38b24620f",
+    "pipeline/products/mps-silver-portrait-studio/01-dev-spec.json": "a7584d2b1900cb426427c85883278d1f9307ce22",
+    "pipeline/products/mps-silver-portrait-studio/01-dev-spec.md": "6dea5cc0fb0d64580463997199e8c68521685de1",
+    "pipeline/products/mps-silver-portrait-studio/02-package/dist/logo.png": "659b870b481d4f6b62c3c3613cb0d656e7973825",
+    "pipeline/products/mps-silver-portrait-studio/02-package/dist/mps-silver-portrait-studio-1.0.0.zip": "54a2e62b436a74b7871362719b37ab65865ade55",
+    "pipeline/products/mps-silver-portrait-studio/02-self-test.md": "5ee018e8bace57f8600f1ce129783ce935f5f2a4"
+  },
+  "sop_blob": "53e9b9862e62dadd2bd5a20d6e5e5697e3beab46",
+  "original_receipt_preserved": {
+    "event_id": "evt-6851162b0da431ce76fb4c46c46412189a75d1ba38b4009281ec05f2f5be2c94",
+    "role": "codex",
+    "action": "acknowledged",
+    "at": "2026-11-12T09:56:39+08:00",
+    "evidence_ref": "941049712599a0dc8c7b5bdbdfdec221a5c4f9dc:pipeline/products/mps-silver-portrait-studio/status.json",
+    "claim_id": "504de69a-6590-496a-a420-5c2de423c1c6"
+  },
+  "inheritance": {
+    "reference": "108761fb56bc6712d22b387386d4105841bcb69b",
+    "helper_files_byte_identical": {
+      "audit_images.py": true,
+      "png_local.py": true,
+      "jpeg_local.py": true
+    },
+    "studio_functions_ast_identical": [
+      "_account_entry",
+      "_account_ready",
+      "_body_digest",
+      "_clean_text",
+      "_confirm_bound",
+      "_continue_job",
+      "_default_transport",
+      "_deliver",
+      "_demo_manifest",
+      "_due_text",
+      "_ensure_skill_key",
+      "_fail_kind",
+      "_history",
+      "_keep_reset",
+      "_local_time",
+      "_membership_link",
+      "_now",
+      "_path",
+      "_photo_changed",
+      "_photo_digest",
+      "_plain",
+      "_poll",
+      "_query",
+      "_query_auth",
+      "_recover_skill_key",
+      "_save_support",
+      "_shape_of",
+      "_submit",
+      "_submit_pending",
+      "_submit_unauthorized",
+      "_support_state",
+      "_unique",
+      "call",
+      "cmd_auth",
+      "cmd_balance",
+      "cmd_decline",
+      "cmd_demo",
+      "cmd_feedback",
+      "cmd_history",
+      "cmd_paid",
+      "cmd_refuse",
+      "cmd_resume",
+      "cmd_status",
+      "cmd_ticket",
+      "cmd_topup",
+      "device",
+      "draft_name",
+      "emit",
+      "ensure_install_secret",
+      "link_fresh",
+      "load_account",
+      "load_draft",
+      "main",
+      "md_safe_path",
+      "progress",
+      "read_json",
+      "save_account",
+      "save_draft",
+      "state_dir",
+      "trusted_link",
+      "wait_text",
+      "write_json"
+    ]
+  },
+  "independent_reviews": [
+    "账户/支付/恢复/未知replan早退专项，只读静态",
+    "被摄人/代购/老兵/自然年龄/执行指令专项，只读静态"
+  ],
+  "client_source_modified_by_codex": false,
+  "development_documents_modified": false,
+  "new_upstream_calls": 0,
+  "backend_business_calls": 0,
+  "production_writes": 0,
+  "platform_uploads": 0,
+  "full_a2_executed": false,
+  "appendix_d": "suspended; D.6 suspended",
+  "next_role": "claude"
+}
