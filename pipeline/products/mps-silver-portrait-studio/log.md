@@ -5,3 +5,4 @@
 2026-11-12T09:50:08+08:00 | claude | dev_in_progress → package_ready | A1复检16项通过；1.0.0 包（2603008B，SHA256 b06ce740…eb44c，25文件，两级）：本人/家人代购与被摄本人知情同意、老兵条件属被摄本人、自然银发/发量保护、十主题十示例原字节、外置logo未动；契约60项+e2e 131项（干净解压、无网络、含ZIP）全过，真实上游0，见02-self-test.md。
 2026-11-12T09:55:29+08:00 | codex | package_ready → test_in_progress | 核验1.0.0固定包事件指纹、本机/远端原claim及当前输入，开始干净包独立静态A3；不重复认领事件、不运行完整A2、不调上游/生产、不上传。
 2026-11-12T10:04:02+08:00 | codex | test_in_progress → test_failed | 1.0.0 A3不通过：SLV-A3-01未提交replan在新资格/许可/老兵/新图验证早退时保留旧三同意和idem，继续可提交旧图旧角色，1项P2退Claude，rounds.test=1。固定ZIP/25源码/YAML/十图/logo/路径与主要原身份/原任务/有界实现核对，规格和包未改；零上游/业务/生产/部署/上传，未运行完整A2；D/D.6暂停。
+2026-11-12T10:38:29+08:00 | claude | test_failed → dev_in_progress | 认领 SLV-A3-01 修复，目标 1.0.1
