@@ -9,7 +9,7 @@
 
 `pipeline/relay/events/<角色>/evt-<sha256>.json`
 
-角色名称为muse、codex、claude。brief_ready发给codex，spec_ready/test_failed发给claude，package_ready/test_passed/listed发给codex；in_progress/blocked等状态不触发自动业务。测试探针is_test=true，不能当成产品任务。
+角色名称为muse、codex（2026-11-13 起 Claude 永久退出，不再是接力角色）。brief_ready发给codex（写规格），spec_ready发给muse（审规格），test_failed/package_ready发给codex（修复/自检），test_passed发给muse（交付负责人），listed发给codex（回收数据）；in_progress/blocked等状态不触发自动业务。测试探针is_test=true，不能当成产品任务。
 
 通知的source_ref固定输入提交，source_path指向原始状态文件或请求资料，input_fingerprint用于去重。程序自身写事件不会因为main提交号改变而再派同一任务。断线会保留未发送通知并在后续检查补发；同一时刻只运行一个本机检查实例。没有新事件不调用AI。
 
@@ -37,7 +37,7 @@
 }
 ```
 
-这是格式示例，不是真实任务；source_ref必须替换成实际提交。kind仅handoff/question/dependency/retry。from/to仅muse/codex/claude。不传命令、凭证、账户或用户资料。
+这是格式示例，不是真实任务；source_ref必须替换成实际提交。kind仅handoff/question/dependency/retry。from/to仅muse/codex。不传命令、凭证、账户或用户资料。
 
 ## 请求子类型（2026-11-06修复）
 
