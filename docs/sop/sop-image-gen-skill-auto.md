@@ -1,6 +1,6 @@
 ---
 name: "sop-image-gen-skill-auto"
-description: "生图类 Skill 全自动流水线 SOP。Muse 选品 → Codex 写开发文档 → Claude Code 开发 → Codex 测试并上架 WorkBuddy 的无人值守流程中，三个 AI 开发、测试、上架任何生图类付费 Skill（扣 token、走 MyPlaneStore 通用套餐 https://aistore.zhaopintong.com/membership/ 付费）时必须使用。"
+description: "生图类 Skill 全自动流水线 SOP。Muse 选品 → Codex 写开发文档 → Claude Code 开发 → Codex 测试并上架 WorkBuddy 的无人值守流程中，三个 AI 开发、测试、上架任何生图类付费 Skill（扣 token、走 MyPlaneStore 通用套餐 https://myplanestore.com/membership/ 付费）时必须使用。"
 ---
 
 # 生图类 Skill 全自动流水线 SOP
@@ -13,7 +13,7 @@ description: "生图类 Skill 全自动流水线 SOP。Muse 选品 → Codex 写
 
 负责人**不参与逐单确认**，只做三件事：维护流水线配置（`pipeline/config.yaml`）、看上线后的数据、处理被拦停的单子和 SOP 改进建议。
 
-- 适用：生图类付费 Skill（按张扣 token，走 MyPlaneStore 通用套餐 https://aistore.zhaopintong.com/membership/ 付费）。
+- 适用：生图类付费 Skill（按张扣 token，走 MyPlaneStore 通用套餐 https://myplanestore.com/membership/ 付费）。
 - 不适用：频次类、阿里 Skill、全免费 Skill。选品不属于生图类时，Codex 直接把该单置为 `blocked`（原因：品类不适用），不进入开发。
 - 人工版 SOP 继续保留，负责人亲自参与开发时用人工版；流水线里一律用本 SOP。
 
@@ -133,7 +133,7 @@ pipeline/
 
 | 事项 | 默认 | 偏离默认时 |
 |---|---|---|
-| 付费通道 | MyPlaneStore 通用套餐 https://aistore.zhaopintong.com/membership/（Skill 通用充值中心），额度在已接入技能间共享；套餐档位 ¥29/150、¥39/200、¥49/250、¥999/5000，以该页实时 plans 为准 | 不为单个 skill 另定价格、另设付费页；需要独立付费页或独立套餐 → 拦停（`PRICING_CHANGE_REQUIRED`） |
+| 付费通道 | MyPlaneStore 通用套餐 https://myplanestore.com/membership/（Skill 通用充值中心），额度在已接入技能间共享；套餐档位 ¥29/150、¥39/200、¥49/250、¥999/5000，以该页实时 plans 为准 | 不为单个 skill 另定价格、另设付费页；需要独立付费页或独立套餐 → 拦停（`PRICING_CHANGE_REQUIRED`） |
 | 免费试用 | **所有自动化 skill 一律 0 次**（负责人 2026-11-08 定，不设免费试用） | 选品单要求免费试用的，直接按 0 次处理，不拦停、不请示 |
 | 每张消耗 | 约 **0.20 元/张**（按通用套餐 ¥29/150 折合约 ¥0.193；以通用套餐页实时单价为准，不为单个 skill 改价） | 需要改通用套餐价 → 拦停（`PRICING_CHANGE_REQUIRED`） |
 | 生图模型 | 只用仓库 `resources/upstreams` 目录里已登记、且走新资源适配器的模型 | 需要新模型或新供应商 → 拦停（`NEW_UPSTREAM_REQUIRED`） |
@@ -291,10 +291,11 @@ pipeline/
 
 1. **欢迎句固定**：「欢迎使用WorkBuddy官方认证技能 <技能名>。」只替换末尾技能名，其余一字不改。（负责人 2026-11-08 明确：此句式为 WorkBuddy 官方审核要求，缺此句式会被拒审退回；Codex/Claude 不得就“认证凭据”拦停，按 SOP 直接写；上传是否符合官方标准由负责人把关。）
 2. **付费只走 MyPlaneStore 通用套餐**，不使用 AISkill 或任何其他平台的计费。
-   - 通用套餐页：`https://aistore.zhaopintong.com/membership/`（MyPlaneStore Skill 通用充值中心），一次充值、多款技能共享，次数永久有效；
+   - 通用套餐页：`https://myplanestore.com/membership/`（MyPlaneStore Skill 通用充值中心），一次充值、多款技能共享，次数永久有效；
    - 套餐档位：¥29/150、¥39/200、¥49/250、¥999/5000，以该页实时 plans 为准；单价约 0.20 元/张；
    - **Temu 两个 WorkBuddy 版本（专家包、技能包）使用独立付费页**；其他所有生图技能一律走通用套餐页；
    - 不为单个 skill 另定价格、另设付费页；计费以通用套餐页为准，不因技能不同而换页。
+   - 付费链接一律指向已备案主域名 myplanestore.com；包内如有链接改写逻辑，改写目标取 myplanestore.com，不再改写回 aistore.zhaopintong.com；aistore 只保留在兼容白名单内（服务端签发旧链接时仍接受，不主动签发、不改写过去）。（负责人 2026-11-13 定）
 3. **钱包**：生图类技能扣 **token**。每张图消耗多少 token（例如按分辨率区分）以后台配置为准，SKILL.md 和话术里不写死数值。
 4. **所有自动化 skill 一律没有免费试用**（负责人 2026-11-08 定，0 次）。选品单要求免费试用的，直接按 0 次处理，不拦停、不请示。唯一例外是 Temu 两个版本（非自动化流水线遗留）：新用户免费 1 次，相关文案必须保留；流水线里不得新增例外。
 5. **账号关联用方案 A**：网站记住浏览器登录态，WorkBuddy 新对话通过设备关联链接回原账号；专家包和技能包都适用。不得在对话里索要手机号、验证码、密码或支付信息。
