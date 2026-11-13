@@ -15,9 +15,9 @@ import tempfile
 import uuid
 
 ROOT = Path(__file__).resolve().parent
-ROUTES = {"brief_ready": "codex", "spec_ready": "claude", "test_failed": "claude",
-          "package_ready": "codex", "test_passed": "codex", "listed": "codex"}
-ROLES = {"codex", "claude", "muse"}
+ROUTES = {"brief_ready": "codex", "spec_ready": "muse", "test_failed": "codex",
+          "package_ready": "codex", "test_passed": "muse", "listed": "codex"}
+ROLES = {"codex", "muse"}
 SLUG = re.compile(r"[a-z0-9][a-z0-9-]{0,63}\Z")
 
 
