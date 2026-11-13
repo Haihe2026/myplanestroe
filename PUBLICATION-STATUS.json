@@ -1,7 +1,7 @@
 {
   "updated": "2026-11-13",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "homepage_designed_hero_deployed",
+  "last_change": "wechat_domain_verification_file_uploaded",
   "production_access_included": false,
   "live_sync": false,
   "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
@@ -21,5 +21,7 @@
   "real_oauth_verified_this_deployment": false,
   "real_payment_verified_this_deployment": false,
   "homepage_live_desktop_mobile_verified": true,
-  "homepage_payment_files_unchanged": 228
+  "homepage_payment_files_unchanged": 228,
+  "wechat_domain_verification_file_deployed": true,
+  "wechat_public_account_setting_saved_by_owner": false
 }
