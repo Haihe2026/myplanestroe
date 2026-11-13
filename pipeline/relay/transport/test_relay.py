@@ -12,8 +12,9 @@ class SharedRelayTests(unittest.TestCase):
                              {"skill_id": name, "stage": stage}, {"00-brief.md": "b"*40})
 
     def test_stage_routes(self):
-        for stage, role in [("brief_ready", "codex"), ("spec_ready", "claude"),
-                            ("test_failed", "claude"), ("package_ready", "codex")]:
+        for stage, role in [("brief_ready", "codex"), ("spec_ready", "muse"),
+                            ("test_failed", "codex"), ("package_ready", "codex"),
+                            ("test_passed", "muse"), ("listed", "codex")]:
             self.assertEqual(self.sample(stage)["to"], role)
 
     def test_no_in_progress_or_blocked_retrigger(self):
@@ -66,7 +67,7 @@ class SharedRelayTests(unittest.TestCase):
                 r.flush()
                 r.flush()
                 self.assertEqual(publish.call_count, 1)
-            self.assertTrue((Path(directory)/"inbox"/"claude"/(event["event_id"]+".json")).exists())
+            self.assertTrue((Path(directory)/"inbox"/"muse"/(event["event_id"]+".json")).exists())
             r.db.close()
 
     def test_request_rejects_commands_and_other_repo(self):
