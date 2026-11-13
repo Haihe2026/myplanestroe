@@ -1,0 +1,42 @@
+{
+  "updated": "2026-11-13",
+  "scope": "homepage_only",
+  "url": "https://myplanestore.com/",
+  "files": [
+    "/var/www/image-assistant/site/index.html",
+    "/var/www/image-assistant/site/site.css",
+    "/var/www/image-assistant/site/hero-plane-20261113.webp"
+  ],
+  "layout": "emerald hero with original 3D paper airplane, responsive cards",
+  "brand": "Original MyPlaneStore wordmark and paper-plane SVG retained; legal website name in header and footer",
+  "services": "Five original service URL paths retained",
+  "artwork": {
+    "mode": "built-in image_gen",
+    "type": "new original decorative art",
+    "bytes": 58906,
+    "contains_text": false,
+    "third_party_art_copied": false
+  },
+  "validation": {
+    "local_checks": 52,
+    "widths": [
+      1440,
+      1920,
+      390,
+      320
+    ],
+    "independent_qa_widths": [
+      320,
+      390,
+      1440
+    ],
+    "live_public_checks": "desktop/mobile HTTP200, artwork decoded, footer retained, no overflow",
+    "protected_files_unchanged": 228,
+    "real_provider_calls": 0
+  },
+  "nginx_changes": 0,
+  "service_restarts": 0,
+  "customer_data_changes": 0,
+  "payment_changes": 0,
+  "real_wechat_or_payment_tests": 0
+}

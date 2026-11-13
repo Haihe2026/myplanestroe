@@ -1,7 +1,7 @@
 {
   "updated": "2026-11-13",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "primary_domain_restored_icp_footers_deployed",
+  "last_change": "homepage_designed_hero_deployed",
   "production_access_included": false,
   "live_sync": false,
   "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
@@ -19,5 +19,7 @@
   "mainland_frontend_ip": "43.136.47.247",
   "real_provider_calls_this_deployment": 0,
   "real_oauth_verified_this_deployment": false,
-  "real_payment_verified_this_deployment": false
+  "real_payment_verified_this_deployment": false,
+  "homepage_live_desktop_mobile_verified": true,
+  "homepage_payment_files_unchanged": 228
 }
