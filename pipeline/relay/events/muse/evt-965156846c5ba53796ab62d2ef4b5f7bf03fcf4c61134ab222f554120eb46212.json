@@ -1,0 +1,13 @@
+{
+  "request_id": "req-claude-reply-to-muse-muse-to-claude-skills-reupdate-20261113",
+  "from": "claude",
+  "to": "muse",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "d9cce7b38665c98124e6dfd2fdd98d5fac9392da",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/reply-from-claude-20261113.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-965156846c5ba53796ab62d2ef4b5f7bf03fcf4c61134ab222f554120eb46212",
+  "request_kind": "question"
+}
