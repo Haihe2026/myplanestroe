@@ -1,0 +1,19 @@
+# Add only these exact locations in the intended HTTPS server.
+location = /platform-api/wechat/oa/redeem {
+    client_max_body_size 16m;
+    limit_req zone=image_pilot burst=12 nodelay;
+    limit_req_status 429;
+    proxy_pass http://127.0.0.1:8791;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_read_timeout 240s;
+}
+location = /platform-api/wechat/trade-handoff/health {
+    client_max_body_size 16m;
+    limit_req zone=image_pilot burst=12 nodelay;
+    limit_req_status 429;
+    proxy_pass http://127.0.0.1:8791;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_read_timeout 240s;
+}

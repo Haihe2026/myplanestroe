@@ -1,7 +1,7 @@
 {
   "updated": "2026-11-13",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "own_official_account_oauth_deployed_access_review_submitted",
+  "last_change": "trade_primary_domain_handoff_and_three_clients_2_0_15",
   "production_access_included": false,
   "live_sync": false,
   "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
@@ -30,5 +30,8 @@
   "wechat_owner_reported_qr_scannable": true,
   "wechat_real_callback_verified": false,
   "wechat_access_review": "submitted_by_owner_pending_platform_review",
-  "real_wechat_exchanges_this_deployment": 0
+  "real_wechat_exchanges_this_deployment": 0,
+  "trade_payment_url": "https://myplanestore.com/pay?skill=trade-leads",
+  "trade_handoff_contract": "trade-web-handoff-v1",
+  "real_trade_wechat_payment_tested": false
 }

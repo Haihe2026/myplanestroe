@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-13",
+  "status": "production_deployed",
+  "contract": "trade-web-handoff-v1",
+  "primary_payment_url": "https://myplanestore.com/pay?skill=trade-leads",
+  "active_shared_entry": "/opt/skill-platform/trade-primary-2.0.15-20261113/run_shared.py",
+  "preserved_previous_entry": "/opt/skill-platform/wechat-official-20261113/run_shared.py",
+  "admin_and_oauth_callback_changed": false,
+  "static_pages_changed": false,
+  "only_new_table": "trade_web_handoffs",
+  "independent_purpose_ticket_ttl": 120,
+  "one_time": true,
+  "long_term_credentials_in_url": false,
+  "business_balance_orders_or_trials_changed": false,
+  "source_sha256": {
+    "run_shared.py": "f11cc4b2c1c302d263975d6fbec075c0b88090c8969fe02a5069410e81831c74",
+    "trade_web_handoff.py": "3de88a6fbafd6203479d2bfe795c8d61a38cf7af0ff37dea378ed819489010d0"
+  },
+  "verification": {
+    "client_cases_per_channel": 109,
+    "backend_real_classes_http": 14,
+    "independent_negative": 16,
+    "linux_cases": 30,
+    "primary_host_valid": true,
+    "live_boundaries": {
+      "health": {
+        "status": 200,
+        "cookies_issued": false
+      },
+      "anonymous_me": {
+        "status": 401,
+        "cookies_issued": false
+      },
+      "unknown_handoff": {
+        "status": 401,
+        "cookies_issued": false
+      },
+      "hostile_origin": {
+        "status": 403,
+        "cookies_issued": false
+      }
+    },
+    "real_wechat_scan": false,
+    "real_payment": false,
+    "supplier_calls": 0
+  },
+  "publication_boundary": "Reviewed source only. No real tickets, cookies, customer records, databases, keys, logs, private backups or production permissions."
+}
