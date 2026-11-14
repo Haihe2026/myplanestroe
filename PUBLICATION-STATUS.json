@@ -1,7 +1,7 @@
 {
   "updated": "2026-11-14",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "trade_payment_centered_modal_deployed",
+  "last_change": "wechat_access_challenge_deployed_and_owner_business_domains_saved",
   "production_access_included": false,
   "live_sync": false,
   "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
@@ -23,7 +23,7 @@
   "homepage_live_desktop_mobile_verified": true,
   "homepage_payment_files_unchanged": 228,
   "wechat_domain_verification_file_deployed": true,
-  "wechat_public_account_setting_saved_by_owner": false,
+  "wechat_public_account_setting_saved_by_owner": true,
   "wechat_auth_mode": "own_official_account",
   "wechat_callback_origin": "https://www.myplanestore.com",
   "wechat_own_config_in_repository": false,
@@ -45,5 +45,15 @@
   "manual_confirmation_deployed": true,
   "manual_confirmation_bank_reference_required": false,
   "manual_confirmation_per_order_idempotency_preserved": true,
-  "manual_confirmation_real_customer_grants": 0
+  "manual_confirmation_real_customer_grants": 0,
+  "wechat_access_latest_challenge_deployed": true,
+  "wechat_access_latest_challenge_public_checks": 4,
+  "wechat_access_latest_challenge_owner_submission": "not_observed",
+  "wechat_external_warning_cleared": "not_verified",
+  "wechat_business_domain_configuration": "owner_screenshot_confirmed",
+  "wechat_business_domains": [
+    "www.myplanestore.com",
+    "myplanestore.com"
+  ],
+  "wechat_access_latest_oauth_code_changes": 0
 }
