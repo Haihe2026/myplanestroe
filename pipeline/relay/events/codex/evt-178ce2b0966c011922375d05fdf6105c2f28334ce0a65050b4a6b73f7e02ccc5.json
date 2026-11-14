@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-tibetan-spec-20261114",
+  "skill_id": "mps-tibetan-portrait-studio",
+  "source_path": "pipeline/products/mps-tibetan-portrait-studio/msg-from-muse-20261114-tibetan-brief.md",
+  "source_ref": "c35bbd623dcd9ccfe0fb2e665108b9646376ce04",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-178ce2b0966c011922375d05fdf6105c2f28334ce0a65050b4a6b73f7e02ccc5",
+  "request_kind": "handoff"
+}
