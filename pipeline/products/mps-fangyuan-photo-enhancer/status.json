@@ -1,0 +1,1 @@
+{"blocked": null, "claimed_at": null, "lane": "fast", "owner": null, "rounds": {"dev": 0, "spec": 0, "test": 0}, "skill_id": "mps-fangyuan-photo-enhancer", "sop": "sop-image-gen-skill-auto", "sop_version": "dc604fdca6ee7eafe83cd4cc5aad0d01185d3e06", "stage": "brief_ready", "updated_at": "2026-11-14T22:15:20+08:00", "versions": {"listed": null, "package": null}}
