@@ -1,0 +1,187 @@
+{
+  "scope": "document/assets consistency only, not Skill A2/A3 or production tests",
+  "checks": [
+    {
+      "check": "10 distinct scenes and exact keys",
+      "result": "PASS"
+    },
+    {
+      "check": "16 literal utterances and handling",
+      "result": "PASS"
+    },
+    {
+      "check": "24 description trigger terms",
+      "result": "PASS"
+    },
+    {
+      "check": "3 bilingual examples with identical size/ratio constraints",
+      "result": "PASS"
+    },
+    {
+      "check": "8 required metadata and exact welcome",
+      "result": "PASS"
+    },
+    {
+      "check": "no demo female pronouns in production prompts",
+      "result": "PASS"
+    },
+    {
+      "check": "14 fixed-source business contracts",
+      "result": "PASS"
+    },
+    {
+      "check": "7 fixed-source OA routes",
+      "result": "PASS"
+    },
+    {
+      "check": "six generation HTTP fields",
+      "result": "PASS"
+    },
+    {
+      "check": "primary domain and 8 telemetry fields",
+      "result": "PASS"
+    },
+    {
+      "check": "420-second bounded budget and no generation POST replay",
+      "result": "PASS"
+    },
+    {
+      "check": "57 SOP cases with actual DH mappings",
+      "result": "PASS"
+    },
+    {
+      "check": "21 Dunhuang requirements not claimed executed",
+      "result": "PASS"
+    },
+    {
+      "check": "3 actual independent metrics",
+      "result": "PASS"
+    },
+    {
+      "check": "authorization no charge and no manual key requirement",
+      "result": "PASS"
+    },
+    {
+      "check": "2 specific backend chapters and current 3MB constraint",
+      "result": "PASS"
+    },
+    {
+      "check": "demo pipa_back final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo pipa_back JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo mural_fairy final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo mural_fairy JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo mogao_apsara final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo mogao_apsara JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo mingsha_sunset final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo mingsha_sunset JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo crescent_night final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo crescent_night JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo apsara_dance final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo apsara_dance JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo water_sleeves final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo water_sleeves JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo dunhuang_lady final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo dunhuang_lady JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo camel_caravan final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo camel_caravan JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "demo starry_desert final SHA/size/package path",
+      "result": "PASS"
+    },
+    {
+      "check": "demo starry_desert JPEG512x768",
+      "result": "PASS"
+    },
+    {
+      "check": "10 final JPEG demos and budget",
+      "result": "PASS"
+    },
+    {
+      "check": "logo PNG512² <=500000 and SHA",
+      "result": "PASS"
+    },
+    {
+      "check": "11 actual task records, no duplicate POST/customer DB",
+      "result": "PASS"
+    },
+    {
+      "check": "visual review SHA and original/intermediate/final lineage",
+      "result": "PASS"
+    },
+    {
+      "check": "no actual credential pattern or private machine paths",
+      "result": "PASS"
+    },
+    {
+      "check": "MD table row adjacency",
+      "result": "PASS"
+    }
+  ],
+  "count": 42,
+  "result": "PASS",
+  "spec_md_sha256": "1731efb08a7cbd1cddf98fdb2f096412015d8eb6b5e50bd4d35dfe0bb6092396",
+  "spec_json_sha256": "8b46131f7526839246300bdd217250451730e3726f5cc04de6a41df182d460f9",
+  "not_executed": [
+    "client implementation",
+    "Skill Windows/Linux A2",
+    "Skill A3",
+    "real OAuth",
+    "real payment",
+    "host/browser acceptance",
+    "production deploy",
+    "automatic upload"
+  ]
+}

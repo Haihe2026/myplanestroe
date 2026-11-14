@@ -1,0 +1,42 @@
+{
+  "key": "logo",
+  "series": "主题logo",
+  "title": "敦煌写真立体主题logo",
+  "prompt": "Use case: logo-brand. Asset type: original dimensional Dunhuang portrait studio app icon. A single sculptural pear-shaped pipa with a softly looping silk ribbon, framed by a subtle camera aperture motif. Sand-gold brushed metal, tactile verdigris ceramic and warm ivory silk on a warm sand-coloured rounded-square base. A restrained lapis-blue accent, convincing material depth, shallow relief, soft contact shadows, one clear focal motif readable at small size. Not a flat vector or generic ico. No human face, deity, text, letters, numbers, brand, model name, company logo, national emblem or watermark. Original icon, no imitation of an institution or stage-show identity.",
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "requested_size": [
+    1024,
+    1024
+  ],
+  "generation_date": "2026-11-14T16:06:16+08:00",
+  "fictional_adults": true,
+  "synthetic_example_age": 25,
+  "identity_age_is_not_user_default": true,
+  "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+  "method": "registered_adapter_text_to_image",
+  "reference": null,
+  "status": "succeeded",
+  "raw_sha256": "904c3d0405a6dfd7f8583fa856438da329a0050c1d3aee6b7de101d542b2c56b",
+  "raw_bytes": 3067740,
+  "file": "logo.png",
+  "actual_generated_size": [
+    1254,
+    1254
+  ],
+  "local_resize": true,
+  "local_processing": "resize; true-color PNG; no added markings",
+  "output_size": [
+    512,
+    512
+  ],
+  "output_bytes": 480802,
+  "output_sha256": "9fdf400c88896e8dccaf6852fb4f7bf5d95a48ac97bc3468c86b6caea69acfe7",
+  "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+  "idempotency_key": "mps-dunhuang-assets-20261114-logo",
+  "actual_upstream_invoice_verified": false,
+  "visual_review": "passed dimensional topic logo512x512/480802B;01-visual-review.md",
+  "paid_generation_calls": 1,
+  "asset_role": "theme_logo",
+  "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+}

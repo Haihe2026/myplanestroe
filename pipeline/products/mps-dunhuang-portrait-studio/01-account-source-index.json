@@ -1,0 +1,341 @@
+[
+  {
+    "path": "resources/shared-image-temporary/client.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "bea554745f369b74ba9be71a8f5493822e84a338",
+    "lines": [
+      [
+        4,
+        16
+      ],
+      [
+        27,
+        35
+      ],
+      [
+        63,
+        97
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "3adf3ab108565cbd45f65aca37e79a3cd11e798c",
+    "lines": [
+      [
+        31,
+        38
+      ],
+      [
+        134,
+        183
+      ],
+      [
+        211,
+        219
+      ],
+      [
+        308,
+        350
+      ],
+      [
+        366,
+        403
+      ],
+      [
+        424,
+        464
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.14/service/registration_entries.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "950191ee007d7ee4b7a6ec3ef937c32449011e67",
+    "lines": [
+      [
+        21,
+        47
+      ],
+      [
+        49,
+        80
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.14/service/skill_access.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "8578245333199aa82a9b4de9265625d7bd35672a",
+    "lines": [
+      [
+        47,
+        87
+      ],
+      [
+        89,
+        100
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.14/core/membership.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "acdae154db7c8711d02e70bc81e4b2c1502e4bc0",
+    "lines": [
+      [
+        38,
+        74
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "7b1030c0c27a5a5478b34a6b1b2fb0d1067e806b",
+    "lines": [
+      [
+        22,
+        34
+      ],
+      [
+        68,
+        95
+      ]
+    ]
+  },
+  {
+    "path": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "6b160791acec7c3e0cf87f8ada2cf5ac849a4c0b",
+    "lines": [
+      [
+        14,
+        18
+      ],
+      [
+        89,
+        118
+      ],
+      [
+        124,
+        171
+      ],
+      [
+        208,
+        250
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_entries.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "756a5a68d7fe938fb121117551099e0300d921b6",
+    "lines": [
+      [
+        15,
+        64
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/trade-link-fix-20261111/wechat_binding.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "d65e9c138ce8ab3c2aa8dc15158c818825945ffe",
+    "lines": [
+      [
+        10,
+        16
+      ],
+      [
+        64,
+        101
+      ],
+      [
+        173,
+        198
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/wechat-official-20261113/oa_binding.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "93c3352c39dac615cb290cb49d3ad7204c08da8b",
+    "lines": [
+      [
+        22,
+        27
+      ],
+      [
+        48,
+        76
+      ],
+      [
+        141,
+        180
+      ],
+      [
+        214,
+        295
+      ],
+      [
+        304,
+        324
+      ],
+      [
+        326,
+        461
+      ],
+      [
+        464,
+        548
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/wechat-official-20261113/run_shared.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "fc3db315207a4cf5e3c400f5fe0d6deaaa3a0ba3",
+    "lines": [
+      [
+        7,
+        29
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/trade-primary-2.0.15-20261113/run_shared.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "69f76efd0e6ab482c5432c33531bd21991a90660",
+    "lines": [
+      [
+        9,
+        23
+      ],
+      [
+        26,
+        41
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/trade-primary-2.0.15-20261113/trade_web_handoff.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "1460fe63ccf3ace6caa0d77dba55ed5a74b8b416",
+    "lines": [
+      [
+        18,
+        24
+      ],
+      [
+        109,
+        136
+      ],
+      [
+        139,
+        181
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/manual-confirmation-20261113/run_ops.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "cca69a95e0093e0cf9b04d7b07a32513ba804193",
+    "lines": [
+      [
+        7,
+        31
+      ]
+    ]
+  },
+  {
+    "path": "snapshot/opt/skill-platform/manual-confirmation-20261113/manual_confirmation.py",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "5180f555e45f7716acc81af7e65c5b6ae05bde2f",
+    "lines": [
+      [
+        1,
+        7
+      ],
+      [
+        18,
+        43
+      ],
+      [
+        70,
+        99
+      ]
+    ]
+  },
+  {
+    "path": "infrastructure/effective-services.txt",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "954864a8fc4451feeb0b72589e78bcc08a9cf03e",
+    "lines": [
+      [
+        1,
+        13
+      ]
+    ]
+  },
+  {
+    "path": "infrastructure/mainland-frontend/myplanestore.com.conf",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "fdb9016b972b08b535a39f3e392016ed9762f308",
+    "lines": [
+      [
+        28,
+        76
+      ],
+      [
+        80,
+        134
+      ]
+    ]
+  },
+  {
+    "path": "infrastructure/own-wechat-20261113.public.json",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "bca08c7240a92053228d40afa394fd5404630ef6",
+    "lines": [
+      [
+        2,
+        32
+      ]
+    ]
+  },
+  {
+    "path": "infrastructure/main-domain-restore-20261112.public.json",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "9887270ac016e881d6c85f53fe1c62d97683fb19",
+    "lines": [
+      [
+        2,
+        36
+      ]
+    ]
+  },
+  {
+    "path": "infrastructure/wechat-checkout-20261111.public.json",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "f4064677e2d3af95f4fab4a69cceff6848d43f05",
+    "lines": [
+      [
+        2,
+        24
+      ]
+    ]
+  },
+  {
+    "path": "infrastructure/home-design-20261113.public.json",
+    "ref": "7255618c0085019a2e488994247967890ab0868d",
+    "blob": "1dbef73aee30b8598ddcd463e5fc5c571fbac13c",
+    "lines": [
+      [
+        2,
+        41
+      ]
+    ]
+  }
+]

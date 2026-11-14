@@ -1,0 +1,759 @@
+{
+  "repository": "Haihe2026/myplanestroe",
+  "ref": "7255618c0085019a2e488994247967890ab0868d",
+  "previous_backend_ref": "229f5e96ad349d32c076bff87766c5f27f93f93d",
+  "scope": "public source review only; no live business/provider/production access",
+  "official_read": {
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "utc": "2026-11-14T08:08:17.188490+00:00",
+    "status": 200,
+    "bytes": 284337,
+    "sha256": "7fe161594b4715268ad9fe86438dcb5d3818c90621ffb86997b64a68ff04408e"
+  },
+  "sources": [
+    {
+      "path": "resources/shared-image-temporary/client.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "bea554745f369b74ba9be71a8f5493822e84a338",
+      "lines": [
+        [
+          4,
+          16
+        ],
+        [
+          27,
+          35
+        ],
+        [
+          63,
+          97
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/shared_platform.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "3adf3ab108565cbd45f65aca37e79a3cd11e798c",
+      "lines": [
+        [
+          31,
+          38
+        ],
+        [
+          134,
+          183
+        ],
+        [
+          211,
+          219
+        ],
+        [
+          308,
+          350
+        ],
+        [
+          366,
+          403
+        ],
+        [
+          424,
+          464
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/registration_entries.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "950191ee007d7ee4b7a6ec3ef937c32449011e67",
+      "lines": [
+        [
+          21,
+          47
+        ],
+        [
+          49,
+          80
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/service/skill_access.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "8578245333199aa82a9b4de9265625d7bd35672a",
+      "lines": [
+        [
+          47,
+          87
+        ],
+        [
+          89,
+          100
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/membership.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "acdae154db7c8711d02e70bc81e4b2c1502e4bc0",
+      "lines": [
+        [
+          38,
+          74
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/manual_payments.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "7b1030c0c27a5a5478b34a6b1b2fb0d1067e806b",
+      "lines": [
+        [
+          22,
+          34
+        ],
+        [
+          68,
+          95
+        ]
+      ]
+    },
+    {
+      "path": "pipeline/products/mps-id-photo-background/backend-patch/gemini-support-20261107/gemini_support.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "6b160791acec7c3e0cf87f8ada2cf5ac849a4c0b",
+      "lines": [
+        [
+          14,
+          18
+        ],
+        [
+          89,
+          118
+        ],
+        [
+          124,
+          171
+        ],
+        [
+          208,
+          250
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/wechat_entries.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "756a5a68d7fe938fb121117551099e0300d921b6",
+      "lines": [
+        [
+          15,
+          64
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/trade-link-fix-20261111/wechat_binding.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "d65e9c138ce8ab3c2aa8dc15158c818825945ffe",
+      "lines": [
+        [
+          10,
+          16
+        ],
+        [
+          64,
+          101
+        ],
+        [
+          173,
+          198
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/wechat-official-20261113/oa_binding.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "93c3352c39dac615cb290cb49d3ad7204c08da8b",
+      "lines": [
+        [
+          22,
+          27
+        ],
+        [
+          48,
+          76
+        ],
+        [
+          141,
+          180
+        ],
+        [
+          214,
+          295
+        ],
+        [
+          304,
+          324
+        ],
+        [
+          326,
+          461
+        ],
+        [
+          464,
+          548
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/wechat-official-20261113/run_shared.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "fc3db315207a4cf5e3c400f5fe0d6deaaa3a0ba3",
+      "lines": [
+        [
+          7,
+          29
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/trade-primary-2.0.15-20261113/run_shared.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "69f76efd0e6ab482c5432c33531bd21991a90660",
+      "lines": [
+        [
+          9,
+          23
+        ],
+        [
+          26,
+          41
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/trade-primary-2.0.15-20261113/trade_web_handoff.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "1460fe63ccf3ace6caa0d77dba55ed5a74b8b416",
+      "lines": [
+        [
+          18,
+          24
+        ],
+        [
+          109,
+          136
+        ],
+        [
+          139,
+          181
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/manual-confirmation-20261113/run_ops.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "cca69a95e0093e0cf9b04d7b07a32513ba804193",
+      "lines": [
+        [
+          7,
+          31
+        ]
+      ]
+    },
+    {
+      "path": "snapshot/opt/skill-platform/manual-confirmation-20261113/manual_confirmation.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "5180f555e45f7716acc81af7e65c5b6ae05bde2f",
+      "lines": [
+        [
+          1,
+          7
+        ],
+        [
+          18,
+          43
+        ],
+        [
+          70,
+          99
+        ]
+      ]
+    },
+    {
+      "path": "infrastructure/effective-services.txt",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "954864a8fc4451feeb0b72589e78bcc08a9cf03e",
+      "lines": [
+        [
+          1,
+          13
+        ]
+      ]
+    },
+    {
+      "path": "infrastructure/mainland-frontend/myplanestore.com.conf",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "fdb9016b972b08b535a39f3e392016ed9762f308",
+      "lines": [
+        [
+          28,
+          76
+        ],
+        [
+          80,
+          134
+        ]
+      ]
+    },
+    {
+      "path": "infrastructure/own-wechat-20261113.public.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "bca08c7240a92053228d40afa394fd5404630ef6",
+      "lines": [
+        [
+          2,
+          32
+        ]
+      ]
+    },
+    {
+      "path": "infrastructure/main-domain-restore-20261112.public.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "9887270ac016e881d6c85f53fe1c62d97683fb19",
+      "lines": [
+        [
+          2,
+          36
+        ]
+      ]
+    },
+    {
+      "path": "infrastructure/wechat-checkout-20261111.public.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "f4064677e2d3af95f4fab4a69cceff6848d43f05",
+      "lines": [
+        [
+          2,
+          24
+        ]
+      ]
+    },
+    {
+      "path": "infrastructure/home-design-20261113.public.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "1dbef73aee30b8598ddcd463e5fc5c571fbac13c",
+      "lines": [
+        [
+          2,
+          41
+        ]
+      ]
+    },
+    {
+      "path": "resources/upstreams/README.md",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "13ea469ee8a8fa15961191210b4eb12aade09186",
+      "lines": [
+        [
+          3,
+          11
+        ],
+        [
+          21,
+          30
+        ]
+      ],
+      "line_count": 31
+    },
+    {
+      "path": "resources/upstreams/assets.public.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "f54048b056d841b2175e2626fd994fe59a5d1a04",
+      "lines": [
+        [
+          1,
+          29
+        ]
+      ],
+      "line_count": 30
+    },
+    {
+      "path": "resources/upstreams/catalog.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "78c630cecb11e24893449ae60a5012890b93e123",
+      "lines": [
+        [
+          1,
+          9
+        ],
+        [
+          423,
+          444
+        ]
+      ],
+      "line_count": 833
+    },
+    {
+      "path": "resources/upstreams/code-map.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "bf9f18b58e772643743a99667a5d3926bf45251a",
+      "lines": [
+        [
+          1,
+          10
+        ]
+      ],
+      "line_count": 11
+    },
+    {
+      "path": "resources/VALIDATION.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "0065df0db63405d113352f81a3309a14f2a02b0e",
+      "lines": [
+        [
+          1,
+          34
+        ]
+      ],
+      "line_count": 34
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/server.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "91251706cf653880dd4e73c76cbc55d07544f670",
+      "lines": [
+        [
+          245,
+          274
+        ],
+        [
+          294,
+          324
+        ]
+      ],
+      "line_count": 531
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.14/core/image_inputs.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "749b820fccb6f04797488932d48401a01fea6396",
+      "lines": [
+        [
+          8,
+          51
+        ]
+      ],
+      "line_count": 69
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.24/sunburst.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "648703366d49d4a14b3cece881402f075a0ad5d2",
+      "lines": [
+        [
+          12,
+          17
+        ],
+        [
+          142,
+          185
+        ]
+      ],
+      "line_count": 208
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.35-r2/image_retention.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "874ce5672ef5974e992f37eb37c00a2766a74d4a",
+      "lines": [
+        [
+          10,
+          11
+        ],
+        [
+          49,
+          70
+        ],
+        [
+          82,
+          82
+        ],
+        [
+          153,
+          182
+        ]
+      ],
+      "line_count": 188
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.35-r2/run_shared.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "705741099ea12ddc2badbaf835c53afd2052d00f",
+      "lines": [
+        [
+          1,
+          8
+        ]
+      ],
+      "line_count": 9
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.52/asset_registry.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "279e7699bc1f449e36ea23e36272c9c3e876864d",
+      "lines": [
+        [
+          23,
+          28
+        ],
+        [
+          88,
+          96
+        ]
+      ],
+      "line_count": 97
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.57/resource_adapter.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "019291627ed9ed940f0d4962498b6e372a634a5a",
+      "lines": [
+        [
+          17,
+          20
+        ],
+        [
+          56,
+          64
+        ],
+        [
+          94,
+          159
+        ]
+      ],
+      "line_count": 191
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.57/safe_http.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "f72c50a332c97c2abb024f8769ad8ed9732718bf",
+      "lines": [
+        [
+          26,
+          57
+        ]
+      ],
+      "line_count": 57
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/child_resource.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "fff13531e9e02491c20cf5ac45dce755b576d59c",
+      "lines": [
+        [
+          18,
+          22
+        ],
+        [
+          44,
+          91
+        ],
+        [
+          93,
+          124
+        ]
+      ],
+      "line_count": 125
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.59-child-photo/run_shared.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "5ebc3b29ede9d0f50b711735608fa07bcc63fa75",
+      "lines": [
+        [
+          4,
+          22
+        ]
+      ],
+      "line_count": 23
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new-only-policy.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "ad380cf34bdd2801a49686fa2be08e2a77d0f40f",
+      "lines": [
+        [
+          1,
+          8
+        ]
+      ],
+      "line_count": 8
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/new_only.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "280a7cbdd3aec75d2a3572661d7e8cf45ea1813f",
+      "lines": [
+        [
+          18,
+          49
+        ],
+        [
+          55,
+          82
+        ],
+        [
+          96,
+          133
+        ],
+        [
+          158,
+          176
+        ]
+      ],
+      "line_count": 188
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.60-new-resource-only/run_shared.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "3c75600ea5d4a30bf9fa3104788d5849b999e59a",
+      "lines": [
+        [
+          4,
+          13
+        ],
+        [
+          33,
+          39
+        ]
+      ],
+      "line_count": 40
+    },
+    {
+      "path": "snapshot/opt/skill-platform/member-0.10.61-wechat/run_shared.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "725387865696e31978cdc52c0b0f807c6d2fc2ec",
+      "lines": [
+        [
+          4,
+          12
+        ]
+      ],
+      "line_count": 13
+    },
+    {
+      "path": "snapshot/opt/skill-platform/provider-costs-20261105/usage_capture.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "3ab7b3b09d1ffa10b1eeeccd1e69608bd87fefcb",
+      "lines": [
+        [
+          6,
+          37
+        ],
+        [
+          52,
+          83
+        ]
+      ],
+      "line_count": 84
+    },
+    {
+      "path": "snapshot/opt/skill-platform/provider-costs-20261105/cost_store.py",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "04a16d35341c0a5051cf24657834a4fc2bcfdd5f",
+      "lines": [
+        [
+          15,
+          31
+        ],
+        [
+          38,
+          43
+        ],
+        [
+          59,
+          69
+        ]
+      ],
+      "line_count": 69
+    },
+    {
+      "path": "docs/sop/sop-image-gen-skill-auto.md",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "43d48ec5625854e4d66b3ff7f754b7f0e2e0eaa6",
+      "lines": [
+        [
+          150,
+          158
+        ],
+        [
+          190,
+          194
+        ],
+        [
+          230,
+          231
+        ],
+        [
+          824,
+          830
+        ],
+        [
+          855,
+          855
+        ]
+      ],
+      "line_count": 1372
+    },
+    {
+      "path": "pipeline/config.yaml",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "0dca878e7778521c97031abd3e587c4395ebad3c",
+      "lines": [
+        [
+          1,
+          16
+        ]
+      ],
+      "line_count": 17
+    },
+    {
+      "path": "pipeline/products/mps-dunhuang-portrait-studio/00-brief.md",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "463fd6d6e1cf49ff921835345fc0d7c0bb7e11d6",
+      "lines": [
+        [
+          1,
+          66
+        ]
+      ],
+      "line_count": 66
+    },
+    {
+      "path": "pipeline/products/mps-dunhuang-portrait-studio/status.json",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "ea55734c0b7eeea845f2ff9e0601fe5e0550f7ee",
+      "lines": [
+        [
+          1,
+          21
+        ]
+      ],
+      "line_count": 21
+    },
+    {
+      "path": "pipeline/products/mps-dunhuang-portrait-studio/log.md",
+      "ref": "7255618c0085019a2e488994247967890ab0868d",
+      "blob": "51388187221510131420ad7b0906ddc306380d1c",
+      "lines": [
+        [
+          1,
+          1
+        ]
+      ],
+      "line_count": 2
+    }
+  ]
+}
+

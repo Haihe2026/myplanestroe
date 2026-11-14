@@ -1,0 +1,633 @@
+{
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "authorized_final_demos": 10,
+  "succeeded": 10,
+  "upstream_generation_calls": 10,
+  "auth_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838",
+  "reference_reused_from_prior_owned_synthetic_asset": true,
+  "new_reference_seed_calls": 0,
+  "items": [
+    {
+      "key": "pipa_back",
+      "series": "敦煌主题艺术写真",
+      "title": "飞天反弹琵琶",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. One pear-shaped pipa held behind and just above the back of her shoulders, one hand supporting the clearly visible neck above the head, the other arm making a natural plucking gesture at the strings behind the shoulder. Gentle three-quarter back-side body angle, face turned naturally toward the viewer, plausible shoulder joints, exactly two complete arms and two hands, one instrument. The instrument must read as behind the shoulders, not held in front of the chest, and must not pierce the neck or head. Opaque fitted dance top, layered long skirt, a clear sash, restrained neck and upper-arm jewellery, one short trailing ribbon. Muted vermilion, warm sand gold and verdigris. Original abstract mural-inspired studio backdrop. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:05:54+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "3b3ac1b632e39279edacc594f2cd5e4c75f8528222dfc9b432628663f6775842",
+      "raw_bytes": 2213620,
+      "file": "pipa_back.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 123915,
+      "output_sha256": "c717729b5346e4ec55c2d9f131e5c39625b0bbb6450a2f534a565570d1a40444",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-pipa_back",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "4c57ff502f1dc905a7fd068da05ec7e3ac41359fb623a0f78237c56d925bd17e",
+        "bytes": 598169,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "mural_fairy",
+      "series": "敦煌主题艺术写真",
+      "title": "敦煌壁画仙女",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A calm front to three-quarter standing portrait, original abstract mural-inspired border patterns and soft lotus-petal ornament behind her, not a replica of any cave mural. An opaque coherent Dunhuang-inspired costume with layered long skirt, matching soft drape, restrained necklace and a small floral forehead motif, one sculpted hair bun. Earth red, muted turquoise, lapis blue and warm ochre with subtle background texture. Keep the face and skin photographic and clean, never cracked or painted like an ancient artefact. This is a poised mural-themed portrait, not the airborne pose of the Mogao scene. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:05:57+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "c14cc9b3cc267471bfa4e6e255a2ef9d0d968df4271b2feae19106e631e227b3",
+      "raw_bytes": 2740410,
+      "file": "mural_fairy.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 171459,
+      "output_sha256": "9cbb023e78f0b2226c55d446cc233d93961c232c24f33b66d729557f4dfe78b3",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-mural_fairy",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "68c2680808d531a2718c6cb9a11b865a134f3aadd587c938f13e301e8f30008e",
+        "bytes": 692627,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "mogao_apsara",
+      "series": "敦煌主题艺术写真",
+      "title": "莫高窟飞天",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A graceful anatomically plausible dance pose conveying apsara flight through a gently arched diagonal body line, flowing layered skirt and two clearly continuous looping silk ribbons. Opaque dignified dance top and skirt, restrained necklace and armbands, one coordinated high bun. Original softly lit cave-like studio architecture and indistinct mineral-pigment colour layers, no identifiable copied grotto interior, no clearly depicted second human, deity face or crowd in the backdrop. Face unobstructed; ribbons attach and travel plausibly, never through face, neck, torso or fingers. No Western angel wings or fantasy armour. This is AI art, not a photograph inside the real Mogao caves. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:05:59+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "4713deeed259b2ba868ef92b8394d6f57b06e6f2345ae1768f19d975d0ba7eb4",
+      "raw_bytes": 2174594,
+      "file": "mogao_apsara.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 120774,
+      "output_sha256": "b7a7c28eaaa519214bc3b95b8b226d0df95be4ec65610ecae1d698663b09ac24",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-mogao_apsara",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "ccfcdd12b9537fbb2055fe971864061f123c59630e48e2d3c71a29b5b56d8a91",
+        "bytes": 585671,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "mingsha_sunset",
+      "series": "敦煌主题艺术写真",
+      "title": "鸣沙山沙漠飞天",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. She stands with both feet naturally supported in a warm sunset desert composition inspired by the layered curved dunes of Mingsha Mountain. One coherent opaque Dunhuang-inspired dance top and long skirt, a single wind-lifted matching drape, restrained necklace and bun ornaments. Soft raking warm sunlight and fine sand ridges; clean face and believable fabric movement. No water, snow mountains, sea, pyramids or unrelated landmarks, no camels or other people. Scenic artistic background, not a claim of a real location shoot or exact current viewpoint. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:06:01+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "f9f5324e4f2cd6775eb704aca7c60a705d1301c8eb103cbfa222546ce76cc92b",
+      "raw_bytes": 2193840,
+      "file": "mingsha_sunset.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 130611,
+      "output_sha256": "c42c4a10b1ebbe3da71751f769a0fa2c3d8ab8f4ae174923b96b303b3dd80883",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-mingsha_sunset",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "b94d92a81f6c5bfe4ce74a167bc45ee2350cb1f437b641612e9d0413fe897018",
+        "bytes": 566445,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "crescent_night",
+      "series": "敦煌主题艺术写真",
+      "title": "月牙泉夜景飞天",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A grounded standing portrait at blue hour with a small clearly crescent-shaped water surface in the distant landscape, softly enclosed by curving desert dunes. One opaque coordinated Dunhuang-inspired costume, layered skirt, graceful drape, restrained gold-toned necklace and one sculpted bun. Soft explainable portrait fill light against restrained warm landscape glints. Do not stand in the spring or on heritage structures. Water must be a distant crescent, not a full round lake, sea or waterfall. No invented prominent buildings, other people or camels. An artistic interpretation, not verified real night lighting or exact tourist-site photography. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:06:03+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "fd52a26d40f934d18b2a79f7044d825688292d35dfb35e38ee39769eda6e5239",
+      "raw_bytes": 1986007,
+      "file": "crescent_night.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 101630,
+      "output_sha256": "88eafe3533af4c67d1b7f8605d3041adf163ae3af4e7e818ece25e7da5469197",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-crescent_night",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "3646b92d1d063635caecc02afb7d165dab8818f250f46cd83fe5667fe3e91f9e",
+        "bytes": 520596,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "apsara_dance",
+      "series": "敦煌主题艺术写真",
+      "title": "敦煌乐舞飞天",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A grounded Dunhuang-inspired solo dance still with a clear centre of balance, one foot gently lifted, a supple side-turn and two relaxed readable hands with plausible wrist and elbow angles. Opaque costume, layered skirt with a clear waist sash, restrained ornaments and short flowing ribbons, a coherent bun with a small ornament. Original abstract rhythm-like mural patterns on a quiet warm-ochre studio backdrop. Default is empty hands: no instrument, band, accompanying dancer or copied stage-show costume. Differentiate from back-pipa and long water-sleeve scenes through the complete grounded body pose and short ribbon movement. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:06:05+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "642c1a8f383bd5856106272124c6723dfeb7cb5f791f7efee9fa7e035d54f2ab",
+      "raw_bytes": 2090731,
+      "file": "apsara_dance.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 114197,
+      "output_sha256": "cd11ed76f15be2ebfb4f96de0bdf3a0ea1da1f9c753f3ba7fd0a4cbee3083626",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-apsara_dance",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "6b0f8308ee39de833a71ce3b8f013d8c282e4e1b2c891a7cb3edb87e1188370a",
+        "bytes": 559971,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "water_sleeves",
+      "series": "敦煌主题艺术写真",
+      "title": "飞天水袖舞",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A modern Dunhuang-inspired stage water-sleeve dance portrait, explicitly an artistic stage interpretation rather than reconstruction of a cave dance. Two long opaque silk sleeve extensions visibly connect to the two garment sleeves, each forms its own readable arc; both hands and the original two arms remain anatomically coherent. The face is unobstructed, the layered long skirt reaches the floor, a stable grounded pose and coordinated bun/necklace complete the costume. Muted ivory, vermilion and turquoise against a simple dark warm studio backdrop. Sleeves are fabric, not flowing water, extra arms or tight wraps around the neck. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:06:07+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "4ca34c31aaa5abf6a2b1a287a3d7bf93c14ca553ada2113367a4e26887992670",
+      "raw_bytes": 2093577,
+      "file": "water_sleeves.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 111246,
+      "output_sha256": "b8c439c2e183a29ca15b1b97e4e677b26833d8aeac59a7838f5797cba578bd77",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-water_sleeves",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "8933f37f74dfe7a47d784b7767a35162513ae3f19755e8d6f58ff49f53edb935",
+        "bytes": 542613,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "dunhuang_lady",
+      "series": "敦煌主题艺术写真",
+      "title": "敦煌古装仕女",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A dignified stationary lady portrait inspired generally by Dunhuang mural culture: broad-sleeved opaque upper garment, a layered long skirt, naturally falling silk drape, restrained hair bun, one small flower pin and optional tiny floral forehead ornament. A calm seated pose on a simple unbranded stool, hands relaxed and visible, feet naturally supported. Warm ochre, muted earth-red and blue-green geometric mural border in an original studio composition. No airborne motion, no wings or wedding crown. Do not present this as a precise Tang dynasty costume or exact reconstruction of the Five Dynasties donor figures; do not merely reuse the reference Hanfu outfit. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:06:09+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "854a9b87f69242197831854dfb92921d626df05077279f3456404db0e1fd0125",
+      "raw_bytes": 2323199,
+      "file": "dunhuang_lady.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 146147,
+      "output_sha256": "20f03413c78304c4f082020a5519921f7127c2f510b7d1f9e463bcb5f4760346",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-dunhuang_lady",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "93292ef99f92750f6b1ae0ce48ecc0eeaf4e4810c01281bf02dcbd740aad1b47",
+        "bytes": 613786,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "camel_caravan",
+      "series": "敦煌主题艺术写真",
+      "title": "沙漠驼队飞天",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A single grounded adult foreground portrait in an opaque coordinated Dunhuang-inspired costume with flowing long skirt and a modest drape, restrained jewellery and a clear bun. In the distance, three small camels travel in a line along a curved desert ridge in warm late-afternoon light. Each camel has believable legs, humps, scale and occlusion; they carry no riders. Exactly one human in the whole image: no camel driver, tourist, rider, companion or crowd. Clothing never tangles with animals. Original artistic scenic composition, not a photograph of a real tour. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:06:11+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "00b1061f00e8e8acd510e9d8b929be752d82cfe9d86e38e97026694687dfa0e3",
+      "raw_bytes": 2489537,
+      "file": "camel_caravan.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 171395,
+      "output_sha256": "fa558cb42edbefa99b8e02ed8eaa5867d2f7572961f6192602297c1d2db701eb",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-camel_caravan",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "93d150842fe9698a1e81a97c8c9f30040489b37bc7b0371307f135ad198bc557",
+        "bytes": 682656,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    },
+    {
+      "key": "starry_desert",
+      "series": "敦煌主题艺术写真",
+      "title": "星空沙漠飞天",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A grounded adult portrait with a graceful flowing-ribbon pose and an opaque coordinated Dunhuang-inspired dance top and long skirt. A broad distant desert dune silhouette beneath a restrained clear star field, deep indigo, warm sand gold and muted turquoise. Believable soft portrait light keeps her face natural and legible. No crescent spring or other water, no camels, buildings, giant planets or other people; no supernatural glow or wings. Modern composite artistic scene, not an astronomical measurement, exact Milky Way position or real location photograph. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition.",
+      "asset_id": "aisplice",
+      "model": "gpt-image-2.5-ext",
+      "requested_size": [
+        1024,
+        1536
+      ],
+      "generation_date": "2026-11-14T16:06:13+08:00",
+      "fictional_adults": true,
+      "synthetic_example_age": 25,
+      "identity_age_is_not_user_default": true,
+      "rights": "通过登记资源生成的虚构成年人敦煌主题艺术写真演示资产或主题 logo，供本技能开发、打包与展示使用。",
+      "method": "registered_adapter_reference_edit_with_public_synthetic_input_url",
+      "reference": {
+        "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+        "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+        "fictional_adults": true,
+        "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+        "people": 1,
+        "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+        "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+        "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+      },
+      "status": "succeeded",
+      "raw_sha256": "75356b04ab4e47950f483fa502ed20ff04dacd4e9adbc268d07875ca2f436a8b",
+      "raw_bytes": 2287422,
+      "file": "starry_desert.jpg",
+      "actual_generated_size": [
+        1024,
+        1536
+      ],
+      "local_resize": true,
+      "local_processing": "original1024x1536 -> true-colour PNG512x768 -> JPEG quality92 subsampling0 optimize; no crop, pose/content or generation changes",
+      "output_size": [
+        512,
+        768
+      ],
+      "output_bytes": 141855,
+      "output_sha256": "c5242607d01135ac44e26d9c782c7dbe46b5583c78e6b77653f5025020b6fb1f",
+      "authorization_ref": "e90fea9cf6c36382495a7c32fe55fb146e507838:pipeline/products/mps-dunhuang-portrait-studio/01-asset-plan-20261114.json",
+      "idempotency_key": "mps-dunhuang-assets-20261114-starry_desert",
+      "actual_upstream_invoice_verified": false,
+      "visual_review": "passed original full PNG plus final JPEG contact sheet; four key JPEG/PNG full-size comparisons passed; see01-visual-review.md",
+      "asset_role": "development_demo",
+      "disclosure": "AI 生成敦煌写真，非实拍",
+      "intermediate_png": {
+        "sha256": "dbfc55e46b51fecdc03045b25284e3ffe698898e7b27afb7b6e3476e6d1f125f",
+        "bytes": 598832,
+        "size": [
+          512,
+          768
+        ],
+        "kept_locally": true
+      },
+      "output_format": "JPEG",
+      "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+    }
+  ],
+  "cost": {
+    "unit_usd_estimate": 0.0065,
+    "total_demo_usd_estimate": 0.065,
+    "invoice_verified": false
+  },
+  "scope": "New original Dunhuang-themed reference edits using one owned synthetic adult identity. Demo age/gender/face are not customer defaults. No third-party artwork or real person photo input.",
+  "compact_3mb": true,
+  "package_demo_bytes": 1333229,
+  "compact_source_ref": "df2c195c4cbb3b6ad977b6e348627168b83c8fff:docs/sop/sop-image-gen-skill-auto.md",
+  "package_policy": "use ten JPEG files directly under assets/, bare filenames in demos.json; intermediate PNGs are local source evidence only, excluded from package and repository deliverables",
+  "visual_review": "passed",
+  "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+}

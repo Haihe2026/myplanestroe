@@ -1,0 +1,11 @@
+{
+  "demos": 10,
+  "logo": 1,
+  "upstream_calls": 11,
+  "compression_calls": 0,
+  "demo_bytes": 1333229,
+  "image_only_zip_including_external_logo_bytes": 1815941,
+  "package_zip_limit": 3000000,
+  "suggested_package_budget": 2500000,
+  "actual_skill_zip_exists": false
+}

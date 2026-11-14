@@ -1,8 +1,19 @@
 {
-  "at": "2026-11-14T15:55:58+08:00",
+  "at": "2026-11-14T16:37:47+08:00",
   "url": "https://open.workbuddy.cn/docs/skill",
   "status": 200,
   "bytes": 284337,
   "sha256": "7fe161594b4715268ad9fe86438dcb5d3818c90621ffb86997b64a68ff04408e",
-  "method": "live HTTPS GET"
+  "method": "fresh HTTPS GET; read visible skill structure/frontmatter and references/scripts/templates instructions",
+  "required_fields": [
+    "name",
+    "display_name",
+    "display_name_en",
+    "description",
+    "description_zh",
+    "description_en",
+    "version",
+    "author"
+  ],
+  "applicable_type": "workbuddy-skill; expert not applicable"
 }

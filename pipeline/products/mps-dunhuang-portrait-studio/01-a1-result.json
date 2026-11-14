@@ -1,0 +1,24 @@
+{
+  "result": "PASS",
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "spec_md_sha256": "1731efb08a7cbd1cddf98fdb2f096412015d8eb6b5e50bd4d35dfe0bb6092396",
+  "spec_json_sha256": "8b46131f7526839246300bdd217250451730e3726f5cc04de6a41df182d460f9",
+  "open_blockers": [],
+  "closed_findings": ["DH-A1-01", "DH-A1-02", "DH-A1-03"],
+  "reviewed_assets": {
+    "demos": 10,
+    "logo": 1,
+    "demo_total_bytes": 1333229,
+    "logo_bytes": 480802,
+    "visual_review_sha256": "b34cefe1fe55db86b526adaa762880ab58ab0f8b3a5d4c89011f4a2f134a877b"
+  },
+  "reviewed_demo_count": 10,
+  "reviewed_logo_count": 1,
+  "review_scope": "Independent internal A1 document review of fixed MD/JSON, latest SOP/config, ten Dunhuang scenes, adult-self/single-person scope and three consents, inherited state machine, public metadata and three bilingual examples, fixed payment/backend/upstream contracts, eight-field telemetry and funnel definitions, 57 stage-six mappings and 21 Dunhuang requirements, final ten JPEG and external logo hashes/dimensions, and independent visual evidence. No Skill execution/A2/A3, production or financial changes, business/provider calls, or upload. Muse A1 approval remains a separate next step.",
+  "limits": [
+    "Skill implementation and both-platform A2 remain unexecuted requirements.",
+    "No final Skill ZIP exists; the 3000000-byte maximum must be checked on the actual later package.",
+    "Visual and source records do not prove real-person fidelity, historical reconstruction, real OAuth/payment, supplier deletion/invoice, production-byte identity, host behavior or platform publication."
+  ],
+  "report": "01-a1-review.md"
+}
