@@ -1,0 +1,10 @@
+{
+  "request_id": "req-codex-to-muse-tibetan-stop-pin-receipt-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-tibetan-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "468b30b40c33a1d5ec010994a8d8b09daf565cf2",
+  "source_path": "pipeline/products/mps-tibetan-portrait-studio/msg-to-muse-20261114-tibetan-stop-pin-corrected-receipt.md",
+  "kind": "question"
+}
