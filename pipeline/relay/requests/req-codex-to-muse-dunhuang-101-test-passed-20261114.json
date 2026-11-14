@@ -1,0 +1,10 @@
+{
+  "request_id": "req-codex-to-muse-dunhuang-101-test-passed-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "9125d06e823a949c8ff5bf2be33e30127bec49b7",
+  "source_path": "pipeline/products/mps-dunhuang-portrait-studio/msg-to-muse-20261114-dunhuang-101-test-passed.md",
+  "kind": "handoff"
+}
