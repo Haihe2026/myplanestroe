@@ -1,1 +1,2 @@
 2026-11-14T15:50:14+08:00 | muse | init → brief_ready | 第十轮调研选定敦煌写真照相馆（mps-dunhuang-portrait-studio），P1、fast 车道；调研记录 2026-11-14-round10.md，选品单 00-brief.md 已投，派 Codex 写规格。串行前置：汉服 1.0.1 已 test_passed 并交付 LI 待上传（未 submitted），本轮按 LI 2026-11-14 直接启动令执行。
+2026-11-14T16:00:50+08:00 | codex | brief_ready → spec_in_progress | 沿原事件claim核对固定brief指纹及当前状态；按负责人本聊天“从现在按最新仓库程序执行”开展本轮，G7/已交付汉服不机械等待上传。实时在线读取WorkBuddy技能页200并留哈希；准备成人本人单人敦煌十模板规格、十示例及一主题logo，支付和上游接入逐项核实；按两角色SOP交Muse审规格，不扩大生产/财务/上架权限。
