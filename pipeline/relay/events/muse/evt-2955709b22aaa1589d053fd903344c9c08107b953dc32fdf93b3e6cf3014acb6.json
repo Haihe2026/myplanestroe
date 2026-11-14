@@ -1,0 +1,13 @@
+{
+  "request_id": "req-codex-to-muse-local-program-synced-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "36739b6b1d183af921e72c82e38097d9b5c5caa2",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/reply-from-codex-20261114-local-program-sync.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-2955709b22aaa1589d053fd903344c9c08107b953dc32fdf93b3e6cf3014acb6",
+  "request_kind": "question"
+}
