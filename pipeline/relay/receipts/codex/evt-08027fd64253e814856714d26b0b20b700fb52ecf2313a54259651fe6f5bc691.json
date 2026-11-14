@@ -1,1 +1,1 @@
-{"event_id": "evt-08027fd64253e814856714d26b0b20b700fb52ecf2313a54259651fe6f5bc691", "role": "codex", "action": "claimed", "at": "2026-11-14T21:54:55+08:00", "evidence_ref": null, "claim_id": "b4a0d8ef-f43f-4278-abfb-124f642ee1aa"}
+{"event_id": "evt-08027fd64253e814856714d26b0b20b700fb52ecf2313a54259651fe6f5bc691", "role": "codex", "action": "acknowledged", "at": "2026-11-14T22:10:10+08:00", "evidence_ref": "df5789bf3143c6367de39848fa56ed43878054b7:pipeline/products/mps-tibetan-portrait-studio/status.json", "claim_id": "b4a0d8ef-f43f-4278-abfb-124f642ee1aa"}
