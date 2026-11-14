@@ -7,3 +7,24 @@
 #tiers .tier-choice .tier-bonus{display:block;color:#ffe39b;font-size:16px;font-weight:700;margin-top:12px;line-height:1.5}#tiers .tier-credit{opacity:.8;margin-top:6px}.tier-explanation{font-size:12px;line-height:1.7;opacity:.85}#tiers .tier-choice{height:auto;min-height:250px}
 
 #tiers .tier-choice:hover:enabled .tier-bonus,#tiers .tier-choice:focus-visible .tier-bonus{color:#087a50}
+
+/* Explicit payment action on each existing tier; preserve order and amount checks. */
+#tiers .tier-pay-action{display:block;width:100%;margin-top:16px;padding:11px 8px;background:#10b975;color:#fff;border:1px solid #64dfac;border-radius:6px;font-size:15px;font-weight:750;text-align:center;line-height:1.5}#tiers .tier-choice:hover .tier-pay-action{background:#078459;color:#fff}#tiers .tier-choice{cursor:pointer}
+
+/* Payment is in the top layer, independent of page scroll and background art. */
+#trade-payment-dialog{position:fixed;inset:0;margin:auto;width:min(520px,calc(100% - 28px));max-height:calc(100vh - 28px);max-height:calc(100dvh - 28px);padding:22px;border:1px solid #83cbb1;border-radius:16px;background:#083f30;color:#f0fff8;box-shadow:0 24px 90px #00180ec0;overflow:auto;overscroll-behavior:contain;line-height:1.6}
+#trade-payment-dialog::backdrop{background:#001a15b8;backdrop-filter:blur(5px)}
+.trade-payment-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.trade-payment-heading h2{margin:0;font-size:22px;line-height:1.4}
+#trade-payment-close{flex:none;min-width:40px;min-height:40px;padding:0;background:#ffffff0a;border-color:#91c9b080;font-size:27px;line-height:1}
+#trade-payment-dialog #order{margin:0;padding:0;border:0;text-align:center}
+#trade-payment-dialog #order-label{margin:8px 0 14px;font-size:15px;font-weight:700;overflow-wrap:anywhere}
+#trade-payment-status{margin:12px 0;font-size:14px;text-align:center;overflow-wrap:anywhere}
+#trade-payment-dialog .qrs img{display:block;width:min(230px,100%);max-height:48vh;max-height:48dvh;object-fit:contain;margin:auto;border-radius:8px}
+#trade-payment-dialog .qrs figure{width:100%;min-width:0}
+#trade-payment-dialog .qrs figcaption{font-size:12px;margin:5px 0 12px}
+#trade-payment-dialog .invoice{font-size:12px;line-height:1.7;margin:12px 0}
+#trade-payment-dialog #reported{width:100%;min-height:46px}
+#trade-payment-dialog #order>p:last-child{font-size:12px;margin:10px 0 0}
+body.trade-payment-open{overflow:hidden}
+@media(max-width:540px){#trade-payment-dialog{padding:17px}.trade-payment-heading h2{font-size:20px}#trade-payment-dialog #order-label{font-size:14px}}

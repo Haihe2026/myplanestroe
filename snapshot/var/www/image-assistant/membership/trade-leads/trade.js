@@ -2,7 +2,7 @@
  const $=id=>document.getElementById(id),q=new URLSearchParams(location.search),skill=q.get('skill')||'trade-leads';
  if(skill==='pet'){location.replace('/membership/pet/');return}
  if(skill!=='trade-leads'){$('message').textContent='请从当前技能的充值入口继续。';return}
- const api=async(path,body)=>{const r=await fetch('/platform-api/trade-leads/web'+path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json','X-Membership-Request':'1'}:{},body:body?JSON.stringify(body):undefined,cache:'no-store'});const d=await r.json();if(!r.ok)throw Error(d.error?.message||'账户读取失败');return d};
+ const api=async(path,body)=>{const controller=new AbortController(),deadline=setTimeout(()=>controller.abort(),12000);try{const r=await fetch('/platform-api/trade-leads/web'+path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json','X-Membership-Request':'1'}:{},body:body?JSON.stringify(body):undefined,cache:'no-store',signal:controller.signal});const d=await r.json();if(!r.ok)throw Error(d.error?.message||'账户读取失败');return d;}finally{clearTimeout(deadline);}};
  let order=null,timer=null;
  try{
   const account=await api('/account');if($('recharge-note')){$('recharge-note').textContent=account.promotion?.enabled?'活动期间，每档额外赠送 '+account.promotion.bonus_searches+' 次搜索的等值余额，用于外贸获客的搜索和整理。':'充值余额用于外贸获客的搜索和整理。';}
@@ -14,7 +14,39 @@
   }else{
    if(account.remembered===true)window.dispatchEvent(new CustomEvent('mps:trade-account-ready',{detail:{remembered:true}}));
    $('pay').hidden=false;if(account.price_list){const p=account.price_list;$('price-note').textContent=`搜索 ¥${(p.search/100).toFixed(2)} / 次 · 公司档案 ¥${(p.company/100).toFixed(2)} / 家 · 采购联系人 ¥${(p.contact/100).toFixed(2)} / 位\n${account.daily_free_trial>0?'每天免费搜索 '+account.daily_free_trial+' 次。':''}只为有效结果付费：没搜到公司、没有公司档案、没找到联系人，都不扣钱。`;}$('message').textContent=account.remembered?account.account_label:'请先在 WorkBuddy 中使用「外贸获客」并关联账户，关联后回到此页即可充值。';$('balance').textContent='¥'+(account.balance_fen/100).toFixed(2);
-   for(const amount of account.tiers){const b=document.createElement('button');b.className='tier-choice';b.dataset.amount=String(amount);const meta=(account.tier_details||[]).find(x=>x.amount_fen===amount);const name=document.createElement('span'),price=document.createElement('strong'),description=document.createElement('small'),credit=document.createElement('small');name.textContent=meta?.name||'充值套餐';price.textContent='¥'+(amount/100).toFixed(2);description.textContent=meta?.description||'用于外贸获客的搜索和整理。';credit.textContent='约 '+(meta?.base_searches??Math.floor(amount/account.price_list.search))+' 次搜索';const bonus=document.createElement('small');bonus.className='tier-bonus';bonus.textContent=meta?.bonus_searches>0?'活动加赠 '+meta.bonus_searches+' 次搜索 · 共 '+meta.total_searches+' 次':'按当前搜索单价换算';const note=document.createElement('small');note.className='tier-credit';note.textContent='合计到账 ¥'+((meta?.credited_fen??amount)/100).toFixed(2);const action=document.createElement('span');action.className='tier-pay-action';action.textContent=account.remembered?'付款，开始拓客':'微信登录后付款';b.append(name,price,description,credit,bonus,note,action);b.disabled=false;b.onclick=async()=>{if(!account.remembered){try{sessionStorage.setItem('mps-trade-checkout',JSON.stringify({amount,at:Date.now()}));}catch(_){}location.assign('/auth/wechat/#product=trade-leads');return;}b.disabled=true;try{order=await api('/orders',{amount_fen:amount});window.mpsAmountQr(order.amount_fen,document.querySelector('#order .qrs img'));$('order').hidden=false;$('order-label').textContent='订单 '+order.id+' · 应付 ¥'+(order.amount_fen/100).toFixed(2);$('message').textContent='请按订单金额扫码支付，等待收款确认。';$('reported').disabled=order.status==='paid';if(timer)clearInterval(timer);timer=setInterval(check,5000)}catch(e){$('message').textContent='请稍后刷新页面，或联系客服协助完成当前操作。'}finally{b.disabled=false}};$('tiers').append(b)}
+
+   const payment=$('trade-payment-dialog');let creating=false,reporting=false,checking=null;
+   const notify=text=>{$('message').textContent=text;$('trade-payment-status').textContent=text;};
+   function stopPaymentPolling(){if(timer){clearInterval(timer);timer=null;}}
+   function pollPayment(){stopPaymentPolling();if(payment.open&&order&&order.status!=='paid')timer=setInterval(()=>{if(!document.hidden)check();},5000);}
+   function renderOrder(){
+    window.mpsAmountQr(order.amount_fen,document.querySelector('#order .qrs img'));
+    $('order').hidden=false;$('order-label').textContent='订单 '+order.id+' · 应付 ¥'+(order.amount_fen/100).toFixed(2);
+    const paid=order.status==='paid';document.querySelector('#order .qrs').hidden=paid;$('reported').disabled=paid||reporting;
+    notify(paid?'充值成功，余额已更新，可回到原技能继续。':order.status==='reported'?'付款信息已登记，确认到账后余额自动更新。':'请按订单金额扫码支付，完成后点击“我已付款”。');
+   }
+   function showPayment(){if(!payment.open){payment.showModal();payment.scrollTop=0;document.body.classList.add('trade-payment-open');}}
+   async function openPayment(amount){
+    showPayment();
+    if(creating||reporting)return;
+    if(order&&order.amount_fen===amount&&['pending','reported'].includes(order.status)){renderOrder();pollPayment();return;}
+    creating=true;stopPaymentPolling();$('order').hidden=true;payment.setAttribute('aria-busy','true');
+    for(const b of $('tiers').children)b.disabled=true;
+    notify('正在准备付款二维码…');
+    try{
+     const created=await api('/orders',{amount_fen:amount});
+     if(!created||typeof created.id!=='string'||created.amount_fen!==amount)throw Error('订单金额暂未确认');
+     order=created;renderOrder();pollPayment();
+    }catch(e){notify('暂时未能准备付款二维码，请关闭弹窗后核对订单或联系客服。');}
+    finally{creating=false;payment.removeAttribute('aria-busy');for(const b of $('tiers').children)b.disabled=false;}
+   }
+   $('trade-payment-close').onclick=()=>payment.close();
+   payment.addEventListener('close',()=>{stopPaymentPolling();document.body.classList.remove('trade-payment-open');});
+   payment.addEventListener('click',e=>{if(e.target!==payment)return;const r=payment.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)payment.close();});
+   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPaymentPolling();else if(payment.open){check();pollPayment();}});
+   window.addEventListener('pagehide',stopPaymentPolling);
+
+   for(const amount of account.tiers){const b=document.createElement('button');b.className='tier-choice';b.dataset.amount=String(amount);const meta=(account.tier_details||[]).find(x=>x.amount_fen===amount);const name=document.createElement('span'),price=document.createElement('strong'),description=document.createElement('small'),credit=document.createElement('small');name.textContent=meta?.name||'充值套餐';price.textContent='¥'+(amount/100).toFixed(2);description.textContent=meta?.description||'用于外贸获客的搜索和整理。';credit.textContent='约 '+(meta?.base_searches??Math.floor(amount/account.price_list.search))+' 次搜索';const bonus=document.createElement('small');bonus.className='tier-bonus';bonus.textContent=meta?.bonus_searches>0?'活动加赠 '+meta.bonus_searches+' 次搜索 · 共 '+meta.total_searches+' 次':'按当前搜索单价换算';const note=document.createElement('small');note.className='tier-credit';note.textContent='合计到账 ¥'+((meta?.credited_fen??amount)/100).toFixed(2);const action=document.createElement('span');action.className='tier-pay-action';action.textContent=account.remembered?'付款，开始拓客':'微信登录后付款';b.append(name,price,description,credit,bonus,note,action);b.disabled=false;b.onclick=async()=>{if(!account.remembered){try{sessionStorage.setItem('mps-trade-checkout',JSON.stringify({amount,at:Date.now()}));}catch(_){}location.assign('/auth/wechat/#product=trade-leads');return;}await openPayment(amount)};$('tiers').append(b)}
    if(account.remembered){try{
     const pending=JSON.parse(sessionStorage.getItem('mps-trade-checkout')||'null');
     if(pending&&Date.now()-pending.at>=0&&Date.now()-pending.at<15*60*1000&&account.tiers.includes(pending.amount)){
@@ -22,8 +54,21 @@
      sessionStorage.removeItem('mps-trade-checkout');if(choice)choice.click();
     }
    }catch(_){}}
-   async function check(){try{const d=await api('/orders/'+order.id);if(d.status==='paid'){clearInterval(timer);$('message').textContent='充值成功，回到 WorkBuddy 对话里说『继续』即可接着整理。';$('reported').disabled=true;const a=await api('/account');$('balance').textContent='¥'+(a.balance_fen/100).toFixed(2)}}catch(e){$('message').textContent='请稍后刷新页面，或联系客服协助完成当前操作。'}}
-   $('reported').onclick=async()=>{try{await api('/report-payment',{order_id:order.id});$('message').textContent='付款信息已提交，确认到账后余额会自动更新。';await check()}catch(e){$('message').textContent='请稍后刷新页面，或联系客服协助完成当前操作。'}};
+   async function check(){
+    if(!order||checking===order.id)return;const id=order.id;checking=id;
+    try{const updated=await api('/orders/'+encodeURIComponent(id));if(!order||order.id!==id||creating)return;
+     if(!updated||updated.id!==id||updated.amount_fen!==order.amount_fen||!['pending','reported','paid'].includes(updated.status))throw Error('订单状态暂未确认');
+     order=updated;renderOrder();
+     if(order.status==='paid'){stopPaymentPolling();const a=await api('/account');$('balance').textContent='¥'+(a.balance_fen/100).toFixed(2);}
+    }catch(e){if(order&&order.id===id&&payment.open)notify('暂时无法读取到账状态，请稍后重新打开本订单。');}
+    finally{if(checking===id)checking=null;}
+   }
+   $('reported').onclick=async()=>{
+    if(!order||reporting||order.status==='paid')return;const id=order.id;reporting=true;$('reported').disabled=true;
+    try{await api('/report-payment',{order_id:id});if(!order||order.id!==id)return;order={...order,status:'reported'};renderOrder();await check();}
+    catch(e){if(order&&order.id===id)notify('暂时未能登记付款，请稍后重试或联系客服。');}
+    finally{reporting=false;if(order&&order.id===id)$('reported').disabled=order.status==='paid';}
+   };
   }
  }catch(e){$('message').textContent='请稍后刷新页面，或联系客服协助完成当前操作。'}
 })();

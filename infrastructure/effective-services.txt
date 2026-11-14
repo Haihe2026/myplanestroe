@@ -1,3 +1,8 @@
+# Verified 2026-11-14: active administrator confirmation overlay
+skill-monitor ExecStart=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/manual-confirmation-20261113/run_ops.py --config /etc/skill-monitor/config.json --shared-db /var/lib/skill-platform/shared.db --temu-source /opt/temu-image-assistant/0.2.2/service
+# Wraps wechat-official-20261113/run_ops.py and the entire existing administration chain. Shared service remains trade-primary-2.0.15-20261113 with the same arguments. Checkout modal deployment changed only three static trade files, with no service restart.
+
+--- Previous observations ---
 # Verified 2026-11-13: trade authenticated primary-origin browser handoff
 skill-platform ExecStart=/opt/skill-platform/1.2.0/venv/bin/python /opt/skill-platform/trade-primary-2.0.15-20261113/run_shared.py --db /var/lib/skill-platform/shared.db --gemini-db /var/lib/image-assistant/pilot.db --temu-db /var/lib/temu-image-assistant/trial.db --temu-source /opt/temu-image-assistant/0.2.2/service
 # Wraps current wechat-official-20261113 chain; skill-monitor remains wechat-official-20261113/run_ops.py. No credentials or production access in mirror.

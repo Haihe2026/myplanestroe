@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-13",
+  "updated": "2026-11-14",
   "mode": "manual_reviewed_snapshot",
-  "last_change": "trade_primary_domain_handoff_and_three_clients_2_0_15",
+  "last_change": "trade_payment_centered_modal_deployed",
   "production_access_included": false,
   "live_sync": false,
   "trade_source_mirror": "supplier_identity_and_connection_configuration_anonymized",
@@ -33,5 +33,17 @@
   "real_wechat_exchanges_this_deployment": 0,
   "trade_payment_url": "https://myplanestore.com/pay?skill=trade-leads",
   "trade_handoff_contract": "trade-web-handoff-v1",
-  "real_trade_wechat_payment_tested": false
+  "real_trade_wechat_payment_tested": false,
+  "checkout_modal_synthetic_scenarios": 38,
+  "checkout_modal_public_origins_verified": [
+    "https://myplanestore.com",
+    "https://aistore.zhaopintong.com"
+  ],
+  "checkout_modal_real_orders": 0,
+  "checkout_modal_real_payments": 0,
+  "checkout_modal_real_supplier_calls": 0,
+  "manual_confirmation_deployed": true,
+  "manual_confirmation_bank_reference_required": false,
+  "manual_confirmation_per_order_idempotency_preserved": true,
+  "manual_confirmation_real_customer_grants": 0
 }
