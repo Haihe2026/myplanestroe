@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-dunhuang-size-limit-20261114",
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "source_path": "pipeline/products/mps-dunhuang-portrait-studio/msg-from-muse-20261114-dunhuang-size-limit.md",
+  "source_ref": "33ece26eae2d394635fa2f299eaf9f3d4884b40d",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-2a23aad1eb1e46771df9e156f9f9403428ec0ab9da43d6a91475500bff900080",
+  "request_kind": "question"
+}
