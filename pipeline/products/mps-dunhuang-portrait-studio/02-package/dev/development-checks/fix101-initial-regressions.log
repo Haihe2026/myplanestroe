@@ -1,0 +1,45 @@
+FFFFF
+======================================================================
+FAIL: test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled (__main__.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled) (original_state='submit_unknown', auth_error=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-fix-101/product/02-package/dev/e2e_check.py", line 2781, in test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled
+    self.assertIn('费用以服务记录为准', text)
+AssertionError: '费用以服务记录为准' not found in '这次没有拿到图——网络没连上。这次还没有开始生成，没有扣次数。原需求已保留，稍后说「继续」，我先核对原任务；请不要重复生成。\n'
+
+======================================================================
+FAIL: test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled (__main__.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled) (original_state='submit_unknown', auth_error=503)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-fix-101/product/02-package/dev/e2e_check.py", line 2781, in test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled
+    self.assertIn('费用以服务记录为准', text)
+AssertionError: '费用以服务记录为准' not found in '这次没有拿到图——服务正在处理较多请求。这次还没有开始生成，没有扣次数。原需求已保留，稍后说「继续」，我先核对原任务；请不要重复生成。\n'
+
+======================================================================
+FAIL: test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled (__main__.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled) (original_state='delivered', auth_error=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-fix-101/product/02-package/dev/e2e_check.py", line 2781, in test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled
+    self.assertIn('费用以服务记录为准', text)
+AssertionError: '费用以服务记录为准' not found in '这次没有拿到图——网络没连上。这次还没有开始生成，没有扣次数。原需求已保留，稍后说「继续」，我先核对原任务；请不要重复生成。\n'
+
+======================================================================
+FAIL: test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled (__main__.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled) (original_state='delivered', auth_error=503)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-fix-101/product/02-package/dev/e2e_check.py", line 2781, in test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled
+    self.assertIn('费用以服务记录为准', text)
+AssertionError: '费用以服务记录为准' not found in '这次没有拿到图——服务正在处理较多请求。这次还没有开始生成，没有扣次数。原需求已保留，稍后说「继续」，我先核对原任务；请不要重复生成。\n'
+
+======================================================================
+FAIL: test_fix101_new_feedback_b_never_implicitly_retries_unknown_a (__main__.DunhuangLimits.test_fix101_new_feedback_b_never_implicitly_retries_unknown_a)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-fix-101/product/02-package/dev/e2e_check.py", line 2808, in test_fix101_new_feedback_b_never_implicitly_retries_unknown_a
+    self.assertEqual(len(submitted_b), 1)
+AssertionError: 2 != 1
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.797s
+
+FAILED (failures=5)

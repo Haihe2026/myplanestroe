@@ -1,0 +1,40 @@
+{
+  "phase": "development exact DH-A3-03 regression; not A3",
+  "recorded_at": "2026-11-14T19:38:28+08:00",
+  "python": "3.12.10",
+  "os": "Windows",
+  "payload_blob_bytes": 1048576,
+  "request_deadline_seconds": 0.2,
+  "idle_child_lifetime_seconds": 5,
+  "real_network_calls": 0,
+  "old": {
+    "runtime_sha256": "f5e7ada3e5fcce428411562985f5bb0ba9b3804de321855682d6f69600bb20e7",
+    "elapsed_seconds": 5.094,
+    "all_reaped": true,
+    "passed_under_2s": false,
+    "source": "actual pre-fix execution in this new101 workspace; old100 was not changed"
+  },
+  "new": {
+    "runtime_sha256": "35b5efad56fa88a3d8dba31b7e6def02d99d96ace1b2046ad0b9789fd92002da",
+    "test_sha256": "2e470addb06a3ade62d7e342bda501666e4d974fa9665a5a0aa4c5a5d182bb4d",
+    "elapsed_seconds": 0.203,
+    "error_type": "OSError",
+    "child_count": 1,
+    "all_reaped": true,
+    "stdin_writer_leaks": 0,
+    "passed_under_2s": true
+  },
+  "suite": {
+    "tests": 19,
+    "passed": 19,
+    "failures": 0,
+    "seconds": 0.5,
+    "command": "python dev/test_http_deadline.py --package mps-dunhuang-portrait-studio -v",
+    "includes": [
+      "old16 checks retained",
+      "real large stdin idle deadline",
+      "failed writer rejects child success",
+      "active stdout/stderr reader close skipped"
+    ]
+  }
+}

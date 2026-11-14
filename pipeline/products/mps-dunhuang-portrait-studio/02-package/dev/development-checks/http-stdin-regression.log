@@ -1,0 +1,4 @@
+Development-only, zero network. Windows CPython 3.12.10.
+Old helper: deadline 0.2s, 1MiB stdin, idle child 5s: elapsed 5.094s, FAIL under 2s.
+New helper: elapsed 0.2030s; child reaped=True; stdin writer leaks=0.
+19/19 targeted helper tests passed in 0.500s; not A3.

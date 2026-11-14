@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "skill_id": "mps-dunhuang-portrait-studio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "executed": true,
   "tests": {
     "DH01": [
@@ -64,13 +64,15 @@
       "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
       "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
       "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
-      "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks"
+      "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+      "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
     ],
     "DH12": [
       "e2e.Support.test_balance_shows_recent_records",
       "e2e.Support.test_feedback_creates_ticket_without_charge",
       "e2e.Support.test_ticket_status_reply_and_isolation",
-      "e2e.InheritedHnfSemantics.test_hnf03_feedback_unknown_waits_for_explicit_user"
+      "e2e.InheritedHnfSemantics.test_hnf03_feedback_unknown_waits_for_explicit_user",
+      "e2e.DunhuangLimits.test_fix101_new_feedback_b_never_implicitly_retries_unknown_a"
     ],
     "DH13": [
       "e2e.Telemetry.test_fields_once_and_flag",
@@ -115,7 +117,8 @@
       "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
       "contract.Contract.test_failure_copy",
       "contract.PayConversion.test_favorite_section",
-      "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+      "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
     ],
     "DH19": [
       "contract.Contract.test_forbidden_words",
@@ -145,7 +148,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -164,7 +168,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -182,7 +187,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -359,7 +365,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -377,7 +384,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -395,7 +403,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -430,7 +439,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -449,7 +459,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -467,7 +478,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -508,7 +520,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -526,7 +539,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -544,7 +558,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -562,7 +577,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -580,7 +596,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
         "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
-        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+        "e2e.PayConversion.test_fresh_topup_gives_link_account",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -599,7 +616,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -784,7 +802,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -803,7 +822,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -822,7 +842,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -841,7 +862,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -980,7 +1002,8 @@
         "e2e.InheritedHnfSemantics.test_hnf03_feedback_unknown_waits_for_explicit_user",
         "e2e.Support.test_balance_shows_recent_records",
         "e2e.Support.test_feedback_creates_ticket_without_charge",
-        "e2e.Support.test_ticket_status_reply_and_isolation"
+        "e2e.Support.test_ticket_status_reply_and_isolation",
+        "e2e.DunhuangLimits.test_fix101_new_feedback_b_never_implicitly_retries_unknown_a"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1018,7 +1041,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1073,7 +1097,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1092,7 +1117,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1111,7 +1137,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1130,7 +1157,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1149,7 +1177,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1168,7 +1197,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1187,7 +1217,8 @@
         "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
         "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
         "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
-        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it",
+        "e2e.DunhuangLimits.test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled"
       ],
       "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
       "executed": true,
@@ -1201,10 +1232,28 @@
     "No fabricated Range/inline_delivery/retry-before-billing or sibling fingerprint capability.",
     "S6-52/53/55/57 host memory/implicit invocation require actual host; Mock/static cannot prove them."
   ],
-  "executed_against_zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+  "executed_against_zip_sha256": "c08d9c55afbe831f5357bee9ba4166a2c3dcdca4e60ebba2444762e0041e9357",
   "executed_platforms": [
     "Windows Python 3.12.10",
     "Linux Python 3.12.3"
   ],
-  "result": "PASS"
+  "result": "PASS",
+  "fix_1_0_1_regressions": {
+    "scope": "auth failure truthful original-task fees; new B cannot implicitly retry unknown feedback A",
+    "initial_fail_log": "02-package/dev/development-checks/fix101-initial-regressions.log",
+    "initial_result": {
+      "tests": 2,
+      "failures": 5,
+      "errors": 0
+    },
+    "target_pass_log": "02-package/dev/development-checks/fix101-regressions-passed.log",
+    "target_result": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "additional_control": "duplicate pending A text does not authorize a replay; explicit --retry only; known ticket ids GET-only",
+    "full_A2_run": false
+  }
 }

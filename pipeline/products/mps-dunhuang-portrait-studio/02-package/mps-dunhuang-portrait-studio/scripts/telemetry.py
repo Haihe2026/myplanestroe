@@ -13,7 +13,7 @@ import http_bytes
 
 SKILL_ID = 'mps-dunhuang-portrait-studio'
 SKILL_NAME = '敦煌写真照相馆'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 TELEMETRY_ORIGIN = 'https://myplanestore.com'
 TELEMETRY_PATH = '/platform-api/telemetry/v1/first-dialogue'

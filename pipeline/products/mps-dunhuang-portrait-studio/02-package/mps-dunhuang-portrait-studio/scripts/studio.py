@@ -30,7 +30,7 @@ import theme as T
 import welcome_copy as W  # noqa: E402
 
 SKILL_ID = 'mps-dunhuang-portrait-studio'
-SKILL_VERSION = '1.0.0'
+SKILL_VERSION = '1.0.1'
 CHANNEL = 'workbuddy_skill'
 ORIGIN = 'https://myplanestore.com'
 API_PREFIX = '/platform-api/gemini'
@@ -996,7 +996,7 @@ def cmd_auth(args):
         return emit('needsCredits', W.final_step(extra), EXIT_WAIT, link_included=True)
     if st == 'ready':
         return emit('ready', '', EXIT_OK)
-    return emit('serviceUnavailable', W.failure(_fail_kind(extra), 'not_started'), EXIT_ERROR)
+    return emit('serviceUnavailable', W.account_failure(_fail_kind(extra), '授权'), EXIT_ERROR)
 
 
 def cmd_topup(args):
@@ -1164,10 +1164,12 @@ def _save_support(st):
     write_json(os.path.join('support', 'state.json'), st)
 
 
-def _submit_pending(a, st):
-    """逐条提交待交反馈。返回 (已建工单列表, 未交原因或 None)。同一条反馈始终用同一个请求编号。"""
+def _submit_pending(a, st, only_key=None):
+    """Submit only the newly confirmed item, or explicitly retried saved feedback."""
     done, reason = [], None
     for item in list(st['pending']):
+        if only_key is not None and item['key'] != only_key:
+            continue
         try:
             r = call('POST', '/support-tickets', item['body'], auth=a['install_secret'], idem=item['key'])
         except GatewayError as e:
@@ -1200,6 +1202,7 @@ def _submit_pending(a, st):
 def cmd_feedback(args):
     telemetry.report_once(state_dir())
     st = _support_state()
+    only_key = None
     if not args.retry:
         text = (args.text or '').strip()
         if args.category not in CATEGORIES or not text or len(text) > TICKET_TEXT_MAX or \
@@ -1212,15 +1215,19 @@ def cmd_feedback(args):
             if isinstance(jid, str) and re.fullmatch(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', jid):
                 body['job_id'] = jid
         digest = hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
-        if digest not in [x.get('digest') for x in st['pending']]:
-            st['pending'].append(dict(digest=digest, key='fb-' + uuid.uuid4().hex, body=body))
-            _save_support(st)
+        if digest in [x.get('digest') for x in st['pending']]:
+            # Repeating an unknown item's text must not silently stand in for --retry.
+            return emit('feedbackSaved', W.feedback_saved('pending'), EXIT_WAIT,
+                        pending=len(st['pending']), auto_retry=False)
+        only_key = 'fb-' + uuid.uuid4().hex
+        st['pending'].append(dict(digest=digest, key=only_key, body=body))
+        _save_support(st)
     elif not st['pending']:
         return emit('feedbackNone', W.feedback_nothing_pending(), EXIT_OK)
     a = load_account()
     if not a.get('install_secret'):
         return emit('feedbackSaved', W.feedback_saved('no_account'), EXIT_WAIT, pending=len(st['pending']), auto_retry=False)
-    done, reason = _submit_pending(a, st)
+    done, reason = _submit_pending(a, st, only_key=only_key)
     if reason and not done:
         # HNF-A3-03：没拿到反馈编号时原请求编号和原内容已保留；只有用户明确说「提交反馈」才 --retry，宿主不自动重跑
         return emit('feedbackSaved', W.feedback_saved(reason), EXIT_WAIT, pending=len(st['pending']), auto_retry=False)

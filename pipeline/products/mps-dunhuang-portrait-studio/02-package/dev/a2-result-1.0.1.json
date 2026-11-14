@@ -1,0 +1,418 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "version": "1.0.1",
+  "at": "2026-11-14T19:44:52+08:00",
+  "result": "PASS",
+  "zip_file": "mps-dunhuang-portrait-studio-1.0.1.zip",
+  "zip_bytes": 1453789,
+  "zip_sha256": "c08d9c55afbe831f5357bee9ba4166a2c3dcdca4e60ebba2444762e0041e9357",
+  "zip_blob_sha1": "6f3fcf82e1b6b4e6685ed6a117a6b6db7baf6b1e",
+  "limit": 3000000,
+  "target": 2500000,
+  "zip_files": [
+    {
+      "path": "mps-dunhuang-portrait-studio/_meta.json",
+      "bytes": 242,
+      "sha256": "251e9429cb2d76d7723d6e16f689ce722cc24df3ec29120835a8e19e88ed4bf7",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/apsara_dance.jpg",
+      "bytes": 114197,
+      "sha256": "cd11ed76f15be2ebfb4f96de0bdf3a0ea1da1f9c753f3ba7fd0a4cbee3083626",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/camel_caravan.jpg",
+      "bytes": 171395,
+      "sha256": "fa558cb42edbefa99b8e02ed8eaa5867d2f7572961f6192602297c1d2db701eb",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/crescent_night.jpg",
+      "bytes": 101630,
+      "sha256": "88eafe3533af4c67d1b7f8605d3041adf163ae3af4e7e818ece25e7da5469197",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/demos.json",
+      "bytes": 2835,
+      "sha256": "fdf8cd98bc91c61205c38a44e59fd3e49595df1c442bc62e9a9c5a2d0bb110ca",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/dunhuang_lady.jpg",
+      "bytes": 146147,
+      "sha256": "20f03413c78304c4f082020a5519921f7127c2f510b7d1f9e463bcb5f4760346",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/mingsha_sunset.jpg",
+      "bytes": 130611,
+      "sha256": "c42c4a10b1ebbe3da71751f769a0fa2c3d8ab8f4ae174923b96b303b3dd80883",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/mogao_apsara.jpg",
+      "bytes": 120774,
+      "sha256": "b7a7c28eaaa519214bc3b95b8b226d0df95be4ec65610ecae1d698663b09ac24",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/mural_fairy.jpg",
+      "bytes": 171459,
+      "sha256": "9cbb023e78f0b2226c55d446cc233d93961c232c24f33b66d729557f4dfe78b3",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/pipa_back.jpg",
+      "bytes": 123915,
+      "sha256": "c717729b5346e4ec55c2d9f131e5c39625b0bbb6450a2f534a565570d1a40444",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/starry_desert.jpg",
+      "bytes": 141855,
+      "sha256": "c5242607d01135ac44e26d9c782c7dbe46b5583c78e6b77653f5025020b6fb1f",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/water_sleeves.jpg",
+      "bytes": 111246,
+      "sha256": "b8c439c2e183a29ca15b1b97e4e677b26833d8aeac59a7838f5797cba578bd77",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/README.md",
+      "bytes": 2551,
+      "sha256": "3ceff5fb50d037582096953c19583173ab06079416b52a3d175526a46d36c3ab",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/api-spec.md",
+      "bytes": 5945,
+      "sha256": "97936230dfc03c1afdef68688bce666fc90cedfff9c17bc87fa78a0dcc1b9cdd",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/examples.md",
+      "bytes": 3127,
+      "sha256": "a9c16f7861687f303c3ef555d1bb2e7e3c540ae557ba489137f15f5526ac8656",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/platform-rules.md",
+      "bytes": 1449,
+      "sha256": "1f5407564cddfa44b03ba3ab8a5071be56dd785684079bc952efa52e02a074c7",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/prompts.md",
+      "bytes": 16244,
+      "sha256": "f3c514a635a20a2100cb35973f3b5db25d703668d014336d3fae2ca1c4828b3c",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/scenes.md",
+      "bytes": 9134,
+      "sha256": "2d52733e3646b6ef31583d4e32fe5f57fc621829363e340e40e771fe156b7bc2",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/audit_images.py",
+      "bytes": 5815,
+      "sha256": "ed7dc98ccc67395bcebd5d47f13a9ceee8de2c0cf4f56a50a5fbbbe276e2d33c",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/http_bytes.py",
+      "bytes": 11353,
+      "sha256": "35b5efad56fa88a3d8dba31b7e6def02d99d96ace1b2046ad0b9789fd92002da",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/jpeg_local.py",
+      "bytes": 16986,
+      "sha256": "c233bb9c88dd934513d0f685107f2219592f78fef6d29a20b1745becd175ec62",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/png_local.py",
+      "bytes": 9387,
+      "sha256": "ef6e94645528b41943b70a36af22dd4ebdaf18fe3c1b8690427437a03ca80648",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/private_store.py",
+      "bytes": 5745,
+      "sha256": "dab4c488102e7ab62327932b1a7091b3e9cd14e979fb50b43db0d2ce0c4cbce4",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/studio.py",
+      "bytes": 60520,
+      "sha256": "7de10d95d5b7fbbf52ba036a7a9b9ff4279bc525712cbad52d2a7e89b9f32d63",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/telemetry.py",
+      "bytes": 5295,
+      "sha256": "e1ddf74f53063796f4a213f1a5c03e6a089105605d07f004cc034dfb1d9c7aff",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/theme.py",
+      "bytes": 32731,
+      "sha256": "91926fd06756d5153d82a2e1f6af89692aced04b356689bd0283249cb51e444b",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/welcome_copy.py",
+      "bytes": 24053,
+      "sha256": "26f2a6c11d3edb1886765846d41068771280be27ad08047c5856a63db8d93478",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/SKILL.md",
+      "bytes": 15285,
+      "sha256": "11ef481a8bc216760ffd04f605047b11795948f6b7dbce5f2be17cee33a23139",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/tests/first-turn-preview.md",
+      "bytes": 2590,
+      "sha256": "0c92c238cc515be2c425e5c3ce1ab2671c31a901c37a67c9bb63733d2fc0d0fc",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/tests/test_skill_contract.py",
+      "bytes": 121898,
+      "sha256": "9c2b7cc11a8da117666ee15f98d548a1e4080bbe847b01267c5d9a4113201719",
+      "unix_mode": "0o644"
+    }
+  ],
+  "checks": [
+    {
+      "platform": "windows",
+      "suite": "contract",
+      "tests": 64,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs-1.0.1/windows-contract.stdout.txt",
+          "bytes": 145,
+          "sha256": "39a58e43648b274dfdb00dbfeb9b28f54c563dd2adc250bf732e81cbd731c9ad"
+        },
+        {
+          "path": "a2-logs-1.0.1/windows-contract.stderr.txt",
+          "bytes": 421,
+          "sha256": "45dfd910fa38e2d7a54e8f3033647deb17e0921a56b9da4f7a9aa86a3ec83bdc"
+        }
+      ]
+    },
+    {
+      "platform": "windows",
+      "suite": "e2e",
+      "tests": 157,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs-1.0.1/windows-e2e.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs-1.0.1/windows-e2e.stderr.txt",
+          "bytes": 13113,
+          "sha256": "228b8854905d1bce215b5930a02fa7f98bf4a46de6af59523ec5413d1e9fa814"
+        }
+      ]
+    },
+    {
+      "platform": "windows",
+      "suite": "http-deadline",
+      "tests": 19,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs-1.0.1/windows-http-deadline.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs-1.0.1/windows-http-deadline.stderr.txt",
+          "bytes": 123,
+          "sha256": "ef765d719a67f40a2728f4e7c9af933eb282ce3ee441f464f215bd0fe7fc0aa1"
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "suite": "contract",
+      "tests": 64,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs-1.0.1/linux-contract.stdout.txt",
+          "bytes": 144,
+          "sha256": "dcf4b8da29f71441e8b8980196eb2cbb1514981d891f773bcccbfbff68f2b6b6"
+        },
+        {
+          "path": "a2-logs-1.0.1/linux-contract.stderr.txt",
+          "bytes": 411,
+          "sha256": "d3443f07ff19b48fc33df568ec8da24383b5819b1c59d7904b491325992558e1"
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "suite": "e2e",
+      "tests": 157,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs-1.0.1/linux-e2e.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs-1.0.1/linux-e2e.stderr.txt",
+          "bytes": 9642,
+          "sha256": "eb3ee14fbcccf45cc28673bbaa4bed47f189243cc45a90330b9b7aeffc53090e"
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "suite": "http-deadline",
+      "tests": 19,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs-1.0.1/linux-http-deadline.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs-1.0.1/linux-http-deadline.stderr.txt",
+          "bytes": 118,
+          "sha256": "19bdfc01c87840aa504d62acbcf54acaacfb1bd7cb9136aae0927a1cd8b7582b"
+        }
+      ]
+    }
+  ],
+  "windows": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "isolation": "synthetic private tree, Python socket guard and inherited HTTP-helper offline gate",
+    "test_source": "original unmodified files"
+  },
+  "linux": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "uid": 0,
+    "isolation": "unshare -rn and Python/offline-child guards",
+    "filesystem": "private Linux-native /tmp tree",
+    "test_source": "original unmodified files"
+  },
+  "fixed_spec": {
+    "commit": "a8538c0a3170dbba876bddd449b63ff2f33704fe",
+    "md_sha256": "1731efb08a7cbd1cddf98fdb2f096412015d8eb6b5e50bd4d35dfe0bb6092396",
+    "json_sha256": "8b46131f7526839246300bdd217250451730e3726f5cc04de6a41df182d460f9",
+    "unchanged": true,
+    "version_deviation": "Patch version1.0.1 repairs three A3 implementation defects; approved scope, descriptions, examples and assets unchanged"
+  },
+  "baseline_version": "1.0.0",
+  "baseline_package_commit": "2f28a226db29d033cf85cc310aa2efe0bc2ac56f",
+  "a3_failure_commit": "742fd6f9778cabe5a66489b134ffd98b1dd2061c",
+  "changed_zip_members": [
+    "mps-dunhuang-portrait-studio/_meta.json",
+    "mps-dunhuang-portrait-studio/scripts/http_bytes.py",
+    "mps-dunhuang-portrait-studio/scripts/studio.py",
+    "mps-dunhuang-portrait-studio/scripts/telemetry.py",
+    "mps-dunhuang-portrait-studio/SKILL.md"
+  ],
+  "prior_zip_retained": true,
+  "external_business_calls": 0,
+  "real_upstream_calls": 0,
+  "new_demo_calls": 0,
+  "new_logo_calls": 0,
+  "deployments": 0,
+  "publish_attempts": 0,
+  "demos": {
+    "count": 10,
+    "total_bytes": 1333229,
+    "source": "approved existing JPEG bytes unchanged; demos-derivation.json"
+  },
+  "logo": {
+    "bytes": 480802,
+    "sha256": "9fdf400c88896e8dccaf6852fb4f7bf5d95a48ac97bc3468c86b6caea69acfe7",
+    "outside_zip": true
+  },
+  "windows_private_acl": {
+    "result": "PASS",
+    "native": true,
+    "evidence": "windows-private-acl.json",
+    "runtime_source_sha256": "dab4c488102e7ab62327932b1a7091b3e9cd14e979fb50b43db0d2ce0c4cbce4",
+    "reused_verified_evidence": true
+  },
+  "syntax37": {
+    "result": "PASS",
+    "method": "AST feature_version 3.7 only; no Python 3.7 runtime claimed",
+    "files": [
+      "audit_images.py",
+      "http_bytes.py",
+      "jpeg_local.py",
+      "png_local.py",
+      "private_store.py",
+      "studio.py",
+      "telemetry.py",
+      "theme.py",
+      "welcome_copy.py"
+    ]
+  },
+  "decisions": [
+    {
+      "id": "DH-DEV-DEC-01",
+      "decision": "U06 clarify supports back-pipa vs empty-hand dance only; other held-pipa dance is unregistered and requires clarification, no confirm or HTTP"
+    },
+    {
+      "id": "DH-DEV-DEC-02",
+      "decision": "Only explicit pending/processing without review/unknown notice proves processing; missing/unknown/needs_review is unconfirmed, preserves original task"
+    },
+    {
+      "id": "DH-DEV-DEC-03",
+      "decision": "Full HTTP transaction runs once in fixed short-lived stdlib child; parent deadline covers DNS/headers/body, kills on expiry, no retry/fallback. Process startup/kill/reap scheduling has bounded cleanup overhead and is not a hard real-time guarantee; 90s process margin retained"
+    }
+  ],
+  "unverified": [
+    "real WorkBuddy host behavior and upstream image quality",
+    "real OAuth/payment/receipt callback and production deployment",
+    "real Windows junction construction (Windows component rejection is mock-verified; Linux symlink real-verified)",
+    "actual Python 3.7 interpreter"
+  ],
+  "a3": "not executed here; fixed ZIP static review is next",
+  "owner_manual_upload": true,
+  "repaired_findings": [
+    "DH-A3-01 auth failure fee truth",
+    "DH-A3-02 new feedback cannot retry old unknown",
+    "DH-A3-03 deadline supervision covers blocked Windows stdin"
+  ]
+}

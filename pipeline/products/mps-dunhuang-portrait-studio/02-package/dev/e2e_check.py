@@ -2737,6 +2737,116 @@ class InheritedHnfSemantics(Base):
 
 class DunhuangLimits(Base):
     """DH05/06/10/17: independent endpoint, state freeze and bounded-work checks."""
+    def test_fix101_auth_failure_keeps_original_task_and_never_claims_unbilled(self):
+        import copy
+        real = self.mock.transport
+        phase = {'state': 'submit_unknown', 'auth_error': None}
+        seen = []
+        def transport(method, url, body, headers, timeout, binary):
+            seen.append((method, url))
+            if phase['auth_error'] is not None:
+                raise studio.GatewayError(phase['auth_error'])
+            if phase['state'] == 'submit_unknown' and method == 'GET' and '/jobs/' in url:
+                raise studio.GatewayError(0)
+            status, raw = real(method, url, body, headers, timeout, binary)
+            if method == 'POST' and url.endswith('/skill-jobs'):
+                response = json.loads(raw)
+                response.update(charged_uses=1, reserved_uses=0)
+                return status, json.dumps(response).encode()
+            return status, raw
+        studio.TRANSPORT = transport
+        first = True
+        for state in ('submit_unknown', 'delivered'):
+            phase.update(state=state, auth_error=None)
+            self.mock.scenario['submit_lost'] = state == 'submit_unknown'
+            did = self.confirmed_draft()
+            if first:
+                self.paid_account(did, 20)
+                first = False
+            charged_before = self.mock.charges
+            _, signal, _, _ = self.run_cmd('run', '--draft', did)
+            self.assertEqual(signal['signal'], 'jobPending' if state == 'submit_unknown' else 'delivered')
+            self.assertEqual(self.mock.charges, charged_before + 1)  # accepted synthetic job really billed
+            original = copy.deepcopy(studio.load_draft(did))
+            self.assertEqual(original['state'], state)
+            identity = copy.deepcopy(studio.load_account())
+            posts = len([x for x in seen if x[0] == 'POST' and x[1].endswith('/skill-jobs')])
+            for error in (0, 503):
+                with self.subTest(original_state=state, auth_error=error):
+                    phase['auth_error'] = error
+                    code, signal, text, _ = self.run_cmd('auth')
+                    self.assertEqual((code, signal['signal']), (3, 'serviceUnavailable'))
+                    for false_claim in ('没有产生任何扣费', '没有扣任何次数', '尚未开始', '未开始制作',
+                                        '还没有开始生成', '没有开始生成'):
+                        self.assertNotIn(false_claim, text)
+                    self.assertIn('费用以服务记录为准', text)
+                    self.assertEqual(studio.load_draft(did), original)
+                    self.assertEqual(studio.load_account(), identity)
+                    self.assertEqual(studio.load_account()['install_secret'], identity['install_secret'])
+                    self.assertEqual(len([x for x in seen if x[0] == 'POST' and x[1].endswith('/skill-jobs')]), posts)
+                    self.assertEqual(self.mock.charges, charged_before + 1)
+
+    def test_fix101_new_feedback_b_never_implicitly_retries_unknown_a(self):
+        import copy
+        self.run_cmd('topup')
+        self.mock.authorize(self.secret(), 3)
+        self.mock.scenario['ticket_lost_once'] = True
+        code, signal, _, _ = self.run_cmd('feedback', '--category', 'image_quality', '--text', 'A：袖口颜色需要核对')
+        self.assertEqual((code, signal['signal'], signal['auto_retry']), (2, 'feedbackSaved', False))
+        pending_a = copy.deepcopy(studio.read_json(os.path.join('support', 'state.json'))['pending'][0])
+        original_a_ids = set(self.mock.tickets)
+        self.assertEqual(len(original_a_ids), 1)  # A was accepted, response lost
+        def posts():
+            return [c for c in self.mock.calls if c[0] == 'POST' and c[1] == '/support-tickets']
+        self.assertEqual(len(posts()), 1)
+
+        # Repeating A's original text is not the explicit --retry continuation either.
+        before = len(posts())
+        calls_before = len(self.mock.calls)
+        code, signal, message, _ = self.run_cmd('feedback', '--category', 'image_quality', '--text', 'A：袖口颜色需要核对')
+        self.assertEqual((code, signal['signal'], signal['auto_retry']), (2, 'feedbackSaved', False))
+        self.assertEqual(len(posts()), before)
+        self.assertEqual(len(self.mock.calls), calls_before)  # duplicate-local branch performs no business HTTP
+        for invented_reason in ('服务正在处理较多请求', '服务繁忙', '网络没连上', '网络暂时没连上'):
+            self.assertNotIn(invented_reason, message)
+        self.assertEqual(studio.read_json(os.path.join('support', 'state.json'))['pending'], [pending_a])
+
+        # Only B is newly confirmed. No --retry means no authorization to replay unknown A.
+        b_text = 'B：请增加更清楚的操作说明'
+        before = len(posts())
+        code, signal, _, _ = self.run_cmd('feedback', '--category', 'workflow', '--text', b_text)
+        self.assertEqual((code, signal['signal'], signal['auto_retry']), (0, 'ticketCreated', False))
+        submitted_b = posts()[before:]
+        self.assertEqual(len(submitted_b), 1)
+        self.assertEqual(submitted_b[0][2], {'category': 'workflow', 'text': b_text})
+        self.assertNotEqual(submitted_b[0][3]['Idempotency-Key'], pending_a['key'])
+        saved = studio.read_json(os.path.join('support', 'state.json'))
+        self.assertEqual(saved['pending'], [pending_a])
+        self.assertEqual(len(signal['ticket_ids']), 1)
+        b_id = signal['ticket_ids'][0]
+
+        # A is replayed only after the explicit continuation, with its exact original body and key.
+        before = len(posts())
+        code, signal, _, _ = self.run_cmd('feedback', '--retry')
+        self.assertEqual((code, signal['signal']), (0, 'ticketCreated'))
+        replay = posts()[before:]
+        self.assertEqual(len(replay), 1)
+        self.assertEqual(replay[0][2], pending_a['body'])
+        self.assertEqual(replay[0][3]['Idempotency-Key'], pending_a['key'])
+        self.assertEqual(set(signal['ticket_ids']), original_a_ids)
+        a_id = signal['ticket_ids'][0]
+        self.assertEqual(len(self.mock.tickets), 2)
+        self.assertEqual(studio.read_json(os.path.join('support', 'state.json'))['pending'], [])
+
+        before = len(posts())
+        for ticket in (a_id, b_id):
+            self.run_cmd('ticket', '--id', ticket)
+            self.assertTrue([c for c in self.mock.calls if c[0] == 'GET' and c[1] == '/support-tickets/' + ticket])
+        self.assertEqual(self.run_cmd('feedback', '--retry')[1]['signal'], 'feedbackNone')
+        self.assertEqual(len(posts()), before)
+        self.assertFalse([c for c in self.mock.calls if c[0] == 'POST' and c[1] == '/skill-jobs'])
+        self.assertEqual((self.mock.charges, self.mock.users[self.secret()]['balance']), (0, 3))
+
     def test_private_state_rejects_middle_link_components(self):
         from unittest import mock
         state = studio.state_dir()

@@ -13,7 +13,7 @@ examples_en:
   - "I am an adult. Use this single-person photo of me for a Dunhuang apsara portrait with a pipa played behind my shoulders. Aim to preserve my facial features and appearance, portrait 2:3, 1024×1536."
   - "I am an adult. Use this single-person photo of me for a Mingsha Mountain desert apsara portrait with sunset dunes. Aim to preserve my facial features and appearance, portrait 2:3, 1024×1536."
   - "I am an adult. Use this single-person photo of me for a Crescent Spring night apsara portrait with crescent-shaped water in the background. Aim to preserve my facial features and appearance, portrait 2:3, 1024×1536."
-version: "1.0.0"
+version: "1.0.1"
 author: "MyPlaneStore"
 ---
 

@@ -392,7 +392,7 @@ class Mock:
         if not isinstance(body, dict) or set(body) != TELEMETRY_FIELDS or len(json.dumps(body).encode()) > 4096:
             return 400, b'{}'
         if body.get('skill_id') != SKILL_ID or body.get('skill_name') != '敦煌写真照相馆' or \
-                body.get('skill_version') != '1.0.0' or body.get('channel') != 'workbuddy_skill' or type(body.get('is_test')) is not bool:
+                body.get('skill_version') != '1.0.1' or body.get('channel') != 'workbuddy_skill' or type(body.get('is_test')) is not bool:
             return 400, b'{}'
         inst = body['installation_id']
         dup = inst in self.telemetry

@@ -10,6 +10,7 @@ import os
 import struct
 import subprocess
 import sys
+import threading
 import time
 from urllib.parse import unquote, urlsplit
 
@@ -93,12 +94,40 @@ def _kill_and_reap(process):
 
 def _close_pipes(process):
     for name in ('stdin', 'stdout', 'stderr'):
+        reader = getattr(process, name + '_thread', None)
+        if reader is not None and reader.is_alive():
+            # Windows communicate readers own their BufferedReader lock. If OS
+            # termination/reaping is delayed, close must not block this thread.
+            continue
         stream = getattr(process, name, None)
         if stream is not None:
             try:
                 stream.close()
             except OSError:
                 pass
+
+
+def _write_stdin(stream, payload, done, result):
+    """Own the stdin stream exclusively; never hold the deadline thread in write."""
+    ok = False
+    try:
+        view = memoryview(payload)
+        while view:
+            written = stream.write(view)
+            if not isinstance(written, int) or written <= 0 or written > len(view):
+                raise OSError('request pipe unavailable')
+            view = view[written:]
+        stream.flush()
+        ok = True
+    except Exception:
+        pass
+    finally:
+        try:
+            stream.close()
+        except Exception:
+            ok = False
+        result[0] = ok
+        done.set()
 
 
 def request(method, url, body, headers, timeout, limit):
@@ -126,15 +155,38 @@ def request(method, url, body, headers, timeout, limit):
     if os.name == 'nt':
         options['creationflags'] = subprocess.CREATE_NO_WINDOW
     process = None
+    writer = None
+    writer_started = False
+    input_stream = None
     try:
         process = subprocess.Popen(command, **options)
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise OSError('request deadline reached')
+        # Windows communicate(input=large_payload) writes stdin synchronously
+        # before its timeout-controlled reader joins. Detach stdin first so that
+        # communicate cannot flush, write or close a writer-owned buffered stream.
+        input_stream = process.stdin
+        if input_stream is None:
+            raise OSError('request pipe unavailable')
+        process.stdin = None
+        written = threading.Event()
+        write_result = [False]
+        writer = threading.Thread(target=_write_stdin,
+                                  args=(input_stream, payload, written, write_result), daemon=True,
+                                  name='mps-http-stdin-writer')
+        writer.start()
+        writer_started = True
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise OSError('request deadline reached')
         try:
-            wire, _ = process.communicate(input=payload, timeout=remaining)
+            wire, _ = process.communicate(input=None, timeout=remaining)
         except subprocess.TimeoutExpired:
             raise OSError('request deadline reached') from None
+        writer.join(timeout=max(0.0, deadline - time.monotonic()))
+        if not written.is_set() or not write_result[0]:
+            raise OSError('request pipe unavailable')
         if time.monotonic() >= deadline:
             raise OSError('request deadline reached')
         if process.returncode != 0 or not isinstance(wire, bytes) or len(wire) < 4 or len(wire) > limit + 4:
@@ -143,12 +195,22 @@ def request(method, url, body, headers, timeout, limit):
         if not 100 <= status <= 599:
             raise OSError('request unavailable')
         return status, wire[4:]
-    except OSError:
+    except (OSError, RuntimeError):
         raise OSError('request unavailable') from None
     finally:
         if process is not None:
             if process.poll() is None:
                 _kill_and_reap(process)
+            if writer_started:
+                # Killing the helper normally breaks the blocked write and lets
+                # its owner close stdin. Never close that stream from this thread:
+                # BufferedWriter.close could wait on the blocked writer's lock.
+                writer.join(timeout=REAP_TIMEOUT_S)
+            elif input_stream is not None:
+                try:
+                    input_stream.close()
+                except OSError:
+                    pass
             _close_pipes(process)
 
 

@@ -5,7 +5,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 SRC=HERE.parent/'mps-dunhuang-portrait-studio'
 DIST=HERE.parent/'dist'
-VERSION='1.0.0'
+VERSION='1.0.1'
 OUT=DIST/('mps-dunhuang-portrait-studio-'+VERSION+'.zip')
 LIMIT=3000000
 TARGET=2500000

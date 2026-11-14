@@ -10,6 +10,7 @@ import socket
 import struct
 import subprocess
 import sys
+import threading
 import time
 import types
 import unittest
@@ -31,12 +32,22 @@ URL = 'https://myplanestore.com/platform-api/gemini/health'
 SECRET = 'synthetic-not-a-real-secret'
 
 
+class CapturedPipe(io.BytesIO):
+    captured = b''
+
+    def close(self):
+        if not self.closed:
+            self.captured = self.getvalue()
+        super().close()
+
+
 class FakeProcess:
     def __init__(self, wire=None, timeout=False):
         self.wire = struct.pack('!I', 200) + b'ok' if wire is None else wire
         self.timeout = timeout
         self.returncode = None
-        self.stdin = io.BytesIO()
+        self.original_stdin = CapturedPipe()
+        self.stdin = self.original_stdin
         self.stdout = io.BytesIO()
         self.stderr = None
         self.calls = []
@@ -96,7 +107,9 @@ class HTTPDeadlineChecks(unittest.TestCase):
         self.assertFalse(options['shell'])
         self.assertEqual(options['stderr'], subprocess.DEVNULL)
         self.assertNotIn(SECRET, ' '.join(argv))
-        self.assertIn(SECRET.encode(), process.calls[0][0])
+        self.assertIn(SECRET.encode(), process.original_stdin.captured)
+        self.assertIsNone(process.stdin)
+        self.assertIsNone(process.calls[0][0])
         self.assertEqual(len(process.calls), 1)
 
     def test_timeout_kills_and_reaps_without_retry(self):
@@ -257,6 +270,49 @@ class HTTPDeadlineChecks(unittest.TestCase):
         self.assertEqual(len(processes), 1)
         self.assertIsNotNone(processes[0].poll())
         self.assertLess(time.monotonic() - started, 5.0)
+
+    def test_large_stdin_idle_child_deadline_and_writer_reaped(self):
+        # Old Windows 3.12.10 implementation f5e7ada3... took 5.094 seconds:
+        # communicate synchronously wrote 1MiB before reaching its timeout join.
+        # This child never reads stdin, creates no socket, and lives at most 5s.
+        processes = []
+        before = set(threading.enumerate())
+        def idle(command, **options):
+            process = REAL_POPEN([sys.executable, '-I', '-S', '-c', 'import time; time.sleep(5)'], **options)
+            processes.append(process)
+            return process
+        started = time.monotonic()
+        with mock.patch.object(HTTP.subprocess, 'Popen', side_effect=idle):
+            with self.assertRaises(OSError):
+                HTTP.request('POST', URL, {'synthetic_blob': 'x' * (1024 * 1024)}, {}, 0.2, 32)
+        elapsed = time.monotonic() - started
+        self.assertEqual(len(processes), 1)
+        self.assertIsNotNone(processes[0].poll())
+        self.assertLess(elapsed, 2.0)
+        leaked = [thread for thread in threading.enumerate()
+                  if thread not in before and thread.name == 'mps-http-stdin-writer']
+        self.assertEqual(leaked, [])
+
+    def test_failed_stdin_writer_rejects_successful_child(self):
+        process = FakeProcess()
+        process.original_stdin.write = mock.Mock(side_effect=OSError('synthetic pipe failure'))
+        with mock.patch.object(HTTP.subprocess, 'Popen', return_value=process):
+            with self.assertRaises(OSError):
+                self.request()
+        self.assertTrue(process.reaped)
+
+    def test_active_reader_close_is_skipped(self):
+        process = FakeProcess()
+        process.stdout_thread = types.SimpleNamespace(is_alive=lambda: True)
+        process.stderr_thread = types.SimpleNamespace(is_alive=lambda: True)
+        process.stderr = io.BytesIO()
+        HTTP._close_pipes(process)
+        self.assertFalse(process.stdout.closed)
+        self.assertFalse(process.stderr.closed)
+        process.stdout_thread = process.stderr_thread = None
+        HTTP._close_pipes(process)
+        self.assertTrue(process.stdout.closed)
+        self.assertTrue(process.stderr.closed)
 
     def test_runtime_python37_syntax(self):
         ast.parse(MODULE_PATH.read_text(encoding='utf-8'), feature_version=(3, 7))
