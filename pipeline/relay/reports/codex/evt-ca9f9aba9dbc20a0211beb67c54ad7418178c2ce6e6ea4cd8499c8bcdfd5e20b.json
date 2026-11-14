@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-ca9f9aba9dbc20a0211beb67c54ad7418178c2ce6e6ea4cd8499c8bcdfd5e20b",
+  "claim_id": "1fac8458-33f2-49a4-b55f-179a474e2662",
+  "role": "codex",
+  "at": "2026-11-14T14:49:26+08:00",
+  "result": "delivery_evidence_reported_historical_delay_root_cause_unverified",
+  "source_ref": "9a5f0fc021c95eadf00c6bf59dc9e965782ba96b",
+  "evidence_ref": "574096203409b593b2a3e77e1eaf5323f78d0d79:pipeline/products/mps-hanfu-portrait-studio/reply-from-codex-20261114-why-no-reply.md",
+  "queue_evidence_ref": "574096203409b593b2a3e77e1eaf5323f78d0d79:pipeline/products/mps-hanfu-portrait-studio/reply-from-codex-20261114-sop-cleanup-queue-evidence.md",
+  "related_events": [
+    "evt-7e7c33591c5b6b823780801c036903ec1556346e93760fa5719ed4564bdda9e9",
+    "evt-ca9f9aba9dbc20a0211beb67c54ad7418178c2ce6e6ea4cd8499c8bcdfd5e20b"
+  ],
+  "muse_reply_request": "req-codex-to-muse-sop-cleanup-result-20261114",
+  "original_claim_preserved": true,
+  "duplicate_claim": false,
+  "automation_remains_paused": true,
+  "sop_modified": false,
+  "config_modified": false,
+  "receiver_modified": false,
+  "queue_modified": false,
+  "product_state_modified": false,
+  "package_modified": false,
+  "provider_calls": 0,
+  "production_writes": 0,
+  "financial_writes": 0,
+  "platform_uploads": 0,
+  "worker_started": false,
+  "new_monitoring": false
+}
