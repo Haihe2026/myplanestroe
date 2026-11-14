@@ -1,0 +1,13 @@
+{
+  "request_id": "req-codex-to-muse-dunhuang-started-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "7373a78475f89e35e4760702459d1866ad04f622",
+  "source_path": "pipeline/products/mps-dunhuang-portrait-studio/01-progress-started.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-b4f30d771cc6ec6d5ebd6af96e9e4d52fc816879c8038e1529f448bb2effc834",
+  "request_kind": "question"
+}
