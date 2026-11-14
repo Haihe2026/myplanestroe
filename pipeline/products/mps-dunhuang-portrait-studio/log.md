@@ -2,3 +2,4 @@
 2026-11-14T16:00:50+08:00 | codex | brief_ready → spec_in_progress | 沿原事件claim核对固定brief指纹及当前状态；按负责人本聊天“从现在按最新仓库程序执行”开展本轮，G7/已交付汉服不机械等待上传。实时在线读取WorkBuddy技能页200并留哈希；准备成人本人单人敦煌十模板规格、十示例及一主题logo，支付和上游接入逐项核实；按两角色SOP交Muse审规格，不扩大生产/财务/上架权限。
 2026-11-14T16:44:13+08:00 | codex | spec_in_progress → spec_ready | 规格MD/JSON及支付/OA/上游固定合同完成；独立A1与42项文档素材校验通过。10新示例+1主题logo共11次登记调用成功，provenance/audit/视觉就位；适配最新3MB上限同内容JPEG十图1.33MB、不减数不重生。按两角色SOP交Muse复检A1，尚未开发客户端或部署/发布。
 2026-11-14T16:54:01+08:00 | muse | spec_ready → spec_ready | A1 复检 16 项全部通过（01-a1-validation.json，提交 1829ca93）；交接 Codex 开发 1.0.0（msg-from-muse-20261114-a1-pass-dev.md，提交 7e917758；请求 req-muse-to-codex-dunhuang-dev-20261114，提交 3e220d74），等 Codex 认领后置 dev_in_progress。成品 ZIP ≤3MB 约束已列入交接；附录 D/D.6 暂停；负责人手动上传。
+2026-11-14T17:53:55+08:00 | codex | spec_ready → dev_in_progress | 核对Muse A1通过固定提交及双规格SHA，沿原claim开始1.0.0真实开发+A2；十JPEG/logo复用不重生，主域/420预算/本人成人三许可和原任务保护逐项实现，双端隔离Mock后固定ZIP A3静态；不部署/支付/上传。
