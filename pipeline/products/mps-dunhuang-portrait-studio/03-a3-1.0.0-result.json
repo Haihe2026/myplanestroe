@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "version": "1.0.0",
+  "at": "2026-11-14T19:21:18+08:00",
+  "result": "FAIL",
+  "method": "static only; no package import/execution or A2 rerun",
+  "source_ref": "2f28a226db29d033cf85cc310aa2efe0bc2ac56f",
+  "zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+  "zip_bytes": 1453045,
+  "findings": [
+    {
+      "id": "DH-A3-01",
+      "priority": "P2",
+      "file": "scripts/studio.py",
+      "lines": "989-999",
+      "problem": "cmd_auth error has no draft context but calls W.failure(not_started), asserting no image fees after a prior unknown/settled task",
+      "expected": "account_failure with fees by service records; preserve original task/account identity",
+      "reproduce": "Prior submitted-unknown or delivered task; user auth; account request network/5xx failure; static branch emits definite not charged"
+    },
+    {
+      "id": "DH-A3-02",
+      "priority": "P2",
+      "file": "scripts/studio.py",
+      "lines": "1167-1223",
+      "problem": "New feedback B invokes _submit_pending over entire queue and automatically re-POSTs old unknown A without explicit retry",
+      "expected": "A new confirmed item submits only that item; old unknown items retain exact key/body and await explicit retry",
+      "reproduce": "A POST response unknown remains pending; user only confirms new B; default feedback branch queues B then iterates A,B"
+    },
+    {
+      "id": "DH-A3-03",
+      "priority": "P2",
+      "file": "scripts/http_bytes.py",
+      "lines": "104-150",
+      "problem": "On Windows Popen.communicate synchronously _stdin_write(input) before reader timeout joins; large request pipe write is outside effective deadline supervision",
+      "expected": "Separate bounded stdin writing from main-thread deadline; expiry kills/reaps this helper, no retry or credential files",
+      "reproduce": "Static CPython 3.12 Windows _communicate source confirms synchronous write before timeout joins; payload larger than pipe capacity and helper pre-read stall can block the supervising thread",
+      "boundary": "Normal helper DNS/header/body phase is bounded after full stdin read; issue is large Windows input/pre-read stage. Existing OS scheduling caveat does not cover blocking application pipe writes"
+    }
+  ],
+  "host_acceptance": "skipped under standing rule; not passed",
+  "requested_next": "1.0.1 development/A2 then frozen ZIP A3; retain 1.0.0"
+}

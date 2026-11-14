@@ -1,0 +1,578 @@
+{
+  "result": "FAIL",
+  "review_scope": "A3 static Core/account/payment/recovery subreview only; actual new clean package from the fixed remote ZIP; text/AST trace, no package imported or executed.",
+  "source_package_commit": "2f28a226db29d033cf85cc310aa2efe0bc2ac56f",
+  "zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+  "zip_bytes": 1453045,
+  "reviewed_files": [
+    {
+      "path": "scripts/studio.py",
+      "sha256": "e12e0d88b268ea29c1c472d8f1f89d13041128453e7f03b64b4cf5ed995a662a"
+    },
+    {
+      "path": "scripts/welcome_copy.py",
+      "sha256": "26f2a6c11d3edb1886765846d41068771280be27ad08047c5856a63db8d93478"
+    }
+  ],
+  "checks": [
+    {
+      "id": "RC01",
+      "check": "Frozen source identity",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              32,
+              38
+            ]
+          ]
+        }
+      ],
+      "detail": "Extracted Core and welcome bytes equal the fixed ZIP members; slug/version/channel/base are this product, business product remains gemini."
+    },
+    {
+      "id": "RC02",
+      "check": "First turn is telemetry plus local persistence",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              316,
+              341
+            ]
+          ]
+        }
+      ],
+      "detail": "No business call or account read on first-turn; telemetry and local state errors are best effort. Account words return accountIntent. Explicit no-photo image requests now infer has_need while greetings do not require the flag."
+    },
+    {
+      "id": "RC03",
+      "check": "Original identity and account input validation",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              167,
+              196
+            ]
+          ]
+        }
+      ],
+      "detail": "Invalid persisted identity fails rather than silently creating a replacement. A valid original install_secret is retained; a new secret is generated only when no original identity exists."
+    },
+    {
+      "id": "RC04",
+      "check": "Main-domain and trustworthy short links",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              35,
+              38
+            ],
+            [
+              279,
+              292
+            ],
+            [
+              540,
+              564
+            ],
+            [
+              614,
+              624
+            ]
+          ]
+        }
+      ],
+      "detail": "Exact HTTPS first-party host/path and userinfo rejection; preserve query/fragment, normalize legacy input toward myplanestore.com, positive non-bool expiry. Expired links retried at most once using original identity."
+    },
+    {
+      "id": "RC05",
+      "check": "Six-field singleton generation contract",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              89,
+              94
+            ],
+            [
+              240,
+              276
+            ],
+            [
+              517,
+              533
+            ]
+          ]
+        }
+      ],
+      "detail": "Body has exactly prompt,size,confirmed,image_engine,references,reference_consent; actual True confirmations; only three supported sizes; one PNG/JPEG reference; bounded raw read and source digest; no model/n/quality additions."
+    },
+    {
+      "id": "RC06",
+      "check": "Unsubmitted invalidation precedes early returns",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              409,
+              458
+            ],
+            [
+              463,
+              471
+            ]
+          ]
+        }
+      ],
+      "detail": "Locks first; otherwise _void_unsubmitted persists three consents false, clears key/job/body/source/prompt/look and task billing, saves B path and replanning before scene/look/eligibility/text/file checks. Unknown/no/bad B cannot retain A authorization."
+    },
+    {
+      "id": "RC07",
+      "check": "Three consents and immutable planned prompt/look",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              449,
+              460
+            ],
+            [
+              478,
+              491
+            ],
+            [
+              517,
+              533
+            ]
+          ]
+        }
+      ],
+      "detail": "Successful plan stores prompt_snapshot and look_snapshot; confirm only planned adult-self and unchanged source SHA, independent yes flags. run requires all three actual booleans; outgoing body uses frozen prompt, not rebuilt theme defaults."
+    },
+    {
+      "id": "RC08",
+      "check": "Submit journal and unknown generation GET-only",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              645,
+              658
+            ],
+            [
+              688,
+              722
+            ],
+            [
+              735,
+              756
+            ],
+            [
+              785,
+              801
+            ]
+          ]
+        }
+      ],
+      "detail": "Persist submit_unknown/body digest/body_recipe before the only generation POST. Timeout, 409/5xx, invalid response/id and GET404 preserve key and task; recovery reads original by-key/job/image, never reposts generation."
+    },
+    {
+      "id": "RC09",
+      "check": "Binding401 and original-account recovery",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              568,
+              611
+            ],
+            [
+              725,
+              756
+            ],
+            [
+              767,
+              782
+            ]
+          ]
+        }
+      ],
+      "detail": "Key saved unbound then bound is True required. Binding401 removes only key/bound, retains install identity and draft. Submitted401 restores original account identity and queries original task; persistent failure exits4/task_kept, no new task key."
+    },
+    {
+      "id": "RC10",
+      "check": "402 and regenerate stay within consent/identity boundaries",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              663,
+              677
+            ],
+            [
+              700,
+              707
+            ],
+            [
+              921,
+              961
+            ]
+          ]
+        }
+      ],
+      "detail": "Definitive insufficient balance keeps original task and asks before topup. Resume prevalidates local reference before account calls. Regenerate only finished states plus renewed pay consent and preserved owner/upload consents."
+    },
+    {
+      "id": "RC11",
+      "check": "New-task billing residual defect closed",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              463,
+              468
+            ],
+            [
+              715,
+              719
+            ],
+            [
+              824,
+              826
+            ],
+            [
+              900,
+              918
+            ],
+            [
+              947,
+              961
+            ]
+          ]
+        }
+      ],
+      "detail": "New plan and regenerate clear charged_uses,reserved_uses,remaining_after_submit. Current nonnegative exact-int response values only; absence remains unknown, existing locked-task values retained, no inferred charge1."
+    },
+    {
+      "id": "RC12",
+      "check": "Pending/unknown progress defect closed",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              804,
+              842
+            ]
+          ]
+        }
+      ],
+      "detail": "Only explicit pending/processing without uncertainty notice proves processing; missing/unknown/review status or errors remain unconfirmed. Failure says fees from records; no new generation POST."
+    },
+    {
+      "id": "RC13",
+      "check": "Shared request/count/wall budgets",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              40,
+              86
+            ],
+            [
+              224,
+              229
+            ],
+            [
+              262,
+              263
+            ],
+            [
+              804,
+              842
+            ],
+            [
+              1332,
+              1350
+            ]
+          ]
+        }
+      ],
+      "detail": "Main resets once; nested resume/run share budget. Six combined by-key/id reads, two image reads, four account requests, query/download windows120 and overall420 monotonic. Budget passed to http_bytes.request; this subreview does not execute HTTP worker or repeat deadline tests."
+    },
+    {
+      "id": "RC14",
+      "check": "Read-only image recovery and safe delivery",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              868,
+              918
+            ]
+          ]
+        }
+      ],
+      "detail": "Read original image only, bounded PNG verification including CRC/zlib before non-overwrite output. Download failure saves download_pending; dimensions reported as actual; output balance exact-int and charges from task response only."
+    },
+    {
+      "id": "RC15",
+      "check": "No-account menus have an exit",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              964,
+              1061
+            ],
+            [
+              1102,
+              1146
+            ]
+          ]
+        }
+      ],
+      "detail": "status/auth/topup/paid/balance/history use original quick-entry/membership short-link paths or factual failure, without generating. Account state/registered/remaining balance does not establish a new order payment."
+    },
+    {
+      "id": "RC16",
+      "check": "Account-only auth failure fee wording",
+      "result": "FAIL",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              989,
+              999
+            ]
+          ]
+        },
+        {
+          "path": "scripts/welcome_copy.py",
+          "lines": [
+            [
+              228,
+              233
+            ]
+          ]
+        },
+        {
+          "path": "SKILL.md",
+          "lines": [
+            [
+              81,
+              85
+            ]
+          ]
+        }
+      ],
+      "detail": "cmd_auth has no task context but its error branch calls failure(...,not_started), producing a false assertion that an existing unknown image never started or charged."
+    },
+    {
+      "id": "RC17",
+      "check": "History and ticket views use factual owner-scoped records",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              1072,
+              1146
+            ],
+            [
+              1149,
+              1151
+            ],
+            [
+              1234,
+              1263
+            ]
+          ]
+        }
+      ],
+      "detail": "Paging based on returned total; sanitizes record text and uses received charge/reserve/refund fields. Ticket known-id path is GET-only, checks returned id, handles404 without claiming access; absent due time not fabricated."
+    },
+    {
+      "id": "RC18",
+      "check": "Feedback journals and known-id lookup",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              1154,
+              1197
+            ],
+            [
+              1203,
+              1219
+            ],
+            [
+              1234,
+              1263
+            ]
+          ]
+        }
+      ],
+      "detail": "Feedback body/key saved before POST; malformed/unknown response keeps pending. A known ticket is queried rather than resubmitted; no invented support by-key endpoint. Queue dispatch exception is RC19."
+    },
+    {
+      "id": "RC19",
+      "check": "Unknown old feedback must not piggyback a new submission",
+      "result": "FAIL",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              1167,
+              1197
+            ],
+            [
+              1200,
+              1231
+            ]
+          ]
+        },
+        {
+          "path": "SKILL.md",
+          "lines": [
+            [
+              97,
+              97
+            ]
+          ]
+        }
+      ],
+      "detail": "New feedback B with args.retry=False appends B then submits the whole pending list, including previously unknown A, although the user only confirmed B. auto_retry=False signals do not prevent that old A repost in this branch."
+    }
+  ],
+  "findings": [
+    {
+      "id": "DH-A3-CORE-01",
+      "priority": "P2",
+      "check": "RC16",
+      "title": "Generic auth failure asserts an unknown image was not charged",
+      "input": "An original image remains submit_unknown (or was settled but not yet confirmed). User asks to re-authorize; quick-entry fails with network/HTTP error.",
+      "expected": "State only that this account operation failed, authorization itself costs no image use, and original image fees remain determined by service records.",
+      "actual": "studio.py:999 passes not_started to welcome_copy.failure; the final message asserts no generation started and no uses were charged, although cmd_auth never reads a draft.",
+      "suggested_fix": "In a development version, use the safe account_failure or record-context wording for this no-draft branch. Retain original task/key and do not alter the frozen1.0.0 artifact.",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              989,
+              999
+            ]
+          ]
+        },
+        {
+          "path": "scripts/welcome_copy.py",
+          "lines": [
+            [
+              228,
+              233
+            ]
+          ]
+        },
+        {
+          "path": "SKILL.md",
+          "lines": [
+            [
+              81,
+              85
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DH-A3-CORE-02",
+      "priority": "P2",
+      "check": "RC19",
+      "title": "New feedback submits an old unknown pending item without explicit continuation",
+      "input": "Feedback A was POSTed but its response was lost, so A remains pending. User later explicitly confirms a distinct new feedback B without requesting to continue A.",
+      "expected": "Submit B only; retain A with its original body/key until the user explicitly asks to continue that unknown feedback.",
+      "actual": "cmd_feedback args.retry=False appends B, then _submit_pending iterates all pending items and rePOSTs A before B; auto_retry=False on the later signal does not stop the action.",
+      "suggested_fix": "In development, distinguish the currently confirmed new item from old unknown pending items; only an explicit retry operation may resume the relevant old pending feedback with the same body/key.",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              1167,
+              1197
+            ],
+            [
+              1200,
+              1231
+            ]
+          ]
+        },
+        {
+          "path": "SKILL.md",
+          "lines": [
+            [
+              97,
+              97
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "open_findings": [
+    "DH-A3-CORE-01",
+    "DH-A3-CORE-02"
+  ],
+  "closed_development_findings": [
+    "new-task stale billing fields cleared",
+    "only proven pending state reports processing",
+    "explicit no-photo image request infers has_need"
+  ],
+  "a2_evidence_reviewed": "a2-summary.json binds this ZIP and records Windows/Linux64 contract+155e2e+16deadline passes; final e2e log tails read, no tests rerun.",
+  "official_record_reviewed": "official-pre-a3-read.json records root live200 at2026-11-14T19:09:17+08:00,284412B/SHAcee032d5...; no network performed by this subreview.",
+  "limits": [
+    "No A2, package function, HTTP, browser or upstream execution.",
+    "HTTP worker hard-deadline/private-storage internals belong to their separately assigned static review; Core integration checked only.",
+    "Host and prelisting zero-consumption browser checks skipped under standing rule; not marked passed.",
+    "No production/payment/listing acceptance; no source modifications."
+  ],
+  "report": "a3-recovery-review.md"
+}

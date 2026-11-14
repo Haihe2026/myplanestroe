@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "version": "1.0.0",
+  "result": "PASS",
+  "scope": "A3 metadata, ZIP layout, static dependencies, raw YAML, bilingual examples, approved assets and independent path parsing",
+  "overall_a3": null,
+  "source_package_commit": "2f28a226db29d033cf85cc310aa2efe0bc2ac56f",
+  "zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+  "zip_bytes": 1453045,
+  "zip_blob": "aeca4f1c0b2c71585fd3dcae9d445ae47ae0e2b2",
+  "clean_package_bound": true,
+  "open_findings": [],
+  "checks": [
+    {
+      "id": "M01-fixed-basis",
+      "result": "PASS",
+      "evidence": {
+        "spec_sha256": "8b46131f7526839246300bdd217250451730e3726f5cc04de6a41df182d460f9",
+        "approved_request": "7e9177587b49674d5e1d736480343fc9025a16c3",
+        "sop_blob": "20b07a7e97a8e78403e82e0a2c71cee6a0b6013e",
+        "config_blob": "0dca878e7778521c97031abd3e587c4395ebad3c",
+        "official_read": {
+          "at": "2026-11-14T19:09:17+08:00",
+          "url": "https://open.workbuddy.cn/docs/skill",
+          "status": 200,
+          "bytes": 284412,
+          "sha256": "cee032d50e92db95a60f7c0381cf1a3f9a5b3cddc8a17f95da6699d8fe4d2269",
+          "role": "A3 static self-check"
+        }
+      }
+    },
+    {
+      "id": "M02-zip-integrity-size",
+      "result": "PASS",
+      "evidence": {
+        "sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+        "bytes": 1453045,
+        "file_count": 30,
+        "git_blob": "aeca4f1c0b2c71585fd3dcae9d445ae47ae0e2b2",
+        "limit_bytes": 3000000,
+        "target_bytes": 2500000,
+        "limit_headroom": 1546955,
+        "target_headroom": 1046955,
+        "crc": "all members verified"
+      }
+    },
+    {
+      "id": "M03-path-structure",
+      "result": "PASS",
+      "evidence": {
+        "single_wrapper": "mps-dunhuang-portrait-studio",
+        "max_logical_depth": 2,
+        "logical_depth_definition": "package root / optional second-level directory / file",
+        "unsafe_paths": false,
+        "encrypted": false,
+        "symlinks": false,
+        "duplicate_casefold": false
+      }
+    },
+    {
+      "id": "M04-clean-source-binding",
+      "result": "PASS",
+      "evidence": {
+        "matched_members": 30,
+        "extra_clean_files": 0
+      }
+    },
+    {
+      "id": "M05-raw-frontmatter",
+      "result": "PASS",
+      "evidence": {
+        "parser": "PyYAML 6.0.3 SafeLoader with duplicate rejection",
+        "raw_original": true,
+        "projection_or_newline_rewrite": false,
+        "required_fields": [
+          "name",
+          "display_name",
+          "display_name_en",
+          "description",
+          "description_zh",
+          "description_en",
+          "version",
+          "author"
+        ],
+        "fields_match_approved_spec": true,
+        "skill_md_bytes": 15285,
+        "skill_md_limit": 15360,
+        "examples_zh": 3,
+        "examples_en": 3
+      }
+    },
+    {
+      "id": "M06-bilingual-semantics",
+      "result": "PASS",
+      "evidence": [
+        {
+          "index": 1,
+          "key": "pipa_back",
+          "result": "PASS",
+          "matching_dimensions": [
+            "scene",
+            "scene-specific details",
+            "adult self",
+            "one person",
+            "identity retention",
+            "portrait 2:3",
+            "1024x1536"
+          ]
+        },
+        {
+          "index": 2,
+          "key": "mingsha_sunset",
+          "result": "PASS",
+          "matching_dimensions": [
+            "scene",
+            "scene-specific details",
+            "adult self",
+            "one person",
+            "identity retention",
+            "portrait 2:3",
+            "1024x1536"
+          ]
+        },
+        {
+          "index": 3,
+          "key": "crescent_night",
+          "result": "PASS",
+          "matching_dimensions": [
+            "scene",
+            "scene-specific details",
+            "adult self",
+            "one person",
+            "identity retention",
+            "portrait 2:3",
+            "1024x1536"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M07-versions-public-metadata",
+      "result": "PASS",
+      "evidence": {
+        "version": "1.0.0",
+        "meta_studio_telemetry_frontmatter_agree": true,
+        "welcome_exact": "欢迎使用WorkBuddy官方认证技能 敦煌写真照相馆。",
+        "no_hidden_html_comments": true
+      }
+    },
+    {
+      "id": "M08-runtime-static-dependencies",
+      "result": "PASS",
+      "evidence": {
+        "runtime_scripts": 9,
+        "third_party_runtime_imports": [],
+        "imported_package_scripts": false,
+        "executed_package_scripts": false,
+        "python37": "grammar only; not actual 3.7 execution",
+        "developer_only_dependencies": "PyYAML in tests is not a runtime requirement"
+      }
+    },
+    {
+      "id": "M09-ten-approved-jpegs",
+      "result": "PASS",
+      "evidence": {
+        "count": 10,
+        "size": [
+          512,
+          768
+        ],
+        "format": "JPEG RGB",
+        "total_bytes": 1333229,
+        "all_exact_approved_bytes": true,
+        "full_decode": true,
+        "assets": [
+          {
+            "key": "pipa_back",
+            "sha256": "c717729b5346e4ec55c2d9f131e5c39625b0bbb6450a2f534a565570d1a40444",
+            "bytes": 123915
+          },
+          {
+            "key": "mural_fairy",
+            "sha256": "9cbb023e78f0b2226c55d446cc233d93961c232c24f33b66d729557f4dfe78b3",
+            "bytes": 171459
+          },
+          {
+            "key": "mogao_apsara",
+            "sha256": "b7a7c28eaaa519214bc3b95b8b226d0df95be4ec65610ecae1d698663b09ac24",
+            "bytes": 120774
+          },
+          {
+            "key": "mingsha_sunset",
+            "sha256": "c42c4a10b1ebbe3da71751f769a0fa2c3d8ab8f4ae174923b96b303b3dd80883",
+            "bytes": 130611
+          },
+          {
+            "key": "crescent_night",
+            "sha256": "88eafe3533af4c67d1b7f8605d3041adf163ae3af4e7e818ece25e7da5469197",
+            "bytes": 101630
+          },
+          {
+            "key": "apsara_dance",
+            "sha256": "cd11ed76f15be2ebfb4f96de0bdf3a0ea1da1f9c753f3ba7fd0a4cbee3083626",
+            "bytes": 114197
+          },
+          {
+            "key": "water_sleeves",
+            "sha256": "b8c439c2e183a29ca15b1b97e4e677b26833d8aeac59a7838f5797cba578bd77",
+            "bytes": 111246
+          },
+          {
+            "key": "dunhuang_lady",
+            "sha256": "20f03413c78304c4f082020a5519921f7127c2f510b7d1f9e463bcb5f4760346",
+            "bytes": 146147
+          },
+          {
+            "key": "camel_caravan",
+            "sha256": "fa558cb42edbefa99b8e02ed8eaa5867d2f7572961f6192602297c1d2db701eb",
+            "bytes": 171395
+          },
+          {
+            "key": "starry_desert",
+            "sha256": "c5242607d01135ac44e26d9c782c7dbe46b5583c78e6b77653f5025020b6fb1f",
+            "bytes": 141855
+          }
+        ]
+      }
+    },
+    {
+      "id": "M10-external-logo",
+      "result": "PASS",
+      "evidence": {
+        "path": "02-package/dist/logo.png",
+        "sha256": "9fdf400c88896e8dccaf6852fb4f7bf5d95a48ac97bc3468c86b6caea69acfe7",
+        "bytes": 480802,
+        "format": "PNG",
+        "size": [
+          512,
+          512
+        ],
+        "limit_bytes": 500000,
+        "approved_sha_match": true,
+        "outside_zip_per_spec": true,
+        "aesthetic_judgement": "not part of A3"
+      }
+    },
+    {
+      "id": "M11-manifest-assets-disclosure",
+      "result": "PASS",
+      "evidence": {
+        "bare_filenames": true,
+        "unique_keys_files": true,
+        "approved_titles_notes": true,
+        "fictional_adults_and_ai_disclosed": true,
+        "reference_seed_not_packaged": true,
+        "raw_originals_not_packaged": true
+      }
+    },
+    {
+      "id": "M12-independent-markdown-paths",
+      "result": "PASS",
+      "evidence": {
+        "fixtures": [
+          {
+            "fixture": "Dunhuang Demo Assets/pipa_back.jpg",
+            "decoded_file_exists": true,
+            "query": "",
+            "fragment": ""
+          },
+          {
+            "fixture": "Dunhuang#Demo/pipa_back.jpg",
+            "decoded_file_exists": true,
+            "query": "",
+            "fragment": ""
+          },
+          {
+            "fixture": "Dunhuang%Demo/pipa_back.jpg",
+            "decoded_file_exists": true,
+            "query": "",
+            "fragment": ""
+          }
+        ],
+        "standard_parser": "markdown-it-py CommonMark",
+        "independent_construction": true,
+        "static_mapping": {
+          "path": "02-package/mps-dunhuang-portrait-studio/scripts/studio.py",
+          "line": 135,
+          "space": "%20",
+          "hash": "%23",
+          "percent": "percent escaped before unsafe character encoding",
+          "windows_slashes": "converted to forward slashes"
+        },
+        "package_path_function_called": false,
+        "scope": "independently constructed parser fixtures plus static source mapping, not a runtime behaviour test"
+      }
+    }
+  ],
+  "limits": [
+    "No reviewed package script was imported, executed or called; no A2 rerun or network/business/provider/production/browser action.",
+    "not-run-host: 真机行为验收已跳过（负责人长期规则，2026-11-07），未标为通过。",
+    "Python3.7 is grammar-only; logo no aesthetic re-review; independent path construction is not a package runtime test.",
+    "Scoped metadata PASS does not overrule parent Core findings; overall A3/status/relay/manual handoff belong to parent review."
+  ]
+}
