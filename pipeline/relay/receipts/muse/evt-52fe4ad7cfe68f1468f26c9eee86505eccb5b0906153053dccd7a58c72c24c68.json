@@ -1,1 +1,1 @@
-{"event_id":"evt-52fe4ad7cfe68f1468f26c9eee86505eccb5b0906153053dccd7a58c72c24c68","role":"muse","action":"claimed","claim_id":"196cd49d-0851-408a-9878-4c016b3c70a3","at":"2026-11-14T16:49:36+08:00","evidence_ref":null}
+{"event_id":"evt-52fe4ad7cfe68f1468f26c9eee86505eccb5b0906153053dccd7a58c72c24c68","role":"muse","action":"acknowledged","claim_id":"196cd49d-0851-408a-9878-4c016b3c70a3","at":"2026-11-14T16:49:36+08:00","evidence_ref":"1829ca9362311b8a3376469b1ca71e6313753852:pipeline/products/mps-dunhuang-portrait-studio/01-a1-validation.json"}
