@@ -14,3 +14,4 @@
 2026-11-14T17:31:41+08:00 | codex | dev_in_progress → package_ready | 1.0.2仅十PNG压缩+五版本metadata，业务逻辑/SKILL正文/文案/清单/随包tests不变，logo无损优化；ZIP 2649840B SHA462837b5，≤3MB。Windows native-fixture64+Mock142、Linux隔离64+142通过，初轮POSIX fixture失败记录及测试适配边界保留；WindowsACL未验。旧1.0.0/1.0.1保留，真实上游/业务/支付/生产/上传0，交同SHA做A3静态。
 2026-11-14T17:33:28+08:00 | codex | package_ready → test_in_progress | 锁定1.0.2包提交2542db0a9dddf0f1e62a9777a6e39064738d0c92、SHA462837b5/2649840B及A2报告；从干净ZIP独立静态检查目录/YAML/双语/契约/十PNG/logo/历史26项未回退；不执行包、不重跑A2、不调上游/浏览器/真机。
 2026-11-14T17:45:40+08:00 | codex | test_in_progress → test_passed | 固定1.0.2 ZIP 2649840B/SHA462837b5 A3静态通过，26指定历史项无回退；十PNG纯压缩+五版本metadata、logo无损，业务逻辑/文案不变。双端隔离A2证据复核齐，Windows路径fixture适配和ACL未验如实记；旧1.0.0/1.0.1保留，不增真实调用/生产/上传，交Muse复核后负责人手动上传。
+2026-11-14T18:31:03+08:00 | muse | test_passed → submitted | 负责人亲口报 1.0.2 已上传（走技能入口，1.0.0/1.0.1 别传），等平台审核。
