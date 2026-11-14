@@ -11,5 +11,5 @@
 | mps-travel-portrait-studio | 旅行打卡写真照相馆 | test_passed | — | 0/3/2 | 1.0.2 A3通过，TRV全部关闭；待Muse固定附录D任务，负责人手动上传 | 2026-11-11T22:58:52+08:00 |
 | mps-maternity-portrait-studio | 孕妈写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过，MAT01/02/03关闭；待Muse固定附录D任务，负责人手动上传 | 2026-11-12T02:00:02+08:00 |
 | mps-silver-portrait-studio | 银发写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过，SLV-A3-01关闭；D暂停，交负责人手动上传 | 2026-11-12T10:54:03+08:00 |
-| mps-hanfu-portrait-studio | 汉服写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过，四项关闭；交固定ZIP/外置logo负责人手动上传 | 2026-11-12T20:09:48+08:00 |
+| mps-hanfu-portrait-studio | 汉服写真照相馆 | dev_in_progress | codex | 0/2/1 | 1.0.2仅图片压缩执行中；保留1.0.1，目标ZIP≤3MB | 2026-11-14T17:01:32+08:00 |
 | mps-dunhuang-portrait-studio | 敦煌写真照相馆 | spec_ready | — | 0/0/0 | 规格1.0.0及十示例/主题logo完成，A1自检通过，待Muse复检 | 2026-11-14T16:44:13+08:00 |
