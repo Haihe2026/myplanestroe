@@ -1,0 +1,10 @@
+{
+  "request_id": "req-codex-to-muse-temu-versions-domain-answer-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "322de7543e1dee785d1dabf093c92bbc1fc9eb19",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-to-muse-20261114-temu-versions-domain-answer.md",
+  "kind": "question"
+}
