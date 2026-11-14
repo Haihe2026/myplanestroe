@@ -1,0 +1,9 @@
+{
+  "name": "mps-dunhuang-portrait-studio",
+  "display_name": "敦煌写真照相馆",
+  "display_name_en": "Dunhuang Portrait Studio",
+  "version": "1.0.0",
+  "channel": "workbuddy_skill",
+  "author": "MyPlaneStore",
+  "entry": "SKILL.md"
+}

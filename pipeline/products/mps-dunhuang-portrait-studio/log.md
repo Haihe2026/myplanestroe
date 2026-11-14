@@ -4,3 +4,4 @@
 2026-11-14T16:54:01+08:00 | muse | spec_ready → spec_ready | A1 复检 16 项全部通过（01-a1-validation.json，提交 1829ca93）；交接 Codex 开发 1.0.0（msg-from-muse-20261114-a1-pass-dev.md，提交 7e917758；请求 req-muse-to-codex-dunhuang-dev-20261114，提交 3e220d74），等 Codex 认领后置 dev_in_progress。成品 ZIP ≤3MB 约束已列入交接；附录 D/D.6 暂停；负责人手动上传。
 2026-11-14T17:53:55+08:00 | codex | spec_ready → dev_in_progress | 核对Muse A1通过固定提交及双规格SHA，沿原claim开始1.0.0真实开发+A2；十JPEG/logo复用不重生，主域/420预算/本人成人三许可和原任务保护逐项实现，双端隔离Mock后固定ZIP A3静态；不部署/支付/上传。
 2026-11-14T18:48:51+08:00 | codex | dev_in_progress | 开发复核发现3处Core缺口，精确回归修复前失败、修后通过；继续收口完整HTTP事务硬截止，再冻结ZIP及跑双端隔离A2/A3。尚未声称测试通过，不改生产，不新生图。
+2026-11-14T19:08:56+08:00 | codex | dev_in_progress → package_ready | 1.0.0 ZIP1453045B/SHA0803d919，Windows/Linux各原始契约64+Mock155+HTTP截止16通过，首轮YAML断言/辅助路径失败及修复留档；批准规格与十JPEG/logo字节不变。主域、look快照、原任务保护、跨任务账单隔离、状态/目录链接/HTTP截止已实现；真实生图/支付/部署/上传0，待同SHA A3静态。

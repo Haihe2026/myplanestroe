@@ -1,0 +1,69 @@
+FFFFFF
+======================================================================
+FAIL: test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it (__main__.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it) (new_task='plan')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2767, in test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it
+    self.assertEqual(tuple(changed.get(k) for k in fields),(None,None,None))
+AssertionError: Tuples differ: (1, 0, 5) != (None, None, None)
+
+First differing element 0:
+1
+None
+
+- (1, 0, 5)
++ (None, None, None)
+
+======================================================================
+FAIL: test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it (__main__.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it) (new_task='regenerate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2776, in test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it
+    self.assertIsNone(delivery.call_args.kwargs['charged'])
+AssertionError: 1 is not None
+
+======================================================================
+FAIL: test_dh17_empty_unknown_review_status_never_claims_processing (__main__.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing) (response={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2830, in test_dh17_empty_unknown_review_status_never_claims_processing
+    self.assertEqual(sig['progress'],expected)
+AssertionError: 'processing' != 'unconfirmed'
+- processing
++ unconfirmed
+
+
+======================================================================
+FAIL: test_dh17_empty_unknown_review_status_never_claims_processing (__main__.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing) (response={'status': 'future-status'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2830, in test_dh17_empty_unknown_review_status_never_claims_processing
+    self.assertEqual(sig['progress'],expected)
+AssertionError: 'processing' != 'unconfirmed'
+- processing
++ unconfirmed
+
+
+======================================================================
+FAIL: test_dh17_empty_unknown_review_status_never_claims_processing (__main__.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing) (response={'status': 'needs_review'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2830, in test_dh17_empty_unknown_review_status_never_claims_processing
+    self.assertEqual(sig['progress'],expected)
+AssertionError: 'processing' != 'unconfirmed'
+- processing
++ unconfirmed
+
+
+======================================================================
+FAIL: test_close_question (__main__.FirstTurn.test_close_question)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 191, in test_close_question
+    self.assertIn('这个方向可以吗？',out)
+AssertionError: '这个方向可以吗？' not found in '欢迎使用WorkBuddy官方认证技能 敦煌写真照相馆。\n你想从哪个方向开始？\n'
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.362s
+
+FAILED (failures=6)

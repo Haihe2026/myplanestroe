@@ -1,0 +1,19 @@
+{
+  "CheckedAt": "2026-11-14T18:52:55.3430679+08:00",
+  "OS": "Windows",
+  "NativeGetAcl": true,
+  "Targets": [
+    {
+      "Kind": "file",
+      "Protected": true,
+      "AllowAceCount": 1,
+      "OnlyCurrentUser": true
+    },
+    {
+      "Kind": "directory",
+      "Protected": true,
+      "AllowAceCount": 1,
+      "OnlyCurrentUser": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:406: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp8cmtckcb\\photos\\敦煌写真结果\\me-crescent_night.png'>
+  self.assertEqual(png_local.size_of(open(s['paths'][0], 'rb').read()), (1024, 1536))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:412: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp8cmtckcb\\photos\\敦煌写真结果\\index.html' mode='r' encoding='utf-8'>
+  gallery = open(s['gallery'], encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:428: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp8cmtckcb\\photos\\me.jpg'>
+  self.assertEqual(open(self.photo, 'rb').read(), self.photo_bytes)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:677: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpvhal9rnq\\home\\mps-dunhuang-portrait-studio\\first-dialogue.json' mode='w' encoding='utf-8'>
+  open(os.path.join(d, 'first-dialogue.json'), 'w', encoding='utf-8').write('garbage')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...
+----------------------------------------------------------------------
+Ran 5 tests in 1.471s
+
+OK

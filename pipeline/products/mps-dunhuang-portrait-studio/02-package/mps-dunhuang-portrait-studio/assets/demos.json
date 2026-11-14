@@ -1,0 +1,65 @@
+{
+  "notice": "示例人物为自有合成的虚构成人，只展示艺术方向，不是你的真实结果，不是用户年龄/性别/脸型默认。AI 生成敦煌写真，非实拍。",
+  "demos": [
+    {
+      "key": "pipa_back",
+      "title": "飞天反弹琵琶",
+      "note": "琵琶置肩背后，一手抬起持琴颈、另一手在肩后拨弦；赭色壁画背景，未作真实演奏动作保证。 AI 生成敦煌写真，非实拍。",
+      "file": "pipa_back.jpg"
+    },
+    {
+      "key": "mural_fairy",
+      "title": "敦煌壁画仙女",
+      "note": "正面静立、红绿裙装与莲花几何壁画背景；是艺术壁画构成，未复制指定窟整幅画。 AI 生成敦煌写真，非实拍。",
+      "file": "mural_fairy.jpg"
+    },
+    {
+      "key": "mogao_apsara",
+      "title": "莫高窟飞天",
+      "note": "抬臂舞姿、脚尖接近或触地、飘带弧线，拱形壁画空间；非真实入窟拍摄。 AI 生成敦煌写真，非实拍。",
+      "file": "mogao_apsara.jpg"
+    },
+    {
+      "key": "mingsha_sunset",
+      "title": "鸣沙山沙漠飞天",
+      "note": "人物落地静立，夕阳沙丘、侧后披帛；不宣称悬浮。 AI 生成敦煌写真，非实拍。",
+      "file": "mingsha_sunset.jpg"
+    },
+    {
+      "key": "crescent_night",
+      "title": "月牙泉夜景飞天",
+      "note": "蓝调夜色中落地静立，远景可见小型月牙形水面；不是纯星空沙漠。 AI 生成敦煌写真，非实拍。",
+      "file": "crescent_night.jpg"
+    },
+    {
+      "key": "apsara_dance",
+      "title": "敦煌乐舞飞天",
+      "note": "单足轻抬、双臂舞动、短飘带，壁画风背景；此图未持乐器。 AI 生成敦煌写真，非实拍。",
+      "file": "apsara_dance.jpg"
+    },
+    {
+      "key": "water_sleeves",
+      "title": "飞天水袖舞",
+      "note": "两手及双袖长绸形成弧线，人物落地、深色舞台背景；现代艺术化水袖。 AI 生成敦煌写真，非实拍。",
+      "file": "water_sleeves.jpg"
+    },
+    {
+      "key": "dunhuang_lady",
+      "title": "敦煌古装仕女",
+      "note": "宽袖裙装、端坐木凳、双手放松，暖色几何壁画边饰；并非飞天悬空造型。 AI 生成敦煌写真，非实拍。",
+      "file": "dunhuang_lady.jpg"
+    },
+    {
+      "key": "camel_caravan",
+      "title": "沙漠驼队飞天",
+      "note": "人物站立，沙丘与壁画风石壁，远景三个小骆驼轮廓；无新增人类。 AI 生成敦煌写真，非实拍。",
+      "file": "camel_caravan.jpg"
+    },
+    {
+      "key": "starry_desert",
+      "title": "星空沙漠飞天",
+      "note": "深蓝星空沙丘、蓝金裙装及双臂飘带，落地姿态；无水面和驼队。 AI 生成敦煌写真，非实拍。",
+      "file": "starry_desert.jpg"
+    }
+  ]
+}

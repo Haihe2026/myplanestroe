@@ -1,0 +1,1 @@
+{"mode": "contract", "tests": 64, "failures": 0, "errors": 0, "skipped": 0, "external_network": "denied", "test_source": "original_unmodified"}

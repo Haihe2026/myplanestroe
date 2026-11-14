@@ -1,0 +1,138 @@
+{
+  "note": "Exact approved final JPEG bytes; ten demos reused, no generation.",
+  "source_spec_commit": "a8538c0a3170dbba876bddd449b63ff2f33704fe",
+  "new_generation_calls": 0,
+  "total_bytes": 1333229,
+  "items": [
+    {
+      "key": "pipa_back",
+      "source": "demo-assets/pipa_back.jpg",
+      "source_sha256": "c717729b5346e4ec55c2d9f131e5c39625b0bbb6450a2f534a565570d1a40444",
+      "package_file": "pipa_back.jpg",
+      "package_sha256": "c717729b5346e4ec55c2d9f131e5c39625b0bbb6450a2f534a565570d1a40444",
+      "package_bytes": 123915,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "mural_fairy",
+      "source": "demo-assets/mural_fairy.jpg",
+      "source_sha256": "9cbb023e78f0b2226c55d446cc233d93961c232c24f33b66d729557f4dfe78b3",
+      "package_file": "mural_fairy.jpg",
+      "package_sha256": "9cbb023e78f0b2226c55d446cc233d93961c232c24f33b66d729557f4dfe78b3",
+      "package_bytes": 171459,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "mogao_apsara",
+      "source": "demo-assets/mogao_apsara.jpg",
+      "source_sha256": "b7a7c28eaaa519214bc3b95b8b226d0df95be4ec65610ecae1d698663b09ac24",
+      "package_file": "mogao_apsara.jpg",
+      "package_sha256": "b7a7c28eaaa519214bc3b95b8b226d0df95be4ec65610ecae1d698663b09ac24",
+      "package_bytes": 120774,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "mingsha_sunset",
+      "source": "demo-assets/mingsha_sunset.jpg",
+      "source_sha256": "c42c4a10b1ebbe3da71751f769a0fa2c3d8ab8f4ae174923b96b303b3dd80883",
+      "package_file": "mingsha_sunset.jpg",
+      "package_sha256": "c42c4a10b1ebbe3da71751f769a0fa2c3d8ab8f4ae174923b96b303b3dd80883",
+      "package_bytes": 130611,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "crescent_night",
+      "source": "demo-assets/crescent_night.jpg",
+      "source_sha256": "88eafe3533af4c67d1b7f8605d3041adf163ae3af4e7e818ece25e7da5469197",
+      "package_file": "crescent_night.jpg",
+      "package_sha256": "88eafe3533af4c67d1b7f8605d3041adf163ae3af4e7e818ece25e7da5469197",
+      "package_bytes": 101630,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "apsara_dance",
+      "source": "demo-assets/apsara_dance.jpg",
+      "source_sha256": "cd11ed76f15be2ebfb4f96de0bdf3a0ea1da1f9c753f3ba7fd0a4cbee3083626",
+      "package_file": "apsara_dance.jpg",
+      "package_sha256": "cd11ed76f15be2ebfb4f96de0bdf3a0ea1da1f9c753f3ba7fd0a4cbee3083626",
+      "package_bytes": 114197,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "water_sleeves",
+      "source": "demo-assets/water_sleeves.jpg",
+      "source_sha256": "b8c439c2e183a29ca15b1b97e4e677b26833d8aeac59a7838f5797cba578bd77",
+      "package_file": "water_sleeves.jpg",
+      "package_sha256": "b8c439c2e183a29ca15b1b97e4e677b26833d8aeac59a7838f5797cba578bd77",
+      "package_bytes": 111246,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "dunhuang_lady",
+      "source": "demo-assets/dunhuang_lady.jpg",
+      "source_sha256": "20f03413c78304c4f082020a5519921f7127c2f510b7d1f9e463bcb5f4760346",
+      "package_file": "dunhuang_lady.jpg",
+      "package_sha256": "20f03413c78304c4f082020a5519921f7127c2f510b7d1f9e463bcb5f4760346",
+      "package_bytes": 146147,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "camel_caravan",
+      "source": "demo-assets/camel_caravan.jpg",
+      "source_sha256": "fa558cb42edbefa99b8e02ed8eaa5867d2f7572961f6192602297c1d2db701eb",
+      "package_file": "camel_caravan.jpg",
+      "package_sha256": "fa558cb42edbefa99b8e02ed8eaa5867d2f7572961f6192602297c1d2db701eb",
+      "package_bytes": 171395,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    },
+    {
+      "key": "starry_desert",
+      "source": "demo-assets/starry_desert.jpg",
+      "source_sha256": "c5242607d01135ac44e26d9c782c7dbe46b5583c78e6b77653f5025020b6fb1f",
+      "package_file": "starry_desert.jpg",
+      "package_sha256": "c5242607d01135ac44e26d9c782c7dbe46b5583c78e6b77653f5025020b6fb1f",
+      "package_bytes": 141855,
+      "size": [
+        512,
+        768
+      ],
+      "byte_identical": true
+    }
+  ]
+}

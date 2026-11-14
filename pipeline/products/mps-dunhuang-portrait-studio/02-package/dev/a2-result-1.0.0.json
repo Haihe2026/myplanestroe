@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "version": "1.0.0",
+  "at": "2026-11-14T19:08:30+08:00",
+  "result": "PASS",
+  "zip_file": "mps-dunhuang-portrait-studio-1.0.0.zip",
+  "zip_bytes": 1453045,
+  "zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+  "zip_blob_sha1": "aeca4f1c0b2c71585fd3dcae9d445ae47ae0e2b2",
+  "limit": 3000000,
+  "target": 2500000,
+  "zip_files": [
+    {
+      "path": "mps-dunhuang-portrait-studio/_meta.json",
+      "bytes": 251,
+      "sha256": "bf6b8439fbde93a51598bc3d9671918e47830481600814a7c1d5adafd60b6511",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/apsara_dance.jpg",
+      "bytes": 114197,
+      "sha256": "cd11ed76f15be2ebfb4f96de0bdf3a0ea1da1f9c753f3ba7fd0a4cbee3083626",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/camel_caravan.jpg",
+      "bytes": 171395,
+      "sha256": "fa558cb42edbefa99b8e02ed8eaa5867d2f7572961f6192602297c1d2db701eb",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/crescent_night.jpg",
+      "bytes": 101630,
+      "sha256": "88eafe3533af4c67d1b7f8605d3041adf163ae3af4e7e818ece25e7da5469197",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/demos.json",
+      "bytes": 2835,
+      "sha256": "fdf8cd98bc91c61205c38a44e59fd3e49595df1c442bc62e9a9c5a2d0bb110ca",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/dunhuang_lady.jpg",
+      "bytes": 146147,
+      "sha256": "20f03413c78304c4f082020a5519921f7127c2f510b7d1f9e463bcb5f4760346",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/mingsha_sunset.jpg",
+      "bytes": 130611,
+      "sha256": "c42c4a10b1ebbe3da71751f769a0fa2c3d8ab8f4ae174923b96b303b3dd80883",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/mogao_apsara.jpg",
+      "bytes": 120774,
+      "sha256": "b7a7c28eaaa519214bc3b95b8b226d0df95be4ec65610ecae1d698663b09ac24",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/mural_fairy.jpg",
+      "bytes": 171459,
+      "sha256": "9cbb023e78f0b2226c55d446cc233d93961c232c24f33b66d729557f4dfe78b3",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/pipa_back.jpg",
+      "bytes": 123915,
+      "sha256": "c717729b5346e4ec55c2d9f131e5c39625b0bbb6450a2f534a565570d1a40444",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/starry_desert.jpg",
+      "bytes": 141855,
+      "sha256": "c5242607d01135ac44e26d9c782c7dbe46b5583c78e6b77653f5025020b6fb1f",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/assets/water_sleeves.jpg",
+      "bytes": 111246,
+      "sha256": "b8c439c2e183a29ca15b1b97e4e677b26833d8aeac59a7838f5797cba578bd77",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/README.md",
+      "bytes": 2551,
+      "sha256": "3ceff5fb50d037582096953c19583173ab06079416b52a3d175526a46d36c3ab",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/api-spec.md",
+      "bytes": 5945,
+      "sha256": "97936230dfc03c1afdef68688bce666fc90cedfff9c17bc87fa78a0dcc1b9cdd",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/examples.md",
+      "bytes": 3127,
+      "sha256": "a9c16f7861687f303c3ef555d1bb2e7e3c540ae557ba489137f15f5526ac8656",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/platform-rules.md",
+      "bytes": 1449,
+      "sha256": "1f5407564cddfa44b03ba3ab8a5071be56dd785684079bc952efa52e02a074c7",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/prompts.md",
+      "bytes": 16244,
+      "sha256": "f3c514a635a20a2100cb35973f3b5db25d703668d014336d3fae2ca1c4828b3c",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/references/scenes.md",
+      "bytes": 9134,
+      "sha256": "2d52733e3646b6ef31583d4e32fe5f57fc621829363e340e40e771fe156b7bc2",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/audit_images.py",
+      "bytes": 5815,
+      "sha256": "ed7dc98ccc67395bcebd5d47f13a9ceee8de2c0cf4f56a50a5fbbbe276e2d33c",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/http_bytes.py",
+      "bytes": 8783,
+      "sha256": "f5e7ada3e5fcce428411562985f5bb0ba9b3804de321855682d6f69600bb20e7",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/jpeg_local.py",
+      "bytes": 16986,
+      "sha256": "c233bb9c88dd934513d0f685107f2219592f78fef6d29a20b1745becd175ec62",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/png_local.py",
+      "bytes": 9387,
+      "sha256": "ef6e94645528b41943b70a36af22dd4ebdaf18fe3c1b8690427437a03ca80648",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/private_store.py",
+      "bytes": 5745,
+      "sha256": "dab4c488102e7ab62327932b1a7091b3e9cd14e979fb50b43db0d2ce0c4cbce4",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/studio.py",
+      "bytes": 60179,
+      "sha256": "e12e0d88b268ea29c1c472d8f1f89d13041128453e7f03b64b4cf5ed995a662a",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/telemetry.py",
+      "bytes": 5295,
+      "sha256": "95e2ba61ff94e76079dd24e4d809ad04345f3768a2b9bd208b4e5d84ff050854",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/theme.py",
+      "bytes": 32731,
+      "sha256": "91926fd06756d5153d82a2e1f6af89692aced04b356689bd0283249cb51e444b",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/scripts/welcome_copy.py",
+      "bytes": 24053,
+      "sha256": "26f2a6c11d3edb1886765846d41068771280be27ad08047c5856a63db8d93478",
+      "unix_mode": "0o755"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/SKILL.md",
+      "bytes": 15285,
+      "sha256": "890c76a69dcef9ea2a03ecc145b5d66ea5cf55e377e323965bfd4ae49296bf4e",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/tests/first-turn-preview.md",
+      "bytes": 2590,
+      "sha256": "0c92c238cc515be2c425e5c3ce1ab2671c31a901c37a67c9bb63733d2fc0d0fc",
+      "unix_mode": "0o644"
+    },
+    {
+      "path": "mps-dunhuang-portrait-studio/tests/test_skill_contract.py",
+      "bytes": 121898,
+      "sha256": "9c2b7cc11a8da117666ee15f98d548a1e4080bbe847b01267c5d9a4113201719",
+      "unix_mode": "0o644"
+    }
+  ],
+  "checks": [
+    {
+      "platform": "windows",
+      "suite": "contract",
+      "tests": 64,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs/windows-contract.stdout.txt",
+          "bytes": 145,
+          "sha256": "39a58e43648b274dfdb00dbfeb9b28f54c563dd2adc250bf732e81cbd731c9ad"
+        },
+        {
+          "path": "a2-logs/windows-contract.stderr.txt",
+          "bytes": 421,
+          "sha256": "726c864e124d15bf5bbc5c17a0aae350008f58fa48007cf45120f40014c7b3c5"
+        }
+      ]
+    },
+    {
+      "platform": "windows",
+      "suite": "e2e",
+      "tests": 155,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs/windows-e2e.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs/windows-e2e.stderr.txt",
+          "bytes": 13111,
+          "sha256": "bf826be71b50c84baff3acdd48d7376f2f5ace72857c3c418045bc70d86efc15"
+        }
+      ]
+    },
+    {
+      "platform": "windows",
+      "suite": "http-deadline",
+      "tests": 16,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs/windows-http-deadline.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs/windows-http-deadline.stderr.txt",
+          "bytes": 120,
+          "sha256": "3120ffb1981811c5e9c50419991a9f3426449a145d8720af350278d06b1922ac"
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "suite": "contract",
+      "tests": 64,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs/linux-contract.stdout.txt",
+          "bytes": 144,
+          "sha256": "dcf4b8da29f71441e8b8980196eb2cbb1514981d891f773bcccbfbff68f2b6b6"
+        },
+        {
+          "path": "a2-logs/linux-contract.stderr.txt",
+          "bytes": 411,
+          "sha256": "1c77044ecf2b05496bec207aa8e26d37b7b36f500592d1df5701d290848c4d2d"
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "suite": "e2e",
+      "tests": 155,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs/linux-e2e.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs/linux-e2e.stderr.txt",
+          "bytes": 9640,
+          "sha256": "4d51858519b5817c36df7ebe707e3534bd8e91a83f8159d306128917c8a92034"
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "suite": "http-deadline",
+      "tests": 16,
+      "result": "PASS",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logs": [
+        {
+          "path": "a2-logs/linux-http-deadline.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "a2-logs/linux-http-deadline.stderr.txt",
+          "bytes": 115,
+          "sha256": "29ffcdd7d6897314f8fc53fbfd4bd4cbb30ad49ea1dec8b1441e1949687c57f9"
+        }
+      ]
+    }
+  ],
+  "windows": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "isolation": "synthetic private tree, Python socket guard and inherited HTTP-helper offline gate",
+    "test_source": "original unmodified files"
+  },
+  "linux": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "uid": 0,
+    "isolation": "unshare -rn and Python/offline-child guards",
+    "filesystem": "private Linux-native /tmp tree",
+    "test_source": "original unmodified files"
+  },
+  "fixed_spec": {
+    "commit": "a8538c0a3170dbba876bddd449b63ff2f33704fe",
+    "md_sha256": "1731efb08a7cbd1cddf98fdb2f096412015d8eb6b5e50bd4d35dfe0bb6092396",
+    "json_sha256": "8b46131f7526839246300bdd217250451730e3726f5cc04de6a41df182d460f9",
+    "unchanged": true
+  },
+  "external_business_calls": 0,
+  "real_upstream_calls": 0,
+  "new_demo_calls": 0,
+  "new_logo_calls": 0,
+  "deployments": 0,
+  "publish_attempts": 0,
+  "demos": {
+    "count": 10,
+    "total_bytes": 1333229,
+    "source": "approved existing JPEG bytes unchanged; demos-derivation.json"
+  },
+  "logo": {
+    "bytes": 480802,
+    "sha256": "9fdf400c88896e8dccaf6852fb4f7bf5d95a48ac97bc3468c86b6caea69acfe7",
+    "outside_zip": true
+  },
+  "windows_private_acl": {
+    "result": "PASS",
+    "native": true,
+    "evidence": "windows-private-acl.json",
+    "runtime_source_sha256": "dab4c488102e7ab62327932b1a7091b3e9cd14e979fb50b43db0d2ce0c4cbce4"
+  },
+  "syntax37": {
+    "result": "PASS",
+    "method": "AST feature_version 3.7 only; no Python 3.7 runtime claimed",
+    "files": [
+      "audit_images.py",
+      "http_bytes.py",
+      "jpeg_local.py",
+      "png_local.py",
+      "private_store.py",
+      "studio.py",
+      "telemetry.py",
+      "theme.py",
+      "welcome_copy.py"
+    ]
+  },
+  "decisions": [
+    {
+      "id": "DH-DEV-DEC-01",
+      "decision": "U06 clarify supports back-pipa vs empty-hand dance only; other held-pipa dance is unregistered and requires clarification, no confirm or HTTP"
+    },
+    {
+      "id": "DH-DEV-DEC-02",
+      "decision": "Only explicit pending/processing without review/unknown notice proves processing; missing/unknown/needs_review is unconfirmed, preserves original task"
+    },
+    {
+      "id": "DH-DEV-DEC-03",
+      "decision": "Full HTTP transaction runs once in fixed short-lived stdlib child; parent deadline covers DNS/headers/body, kills on expiry, no retry/fallback. Process startup/kill/reap scheduling has bounded cleanup overhead and is not a hard real-time guarantee; 90s process margin retained"
+    }
+  ],
+  "unverified": [
+    "real WorkBuddy host behavior and upstream image quality",
+    "real OAuth/payment/receipt callback and production deployment",
+    "real Windows junction construction (Windows component rejection is mock-verified; Linux symlink real-verified)",
+    "actual Python 3.7 interpreter"
+  ],
+  "a3": "not executed here; fixed ZIP static review is next",
+  "owner_manual_upload": true
+}

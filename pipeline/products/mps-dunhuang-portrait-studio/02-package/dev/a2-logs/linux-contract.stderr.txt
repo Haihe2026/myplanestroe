@@ -1,0 +1,9 @@
+............................usage: studio.py [-h]
+                 {first-turn,demo,plan,confirm,run,resume,regenerate,status,auth,topup,paid,balance,decline,refuse,history,feedback,ticket}
+                 ...
+studio.py: error: unrecognized arguments: --orderer family_proxy
+....................................
+----------------------------------------------------------------------
+Ran 64 tests in 9.453s
+
+OK

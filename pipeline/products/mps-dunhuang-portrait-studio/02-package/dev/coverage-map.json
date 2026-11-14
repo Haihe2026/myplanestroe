@@ -1,0 +1,1210 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "version": "1.0.0",
+  "executed": true,
+  "tests": {
+    "DH01": [
+      "contract.Contract.test_scenes_match_spec",
+      "contract.Contract.test_prompt_baselines",
+      "e2e.InheritedHnfSemantics.test_hnf01_form_kept_with_custom_outfit_all_combos"
+    ],
+    "DH02": [
+      "contract.Contract.test_route_precedence",
+      "e2e.DunhuangSpec.test_t01_suggested_scene_in_first_turn",
+      "e2e.DunhuangLimits.test_dh02_u06_instrument_followup_never_uses_empty_hands_for_pipa"
+    ],
+    "DH03": [
+      "contract.Contract.test_plan_people_rules",
+      "e2e.OriginalTaskSpec.test_self_only_eligibility_and_three_consents",
+      "e2e.RepairMat101.test_mat_a3_03_adult_unknown_asks_once_then_continues"
+    ],
+    "DH04": [
+      "contract.Contract.test_route_intent_boundaries",
+      "e2e.InheritedHnfSemantics.test_hnf02_negated_boundary_words_not_refused"
+    ],
+    "DH05": [
+      "e2e.InheritedHnfSemantics.test_hnf01_conflicting_outfit_disambiguates_not_dropped",
+      "e2e.DunhuangLimits.test_dh05_snapshot_freezes_complete_look_and_body"
+    ],
+    "DH06": [
+      "contract.Contract.test_slv_a3_01_replan_early_exit_voids_old_confirmation",
+      "e2e.RepairSlv101.test_slv_a3_01_early_exit_then_continue_sends_nothing",
+      "e2e.RepairSlv101.test_slv_a3_01_new_plan_b_needs_fresh_three_consents"
+    ],
+    "DH07": [
+      "e2e.OriginalTaskSpec.test_submit_unknown_persisted_before_post_and_locked",
+      "e2e.OriginalTaskSpec.test_by_key_404_never_resubmits",
+      "e2e.OriginalTaskSpec.test_fam01_first_post_401_then_404_never_resubmits",
+      "e2e.RepairSlv101.test_slv_a3_01_submitted_unknown_pending_replan_keeps_original"
+    ],
+    "DH08": [
+      "contract.Contract.test_png_verify",
+      "contract.InheritedRepairTrv102.test_trv02_r1_png_inflate_bounded",
+      "contract.InheritedRepairTrv102.test_trv02_r1_jpeg_repeated_dht_bounded",
+      "e2e.InheritedRepairTrv101.test_trv02_damaged_inputs_rejected_before_any_request",
+      "e2e.RepairMat101.test_mat_a3_02_needs_credits_resume_checks_photo_first",
+      "e2e.Waiting.test_size_mismatch_reported"
+    ],
+    "DH09": [
+      "contract.InheritedRepairTrv102.test_trv01_r1_bound_401_clears_key_keeps_identity",
+      "e2e.InheritedRepairTrv101.test_trv01_r1_bound_401_clears_stale_key_then_recovers",
+      "e2e.InheritedRepairTrv101.test_trv01_r1_unknown_task_only_queries_original_key",
+      "e2e.DunhuangLimits.test_dh09_bound_cross_account_403_and_revoked_401",
+      "e2e.DunhuangLimits.test_private_state_rejects_middle_link_components"
+    ],
+    "DH10": [
+      "e2e.DunhuangLimits.test_dh10_canonical_links_preserve_tokens",
+      "e2e.DunhuangLimits.test_dh10_credential_redirect_is_not_followed",
+      "e2e.AccountBilling.test_client_rejects_unregistered_field",
+      "e2e.AccountBilling.test_server_rejects_unregistered_field"
+    ],
+    "DH11": [
+      "e2e.PayConversion.test_fresh_topup_gives_link_account",
+      "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+      "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+      "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+      "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks"
+    ],
+    "DH12": [
+      "e2e.Support.test_balance_shows_recent_records",
+      "e2e.Support.test_feedback_creates_ticket_without_charge",
+      "e2e.Support.test_ticket_status_reply_and_isolation",
+      "e2e.InheritedHnfSemantics.test_hnf03_feedback_unknown_waits_for_explicit_user"
+    ],
+    "DH13": [
+      "e2e.Telemetry.test_fields_once_and_flag",
+      "e2e.Telemetry.test_every_early_branch_reports",
+      "e2e.Telemetry.test_corrupt_identity_repaired_and_readonly_skipped",
+      "e2e.InheritedRepairTrv101.test_trv03_attempt_not_persisted_means_not_sent"
+    ],
+    "DH14": [
+      "contract.Contract.test_frontmatter_platform_parse_rules",
+      "contract.Contract.test_examples_match_spec_scenes",
+      "contract.Contract.test_examples_alignment_detects_misalignment",
+      "e2e.FrontmatterYaml.test_source_and_zip_frontmatter_parse",
+      "e2e.FrontmatterYaml.test_duplicate_key_and_unquoted_colon_rejected"
+    ],
+    "DH15": [
+      "e2e.DemoAssets.test_package_demos_trace_to_provenance",
+      "e2e.FirstTurn.test_demo_links_survive_markdown",
+      "e2e.FirstTurn.test_demo_missing_assets_exit3",
+      "e2e.InheritedHnfSemantics.test_hnf04_swordsman_note_matches_image",
+      "e2e.DemoAssets.test_dh15_logo_binding"
+    ],
+    "DH16": [
+      "e2e.FirstTurn.test_first_turn_zero_business_http",
+      "e2e.FirstTurn.test_close_question",
+      "e2e.FirstTurn.test_demo_paths_and_single",
+      "contract.Contract.test_skill_required_rules"
+    ],
+    "DH17": [
+      "contract.Contract.test_timeouts_consistent",
+      "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+      "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+      "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+      "e2e.Waiting.test_once",
+      "e2e.Waiting.test_two_rounds",
+      "e2e.Waiting.test_never_reachable",
+      "e2e.AccountBilling.test_5xx_not_retried",
+      "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+    ],
+    "DH18": [
+      "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+      "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+      "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+      "contract.Contract.test_failure_copy",
+      "contract.PayConversion.test_favorite_section",
+      "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+    ],
+    "DH19": [
+      "contract.Contract.test_forbidden_words",
+      "contract.Contract.test_no_secrets_in_package",
+      "contract.PayConversion.test_customer_copy_no_site_or_key"
+    ],
+    "DH20": [
+      "development.offline_runner.network_deny_before_test_import",
+      "development.cross_platform_final_runs"
+    ],
+    "DH21": [
+      "e2e.ZipLayout.test_zip_dir_depth_at_most_two",
+      "contract.Contract.test_package_dir_depth_at_most_two",
+      "e2e.ZipLayout.test_zip_skill_examples_platform_limits"
+    ]
+  },
+  "stage6": [
+    {
+      "id": "S6-01",
+      "requirement": "未关联账号 → 提示关联 → 浏览器确认后继续",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-02",
+      "requirement": "正常出图并扣费，余额正确",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-03",
+      "requirement": "多图套装中途余额不足 → 402 → 充值后用同一编号继续，已出的图不重复扣费",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-04",
+      "requirement": "内容策略拒绝不扣费",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-05",
+      "requirement": "上游 5xx 不扣费，用同一编号重试成功",
+      "applicability": "adapted_to_current_contract",
+      "test_ids": [
+        "DH07"
+      ],
+      "tests": [
+        "e2e.OriginalTaskSpec.test_by_key_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_fam01_first_post_401_then_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_submit_unknown_persisted_before_post_and_locked",
+        "e2e.RepairSlv101.test_slv_a3_01_submitted_unknown_pending_replan_keeps_original"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-06",
+      "requirement": "同一编号重放不重复扣费",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH07"
+      ],
+      "tests": [
+        "e2e.OriginalTaskSpec.test_by_key_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_fam01_first_post_401_then_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_submit_unknown_persisted_before_post_and_locked",
+        "e2e.RepairSlv101.test_slv_a3_01_submitted_unknown_pending_replan_keeps_original"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-07",
+      "requirement": "token 失效自动清除并提示重新关联",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH09"
+      ],
+      "tests": [
+        "contract.InheritedRepairTrv102.test_trv01_r1_bound_401_clears_key_keeps_identity",
+        "e2e.InheritedRepairTrv101.test_trv01_r1_bound_401_clears_stale_key_then_recovers",
+        "e2e.InheritedRepairTrv101.test_trv01_r1_unknown_task_only_queries_original_key",
+        "e2e.DunhuangLimits.test_dh09_bound_cross_account_403_and_revoked_401",
+        "e2e.DunhuangLimits.test_private_state_rejects_middle_link_components"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-08",
+      "requirement": "首轮脚本输出不含 `http`、套餐、充值、付费、开通账户、价格字样；欢迎句逐字一致",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH16"
+      ],
+      "tests": [
+        "contract.Contract.test_skill_required_rules",
+        "e2e.FirstTurn.test_close_question",
+        "e2e.FirstTurn.test_demo_paths_and_single",
+        "e2e.FirstTurn.test_first_turn_zero_business_http"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-09",
+      "requirement": "首轮调用零 HTTP（把请求函数换成抛异常的函数实测；首次对话上报除外，且失败不影响本轮）",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH16"
+      ],
+      "tests": [
+        "contract.Contract.test_skill_required_rules",
+        "e2e.FirstTurn.test_close_question",
+        "e2e.FirstTurn.test_demo_paths_and_single",
+        "e2e.FirstTurn.test_first_turn_zero_business_http"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-10",
+      "requirement": "示例命令不联网、不读凭证；返回的示例 key 集合与 SKILL.md 示例表、README 的个数和标题完全一致；资源缺失时退出码 3",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH15"
+      ],
+      "tests": [
+        "e2e.DemoAssets.test_package_demos_trace_to_provenance",
+        "e2e.FirstTurn.test_demo_links_survive_markdown",
+        "e2e.FirstTurn.test_demo_missing_assets_exit3",
+        "e2e.InheritedHnfSemantics.test_hnf04_swordsman_note_matches_image",
+        "e2e.DemoAssets.test_dh15_logo_binding"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-11",
+      "requirement": "SKILL.md 含「不得跳过价值展示直接谈钱」「两列」示例表「都是效果示例图，不是你的真实结果」「这个方向可以吗？」，不含「三个方案」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH16"
+      ],
+      "tests": [
+        "contract.Contract.test_skill_required_rules",
+        "e2e.FirstTurn.test_close_question",
+        "e2e.FirstTurn.test_demo_paths_and_single",
+        "e2e.FirstTurn.test_first_turn_zero_business_http"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-12",
+      "requirement": "SKILL.md 列明「不算同意付费执行」的情形：沉默、无异议、认可示例、认可推荐、同意授权、授权完成",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH03"
+      ],
+      "tests": [
+        "contract.Contract.test_plan_people_rules",
+        "e2e.OriginalTaskSpec.test_self_only_eligibility_and_three_consents",
+        "e2e.RepairMat101.test_mat_a3_03_adult_unknown_asks_once_then_continues"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-13",
+      "requirement": "授权话术含「授权本身不扣费」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-14",
+      "requirement": "授权起，每一步话术都含「方案已经存好了」和「没有产生任何扣费」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-15",
+      "requirement": "授权和最后一步话术都含「### 现在需要你做的」编号清单，兜底项含「打不开」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-16",
+      "requirement": "话术里不出现服务端未开放的授权路径",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH10"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_client_rejects_unregistered_field",
+        "e2e.AccountBilling.test_server_rejects_unregistered_field",
+        "e2e.DunhuangLimits.test_dh10_canonical_links_preserve_tokens",
+        "e2e.DunhuangLimits.test_dh10_credential_redirect_is_not_followed"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-17",
+      "requirement": "本机已有账户且有次数 → 跳过授权和充值，直接制作",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-18",
+      "requirement": "用户拒绝开通 → 只回固定一句后结束，不重发链接，方案保留",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-19",
+      "requirement": "全包没有旧的慢到账口径；SKILL.md 含「不能将用户自述当作已到账」和「以服务端真实次数为准」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-20",
+      "requirement": "声明的外层超时 ≥ 请求预算 + 轮询窗口 + 计费前拒绝等待上限（从脚本常量实算，不写死）；全包所有超时数值一致（测试逐处比对 SKILL.md、references、脚本注释）",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-21",
+      "requirement": "开工复述齐全，内容不缺项；未明确同意付费执行的，授权或充值后先补确认再开工",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-22",
+      "requirement": "任务中途余额不足 → 先问是否打开充值页，同意后才取链接；话术含「页面打开不等于已经下单」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-23",
+      "requirement": "账户类说法走账户菜单，不触发第一轮",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-24",
+      "requirement": "**全新环境直接运行 `topup`，输出含可点链接或如实断网说明，不是死胡同（第七章 7.2 第 3 条）**",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-25",
+      "requirement": "**本机无账户时 `topup` / `balance` / `status` 调 `POST /quick-entry` 给关联链接，不直接回 `noAccount`（第七章 7.2 第 1 条）**",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH11"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_existing_account_skips_auth_and_topup",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangSpec.test_t13_reported_payment_not_credited",
+        "e2e.DunhuangSpec.test_t14_friends_each_split_into_independent_tasks",
+        "e2e.PayConversion.test_fresh_topup_gives_link_account"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-26",
+      "requirement": "**失败原因不误报：断网（`GatewayError` 状态 0）说「网络没连上」，服务端错误才说「服务正在处理较多请求」；`topup` 不得一律报 `busy`（第七章 7.2 第 2 条）**",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-27",
+      "requirement": "首次对话上报只含白名单字段，每个安装只发一次，关闭开关生效；开口统计按第六章第 5 节验收",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH13"
+      ],
+      "tests": [
+        "e2e.InheritedRepairTrv101.test_trv03_attempt_not_persisted_means_not_sent",
+        "e2e.Telemetry.test_corrupt_identity_repaired_and_readonly_skipped",
+        "e2e.Telemetry.test_every_early_branch_reports",
+        "e2e.Telemetry.test_fields_once_and_flag"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-28",
+      "requirement": "首次对话上报不挂在可能走不到的分支上：首轮示例命令、无凭证预览退出这些提前返回的分支，退出前都已经发出过上报（测试逐个分支断言）",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH13"
+      ],
+      "tests": [
+        "e2e.InheritedRepairTrv101.test_trv03_attempt_not_persisted_means_not_sent",
+        "e2e.Telemetry.test_corrupt_identity_repaired_and_readonly_skipped",
+        "e2e.Telemetry.test_every_early_branch_reports",
+        "e2e.Telemetry.test_fields_once_and_flag"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-29",
+      "requirement": "一次就出图",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-30",
+      "requirement": "两轮后出图",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-31",
+      "requirement": "五轮都还在处理",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-32",
+      "requirement": "首轮网络抖动后恢复",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-33",
+      "requirement": "全程连不上 → 说「当前进度未能确认」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-34",
+      "requirement": "明确失败 → 不扣费",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH17"
+      ],
+      "tests": [
+        "contract.Contract.test_timeouts_consistent",
+        "e2e.AccountBilling.test_5xx_not_retried",
+        "e2e.DunhuangLimits.test_dh17_budget_denies_before_transport_and_clamps_deadline",
+        "e2e.DunhuangLimits.test_dh17_pending_caps_all_status_gets_and_keeps_original",
+        "e2e.DunhuangLimits.test_dh17_phase_deadline_is_shared_by_lookup_and_poll",
+        "e2e.Waiting.test_never_reachable",
+        "e2e.Waiting.test_once",
+        "e2e.Waiting.test_two_rounds",
+        "e2e.DunhuangLimits.test_dh17_empty_unknown_review_status_never_claims_processing"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-35",
+      "requirement": "成功时先交图；首次交付附一次调整引导，之后不重复",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-36",
+      "requirement": "失败话术按四拍；我方服务端原因只说「服务正在处理较多请求」；拿不到明确费用结论时说「费用以服务记录为准」",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-37",
+      "requirement": "每次付费交付后转述服务端返回的本次扣费和剩余，余额低时追加充值提醒",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-38",
+      "requirement": "交付话术说明原图没有改动；后续调整需要重新生成时先说明可能再次计费",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-39",
+      "requirement": "大图分段下载，断网后续传成功",
+      "applicability": "not_applicable_current_contract",
+      "test_ids": [
+        "DH08"
+      ],
+      "tests": [
+        "contract.Contract.test_png_verify",
+        "contract.InheritedRepairTrv102.test_trv02_r1_jpeg_repeated_dht_bounded",
+        "contract.InheritedRepairTrv102.test_trv02_r1_png_inflate_bounded",
+        "e2e.InheritedRepairTrv101.test_trv02_damaged_inputs_rejected_before_any_request",
+        "e2e.RepairMat101.test_mat_a3_02_needs_credits_resume_checks_photo_first",
+        "e2e.Waiting.test_size_mismatch_reported"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": false,
+      "result": "N/A under approved current contract"
+    },
+    {
+      "id": "S6-40",
+      "requirement": "直连下载失败 → 同键同体加 `inline_delivery` 补取成功，不产生新计费；补取失败才走失败话术",
+      "applicability": "not_applicable_current_contract",
+      "test_ids": [
+        "DH07"
+      ],
+      "tests": [
+        "e2e.OriginalTaskSpec.test_by_key_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_fam01_first_post_401_then_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_submit_unknown_persisted_before_post_and_locked",
+        "e2e.RepairSlv101.test_slv_a3_01_submitted_unknown_pending_replan_keeps_original"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": false,
+      "result": "N/A under approved current contract"
+    },
+    {
+      "id": "S6-41",
+      "requirement": "计费前拒绝错误码 → 按常量等待并同键重试，单张次数和整批等待上限生效；其他 5xx 不重试",
+      "applicability": "not_applicable_current_contract",
+      "test_ids": [
+        "DH07"
+      ],
+      "tests": [
+        "e2e.OriginalTaskSpec.test_by_key_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_fam01_first_post_401_then_404_never_resubmits",
+        "e2e.OriginalTaskSpec.test_submit_unknown_persisted_before_post_and_locked",
+        "e2e.RepairSlv101.test_slv_a3_01_submitted_unknown_pending_replan_keeps_original"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": false,
+      "result": "N/A under approved current contract"
+    },
+    {
+      "id": "S6-42",
+      "requirement": "同设备账户复用（启用时）：只提交指纹；用户确认前不签发；拒绝后不再检测；关闭开关生效；失败时回到正常授权",
+      "applicability": "not_applicable_current_contract",
+      "test_ids": [
+        "DH09"
+      ],
+      "tests": [
+        "contract.InheritedRepairTrv102.test_trv01_r1_bound_401_clears_key_keeps_identity",
+        "e2e.InheritedRepairTrv101.test_trv01_r1_bound_401_clears_stale_key_then_recovers",
+        "e2e.InheritedRepairTrv101.test_trv01_r1_unknown_task_only_queries_original_key",
+        "e2e.DunhuangLimits.test_dh09_bound_cross_account_403_and_revoked_401",
+        "e2e.DunhuangLimits.test_private_state_rejects_middle_link_components"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": false,
+      "result": "N/A under approved current contract"
+    },
+    {
+      "id": "S6-43",
+      "requirement": "请求体出现未登记字段时被拒绝（客户端和服务端各测一次）",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH10"
+      ],
+      "tests": [
+        "e2e.AccountBilling.test_client_rejects_unregistered_field",
+        "e2e.AccountBilling.test_server_rejects_unregistered_field",
+        "e2e.DunhuangLimits.test_dh10_canonical_links_preserve_tokens",
+        "e2e.DunhuangLimits.test_dh10_credential_redirect_is_not_followed"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-44",
+      "requirement": "凭证失效 → 自动清除、退出码 4，重发原任务走授权",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH09"
+      ],
+      "tests": [
+        "contract.InheritedRepairTrv102.test_trv01_r1_bound_401_clears_key_keeps_identity",
+        "e2e.InheritedRepairTrv101.test_trv01_r1_bound_401_clears_stale_key_then_recovers",
+        "e2e.InheritedRepairTrv101.test_trv01_r1_unknown_task_only_queries_original_key",
+        "e2e.DunhuangLimits.test_dh09_bound_cross_account_403_and_revoked_401",
+        "e2e.DunhuangLimits.test_private_state_rejects_middle_link_components"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-45",
+      "requirement": "**对客禁用词测试**：SKILL.md 面向用户部分、README、references 转述文案、脚本所有对客进度文案中不含禁用词清单里的词（进度文案用 AST 从脚本里取出所有字符串常量来扫）",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH19"
+      ],
+      "tests": [
+        "contract.Contract.test_forbidden_words",
+        "contract.Contract.test_no_secrets_in_package",
+        "contract.PayConversion.test_customer_copy_no_site_or_key"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-46",
+      "requirement": "查余额与消费记录、提交工单、查工单各走通一次",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH12"
+      ],
+      "tests": [
+        "e2e.InheritedHnfSemantics.test_hnf03_feedback_unknown_waits_for_explicit_user",
+        "e2e.Support.test_balance_shows_recent_records",
+        "e2e.Support.test_feedback_creates_ticket_without_charge",
+        "e2e.Support.test_ticket_status_reply_and_isolation"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-47",
+      "requirement": "实际尺寸与请求不一致时提示并提出裁切",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH08"
+      ],
+      "tests": [
+        "contract.Contract.test_png_verify",
+        "contract.InheritedRepairTrv102.test_trv02_r1_jpeg_repeated_dht_bounded",
+        "contract.InheritedRepairTrv102.test_trv02_r1_png_inflate_bounded",
+        "e2e.InheritedRepairTrv101.test_trv02_damaged_inputs_rejected_before_any_request",
+        "e2e.RepairMat101.test_mat_a3_02_needs_credits_resume_checks_photo_first",
+        "e2e.Waiting.test_size_mismatch_reported"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-48",
+      "requirement": "输出目录有 `index.html` 画廊",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-49",
+      "requirement": "参考图格式报错点名具体文件",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH08"
+      ],
+      "tests": [
+        "contract.Contract.test_png_verify",
+        "contract.InheritedRepairTrv102.test_trv02_r1_jpeg_repeated_dht_bounded",
+        "contract.InheritedRepairTrv102.test_trv02_r1_png_inflate_bounded",
+        "e2e.InheritedRepairTrv101.test_trv02_damaged_inputs_rejected_before_any_request",
+        "e2e.RepairMat101.test_mat_a3_02_needs_credits_resume_checks_photo_first",
+        "e2e.Waiting.test_size_mismatch_reported"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-50",
+      "requirement": "离线检查不调用后端",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH16"
+      ],
+      "tests": [
+        "contract.Contract.test_skill_required_rules",
+        "e2e.FirstTurn.test_close_question",
+        "e2e.FirstTurn.test_demo_paths_and_single",
+        "e2e.FirstTurn.test_first_turn_zero_business_http"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-51",
+      "requirement": "输出文件不覆盖",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-52",
+      "requirement": "@ 技能完整走一次，交付后弹出收藏卡片；付费或购买流程中途不弹",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-53",
+      "requirement": "点「收藏」后，宿主记忆管理里用户级和项目级各有一条记录，内容只有调用偏好一句话",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-54",
+      "requirement": "选「暂不」后，本次对话不再询问",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-55",
+      "requirement": "开新对话，不 @ 技能，直接问一句该领域的问题 → 出现「加载技能 <技能name>」，并按技能流程执行",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-56",
+      "requirement": "说「取消收藏<技能中文名>」→ 两层记忆里的记录都被删除",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    },
+    {
+      "id": "S6-57",
+      "requirement": "宿主不支持写记忆时，如实告知不支持，不假装成功",
+      "applicability": "applicable_mock",
+      "test_ids": [
+        "DH18"
+      ],
+      "tests": [
+        "contract.Contract.test_failure_copy",
+        "contract.PayConversion.test_favorite_section",
+        "e2e.AccountBilling.test_full_flow_auth_topup_deliver",
+        "e2e.DunhuangLimits.test_dh18_delivery_only_reports_numeric_nonbool_bill",
+        "e2e.RepairA3.test_wed_a3_03_delivery_links_space_and_hash",
+        "e2e.DunhuangLimits.test_dh18_new_task_clears_prior_bill_but_original_resume_keeps_it"
+      ],
+      "boundary": "Mock/static only; actual host/OAuth/payment not asserted",
+      "executed": true,
+      "result": "PASS (Mock/static assertions only)"
+    }
+  ],
+  "stage6_count": 57,
+  "dh_count": 21,
+  "pending_external_evidence": [],
+  "notes": [
+    "No fabricated Range/inline_delivery/retry-before-billing or sibling fingerprint capability.",
+    "S6-52/53/55/57 host memory/implicit invocation require actual host; Mock/static cannot prove them."
+  ],
+  "executed_against_zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+  "executed_platforms": [
+    "Windows Python 3.12.10",
+    "Linux Python 3.12.3"
+  ],
+  "result": "PASS"
+}

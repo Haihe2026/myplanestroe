@@ -1,0 +1,77 @@
+..../tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:415: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpvh2m7ifl/photos/敦煌写真结果/me-crescent_night.png'>
+  self.assertEqual(png_local.size_of(open(s['paths'][0], 'rb').read()), (1024, 1536))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:421: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpvh2m7ifl/photos/敦煌写真结果/index.html' mode='r' encoding='utf-8'>
+  gallery = open(s['gallery'], encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:437: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpvh2m7ifl/photos/me.jpg'>
+  self.assertEqual(open(self.photo, 'rb').read(), self.photo_bytes)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..../tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:528: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpxo2_b8xe/home/mps-dunhuang-portrait-studio/drafts/d-f36a0a6a37394579af12b298f0d51324.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:529: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpxo2_b8xe/home/mps-dunhuang-portrait-studio/account.json' mode='r' encoding='utf-8'>
+  a = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'account.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:564: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpbq8uybr2/home/mps-dunhuang-portrait-studio/account.json' mode='r' encoding='utf-8'>
+  a = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'account.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:546: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpwv35sdj7/home/mps-dunhuang-portrait-studio/account.json' mode='r' encoding='utf-8'>
+  self.assertNotIn('skill_key', json.load(open(acc, encoding='utf-8')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:547: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpwv35sdj7/home/mps-dunhuang-portrait-studio/account.json' mode='r' encoding='utf-8'>
+  self.assertEqual(json.load(open(acc, encoding='utf-8'))['install_secret'], self.secret())  # 原安装身份保留
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.../tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:353: ResourceWarning: unclosed file <_io.BufferedWriter name='/tmp/tmpllliep7y/photos/broken.png'>
+  open(bad, 'wb').write(b'not an image')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..../tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:362: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpbwajrr1g/home/mps-dunhuang-portrait-studio/drafts/d-448715f7e2194b9e9a613915312d814b.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:366: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpbwajrr1g/home/mps-dunhuang-portrait-studio/drafts/d-c4dba82307114920a903b8e6745eab56.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+../tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:1124: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/demos-derivation.json' mode='r' encoding='utf-8'>
+  der=json.load(open(os.path.join(HERE,'demos-derivation.json'),encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:1126: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/mps-dunhuang-a2-100-iu_9tx5s/clean/mps-dunhuang-portrait-studio/assets/demos.json' mode='r' encoding='utf-8'>
+  demos=json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+................../tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:2171: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/mps-dunhuang-a2-100-iu_9tx5s/clean/mps-dunhuang-portrait-studio/scripts/studio.py' mode='r' encoding='utf-8'>
+  src = open(os.path.join(PKG, 'scripts', 'studio.py'), encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+........./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:278: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpreyjjkt9/pkg copy/assets/demos.json' mode='r' encoding='utf-8'>
+  self.assertEqual(len(json.load(open(os.path.join(pkg, 'assets', 'demos.json'), encoding='utf-8'))['demos']), 10)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:296: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/mps-dunhuang-a2-100-iu_9tx5s/clean/mps-dunhuang-portrait-studio/assets/demos.json' mode='r' encoding='utf-8'>
+  good = json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:2694: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp5r2cyyw3/home/mps-dunhuang-portrait-studio/support/state.json' mode='r' encoding='utf-8'>
+  st = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'support', 'state.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:2717: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/mps-dunhuang-a2-100-iu_9tx5s/clean/mps-dunhuang-portrait-studio/SKILL.md'>
+  raw = open(os.path.join(PKG,'SKILL.md'),'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:2728: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/mps-dunhuang-a2-100-iu_9tx5s/clean/mps-dunhuang-portrait-studio/assets/demos.json' mode='r' encoding='utf-8'>
+  demos={d['key']:d for d in json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+................../tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:1635: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmper80s8l9/photos/敦煌写真结果/me-mural_fairy.png'>
+  png_local.verify(open(s['paths'][0], 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......................./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:918: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpftkrhn4_/home/mps-dunhuang-portrait-studio/drafts/d-c2d112e8172b4d77b8542f956f4f6d49.json' mode='r' encoding='utf-8'>
+  old_idem = json.load(open(draft_file, encoding='utf-8'))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:927: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpftkrhn4_/home/mps-dunhuang-portrait-studio/drafts/d-c2d112e8172b4d77b8542f956f4f6d49.json' mode='r' encoding='utf-8'>
+  d = json.load(open(draft_file, encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:937: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpftkrhn4_/home/mps-dunhuang-portrait-studio/drafts/d-c2d112e8172b4d77b8542f956f4f6d49.json' mode='r' encoding='utf-8'>
+  new_idem = json.load(open(draft_file, encoding='utf-8'))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+........................................./tmp/mps-dunhuang-a2-100-iu_9tx5s/product/02-package/dev/e2e_check.py:686: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpkdqjcs5g/home/mps-dunhuang-portrait-studio/first-dialogue.json' mode='w' encoding='utf-8'>
+  open(os.path.join(d, 'first-dialogue.json'), 'w', encoding='utf-8').write('garbage')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.................
+----------------------------------------------------------------------
+Ran 155 tests in 40.288s
+
+OK

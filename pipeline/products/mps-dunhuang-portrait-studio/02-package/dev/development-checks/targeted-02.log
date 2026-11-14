@@ -1,0 +1,32 @@
+.....work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2144: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\scripts\\studio.py' mode='r' encoding='utf-8'>
+  src = open(os.path.join(PKG, 'scripts', 'studio.py'), encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2667: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp5gfkf3ae\\home\\mps-dunhuang-portrait-studio\\support\\state.json' mode='r' encoding='utf-8'>
+  st = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'support', 'state.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2690: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\SKILL.md'>
+  raw = open(os.path.join(PKG,'SKILL.md'),'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2701: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos={d['key']:d for d in json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:344: ResourceWarning: unclosed file <_io.BufferedWriter name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpmqojfjgu\\photos\\broken.png'>
+  open(bad, 'wb').write(b'not an image')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:353: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmprdtbkz9w\\home\\mps-dunhuang-portrait-studio\\drafts\\d-8d3fb9d3b99c4a04808ff9a95447e1a1.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:357: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmprdtbkz9w\\home\\mps-dunhuang-portrait-studio\\drafts\\d-f057a50e281147b08f1d1230b0b6e5d2.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:1102: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\dev\\demos-derivation.json' mode='r' encoding='utf-8'>
+  der=json.load(open(os.path.join(HERE,'demos-derivation.json'),encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:1104: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos=json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.
+----------------------------------------------------------------------
+Ran 30 tests in 12.061s
+
+OK

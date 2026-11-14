@@ -1,0 +1,31 @@
+.....work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:269: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp61qrv01m\\pkg copy\\assets\\demos.json' mode='r' encoding='utf-8'>
+  self.assertEqual(len(json.load(open(os.path.join(pkg, 'assets', 'demos.json'), encoding='utf-8'))['demos']), 10)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:287: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  good = json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...............................work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:909: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpdty6bcrj\\home\\mps-dunhuang-portrait-studio\\drafts\\d-3d36369aac234c26a6f37002d0deb1e1.json' mode='r' encoding='utf-8'>
+  old_idem = json.load(open(draft_file, encoding='utf-8'))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:918: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpdty6bcrj\\home\\mps-dunhuang-portrait-studio\\drafts\\d-3d36369aac234c26a6f37002d0deb1e1.json' mode='r' encoding='utf-8'>
+  d = json.load(open(draft_file, encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:928: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpdty6bcrj\\home\\mps-dunhuang-portrait-studio\\drafts\\d-3d36369aac234c26a6f37002d0deb1e1.json' mode='r' encoding='utf-8'>
+  new_idem = json.load(open(draft_file, encoding='utf-8'))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....F
+======================================================================
+FAIL: test_source_and_zip_frontmatter_parse (__main__.FrontmatterYaml.test_source_and_zip_frontmatter_parse)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2040, in test_source_and_zip_frontmatter_parse
+    src = self.check(f.read(), 'source')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2015, in check
+    self.assertTrue(text.startswith('---\n'), where)
+AssertionError: False is not true : source
+
+----------------------------------------------------------------------
+Ran 42 tests in 5.855s
+
+FAILED (failures=1)

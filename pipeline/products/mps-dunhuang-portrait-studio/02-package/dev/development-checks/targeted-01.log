@@ -1,0 +1,83 @@
+..FF.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2143: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\scripts\\studio.py' mode='r' encoding='utf-8'>
+  src = open(os.path.join(PKG, 'scripts', 'studio.py'), encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.F.....work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2666: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp6a86d2ch\\home\\mps-dunhuang-portrait-studio\\support\\state.json' mode='r' encoding='utf-8'>
+  st = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'support', 'state.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2690: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\SKILL.md'>
+  raw = open(os.path.join(PKG, 'SKILL.md'), 'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+Ework-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:2704: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos={d['key']:d for d in json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:344: ResourceWarning: unclosed file <_io.BufferedWriter name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp60i9dpg9\\photos\\broken.png'>
+  open(bad, 'wb').write(b'not an image')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...FEwork-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:102: ResourceWarning: unclosed file <_io.FileIO name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpotbizp9k\\home\\mps-dunhuang-portrait-studio\\drafts\\d-8573c2cafe81416bbbd576b7fc62757e.json' mode='rb' closefd=True>
+  gc.collect()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:1102: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\dev\\demos-derivation.json' mode='r' encoding='utf-8'>
+  der=json.load(open(os.path.join(HERE,'demos-derivation.json'),encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:1104: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos=json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.
+======================================================================
+ERROR: test_hnf03_skill_rerun_rule_excludes_feedback (__main__.InheritedHnfSemantics.test_hnf03_skill_rerun_rule_excludes_feedback)
+HNF-A3-03 静态执行规范：接管规则的泛化重跑明确排除 feedback（任务只查原任务）；反馈未知等用户明确说才 --retry；SKILL ≤ 15KiB。
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2694, in test_hnf03_skill_rerun_rule_excludes_feedback
+    rule = next(l for l in skill.splitlines() if '没拿到结果时如实说' in l)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+======================================================================
+ERROR: test_shape_defaults_and_people_range (__main__.Confirmation.test_shape_defaults_and_people_range)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 353, in test_shape_defaults_and_people_range
+    d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json')))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+                 ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xac in position 609: illegal multibyte sequence
+
+======================================================================
+FAIL: test_t12_form_and_baselines_only_in_prompt (__main__.DunhuangSpec.test_t12_form_and_baselines_only_in_prompt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2092, in test_t12_form_and_baselines_only_in_prompt
+    self.assertIn(base['text'],job['prompt'])
+AssertionError: '人物身份基线：尽力保留本人五官结构、肤色、自然年龄外观、发际线和体态；按已选套系更换髻式和轻妆，不套示例25岁女性、壁画仙女或文物脸型，不改变性别特征。只能承诺尽力保持，细节差异可能存在。' not found in '真实性基线（永远第一段）：唯一人物仅来自本人这张已确认原照及已确认的可见特征，人数严格为1；仅按本次选定整套敦煌服饰妆造、动作及场景修改，未授权的身体、身份、事实不改，不凭空添加人物。\n文字基线：图中不得出现文字、字母、数字、标牌、品牌或水印；本技能不做本地标题排版。AI生成声明写在方案、交付和画廊，不烧进底图。\n安全基线：仅本人知情同意的成年人单人得体写真，无儿童、额外人物、他人标识、身份伪造和历史精确复原承诺，不做证件/婚纱/旗袍/和服/军装需求。\n人物身份基线：尽力保留本人五官结构、肤色、自然年龄外观、发际线和体态；按已选套系更换髻式和轻妆，不套示例的年龄、性别、肤色或文物脸型，不改变性别特征。只能承诺尽力保持，细节差异可能存在。\n动作：将本人参考照编辑为敦煌古装仕女，只生成一张；保留自然外貌，落实本次已确认的一套服饰妆发。\n视觉参照：不透宽袖上衣＋层叠长裙＋自然披帛，少量花簪/额饰及一髻；温婉坐姿双脚支撑，原创壁画边饰，非精确唐制。 A dignified stationary adult portrait using the requested Dunhuang courtly-lady costume theme; preserve the subject identity and visible sex characteristics inspired generally by Dunhuang mural culture: broad-sleeved opaque upper garment, a layered long skirt, naturally falling silk drape, restrained hair bun, one small flower pin and optional tiny floral forehead ornament. A calm seated pose on a simple unbranded stool, hands relaxed and visible, feet naturally supported. Warm ochre, muted earth-red and blue-green geometric mural border in an original studio composition. No airborne motion, no wings or wedding crown. Do not present this as a precise Tang dynasty costume or exact reconstruction of the Five Dynasties donor figures; do not merely reuse the reference Hanfu outfit.\n本次完整服饰妆发：不透宽袖上衣＋层叠长裙＋自然披帛，少量花簪/额饰及一髻；温婉坐姿双脚支撑，原创壁画边饰，非精确唐制。\n妆发：保留本人脸部、肤色、自然年龄外观与性别特征；髻式、颈饰和轻妆随当前完整套系一致，不继承示例人物的年龄、性别或面容。 细节只叠加在本套完整结构上，套系冲突先澄清，不换成另一主题或参考照原服装。 这是现代敦煌主题艺术写真，不是历史精确复原、文物图像复制或真实景区拍摄。 保持单人、脸部完整、手部自然，构图与本次确认画幅一致。\n锁定：锁定本人原照SHA、可见特征、当前整套服饰妆发、人数1、已确认构图与画幅；无额外人物和文字，不套示例人脸；不重用客户上一方案许可。'
+
+======================================================================
+FAIL: test_t13_boundaries_without_network (__main__.DunhuangSpec.test_t13_boundaries_without_network)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2075, in test_t13_boundaries_without_network
+    self.assertIn('没有产生任何扣费',text)
+AssertionError: '没有产生任何扣费' not found in '这套妆造还没有确定。请从敦煌写真方向里选一套，服装、飘带、饰物和发髻一起配套；这次先不制作。\n'
+
+======================================================================
+FAIL: test_t13_reported_payment_not_credited (__main__.DunhuangSpec.test_t13_reported_payment_not_credited)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 2174, in test_t13_reported_payment_not_credited
+    self.assertIn('还没看到这笔到账', t)
+AssertionError: '还没看到这笔到账' not found in '我刚查了一次，还没确认这笔新充值到账，请以页面和实际次数为准。图片需求已保留，稍后说「继续」，我再查询。\n本次授权或账户查询本身不扣次数，原图片费用以服务记录为准。\n'
+
+======================================================================
+FAIL: test_refuse_copy (__main__.Confirmation.test_refuse_copy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 373, in test_refuse_copy
+    self.assertIn(must, t)
+AssertionError: '成年用户本人知情同意的单人照' not found in '这个需求超出本馆范围：这里只用成年人本人知情同意的单人照制作敦煌主题写真。不做儿童、双人或多人、别人或名人的照片、换脸，不做纯汉服形制、婚纱或婚服、旗袍、和服、军装或其他城市地点写真。作品是艺术创作，不能用作证件、到访证明或文物复原。\n'
+
+----------------------------------------------------------------------
+Ran 30 tests in 11.901s
+
+FAILED (failures=4, errors=2)

@@ -1,0 +1,10 @@
+{
+  "root": "D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\mps-dunhuang-portrait-studio",
+  "baseline_commit": "2542db0a9dddf0f1e62a9777a6e39064738d0c92",
+  "baseline_zip_sha256": "462837b50688cc5d9d6561e379637f99e5fbb0aa54d0f05aeb9ccb9edaa25b9d",
+  "business_equivalent_spec_baseline": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f",
+  "demo_count": 10,
+  "demo_bytes": 1333229,
+  "logo_bytes": 480802,
+  "new_generation_calls": 0
+}

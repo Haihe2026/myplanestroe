@@ -1,0 +1,77 @@
+....D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:415: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmp1klin68m\\photos\\敦煌写真结果\\me-crescent_night.png'>
+  self.assertEqual(png_local.size_of(open(s['paths'][0], 'rb').read()), (1024, 1536))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:421: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmp1klin68m\\photos\\敦煌写真结果\\index.html' mode='r' encoding='utf-8'>
+  gallery = open(s['gallery'], encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:437: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmp1klin68m\\photos\\me.jpg'>
+  self.assertEqual(open(self.photo, 'rb').read(), self.photo_bytes)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:528: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpbwtpgcou\\home\\mps-dunhuang-portrait-studio\\drafts\\d-7df0f2db35974c4b9986cb0a0afec1b4.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:529: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpbwtpgcou\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  a = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'account.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:564: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpx0gbrwoa\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  a = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'account.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:546: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpk50r7nf5\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  self.assertNotIn('skill_key', json.load(open(acc, encoding='utf-8')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:547: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpk50r7nf5\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  self.assertEqual(json.load(open(acc, encoding='utf-8'))['install_secret'], self.secret())  # 原安装身份保留
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:353: ResourceWarning: unclosed file <_io.BufferedWriter name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmp3yom5a7w\\photos\\broken.png'>
+  open(bad, 'wb').write(b'not an image')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:362: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpetv6qbkf\\home\\mps-dunhuang-portrait-studio\\drafts\\d-c3cb00fc7d274be3b17f616915471e82.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:366: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpetv6qbkf\\home\\mps-dunhuang-portrait-studio\\drafts\\d-6c286395d69d46ada2908dd787781ce8.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:1124: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\product\\02-package\\dev\\demos-derivation.json' mode='r' encoding='utf-8'>
+  der=json.load(open(os.path.join(HERE,'demos-derivation.json'),encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:1126: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\clean-a2-ly3gtq0p\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos=json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..................D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:2171: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\clean-a2-ly3gtq0p\\mps-dunhuang-portrait-studio\\scripts\\studio.py' mode='r' encoding='utf-8'>
+  src = open(os.path.join(PKG, 'scripts', 'studio.py'), encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:278: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpgh5w2_lg\\pkg copy\\assets\\demos.json' mode='r' encoding='utf-8'>
+  self.assertEqual(len(json.load(open(os.path.join(pkg, 'assets', 'demos.json'), encoding='utf-8'))['demos']), 10)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:296: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\clean-a2-ly3gtq0p\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  good = json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:2694: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmp33l46ns1\\home\\mps-dunhuang-portrait-studio\\support\\state.json' mode='r' encoding='utf-8'>
+  st = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'support', 'state.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:2717: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\clean-a2-ly3gtq0p\\mps-dunhuang-portrait-studio\\SKILL.md'>
+  raw = open(os.path.join(PKG,'SKILL.md'),'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:2728: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\clean-a2-ly3gtq0p\\mps-dunhuang-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos={d['key']:d for d in json.load(open(os.path.join(PKG,'assets','demos.json'),encoding='utf-8'))['demos']}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..................D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:1635: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpdexqvaol\\photos\\敦煌写真结果\\me-mural_fairy.png'>
+  png_local.verify(open(s['paths'][0], 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......................D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:918: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpdggnhotc\\home\\mps-dunhuang-portrait-studio\\drafts\\d-200b307261384f12963abe6420e3d0e0.json' mode='r' encoding='utf-8'>
+  old_idem = json.load(open(draft_file, encoding='utf-8'))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:927: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpdggnhotc\\home\\mps-dunhuang-portrait-studio\\drafts\\d-200b307261384f12963abe6420e3d0e0.json' mode='r' encoding='utf-8'>
+  d = json.load(open(draft_file, encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:937: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmpdggnhotc\\home\\mps-dunhuang-portrait-studio\\drafts\\d-200b307261384f12963abe6420e3d0e0.json' mode='r' encoding='utf-8'>
+  new_idem = json.load(open(draft_file, encoding='utf-8'))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........................................D:\My Documents\ChatGPT\自动化SKILL-SOP-执行\work-20261114-dunhuang-dev-100\product\02-package\dev\e2e_check.py:686: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\自动化SKILL-SOP-执行\\work-20261114-dunhuang-dev-100\\a2-native-fixtures\\tmp60f_4i3j\\home\\mps-dunhuang-portrait-studio\\first-dialogue.json' mode='w' encoding='utf-8'>
+  open(os.path.join(d, 'first-dialogue.json'), 'w', encoding='utf-8').write('garbage')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.................
+----------------------------------------------------------------------
+Ran 155 tests in 80.410s
+
+OK

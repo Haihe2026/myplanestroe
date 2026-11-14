@@ -1,0 +1,59 @@
+....work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:406: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmptc0bo0wk\\photos\\敦煌写真结果\\me-crescent_night.png'>
+  self.assertEqual(png_local.size_of(open(s['paths'][0], 'rb').read()), (1024, 1536))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+F..Fwork-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:517: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpabn2t4s6\\home\\mps-dunhuang-portrait-studio\\drafts\\d-4fdcfc4328c24b06b1ee8e7ff2951e0b.json' mode='r' encoding='utf-8'>
+  d = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'drafts', did + '.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:518: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpabn2t4s6\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  a = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'account.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:553: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpc6sc5_vk\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  a = json.load(open(os.path.join(self.home, 'mps-dunhuang-portrait-studio', 'account.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:535: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpb8kj27li\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  self.assertNotIn('skill_key', json.load(open(acc, encoding='utf-8')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:536: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpb8kj27li\\home\\mps-dunhuang-portrait-studio\\account.json' mode='r' encoding='utf-8'>
+  self.assertEqual(json.load(open(acc, encoding='utf-8'))['install_secret'], self.secret())  # 原安装身份保留
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+............work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:675: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpbvgzetwx\\home\\mps-dunhuang-portrait-studio\\first-dialogue.json' mode='w' encoding='utf-8'>
+  open(os.path.join(d, 'first-dialogue.json'), 'w', encoding='utf-8').write('garbage')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+F..................work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py:1615: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpl_d_uu3y\\photos\\敦煌写真结果\\me-mural_fairy.png'>
+  png_local.verify(open(s['paths'][0], 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....................................
+======================================================================
+FAIL: test_full_flow_auth_topup_deliver (__main__.AccountBilling.test_full_flow_auth_topup_deliver)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 409, in test_full_flow_auth_topup_deliver
+    self.assertIn('发型按套系换成相应髻式', t)
+AssertionError: '发型按套系换成相应髻式' not found in '做好了（AI 生成敦煌写真，非实拍）：\n- [me-crescent\\_night.png](C:/Users/ADMINI~1/AppData/Local/Temp/tmptc0bo0wk/photos/敦煌写真结果/me-crescent_night.png)\n- [全部结果一览](C:/Users/ADMINI~1/AppData/Local/Temp/tmptc0bo0wk/photos/敦煌写真结果/index.html)\n这次做成了「月牙泉夜景飞天」方向，服装、飘带、饰物、发髻和妆容配套，尽力保持五官与自然外貌；人物与服饰细节可能有差异，不是实拍或文物复原，请看看脸部和手部。\n你发来的原照片没有改动，结果另存为新文件。\n本次费用以服务记录为准。剩余 2 次。\n想调整直接说，比如「飘带收短一点」「背景换成夕阳」；每次先改一件事。需要重新制作时可能再次按张计费，我会先跟你确认。\n'
+
+======================================================================
+FAIL: test_rate_limited_keeps_task_same_key (__main__.AccountBilling.test_rate_limited_keeps_task_same_key)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 485, in test_rate_limited_keeps_task_same_key
+    self.assertEqual(self.run_cmd('run','--draft',did)[1]['signal'],'jobUnknown')
+AssertionError: 'jobPending' != 'jobUnknown'
+- jobPending
++ jobUnknown
+
+
+======================================================================
+FAIL: test_corrupt_identity_repaired_and_readonly_skipped (__main__.Telemetry.test_corrupt_identity_repaired_and_readonly_skipped)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "work-20261114-dunhuang-dev-100/product/02-package/dev/e2e_check.py", line 688, in test_corrupt_identity_repaired_and_readonly_skipped
+    self.assertEqual(telemetry.report_once(os.path.join(self.tmp, 'no', 'such', 'dir')), 'skipped')
+AssertionError: 'sent' != 'skipped'
+- sent
++ skipped
+
+
+----------------------------------------------------------------------
+Ran 77 tests in 64.322s
+
+FAILED (failures=3)
