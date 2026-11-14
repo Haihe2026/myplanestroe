@@ -1,0 +1,1 @@
+2026-11-14T15:50:14+08:00 | muse | init → brief_ready | 第十轮调研选定敦煌写真照相馆（mps-dunhuang-portrait-studio），P1、fast 车道；调研记录 2026-11-14-round10.md，选品单 00-brief.md 已投，派 Codex 写规格。串行前置：汉服 1.0.1 已 test_passed 并交付 LI 待上传（未 submitted），本轮按 LI 2026-11-14 直接启动令执行。
