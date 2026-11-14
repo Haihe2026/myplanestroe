@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-temu-versions-20261114",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261114-temu-versions.md",
+  "source_ref": "a28bc781e59803713181f29b497ddcee78fb36e6",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-abdeb87313b792ebd7aed10e3acf5548fb1349b7c30eb6cb9524fe9595c3813f",
+  "request_kind": "question"
+}
