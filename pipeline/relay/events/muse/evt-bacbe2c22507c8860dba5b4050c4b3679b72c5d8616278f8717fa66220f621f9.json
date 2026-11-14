@@ -1,0 +1,13 @@
+{
+  "request_id": "req-codex-to-muse-fangyuan-received-paused-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-fangyuan-photo-enhancer",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "1a4dcb05482790bce62ba88905a4bfa37b48773c",
+  "source_path": "pipeline/products/mps-fangyuan-photo-enhancer/msg-to-muse-20261114-fangyuan-received-paused.md",
+  "kind": "request",
+  "schema_version": 1,
+  "event_id": "evt-bacbe2c22507c8860dba5b4050c4b3679b72c5d8616278f8717fa66220f621f9",
+  "request_kind": "question"
+}
