@@ -1,0 +1,191 @@
+{
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "at": "2026-11-14T16:04:31+08:00",
+  "demos": 10,
+  "logo": 1,
+  "paid_generation_limit": 11,
+  "asset_id": "aisplice",
+  "model": "gpt-image-2.5-ext",
+  "resolution": "1K",
+  "n": 1,
+  "legacy_fallback": false,
+  "authorization": "本聊天长期授权规格所需示例图和每技能一张主题logo；仅开发资产，留provenance/audit。",
+  "reference": {
+    "url": "https://raw.githubusercontent.com/Haihe2026/myplanestroe/9ad88b342a5200c0d6f91c066b3e48382ce8573a/pipeline/products/mps-hanfu-portrait-studio/01-reference-seed.png",
+    "sha256": "2eee7709e21f3b36333513e977914af8c8a33abcc9e6af54f46dd216e7154594",
+    "fictional_adults": true,
+    "source_commit": "9ad88b342a5200c0d6f91c066b3e48382ce8573a",
+    "people": 1,
+    "asset_role": "identity_reference_only; rejected as qixiong demo due low skirt waist; exclude from Skill package",
+    "source_subject": "wholly fictional 25-year-old adult woman; age, gender and appearance are development examples, not user defaults or exact historical reconstruction",
+    "role": "owned synthetic adult identity reference only, not a Dunhuang demo; do not inherit original Hanfu clothing"
+  },
+  "reference_scope": "Owned synthetic adult identity only; all ten final Dunhuang demos are new reference-edit generations, no real person or third-party artwork input.",
+  "transport": "Existing audited registered new_only.Adapter, isolated task DB and signer; do not alter production service, authentication, policy or customer wallets.",
+  "retry": "One POST per scene key, maximum 11. Unknown outcomes only query original task. No automatic generation replay. If asset quality requires replacement, first document rejected output and amend plan/audit.",
+  "research_sources": [
+    "https://www.dha.ac.cn/info/1159/2723.htm",
+    "https://www.dha.ac.cn/info/1425/3561.htm",
+    "https://www.dha.ac.cn/info/1159/2716.htm",
+    "https://www.dha.ac.cn/info/1426/3673.htm"
+  ],
+  "scenes": [
+    {
+      "key": "pipa_back",
+      "title": "飞天反弹琵琶",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "反弹琵琶",
+        "背弹琵琶",
+        "琵琶造型"
+      ],
+      "direction": "One pear-shaped pipa held behind and just above the back of her shoulders, one hand supporting the clearly visible neck above the head, the other arm making a natural plucking gesture at the strings behind the shoulder. Gentle three-quarter back-side body angle, face turned naturally toward the viewer, plausible shoulder joints, exactly two complete arms and two hands, one instrument. The instrument must read as behind the shoulders, not held in front of the chest, and must not pierce the neck or head. Opaque fitted dance top, layered long skirt, a clear sash, restrained neck and upper-arm jewellery, one short trailing ribbon. Muted vermilion, warm sand gold and verdigris. Original abstract mural-inspired studio backdrop.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. One pear-shaped pipa held behind and just above the back of her shoulders, one hand supporting the clearly visible neck above the head, the other arm making a natural plucking gesture at the strings behind the shoulder. Gentle three-quarter back-side body angle, face turned naturally toward the viewer, plausible shoulder joints, exactly two complete arms and two hands, one instrument. The instrument must read as behind the shoulders, not held in front of the chest, and must not pierce the neck or head. Opaque fitted dance top, layered long skirt, a clear sash, restrained neck and upper-arm jewellery, one short trailing ribbon. Muted vermilion, warm sand gold and verdigris. Original abstract mural-inspired studio backdrop. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "mural_fairy",
+      "title": "敦煌壁画仙女",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "壁画仙女",
+        "壁画配色",
+        "敦煌壁画"
+      ],
+      "direction": "A calm front to three-quarter standing portrait, original abstract mural-inspired border patterns and soft lotus-petal ornament behind her, not a replica of any cave mural. An opaque coherent Dunhuang-inspired costume with layered long skirt, matching soft drape, restrained necklace and a small floral forehead motif, one sculpted hair bun. Earth red, muted turquoise, lapis blue and warm ochre with subtle background texture. Keep the face and skin photographic and clean, never cracked or painted like an ancient artefact. This is a poised mural-themed portrait, not the airborne pose of the Mogao scene.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A calm front to three-quarter standing portrait, original abstract mural-inspired border patterns and soft lotus-petal ornament behind her, not a replica of any cave mural. An opaque coherent Dunhuang-inspired costume with layered long skirt, matching soft drape, restrained necklace and a small floral forehead motif, one sculpted hair bun. Earth red, muted turquoise, lapis blue and warm ochre with subtle background texture. Keep the face and skin photographic and clean, never cracked or painted like an ancient artefact. This is a poised mural-themed portrait, not the airborne pose of the Mogao scene. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "mogao_apsara",
+      "title": "莫高窟飞天",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "莫高窟飞天",
+        "洞窟飞天",
+        "飞天飘带"
+      ],
+      "direction": "A graceful anatomically plausible dance pose conveying apsara flight through a gently arched diagonal body line, flowing layered skirt and two clearly continuous looping silk ribbons. Opaque dignified dance top and skirt, restrained necklace and armbands, one coordinated high bun. Original softly lit cave-like studio architecture and indistinct mineral-pigment colour layers, no identifiable copied grotto interior, no clearly depicted second human, deity face or crowd in the backdrop. Face unobstructed; ribbons attach and travel plausibly, never through face, neck, torso or fingers. No Western angel wings or fantasy armour. This is AI art, not a photograph inside the real Mogao caves.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A graceful anatomically plausible dance pose conveying apsara flight through a gently arched diagonal body line, flowing layered skirt and two clearly continuous looping silk ribbons. Opaque dignified dance top and skirt, restrained necklace and armbands, one coordinated high bun. Original softly lit cave-like studio architecture and indistinct mineral-pigment colour layers, no identifiable copied grotto interior, no clearly depicted second human, deity face or crowd in the backdrop. Face unobstructed; ribbons attach and travel plausibly, never through face, neck, torso or fingers. No Western angel wings or fantasy armour. This is AI art, not a photograph inside the real Mogao caves. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "mingsha_sunset",
+      "title": "鸣沙山沙漠飞天",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "鸣沙山",
+        "沙漠落日",
+        "沙丘飞天"
+      ],
+      "direction": "She stands with both feet naturally supported in a warm sunset desert composition inspired by the layered curved dunes of Mingsha Mountain. One coherent opaque Dunhuang-inspired dance top and long skirt, a single wind-lifted matching drape, restrained necklace and bun ornaments. Soft raking warm sunlight and fine sand ridges; clean face and believable fabric movement. No water, snow mountains, sea, pyramids or unrelated landmarks, no camels or other people. Scenic artistic background, not a claim of a real location shoot or exact current viewpoint.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. She stands with both feet naturally supported in a warm sunset desert composition inspired by the layered curved dunes of Mingsha Mountain. One coherent opaque Dunhuang-inspired dance top and long skirt, a single wind-lifted matching drape, restrained necklace and bun ornaments. Soft raking warm sunlight and fine sand ridges; clean face and believable fabric movement. No water, snow mountains, sea, pyramids or unrelated landmarks, no camels or other people. Scenic artistic background, not a claim of a real location shoot or exact current viewpoint. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "crescent_night",
+      "title": "月牙泉夜景飞天",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "月牙泉",
+        "月牙泉夜景",
+        "泉边飞天"
+      ],
+      "direction": "A grounded standing portrait at blue hour with a small clearly crescent-shaped water surface in the distant landscape, softly enclosed by curving desert dunes. One opaque coordinated Dunhuang-inspired costume, layered skirt, graceful drape, restrained gold-toned necklace and one sculpted bun. Soft explainable portrait fill light against restrained warm landscape glints. Do not stand in the spring or on heritage structures. Water must be a distant crescent, not a full round lake, sea or waterfall. No invented prominent buildings, other people or camels. An artistic interpretation, not verified real night lighting or exact tourist-site photography.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A grounded standing portrait at blue hour with a small clearly crescent-shaped water surface in the distant landscape, softly enclosed by curving desert dunes. One opaque coordinated Dunhuang-inspired costume, layered skirt, graceful drape, restrained gold-toned necklace and one sculpted bun. Soft explainable portrait fill light against restrained warm landscape glints. Do not stand in the spring or on heritage structures. Water must be a distant crescent, not a full round lake, sea or waterfall. No invented prominent buildings, other people or camels. An artistic interpretation, not verified real night lighting or exact tourist-site photography. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "apsara_dance",
+      "title": "敦煌乐舞飞天",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "敦煌乐舞",
+        "飞天乐舞",
+        "乐舞写真"
+      ],
+      "direction": "A grounded Dunhuang-inspired solo dance still with a clear centre of balance, one foot gently lifted, a supple side-turn and two relaxed readable hands with plausible wrist and elbow angles. Opaque costume, layered skirt with a clear waist sash, restrained ornaments and short flowing ribbons, a coherent bun with a small ornament. Original abstract rhythm-like mural patterns on a quiet warm-ochre studio backdrop. Default is empty hands: no instrument, band, accompanying dancer or copied stage-show costume. Differentiate from back-pipa and long water-sleeve scenes through the complete grounded body pose and short ribbon movement.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A grounded Dunhuang-inspired solo dance still with a clear centre of balance, one foot gently lifted, a supple side-turn and two relaxed readable hands with plausible wrist and elbow angles. Opaque costume, layered skirt with a clear waist sash, restrained ornaments and short flowing ribbons, a coherent bun with a small ornament. Original abstract rhythm-like mural patterns on a quiet warm-ochre studio backdrop. Default is empty hands: no instrument, band, accompanying dancer or copied stage-show costume. Differentiate from back-pipa and long water-sleeve scenes through the complete grounded body pose and short ribbon movement. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "water_sleeves",
+      "title": "飞天水袖舞",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "水袖舞",
+        "长袖舞",
+        "飞天水袖"
+      ],
+      "direction": "A modern Dunhuang-inspired stage water-sleeve dance portrait, explicitly an artistic stage interpretation rather than reconstruction of a cave dance. Two long opaque silk sleeve extensions visibly connect to the two garment sleeves, each forms its own readable arc; both hands and the original two arms remain anatomically coherent. The face is unobstructed, the layered long skirt reaches the floor, a stable grounded pose and coordinated bun/necklace complete the costume. Muted ivory, vermilion and turquoise against a simple dark warm studio backdrop. Sleeves are fabric, not flowing water, extra arms or tight wraps around the neck.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A modern Dunhuang-inspired stage water-sleeve dance portrait, explicitly an artistic stage interpretation rather than reconstruction of a cave dance. Two long opaque silk sleeve extensions visibly connect to the two garment sleeves, each forms its own readable arc; both hands and the original two arms remain anatomically coherent. The face is unobstructed, the layered long skirt reaches the floor, a stable grounded pose and coordinated bun/necklace complete the costume. Muted ivory, vermilion and turquoise against a simple dark warm studio backdrop. Sleeves are fabric, not flowing water, extra arms or tight wraps around the neck. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "dunhuang_lady",
+      "title": "敦煌古装仕女",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "敦煌仕女",
+        "古装仕女",
+        "供养人服饰意象"
+      ],
+      "direction": "A dignified stationary lady portrait inspired generally by Dunhuang mural culture: broad-sleeved opaque upper garment, a layered long skirt, naturally falling silk drape, restrained hair bun, one small flower pin and optional tiny floral forehead ornament. A calm seated pose on a simple unbranded stool, hands relaxed and visible, feet naturally supported. Warm ochre, muted earth-red and blue-green geometric mural border in an original studio composition. No airborne motion, no wings or wedding crown. Do not present this as a precise Tang dynasty costume or exact reconstruction of the Five Dynasties donor figures; do not merely reuse the reference Hanfu outfit.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A dignified stationary lady portrait inspired generally by Dunhuang mural culture: broad-sleeved opaque upper garment, a layered long skirt, naturally falling silk drape, restrained hair bun, one small flower pin and optional tiny floral forehead ornament. A calm seated pose on a simple unbranded stool, hands relaxed and visible, feet naturally supported. Warm ochre, muted earth-red and blue-green geometric mural border in an original studio composition. No airborne motion, no wings or wedding crown. Do not present this as a precise Tang dynasty costume or exact reconstruction of the Five Dynasties donor figures; do not merely reuse the reference Hanfu outfit. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "camel_caravan",
+      "title": "沙漠驼队飞天",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "驼队",
+        "沙漠骆驼",
+        "大漠飞天"
+      ],
+      "direction": "A single grounded adult foreground portrait in an opaque coordinated Dunhuang-inspired costume with flowing long skirt and a modest drape, restrained jewellery and a clear bun. In the distance, three small camels travel in a line along a curved desert ridge in warm late-afternoon light. Each camel has believable legs, humps, scale and occlusion; they carry no riders. Exactly one human in the whole image: no camel driver, tourist, rider, companion or crowd. Clothing never tangles with animals. Original artistic scenic composition, not a photograph of a real tour.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A single grounded adult foreground portrait in an opaque coordinated Dunhuang-inspired costume with flowing long skirt and a modest drape, restrained jewellery and a clear bun. In the distance, three small camels travel in a line along a curved desert ridge in warm late-afternoon light. Each camel has believable legs, humps, scale and occlusion; they carry no riders. Exactly one human in the whole image: no camel driver, tourist, rider, companion or crowd. Clothing never tangles with animals. Original artistic scenic composition, not a photograph of a real tour. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "starry_desert",
+      "title": "星空沙漠飞天",
+      "series": "敦煌主题艺术写真",
+      "size": "1024x1536",
+      "ratio": "2:3",
+      "tier": "1K",
+      "keywords": [
+        "星空",
+        "银河沙漠",
+        "星夜飞天"
+      ],
+      "direction": "A grounded adult portrait with a graceful flowing-ribbon pose and an opaque coordinated Dunhuang-inspired dance top and long skirt. A broad distant desert dune silhouette beneath a restrained clear star field, deep indigo, warm sand gold and muted turquoise. Believable soft portrait light keeps her face natural and legible. No crescent spring or other water, no camels, buildings, giant planets or other people; no supernatural glow or wings. Modern composite artistic scene, not an astronomical measurement, exact Milky Way position or real location photograph.",
+      "prompt": "Use case: identity-preserve. Asset type: offline Dunhuang-themed portrait Skill development demo. Edit the supplied wholly synthetic adult reference; keep the exact same fictional 25-year-old adult woman face, apparent adult age, hairline, natural skin tone, body proportions and realistic skin texture. Her age, gender and face are demo properties, never customer defaults. Replace reference clothing, hairstyle, pose, setting and light; do not inherit the coral Hanfu blouse, tied-waist skirt or original hair arrangement. Exactly one human, face clearly visible, portrait composition including the complete outfit where possible. A coherent original Dunhuang-inspired artistic costume: fully opaque dignified top and long skirt, restrained matching ornaments, coordinated hair and makeup. Preserve natural facial anatomy; no exaggerated whitening or plastic skin. A grounded adult portrait with a graceful flowing-ribbon pose and an opaque coordinated Dunhuang-inspired dance top and long skirt. A broad distant desert dune silhouette beneath a restrained clear star field, deep indigo, warm sand gold and muted turquoise. Believable soft portrait light keeps her face natural and legible. No crescent spring or other water, no camels, buildings, giant planets or other people; no supernatural glow or wings. Modern composite artistic scene, not an astronomical measurement, exact Milky Way position or real location photograph. AI-created artistic portrait, not a documentary photograph, official historical costume reconstruction or institution endorsement. No child, extra person, duplicated face, extra limbs, malformed hands, missing fingers, broken wrists, text, letters, numbers, logos, trademarks or watermarks. Do not mix in ordinary Hanfu-form catalogue outfits, kimono, bridal fengguan/xiapei, qipao, military uniform, Western angel wings or belly-dance metal costume. No explicit nudity or transparent clothing. Do not copy any contemporary photographer, branded costume, stage show or specific digitized mural composition."
+    },
+    {
+      "key": "logo",
+      "title": "敦煌写真立体主题logo",
+      "series": "主题logo",
+      "size": "1024x1024",
+      "prompt": "Use case: logo-brand. Asset type: original dimensional Dunhuang portrait studio app icon. A single sculptural pear-shaped pipa with a softly looping silk ribbon, framed by a subtle camera aperture motif. Sand-gold brushed metal, tactile verdigris ceramic and warm ivory silk on a warm sand-coloured rounded-square base. A restrained lapis-blue accent, convincing material depth, shallow relief, soft contact shadows, one clear focal motif readable at small size. Not a flat vector or generic ico. No human face, deity, text, letters, numbers, brand, model name, company logo, national emblem or watermark. Original icon, no imitation of an institution or stage-show identity."
+    }
+  ]
+}
