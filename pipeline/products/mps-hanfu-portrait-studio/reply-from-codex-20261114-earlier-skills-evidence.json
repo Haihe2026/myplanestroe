@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "timezone": "Asia/Shanghai",
+  "result": "repository_audit_complete_release_identity_gaps_remain",
+  "product_inventory_count": 26,
+  "source_refs": {
+    "Haihe2026/myplanestroe": "f6c60777f442748cd0323b2ea9fd87f278068875",
+    "Haihe2026/Skillhub": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+    "Haihe2026/cross-border-appeal-helper": "53f0923ec84a4116af5d26870f8aabb7b98a114c",
+    "Haihe2026/ai-skills-collection": "788f097942bb8a404d04ca831512e92ee7c43437"
+  },
+  "official_read": {
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "date": "2026-11-14",
+    "result": "online content readable; skill structure/frontmatter/scripts/references"
+  },
+  "provider_calls": 0,
+  "public_get_count": 8,
+  "public_anonymous_gets": [
+    {
+      "url": "https://myplanestore.com/platform-api/listing/v1/health",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:19+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "application/json; charset=utf-8",
+      "sample_bytes": 112,
+      "sample_sha256": "50c1a5aea9b473a8c133d168bc8f8950b706ea35d2a5732b462cd87beac47952",
+      "health": {
+        "status": "ok",
+        "contract": "listing-cny-bundle-v1",
+        "payment_ready": true,
+        "host_integration_verified": false
+      }
+    },
+    {
+      "url": "https://myplanestore.com/platform-api/grok-video/health",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:19+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "application/json; charset=utf-8",
+      "sample_bytes": 367,
+      "sample_sha256": "38e4fcd2814bc5c9510e554e3fd52533ebce7aa3bdf74327dd92e4657aee13f6",
+      "health": {
+        "status": "ok",
+        "version": "0.1.2",
+        "billing_version": "0.1.3",
+        "contract": "grok-video-v1",
+        "account_entry_enabled": true,
+        "registration": "wechat_ready",
+        "customer_generation_enabled": true,
+        "retail_pricing": "shared_per_success",
+        "video_cost_uses": 1,
+        "video_trial_uses": 0,
+        "duration_min": 6,
+        "duration_max": 15,
+        "resolutions": [
+          "480p",
+          "720p"
+        ],
+        "max_images": 7
+      }
+    },
+    {
+      "url": "https://myplanestore.com/membership/listing/",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:19+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "text/html",
+      "sample_bytes": 5965,
+      "sample_sha256": "955d1cd97ce8a46b41cef6540002bda729122b9c329c87093bb92658bc87779f"
+    },
+    {
+      "url": "https://myplanestore.com/membership/gemini/",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:19+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "text/html",
+      "sample_bytes": 18421,
+      "sample_sha256": "107591bf7759dc50a9c97b420389788d7c7a59ab4f0c3a40d3f71c23454f2639"
+    },
+    {
+      "url": "https://aistore.zhaopintong.com/platform-api/listing/v1/health",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:21+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "application/json; charset=utf-8",
+      "sample_bytes": 112,
+      "sample_sha256": "50c1a5aea9b473a8c133d168bc8f8950b706ea35d2a5732b462cd87beac47952",
+      "health": {
+        "status": "ok",
+        "contract": "listing-cny-bundle-v1",
+        "payment_ready": true,
+        "host_integration_verified": false
+      }
+    },
+    {
+      "url": "https://aistore.zhaopintong.com/platform-api/grok-video/health",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:21+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "application/json; charset=utf-8",
+      "sample_bytes": 367,
+      "sample_sha256": "38e4fcd2814bc5c9510e554e3fd52533ebce7aa3bdf74327dd92e4657aee13f6",
+      "health": {
+        "status": "ok",
+        "version": "0.1.2",
+        "billing_version": "0.1.3",
+        "contract": "grok-video-v1",
+        "account_entry_enabled": true,
+        "registration": "wechat_ready",
+        "customer_generation_enabled": true,
+        "retail_pricing": "shared_per_success",
+        "video_cost_uses": 1,
+        "video_trial_uses": 0,
+        "duration_min": 6,
+        "duration_max": 15,
+        "resolutions": [
+          "480p",
+          "720p"
+        ],
+        "max_images": 7
+      }
+    },
+    {
+      "url": "https://aistore.zhaopintong.com/membership/listing/",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:21+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "text/html",
+      "sample_bytes": 5965,
+      "sample_sha256": "955d1cd97ce8a46b41cef6540002bda729122b9c329c87093bb92658bc87779f"
+    },
+    {
+      "url": "https://aistore.zhaopintong.com/membership/gemini/",
+      "method": "GET",
+      "follow_redirects": false,
+      "at": "2026-11-14T08:44:22+08:00",
+      "status": 200,
+      "location": null,
+      "content_type": "text/html",
+      "sample_bytes": 18421,
+      "sample_sha256": "107591bf7759dc50a9c97b420389788d7c7a59ab4f0c3a40d3f71c23454f2639"
+    }
+  ],
+  "package_execution_count": 0,
+  "package_test_runs": 0,
+  "production_writes": 0,
+  "financial_writes": 0,
+  "platform_uploads": 0,
+  "product_state_changed": false,
+  "automation_resumed": false,
+  "events": [
+    {
+      "event_id": "evt-882a7da18087e0371569275c3d4ccd0d12257b88a35683d6d5a57a512f690522",
+      "request_id": "req-muse-to-codex-earlier-skills-20261114",
+      "request_kind": "question",
+      "source_ref": "31cd46ebd289d0ea069d2acab1e55ab26fe230a2",
+      "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261114-earlier-skills-codex.md",
+      "original_claim_id": "c0700a57-d44a-40c2-a308-df8bbdf007a8",
+      "event_hash_verified": true
+    },
+    {
+      "event_id": "evt-bff2a532552b101aeb93847065428238f52b40f0c9f77251b31ca903e05a878d",
+      "request_id": "req-muse-to-codex-earlier-skills-followup-20261114",
+      "request_kind": "retry",
+      "source_ref": "30fe16834713851a6daa3b963371dc05620c1aeb",
+      "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261114-earlier-skills-codex-followup.md",
+      "original_claim_id": "1f0051a3-047c-4cae-adf8-36d2652a85ec",
+      "event_hash_verified": true
+    }
+  ],
+  "candidates": [
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/baby-growth-album/1.1.1/SkillHub/jyai-baby-growth-album-skillhub-v1.1.1.zip",
+      "sha256": "0239ef100319d723dd245bb093e7b91050d4109ddc56bb263c5c7683d4c622c8",
+      "bytes": 50815,
+      "file_count": 23,
+      "fixed_terms_hit_lines": 17,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/baby-growth-album/1.1.1/WorkBuddy技能/myplanestore-child-photo-retoucher-workbuddy_skill-v1.1.1.zip",
+      "sha256": "fd2150a9c986f5ab072e89402e5eb801857e30fbb0082d89496fb1a1ebbb9051",
+      "bytes": 50868,
+      "file_count": 23,
+      "fixed_terms_hit_lines": 17,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/temu-image-master/latest-three-20261029/SkillHub/temu-image-master-skillhub-wechat-v1.1.3.zip",
+      "sha256": "522266a67ca4a0e7feb2aa298a625c54259d459d2d80a503bca59820aaf87ff0",
+      "bytes": 66095,
+      "file_count": 22,
+      "fixed_terms_hit_lines": 23,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/temu-image-master/latest-three-20261029/WorkBuddy专家/temu-image-master-workbuddy_expert-wechat-v1.0.18.zip",
+      "sha256": "7b9b6ae4231a8a2be16af229a461d00a3fb59a033f2179fa8d4c6c731866e944",
+      "bytes": 78812,
+      "file_count": 28,
+      "fixed_terms_hit_lines": 23,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/temu-image-master/latest-three-20261029/WorkBuddy技能/temu-image-master-workbuddy_skill-wechat-v1.1.3.zip",
+      "sha256": "92e73b30a5f5f81de42c5c79e49dd4f7395c26fc333b230c9fcc125df5ac50fd",
+      "bytes": 66116,
+      "file_count": 22,
+      "fixed_terms_hit_lines": 23,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/baby-growth-album/1.2.0/frozen-checks.zip",
+      "outer_sha256": "ace5aa600208586cdadb54f77aafe4d37206dbba584866d509592ab9b06a6ba1",
+      "nested_path": "releases/baby-growth-album/1.2.0/SkillHub/jyai-baby-growth-album-skillhub-v1.2.0.zip",
+      "sha256": "a771c3eee8156ebabfbbbe00ba4c2ac0165b788ff6cec971ffe544596d11c38c",
+      "bytes": 56432,
+      "file_count": 25,
+      "fixed_terms_hit_lines": 20,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/baby-growth-album/1.2.0/frozen-checks.zip",
+      "outer_sha256": "ace5aa600208586cdadb54f77aafe4d37206dbba584866d509592ab9b06a6ba1",
+      "nested_path": "releases/baby-growth-album/1.2.0/WorkBuddy专家/myplanestore-child-photo-retouch-expert-v1.2.0.zip",
+      "sha256": "2db887f5ad7a73d3d09555a1d8b4df33320b4dcedc0db547b170e5441c348221",
+      "bytes": 259001,
+      "file_count": 28,
+      "fixed_terms_hit_lines": 20,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "releases/baby-growth-album/1.2.0/frozen-checks.zip",
+      "outer_sha256": "ace5aa600208586cdadb54f77aafe4d37206dbba584866d509592ab9b06a6ba1",
+      "nested_path": "releases/baby-growth-album/1.2.0/WorkBuddy技能/myplanestore-child-photo-retoucher-workbuddy_skill-v1.2.0.zip",
+      "sha256": "cdb1fc9925ad15e9778e5c16e3a5b481d149fc6b98d3051eee15fa453088a353",
+      "bytes": 56486,
+      "file_count": 25,
+      "fixed_terms_hit_lines": 20,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "avatar-diy-master-v1.0.0.zip",
+      "sha256": "72d22c30286016e93a67131929421dfc533a9dc6abbd40c55f817759fa270f61",
+      "bytes": 517474,
+      "file_count": 26,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "avatar-diy-master-v1.0.0-fix1.zip",
+      "sha256": "41e0e877cf50ce0bc4e7e4d82dc1ef10569575278afac5b81bcf2498ece0f7b4",
+      "bytes": 515974,
+      "file_count": 23,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "avatar-diy-master-v1.0.0-fix2.zip",
+      "sha256": "710dfaa45a52a8096351a7b7504c22dde402fa58f6386e47b7a00f347f298b4a",
+      "bytes": 515978,
+      "file_count": 23,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-v1.0.0.zip",
+      "sha256": "8403ebbae30dff47d2b4d231fb931fb0f52f4ede7247b133bec5a441eae93fb3",
+      "bytes": 55002,
+      "file_count": 18,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-v1.0.0-fix1.zip",
+      "sha256": "1586726d4b98c36cd2cc1376df694797598b2f2f6a1ca260d4e5bc6b47bd7f97",
+      "bytes": 72203,
+      "file_count": 26,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-v1.0.0-fix2.zip",
+      "sha256": "02dff43788f3519aae7cc71afc73869e7d4f0d47cbed1d116b0d94464f77c8d9",
+      "bytes": 298985,
+      "file_count": 28,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-workbuddy-expert-v1.0.0.zip",
+      "sha256": "a982ba9117b13c3ff6c01d82ec52522aa5aa12883b7a5b518e35fd2ff8639be2",
+      "bytes": 55009,
+      "file_count": 18,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-workbuddy-expert-v1.0.0-fix1.zip",
+      "sha256": "0a37edddd356e47641ba08c299765e401547d37f610f53e9e37273d746cff5a2",
+      "bytes": 72210,
+      "file_count": 26,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-workbuddy-expert-v1.0.0-fix2.zip",
+      "sha256": "bc031ec36a2df08035c50c8e254d519a1d15880f21a96a624a9094850e2ba5bf",
+      "bytes": 298992,
+      "file_count": 28,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-workbuddy-skill-v1.0.0.zip",
+      "sha256": "076e2b319859d28287f97a50445e689f5729e5e1a8b0c38636ff41161ffae9cd",
+      "bytes": 55009,
+      "file_count": 18,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-workbuddy-skill-v1.0.0-fix1.zip",
+      "sha256": "2a80be9c1ee70a42e2a3bfc977aa237cca146bbc35a54bf574c85c7f25817fc4",
+      "bytes": 72210,
+      "file_count": 26,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/Skillhub",
+      "source_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+      "path": "old-photo-restore-master-workbuddy-skill-v1.0.0-fix2.zip",
+      "sha256": "954be71709b748e40412a178f1b5b58b3d34c76aa03fadc7d1be6ceb6b814ea9",
+      "bytes": 298992,
+      "file_count": 28,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_repo": "Haihe2026/cross-border-appeal-helper",
+      "source_ref": "53f0923ec84a4116af5d26870f8aabb7b98a114c",
+      "path": "cross-border-appeal-helper-v1-review.zip",
+      "sha256": "469c685c3a0cf934404299d869777eacd051e00aa2341afce0ed1e412272d8ca",
+      "bytes": 45761,
+      "file_count": 27,
+      "version_field": null,
+      "fixed_terms_hit_lines": 0,
+      "static_only": true,
+      "platform_upload_identity_verified": false
+    }
+  ],
+  "notes": [
+    "Candidates are fixed repository artifacts, not verified current platform uploads.",
+    "Archived/frozen checks and historical pass records were read, not rerun.",
+    "Public health/page GETs do not prove production code bytes, account/OAuth/payment or host end-to-end compatibility.",
+    "Main-domain clients still require separate legacy OAuth and upstream TLS/SNI dependency checks before removing aistore infrastructure.",
+    "One consolidated kind=question reply covers original question and retry; no development request."
+  ],
+  "products": [
+    "ChatGPT 生图王（先查）",
+    "ChatGPT 全能生图王 Pro（先查）",
+    "Grok 一键短视频生成助手（重提优先）",
+    "Listing 优化大师",
+    "跨境售后申诉助手",
+    "Grok 一键生图",
+    "差评回复大师",
+    "朋友圈文案大师",
+    "头像定制大师",
+    "儿童写真与精修专家",
+    "Temu 主图·SKU 图专家",
+    "Amazon 选品 2026 版 Pro",
+    "17TRACK 全球物流追踪",
+    "跨境竞品广告分析师",
+    "亚马逊选品逻辑大师",
+    "SKILL-SEO 优化师",
+    "Grok 视频创作助手",
+    "AI 开发机空间管家",
+    "开发缓存治理专家",
+    "微信存储清理助手",
+    "微信 C 盘专清（技能侧）",
+    "AI 产品交付前自检大师",
+    "宠物养生问诊助手",
+    "老照片修复大师",
+    "跨境广告否定词助手",
+    "Grok 产品图转视频助手"
+  ],
+  "reply_content_sha256": "1eacf11cd780027ac96685ee9cce5a1fb0210474b671285721070a01c4a34f23"
+}
