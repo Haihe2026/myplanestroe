@@ -1,0 +1,10 @@
+{
+  "request_id": "req-codex-to-muse-fangyuan-resume-source-scope-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-fangyuan-photo-enhancer",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "e6c7054da61db05e2511078b2a9fc733e5c82e9b",
+  "source_path": "pipeline/products/mps-fangyuan-photo-enhancer/msg-to-muse-20261114-resume-source-scope-receipt.md",
+  "kind": "question"
+}
