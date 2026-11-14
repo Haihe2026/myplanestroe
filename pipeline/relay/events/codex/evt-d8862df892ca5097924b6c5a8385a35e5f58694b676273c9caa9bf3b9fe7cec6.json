@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-sop-two-role-confirm-20261114",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261114-sop-two-role-confirm.md",
+  "source_ref": "52c8312875456bfb5eefb65514ebde7be0b94d9c",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-d8862df892ca5097924b6c5a8385a35e5f58694b676273c9caa9bf3b9fe7cec6",
+  "request_kind": "question"
+}
