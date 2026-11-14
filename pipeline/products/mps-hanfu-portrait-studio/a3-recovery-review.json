@@ -1,0 +1,920 @@
+{
+  "review_type": "A3 scoped static recovery regression review",
+  "review_date": "2026-11-14",
+  "status": "PASS_SCOPED_STATIC",
+  "overall_a3_pass": false,
+  "candidate": {
+    "version": "1.0.2",
+    "package_root": "02-package/mps-hanfu-portrait-studio",
+    "zip_sha256_provided_by_main": "462837b50688cc5d9d6561e379637f99e5fbb0aa54d0f05aeb9ccb9edaa25b9d",
+    "zip_bytes_provided_by_main": 2649840,
+    "baseline_ref": "fe2e051ffaf06e5e3afee65f754e4a9e486d3a8f"
+  },
+  "scope": {
+    "plan": "prior-defects-plan.md",
+    "plan_items": "lines 43-66 (24 rows) plus line 68 WED-A3-02 and WED-A3-03",
+    "coverage_count": 26,
+    "method": "Read actual candidate source and trace branches; parse raw frontmatter using independent PyYAML SafeLoader and YAML node keys; parse JSON demo manifest and check file existence. No package imports or execution.",
+    "package_commands_executed": 0,
+    "package_modules_imported": 0,
+    "a2_or_tests_executed": 0,
+    "business_or_upstream_http": 0,
+    "remote_or_state_mutations": 0,
+    "not_claimed": [
+      "No overall A3 decision; final A2 evidence belongs to main review.",
+      "No runtime, payment, upstream, host UI, human likeness or platform upload verification.",
+      "Main owns ZIP integrity, image derivation and visual quality, HNF-A3-01 through HNF-A3-04 and final product decision.",
+      "Historical closure versions are evidence in the plan, not newly executed tests in this review.",
+      "Paths and bounded-decoder conclusions below are static source reasoning, not execution of package helpers."
+    ]
+  },
+  "sources": {
+    "studio": "02-package/mps-hanfu-portrait-studio/scripts/studio.py",
+    "telemetry": "02-package/mps-hanfu-portrait-studio/scripts/telemetry.py",
+    "audit": "02-package/mps-hanfu-portrait-studio/scripts/audit_images.py",
+    "png": "02-package/mps-hanfu-portrait-studio/scripts/png_local.py",
+    "jpeg": "02-package/mps-hanfu-portrait-studio/scripts/jpeg_local.py",
+    "welcome": "02-package/mps-hanfu-portrait-studio/scripts/welcome_copy.py",
+    "skill": "02-package/mps-hanfu-portrait-studio/SKILL.md",
+    "demos": "02-package/mps-hanfu-portrait-studio/assets/demos.json"
+  },
+  "checks": [
+    {
+      "id": "A3-PAY-01",
+      "result": "pass_static_no_regression",
+      "old_defect": "paid in a new environment lacked an original-account entry and could imply payment registration without server evidence.",
+      "observed_control_flow": "ensure_install_secret preserves an existing installation identity. paid without identity or after balance 401 uses quick-entry and returns a linkAccount or creditsPending result; only a real balance response containing a non-bool integer greater than zero emits creditsConfirmed and actual remaining count. No user payment statement is treated as a receipt.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              238,
+              243
+            ],
+            [
+              699,
+              724
+            ],
+            [
+              1164,
+              1200
+            ]
+          ]
+        },
+        {
+          "source": "welcome",
+          "lines": [
+            [
+              179,
+              189
+            ]
+          ]
+        },
+        {
+          "source": "skill",
+          "lines": [
+            [
+              104,
+              107
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-PAY-02",
+      "result": "pass_static_no_regression",
+      "old_defect": "Expired or unvalidated server short links were relayed.",
+      "observed_control_flow": "link_fresh accepts only an explicit positive int expires_in. quick-entry and membership-link use the same original install identity and retry at most once for stale links; still-stale responses return EXPIRED. trusted_link checks first-party origin and allowed paths, then preserves ticket query/fragment. Existing baseline domain mapping is retained; this compression review does not claim a domain migration.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              328,
+              339
+            ],
+            [
+              699,
+              724
+            ],
+            [
+              773,
+              801
+            ]
+          ]
+        },
+        {
+          "source": "skill",
+          "lines": [
+            [
+              52,
+              52
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-PAY-03",
+      "result": "pass_static_no_regression",
+      "old_defect": "The final preference sentence in description omitted account intent.",
+      "observed_control_flow": "The original frontmatter description ends with explicit 汉服写真问题或本技能账户问题先调用. Host account takeover and new-chat account commands are separate from first-turn value demonstration.",
+      "evidence": [
+        {
+          "source": "skill",
+          "lines": [
+            [
+              5,
+              5
+            ],
+            [
+              50,
+              54
+            ],
+            [
+              84,
+              84
+            ],
+            [
+              104,
+              106
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-PAY-04",
+      "result": "pass_static_no_regression",
+      "old_defect": "Offline demo accessed credentials or sent telemetry/network requests.",
+      "observed_control_flow": "cmd_demo reads the local assets manifest, validates the requested file set, copies local files and emits md_safe_path values. Its full body contains no call, load_account or report_once; first-dialogue reporting belongs to cmd_first_turn.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              500,
+              510
+            ],
+            [
+              516,
+              568
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-E01",
+      "result": "pass_static_no_regression",
+      "old_defect": "Bilingual example counts matched while themes or pixel promises differed.",
+      "observed_control_flow": "Raw frontmatter was independently parsed by PyYAML SafeLoader. Three ordered pairs cover Tang chest-high/chest-tied ruqun, Song beizi with matching skirt, and Ming mamian skirt. Both languages state adult, own single-person photo, preserve appearance, portrait 2:3 and 1024×1536; not merely equal list lengths.",
+      "evidence": [
+        {
+          "source": "skill",
+          "lines": [
+            [
+              8,
+              15
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-E02",
+      "result": "pass_static_no_regression",
+      "old_defect": "Spaces and Markdown-sensitive path characters broke file links.",
+      "observed_control_flow": "md_safe_path makes the path absolute, changes backslashes to forward slashes, escapes existing percent first and encodes space/tab/parentheses/angle brackets. Demo and delivered image/gallery link targets all use this helper. JSON manifest parsing found 10 entries and all 10 local files present. No CommonMark renderer or package path function was executed.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              184,
+              191
+            ],
+            [
+              551,
+              568
+            ],
+            [
+              1055,
+              1058
+            ]
+          ]
+        },
+        {
+          "source": "welcome",
+          "lines": [
+            [
+              202,
+              213
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-E03",
+      "result": "pass_static_no_regression",
+      "old_defect": "A literal # became a URI fragment and truncated image paths.",
+      "observed_control_flow": "The unsafe map explicitly encodes # as %23 and ? as %3F; an existing percent is first encoded to %25. Encoded image and gallery targets are passed through to the Markdown delivery builder rather than decoded back into target text.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              185,
+              191
+            ],
+            [
+              1055,
+              1058
+            ]
+          ]
+        },
+        {
+          "source": "welcome",
+          "lines": [
+            [
+              202,
+              213
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WED-A3-01",
+      "result": "pass_static_no_regression",
+      "old_defect": "Offline demo incorrectly triggered first-dialogue network reporting.",
+      "observed_control_flow": "cmd_demo remains local-only; the separate cmd_first_turn is the reporting entry point. The fact that historical wedding closure evidence is A2-level is preserved in the plan and is not represented as a newly run wedding check here.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              500,
+              501
+            ],
+            [
+              540,
+              568
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-FAM-01",
+      "result": "pass_static_no_regression",
+      "old_defect": "Generation POST 401 followed by recovered by-key GET 404 could cause a second generation POST.",
+      "observed_control_flow": "_submit first saves submit_unknown and frozen body digest before its single POST. Its 401 branch goes to _submit_unauthorized, which may recover credentials once and GET only the original idem. GET 404, errors and malformed IDs return jobPending without a POST or key change. run/resume route unknown or existing tasks to original by-key/id queries; regenerate requires a finished state.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              804,
+              817
+            ],
+            [
+              847,
+              855
+            ],
+            [
+              895,
+              916
+            ],
+            [
+              927,
+              986
+            ],
+            [
+              1062,
+              1100
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-FAM-02",
+      "result": "pass_static_no_regression",
+      "old_defect": "Recovery/query failure downgraded an unknown accepted task to confirmed, allowing replan to clear its original key/body.",
+      "observed_control_flow": "LOCKED_STATES includes submit_unknown/submitted/download_pending. plan checks the existing lock before _void_unsubmitted. Failed credential recovery emits credentialsReset(task_kept=true) without rewriting the draft; lookup failures retain the task state and original idem/body. resume continues original job; regeneration is refused unless actually terminal.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              153,
+              155
+            ],
+            [
+              578,
+              584
+            ],
+            [
+              885,
+              916
+            ],
+            [
+              941,
+              961
+            ],
+            [
+              1062,
+              1100
+            ]
+          ]
+        },
+        {
+          "source": "skill",
+          "lines": [
+            [
+              99,
+              99
+            ],
+            [
+              111,
+              114
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3-FAM-03",
+      "result": "pass_static_no_regression",
+      "old_defect": "A missing demo was skipped and 9 of 10 was returned as success.",
+      "observed_control_flow": "_demo_manifest requires exactly all SCENES once, required string fields and safe bare PNG filenames. cmd_demo preflights every requested file before copying; any missing or copy failure returns demoUnavailable instead of partial success. Candidate manifest contains 10 expected unique keys and no missing file.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              513,
+              537
+            ],
+            [
+              540,
+              568
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRV-01",
+      "result": "pass_static_no_regression",
+      "old_defect": "A saved Key was treated as ready despite false/missing/failed binding acknowledgement.",
+      "observed_control_flow": "New keys are saved privately with skill_key_bound=False. _confirm_bound accepts only dict bound is True before setting the marker and returning ok. cmd_run reaches _submit only when _ensure_skill_key returns ok; exceptions, missing/false binding and malformed key results exit without new generation.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              727,
+              770
+            ],
+            [
+              831,
+              844
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRV-01-R1",
+      "result": "pass_static_no_regression",
+      "old_defect": "Binding 401 retained a stale cached Key and caused permanent recovery loops.",
+      "observed_control_flow": "A binding 401 removes both cached skill_key and skill_key_bound and saves the account, preserving install_secret and draft. key_reset returns exit 4 with task_kept=true. Recovery obtains a new key using the original identity and requires binding confirmation again; original tasks still follow GET-only continuation.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              753,
+              770
+            ],
+            [
+              837,
+              844
+            ],
+            [
+              885,
+              892
+            ],
+            [
+              927,
+              942
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRV-02",
+      "result": "pass_static_no_regression",
+      "old_defect": "Header-only PNG/JPEG checks accepted truncated or damaged images.",
+      "observed_control_flow": "Input audit limits bytes/dimensions, checks every PNG chunk boundary/CRC, required structure, zlib EOF and row lengths/filters. JPEG parses marker lengths/tables, fully decodes required entropy MCU units, checks truncated bit consumption/restart sequence and requires EOI plus component scans. Delivery verifies complete PNG before writing success; invalid downloads remain download_pending and are fetched by the original job.",
+      "evidence": [
+        {
+          "source": "audit",
+          "lines": [
+            [
+              14,
+              17
+            ],
+            [
+              32,
+              91
+            ],
+            [
+              94,
+              131
+            ]
+          ]
+        },
+        {
+          "source": "png",
+          "lines": [
+            [
+              142,
+              190
+            ],
+            [
+              261,
+              263
+            ]
+          ]
+        },
+        {
+          "source": "jpeg",
+          "lines": [
+            [
+              112,
+              118
+            ],
+            [
+              158,
+              285
+            ],
+            [
+              288,
+              352
+            ]
+          ]
+        },
+        {
+          "source": "studio",
+          "lines": [
+            [
+              1012,
+              1025
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRV-02-R1",
+      "result": "pass_static_no_regression",
+      "old_defect": "PNG zlib output and repeated JPEG DHT lookup construction lacked resource budgets.",
+      "observed_control_flow": "Both input PNG audit and delivery verify use shared inflate_rows: each decompress has limit=max(1,min(65536,remaining+1)), output is consumed immediately, unconsumed_tail is drained with the same cap, unused_data rejects, EOF/remaining are checked without flush. JPEG DHT stores checked definition bytes without building a table; only scan-referenced definitions build cached lookups, equal definitions reuse one table, builds stop at 32 and scans at 64. Input JPEG size is rejected before entropy work.",
+      "evidence": [
+        {
+          "source": "audit",
+          "lines": [
+            [
+              60,
+              78
+            ],
+            [
+              86,
+              91
+            ]
+          ]
+        },
+        {
+          "source": "png",
+          "lines": [
+            [
+              182,
+              187
+            ],
+            [
+              193,
+              263
+            ]
+          ]
+        },
+        {
+          "source": "jpeg",
+          "lines": [
+            [
+              12,
+              48
+            ],
+            [
+              210,
+              237
+            ],
+            [
+              265,
+              271
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRV-03",
+      "result": "pass_static_no_regression",
+      "old_defect": "First-dialogue telemetry failure automatically retried on later commands.",
+      "observed_control_flow": "report_once honors OFF and sent/attempted. attempted=True is atomically saved and read back before transport; every later report_once exits already even after transport/status/receipt failure. Exactly eight fields, no redirect handler, 2-second timeout and 4096-byte read remain. Server event_id is stored as canonical for receipt/account linking, not assumed equal to the request event_id.",
+      "evidence": [
+        {
+          "source": "telemetry",
+          "lines": [
+            [
+              18,
+              38
+            ],
+            [
+              67,
+              79
+            ],
+            [
+              86,
+              123
+            ],
+            [
+              126,
+              158
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRV-04",
+      "result": "pass_static_no_regression",
+      "old_defect": "Generic environment words overrode specific clothing intent.",
+      "observed_control_flow": "Hanfu adaptation retains specific form > style > dynasty > generic environment ordering, with negated words stripped first. Boundary/main-need hints are separate from scene choice, and the host must use scenes.md context rather than reject negated words. Travel scenes are not inherited into the Hanfu product.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              367,
+              427
+            ]
+          ]
+        },
+        {
+          "source": "skill",
+          "lines": [
+            [
+              30,
+              32
+            ],
+            [
+              88,
+              88
+            ],
+            [
+              96,
+              100
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRV-05",
+      "result": "pass_static_no_regression",
+      "old_defect": "Photo transfer consent did not identify image-service/compute recipient categories.",
+      "observed_control_flow": "Confirmation copy explicitly names 图片服务及算力供应商 and limits transfer to this photo/current production. Owner/upload/pay are separate gates in host instructions and cmd_confirm. The generated body sets reference_consent only after these gates, source-digest validation and local image audit.",
+      "evidence": [
+        {
+          "source": "welcome",
+          "lines": [
+            [
+              40,
+              61
+            ],
+            [
+              196,
+              199
+            ]
+          ]
+        },
+        {
+          "source": "skill",
+          "lines": [
+            [
+              98,
+              99
+            ]
+          ]
+        },
+        {
+          "source": "studio",
+          "lines": [
+            [
+              650,
+              692
+            ],
+            [
+              807,
+              817
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAT-A3-01",
+      "result": "pass_static_no_regression",
+      "old_defect": "An unquoted colon-space in English description broke original YAML.",
+      "observed_control_flow": "Original SKILL frontmatter was directly parsed by independent PyYAML SafeLoader; YAML node keys contain no duplicates, version is 1.0.2, examples are arrays of strings. The description fields are quoted scalars; no projection or split-on-colon validator was substituted.",
+      "evidence": [
+        {
+          "source": "skill",
+          "lines": [
+            [
+              1,
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAT-A3-02",
+      "result": "pass_static_no_regression",
+      "old_defect": "A deleted/corrupt confirmed photo reached account/Key HTTP before local validation.",
+      "observed_control_flow": "For unsubmitted run, _job_body fully audits input and validates raw source SHA before load_account/_account_ready/_ensure_skill_key. needs_credits without a job performs the same local check before its balance GET. Existing jobs and submit_unknown branch to original task lookup before consulting mutable local photo content. Only separate one-shot telemetry may precede local input rejection.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              680,
+              692
+            ],
+            [
+              804,
+              844
+            ],
+            [
+              1062,
+              1085
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAT-A3-03",
+      "result": "pass_static_no_regression",
+      "old_defect": "Adult was not asked, unknown was treated as no, and changing the photo was advised to bypass eligibility.",
+      "observed_control_flow": "Host fills unknown for unasked self/adult and merges factual questions. plan explicitly distinguishes no from unknown: no gives the actual minor/not-self reason; unknown returns needsEligibility. Copy asks self/adult from user statement, no age inference or proof; no maternity-stage rule is inherited.",
+      "evidence": [
+        {
+          "source": "skill",
+          "lines": [
+            [
+              96,
+              100
+            ]
+          ]
+        },
+        {
+          "source": "studio",
+          "lines": [
+            [
+              594,
+              606
+            ]
+          ]
+        },
+        {
+          "source": "welcome",
+          "lines": [
+            [
+              64,
+              82
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SLV-A3-01",
+      "result": "pass_static_no_regression",
+      "old_defect": "Unsubmitted A replan to unknown/no/bad B returned before durable invalidation, letting resume submit old A.",
+      "observed_control_flow": "After protecting already-submitted locks, plan invokes _void_unsubmitted before scene/form/eligibility/text/new-photo validation. It clears three consents, idem/job/body digest and saves replanning; new image path is saved and old photo SHA cleared before any early return. confirm requires planned, while run/resume/regenerate explicitly stop replanning. Only successful plan plus new confirmation can create a new key.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              578,
+              625
+            ],
+            [
+              633,
+              661
+            ],
+            [
+              804,
+              810
+            ],
+            [
+              1062,
+              1066
+            ],
+            [
+              1088,
+              1100
+            ]
+          ]
+        },
+        {
+          "source": "skill",
+          "lines": [
+            [
+              99,
+              99
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "slash-regression-no-independent-id",
+      "result": "pass_static_no_regression",
+      "old_defect": "A Windows backslash-dot state directory or unnormalized separators broke Markdown paths.",
+      "observed_control_flow": "state_dir uses a non-dot SKILL_ID directory. md_safe_path normalizes absolute Windows paths to forward slashes before encoding unsafe characters; all user demo/result/gallery targets use it. This is the named slash regression, not an invented independent A3 defect ID.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              176,
+              191
+            ],
+            [
+              565,
+              568
+            ],
+            [
+              1055,
+              1058
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exact-welcome-no-independent-id",
+      "result": "pass_static_no_regression",
+      "old_defect": "Named regression requires preserving the exact fixed welcome sentence; withdrawn certification objections are not revived.",
+      "observed_control_flow": "WELCOME is the literal 欢迎使用WorkBuddy官方认证技能 + one ASCII space + SKILL_NAME(汉服写真照相馆) + Chinese full stop, yielding 欢迎使用WorkBuddy官方认证技能 汉服写真照相馆。. first-turn emits the same W.WELCOME and host requires verbatim copying.",
+      "evidence": [
+        {
+          "source": "welcome",
+          "lines": [
+            [
+              5,
+              7
+            ]
+          ]
+        },
+        {
+          "source": "studio",
+          "lines": [
+            [
+              508,
+              510
+            ]
+          ]
+        },
+        {
+          "source": "skill",
+          "lines": [
+            [
+              56,
+              56
+            ],
+            [
+              86,
+              86
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WED-A3-02",
+      "result": "pass_static_no_regression",
+      "old_defect": "Replacing a photo at the same path after planning left old consent and task key usable.",
+      "observed_control_flow": "Successful plan freezes source SHA. confirm rehashes before minting the key; _job_body audits and compares the exact raw bytes again before account HTTP; mismatch _photo_changed durably clears all consents/key. _submit also rejects a changed frozen body digest. Already-submitted unknown tasks keep their original query lock instead of reading a changed photo and resubmitting.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              622,
+              626
+            ],
+            [
+              650,
+              692
+            ],
+            [
+              804,
+              817
+            ],
+            [
+              847,
+              855
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WED-A3-03",
+      "result": "pass_static_no_regression",
+      "old_defect": "Delivered image/gallery Markdown targets omitted safe-path encoding.",
+      "observed_control_flow": "_deliver creates separate non-overwriting output files, converts each user image target and index.html target through md_safe_path and passes those encoded targets to W.delivery. W.delivery escapes label metacharacters and uses the supplied target unchanged. HTML gallery image filenames separately use URL quote.",
+      "evidence": [
+        {
+          "source": "studio",
+          "lines": [
+            [
+              989,
+              1009
+            ],
+            [
+              1026,
+              1030
+            ],
+            [
+              1055,
+              1058
+            ]
+          ]
+        },
+        {
+          "source": "welcome",
+          "lines": [
+            [
+              202,
+              218
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "supplemental_confirmation": {
+    "id": "HNF-A3-03",
+    "status": "static_host_and_control_flow_retained; main owns final closure",
+    "observed": "SKILL53 excludes feedback from automatic retry; SKILL119 requires explicit feedback --retry when no ticket ID. Unknown submission retains stored body/key and output auto_retry=false; original task recovery does not invoke support submission.",
+    "evidence": [
+      {
+        "source": "skill",
+        "lines": [
+          [
+            53,
+            53
+          ],
+          [
+            119,
+            120
+          ]
+        ]
+      },
+      {
+        "source": "studio",
+        "lines": [
+          [
+            1306,
+            1370
+          ]
+        ]
+      }
+    ]
+  },
+  "findings": [],
+  "conclusion": "The 26 named historical regression constraints show no static regression in the actual clean 1.0.2 candidate. This is a scoped source review only and does not substitute for main's final A2/overall A3 decision."
+}

@@ -1,0 +1,363 @@
+{
+  "result": "PASS",
+  "review_scope": "A3 static metadata/assets/diff subreview only; no audited package imported/executed, no A2/A3 package scripts or business calls. Overall A3 remains for the lead reviewer.",
+  "overall_a3": null,
+  "zip_sha256": "462837b50688cc5d9d6561e379637f99e5fbb0aa54d0f05aeb9ccb9edaa25b9d",
+  "zip_bytes": 2649840,
+  "source_zip_sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea",
+  "checks": [
+    {
+      "check": "fixed ZIP identity",
+      "result": "PASS",
+      "evidence": {
+        "bytes": 2649840,
+        "sha256": "462837b50688cc5d9d6561e379637f99e5fbb0aa54d0f05aeb9ccb9edaa25b9d",
+        "source_sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea"
+      }
+    },
+    {
+      "check": "CRC/count/size",
+      "result": "PASS",
+      "evidence": {
+        "crc_bad_member": null,
+        "files": 25,
+        "limit": 3000000,
+        "headroom_bytes": 350160
+      }
+    },
+    {
+      "check": "archive path safety and two levels",
+      "result": "PASS",
+      "evidence": []
+    },
+    {
+      "check": "original YAML frontmatter",
+      "result": "PASS",
+      "evidence": {
+        "parser": "PyYAML SafeLoader with duplicate-key rejection; actual unmodified archive text",
+        "required": [
+          "name",
+          "display_name",
+          "display_name_en",
+          "description",
+          "description_zh",
+          "description_en",
+          "version",
+          "author"
+        ],
+        "version": "1.0.2"
+      }
+    },
+    {
+      "check": "SKILL size and body unchanged",
+      "result": "PASS",
+      "evidence": {
+        "bytes": 15352,
+        "limit": 15360,
+        "only_frontmatter_version_changed": true
+      }
+    },
+    {
+      "check": "three bilingual examples aligned",
+      "result": "PASS",
+      "evidence": [
+        {
+          "index": 1,
+          "zh": "我是成年人，想用这张本人单人照做唐制齐胸襦裙写真；保留我的五官和原貌，竖版2:3，1024×1536。",
+          "en": "I am an adult. Use this single-person photo of me for a Tang-inspired chest-high, chest-tied ruqun portrait. Preserve my facial features and appearance, portrait 2:3, 1024×1536.",
+          "same_scene_and_size": true
+        },
+        {
+          "index": 2,
+          "zh": "我是成年人，想用这张本人单人照做宋制褙子写真，搭配同套裙装；保留我的五官和原貌，竖版2:3，1024×1536。",
+          "en": "I am an adult. Use this single-person photo of me for a Song-inspired beizi portrait with a matching skirt. Preserve my facial features and appearance, portrait 2:3, 1024×1536.",
+          "same_scene_and_size": true
+        },
+        {
+          "index": 3,
+          "zh": "我是成年人，想用这张本人单人照做明制马面裙写真；保留我的五官和原貌，竖版2:3，1024×1536。",
+          "en": "I am an adult. Use this single-person photo of me for a Ming-inspired mamian skirt portrait. Preserve my facial features and appearance, portrait 2:3, 1024×1536.",
+          "same_scene_and_size": true
+        }
+      ]
+    },
+    {
+      "check": "five version locations",
+      "result": "PASS",
+      "evidence": {
+        "SKILL.md": "1.0.2",
+        "_meta.json": "1.0.2",
+        "scripts/studio.py": "1.0.2",
+        "scripts/telemetry.py": "1.0.2",
+        "tests/first-turn-preview.md": "1.0.2"
+      }
+    },
+    {
+      "check": "welcome exact and unchanged",
+      "result": "PASS",
+      "evidence": {
+        "text": "欢迎使用WorkBuddy官方认证技能 汉服写真照相馆。",
+        "method": "read literal strings and concatenation AST only, no module execution",
+        "welcome_copy_byte_identical": true,
+        "source_line": 7,
+        "note": "SKILL body unchanged; fixed output is script-supplied, not an additional literal required in SKILL."
+      }
+    },
+    {
+      "check": "ten PNG assets and derivation SHA",
+      "result": "PASS",
+      "evidence": {
+        "total_bytes": 2555027,
+        "manifest_byte_identical": true,
+        "all_notes_contain_AI_disclosure": true
+      }
+    },
+    {
+      "check": "only ten images and five version files changed",
+      "result": "PASS",
+      "evidence": {
+        "changed": [
+          "SKILL.md",
+          "_meta.json",
+          "assets/daily.png",
+          "assets/flowing.png",
+          "assets/garden.png",
+          "assets/ming_mamian.png",
+          "assets/quju.png",
+          "assets/song_beizi.png",
+          "assets/swordsman.png",
+          "assets/tang_banbi.png",
+          "assets/tang_ruqun.png",
+          "assets/weijin.png",
+          "scripts/studio.py",
+          "scripts/telemetry.py",
+          "tests/first-turn-preview.md"
+        ],
+        "unchanged_files": [
+          "README.md",
+          "assets/demos.json",
+          "references/platform-rules.md",
+          "references/prompts.md",
+          "references/scenes.md",
+          "scripts/audit_images.py",
+          "scripts/jpeg_local.py",
+          "scripts/png_local.py",
+          "scripts/welcome_copy.py",
+          "tests/test_skill_contract.py"
+        ],
+        "members_added_or_removed": []
+      }
+    },
+    {
+      "check": "business AST unchanged",
+      "result": "PASS",
+      "evidence": {
+        "scripts/audit_images.py": true,
+        "scripts/jpeg_local.py": true,
+        "scripts/png_local.py": true,
+        "scripts/studio.py": true,
+        "scripts/telemetry.py": true,
+        "scripts/welcome_copy.py": true
+      }
+    },
+    {
+      "check": "public white-label unchanged",
+      "result": "PASS",
+      "evidence": {
+        "unexpected_provider_or_process_terms": [],
+        "scope": "original public SKILL section and README; unchanged welcome/refs separately confirmed by byte diff"
+      }
+    },
+    {
+      "check": "external logo",
+      "result": "PASS",
+      "evidence": {
+        "bytes": 418249,
+        "sha256": "bf919e85511fe0ea2adbd8d43b1599314801357c5fcb7bec40445c9c6540bff5",
+        "format": "PNG",
+        "mode": "RGB",
+        "size": [
+          512,
+          512
+        ],
+        "pixel_identical_to_original": true
+      }
+    }
+  ],
+  "assets": [
+    {
+      "key": "tang_ruqun",
+      "file": "tang_ruqun.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 240601,
+      "sha256": "ce0e9595e75e2573c0e90b29cf5a4ff04c495ce9335ec64ba4e8b97f6355bcd0",
+      "source_sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "song_beizi",
+      "file": "song_beizi.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 231355,
+      "sha256": "cd13e6f76226929c8c2b50d6870278bb0bf4603bc4e74b30bf6df733a59e1ce8",
+      "source_sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "ming_mamian",
+      "file": "ming_mamian.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 243708,
+      "sha256": "4a11bfc0a853297c6bb6a0c61711fb51d1d5d615d3f7924be4522bdb1cf01f8e",
+      "source_sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "weijin",
+      "file": "weijin.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 228410,
+      "sha256": "75a58fee810e3004e826ccc534af32172dc0621e86f81803e9981ea3b829e03b",
+      "source_sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "daily",
+      "file": "daily.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 246520,
+      "sha256": "f0bf27e028ba612ac255299b012a57d20b59776ca38b18e1958ba509819c917b",
+      "source_sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "flowing",
+      "file": "flowing.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 262843,
+      "sha256": "0a0acd3c6d09756e1c18313a8fdbd960d4426fcdf186445aeb15bedbe884bb19",
+      "source_sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "swordsman",
+      "file": "swordsman.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 233486,
+      "sha256": "64d1b60c0317f0585409506699d6727ce5f41403be373d5f748eb0f40f226e58",
+      "source_sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "tang_banbi",
+      "file": "tang_banbi.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 253559,
+      "sha256": "02f5e111b21b68461300791dc4406f5351ed8e472ff082bde843ad938c1a279b",
+      "source_sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "quju",
+      "file": "quju.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 225592,
+      "sha256": "ed81614a436506ad45719599cb66fe8d3d797d4b38c28459eb2c02968cc11b08",
+      "source_sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    },
+    {
+      "key": "garden",
+      "file": "garden.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "size": [
+        512,
+        768
+      ],
+      "bytes": 388953,
+      "sha256": "ec20185a04ecbaf2f6076604c763668c6971fa1d3995be07878fa7fb5bb6d3e8",
+      "source_sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
+      "derivation_sha_matches": true,
+      "max_channel_error": 2
+    }
+  ],
+  "logo": {
+    "bytes": 418249,
+    "sha256": "bf919e85511fe0ea2adbd8d43b1599314801357c5fcb7bec40445c9c6540bff5",
+    "format": "PNG",
+    "mode": "RGB",
+    "size": [
+      512,
+      512
+    ],
+    "pixel_identical_to_original": true
+  },
+  "open_package_blockers": [],
+  "limits": [
+    "Image colour error was independently decoded and compared; visual quality acceptance remains in compression-visual-review.md, not inferred from pixel error alone.",
+    "A2 environment and native harness adaptation evidence is outside this subreview.",
+    "No true host, payment, production or publication acceptance."
+  ],
+  "closed_evidence_findings": [
+    {
+      "id": "HNF102-EVIDENCE-01",
+      "detail": "Re-read corrected staging/compression records: c4d345... is the 1.0.1 source; 294600ab... is explicitly an experiment container; final_zip is 2649840B/462837... . Frozen ZIP unchanged."
+    }
+  ],
+  "report": "a3-metadata-review.md"
+}
