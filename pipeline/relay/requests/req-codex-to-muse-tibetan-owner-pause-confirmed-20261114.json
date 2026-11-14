@@ -1,0 +1,10 @@
+{
+  "request_id": "req-codex-to-muse-tibetan-owner-pause-confirmed-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-tibetan-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "1172453618e41ca900b97790d0689411753e6d8a",
+  "source_path": "pipeline/products/mps-tibetan-portrait-studio/msg-to-muse-20261114-tibetan-paused-by-owner.md",
+  "kind": "question"
+}
