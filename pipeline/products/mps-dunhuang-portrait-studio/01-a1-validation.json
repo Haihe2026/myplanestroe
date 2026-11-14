@@ -1,0 +1,34 @@
+{
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "checked_at": "2026-11-14T16:54:01+08:00",
+  "checked_by": "muse",
+  "result": "pass",
+  "checklist_count": 16,
+  "spec_md_sha256": "1731efb08a7cbd1cddf98fdb2f096412015d8eb6b5e50bd4d35dfe0bb6092396",
+  "spec_json_sha256": "8b46131f7526839246300bdd217250451730e3726f5cc04de6a41df182d460f9",
+  "sop_current": "df2c195c4cbb3b6ad977b6e348627168b83c8fff",
+  "checks": [
+    {"item": 1, "label": "立项/词表/查重", "result": "pass", "evidence": "slug mps-dunhuang-portrait-studio、中文名与展示名一致；触发词24个含「敦煌写真照相馆充值」；SkillHub站内0同名（brief），WorkBuddy同名登录墙未验、撞名由负责人定展示名、slug不变（MD L19/D09）。"},
+    {"item": 2, "label": "官方文档已读记录", "result": "pass", "evidence": "01-official-read.json：2026-11-14 16:37:47+08:00 fresh HTTPS 200、284337B、SHA 7fe16159…，适用团队Skill。"},
+    {"item": 3, "label": "场景路由表/16条原话", "result": "pass", "evidence": "scenes 10个key与brief 10模板一一对应；trigger_matrix 16条逐条有路由与处理规则，否定词「最怕画成汉服」作纠偏不拒单。"},
+    {"item": 4, "label": "每场景提示词模板与基线", "result": "pass", "evidence": "每场景有prompt/prompt_assembly/look_profile；prompt_baselines 4项；本人成人单人、三独立许可；生产prompt无女性人称（DH-A1-03已闭环）。"},
+    {"item": 5, "label": "首轮示例图8-12个", "result": "pass", "evidence": "10张JPEG 512x768，总1333229B；output_sha256逐项与demo-assets实际文件核对一致；provenance/audit齐全。"},
+    {"item": 6, "label": "主题logo方向", "result": "pass", "evidence": "02-package/dist/logo.png：PNG 512x512、480802B≤500KB，SHA 9fdf400c…与规格一致；立体主题方向，非平面ico。"},
+    {"item": 7, "label": "计费", "result": "pass", "evidence": "billing.public_checkout https://myplanestore.com/membership/；free_trial false、new_user_trial 0；description写明按张计费、0次免费试用。"},
+    {"item": 8, "label": "模型与成本", "result": "pass", "evidence": "目录模型成本$0.0065/张，毛利76.47%≥60%；11次开发素材预算$0.0715；未核供应商实际账单已注明。"},
+    {"item": 9, "label": "车道", "result": "pass", "evidence": "fast；无后端部署，部署车道不适用。"},
+    {"item": 10, "label": "接口约定", "result": "pass", "evidence": "14业务API+7 OA路径，带源码位置；backend-source-index齐全；未杜撰字段。"},
+    {"item": 11, "label": "漏斗步骤对应表", "result": "pass", "evidence": "funnel_mapping L0-L4完整；三独立指标（启用数/激活数/充值笔数）按新老拆分（DH-A1-01已闭环）。"},
+    {"item": 12, "label": "相邻技能与分界句", "result": "pass", "evidence": "sibling_skills边界：非敦煌地点/纯汉服/婚纱双人多人/旗袍/儿童/和服军装；汉服test_passed未submitted，不当已上架推荐。"},
+    {"item": 13, "label": "不承接的需求清单", "result": "pass", "evidence": "description+安全基线：不做儿童/双人/他人代拍/纯汉服/婚纱/旗袍/和服/军装/其他地点写真；模板注明AI生成非实拍。"},
+    {"item": 14, "label": "验收用例清单", "result": "pass", "evidence": "stage6_cases 57项+tests 21项敦煌专项；A2/A3分工标明；A2/A3尚未执行如实保留。"},
+    {"item": 15, "label": "决策记录", "result": "pass", "evidence": "decisions 13条，含3MB上限、主域适配、授权正文完整约束（DH-A1-02已闭环）等。"},
+    {"item": 16, "label": "MD/JSON一致", "result": "pass", "evidence": "两文件SHA实测与A1报告一致；slug、欢迎句逐字一致；examples中英各3条同场景；description末句调用倾向句含「或本技能账户问题」；对客文案无上游模型名/服务商名/域名/品牌。"}
+  ],
+  "limits": [
+    "Skill实现与A2/A3尚未执行，成品ZIP未生成，3MB上限待开发称重。",
+    "视觉报告艺术限制保留（月牙泉辨识较弱、脚尖近地、水袖定格、背景绘制人物），不作超出事实的承诺。",
+    "浏览器充值页为主域下/membership/gemini/产品入口，公开结账页为通用套餐页；与此前各款口径一致。"
+  ],
+  "next": "交Codex按规格开发1.0.0（阶段5-6），A2自测后Codex自检A3；附录D/D.6按负责人令暂停；负责人手动上传，codex_may_publish=false。"
+}
