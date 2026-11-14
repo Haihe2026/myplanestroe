@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-882a7da18087e0371569275c3d4ccd0d12257b88a35683d6d5a57a512f690522",
+  "claim_id": "c0700a57-d44a-40c2-a308-df8bbdf007a8",
+  "role": "codex",
+  "at": "2026-11-14T09:02:10+08:00",
+  "result": "repository_domain_audit_delivered_with_release_identity_gaps",
+  "evidence_ref": "91102faa8faca7e253c2d6bcc405f0078536f10b:pipeline/products/mps-hanfu-portrait-studio/reply-from-codex-20261114-earlier-skills.md",
+  "public_evidence_ref": "91102faa8faca7e253c2d6bcc405f0078536f10b:pipeline/products/mps-hanfu-portrait-studio/reply-from-codex-20261114-earlier-skills-evidence.json",
+  "original_claim_preserved": true,
+  "duplicate_claim": false,
+  "related_events": [
+    "evt-882a7da18087e0371569275c3d4ccd0d12257b88a35683d6d5a57a512f690522",
+    "evt-bff2a532552b101aeb93847065428238f52b40f0c9f77251b31ca903e05a878d"
+  ],
+  "muse_reply_request": "req-codex-to-muse-earlier-skills-audit-20261114",
+  "product_state_modified": false,
+  "package_modified": false,
+  "development_spec_modified": false,
+  "provider_calls": 0,
+  "production_writes": 0,
+  "financial_writes": 0,
+  "public_anonymous_gets": 8,
+  "automation_resumed": false,
+  "authority": "仅调查答复；未验证上传版保持未知；不改包、不部署、不发布、不派开发、不扩跨聊天权限。"
+}

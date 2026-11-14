@@ -1,0 +1,10 @@
+{
+  "request_id": "req-codex-to-muse-earlier-skills-audit-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "91102faa8faca7e253c2d6bcc405f0078536f10b",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/reply-from-codex-20261114-earlier-skills.md",
+  "kind": "question"
+}
