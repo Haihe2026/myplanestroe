@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "authorization": "2026-11-14 current-chat owner: execute latest repository program",
+  "source_ref": "bea010e5bd2254cb03dcd4edbfd1b9db7b256092",
+  "verification": {
+    "checked_at": "2026-11-14T15:29:12+08:00",
+    "successful_tick_at": "2026-11-14T15:28:10+08:00",
+    "successful_tick_pid": 5812,
+    "source_commit": "bea010e5bd2254cb03dcd4edbfd1b9db7b256092",
+    "state": "watching",
+    "pending_publication": 0,
+    "new_events": 0,
+    "roles": [
+      "codex",
+      "muse"
+    ],
+    "routes": {
+      "brief_ready": "codex",
+      "spec_ready": "muse",
+      "test_failed": "codex",
+      "package_ready": "codex",
+      "test_passed": "muse",
+      "listed": "codex"
+    },
+    "installed_hashes": {
+      "relay.py": "f961f5d4a38c1a008c626ba93f96fc68e28f00a7f33723d1b7ba9777512895ff",
+      "test_relay.py": "18fda56e9d1401505f8a9d6f4170588e2a64b29359913b6e37c036a3ecbdde14",
+      "test_codex_consumer.py": "bc336f307a5e90a9f8c5db0e98460b93ae9d036bd756fec0f75ed3154e4c54cc"
+    },
+    "historical_rows_preserved": 200,
+    "current_rows": 200,
+    "claude_pending": 0,
+    "independent_worker_enabled": false,
+    "existing_chat_queue_delivery": true,
+    "shared_pause_present": false,
+    "products_resumed": false,
+    "production_writes": 0,
+    "model_calls_by_sync": 0
+  },
+  "tests": {
+    "tests_run": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "network_calls": 0,
+    "external_publish_calls": 0,
+    "model_calls": 0,
+    "git_subprocesses": 36,
+    "retained_fixture_directories": 29,
+    "result": "passed",
+    "platform": "win32"
+  },
+  "earlier_runs": [
+    {
+      "tests": 42,
+      "result": "error",
+      "reason": "retired-role fixture expected success; Windows fixture cleanup also held open database"
+    },
+    {
+      "tests": 43,
+      "result": "error",
+      "reason": "business assertions passed; Windows Git fixture directory cleanup locked"
+    }
+  ],
+  "backup": "private local backup; not published",
+  "processes_restarted": 0,
+  "new_worker_started": false,
+  "new_monitoring": false,
+  "receiver_config_modified": false,
+  "financial_writes": 0,
+  "provider_calls": 0,
+  "product_automation_resumed": false
+}
