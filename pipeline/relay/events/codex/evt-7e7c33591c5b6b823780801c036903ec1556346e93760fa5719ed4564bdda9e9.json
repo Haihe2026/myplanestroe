@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-sop-cleanup-confirm-20261114",
+  "skill_id": "mps-hanfu-portrait-studio",
+  "source_path": "pipeline/products/mps-hanfu-portrait-studio/msg-from-muse-20261114-sop-cleanup-confirm.md",
+  "source_ref": "f88a16c5252fe7bd53ec02469ae600d70f9e9795",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-7e7c33591c5b6b823780801c036903ec1556346e93760fa5719ed4564bdda9e9",
+  "request_kind": "question"
+}
