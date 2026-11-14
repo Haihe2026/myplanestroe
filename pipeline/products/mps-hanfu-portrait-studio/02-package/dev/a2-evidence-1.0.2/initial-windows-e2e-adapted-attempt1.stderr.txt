@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<workspace>/work-20261114-hanfu-resize\offline_runner.py", line 27, in <module>
+    runpy.run_path(script,run_name='__main__')
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 259, in _get_code_from_file
+  File "<workspace>/work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py", line 966
+    self.assertTrue(os.path.isfile(unquote(path)))
+IndentationError: unexpected indent

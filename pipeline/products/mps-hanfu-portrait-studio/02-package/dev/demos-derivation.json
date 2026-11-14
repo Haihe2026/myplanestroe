@@ -1,6 +1,6 @@
 {
-  "note": "原字节复制，未缩放、未重编码、未新增生图调用；源图见 demo-assets/provenance.json",
-  "total_bytes": 4718679,
+  "note": "1.0.2授权纯图片压缩：原1.0.1 PNG来源保持，RGB每通道最接近4倍数clamp255，Pillow PNG optimize9；同512x768/内容/人数/文件名，无裁切重生；byte_identical=false，保原来源与新派生SHA。",
+  "total_bytes": 2555027,
   "items": [
     {
       "key": "tang_ruqun",
@@ -8,13 +8,18 @@
       "source": "tang_ruqun.png",
       "source_sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
       "package_file": "tang_ruqun.png",
-      "package_sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
-      "package_bytes": 456086,
+      "package_sha256": "ce0e9595e75e2573c0e90b29cf5a4ff04c495ce9335ec64ba4e8b97f6355bcd0",
+      "package_bytes": 240601,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.42174859834289,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "song_beizi",
@@ -22,13 +27,18 @@
       "source": "song_beizi.png",
       "source_sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
       "package_file": "song_beizi.png",
-      "package_sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
-      "package_bytes": 443289,
+      "package_sha256": "cd13e6f76226929c8c2b50d6870278bb0bf4603bc4e74b30bf6df733a59e1ce8",
+      "package_bytes": 231355,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.32996573274309,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "ming_mamian",
@@ -36,13 +46,18 @@
       "source": "ming_mamian.png",
       "source_sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
       "package_file": "ming_mamian.png",
-      "package_sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
-      "package_bytes": 449225,
+      "package_sha256": "4a11bfc0a853297c6bb6a0c61711fb51d1d5d615d3f7924be4522bdb1cf01f8e",
+      "package_bytes": 243708,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.40171538418886,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "weijin",
@@ -50,13 +65,18 @@
       "source": "weijin.png",
       "source_sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
       "package_file": "weijin.png",
-      "package_sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
-      "package_bytes": 443935,
+      "package_sha256": "75a58fee810e3004e826ccc534af32172dc0621e86f81803e9981ea3b829e03b",
+      "package_bytes": 228410,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.37152348313631,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "daily",
@@ -64,13 +84,18 @@
       "source": "daily.png",
       "source_sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
       "package_file": "daily.png",
-      "package_sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
-      "package_bytes": 458931,
+      "package_sha256": "f0bf27e028ba612ac255299b012a57d20b59776ca38b18e1958ba509819c917b",
+      "package_bytes": 246520,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.37189179315911,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "flowing",
@@ -78,13 +103,18 @@
       "source": "flowing.png",
       "source_sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
       "package_file": "flowing.png",
-      "package_sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
-      "package_bytes": 476673,
+      "package_sha256": "0a0acd3c6d09756e1c18313a8fdbd960d4426fcdf186445aeb15bedbe884bb19",
+      "package_bytes": 262843,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.37352009770414,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "swordsman",
@@ -92,13 +122,18 @@
       "source": "swordsman.png",
       "source_sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
       "package_file": "swordsman.png",
-      "package_sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
-      "package_bytes": 441924,
+      "package_sha256": "64d1b60c0317f0585409506699d6727ce5f41403be373d5f748eb0f40f226e58",
+      "package_bytes": 233486,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.35961200484843,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "tang_banbi",
@@ -106,13 +141,18 @@
       "source": "tang_banbi.png",
       "source_sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
       "package_file": "tang_banbi.png",
-      "package_sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
-      "package_bytes": 468577,
+      "package_sha256": "02f5e111b21b68461300791dc4406f5351ed8e472ff082bde843ad938c1a279b",
+      "package_bytes": 253559,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.38797069687985,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "quju",
@@ -120,13 +160,18 @@
       "source": "quju.png",
       "source_sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
       "package_file": "quju.png",
-      "package_sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
-      "package_bytes": 434273,
+      "package_sha256": "ed81614a436506ad45719599cb66fe8d3d797d4b38c28459eb2c02968cc11b08",
+      "package_bytes": 225592,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.32165411588933,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     },
     {
       "key": "garden",
@@ -134,13 +179,20 @@
       "source": "garden.png",
       "source_sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
       "package_file": "garden.png",
-      "package_sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
-      "package_bytes": 645766,
+      "package_sha256": "ec20185a04ecbaf2f6076604c763668c6971fa1d3995be07878fa7fb5bb6d3e8",
+      "package_bytes": 388953,
       "size": [
         512,
         768
       ],
-      "byte_identical": true
+      "byte_identical": false,
+      "compression": "RGB6: each 8-bit channel rounded to nearest multiple4, clamp255; PNG optimize9",
+      "max_channel_error": 2,
+      "psnr_db": 46.372373098665676,
+      "source_version": "1.0.1",
+      "package_version": "1.0.2"
     }
-  ]
+  ],
+  "new_generation_calls": 0,
+  "source_zip_sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea"
 }

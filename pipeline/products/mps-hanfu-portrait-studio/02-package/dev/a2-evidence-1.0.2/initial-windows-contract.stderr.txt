@@ -1,0 +1,52 @@
+....FF......................usage: studio.py plan [-h] --draft DRAFT --scene SCENE
+                      [--shape {landscape,portrait,square}] --self
+                      {yes,no,unknown} --adult {yes,no,unknown}
+                      [--form {ming,quju,song,tang}] --single {yes,no}
+                      --face-clear {yes,no} [--features FEATURES]
+                      [--outfit OUTFIT] [--image IMAGE]
+studio.py plan: error: the following arguments are required: --self, --adult
+usage: studio.py plan [-h] --draft DRAFT --scene SCENE
+                      [--shape {landscape,portrait,square}] --self
+                      {yes,no,unknown} --adult {yes,no,unknown}
+                      [--form {ming,quju,song,tang}] --single {yes,no}
+                      --face-clear {yes,no} [--features FEATURES]
+                      [--outfit OUTFIT] [--image IMAGE]
+studio.py plan: error: the following arguments are required: --single, --face-clear
+usage: studio.py [-h]
+                 {first-turn,demo,plan,confirm,run,resume,regenerate,status,auth,topup,paid,balance,decline,refuse,history,feedback,ticket}
+                 ...
+studio.py: error: unrecognized arguments: --orderer family_proxy
+....................................
+======================================================================
+FAIL: test_demo_link_path_with_hash (test_skill_contract.Contract.test_demo_link_path_with_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\mps-hanfu-portrait-studio\tests\test_skill_contract.py", line 1089, in test_demo_link_path_with_hash
+    self.assertEqual(uri_file_part(enc), ('/home/' + odd + '/f.png', '', ''), odd)
+AssertionError: Tuples differ: ('D:/home/a#b/f.png', '', '') != ('/home/a#b/f.png', '', '')
+
+First differing element 0:
+'D:/home/a#b/f.png'
+'/home/a#b/f.png'
+
+- ('D:/home/a#b/f.png', '', '')
+?   --
+
++ ('/home/a#b/f.png', '', '') : a#b
+
+======================================================================
+FAIL: test_demo_link_path_with_space (test_skill_contract.Contract.test_demo_link_path_with_space)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\mps-hanfu-portrait-studio\tests\test_skill_contract.py", line 1045, in test_demo_link_path_with_space
+    self.assertEqual(unquote(enc), '/home/' + odd + '/f.png')
+AssertionError: 'D:/home/a (1)/f.png' != '/home/a (1)/f.png'
+- D:/home/a (1)/f.png
+? --
++ /home/a (1)/f.png
+
+
+----------------------------------------------------------------------
+Ran 64 tests in 5.965s
+
+FAILED (failures=2)

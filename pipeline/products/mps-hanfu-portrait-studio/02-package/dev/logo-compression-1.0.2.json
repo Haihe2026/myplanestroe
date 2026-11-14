@@ -1,0 +1,13 @@
+{
+  "method": "lossless PNG optimize/compress_level9",
+  "original_bytes": 418271,
+  "original_sha256": "d6cda4a802770817435324b898d5e0f1705adf95cd2a7c665baba27727c2978b",
+  "output_bytes": 418249,
+  "output_sha256": "bf919e85511fe0ea2adbd8d43b1599314801357c5fcb7bec40445c9c6540bff5",
+  "pixel_identical": true,
+  "size": [
+    512,
+    512
+  ],
+  "new_generation_calls": 0
+}

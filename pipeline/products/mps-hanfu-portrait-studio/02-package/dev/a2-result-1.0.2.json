@@ -1,0 +1,108 @@
+{
+  "at": "2026-11-14T17:30:37+08:00",
+  "phase": "A2 developer validation",
+  "result": "PASS",
+  "version": "1.0.2",
+  "zip": {
+    "file": "mps-hanfu-portrait-studio-1.0.2.zip",
+    "bytes": 2649840,
+    "sha256": "462837b50688cc5d9d6561e379637f99e5fbb0aa54d0f05aeb9ccb9edaa25b9d",
+    "files": 25,
+    "limit_bytes": 3000000,
+    "remaining_bytes": 350160
+  },
+  "runs": [
+    {
+      "label": "windows-contract-native",
+      "tests": 64,
+      "result": "PASS",
+      "skipped": 0,
+      "original_log_sha256": "e162d1d25a4beac3179a566781a2ef6ba37a5a1c438e368b6ad788fc541ad3da",
+      "public_log_sha256": "e162d1d25a4beac3179a566781a2ef6ba37a5a1c438e368b6ad788fc541ad3da",
+      "public_log": "02-package/dev/a2-evidence-1.0.2/windows-contract-native.stderr.txt"
+    },
+    {
+      "label": "windows-e2e-adapted",
+      "tests": 142,
+      "result": "PASS",
+      "skipped": 0,
+      "original_log_sha256": "693ee07f7db85593cf0df82b3c9191a7d6f07d949c22446aac80127ebc0cea5b",
+      "public_log_sha256": "e09d070e3b5af2a08fe9e7ce616784e652abfbeb29496e34133866211fb8d0dc",
+      "public_log": "02-package/dev/a2-evidence-1.0.2/windows-e2e-adapted.stderr.txt"
+    },
+    {
+      "label": "linux-contract",
+      "tests": 64,
+      "result": "PASS",
+      "skipped": 0,
+      "original_log_sha256": "601719156998ad8d8febacc5fe4078eb50cd87fd07da7db8a462cf67d02c598b",
+      "public_log_sha256": "601719156998ad8d8febacc5fe4078eb50cd87fd07da7db8a462cf67d02c598b",
+      "public_log": "02-package/dev/a2-evidence-1.0.2/linux-contract.stderr.txt"
+    },
+    {
+      "label": "linux-e2e",
+      "tests": 142,
+      "result": "PASS",
+      "skipped": 0,
+      "original_log_sha256": "f5e8326a1e6479477bb8f06150a25bd532edfff2f5be205b1660ef54a5a355a6",
+      "public_log_sha256": "f5e8326a1e6479477bb8f06150a25bd532edfff2f5be205b1660ef54a5a355a6",
+      "public_log": "02-package/dev/a2-evidence-1.0.2/linux-e2e.stderr.txt"
+    }
+  ],
+  "windows": {
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "contract": "64 tests under explicit native fixture adapter; original package test bytes unchanged",
+    "e2e": "142 tests under development-only image-derivation and platform fixtures",
+    "initial_raw_suite": "2 POSIX /home fixture failures; raw e2e1 path normalization failure and2 cleanup errors retained; later fixture URL-decoding gap fixed",
+    "adapter": "offline_runner: four /home literals in two tests rebound to native Windows drive; no assertion removal",
+    "acl_verified": false
+  },
+  "linux": {
+    "os": "Ubuntu WSL2, Linux-native private /tmp copy",
+    "python": "3.12.3",
+    "network": "unshare -rn plus socket/urlopen denial",
+    "contract": "64 original tests unmodified",
+    "e2e": "142 tests with final external development harness"
+  },
+  "scope": {
+    "runtime_logic_changed": false,
+    "skill_body_changed": false,
+    "demos_manifest_changed": false,
+    "package_tests_changed": false,
+    "metadata_version_files": [
+      "mps-hanfu-portrait-studio/SKILL.md",
+      "mps-hanfu-portrait-studio/_meta.json",
+      "mps-hanfu-portrait-studio/scripts/studio.py",
+      "mps-hanfu-portrait-studio/scripts/telemetry.py",
+      "mps-hanfu-portrait-studio/tests/first-turn-preview.md"
+    ],
+    "images_changed": 10,
+    "images_dimensions_preserved": true,
+    "archive_old_versions_preserved": true,
+    "real_upstream_calls": 0,
+    "real_payment_calls": 0,
+    "production_changes": 0,
+    "upload": false
+  },
+  "fixture_changes": {
+    "e2e_diff": "02-package/dev/e2e-fixture-changes-1.0.2.diff",
+    "business_expectations": "identity/consent/charge/idempotency/feedback assertions unchanged",
+    "new_image_lineage": "original source SHA -> compressed package SHA; old provenance remains intact",
+    "native_paths": "decode Markdown-safe href before filesystem lookup; compare both native paths after slash normalization",
+    "posix_permissions": "mode600 assertion runs Linux; Windows ACL is not inferred or claimed",
+    "cleanup": "GC before cleanup; verified path remains in declared fixture root; only Windows32 locked-handle cleanup may retain artifact without masking test-body errors"
+  },
+  "harness_sha256": "6b44b4105141a78cfea8e36ea9c813c347ff557ab0c0f803f6728eb9f4f99724",
+  "offline_runner_sha256": "92f25f976202c0ab114c3013c799669452335976dac49873d5618805dbe79ac0",
+  "visual_report_sha256": "72dacaaeb215262ae1a21cc508d45738f262c0daff2a10491473be3b636841b4",
+  "not_verified": [
+    "Windows current-user ACL semantics",
+    "real WorkBuddy install/host behavior",
+    "true human likeness/history accuracy",
+    "real OAuth/WeChat/payment",
+    "production deployed bytes",
+    "platform upload/review"
+  ],
+  "a3": "separate static review pending; no A2 execution during A3"
+}

@@ -1,0 +1,23 @@
+............................usage: studio.py plan [-h] --draft DRAFT --scene SCENE
+                      [--shape {landscape,portrait,square}] --self
+                      {yes,no,unknown} --adult {yes,no,unknown}
+                      [--form {ming,quju,song,tang}] --single {yes,no}
+                      --face-clear {yes,no} [--features FEATURES]
+                      [--outfit OUTFIT] [--image IMAGE]
+studio.py plan: error: the following arguments are required: --self, --adult
+usage: studio.py plan [-h] --draft DRAFT --scene SCENE
+                      [--shape {landscape,portrait,square}] --self
+                      {yes,no,unknown} --adult {yes,no,unknown}
+                      [--form {ming,quju,song,tang}] --single {yes,no}
+                      --face-clear {yes,no} [--features FEATURES]
+                      [--outfit OUTFIT] [--image IMAGE]
+studio.py plan: error: the following arguments are required: --single, --face-clear
+usage: studio.py [-h]
+                 {first-turn,demo,plan,confirm,run,resume,regenerate,status,auth,topup,paid,balance,decline,refuse,history,feedback,ticket}
+                 ...
+studio.py: error: unrecognized arguments: --orderer family_proxy
+....................................
+----------------------------------------------------------------------
+Ran 64 tests in 2.368s
+
+OK

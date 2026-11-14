@@ -1,0 +1,180 @@
+{
+  "method": "rgb6",
+  "demo_bytes": 2555027,
+  "minimum_psnr_db": 46.32165411588933,
+  "images": [
+    {
+      "path": "mps-hanfu-portrait-studio/assets/tang_ruqun.png",
+      "original_sha256": "0d797db73af68338e6cc313b583e23aef1b7a3e94852434350f23d46a5a22a45",
+      "original_bytes": 456086,
+      "output_sha256": "ce0e9595e75e2573c0e90b29cf5a4ff04c495ce9335ec64ba4e8b97f6355bcd0",
+      "output_bytes": 240601,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.42174859834289
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/song_beizi.png",
+      "original_sha256": "2a1e593a1d9438f545d7616227b2911169d4d50c12a37ce99369632dc52d5ef3",
+      "original_bytes": 443289,
+      "output_sha256": "cd13e6f76226929c8c2b50d6870278bb0bf4603bc4e74b30bf6df733a59e1ce8",
+      "output_bytes": 231355,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.32996573274309
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/ming_mamian.png",
+      "original_sha256": "343cfc62d01a4bae92db4ff71db4510636eaf7e69bfd96b39ede3b2c22ae06a5",
+      "original_bytes": 449225,
+      "output_sha256": "4a11bfc0a853297c6bb6a0c61711fb51d1d5d615d3f7924be4522bdb1cf01f8e",
+      "output_bytes": 243708,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.40171538418886
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/weijin.png",
+      "original_sha256": "1da03bfa21986062b7e0c84371d6bdd9974a7c168df768c5ed9282d1d9dd60ad",
+      "original_bytes": 443935,
+      "output_sha256": "75a58fee810e3004e826ccc534af32172dc0621e86f81803e9981ea3b829e03b",
+      "output_bytes": 228410,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.37152348313631
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/daily.png",
+      "original_sha256": "8770ce5daa4f36afb01373f1d9b751ce996f435d124d099a4282112c1a9d49ec",
+      "original_bytes": 458931,
+      "output_sha256": "f0bf27e028ba612ac255299b012a57d20b59776ca38b18e1958ba509819c917b",
+      "output_bytes": 246520,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.37189179315911
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/flowing.png",
+      "original_sha256": "740c520bbfbf314bc4134994cc9484057989579b8334e5c9b5faba6f84342cb5",
+      "original_bytes": 476673,
+      "output_sha256": "0a0acd3c6d09756e1c18313a8fdbd960d4426fcdf186445aeb15bedbe884bb19",
+      "output_bytes": 262843,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.37352009770414
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/swordsman.png",
+      "original_sha256": "1e98a5a5d8126f752ac6a1cb0a2328ee9bb7f8acf27cc302d9171ffcc7591bf2",
+      "original_bytes": 441924,
+      "output_sha256": "64d1b60c0317f0585409506699d6727ce5f41403be373d5f748eb0f40f226e58",
+      "output_bytes": 233486,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.35961200484843
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/tang_banbi.png",
+      "original_sha256": "810618786648390d772c0b36a996d8a23a3aa9ed48dbda50bf3ded648b088c12",
+      "original_bytes": 468577,
+      "output_sha256": "02f5e111b21b68461300791dc4406f5351ed8e472ff082bde843ad938c1a279b",
+      "output_bytes": 253559,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.38797069687985
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/quju.png",
+      "original_sha256": "14213466af598e52ef3284e2157f27c56e41da4bb56f90c37a7e80f462ce9638",
+      "original_bytes": 434273,
+      "output_sha256": "ed81614a436506ad45719599cb66fe8d3d797d4b38c28459eb2c02968cc11b08",
+      "output_bytes": 225592,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.32165411588933
+    },
+    {
+      "path": "mps-hanfu-portrait-studio/assets/garden.png",
+      "original_sha256": "709c59f582bcb24f3f1046700e35e3e46da1461a7225d73e5650d0efb99db8cf",
+      "original_bytes": 645766,
+      "output_sha256": "ec20185a04ecbaf2f6076604c763668c6971fa1d3995be07878fa7fb5bb6d3e8",
+      "output_bytes": 388953,
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGB",
+      "psnr_db": 46.372373098665676
+    }
+  ],
+  "version_files": [
+    "mps-hanfu-portrait-studio/SKILL.md",
+    "mps-hanfu-portrait-studio/_meta.json",
+    "mps-hanfu-portrait-studio/scripts/studio.py",
+    "mps-hanfu-portrait-studio/scripts/telemetry.py",
+    "mps-hanfu-portrait-studio/tests/first-turn-preview.md"
+  ],
+  "unchanged_files": [
+    "mps-hanfu-portrait-studio/README.md",
+    "mps-hanfu-portrait-studio/assets/demos.json",
+    "mps-hanfu-portrait-studio/references/platform-rules.md",
+    "mps-hanfu-portrait-studio/references/prompts.md",
+    "mps-hanfu-portrait-studio/references/scenes.md",
+    "mps-hanfu-portrait-studio/scripts/audit_images.py",
+    "mps-hanfu-portrait-studio/scripts/jpeg_local.py",
+    "mps-hanfu-portrait-studio/scripts/png_local.py",
+    "mps-hanfu-portrait-studio/scripts/welcome_copy.py",
+    "mps-hanfu-portrait-studio/tests/test_skill_contract.py"
+  ],
+  "chosen": true,
+  "new_generation_calls": 0,
+  "source_version": "1.0.1",
+  "target_version": "1.0.2",
+  "visual_review": "PASS: compression-visual-review.md",
+  "max_channel_error": 2,
+  "original_pixel_dimensions_preserved": true,
+  "compression_candidate_archive": {
+    "bytes": 2649440,
+    "sha256": "294600ab24d57fcbd0d7345fba21d54624844f23372d42c1195d3db4168d7ed3",
+    "meaning": "compression experiment container; not final release ZIP"
+  },
+  "source_zip": {
+    "file": "mps-hanfu-portrait-studio-1.0.1.zip",
+    "bytes": 4815365,
+    "sha256": "c4d345920b0fd0c2f1d3443c2044f520876f21000865fcac3212a55314c2f6ea"
+  },
+  "final_zip": {
+    "file": "mps-hanfu-portrait-studio-1.0.2.zip",
+    "bytes": 2649840,
+    "sha256": "462837b50688cc5d9d6561e379637f99e5fbb0aa54d0f05aeb9ccb9edaa25b9d",
+    "frozen": true
+  },
+  "visual_review_sha256": "72dacaaeb215262ae1a21cc508d45738f262c0daff2a10491473be3b636841b4"
+}

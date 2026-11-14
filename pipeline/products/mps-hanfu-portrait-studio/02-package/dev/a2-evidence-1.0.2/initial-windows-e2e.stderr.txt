@@ -1,0 +1,173 @@
+....D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:394: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt28gywib\\photos\\����д����\\me-flowing.png'>
+  self.assertEqual(png_local.size_of(open(s['paths'][0], 'rb').read()), (1024, 1536))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:400: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt28gywib\\photos\\����д����\\index.html' mode='r' encoding='utf-8'>
+  gallery = open(s['gallery'], encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:417: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt28gywib\\photos\\me.jpg'>
+  self.assertEqual(open(self.photo, 'rb').read(), self.photo_bytes)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:504: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpkbokp2hg\\home\\mps-hanfu-portrait-studio\\drafts\\d-d11ab15a040e411a9a00cc827b489848.json' mode='r' encoding='cp936'>
+  d = json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'drafts', did + '.json')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:505: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpkbokp2hg\\home\\mps-hanfu-portrait-studio\\account.json' mode='r' encoding='cp936'>
+  a = json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'account.json')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:540: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp3tzhnxbz\\home\\mps-hanfu-portrait-studio\\account.json' mode='r' encoding='cp936'>
+  a = json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'account.json')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:522: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt5yx_e7f\\home\\mps-hanfu-portrait-studio\\account.json' mode='r' encoding='cp936'>
+  self.assertNotIn('skill_key', json.load(open(acc)))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:523: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt5yx_e7f\\home\\mps-hanfu-portrait-studio\\account.json' mode='r' encoding='cp936'>
+  self.assertEqual(json.load(open(acc))['install_secret'], self.secret())  # ԭ��װ���ݱ���
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:332: ResourceWarning: unclosed file <_io.BufferedWriter name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpictyb1t9\\photos\\broken.png'>
+  open(bad, 'wb').write(b'not an image')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:341: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpbmhiv87m\\home\\mps-hanfu-portrait-studio\\drafts\\d-b6c5f05c5a794b349406cf88c93acf5c.json' mode='r' encoding='cp936'>
+  d = json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'drafts', did + '.json')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:345: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpbmhiv87m\\home\\mps-hanfu-portrait-studio\\drafts\\d-0f72d8240ea4434dbc33e0022092b229.json' mode='r' encoding='cp936'>
+  d = json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'drafts', did + '.json')))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1082: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\dev\\..\\..\\demo-assets\\provenance.json' mode='r' encoding='utf-8'>
+  prov = json.load(open(os.path.join(src, 'provenance.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1086: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\dev\\demos-derivation.json' mode='r' encoding='utf-8'>
+  der = json.load(open(os.path.join(HERE, 'demos-derivation.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1087: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos = json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))['demos']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\tang_ruqun.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\song_beizi.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\ming_mamian.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\weijin.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\daily.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\flowing.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\swordsman.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\tang_banbi.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\quju.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1103: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\garden.png'>
+  w, h = png_local.size_of(open(os.path.join(PKG, 'assets', d['file']), 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+....D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:176: ResourceWarning: unclosed file <_io.BufferedReader name='C:/Users/ADMINI~1/AppData/Local/Temp/tmpvr111y8n/home/mps-hanfu-portrait-studio/demos/garden.png'>
+  w, h = png_local.size_of(open(p, 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:252: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpp9ltriz0\\pkg copy\\assets\\demos.json' mode='r' encoding='utf-8'>
+  self.assertEqual(len(json.load(open(os.path.join(pkg, 'assets', 'demos.json'), encoding='utf-8'))['demos']), 10)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:270: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  good = json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2152: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\scripts\\studio.py' mode='r' encoding='utf-8'>
+  src = open(os.path.join(PKG, 'scripts', 'studio.py'), encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..EE..................D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:1593: ResourceWarning: unclosed file <_io.BufferedReader name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpfx9cma9q\\photos\\����д����\\me-daily.png'>
+  png_local.verify(open(s['paths'][0], 'rb').read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......................D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:887: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt3axo7tk\\home\\mps-hanfu-portrait-studio\\drafts\\d-e328767504e144859d69b69f9b68bd89.json' mode='r' encoding='cp936'>
+  old_idem = json.load(open(draft_file))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:896: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt3axo7tk\\home\\mps-hanfu-portrait-studio\\drafts\\d-e328767504e144859d69b69f9b68bd89.json' mode='r' encoding='cp936'>
+  d = json.load(open(draft_file))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:906: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpt3axo7tk\\home\\mps-hanfu-portrait-studio\\drafts\\d-e328767504e144859d69b69f9b68bd89.json' mode='r' encoding='cp936'>
+  new_idem = json.load(open(draft_file))['idem']
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..F..D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2684: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\references\\scenes.md' mode='r' encoding='utf-8'>
+  doc = open(os.path.join(PKG, 'references', 'scenes.md'), encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2687: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\SKILL.md' mode='r' encoding='utf-8'>
+  skill = open(os.path.join(PKG, 'SKILL.md'), encoding='utf-8').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2703: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpnzb7kfl3\\home\\mps-hanfu-portrait-studio\\support\\state.json' mode='r' encoding='utf-8'>
+  st = json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'support', 'state.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2727: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\SKILL.md'>
+  raw = open(os.path.join(PKG, 'SKILL.md'), 'rb').read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2741: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\demos.json' mode='r' encoding='utf-8'>
+  demos = {d['key']: d for d in json.load(open(os.path.join(PKG, 'assets', 'demos.json'), encoding='utf-8'))['demos']}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2746: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\..\\..\\demo-assets\\provenance.json' mode='r' encoding='utf-8'>
+  prov = json.load(open(os.path.join(PKG, '..', '..', 'demo-assets', 'provenance.json'), encoding='utf-8')) \
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2748: ResourceWarning: unclosed file <_io.BufferedReader name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\assets\\swordsman.png'>
+  digest = hashlib.sha256(open(os.path.join(PKG, 'assets', 'swordsman.png'), 'rb').read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:2750: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\dev\\demos-derivation.json' mode='r' encoding='utf-8'>
+  derivation = json.load(open(os.path.join(HERE, 'demos-derivation.json'), encoding='utf-8'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......................................D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py:662: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpz_2_a638\\home\\mps-hanfu-portrait-studio\\first-dialogue.json' mode='w' encoding='cp936'>
+  open(os.path.join(d, 'first-dialogue.json'), 'w').write('garbage')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+................D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\mps-hanfu-portrait-studio\tests\test_skill_contract.py:66: ResourceWarning: unclosed file <_io.TextIOWrapper name='D:\\My Documents\\ChatGPT\\�Զ���SKILL-SOP-ִ��\\work-20261114-hanfu-resize\\product\\02-package\\mps-hanfu-portrait-studio\\..\\..\\01-dev-spec.json' mode='r' encoding='utf-8'>
+  SPEC_JSON = open(_SPEC, encoding='utf-8').read() if os.path.isfile(_SPEC) else None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.
+======================================================================
+ERROR: test_t14_friends_each_split_into_independent_tasks (__main__.HanfuSpec.test_t14_friends_each_split_into_independent_tasks)
+��� T13�����۸��ĸ��� �� ���Ա��˵����ա�����ȷ�ϡ�����һ�������Կ�һ�Σ����ղ�֧�֣����Ӻ�Ӱ���ˡ�
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py", line 2117, in test_t14_friends_each_split_into_independent_tasks
+    idems = [json.load(open(os.path.join(self.home, 'mps-hanfu-portrait-studio', 'drafts', d + '.json')))['idem'] for d in dids]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+                 ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xac in position 126: illegal multibyte sequence
+
+======================================================================
+ERROR: test_t14_friends_each_split_into_independent_tasks (__main__.HanfuSpec.test_t14_friends_each_split_into_independent_tasks)
+��� T13�����۸��ĸ��� �� ���Ա��˵����ա�����ȷ�ϡ�����һ�������Կ�һ�Σ����ղ�֧�֣����Ӻ�Ӱ���ˡ�
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py", line 99, in tearDown
+    shutil.rmtree(self.tmp)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 633, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] ��һ����������ʹ�ô��ļ��������޷����ʡ�: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpfrbg8rw_\\home\\mps-hanfu-portrait-studio\\drafts\\d-9ff1814d3a434907b69dc0a6a7c55159.json'
+
+======================================================================
+FAIL: test_wed_a3_03_delivery_links_space_and_hash (__main__.RepairA3.test_wed_a3_03_delivery_links_space_and_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\My Documents\ChatGPT\�Զ���SKILL-SOP-ִ��\work-20261114-hanfu-resize\product\02-package\dev\e2e_check.py", line 950, in test_wed_a3_03_delivery_links_space_and_hash
+    self.assertEqual(os.path.abspath(unquote(path)), os.path.abspath(real).replace('\\', '/'))
+AssertionError: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\[40 chars].png' != 'C:/Users/ADMINI~1/AppData/Local/Temp/tmp355[31 chars].png'
+- C:\Users\ADMINI~1\AppData\Local\Temp\tmp355flpco\my photos\����д����\me-daily.png
+?   ^     ^        ^       ^     ^    ^           ^         ^      ^
++ C:/Users/ADMINI~1/AppData/Local/Temp/tmp355flpco/my photos/����д����/me-daily.png
+?   ^     ^        ^       ^     ^    ^           ^         ^      ^
+
+
+----------------------------------------------------------------------
+Ran 142 tests in 54.549s
+
+FAILED (failures=1, errors=2)

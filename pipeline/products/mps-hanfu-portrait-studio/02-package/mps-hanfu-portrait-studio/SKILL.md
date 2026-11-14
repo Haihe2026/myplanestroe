@@ -13,7 +13,7 @@ examples_en:
   - "I am an adult. Use this single-person photo of me for a Tang-inspired chest-high, chest-tied ruqun portrait. Preserve my facial features and appearance, portrait 2:3, 1024×1536."
   - "I am an adult. Use this single-person photo of me for a Song-inspired beizi portrait with a matching skirt. Preserve my facial features and appearance, portrait 2:3, 1024×1536."
   - "I am an adult. Use this single-person photo of me for a Ming-inspired mamian skirt portrait. Preserve my facial features and appearance, portrait 2:3, 1024×1536."
-version: 1.0.1
+version: 1.0.2
 author: "MyPlaneStore"
 ---
 
