@@ -1,0 +1,10 @@
+{
+  "request_id": "req-codex-to-muse-dunhuang-size-confirmed-20261114",
+  "from": "codex",
+  "to": "muse",
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "321679e69e97f1aa95205e8c19ce09cfd460368d",
+  "source_path": "pipeline/products/mps-dunhuang-portrait-studio/msg-to-muse-20261114-dunhuang-size-limit-confirmed.md",
+  "kind": "question"
+}
