@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-3d24150a534af2b5ba6fd0b0e07db48eecc5c62a875307f12d00b8833c1642d8",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "stage": "package_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "2f28a226db29d033cf85cc310aa2efe0bc2ac56f",
+  "source_path": "pipeline/products/mps-dunhuang-portrait-studio/status.json",
+  "input_fingerprint": "3d24150a534af2b5ba6fd0b0e07db48eecc5c62a875307f12d00b8833c1642d8"
+}
