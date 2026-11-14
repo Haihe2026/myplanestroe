@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-14T22:47:48+08:00",
+  "result": "READ_ONLY_AUDIT_COMPLETE_ONLINE_IDENTITY_UNVERIFIED",
+  "event_id": "evt-abdeb87313b792ebd7aed10e3acf5548fb1349b7c30eb6cb9524fe9595c3813f",
+  "claim_id": "2455e1fe-e43b-492a-9d7d-12e0b070a579",
+  "request_id": "req-muse-to-codex-temu-versions-20261114",
+  "source_pin": {
+    "original_ref": "a28bc781e59803713181f29b497ddcee78fb36e6",
+    "original_ref_type": "blob not commit; commit ref unreadable",
+    "corrected_commit": "36e0d2ebaf0cf44785993665fc22c725319526b7",
+    "same_document_blob": "a28bc781e59803713181f29b497ddcee78fb36e6",
+    "original_event_kept": true,
+    "corrected_event_id": "evt-757c76ec1397fb9178644f535724b12a56795a131329d7465635dc7892fd6f19"
+  },
+  "private_repository": {
+    "name": "Haihe2026/Skillhub",
+    "private": true,
+    "checked_main_ref": "3f02beb3e207ce319981a29e08fabd2f7d7b5177",
+    "complete_tree_entries": 372,
+    "truncated": false,
+    "branches": [
+      {
+        "name": "main",
+        "head": "3f02beb3e207ce319981a29e08fabd2f7d7b5177"
+      }
+    ],
+    "tags": 0,
+    "releases": 0
+  },
+  "repository_search": {
+    "temu_zip_count": 17,
+    "all_git_blobs_verified": true,
+    "nested_zip_count": 0,
+    "central_directory_and_text_target_mentions": 0,
+    "requested_versions": [
+      "1.1.11",
+      "1.0.25"
+    ],
+    "conclusion": "Not found in this authenticated current main/branch/tag/Release view; no substitute older packages and no claim about all historical/deleted commits."
+  },
+  "packages": [
+    {
+      "source_kind": "local_delivery_candidate",
+      "name": "temu-image-master-workbuddy_skill-v1.1.11.zip",
+      "version": "1.1.11",
+      "channel": "workbuddy_skill",
+      "publisher_type": "team",
+      "bytes": 76358,
+      "members": 25,
+      "sha256": "6321095d34935327de56dbd2582f8f9d679633241c5bb7d7468fb0f458cc903e",
+      "metadata_evidence": [
+        "channel.json:2-4",
+        "SKILL.md raw frontmatter",
+        "telemetry.json channel/skill_version"
+      ],
+      "api_default": "https://myplanestore.com",
+      "allowed_page_hosts": [
+        "myplanestore.com",
+        "aistore.zhaopintong.com"
+      ],
+      "payment_path": "/membership/temu/",
+      "registration_path": "/membership/temu/register/",
+      "server_url_returned_unchanged": true,
+      "link_evidence": [
+        "scripts/transport.py:296-306",
+        "scripts/client.py:50-60",
+        "scripts/transport.py:323-337,358-367,738-748",
+        "scripts/merchant_journey.py:87-96",
+        "scripts/transport.py:32-42"
+      ],
+      "wechat_document": {
+        "path": "references/wechat-account.md",
+        "line": 5,
+        "old_domain_text_present": true,
+        "live_callback_verified": false
+      },
+      "adjacent_record": {
+        "local_sha_matches": true,
+        "uploaded": false,
+        "review_status": "not_submitted",
+        "current_platform_state_proved": false
+      },
+      "platform_upload_identity_verified": false
+    },
+    {
+      "source_kind": "local_delivery_candidate",
+      "name": "jyai-temu-image-master-workbuddy-team-expert-v1.0.25.zip",
+      "version": "1.0.25",
+      "channel": "workbuddy_expert",
+      "publisher_type": "team",
+      "bytes": 80849,
+      "members": 27,
+      "sha256": "d6647419faad1edcfd4128e313cc6910e368c09e7f66a869cbb9c06c04644211",
+      "metadata_evidence": [
+        ".codebuddy-plugin/plugin.json:2-4,61-62",
+        "skills/temu-image-master/channel.json:2-3",
+        "skills/temu-image-master/telemetry.json:2-5"
+      ],
+      "api_default": "https://myplanestore.com",
+      "allowed_page_hosts": [
+        "myplanestore.com",
+        "aistore.zhaopintong.com"
+      ],
+      "payment_path": "/membership/temu/",
+      "registration_path": "/membership/temu/register/",
+      "server_url_returned_unchanged": true,
+      "link_evidence": [
+        "skills/temu-image-master/scripts/transport.py:296-306 membership-link",
+        "skills/temu-image-master/scripts/transport.py:323-337 quick-entry",
+        "skills/temu-image-master/scripts/transport.py:347-374 account entry",
+        "skills/temu-image-master/scripts/transport.py:408-413 account menu output",
+        "skills/temu-image-master/scripts/client.py:50-60 wrapper"
+      ],
+      "wechat_document": {
+        "member_count": 0,
+        "text_references": 0,
+        "repair_of_other_channel_document_proved": false
+      },
+      "adjacent_record": {
+        "local_sha_matches": true,
+        "uploaded": false,
+        "review_status": "not_submitted",
+        "current_platform_state_proved": false,
+        "report_only_main_domain_claim_conflicts_with_code": true
+      },
+      "platform_upload_identity_verified": false
+    }
+  ],
+  "can_conclude_live_main_domain_only": false,
+  "conclusions": [
+    "Channel identities of these two exact local candidates verified by internal metadata, not version ranges or filenames",
+    "Both use main-domain API default but accept either exact main or legacy page host and return valid server URLs unchanged",
+    "Skill1.1.11 still has legacy callback documentation; expert1.0.25 has no such document, not evidence of another document repaired",
+    "No mapping from these local candidates to actual current platform-uploaded bytes established"
+  ],
+  "missing_for_online_conclusion": [
+    "Actual platform-uploaded original ZIP SHA256 (or retrievable original) bound to channel/version1.1.11 and1.0.25",
+    "Domain of page links actually issued by the serving backend/online flow, with ticket/query/fragment removed; default client constants do not establish actual response host"
+  ],
+  "scope": {
+    "readonly": true,
+    "package_imports": 0,
+    "package_execution": 0,
+    "package_test_runs": 0,
+    "business_api_calls": 0,
+    "real_payments": 0,
+    "upstream_calls": 0,
+    "package_changes": 0,
+    "production_changes": 0,
+    "financial_changes": 0,
+    "uploads": 0,
+    "automation_resumed": false,
+    "private_source_or_zip_published": false
+  }
+}
