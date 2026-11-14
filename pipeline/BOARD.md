@@ -12,4 +12,4 @@
 | mps-maternity-portrait-studio | 孕妈写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过，MAT01/02/03关闭；待Muse固定附录D任务，负责人手动上传 | 2026-11-12T02:00:02+08:00 |
 | mps-silver-portrait-studio | 银发写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 A3通过，SLV-A3-01关闭；D暂停，交负责人手动上传 | 2026-11-12T10:54:03+08:00 |
 | mps-hanfu-portrait-studio | 汉服写真照相馆 | test_passed | — | 0/2/1 | 1.0.2压缩版2,649,840B，A3通过，交Muse/负责人手动上传 | 2026-11-14T17:45:40+08:00 |
-| mps-dunhuang-portrait-studio | 敦煌写真照相馆 | test_in_progress | codex | 0/2/1 | 1.0.1固定1453789B/SHAc08d9c55，A3静态复核三项修复 | 2026-11-14T19:48:59+08:00 |
+| mps-dunhuang-portrait-studio | 敦煌写真照相馆 | test_passed | — | 0/2/1 | 1.0.1 1453789B，双端A2/静态A3通过；交Muse核对，负责人手动上传 | 2026-11-14T19:59:50+08:00 |

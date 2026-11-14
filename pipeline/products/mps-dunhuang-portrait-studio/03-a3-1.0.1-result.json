@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "skill_id": "mps-dunhuang-portrait-studio",
+  "version": "1.0.1",
+  "at": "2026-11-14T19:59:50+08:00",
+  "result": "PASS",
+  "meaning": "A3 static self-check passed; host and platform acceptance not claimed",
+  "source_package_commit": "409250986fe5ef57c1180992e903040057033d62",
+  "zip_sha256": "c08d9c55afbe831f5357bee9ba4166a2c3dcdca4e60ebba2444762e0041e9357",
+  "zip_blob": "6f3fcf82e1b6b4e6685ed6a117a6b6db7baf6b1e",
+  "zip_bytes": 1453789,
+  "method": "clean remote-fetched fixed ZIP; independent source/AST/YAML/image parsing only; no package import/exec or A2 rerun",
+  "fixed_findings": [
+    "DH-A3-01",
+    "DH-A3-02",
+    "DH-A3-03"
+  ],
+  "open_blocking_findings": [],
+  "reviews": [
+    {
+      "path": "02-package/dev/a3-1.0.1/a3-metadata-review.json",
+      "sha256": "595014c917055038d900e16d0aec61c79897d9464f5d034a5548746933a0f5e2",
+      "result": "PASS"
+    },
+    {
+      "path": "02-package/dev/a3-1.0.1/a3-recovery-review.json",
+      "sha256": "7d240222cefa3702bc1e42a64713d4e2bc60c001c23d3ee50d8d64a2a6fb7c3a",
+      "result": "PASS"
+    },
+    {
+      "path": "02-package/dev/a3-1.0.1/a3-transport-review.json",
+      "sha256": "0c93157b6dca12bca51d649046eee5a70f8212087d197f2f4d98ebad0f7ef74c",
+      "result": "PASS"
+    }
+  ],
+  "a2": {
+    "result": "PASS",
+    "per_os": {
+      "contract": 64,
+      "mock": 157,
+      "http_deadline": 19
+    },
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "report": "02-self-test.md"
+  },
+  "non_blocking_notes": [
+    {
+      "id": "DOC-01",
+      "detail": "ZIP tests/first-turn-preview.md retains1.0.0 label; no active parser/runtime use. Current external04-owner-checklist-1.0.1.md supersedes it for owner reference; do not deliver old1.0.0"
+    }
+  ],
+  "official": {
+    "at": "2026-11-14T19:45:30+08:00",
+    "url": "https://open.workbuddy.cn/docs/skill",
+    "status": 200,
+    "bytes": 284412,
+    "sha256": "cee032d50e92db95a60f7c0381cf1a3f9a5b3cddc8a17f95da6699d8fe4d2269",
+    "role": "A3 static1.0.1"
+  },
+  "host": "skipped under owner standing rule, not passed",
+  "browser": "skipped",
+  "python37": "AST only, real interpreter not verified",
+  "real_upstream_calls": 0,
+  "new_generation_calls": 0,
+  "production_deployments": 0,
+  "upload_attempts": 0,
+  "owner_manual_upload": true,
+  "old_version_retained": true
+}

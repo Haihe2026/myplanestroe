@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "version": "1.0.1",
+  "result": "PASS",
+  "at": "2026-11-14T19:52:10+08:00",
+  "source_ref": "409250986fe5ef57c1180992e903040057033d62",
+  "zip_sha256": "c08d9c55afbe831f5357bee9ba4166a2c3dcdca4e60ebba2444762e0041e9357",
+  "zip_bytes": 1453789,
+  "runtime_sha256": "35b5efad56fa88a3d8dba31b7e6def02d99d96ace1b2046ad0b9789fd92002da",
+  "method": "static source/AST/ZIP inspection only; no package import/exec, no tests/network/host",
+  "fixed_findings": [
+    "DH-A3-03"
+  ],
+  "open_findings": [],
+  "checks": [
+    {
+      "id": "TR-01",
+      "result": "PASS",
+      "conclusion": "DH-A3-03闭合：主线程不再同步写大stdin，detach后受控writer写/flush/close，主线程communicate(None)带剩余monotonic timeout，完整传输受监督。",
+      "evidence": "scripts/http_bytes.py:133-214; scripts/http_bytes.py:110-130"
+    },
+    {
+      "id": "TR-02",
+      "result": "PASS",
+      "conclusion": "到期走单次helper kill/reap，writer bounded join；不从主线程close被writer/reader持有的buffer锁，writer异常不接受成功响应。",
+      "evidence": "scripts/http_bytes.py:80-92; scripts/http_bytes.py:95-107; scripts/http_bytes.py:133-214"
+    },
+    {
+      "id": "TR-03",
+      "result": "PASS",
+      "conclusion": "固定sys.executable/-I/-S/helper路径，shell=False与Windows隐藏；凭据不进argv/临时文件，仅JSON内存pipe；无重试或父进程网络回退。",
+      "evidence": "scripts/http_bytes.py:133-214; scripts/http_bytes.py:248-267"
+    },
+    {
+      "id": "TR-04",
+      "result": "PASS",
+      "conclusion": "目标仅https主域/platform-api；headers/timeout/limit验证；响应bytes/长度/status与晚返回校验；单次urllib事务拒重定向、错误体不读、不打印错误凭据。",
+      "evidence": "scripts/http_bytes.py:49-77; scripts/http_bytes.py:24-46; scripts/http_bytes.py:217-245; scripts/http_bytes.py:248-267"
+    },
+    {
+      "id": "TR-05",
+      "result": "PASS",
+      "conclusion": "Core JSON2MiB/PNG16MiB及telemetry4KiB转接同一边界；未知提交先保存原键/body摘要，GatewayError0仅原任务GET；没有新POST重试策略。",
+      "evidence": "scripts/studio.py:_default_transport/call/_submit/_continue_job; scripts/telemetry.py:_default_transport/report_once"
+    },
+    {
+      "id": "TR-06",
+      "result": "PASS",
+      "conclusion": "OS创建/终止/回收有调度开销，保留90秒进程余量，不将逻辑截止说成硬实时；HTTP子进程是单请求传输工具，无AI心跳/常驻worker。",
+      "evidence": "scripts/http_bytes.py:module docstring; scripts/studio.py:PROCESS_MARGIN_S/OUTER_TIMEOUT_S"
+    }
+  ],
+  "host": "skipped; not passed"
+}

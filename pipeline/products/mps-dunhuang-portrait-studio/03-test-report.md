@@ -1,35 +1,22 @@
-# 敦煌写真照相馆1.0.0 — A3静态退回
+# 敦煌写真照相馆1.0.1 — A3自检报告
 
-2026-11-14T19:21:18+08:00。**自检不通过**。固定包提交`2f28a226db29d033cf85cc310aa2efe0bc2ac56f`，ZIP1453045B，SHA256 `0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51`。本轮只静态阅读干净解压包、AST/标准库和资料，不导入/执行包，不重跑A2，不调用上游/浏览器。
+2026-11-14T19:59:50+08:00。**自检通过**，含义为固定ZIP静态检查通过；真实宿主、平台审核、OAuth/支付/生产出图不在本结论内。
 
-## DH-A3-01 / P2
+固定包提交`409250986fe5ef57c1180992e903040057033d62`；`02-package/dist/mps-dunhuang-portrait-studio-1.0.1.zip`，**1,453,789B**，SHA256 `c08d9c55afbe831f5357bee9ba4166a2c3dcdca4e60ebba2444762e0041e9357`，Git blob`6f3fcf82e1b6b4e6685ed6a117a6b6db7baf6b1e`。远端Git blob下载与本地候选一致，干净解压30文件逐字节核对；低于3MB上限及2.5MB目标。
 
-`scripts/studio.py:989-999`
+| 静态范围 | 结果及证据 |
+|---|---|
+| ZIP/结构/平台元数据 | 12项PASS；原始严格YAML八字段、3对中英语义、实际15285B SKILL、无重复/穿越/链接、逻辑最多两级、无第三方运行依赖 |
+| 演示/路径/logo | 十批准JPEG共1333229B/512×768、SHA不变；外置logo480802B/512²不变；空格/#/%的独立Markdown路径构造通过 |
+| 账户/反馈修复 | DH-A3-01/02闭合；泛账户授权失败只以记录说明费用；新B仅自己的key，旧未知A不自动POST，重复原文中性提示，显式--retry才续交，已有编号只GET |
+| 原状态机/支付/身份 | 精确差分显示其他Core文本/函数不变；原17项静态PASS按相同源码继承，含三许可、原任务GET-only、冻结look/prompt、账单隔离、账户恢复、主域、六字段、420预算 |
+| HTTP截止 | 6项静态PASS，DH-A3-03闭合：stdin专属writer与主线程监督分离，remaining timeout/晚结果拒绝、单次helper kill/reap、有限join且不触活跃读写buffer锁、凭据只pipe、无重试/回退/重定向 |
+| 真机/浏览器 | 真机行为验收已跳过（负责人长期规则，2026-11-07）；附录D/D.6暂停，未做且不称通过 |
 
-实际：cmd_auth error has no draft context but calls W.failure(not_started), asserting no image fees after a prior unknown/settled task。
+A3只静态读取远端固定包、AST/原始YAML/图片数据及已有证据，未导入或执行包、未重跑A2、未调用上游/浏览器。A2另记录Windows原生3.12.10与Linux3.12.3各64契约+157Mock+19HTTP专项通过，0失败/错误/跳过；共480项平台执行。Python3.7仅AST语法兼容，未声称真实解释器运行。OS进程创建/终止/回收仍有调度开销，不宣称硬实时。
 
-复现路径：Prior submitted-unknown or delivered task; user auth; account request network/5xx failure; static branch emits definite not charged。
+批准规格MD/JSON保持A1固定SHA；本版是实施缺陷修复补丁，输出版本1.0.1，范围、描述、examples、收费/资源不扩张。较1.0.0仅5个ZIP成员变化，其余25文件逐字节相同；所有图和logo复用，开发/测试真实上游调用、新生图、生产部署、上传均0。完整分项证据在`02-package/dev/a3-1.0.1/`。
 
-期望：account_failure with fees by service records; preserve original task/account identity。
+非阻断文档观察DOC-01：ZIP内`tests/first-turn-preview.md`保留1.0.0参考单标签，没有活跃解析/运行引用；不能称它已升级。本次负责人请用仓库外置`04-owner-checklist-1.0.1.md`和当前SKILL/_meta判定版本。旧1.0.0有三项已记录缺陷，不是交付包，旧ZIP和失败报告保留审计。
 
-## DH-A3-02 / P2
-
-`scripts/studio.py:1167-1223`
-
-实际：New feedback B invokes _submit_pending over entire queue and automatically re-POSTs old unknown A without explicit retry。
-
-复现路径：A POST response unknown remains pending; user only confirms new B; default feedback branch queues B then iterates A,B。
-
-期望：A new confirmed item submits only that item; old unknown items retain exact key/body and await explicit retry。
-
-## DH-A3-03 / P2
-
-`scripts/http_bytes.py:104-150`
-
-实际：On Windows Popen.communicate synchronously _stdin_write(input) before reader timeout joins; large request pipe write is outside effective deadline supervision。
-
-复现路径：Static CPython 3.12 Windows _communicate source confirms synchronous write before timeout joins; payload larger than pipe capacity and helper pre-read stall can block the supervising thread。
-
-期望：Separate bounded stdin writing from main-thread deadline; expiry kills/reaps this helper, no retry or credential files。
-
-1.0.0的A2双端64+155+16通过记录仍保留，但这些新增场景未被首轮测试覆盖，不能用A2代替A3通过。退开发出1.0.1补精确回归并重跑双端A2，再锁新ZIP做静态A3；保留旧ZIP，不覆盖固定证据。真机行为验收/上架前浏览器验证按长期规则跳过，不称通过。未部署、未支付、未新生图、未上传。
+官方技能文档已于2026-11-14T19:45:30+08:00在线读取`https://open.workbuddy.cn/docs/skill`，HTTP200，SHA`cee032d50e92db95a60f7c0381cf1a3f9a5b3cddc8a17f95da6699d8fe4d2269`；记录随报告提交。通过后状态test_passed交Muse核对并交负责人手动上传；不执行上传，不恢复AI心跳或独立worker。

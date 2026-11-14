@@ -1,0 +1,285 @@
+{
+  "result": "PASS",
+  "open_findings": [],
+  "overall_a3": null,
+  "scope": "metadata/assets/ZIP/static-only",
+  "source_ref": "409250986fe5ef57c1180992e903040057033d62",
+  "source_package_commit": "409250986fe5ef57c1180992e903040057033d62",
+  "version": "1.0.1",
+  "zip_sha256": "c08d9c55afbe831f5357bee9ba4166a2c3dcdca4e60ebba2444762e0041e9357",
+  "zip_bytes": 1453789,
+  "zip_blob": "6f3fcf82e1b6b4e6685ed6a117a6b6db7baf6b1e",
+  "checks": [
+    {
+      "id": "M01-fixed-source",
+      "result": "PASS",
+      "evidence": {
+        "source_ref": "409250986fe5ef57c1180992e903040057033d62",
+        "approved_spec_sha256": "8b46131f7526839246300bdd217250451730e3726f5cc04de6a41df182d460f9",
+        "official_read": {
+          "at": "2026-11-14T19:45:30+08:00",
+          "url": "https://open.workbuddy.cn/docs/skill",
+          "status": 200,
+          "bytes": 284412,
+          "sha256": "cee032d50e92db95a60f7c0381cf1a3f9a5b3cddc8a17f95da6699d8fe4d2269",
+          "role": "A3 static1.0.1"
+        }
+      }
+    },
+    {
+      "id": "M02-zip-integrity-size",
+      "result": "PASS",
+      "evidence": {
+        "bytes": 1453789,
+        "crc": "PASS",
+        "files": 30,
+        "max": 3000000,
+        "target": 2500000,
+        "headroom": 1546211
+      }
+    },
+    {
+      "id": "M03-layout-safe",
+      "result": "PASS",
+      "evidence": {
+        "single_wrapper": "mps-dunhuang-portrait-studio",
+        "logical_depth_max": 2,
+        "duplicate_casefold": false,
+        "links": false,
+        "encryption": false,
+        "unsafe_paths": false
+      }
+    },
+    {
+      "id": "M04-delta-and-clean",
+      "result": "PASS",
+      "evidence": {
+        "clean_matches_zip": 30,
+        "unchanged_members": 25,
+        "changed_members": [
+          "_meta.json",
+          "scripts/http_bytes.py",
+          "scripts/studio.py",
+          "scripts/telemetry.py",
+          "SKILL.md"
+        ],
+        "baseline_zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51"
+      }
+    },
+    {
+      "id": "M05-raw-yaml",
+      "result": "PASS",
+      "evidence": {
+        "parser": "PyYAML strict duplicate-reject SafeLoader",
+        "original_raw": true,
+        "required_fields": [
+          "name",
+          "display_name",
+          "display_name_en",
+          "description",
+          "description_zh",
+          "description_en",
+          "version",
+          "author"
+        ],
+        "skill_md_bytes": 15285,
+        "limit": 15360,
+        "counts": [
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "id": "M06-three-example-pairs",
+      "result": "PASS",
+      "evidence": [
+        {
+          "pair": 1,
+          "scene": "pipa_back",
+          "semantics": "same adult self, one person, identity, scene/details, portrait2:3,1024x1536",
+          "result": "PASS"
+        },
+        {
+          "pair": 2,
+          "scene": "mingsha_sunset",
+          "semantics": "same adult self, one person, identity, scene/details, portrait2:3,1024x1536",
+          "result": "PASS"
+        },
+        {
+          "pair": 3,
+          "scene": "crescent_night",
+          "semantics": "same adult self, one person, identity, scene/details, portrait2:3,1024x1536",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "M07-version-and-welcome",
+      "result": "PASS",
+      "evidence": {
+        "version": "1.0.1",
+        "approved_spec_version": "1.0.0",
+        "delta": "authorized patch-only version; all other required fields/examples exact approved spec",
+        "welcome": "欢迎使用WorkBuddy官方认证技能 敦煌写真照相馆。"
+      }
+    },
+    {
+      "id": "M08-runtime-static",
+      "result": "PASS",
+      "evidence": {
+        "runtime_scripts": 9,
+        "third_party_runtime_imports": [],
+        "python37": "grammar only",
+        "package_imported_or_executed": false
+      }
+    },
+    {
+      "id": "M09-jpegs",
+      "result": "PASS",
+      "evidence": {
+        "count": 10,
+        "size": [
+          512,
+          768
+        ],
+        "format": "JPEG RGB",
+        "bytes": 1333229,
+        "full_decode": true,
+        "approved_sha_match": true,
+        "assets": [
+          {
+            "key": "pipa_back",
+            "sha256": "c717729b5346e4ec55c2d9f131e5c39625b0bbb6450a2f534a565570d1a40444",
+            "bytes": 123915
+          },
+          {
+            "key": "mural_fairy",
+            "sha256": "9cbb023e78f0b2226c55d446cc233d93961c232c24f33b66d729557f4dfe78b3",
+            "bytes": 171459
+          },
+          {
+            "key": "mogao_apsara",
+            "sha256": "b7a7c28eaaa519214bc3b95b8b226d0df95be4ec65610ecae1d698663b09ac24",
+            "bytes": 120774
+          },
+          {
+            "key": "mingsha_sunset",
+            "sha256": "c42c4a10b1ebbe3da71751f769a0fa2c3d8ab8f4ae174923b96b303b3dd80883",
+            "bytes": 130611
+          },
+          {
+            "key": "crescent_night",
+            "sha256": "88eafe3533af4c67d1b7f8605d3041adf163ae3af4e7e818ece25e7da5469197",
+            "bytes": 101630
+          },
+          {
+            "key": "apsara_dance",
+            "sha256": "cd11ed76f15be2ebfb4f96de0bdf3a0ea1da1f9c753f3ba7fd0a4cbee3083626",
+            "bytes": 114197
+          },
+          {
+            "key": "water_sleeves",
+            "sha256": "b8c439c2e183a29ca15b1b97e4e677b26833d8aeac59a7838f5797cba578bd77",
+            "bytes": 111246
+          },
+          {
+            "key": "dunhuang_lady",
+            "sha256": "20f03413c78304c4f082020a5519921f7127c2f510b7d1f9e463bcb5f4760346",
+            "bytes": 146147
+          },
+          {
+            "key": "camel_caravan",
+            "sha256": "fa558cb42edbefa99b8e02ed8eaa5867d2f7572961f6192602297c1d2db701eb",
+            "bytes": 171395
+          },
+          {
+            "key": "starry_desert",
+            "sha256": "c5242607d01135ac44e26d9c782c7dbe46b5583c78e6b77653f5025020b6fb1f",
+            "bytes": 141855
+          }
+        ]
+      }
+    },
+    {
+      "id": "M10-logo",
+      "result": "PASS",
+      "evidence": {
+        "path": "02-package/dist/logo.png",
+        "sha256": "9fdf400c88896e8dccaf6852fb4f7bf5d95a48ac97bc3468c86b6caea69acfe7",
+        "bytes": 480802,
+        "size": [
+          512,
+          512
+        ],
+        "format": "PNG",
+        "external_per_spec": true,
+        "aesthetic_review": false
+      }
+    },
+    {
+      "id": "M11-manifest",
+      "result": "PASS",
+      "evidence": {
+        "bare_filenames": true,
+        "approved_titles_notes": true,
+        "fictional_adults_and_ai_disclosed": true,
+        "reference_seed_not_packaged": true
+      }
+    },
+    {
+      "id": "M12-markdown-paths",
+      "result": "PASS",
+      "evidence": {
+        "independent_commonmark_fixtures": [
+          {
+            "fixture": "Dunhuang Demo Assets/pipa_back.jpg",
+            "parsed_exists": true,
+            "query": "",
+            "fragment": ""
+          },
+          {
+            "fixture": "Dunhuang#Demo/pipa_back.jpg",
+            "parsed_exists": true,
+            "query": "",
+            "fragment": ""
+          },
+          {
+            "fixture": "Dunhuang%Demo/pipa_back.jpg",
+            "parsed_exists": true,
+            "query": "",
+            "fragment": ""
+          }
+        ],
+        "reviewed_function_called": false,
+        "path_function_ast_unchanged": true,
+        "space_hash_percent_safe": true
+      }
+    }
+  ],
+  "limits": [
+    "No package import/exec/call, no A2 rerun, business/provider/production/network/browser/host action.",
+    "not-run-host: 真机行为验收已跳过（负责人长期规则，2026-11-07），未记为通过。",
+    "Python3.7 only grammar; metadata PASS does not adjudicate Core or overall A3."
+  ],
+  "observations": [
+    {
+      "id": "META101-N01",
+      "classification": "nonblocking baseline manual-reference label",
+      "path": "02-package/mps-dunhuang-portrait-studio/tests/first-turn-preview.md",
+      "lines": [
+        1,
+        5
+      ],
+      "recorded_version": "1.0.0",
+      "byte_identical_to_1_0_0": true,
+      "active_version": "1.0.1",
+      "referenced_by_other_package_files": false,
+      "parser_or_runtime_blocker": false,
+      "basis": "A3 checks require active frontmatter/package/runtime versions to agree; this standalone 1.0.0-labelled owner reference is not loaded or linked by the package.",
+      "handoff_requirement": "Do not describe this ZIP-internal reference as updated; parent handoff must identify the actual current 1.0.1 owner checklist.",
+      "parent_planned_current_checklist": "04-manual-checklist-1.0.1.md",
+      "current_external_checklist_reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "result": "PASS",
+  "review_scope": "Targeted fixed-ZIP A3 Core recovery subreview only; exact Core diff and prior17PASS inheritance. Not overall A3 or new HTTP-worker review.",
+  "source_package_commit": "409250986fe5ef57c1180992e903040057033d62",
+  "claim_commit": "87e3482de99b54260f2859d5cba58cf72738494c",
+  "zip_sha256": "c08d9c55afbe831f5357bee9ba4166a2c3dcdca4e60ebba2444762e0041e9357",
+  "zip_bytes": 1453789,
+  "core_sha256": "7de10d95d5b7fbbf52ba036a7a9b9ff4279bc525712cbad52d2a7e89b9f32d63",
+  "baseline_zip_sha256": "0803d919774b6705b5df0b6cee3036a09396737f89a1588b4d05114143b16c51",
+  "baseline_core_sha256": "e12e0d88b268ea29c1c472d8f1f89d13041128453e7f03b64b4cf5ed995a662a",
+  "open_findings": [],
+  "fixed_findings": [
+    "DH-A3-01",
+    "DH-A3-02"
+  ],
+  "closure_evidence": [
+    {
+      "id": "DH-A3-01",
+      "prior_subreview_id": "DH-A3-CORE-01",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              989,
+              999
+            ]
+          ]
+        },
+        {
+          "path": "scripts/welcome_copy.py",
+          "lines": [
+            [
+              376,
+              379
+            ]
+          ]
+        }
+      ],
+      "detail": "No-draft auth errors now use account_failure; only account operation itself has zero image uses, original image fees remain service-record based. Original task/key not modified."
+    },
+    {
+      "id": "DH-A3-02",
+      "prior_subreview_id": "DH-A3-CORE-02",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              1167,
+              1174
+            ],
+            [
+              1202,
+              1238
+            ]
+          ]
+        }
+      ],
+      "detail": "New B creates and submits only its own new only_key; old unknown A is skipped. Duplicate pending body returns before account/ticket submission, preserving old key/body. Only explicit args.retry allows the saved pending queue; known-ticket GET code is unchanged."
+    },
+    {
+      "id": "DH-DEV-PENDING-COPY",
+      "result": "PASS",
+      "evidence": [
+        {
+          "path": "scripts/studio.py",
+          "lines": [
+            [
+              1218,
+              1221
+            ]
+          ]
+        },
+        {
+          "path": "scripts/welcome_copy.py",
+          "lines": [
+            [
+              339,
+              346
+            ]
+          ]
+        }
+      ],
+      "detail": "Duplicate early return uses pending, which falls through to neutral saved-feedback wording rather than busy/network cause; no business request is made by that branch."
+    }
+  ],
+  "changed_core_functions": [
+    "cmd_auth",
+    "_submit_pending",
+    "cmd_feedback"
+  ],
+  "other_core_source_identical_after_version_normalization": true,
+  "inherited_checks": [
+    {
+      "id": "RC01",
+      "check": "Frozen source identity",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC02",
+      "check": "First turn is telemetry plus local persistence",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC03",
+      "check": "Original identity and account input validation",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC04",
+      "check": "Main-domain and trustworthy short links",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC05",
+      "check": "Six-field singleton generation contract",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC06",
+      "check": "Unsubmitted invalidation precedes early returns",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC07",
+      "check": "Three consents and immutable planned prompt/look",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC08",
+      "check": "Submit journal and unknown generation GET-only",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC09",
+      "check": "Binding401 and original-account recovery",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC10",
+      "check": "402 and regenerate stay within consent/identity boundaries",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC11",
+      "check": "New-task billing residual defect closed",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC12",
+      "check": "Pending/unknown progress defect closed",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC13",
+      "check": "Shared request/count/wall budgets",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC14",
+      "check": "Read-only image recovery and safe delivery",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC15",
+      "check": "No-account menus have an exit",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC17",
+      "check": "History and ticket views use factual owner-scoped records",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    },
+    {
+      "id": "RC18",
+      "check": "Feedback journals and known-id lookup",
+      "result": "PASS",
+      "basis": "Exact Core diff: function/source unchanged, with explicit version-scalar update for identity. Prior evidence inherited; no rerun."
+    }
+  ],
+  "metadata_observations": [
+    {
+      "path": "SKILL.md",
+      "sha256": "11ef481a8bc216760ffd04f605047b11795948f6b7dbce5f2be17cee33a23139",
+      "bytes": 15285,
+      "raw_version_replacement_only": true,
+      "semantic_version_only": null,
+      "unchanged_from_100": false
+    },
+    {
+      "path": "_meta.json",
+      "sha256": "251e9429cb2d76d7723d6e16f689ce722cc24df3ec29120835a8e19e88ed4bf7",
+      "bytes": 242,
+      "raw_version_replacement_only": false,
+      "semantic_version_only": true,
+      "unchanged_from_100": false
+    },
+    {
+      "path": "scripts/telemetry.py",
+      "sha256": "e1ddf74f53063796f4a213f1a5c03e6a089105605d07f004cc034dfb1d9c7aff",
+      "bytes": 5295,
+      "raw_version_replacement_only": true,
+      "semantic_version_only": null,
+      "unchanged_from_100": false
+    },
+    {
+      "path": "tests/first-turn-preview.md",
+      "sha256": "0c92c238cc515be2c425e5c3ce1ab2671c31a901c37a67c9bb63733d2fc0d0fc",
+      "bytes": 2590,
+      "raw_version_replacement_only": false,
+      "semantic_version_only": null,
+      "unchanged_from_100": true
+    }
+  ],
+  "notes": [
+    "tests/first-turn-preview.md is unchanged baseline1.0.0 text, not upgraded/current guide. Lead metadata review owns its label assessment; root plans an external current1.0.1 manual reference and explicit non-delivery of old1.0.0. Frozen ZIP untouched.",
+    "A2 summary records both OS64+157+19 on this ZIP; read only, not rerun.",
+    "No module import/execution, network, browser, business/provider call or source mutation. Host skipped under standing rule; not passed."
+  ],
+  "report": "a3-recovery-review.md"
+}
