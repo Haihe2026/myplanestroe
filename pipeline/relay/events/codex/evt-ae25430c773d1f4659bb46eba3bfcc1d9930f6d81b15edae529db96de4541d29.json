@@ -1,0 +1,13 @@
+{
+  "from": "muse",
+  "kind": "request",
+  "request_id": "req-muse-to-codex-tibetan-stop-20261114",
+  "skill_id": "mps-tibetan-portrait-studio",
+  "source_path": "pipeline/products/mps-tibetan-portrait-studio/msg-from-muse-20261114-tibetan-stop.md",
+  "source_ref": "6ecde242e7d9955c4c2961f3be0fee0820973ef7",
+  "source_repo": "Haihe2026/myplanestroe",
+  "to": "codex",
+  "schema_version": 1,
+  "event_id": "evt-ae25430c773d1f4659bb46eba3bfcc1d9930f6d81b15edae529db96de4541d29",
+  "request_kind": "handoff"
+}
