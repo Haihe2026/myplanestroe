@@ -1,8 +1,8 @@
 {
   "blocked": null,
-  "claimed_at": null,
+  "claimed_at": "2026-11-14T19:10:31+08:00",
   "lane": "fast",
-  "owner": null,
+  "owner": "codex",
   "rounds": {
     "dev": 1,
     "spec": 0,
@@ -11,8 +11,8 @@
   "skill_id": "mps-dunhuang-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "4612c7c2688e8e3d46a3d72b855f0df0509f3b76",
-  "stage": "package_ready",
-  "updated_at": "2026-11-14T19:08:56+08:00",
+  "stage": "test_in_progress",
+  "updated_at": "2026-11-14T19:10:31+08:00",
   "versions": {
     "listed": null,
     "package": "1.0.0"
