@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "evt-2b3cc425463bba46dada4c455ae4f47f7a3626d53f2fdb96572b47a6fd130d00",
+  "kind": "stage_ready",
+  "to": "codex",
+  "skill_id": "mps-fangyuan-photo-enhancer",
+  "stage": "brief_ready",
+  "source_repo": "Haihe2026/myplanestroe",
+  "source_ref": "2a458eff64d144a9c316c4f05741d54364e91219",
+  "source_path": "pipeline/products/mps-fangyuan-photo-enhancer/status.json",
+  "input_fingerprint": "2b3cc425463bba46dada4c455ae4f47f7a3626d53f2fdb96572b47a6fd130d00"
+}
