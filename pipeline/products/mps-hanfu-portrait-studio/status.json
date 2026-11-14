@@ -11,8 +11,8 @@
   "skill_id": "mps-hanfu-portrait-studio",
   "sop": "sop-image-gen-skill-auto",
   "sop_version": "8bc1ca669b91d859b3541a122cb7767ff6b8020b",
-  "stage": "test_passed",
-  "updated_at": "2026-11-14T17:45:40+08:00",
+  "stage": "submitted",
+  "updated_at": "2026-11-14T18:31:03+08:00",
   "versions": {
     "listed": null,
     "package": "1.0.2"
