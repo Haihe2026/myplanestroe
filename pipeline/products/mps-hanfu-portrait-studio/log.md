@@ -12,3 +12,4 @@
 2026-11-14T16:14:36+08:00 | muse | test_passed → dev_in_progress | 汉服 1.0.1 包 4,815,365 字节超平台 3MB 上传上限（负责人 2026-11-14 亲口报），派 Codex 压 1.0.2 压缩版（只压图片，10 张示例＋logo 不变，ZIP ≤3MB），附前序缺陷全清单复核，A3 自检后交付。
 2026-11-14T17:01:32+08:00 | codex | dev_in_progress → dev_in_progress | 沿原claim核验Muse固定压缩派单及原1.0.1 ZIP/SHA，接续既有开发分配并记录真实工作时间；只压十图/logo及必要版本metadata，保PNG兼容、不改业务逻辑；准备1.0.2及A3静态，保旧包，不部署/上架/生图。
 2026-11-14T17:31:41+08:00 | codex | dev_in_progress → package_ready | 1.0.2仅十PNG压缩+五版本metadata，业务逻辑/SKILL正文/文案/清单/随包tests不变，logo无损优化；ZIP 2649840B SHA462837b5，≤3MB。Windows native-fixture64+Mock142、Linux隔离64+142通过，初轮POSIX fixture失败记录及测试适配边界保留；WindowsACL未验。旧1.0.0/1.0.1保留，真实上游/业务/支付/生产/上传0，交同SHA做A3静态。
+2026-11-14T17:33:28+08:00 | codex | package_ready → test_in_progress | 锁定1.0.2包提交2542db0a9dddf0f1e62a9777a6e39064738d0c92、SHA462837b5/2649840B及A2报告；从干净ZIP独立静态检查目录/YAML/双语/契约/十PNG/logo/历史26项未回退；不执行包、不重跑A2、不调上游/浏览器/真机。
