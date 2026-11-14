@@ -9,3 +9,4 @@
 2026-11-14T19:21:18+08:00 | codex | test_in_progress → test_failed | 1.0.0静态发现DH-A3-01账户授权失败误称未扣、02新反馈隐式重发旧未知、03Windows大stdin写入未受communicate timeout监督；原ZIP/SHA证据保留。退开发1.0.1补回归+A2/A3，不部署/生图/上传。
 2026-11-14T19:21:55+08:00 | codex | test_failed → dev_in_progress | 认领1.0.1仅修DH-A3-01授权费用误报、02新反馈串旧未知提交、03Windows大stdin写入截止；补精确回归与双端A2，再固定新ZIP做A3。批准规格/图片/logo不改，旧1.0.0保留，不部署/支付/真实生图/上传。
 2026-11-14T19:45:48+08:00 | codex | dev_in_progress → package_ready | 1.0.1 ZIP1453789B/SHAc08d9c55，修复A3三项P2并留精确初败/修后记录；Windows/Linux各64契约+157Mock+HTTP专项全过，详A2报告。仅五ZIP成员变化，其余25/十JPEG/logo/批准规格不变；旧1.0.0与失败A3保留，真实上游/支付/部署/上传0，交新固定ZIP A3静态。
+2026-11-14T19:48:59+08:00 | codex | package_ready → test_in_progress | 锁定1.0.1包提交409250986fe5ef57c1180992e903040057033d62，远端blob逐字节SHAc08d9c55/1453789B一致，双端A2通过。干净解压静态复核DH-A3-01/02/03及五成员变化，继承其余25相同成员已有检查；不执行包/重跑A2/上游/浏览器，长期真机跳过及负责人手动上传保持。
