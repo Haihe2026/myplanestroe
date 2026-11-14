@@ -1,8 +1,8 @@
 # 生图类 Skill 自动流水线
 
-Muse 选品 → Codex 写开发文档 → Claude Code 开发 → Codex 测试与上架 → Codex 回收数据。
+Muse 选品 → Codex 写开发文档 → Muse 审规格 → Codex 开发并自检 → Muse 交付负责人验证上传。
 
-三个 AI 开工前必须先读 `docs/sop/sop-image-gen-skill-auto.md`（尤其第 A 章），并按其中的目录约定、状态机和自动关口执行。
+两个 AI 开工前必须先读 `docs/sop/sop-image-gen-skill-auto.md`（尤其第 A 章），并按其中的目录约定、状态机和自动关口执行。
 
 - `config.yaml`：负责人维护的流水线配置，AI 只读。
 - `BOARD.md`：所有单子的当前状态。
